@@ -1,0 +1,185 @@
+openapi: 3.0.1
+info:
+  title:  VR API
+  version: "1.0"
+servers:
+  - url: https://hq1.appsflyer.com/vr2-api
+paths:
+  /rules:
+    get:
+      summary: Get the rules
+      responses:
+        200:
+          description: 
+            TBD - Add description
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Rules'
+  /rule:
+    post:
+      summary: Create rule
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Rule'
+      responses:
+        200:
+          description: TBD - Add description
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Rule'
+  /rule/{rule_id}:
+    put:
+      summary: Update rule
+      parameters:
+        - name: rule_id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Rule'
+      responses:
+        200:
+          description: TBD - Add description
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Rule'
+  /rule/{rule_id}/status:
+    put:
+      summary: Update rule
+      parameters:
+        - name: rule_id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Status'
+      responses:
+        200:
+          description: TBD - Add description
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Rule'
+components:
+  schemas:
+    EventType:
+      type: string
+      enum:
+        - install
+        - in-app
+    Status:
+      type: string
+      enum:
+        - enabled
+        - disabled
+        - deleted
+    Action:
+      type: string
+      enum:
+        - block-event
+        - block-attribution
+    RuleType:
+      type: string
+      enum:
+        - allow-only
+        - blocking
+    CondOper:
+      type: string
+      enum:
+        - or
+        - and
+    CondGroupOper:
+      type: string
+      enum:
+        - or
+        - and
+    Cond:
+      required:
+        - attr
+        - oper
+        - values
+      properties:
+        attr:
+          type: string
+        oper:
+          type: string
+        values:
+          type: array
+    Conds:
+      type: array
+      items:
+        $ref: '#/components/schemas/Cond'
+    CondGroup:
+      required:
+        - cond-oper
+        - conds
+      properties:
+        cond-oper:
+          $ref: '#/components/schemas/CondOper'
+        conds:
+          $ref: '#/components/schemas/Conds'
+    CondGroups:
+      type: array
+      items:
+        $ref: '#/components/schemas/CondGroup'
+    RuleConditions:
+      required:
+        - cond-group-oper
+        - cond-groups
+      properties:
+        cond-group-oper:
+          $ref: '#/components/schemas/CondGroupOper'
+        cond-groups:
+          $ref: '#/components/schemas/CondGroups'
+    Population:
+      required:
+        - cond-oper
+        - conds
+      properties:
+        cond-oper:
+          $ref: '#/components/schemas/CondOper'
+        conds:
+          $ref: '#/components/schemas/Conds'
+    Rule:
+      properties:
+        app-ids:
+          type: array
+        description:
+          type: string
+        last-update-time-millis:
+          # type: long
+          type: integer
+        name:
+          type: string
+        last-update-user:
+          type: string
+        status:
+          $ref: '#/components/schemas/Status'
+        population:
+          $ref: '#/components/schemas/Population'
+        rule-type:
+          $ref: '#/components/schemas/RuleType'
+        event-type:
+          $ref: '#/components/schemas/EventType'
+        action:
+          $ref: '#/components/schemas/Action'
+        rule-conditions:
+          $ref: '#/components/schemas/RuleConditions'
+    Rules:
+      properties:
+        items:
+      # type: array
+          $ref: '#/components/schemas/Rule'
