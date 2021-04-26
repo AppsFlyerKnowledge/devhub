@@ -1,6 +1,6 @@
 openapi: 3.0.1
 info:
-  title:  VR API
+  title:  Validation Rules API
   version: "1.0"
 servers:
   - url: https://hq1.appsflyer.com/vr2-api
@@ -118,6 +118,12 @@ components:
           type: string
         values:
           type: array
+          items:
+            oneOf:
+              - type: string
+              - type: integer
+              - type: number
+                format: double
     Conds:
       type: array
       items:
@@ -157,11 +163,13 @@ components:
       properties:
         app-ids:
           type: array
+          items: 
+            type: string 
         description:
           type: string
         last-update-time-millis:
-          # type: long
-          type: integer
+          type: number
+          format: long
         name:
           type: string
         last-update-user:
@@ -179,7 +187,6 @@ components:
         rule-conditions:
           $ref: '#/components/schemas/RuleConditions'
     Rules:
-      properties:
+        type: array
         items:
-      # type: array
           $ref: '#/components/schemas/Rule'
