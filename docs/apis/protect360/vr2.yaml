@@ -7,7 +7,9 @@ servers:
 paths:
   /rules:
     get:
-      summary: Get the rules
+      tags:
+      - Get rules
+      summary: Get rules
       responses:
         200:
           description: 
@@ -18,6 +20,8 @@ paths:
                 $ref: '#/components/schemas/Rules'
   /rule:
     post:
+      tags:
+      - Create rule
       summary: Create rule
       requestBody:
         content:
@@ -33,6 +37,8 @@ paths:
                 $ref: '#/components/schemas/Rule'
   /rule/{rule_id}:
     put:
+      tags:
+      - Update rule
       summary: Update rule
       parameters:
         - name: rule_id
@@ -54,7 +60,9 @@ paths:
                 $ref: '#/components/schemas/Rule'
   /rule/{rule_id}/status:
     put:
-      summary: Update rule
+      tags:
+      - Update a rule's status
+      summary: Update a rule's status
       parameters:
         - name: rule_id
           in: path
