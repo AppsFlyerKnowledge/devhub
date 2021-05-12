@@ -44,6 +44,6 @@ Plugins are SDKs for cross-platform frameworks. They wrap around the native SDKs
 </style>
 ### SDK features
 <div class="button-container">
-  <a class="button inappevents" href="https://dev.appsflyer.com/hc/docs/in-app-events-2">In-app events</a>
+  <a style="display: flex;    justify-content: center;    align-items: center;    width: 150px;	  border-radius: 6px;    border: solid 2px;    padding: 16px;    margin-right: 4px;" href="https://dev.appsflyer.com/hc/docs/in-app-events-2">In-app events</a>
   <a class="button conversiondata" href="https://dev.appsflyer.com/hc/docs/conversion-data">Conversion data</a>
 </div>
