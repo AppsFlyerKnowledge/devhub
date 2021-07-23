@@ -1,0 +1,203 @@
+openapi: 3.0.3
+info:
+  title: OneLink API
+  version: '1.0'
+servers:
+  - url: 'https://onelink.appsflyer.com/shortlink/v1/'
+paths:
+  /{onelink-id}:
+    post:
+      summary: Create OneLink attribution link
+      operationId: create-onelink-attribution-link
+      parameters:
+        - name: onelink-id
+          in: path
+          description: Get this from the person using the AppsFlyer dashboard. Taken from the OneLink template screen
+          schema:
+            type: string
+            default: A1b3
+          required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - data
+              properties:
+                brand_domain:
+                  type: string
+                  description: 'Only use this param and request it in the payload if: 1) The Branded Links feature is enabled in your account, and 2) The branded link is configured in your account. If these conditions are not met, do not use this param, as the API call will not work.'
+                  default: mybranded.com
+                ttl:
+                  type: string
+                  description: 'Time to Live for the full attribution link. Default is 31 days. Value can be specified in days (default), minutes or hours (for example, 10m, 20h, 14d).'
+                  default: 25d
+                data:
+                  type: string
+                  description: 'JSON format of the query parameters following the AppsFlyer macros for attribution links. **Note**: The media source (pid) parameter is mandatory.'
+                  default: '{"pid": "my_media_source_SMS", "c": "my_campaign" }'
+                  format: json
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: 'https://myapp.onelink.me/abc123/qwer9876'
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                API limit reached:
+                  value: '{ error : "Data sent exceeds limit" }'
+        '401':
+          description: '401'
+          content:
+            application/json:
+              examples:
+                UNAUTHORIZED:
+                  value: '{ error : "Authentication Failed" }'
+      deprecated: false
+    get:
+      summary: Get OneLink attribution link
+      operationId: get-onelink-attribution-link
+      parameters:
+        - name: onelink-id
+          in: path
+          description: Get this from the person using the AppsFlyer dashboard. Taken from the OneLink template screen
+          schema:
+            type: string
+            default: A1b3
+          required: true
+        - name: id
+          in: query
+          description: 'The ID of the short OneLink query params. For example, for the following OneLink attribution link: myapp.onelink.me/abc123/qwer9876 , the shortlink-id is qwer9876'
+          schema:
+            type: string
+            default: a1b2e3h5
+          required: true
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: |-
+                    { "pid": "sms-offer"
+                    "c": "april-coupon"
+                    }
+        '401':
+          description: '401'
+          content:
+            application/json:
+              examples:
+                UNAUTHORIZED:
+                  value: '{ error : "Authentication Failed" }'
+        '404':
+          description: '404'
+          content:
+            application/json:
+              examples:
+                Shortlink record not found:
+                  value: Not Found
+      deprecated: false
+    put:
+      summary: Update OneLink attribution link
+      operationId: update-onelink-attribution-link
+      parameters:
+        - name: onelink-id
+          in: path
+          description: Get this from the person using the AppsFlyer dashboard. Taken from the OneLink template screen
+          schema:
+            type: string
+            default: A1b2
+          required: true
+        - name: id
+          in: query
+          description: 'The ID of the short OneLink query params. For example, for the following OneLink attribution link: myapp.onelink.me/abc123/qwer9876 , the shortlink-id is qwer9876'
+          schema:
+            type: string
+            default: a1b2e3h5
+          required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - data
+              properties:
+                brand_domain:
+                  type: string
+                  default: newbranded.com
+                ttl:
+                  type: string
+                  description: 'Time to Live for the full attribution link. value can be specified in days (default), minutes or hours (for example, 10m, 20h, 14d).'
+                  default: 22d
+                data:
+                  type: string
+                  default: '{"pid": "my_media_source_SMS", "c": "my_campaign" }'
+                  format: json
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: 'https://myapp.onelink.me/abc123/qwer9876'
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Data Error:
+                  value: ' { error : "Invalid/no data in request" }'
+                API limit reached:
+                  value: '{ error : "Data sent exceeds limit" }'
+      deprecated: false
+    delete:
+      summary: Delete OneLink attribution link
+      operationId: delete-onelink-attribution-link
+      parameters:
+        - name: onelink-id
+          in: path
+          description: Get this from the person using the AppsFlyer dashboard. Taken from the OneLink template screen
+          schema:
+            type: string
+            default: A1b2
+          required: true
+        - name: id
+          in: query
+          description: 'The ID of the short OneLink query params. For example, for the following OneLink attribution link: myapp.onelink.me/abc123/qwer9876 , the shortlink-id is qwer9876'
+          schema:
+            type: string
+            default: a1b2e3h5
+          required: true
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: ok
+        '401':
+          description: '401'
+          content:
+            application/json:
+              examples:
+                UNAUTHORIZED:
+                  value: '{ error : "Authentication Failed" }'
+        '404':
+          description: '404'
+          content:
+            application/json:
+              examples:
+                Shortlink record not found:
+                  value: Not Found
+      deprecated: false
