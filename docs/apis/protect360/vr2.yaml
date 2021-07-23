@@ -34,7 +34,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Rule'
+                $ref: '#/components/schemas/ResponseRule'
   /rule/{rule_id}:
     put:
       tags:
@@ -198,3 +198,30 @@ components:
         type: array
         items:
           $ref: '#/components/schemas/Rule'
+    ResponseRule:
+      properties:
+        app-ids:
+          type: array
+          items: 
+            type: string 
+        description:
+          type: string
+        last-update-time-millis:
+          type: number
+          format: long
+        name:
+          type: string
+        last-update-user:
+          type: string
+        status:
+          $ref: '#/components/schemas/Status'
+        population:
+          $ref: '#/components/schemas/Population'
+        rule-type:
+          $ref: '#/components/schemas/RuleType'
+        event-type:
+          $ref: '#/components/schemas/EventType'
+        action:
+          $ref: '#/components/schemas/Action'
+        rule-conditions:
+          $ref: '#/components/schemas/RuleConditions'
