@@ -2,6 +2,8 @@ openapi: '3.0.2'
 info:
   title: SKAdNetwork conversion mapping schema
   version: '0.1'
+security:
+  - bearerAuth: []
 servers:
 - url: https://hq1.appsflyer.com/api/skad/conversion_schema/v1/
 paths:
@@ -15,8 +17,13 @@ paths:
         in: query
         description: App ID(s) to retrieve configuration for.  Can be repeated multiple
           times in order to filter more than one app
+        required: true
+        style: form
+        explode: true
         schema:
-          type: string
+          type: array
+          items:
+            type: string
       responses:
         '200':
           description: 'OK'
@@ -121,6 +128,11 @@ paths:
                 Result:
                   value: Exceeded rate limitation
 components:
+  securitySchemes:
+    bearerAuth: 
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
   schemas:
     CvMapping:
       properties:
