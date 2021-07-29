@@ -1,0 +1,186 @@
+openapi: '3.0.2'
+info:
+  title: SKAdNetwork conversion mapping schema
+  version: '0.1'
+servers:
+- url: https://hq1.appsflyer.com/api/skad/conversion_schema/v1/
+paths:
+  /:
+    get:
+      summary: Get conversion value mapping schema for specified apps
+      description: Specify one or more apps using the app ID
+      operationId: get-conversion-value-mapping-schema
+      parameters:
+      - name: app_id
+        in: query
+        description: App ID(s) to retrieve configuration for.  Can be repeated multiple
+          times in order to filter more than one app
+        schema:
+          type: string
+      responses:
+        '200':
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+               type: object
+               properties:
+                  data:
+                     type: object
+                     properties:
+                        app_id:
+                           type: string
+                           description: "App Store app id"
+                        configuration_mode:
+                           type: string
+                           description: "AppsFlyer predefined configuration mode or advertiser created custom mode"
+                        last_config_change:
+                           type: string
+                           description: "Last time the user updated conversion value mapping"
+                        measurement_window: 
+                           type: integer
+                           description: "A time window post install that AppsFlyer or the advertiser stops calling updateConversionValue() after (reported in hours)"
+                        conversion_value_mapping:
+                          type: array
+                          description: "The conversion values mapping"
+                          items:
+                            $ref: '#/components/schemas/CvMapping'
+                        
+              example:
+                  data:
+                    - app_id: id12345678
+                      configuration_mode: custom_decode
+                      measurement_window: 24
+                      last_config_change: '2021-02-03 09:32:07.362'
+                      conversion_value_mapping:
+                      - conversion_value: 1
+                        events:
+                        - event_name: af_purchase
+                          mapped_event_name: af_purchase
+                          conversion_event: false
+                          event_counter: 3
+                          event_revenue: 5
+                          min_event_counter: 3
+                          max_event_counter: 6
+                          min_event_revenue: 4.001
+                          max_event_revenue: 5
+                          event_currency: USD
+                          event_revenue_usd: 5
+                        min_time_post_install: 6
+                        max_time_post_install: 12
+                      - conversion_value: 34
+                        events:
+                        - event_name: NewDevice
+                          mapped_event_name: NewDevice
+                          conversion_event: true
+                          event_counter: 5
+                          event_revenue: 6
+                          min_event_revenue: 5.001
+                          max_event_revenue: 6
+                          event_currency: USD
+                          event_revenue_usd: 6
+                        - event_name: AchievedLevel1
+                          mapped_event_name: AchievedLevel1
+                          conversion_event: false
+                          event_counter: 6
+        '400':
+          description: 'Request is malformed'
+          content:
+            application/json:
+              examples:
+                Request malformed:
+                  value: "{}"
+              schema:
+                type: object
+                properties: {}
+        '401':
+          description: 'Authentication error'
+          content:
+            text/plain:
+              examples:
+                Authentication error:
+                  value: "{}"
+              schema:
+                type: object
+                properties: {}
+        '404':
+          description: 'Server error or resource temporarily not found'
+          content:
+            text/plain:
+              examples:
+                Server error:
+                  value: "{}"
+              schema:
+                type: object
+                properties: {}
+        '429':
+          description: 'Exceeded rate limitation'
+          content:
+            text/plain:
+              examples:
+                Result:
+                  value: Exceeded rate limitation
+components:
+  schemas:
+    CvMapping:
+      properties:
+        conversion_value:
+          description: "Original conversion value received by SKAdNetwork"
+          type: integer
+          minimum: 0
+          maximum: 63
+        events:
+          type: array
+          items:
+            $ref: '#/components/schemas/Event'
+        min_time_post_install:
+          type: integer
+          description: "The minimum of the time range in which a user was last active during the measurement window"
+        max_time_post_install:
+          type: integer
+          description: "The maximum of the time range in which a user was last active during the measurement window"
+    Event:
+      properties:
+        event_name:
+          type: string
+          description: "In App Event reported by AppsFlyer’s SDK"
+        mapped_event_name:
+          type: string
+          description: "In App Event as mapped within Ad Network. The mapping between AppsFlye’s in-app event to Ad Network’s in-app event is done by the advertiser, per app, on AppsFlyer’s end (no change here, as it works today)."
+        event_counter:
+          type: integer
+          description: "The number of times an event occurred (note: this field is not present in case of revenue mode)"
+        conversion_event:
+          type: boolean
+          description: "In the case of more than one event, if true, this event is a conversion event as defined by the advertiser"
+        event_currency:
+          type: string
+          description: "Reported currency for the event revenue"
+        event_revenue:
+          type: integer
+          description: "In case of a revenue event, monetary value in local currency would be presented here"
+        min_event_revenue:
+          type: number
+          format: float
+          description: "For ranges of revenue, the minimum value for which this conversion value would be updated"  
+        max_event_revenue:
+          type: number
+          format: float
+          description: "For ranges of revenue, the maximum value for which this conversion value would be updated" 
+        event_revenue_usd:
+          type: number
+          format: float
+          description: "In case of a revenue event, monetary value in USD would be presented here" 
+        min_event_counter:
+          type: integer
+          description: "" 
+        max_event_counter:
+          type: integer
+          description: "In event counter range, the maximum of the defined range" 
+
+
+        
+                  
+
+
+    
