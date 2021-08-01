@@ -1,0 +1,461 @@
+openapi: 3.0.1
+info:
+  title:  Deep linking REST API
+  version: "1.0"
+servers:
+- url: https://dls2s.appsflyer.com/v1.0
+paths:
+  /ios/{app_id}:
+    post:
+      tags:
+      - iOS deep linking request
+      summary: Deep linking for IOS
+      parameters:
+      - name: app_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: "App ID of the app for which you are passing data"
+        example: id123456789
+      - name: af_sig
+        in: query
+        required: true
+        schema:
+          type: string
+        description: |
+          Create an HMAC signature by concatenating the values of the following fields:
+
+          `timestamp` + `ip`
+
+          The HMAC is generated using SHA256 and uses the DevKey as the signature’s secret key. 
+          To retrieve the DevKey, in the AppsFlyer dashboard, go ***Configuration*** > ***App Settings***.
+
+          
+          For example, the concatenation of the timestamp and IP are: 
+          > `2015-01-22T08:45:33.412127.0.0.1`
+
+          The DevKey is `w8sZzy8EaPaxFKfaoTqUi6` 
+          
+          **Note**: Make sure you put the timestamp first, and then the IP.
+        example: "ce2d1e6b4619b9e19bc6be116183b92e43aa01e182b15012a7215bdd879ec327"
+
+      requestBody:
+        content:
+          application/json:
+            schema:
+              title: ios_request
+              required:
+              - is_first
+              - lang
+              - os
+              - timestamp
+              - type
+              - ip
+              type: object
+              properties:
+                idfv:
+                  title: idfv
+                  $ref: '#/components/schemas/CommonIdObject'
+                lang:
+                  type: string
+                  description: "Device locale used for authentication and probabilistic modeling"
+                  example: "en-US"
+                att_status:
+                  type: integer
+                  format: int32
+                  enum:
+                    - 1
+                    - 2
+                    - 3
+                    - 4 
+                  description: |
+                    App Tracking Transparency: Use this flag to indicate if user opts out of the use of IDFA (relevant for iOS 14 and above)
+                    - 1 = authorized
+                    - 2 = denied
+                    - 3 = notDetermined 
+                    - 4 = restricted
+                  example: 1
+                is_first:
+                  type: boolean
+                  description: "Is first app launch"
+                  example: true
+                open_referrer:
+                  type: string
+                  description: "App from which the current app was opened"
+                  example: "com.myexample.myapp"
+                ip:
+                  type: string
+                  description: "The device IP Address - IPv4"
+                  example: "198.51.100.23"
+                os:
+                  type: string
+                  description: "Device OS version used for authentication and probabilistic modeling"
+                  example: "10.3.3"
+                timestamp:
+                  type: string
+                  description: ISO 8601 UTC format
+                  example: "2015-01-22T08:45:33.412"
+                type:
+                  type: string
+                  description: "Device type/model used for authentication and probabilistic modeling"
+                  example: "iPhone"
+                idfa:
+                  title: idfa
+                  $ref: '#/components/schemas/CommonIdObject'
+                sharing_filter:
+                  type: string
+                  x-anyOf:
+                  - type: string
+                  - x-allOf:
+                    - {}
+                    - type: array
+                  example: ["googleadwords_int", "adcolony_int"]
+            
+        required: false
+        
+      responses:
+        200:
+          description: Response for iOS deep linking request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DLResponse'
+              examples:
+                Click_not_found:
+                  value:
+                    found: false
+                    click_event: {}
+                Click_found:
+                  value:
+                    found: true
+                    click_event: {
+                      timestamp: "2020-04-22T08:45:33.412",
+                      custom_params: {
+                        fruit_name: "apples",
+                        fruit_amount: "26"
+                      },
+                      campaign_id: "394a89cf-275a-451b-b030-1c6f8b55ff19",
+                      match_type: "probabilistic",
+                      media_source: "Email",
+                      campaign: "my_new_campaign",
+                      click_http_referrer: "https://www.ynet.co.il/",
+                      af_sub1: "my_afsub1",
+                      af_sub2: "my_afsub2",
+                      af_sub3: "my_afsub3",
+                      af_sub4: "my_afsub4",
+                      af_sub5: "my_afsub5",
+                    }
+        400:
+          $ref: '#/components/responses/BadRequest'
+        503:
+          $ref: '#/components/responses/GatewayTimeout'
+        504:
+          $ref: '#/components/responses/ServiceUnavailable'
+      x-codegen-request-body-name: ios_request
+  
+  /android/{app_id}:
+    post:
+      tags:
+      - Android deep linking request
+      summary: Deep linking for Android
+      parameters:
+      - name: app_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: "App ID of the app for which you are passing data"
+        example: com.example.myapp
+      - name: af_sig
+        in: query
+        required: true
+        schema:
+          type: string
+        description: |
+          Create an HMAC signature by concatenating the values of the following fields:
+
+          `timestamp` + `ip`
+
+          The HMAC is generated using SHA256 and uses the DevKey as the signature’s secret key. 
+          To retrieve the DevKey, in the AppsFlyer dashboard, go ***Configuration*** > ***App Settings***.
+          
+          For example, the concatenation of the timestamp and IP are: 
+          > `2015-01-22T08:45:33.412127.0.0.1`
+
+          The DevKey is `w8sZzy8EaPaxFKfaoTqUi6` 
+          
+          **Note**: Make sure you put the timestamp first, and then the IP.
+        example: "ce2d1e6b4619b9e19bc6be116183b92e43aa01e182b15012a7215bdd879ec327"
+
+      requestBody:
+        content:
+          application/json:
+            schema:
+              title: android_request
+              required:
+              - is_first
+              - lang
+              - os
+              - timestamp
+              - type
+              - ip
+              type: object
+              properties:
+                referrers:
+                  type: array
+                  items:
+                    title: referrer
+                    required:
+                    - source
+                    - value
+                    type: object
+                    properties:
+                      source:
+                        type: string
+                      value:
+                        type: string
+                  description: |
+                    The list referrer strings from app stores (for example, Google Play or Huawei App Gallery).
+
+                    The field structure is a vector of **source** and **value** parameters per store.
+
+                    The current supported stores are **google** and **huawei**.
+                    
+                    > **Note**: **google** and **huawei** are predefined values. The service ignores non-valid store names.
+                  example: 
+                    [ 
+                      { "source": "google",         
+                        "value": "tran_id= 44577766555&pid=adcolony_int"
+                      },
+                      {
+                        "source": "huawei",
+                        "value": null,
+                      }       
+                    ]
+                lang:
+                  type: string
+                  description: "Device locale used for authentication and probabilistic modeling"
+                  example: "en-US"
+                is_first:
+                  type: boolean
+                  description: "Is first app launch"
+                  example: true
+                ip:
+                  type: string
+                  description: "The device IP Address - IPv4"
+                  example: "198.51.100.78"
+                os:
+                  type: string
+                  description: "Device OS version used for authentication and probabilistic modeling"
+                  example: "10.3.3"
+                timestamp:
+                  type: string
+                  description: ISO 8601 UTC format
+                  example: "2015-01-22T08:45:33.412"
+                oaid:
+                  title: oaid
+                  $ref: '#/components/schemas/CommonIdObject'
+                type:
+                  type: string
+                  description: "Device type/model used for authentication and probabilistic modeling"
+                  example: "SM-A115M"
+                gaid:
+                  title: gaid
+                  $ref: '#/components/schemas/CommonIdObject'
+                sharing_filter:
+                  type: string
+                  x-anyOf:
+                  - type: string
+                  - x-allOf:
+                    - {}
+                    - type: array
+                  description: |
+                    The value options are the following:
+                    - `all`: Doesn’t send the event to any partner
+                    - [`"a"`,`"b"`,`"c"`]: Doesn’t send the event to the specified list of partners (by partner IDs)
+                    **Note**: The partner IDs must be taken from predefined.
+                  example: ["googleadwords_int", "adcolony_int"]
+
+        required: true
+      responses:
+        200:
+          description: Response for Android deep linking request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DLResponse'
+              examples:
+                Click_not_found:
+                  value:
+                    found: false
+                    click_event: {}
+                Click_found:
+                  value:
+                    found: true
+                    click_event: {
+                      timestamp: "2020-04-22T08:45:33.412",
+                      custom_params: {
+                        fruit_name: "apples",
+                        fruit_amount: "26"
+                      },
+                      campaign_id: "394a89cf-275a-451b-b030-1c6f8b55ff19",
+                      match_type: "probabilistic",
+                      media_source: "Email",
+                      campaign: "my_new_campaign",
+                      click_http_referrer: "https://www.myrefer.com/",
+                      af_sub1: "my_afsub1",
+                      af_sub2: "my_afsub2",
+                      af_sub3: "my_afsub3",
+                      af_sub4: "my_afsub4",
+                      af_sub5: "my_afsub5",
+                    }
+        400:
+          $ref: '#/components/responses/BadRequest'
+        503:
+          $ref: '#/components/responses/GatewayTimeout'
+        504:
+          $ref: '#/components/responses/ServiceUnavailable'
+      x-codegen-request-body-name: android_request
+
+components:
+  examples:
+    ClickNotFound:
+      value:
+        found: false
+        click_event: {}
+    ClickFound:
+      value:
+        found: true
+        click_event: {
+          timestamp: "2020-04-22T08:45:33.412",
+          custom_params: {
+            fruit_name: "apples",
+            fruit_amount: "26"
+          },
+          campaign_id: "394a89cf-275a-451b-b030-1c6f8b55ff19",
+          match_type: "probabilistic",
+          media_source: "Email",
+          campaign: "my_new_campaign",
+          click_http_referrer: "https://www.ynet.co.il/",
+          af_sub1: "my_afsub1",
+          af_sub2: "my_afsub2",
+          af_sub3: "my_afsub3",
+          af_sub4: "my_afsub4",
+          af_sub5: "my_afsub5",
+        }
+    
+  responses:  
+    BadRequest:
+      description: Bad Request. The request message is not valid.
+      content:
+        application/json:
+            schema:
+              $ref: '#/components/schemas/Error' 
+            example: {
+              message: "Bad Request"
+            }
+    GatewayTimeout:
+      description: Gateway Timeout. ELB (Amazon Load-balancer) service unavailable.
+      content: {}
+    ServiceUnavailable:
+      description: Service Unavailable. ELB (Amazon Load-balancer) service unavailable.
+      content: {}
+
+  schemas:
+    CommonIdObject:
+      required:
+        - type
+        - value
+      properties:
+        type:
+          type: string
+          enum:
+          - unhashed
+          - sha1
+          - md5
+          example: sha1
+        value:
+          type: string
+          example: "123456436CDFAC250CBEAF3BFFCD713E3F123456"
+
+    DLResponse:
+      title: shared response
+      required:
+      - click_event
+      - found
+      type: object
+      properties:
+        found:
+          type: boolean
+        click_event:
+          title: click_event
+          required:
+          - af_sub1
+          - af_sub2
+          - af_sub3
+          - af_sub4
+          - af_sub5
+          - campaign
+          - campaign_id
+          - click_http_referrer
+          - custom_params
+          - match_type
+          - media_source
+          - timestamp
+          type: object
+          properties:
+            campaign_id:
+              type: string
+              nullable: true
+            custom_params:
+              title: custom_params
+              type: object
+              properties: {}
+            timestamp:
+              type: string
+              nullable: true
+            match_type:
+              type: string
+              enum:
+              - referrer
+              - id_matching
+              - srn
+              - fingerprinting
+            media_source:
+              type: string
+              nullable: true
+            campaign:
+              type: string
+              nullable: true
+            click_http_referrer:
+              type: string
+              nullable: true
+            af_sub1:
+              type: string
+              nullable: true
+            af_sub2:
+              type: string
+              nullable: true
+            af_sub3:
+              type: string
+              nullable: true
+            af_sub4:
+              type: string
+              nullable: true
+            af_sub5:
+              type: string
+              nullable: true
+      
+    # Schema for error response body
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+      required:
+        - code
+        - message
+  
