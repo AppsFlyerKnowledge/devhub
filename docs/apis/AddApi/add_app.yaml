@@ -1,6 +1,6 @@
 openapi: 3.0.1
 info:
-  title: Add a new app API
+  title: Add app API
   description: API for adding a new app to your Appsflyer account.
   version: 1.0.0
 servers:
@@ -10,7 +10,7 @@ security:
   - bearerAuth: []
 tags:
   - name: Add App
-    description: 'Public API for Adding a new app to Appsflyer account'
+    description: 'Public API for adding a new app to Appsflyer account'
 
 paths:
   /api/apps/v1/add_app:
