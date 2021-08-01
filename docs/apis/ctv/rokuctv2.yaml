@@ -1,0 +1,1481 @@
+---
+swagger: '2.0'
+x-id:
+- af-wh-ott
+info:
+  title: AppsFlyer Roku CTV API
+  version: 1.0.0
+securityDefinitions:
+  ApiKeyAuth:
+    type: apiKey
+    in: header
+    name: authorization
+    description: |
+      Create an HMAC signature by hashing the entire raw message.
+      The HMAC is generated using SHA256 and uses the DevKey as the signature’s secret key.
+      
+      For example, the raw message is: `{"timestamp":1604503583337,"ip":"127.0.0.1","user_agent":"Roku/DVP-9.21 (AE9.21E04090A)","device_os_version":"9.3.0","device_model":"3920X","device_ids":[{"type":"rida","value":"fa73d67d-f55c-5af3-883a-726253dc7d0e"}],"limit_ad_tracking":false}`
+
+      The DevKey is: `w8sZzy8EaPaxFKfaoTqUi6`
+      The result is: `715b133d5a327b77beb898688a3ad438da0f78071cd3df70e8ec5ecf60751972`
+security:
+- ApiKeyAuth: []
+paths:
+  "/api/v1.0/installs/{app-id}":
+    post:
+      responses:
+        '202':
+          description: The request was accepted
+        '400':
+          description: The authentication succeeded, but mandatory
+            fields in the message body are missing, or fields are invalid
+        '401':
+          description: The app doesn't exist or the authentication failed
+        '403':
+          description: App traffic blocked due to Zero package limit
+        '500':
+          description: Internal server error
+      produces:
+      - application/json
+      consumes:
+      - application/json
+      parameters:
+      - in: path
+        name: app-id
+        description: |-
+          The App ID of the app for which you are passing data. This is the Roku channel ID. 
+          
+          **To get the app/channel ID:**
+          1. In the Roku developer dashboard, click **Manage my channels** > **Preview and update**. 
+          2. From the URL at top of screen, take the 5-6 digit channel ID. This is the app/channel ID.
+          
+          For example: `https://developer.roku.com/developer-channels/channels/edit/package/`**224880**
+        type: string
+        required: true
+        minLength: 1
+        x-allOf:
+        - type: string
+          minLength: 1
+        - {}
+      - in: body
+        name: body
+        description: ''
+        required: true
+        schema:
+          type: object
+          properties:
+            timestamp:
+              description: Event timestamp in Unix time (UTC)
+              type: integer
+              format: int64
+              minimum: 1625230572928
+              x-allOf:
+              - type: integer
+                format: int64
+                minimum: 1
+              maximum: 1625576172928
+              example: 1625576172928
+            request_id:
+              description: Unique identifier per request
+              type: string
+              minLength: 36
+              maxLength: 36
+              x-allOf:
+              - type: string
+                minLength: 36
+                maxLength: 36
+              - {}
+              example: 71dad7da-7926-40d8-9b15-b94a6d46e15a
+            ip:
+              description: The device IP address
+              type: string
+              minLength: 1
+              maxLength: 46
+              x-allOf:
+              - type: string
+                minLength: 1
+                maxLength: 46
+              - {}
+              example: 35.244.183.10
+            user_agent:
+              description: The device user agent
+              type: string
+              minLength: 1
+              maxLength: 256
+              x-allOf:
+              - type: string
+                minLength: 1
+                maxLength: 256
+              - {}
+              example: Roku/DVP-9.21 (AE9.21E04090A)
+            device_os_version:
+              description: The device OS version
+              type: string
+              minLength: 1
+              maxLength: 12
+              x-allOf:
+              - type: string
+                minLength: 1
+                maxLength: 12
+              - {}
+              example: 9.3.0
+            device_model:
+              description: The device model
+              type: string
+              minLength: 1
+              maxLength: 12
+              x-allOf:
+              - type: string
+                minLength: 1
+                maxLength: 12
+              - {}
+              example: 3920X
+            device_ids:
+              description: A vector of the different device IDs
+              type: array
+              items:
+                type: object
+                properties:
+                  type:
+                    enum:
+                    - custom
+                    - rida
+                  value:
+                    type: string
+                    minLength: 1
+                    x-allOf:
+                    - type: string
+                      minLength: 1
+                    - {}
+                required:
+                - type
+                - value
+                x-allOf:
+                - type: object
+                  properties:
+                    type:
+                      enum:
+                      - custom
+                      - rida
+                    value:
+                      type: string
+                      minLength: 1
+                      x-allOf:
+                      - type: string
+                        minLength: 1
+                      - {}
+                  required:
+                  - type
+                  - value
+                - {}
+              x-allOf:
+              - type: array
+                items:
+                  type: object
+                  properties:
+                    type:
+                      enum:
+                      - custom
+                      - rida
+                    value:
+                      type: string
+                      minLength: 1
+                      x-allOf:
+                      - type: string
+                        minLength: 1
+                      - {}
+                  required:
+                  - type
+                  - value
+                  x-allOf:
+                  - type: object
+                    properties:
+                      type:
+                        enum:
+                        - custom
+                        - rida
+                      value:
+                        type: string
+                        minLength: 1
+                        x-allOf:
+                        - type: string
+                          minLength: 1
+                        - {}
+                    required:
+                    - type
+                    - value
+                  - {}
+              example:
+              - type: rida
+                value: fa73d67d-f55c-5af3-883a-726253dc7d0e
+              - type: custom
+                value: 045f4137-57b7-45e6-8a45-c303101a086a
+            limit_ad_tracking:
+              description: Limit Ad Tracking flag. Use this flag to mark whether or not
+                the user has advertiser ID
+              type: boolean
+              x-allOf:
+              - type: boolean
+              example: true
+            customer_user_id:
+              description: Customer user ID, as set by the developer. This is used
+                as the user identifier in the advertiser's system
+              type: string
+              minLength: 1
+              maxLength: 64
+              x-allOf:
+              - type: string
+                minLength: 1
+                maxLength: 64
+              example: 15667737-366d-4994-ac8b-653fe6b2be4a
+            app_version_name:
+              description: The release or version number of the app
+              type: string
+              minLength: 1
+              maxLength: 12
+              x-allOf:
+              - type: string
+                minLength: 1
+                maxLength: 12
+              - {}
+              example: 1.0.5
+          required:
+          - ip
+          - user_agent
+          - device_os_version
+          - device_model
+          - device_ids
+          - limit_ad_tracking
+      summary: Measure installs
+      description: To properly measure CTV app installs with AppsFlyer, the following API call must be made for every new install
+  "/api/v1.0/inapps/{app-id}":
+    post:
+      responses:
+        '202':
+          description: The request was accepted
+        '400':
+          description: The authentication succeeded, but mandatory
+            fields in the message body are missing, or fields are invalid
+        '401':
+          description: The app doesn't exist or the authentication failed
+        '403':
+          description: App traffic blocked due to Zero package limit
+        '500':
+          description: Internal server error
+      produces:
+      - application/json
+      consumes:
+      - application/json
+      parameters:
+      - in: path
+        name: app-id
+        description: |-
+          The App ID of the app for which you are passing data. This is the Roku channel ID. 
+          
+          **To get the app/channel ID:**
+          1. In the Roku developer dashboard, click **Manage my channels** > **Preview and update**. 
+          2. From the URL at top of screen, take the 5-6 digit channel ID. This is the app/channel ID.
+          
+          For example: `https://developer.roku.com/developer-channels/channels/edit/package/`**224880**
+        type: string
+        required: true
+        minLength: 1
+        x-allOf:
+        - type: string
+          minLength: 1
+        - {}
+      - in: header
+        name: authorization
+        description: |-
+          Create an HMAC signature by hashing the entire raw message.
+          The HMAC is generated using SHA256 and uses the DevKey as the signature’s secret key.
+          
+          For example, the raw message is: `{"timestamp":1604503583337,"ip":"127.0.0.1","user_agent":"Roku/DVP-9.21 (AE9.21E04090A)","device_os_version":"9.3.0","device_model":"3920X","device_ids":[{"type":"rida","value":"fa73d67d-f55c-5af3-883a-726253dc7d0e"}],"limit_ad_tracking":false}`
+
+          The DevKey is: `w8sZzy8EaPaxFKfaoTqUi6`
+          The result is: `715b133d5a327b77beb898688a3ad438da0f78071cd3df70e8ec5ecf60751972`
+        type: string
+        required: true
+        minLength: 1
+        x-allOf:
+        - type: string
+          minLength: 1
+        - {}
+      - in: body
+        name: body
+        description: ''
+        required: true
+        schema:
+          type: object
+          properties:
+            timestamp:
+              description: Event timestamp in Unix time (UTC)
+              type: integer
+              format: int64
+              minimum: 1625230572928
+              x-allOf:
+              - type: integer
+                format: int64
+                minimum: 1
+              maximum: 1625576172928
+              example: 1625576172928
+            request_id:
+              description: Unique identifier per request
+              type: string
+              minLength: 36
+              maxLength: 36
+              x-allOf:
+              - type: string
+                minLength: 36
+                maxLength: 36
+              - {}
+              example: 71dad7da-7926-40d8-9b15-b94a6d46e15a
+            ip:
+              description: The device IP address
+              type: string
+              minLength: 1
+              maxLength: 46
+              x-allOf:
+              - type: string
+                minLength: 1
+                maxLength: 46
+              - {}
+              example: 35.244.183.10
+            user_agent:
+              description: The device user agent
+              type: string
+              minLength: 1
+              maxLength: 256
+              x-allOf:
+              - type: string
+                minLength: 1
+                maxLength: 256
+              - {}
+              example: Roku/DVP-9.21 (AE9.21E04090A)
+            device_os_version:
+              description: The device OS version
+              type: string
+              minLength: 1
+              maxLength: 12
+              x-allOf:
+              - type: string
+                minLength: 1
+                maxLength: 12
+              - {}
+              example: 9.3.0
+            device_model:
+              description: The device model
+              type: string
+              minLength: 1
+              maxLength: 12
+              x-allOf:
+              - type: string
+                minLength: 1
+                maxLength: 12
+              - {}
+              example: 3920X
+            device_ids:
+              description: A vector of the different device IDs
+              type: array
+              items:
+                type: object
+                properties:
+                  type:
+                    enum:
+                    - custom
+                    - rida
+                  value:
+                    type: string
+                    minLength: 1
+                    x-allOf:
+                    - type: string
+                      minLength: 1
+                    - {}
+                required:
+                - type
+                - value
+                x-allOf:
+                - type: object
+                  properties:
+                    type:
+                      enum:
+                      - custom
+                      - rida
+                    value:
+                      type: string
+                      minLength: 1
+                      x-allOf:
+                      - type: string
+                        minLength: 1
+                      - {}
+                  required:
+                  - type
+                  - value
+                - {}
+              x-allOf:
+              - type: array
+                items:
+                  type: object
+                  properties:
+                    type:
+                      enum:
+                      - custom
+                      - rida
+                    value:
+                      type: string
+                      minLength: 1
+                      x-allOf:
+                      - type: string
+                        minLength: 1
+                      - {}
+                  required:
+                  - type
+                  - value
+                  x-allOf:
+                  - type: object
+                    properties:
+                      type:
+                        enum:
+                        - custom
+                        - rida
+                      value:
+                        type: string
+                        minLength: 1
+                        x-allOf:
+                        - type: string
+                          minLength: 1
+                        - {}
+                    required:
+                    - type
+                    - value
+                  - {}
+              example:
+              - type: rida
+                value: fa73d67d-f55c-5af3-883a-726253dc7d0e
+              - type: custom
+                value: 045f4137-57b7-45e6-8a45-c303101a086a
+            limit_ad_tracking:
+              description: Limit Ad Tracking flag. Use this flag to mark whether or not
+                the user has advertiser ID
+              type: boolean
+              x-allOf:
+              - type: boolean
+              example: true
+            customer_user_id:
+              description: Customer user ID, as set by the developer. This is used
+                as the user identifier in the advertiser's system
+              type: string
+              minLength: 1
+              maxLength: 64
+              x-allOf:
+              - type: string
+                minLength: 1
+                maxLength: 64
+              example: 15667737-366d-4994-ac8b-653fe6b2be4a
+            app_version_name:
+              description: The release or version number of the app
+              type: string
+              minLength: 1
+              maxLength: 12
+              x-allOf:
+              - type: string
+                minLength: 1
+                maxLength: 12
+              - {}
+              example: 1.0.5
+            event_name:
+              description: A string describing the event name
+              type: string
+              minLength: 1
+              maxLength: 64
+              x-allOf:
+              - type: string
+                minLength: 1
+                maxLength: 64
+              - {}
+              example: af_purchase
+            event_parameters:
+              description: A JSON object which can contain multiple event parameters.
+              type: object
+              properties:
+                af_revenue:
+                  type: number
+                  format: double
+                af_price:
+                  type: number
+                  format: double
+                af_currency:
+                  enum:
+                  - USD
+                  - AED
+                  - AFN
+                  - ALL
+                  - AMD
+                  - ANG
+                  - AOA
+                  - ARS
+                  - AUD
+                  - AWG
+                  - AZN
+                  - BAM
+                  - BBD
+                  - BDT
+                  - BGN
+                  - BHD
+                  - BIF
+                  - BMD
+                  - BND
+                  - BOB
+                  - BRL
+                  - BSD
+                  - BTC
+                  - BTN
+                  - BWP
+                  - BYN
+                  - BZD
+                  - CAD
+                  - CDF
+                  - CHF
+                  - CLF
+                  - CLP
+                  - CNH
+                  - CNY
+                  - COP
+                  - CRC
+                  - CUC
+                  - CUP
+                  - CVE
+                  - CZK
+                  - DJF
+                  - DKK
+                  - DOP
+                  - DZD
+                  - EGP
+                  - ERN
+                  - ETB
+                  - EUR
+                  - FJD
+                  - FKP
+                  - GBP
+                  - GEL
+                  - GGP
+                  - GHS
+                  - GIP
+                  - GMD
+                  - GNF
+                  - GTQ
+                  - GYD
+                  - HKD
+                  - HNL
+                  - HRK
+                  - HTG
+                  - HUF
+                  - IDR
+                  - ILS
+                  - IMP
+                  - INR
+                  - IQD
+                  - IRR
+                  - ISK
+                  - JEP
+                  - JMD
+                  - JOD
+                  - JPY
+                  - KES
+                  - KGS
+                  - KHR
+                  - KMF
+                  - KPW
+                  - KRW
+                  - KWD
+                  - KYD
+                  - KZT
+                  - LAK
+                  - LBP
+                  - LKR
+                  - LRD
+                  - LSL
+                  - LYD
+                  - MAD
+                  - MDL
+                  - MGA
+                  - MKD
+                  - MMK
+                  - MNT
+                  - MOP
+                  - MRO
+                  - MRU
+                  - MUR
+                  - MVR
+                  - MWK
+                  - MXN
+                  - MYR
+                  - MZN
+                  - NAD
+                  - NGN
+                  - NIO
+                  - NOK
+                  - NPR
+                  - NZD
+                  - OMR
+                  - PAB
+                  - PEN
+                  - PGK
+                  - PHP
+                  - PKR
+                  - PLN
+                  - PYG
+                  - QAR
+                  - RON
+                  - RSD
+                  - RUB
+                  - RWF
+                  - SAR
+                  - SBD
+                  - SCR
+                  - SDG
+                  - SEK
+                  - SGD
+                  - SHP
+                  - SLL
+                  - SOS
+                  - SRD
+                  - SSP
+                  - STD
+                  - STN
+                  - SVC
+                  - SYP
+                  - SZL
+                  - THB
+                  - TJS
+                  - TMT
+                  - TND
+                  - TOP
+                  - TRY
+                  - TTD
+                  - TWD
+                  - TZS
+                  - UAH
+                  - UGX
+                  - UYU
+                  - UZS
+                  - VEF
+                  - VES
+                  - VND
+                  - VUV
+                  - WST
+                  - XAF
+                  - XAG
+                  - XAU
+                  - XCD
+                  - XDR
+                  - XOF
+                  - XPD
+                  - XPF
+                  - XPT
+                  - YER
+                  - ZAR
+                  - ZMW
+                  - ZWL
+                  - BYR
+                  x-allOf:
+                  - enum:
+                    - USD
+                    - AED
+                    - AFN
+                    - ALL
+                    - AMD
+                    - ANG
+                    - AOA
+                    - ARS
+                    - AUD
+                    - AWG
+                    - AZN
+                    - BAM
+                    - BBD
+                    - BDT
+                    - BGN
+                    - BHD
+                    - BIF
+                    - BMD
+                    - BND
+                    - BOB
+                    - BRL
+                    - BSD
+                    - BTC
+                    - BTN
+                    - BWP
+                    - BYN
+                    - BZD
+                    - CAD
+                    - CDF
+                    - CHF
+                    - CLF
+                    - CLP
+                    - CNH
+                    - CNY
+                    - COP
+                    - CRC
+                    - CUC
+                    - CUP
+                    - CVE
+                    - CZK
+                    - DJF
+                    - DKK
+                    - DOP
+                    - DZD
+                    - EGP
+                    - ERN
+                    - ETB
+                    - EUR
+                    - FJD
+                    - FKP
+                    - GBP
+                    - GEL
+                    - GGP
+                    - GHS
+                    - GIP
+                    - GMD
+                    - GNF
+                    - GTQ
+                    - GYD
+                    - HKD
+                    - HNL
+                    - HRK
+                    - HTG
+                    - HUF
+                    - IDR
+                    - ILS
+                    - IMP
+                    - INR
+                    - IQD
+                    - IRR
+                    - ISK
+                    - JEP
+                    - JMD
+                    - JOD
+                    - JPY
+                    - KES
+                    - KGS
+                    - KHR
+                    - KMF
+                    - KPW
+                    - KRW
+                    - KWD
+                    - KYD
+                    - KZT
+                    - LAK
+                    - LBP
+                    - LKR
+                    - LRD
+                    - LSL
+                    - LYD
+                    - MAD
+                    - MDL
+                    - MGA
+                    - MKD
+                    - MMK
+                    - MNT
+                    - MOP
+                    - MRO
+                    - MRU
+                    - MUR
+                    - MVR
+                    - MWK
+                    - MXN
+                    - MYR
+                    - MZN
+                    - NAD
+                    - NGN
+                    - NIO
+                    - NOK
+                    - NPR
+                    - NZD
+                    - OMR
+                    - PAB
+                    - PEN
+                    - PGK
+                    - PHP
+                    - PKR
+                    - PLN
+                    - PYG
+                    - QAR
+                    - RON
+                    - RSD
+                    - RUB
+                    - RWF
+                    - SAR
+                    - SBD
+                    - SCR
+                    - SDG
+                    - SEK
+                    - SGD
+                    - SHP
+                    - SLL
+                    - SOS
+                    - SRD
+                    - SSP
+                    - STD
+                    - STN
+                    - SVC
+                    - SYP
+                    - SZL
+                    - THB
+                    - TJS
+                    - TMT
+                    - TND
+                    - TOP
+                    - TRY
+                    - TTD
+                    - TWD
+                    - TZS
+                    - UAH
+                    - UGX
+                    - UYU
+                    - UZS
+                    - VEF
+                    - VES
+                    - VND
+                    - VUV
+                    - WST
+                    - XAF
+                    - XAG
+                    - XAU
+                    - XCD
+                    - XDR
+                    - XOF
+                    - XPD
+                    - XPF
+                    - XPT
+                    - YER
+                    - ZAR
+                    - ZMW
+                    - ZWL
+                    - BYR
+                  type: string
+              x-allOf:
+              - type: object
+                properties:
+                  af_revenue:
+                    type: number
+                    format: double
+                  af_price:
+                    type: number
+                    format: double
+                  af_currency:
+                    enum:
+                    - USD
+                    - AED
+                    - AFN
+                    - ALL
+                    - AMD
+                    - ANG
+                    - AOA
+                    - ARS
+                    - AUD
+                    - AWG
+                    - AZN
+                    - BAM
+                    - BBD
+                    - BDT
+                    - BGN
+                    - BHD
+                    - BIF
+                    - BMD
+                    - BND
+                    - BOB
+                    - BRL
+                    - BSD
+                    - BTC
+                    - BTN
+                    - BWP
+                    - BYN
+                    - BZD
+                    - CAD
+                    - CDF
+                    - CHF
+                    - CLF
+                    - CLP
+                    - CNH
+                    - CNY
+                    - COP
+                    - CRC
+                    - CUC
+                    - CUP
+                    - CVE
+                    - CZK
+                    - DJF
+                    - DKK
+                    - DOP
+                    - DZD
+                    - EGP
+                    - ERN
+                    - ETB
+                    - EUR
+                    - FJD
+                    - FKP
+                    - GBP
+                    - GEL
+                    - GGP
+                    - GHS
+                    - GIP
+                    - GMD
+                    - GNF
+                    - GTQ
+                    - GYD
+                    - HKD
+                    - HNL
+                    - HRK
+                    - HTG
+                    - HUF
+                    - IDR
+                    - ILS
+                    - IMP
+                    - INR
+                    - IQD
+                    - IRR
+                    - ISK
+                    - JEP
+                    - JMD
+                    - JOD
+                    - JPY
+                    - KES
+                    - KGS
+                    - KHR
+                    - KMF
+                    - KPW
+                    - KRW
+                    - KWD
+                    - KYD
+                    - KZT
+                    - LAK
+                    - LBP
+                    - LKR
+                    - LRD
+                    - LSL
+                    - LYD
+                    - MAD
+                    - MDL
+                    - MGA
+                    - MKD
+                    - MMK
+                    - MNT
+                    - MOP
+                    - MRO
+                    - MRU
+                    - MUR
+                    - MVR
+                    - MWK
+                    - MXN
+                    - MYR
+                    - MZN
+                    - NAD
+                    - NGN
+                    - NIO
+                    - NOK
+                    - NPR
+                    - NZD
+                    - OMR
+                    - PAB
+                    - PEN
+                    - PGK
+                    - PHP
+                    - PKR
+                    - PLN
+                    - PYG
+                    - QAR
+                    - RON
+                    - RSD
+                    - RUB
+                    - RWF
+                    - SAR
+                    - SBD
+                    - SCR
+                    - SDG
+                    - SEK
+                    - SGD
+                    - SHP
+                    - SLL
+                    - SOS
+                    - SRD
+                    - SSP
+                    - STD
+                    - STN
+                    - SVC
+                    - SYP
+                    - SZL
+                    - THB
+                    - TJS
+                    - TMT
+                    - TND
+                    - TOP
+                    - TRY
+                    - TTD
+                    - TWD
+                    - TZS
+                    - UAH
+                    - UGX
+                    - UYU
+                    - UZS
+                    - VEF
+                    - VES
+                    - VND
+                    - VUV
+                    - WST
+                    - XAF
+                    - XAG
+                    - XAU
+                    - XCD
+                    - XDR
+                    - XOF
+                    - XPD
+                    - XPF
+                    - XPT
+                    - YER
+                    - ZAR
+                    - ZMW
+                    - ZWL
+                    - BYR
+                    x-allOf:
+                    - enum:
+                      - USD
+                      - AED
+                      - AFN
+                      - ALL
+                      - AMD
+                      - ANG
+                      - AOA
+                      - ARS
+                      - AUD
+                      - AWG
+                      - AZN
+                      - BAM
+                      - BBD
+                      - BDT
+                      - BGN
+                      - BHD
+                      - BIF
+                      - BMD
+                      - BND
+                      - BOB
+                      - BRL
+                      - BSD
+                      - BTC
+                      - BTN
+                      - BWP
+                      - BYN
+                      - BZD
+                      - CAD
+                      - CDF
+                      - CHF
+                      - CLF
+                      - CLP
+                      - CNH
+                      - CNY
+                      - COP
+                      - CRC
+                      - CUC
+                      - CUP
+                      - CVE
+                      - CZK
+                      - DJF
+                      - DKK
+                      - DOP
+                      - DZD
+                      - EGP
+                      - ERN
+                      - ETB
+                      - EUR
+                      - FJD
+                      - FKP
+                      - GBP
+                      - GEL
+                      - GGP
+                      - GHS
+                      - GIP
+                      - GMD
+                      - GNF
+                      - GTQ
+                      - GYD
+                      - HKD
+                      - HNL
+                      - HRK
+                      - HTG
+                      - HUF
+                      - IDR
+                      - ILS
+                      - IMP
+                      - INR
+                      - IQD
+                      - IRR
+                      - ISK
+                      - JEP
+                      - JMD
+                      - JOD
+                      - JPY
+                      - KES
+                      - KGS
+                      - KHR
+                      - KMF
+                      - KPW
+                      - KRW
+                      - KWD
+                      - KYD
+                      - KZT
+                      - LAK
+                      - LBP
+                      - LKR
+                      - LRD
+                      - LSL
+                      - LYD
+                      - MAD
+                      - MDL
+                      - MGA
+                      - MKD
+                      - MMK
+                      - MNT
+                      - MOP
+                      - MRO
+                      - MRU
+                      - MUR
+                      - MVR
+                      - MWK
+                      - MXN
+                      - MYR
+                      - MZN
+                      - NAD
+                      - NGN
+                      - NIO
+                      - NOK
+                      - NPR
+                      - NZD
+                      - OMR
+                      - PAB
+                      - PEN
+                      - PGK
+                      - PHP
+                      - PKR
+                      - PLN
+                      - PYG
+                      - QAR
+                      - RON
+                      - RSD
+                      - RUB
+                      - RWF
+                      - SAR
+                      - SBD
+                      - SCR
+                      - SDG
+                      - SEK
+                      - SGD
+                      - SHP
+                      - SLL
+                      - SOS
+                      - SRD
+                      - SSP
+                      - STD
+                      - STN
+                      - SVC
+                      - SYP
+                      - SZL
+                      - THB
+                      - TJS
+                      - TMT
+                      - TND
+                      - TOP
+                      - TRY
+                      - TTD
+                      - TWD
+                      - TZS
+                      - UAH
+                      - UGX
+                      - UYU
+                      - UZS
+                      - VEF
+                      - VES
+                      - VND
+                      - VUV
+                      - WST
+                      - XAF
+                      - XAG
+                      - XAU
+                      - XCD
+                      - XDR
+                      - XOF
+                      - XPD
+                      - XPF
+                      - XPT
+                      - YER
+                      - ZAR
+                      - ZMW
+                      - ZWL
+                      - BYR
+                    type: string
+              example:
+                af_revenue: 1.99
+                af_price: 2.456
+                af_currency: MYR
+            event_custom_parameters:
+              description: A JSON object which can contain multiple custom event parameters.
+              type: object
+              x-allOf:
+              - type: object
+              example:
+                my_custom_field: This is a string
+                another_custom_field: 1.234
+          required:
+          - ip
+          - user_agent
+          - device_os_version
+          - device_model
+          - device_ids
+          - limit_ad_tracking
+          - event_name
+      summary: Measure in-app events
+      description: This AppsFlyer API integration allows advertisers
+        to measure any post-install in-app event and attribute it to a media source and campaign
+  "/api/v1.0/sessions/{app-id}":
+    post:
+      responses:
+        '202':
+          description: The request was accepted
+        '400':
+          description: The authentication succeeded, but mandatory
+            fields in the message body are missing, or fields are invalid
+        '401':
+          description: The app doesn't exist or the authentication failed
+        '403':
+          description: App traffic blocked due to Zero package limit
+        '500':
+          description: Internal server error
+      produces:
+      - application/json
+      consumes:
+      - application/json
+      parameters:
+      - in: path
+        name: app-id
+        description: |-
+          The App ID of the app for which you are passing data. This is the Roku channel ID. 
+          
+          **To get the app/channel ID:**
+          1. In the Roku developer dashboard, click **Manage my channels** > **Preview and update**. 
+          2. From the URL at top of screen, take the 5-6 digit channel ID. This is the app/channel ID.
+          
+          For example: `https://developer.roku.com/developer-channels/channels/edit/package/`**224880**
+        type: string
+        required: true
+        minLength: 1
+        x-allOf:
+        - type: string
+          minLength: 1
+        - {}
+      - in: header
+        name: authorization
+        description: |-
+          Create an HMAC signature by hashing the entire raw message.
+          The HMAC is generated using SHA256 and uses the DevKey as the signature’s secret key.
+          
+          For example, the raw message is: `{"timestamp":1604503583337,"ip":"127.0.0.1","user_agent":"Roku/DVP-9.21 (AE9.21E04090A)","device_os_version":"9.3.0","device_model":"3920X","device_ids":[{"type":"rida","value":"fa73d67d-f55c-5af3-883a-726253dc7d0e"}],"limit_ad_tracking":false}`
+
+          The DevKey is: `w8sZzy8EaPaxFKfaoTqUi6`
+          The result is: `715b133d5a327b77beb898688a3ad438da0f78071cd3df70e8ec5ecf60751972`
+        type: string
+        required: true
+        minLength: 1
+        x-allOf:
+        - type: string
+          minLength: 1
+        - {}
+      - in: body
+        name: body
+        description: ''
+        required: true
+        schema:
+          type: object
+          properties:
+            timestamp:
+              description: Event timestamp in Unix time (UTC)
+              type: integer
+              format: int64
+              minimum: 1625230572928
+              x-allOf:
+              - type: integer
+                format: int64
+                minimum: 1
+              maximum: 1625576172928
+              example: 1625576172928
+            request_id:
+              description: Unique identifier per request
+              type: string
+              minLength: 36
+              maxLength: 36
+              x-allOf:
+              - type: string
+                minLength: 36
+                maxLength: 36
+              - {}
+              example: 71dad7da-7926-40d8-9b15-b94a6d46e15a
+            ip:
+              description: The device IP Address
+              type: string
+              minLength: 1
+              maxLength: 46
+              x-allOf:
+              - type: string
+                minLength: 1
+                maxLength: 46
+              - {}
+              example: 35.244.183.10
+            user_agent:
+              description: The device user agent
+              type: string
+              minLength: 1
+              maxLength: 256
+              x-allOf:
+              - type: string
+                minLength: 1
+                maxLength: 256
+              - {}
+              example: Roku/DVP-9.21 (AE9.21E04090A)
+            device_os_version:
+              description: The device OS version
+              type: string
+              minLength: 1
+              maxLength: 12
+              x-allOf:
+              - type: string
+                minLength: 1
+                maxLength: 12
+              - {}
+              example: 9.3.0
+            device_model:
+              description: The device model
+              type: string
+              minLength: 1
+              maxLength: 12
+              x-allOf:
+              - type: string
+                minLength: 1
+                maxLength: 12
+              - {}
+              example: 3920X
+            device_ids:
+              description: A vector of the different device IDs
+              type: array
+              items:
+                type: object
+                properties:
+                  type:
+                    enum:
+                    - custom
+                    - rida
+                  value:
+                    type: string
+                    minLength: 1
+                    x-allOf:
+                    - type: string
+                      minLength: 1
+                    - {}
+                required:
+                - type
+                - value
+                x-allOf:
+                - type: object
+                  properties:
+                    type:
+                      enum:
+                      - custom
+                      - rida
+                    value:
+                      type: string
+                      minLength: 1
+                      x-allOf:
+                      - type: string
+                        minLength: 1
+                      - {}
+                  required:
+                  - type
+                  - value
+                - {}
+              x-allOf:
+              - type: array
+                items:
+                  type: object
+                  properties:
+                    type:
+                      enum:
+                      - custom
+                      - rida
+                    value:
+                      type: string
+                      minLength: 1
+                      x-allOf:
+                      - type: string
+                        minLength: 1
+                      - {}
+                  required:
+                  - type
+                  - value
+                  x-allOf:
+                  - type: object
+                    properties:
+                      type:
+                        enum:
+                        - custom
+                        - rida
+                      value:
+                        type: string
+                        minLength: 1
+                        x-allOf:
+                        - type: string
+                          minLength: 1
+                        - {}
+                    required:
+                    - type
+                    - value
+                  - {}
+              example:
+              - type: rida
+                value: fa73d67d-f55c-5af3-883a-726253dc7d0e
+              - type: custom
+                value: 045f4137-57b7-45e6-8a45-c303101a086a
+            limit_ad_tracking:
+              description: Limit Ad Tracking flag. Use this flag to mark whether or not
+                the user has advertiser ID
+              type: boolean
+              x-allOf:
+              - type: boolean
+              example: true
+            customer_user_id:
+              description: Customer user ID, as set by the developer. This is used
+                as the user identifier in the advertiser's system
+              type: string
+              minLength: 1
+              maxLength: 64
+              x-allOf:
+              - type: string
+                minLength: 1
+                maxLength: 64
+              example: 15667737-366d-4994-ac8b-653fe6b2be4a
+            app_version_name:
+              description: The release or version number of the app
+              type: string
+              minLength: 1
+              maxLength: 12
+              x-allOf:
+              - type: string
+                minLength: 1
+                maxLength: 12
+              - {}
+              example: 1.0.5
+          required:
+          - ip
+          - user_agent
+          - device_os_version
+          - device_model
+          - device_ids
+          - limit_ad_tracking
+      summary: Measure sessions
+      description: This AppsFlyer API integration provide advertisers with the ability to measure post-install sessions and attribute it to a media source and campaign
+
