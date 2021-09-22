@@ -1,13 +1,13 @@
-openapi: '3.0.2'
+openapi: '3.0.3'
 info:
   title: SKAdNetwork conversion mapping schema
   version: '0.1'
 security:
   - bearerAuth: []
 servers:
-- url: https://hq1.appsflyer.com/api/skad/conversion_schema/v1/
+- url: https://hq1.appsflyer.com/api/skad/conversion_schema
 paths:
-  /:
+  /v1:
     get:
       summary: Get conversion value mapping schema for specified apps
       description: Specify one or more apps using the app ID
@@ -17,7 +17,6 @@ paths:
         in: query
         description: App ID(s) to retrieve configuration for.  Can be repeated multiple
           times in order to filter more than one app
-        required: true
         style: form
         explode: true
         schema:
