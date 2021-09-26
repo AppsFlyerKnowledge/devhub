@@ -1,6 +1,6 @@
 openapi: '3.0.3'
 info:
-  title: SKAdNetwork conversion mapping schema
+  title: SKAN conversion mapping (CV) schema for ad networks
   version: '0.1'
 security:
   - bearerAuth: []
@@ -9,14 +9,14 @@ servers:
 paths:
   /v1:
     get:
-      summary: Get conversion value mapping schema for specified apps
+      summary: Get the CV schema for specified apps
       description: Specify one or more apps using the app ID
       operationId: get-conversion-value-mapping-schema
       parameters:
       - name: app_id
         in: query
-        description: App ID(s) to retrieve configuration for.  Can be repeated multiple
-          times in order to filter more than one app
+        description: Set 0-many app IDs. If no app ID is set, the schema of all apps returns. In all other cases, the schema of the specified 
+          app IDs returns.
         style: form
         explode: true
         schema:
@@ -39,16 +39,16 @@ paths:
                            description: "App Store app id"
                         configuration_mode:
                            type: string
-                           description: "AppsFlyer predefined configuration mode or advertiser created custom mode"
+                           description: "Measurment mode selected set by the advertiser" 
                         last_config_change:
                            type: string
-                           description: "Last time the user updated conversion value mapping"
+                           description: "Time the advertiser updated the conversion value settings"
                         measurement_window: 
                            type: integer
-                           description: "A time window post install that AppsFlyer or the advertiser stops calling updateConversionValue() after (reported in hours)"
+                           description: "Activity window duration (in hours)"
                         conversion_value_mapping:
                           type: array
-                          description: "The conversion values mapping"
+                          description: "Conversion values mapping"
                           items:
                             $ref: '#/components/schemas/CvMapping'
                         
@@ -136,7 +136,7 @@ components:
     CvMapping:
       properties:
         conversion_value:
-          description: "Original conversion value received by SKAdNetwork"
+          description: "Conversion value"
           type: integer
           minimum: 0
           maximum: 63
@@ -146,48 +146,48 @@ components:
             $ref: '#/components/schemas/Event'
         min_time_post_install:
           type: integer
-          description: "The minimum of the time range in which a user was last active during the measurement window"
+          description: "The lower bound, hours post-install, indicating when the user was last active in the app."
         max_time_post_install:
           type: integer
-          description: "The maximum of the time range in which a user was last active during the measurement window"
+          description: "The upper bound, hours post-install, indicating when the user was last active in the app"
     Event:
       properties:
         event_name:
           type: string
-          description: "In App Event reported by AppsFlyer’s SDK"
+          description: "Advertiser in-app event name"
         mapped_event_name:
           type: string
-          description: "In App Event as mapped within Ad Network. The mapping between AppsFlye’s in-app event to Ad Network’s in-app event is done by the advertiser, per app, on AppsFlyer’s end (no change here, as it works today)."
+          description: "Partner's in-app event name. The advertiser maps event_name to mapped_event_name on a per app basis in AppsFlyer."
         event_counter:
           type: integer
-          description: "The number of times an event occurred (note: this field is not present in case of revenue mode)"
+          description: "The number of times the user performed an event."
         conversion_event:
           type: boolean
           description: "In the case of more than one event, if true, this event is a conversion event as defined by the advertiser"
         event_currency:
           type: string
-          description: "Reported currency for the event revenue"
+          description: "Currency for event_revenue"
         event_revenue:
           type: integer
-          description: "In case of a revenue event, monetary value in local currency would be presented here"
+          description: "In case of a revenue event, monetary value using event_currency"
         min_event_revenue:
           type: number
           format: float
-          description: "For ranges of revenue, the minimum value for which this conversion value would be updated"  
+          description: "The lower bound of the event revenue range"  
         max_event_revenue:
           type: number
           format: float
-          description: "For ranges of revenue, the maximum value for which this conversion value would be updated" 
+          description: "The upper bound of the event counter range. Example: To calculate the revenue, (min_event_revenue + max_event_revenue)/2" 
         event_revenue_usd:
           type: number
           format: float
-          description: "In case of a revenue event, monetary value in USD would be presented here" 
+          description: "In case of a revenue event, monetary value" 
         min_event_counter:
           type: integer
-          description: "" 
+          description: "The lower bound of the event counter range" 
         max_event_counter:
           type: integer
-          description: "In event counter range, the maximum of the defined range" 
+          description: "The upper bound of the event counter range. Example: To calcualte the number of ocurrences, roundup (min_event_counter + max_event_counter )/ 2" 
 
 
         
