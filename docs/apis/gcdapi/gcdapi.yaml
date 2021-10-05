@@ -1,0 +1,113 @@
+openapi: '3.0.3'
+info:
+  title: GCD API for SDK attribution testing 
+  version: '0.1'
+servers:
+- url: https://gcdsdk.appsflyer.com/install_data/v4.0/
+paths:
+  /{app-id}:
+    get:
+      summary: Get the conversion data
+      parameters:
+        - name: app-id
+          in: path
+          description: The app ID
+          schema:
+            type: string
+          required: true
+          examples:
+            iOS:
+              value: id155071234
+            Android:
+              value: com.appsflyer.myapp
+        - name: devkey
+          in: query
+          description: The Dev Key
+          schema:
+            type: string
+          required: true  
+          example: ABCDEw4F78vGTeTuY12345 
+        - name: device_id
+          in: query
+          description: The ID of this specific install
+          schema:
+            type: string
+          required: true
+          example: 1600009251234-1234567
+      responses:
+        '200':
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+              examples:
+                Organic:
+                  value:
+                    af_status: Organic
+                    af_message: organic install
+                    install_time: 2021-08-23 06:59:51.194
+                Non-Organic:
+                  value:
+                    is_universal_link: null
+                    adgroup: null
+                    match_type: id_matching
+                    campaign: None
+                    is_branded_link: null
+                    media_source: liazkam
+                    adset_id: null
+                    campaign_id: null
+                    esp_name: null
+                    iscache: true
+                    install_time: 2021-10-04 11:26:24.967
+                    adgroup_id: null
+                    redirect_response_data: null
+                    orig_cost: 0.0
+                    click_time: 2021-10-04 11:25:15.477
+                    agency: null
+                    cost_cents_USD: 0
+                    is_retargeting: false
+                    af_cpi: null
+                    af_click_lookback: 7d
+                    engmnt_source: null
+                    af_siteid: null
+                    idfa: BD3D610E-9128-4597-96FA-04E23D70D1ED
+                    http_referrer: null
+                    retargeting_conversion_type: none
+                    is_incentivized: false
+                    af_sub5: null
+                    af_sub4: null
+                    adset: null
+                    af_sub1: null
+                    af_sub3: null
+                    af_sub2: null
+                    af_status: Non-organic
+        '404':
+          description: 'Not Found'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error_reason: 
+                    type: string
+                    description: "Error reason"
+                  status_code:
+                    type: integer
+                    description: "Error number"
+              examples:
+                Not-Found:
+                  value:
+                    error_reason: "Attribution data for this AppsFlyer ID is not available" 
+                    status_code: 404 
+
+
+
+                    
+
+                  
+
+                
+
+                  
