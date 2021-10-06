@@ -1,0 +1,321 @@
+openapi: 3.0.1
+info:
+  title: Partner integration settings API (beta)
+  description: Public API for managing partner integrations
+  version: 1.0.0
+servers:
+  - url: https://hq1.appsflyer.com/api/app-integrations
+    description: api server - production
+security:
+  - bearerAuth: []
+tags:
+  - name: Partner integration settings API
+    description: API for managing partner integrations
+paths:
+  /copy:
+    post:
+      tags:
+        -  Partner integration settings API
+      summary: Partner integration settings API
+      requestBody:
+        description: 'Use these examples as a template for your request body:'
+        content:
+          application/json:
+            schema:
+              oneOf:
+                - $ref: '#/components/schemas/facebook'
+                - $ref: '#/components/schemas/snapchat'
+                - $ref: '#/components/schemas/tiktok'
+            examples:
+              Facebook:
+                value:
+                  pid: facebook_int
+                  copy_from_app_id: id8765432111
+                  copy_to_app_id: id1133418088
+                  facebook_app_id: '123'
+              Snapchat:
+                value:
+                  pid: snapchat_int
+                  copy_from_app_id: com.publisher.name
+                  copy_to_app_id: com.publisher.name2
+                  snap_app_id: app id
+                  mact_tos_accepted: true
+              Tiktok:
+                value:
+                  pid: bytedanceglobal_int
+                  copy_from_app_id: com.publisher.name
+                  copy_to_app_id: com.publisher.name2
+                  tiktok_app_id: app id
+        required: true
+      responses:
+        '200':
+          description: Partner integration settings copied successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+        '401':
+          description: Unauthorized/TOS not accepted
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/AccountTypeError'
+                  - $ref: '#/components/schemas/UnauthorizedParamError'
+                  - $ref: '#/components/schemas/UnauthorizedAppError'
+                  - $ref: '#/components/schemas/TosError'
+              examples:
+                accountTypeError:
+                  value:
+                    ErrorType: UNAUTHORIZED
+                    Message: This api is not available for your account type
+                appError:
+                  value:
+                    ErrorType: UNAUTHORIZED
+                    Message: App <app id> is not owned by the user
+                paramError:
+                  value:
+                    ErrorType: UNAUTHORIZED
+                    Message: Your app settings do not allow modifying <param Name> for app <app id>
+                tosError:
+                  value:
+                    ErrorType: UNAUTHORIZED
+                    Message: Attribution terms of service were not accepted for app <app id> and <pid>
+        '404':
+          description: Integration not found
+          content:
+            application/json:
+              examples:
+                integrationNotFound:
+                  value:
+                    ErrorType: NOT_FOUND
+                    Message: Integration for <pid> was not found. Please check the pid value
+        '422':
+          description: Missing/invalid input params
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/InvalidValueError'
+                  - $ref: '#/components/schemas/MissingParamError'
+                  - $ref: '#/components/schemas/GeneralFailureError'
+                  - $ref: '#/components/schemas/IntegrationNotEnabledError'
+                  - $ref: '#/components/schemas/UnmatchedPlatformError'
+              examples:
+                invalidValueError:
+                  value:
+                    ErrorType: INVALID_VALUE
+                    Message: <param> value is invalid.
+                missingParamError:
+                  value:
+                    ErrorType: MISSING_PARAMETER
+                    Message: <param> is missing
+                generalFailureError:
+                  value:
+                    ErrorType: GENERAL_FAILURE
+                    Message: At this time the integration can not be activated.Contact your CSM or support@appsflyer.com with a copy of this message
+                integrationNotEnabledError:
+                  value:
+                    ErrorType: INACTIVE_INTEGRATION
+                    Message: Integration for app <app id> with <pid> is not enabled
+                unmatchedPlatformError:
+                  value:
+                    ErrorType: PLATFORM_UNMATCHED
+                    Message: Both apps should be on the same mobile platform
+        '500':
+          description: Internal server error - please try again
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    facebook:
+      title: Facebook Ads
+      required:
+        - pid
+        - copy_from_app_id
+        - copy_to_app_id
+        - facebook_app_id
+      type: object
+      properties:
+        pid:
+          $ref: '#/components/schemas/pid'
+        copy_from_app_id:
+          $ref: '#/components/schemas/copy_from_app_id'
+        copy_to_app_id:
+          $ref: '#/components/schemas/copy_to_app_id'
+        facebook_app_id:
+          $ref: '#/components/schemas/facebook_app_id'
+    snapchat:
+      title: Snapchat
+      required:
+        - pid
+        - copy_from_app_id
+        - copy_to_app_id
+        - snap_app_id
+        - mact_tos_accepted
+      type: object
+      properties:
+        pid:
+          $ref: '#/components/schemas/pid'
+        copy_from_app_id:
+          $ref: '#/components/schemas/copy_from_app_id'
+        copy_to_app_id:
+          $ref: '#/components/schemas/copy_to_app_id'
+        snap_app_id:
+          $ref: '#/components/schemas/snap_app_id'
+        mact_tos_accepted:
+          $ref: '#/components/schemas/mact_tos_accepted'
+    tiktok:
+      title: Tiktok
+      required:
+        - pid
+        - copy_from_app_id
+        - copy_to_app_id
+        - tiktok_app_id
+      type: object
+      properties:
+        pid:
+          $ref: '#/components/schemas/pid'
+        copy_from_app_id:
+          $ref: '#/components/schemas/copy_from_app_id'
+        copy_to_app_id:
+          $ref: '#/components/schemas/copy_to_app_id'
+        tiktok_app_id:
+          $ref: '#/components/schemas/tiktok_app_id'
+    pid:
+      type: string
+      description: |
+        AppsFlyer Partner ID
+    copy_from_app_id:
+      type: string
+      description: |
+        App to copy integration configuration ***from*** ("source app")
+
+        Example values:
+
+        - **Android:** com.publisher.name
+        - **iOS:** id123456789
+        - **Windows Phone:** a1b2c3d4e5f6
+    copy_to_app_id:
+        type: string
+        description: |
+          App to copy integration configuration ***to*** ("destination app")
+
+          Example values:
+
+          - **Android:** com.publisher.name
+          - **iOS:** id123456789
+          - **Windows Phone:** a1b2c3d4e5f6
+    snap_app_id:
+      type: string
+      description: |
+        [Snap App ID](https://businesshelp.snapchat.com/s/article/snap-app-id?language=en_US) of the destination app, as assigned by Snap
+    mact_tos_accepted:
+      type: boolean
+      description: |
+        Snapchat integration requies that the advertiser accept the Snap [Terms and Conditions for Mobile App Conversion Tracking (MACT)](https://snap.com/en-US/terms/attribution).
+        
+        Selecting **true** for this parameter indicates that you accept these terms as relates to the destination app. Be sure to check with your marketing team or other responsible party before accepting these terms (if required by your company policies).
+    facebook_app_id:
+      type: string
+      description: |
+        [Facebook App ID](https://developers.facebook.com/docs/development/create-an-app/app-dashboard/basic-settings#app-id) of the destination app, as assigned by Facebook
+    tiktok_app_id:
+      type: string
+      description: |
+        [TikTok App ID](https://ads.tiktok.com/help/article?aid=10001060) of the destination app, as assigned by TikTok
+    Response:
+      properties:
+        Click Attribution Lookback Window:
+          type: string
+        Enable Advanced Privacy:
+          type: string
+        Ignore active users for retargeting:
+          type: string
+        Install Re-engagement Click Lookback Window:
+          type: string
+        Re-engagement attribution Enabled:
+          type: string
+        Re-engagement click-through lookback window:
+          type: string
+        Re-engagement view-through attribution:
+          type: string
+        Re-engagement window:
+          type: string
+        Time window for users to be considered inactive:
+          type: string
+        View-Through Attribution lookback window:
+          type: string
+        mapped-in-app-events:
+          type: object
+      type: object
+    AccountTypeError:
+      properties:
+        ErrorType:
+          type: string
+        Message:
+          type: string
+      type: object
+    UnauthorizedParamError:
+      properties:
+        ErrorType:
+          type: string
+        Message:
+          type: string
+      type: object
+    UnauthorizedAppError:
+      properties:
+        ErrorType:
+          type: string
+        Message:
+          type: string
+      type: object
+    TosError:
+      properties:
+        ErrorType:
+          type: string
+        Message:
+          type: string
+      type: object
+    InvalidValueError:
+      properties:
+        ErrorType:
+          type: string
+        Message:
+          type: string
+      type: object
+    MissingParamError:
+      properties:
+        ErrorType:
+          type: string
+        Message:
+          type: string
+      type: object
+    GeneralFailureError:
+      properties:
+        ErrorType:
+          type: string
+        Message:
+          type: string
+      type: object
+    IntegrationNotEnabledError:
+      properties:
+        ErrorType:
+          type: string
+        Message:
+          type: string
+      type: object
+    UnmatchedPlatformError:
+      properties:
+        ErrorType:
+          type: string
+        Message:
+          type: string
+      type: object
+x-readme:
+  explorer-enabled: true
+  proxy-enabled: true
+  samples-enabled: true
