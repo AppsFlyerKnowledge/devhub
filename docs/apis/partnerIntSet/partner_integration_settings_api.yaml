@@ -9,14 +9,14 @@ servers:
 security:
   - bearerAuth: []
 tags:
-  - name: Partner integration settings API
+  - name: Partner integration settings API (beta)
     description: API for managing partner integrations
 paths:
   /copy:
     post:
       tags:
-        -  Partner integration settings API
-      summary: Partner integration settings API
+        - Partner integration settings API (beta)
+      summary: Partner integration settings API (beta)
       requestBody:
         description: 'Use these examples as a template for your request body:'
         content:
@@ -32,7 +32,7 @@ paths:
                   pid: facebook_int
                   copy_from_app_id: id8765432111
                   copy_to_app_id: id1133418088
-                  facebook_app_id: '123'
+                  facebook_app_id: "23502200095693"
               Snapchat:
                 value:
                   pid: snapchat_int
@@ -49,7 +49,10 @@ paths:
         required: true
       responses:
         '200':
-          description: Partner integration settings copied successfully
+          description: |
+            Partner integration settings copied successfully.
+            
+            Response parameters provide a summary of the settings and values copied from the source app to the destination app.
           content:
             application/json:
               schema:
@@ -130,6 +133,9 @@ components:
       type: http
       scheme: bearer
       bearerFormat: JWT
+      description: |
+        HTTP header containing the API token (bearer token) is required. 
+        Ask your account admin to [obtain the V2.0 token](https://support.appsflyer.com/hc/en-us/articles/360004562377) from the AppsFlyer dashboard.
   schemas:
     facebook:
       title: Facebook Ads
@@ -200,15 +206,15 @@ components:
         - **iOS:** id123456789
         - **Windows Phone:** a1b2c3d4e5f6
     copy_to_app_id:
-        type: string
-        description: |
-          App to copy integration configuration ***to*** ("destination app")
+      type: string
+      description: |
+        App to copy integration configuration ***to*** ("destination app")
 
-          Example values:
+        Example values:
 
-          - **Android:** com.publisher.name
-          - **iOS:** id123456789
-          - **Windows Phone:** a1b2c3d4e5f6
+        - **Android:** com.publisher.name
+        - **iOS:** id123456789
+        - **Windows Phone:** a1b2c3d4e5f6
     snap_app_id:
       type: string
       description: |
@@ -217,8 +223,8 @@ components:
       type: boolean
       description: |
         Snapchat integration requies that the advertiser accept the Snap [Terms and Conditions for Mobile App Conversion Tracking (MACT)](https://snap.com/en-US/terms/attribution).
-        
-        Selecting **true** for this parameter indicates that you accept these terms as relates to the destination app. Be sure to check with your marketing team or other responsible party before accepting these terms (if required by your company policies).
+
+        Selecting **true** for this parameter indicates that you accept these terms for the destination app. Be sure to check with your marketing team or other responsible party before accepting these terms (if required by your company policies).
     facebook_app_id:
       type: string
       description: |
@@ -315,7 +321,3 @@ components:
         Message:
           type: string
       type: object
-x-readme:
-  explorer-enabled: true
-  proxy-enabled: true
-  samples-enabled: true
