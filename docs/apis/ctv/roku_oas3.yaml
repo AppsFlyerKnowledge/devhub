@@ -75,7 +75,7 @@ paths:
                   example: 3920X
                 device_ids:
                   type: array
-                  description: A vector of the different device IDs
+                  description: A vector of the different device IDs. Can be either the Roku ID (RIDA) or a custom ID
                   example:
                   - type: rida
                     value: fa73d67d-f55c-5af3-883a-726253dc7d0e
@@ -198,7 +198,7 @@ paths:
                   example: 3920X
                 device_ids:
                   type: array
-                  description: A vector of the different device IDs
+                  description: A vector of the different device IDs. Can be either the Roku ID (RIDA) or a custom ID
                   example:
                   - type: rida
                     value: fa73d67d-f55c-5af3-883a-726253dc7d0e
@@ -523,7 +523,7 @@ paths:
                   example: 3920X
                 device_ids:
                   type: array
-                  description: A vector of the different device IDs
+                  description: A vector of the different device IDs. Can be either the Roku ID (RIDA) or a custom ID
                   example:
                   - type: rida
                     value: fa73d67d-f55c-5af3-883a-726253dc7d0e
