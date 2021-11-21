@@ -3,14 +3,14 @@ info:
   title: Roku CTV API
   version: 1.0.0
 servers:
-- url: http://roku.ctv.appsflyer.com/api/v1.0/
+- url: https://roku.ctv.appsflyer.com/api/v1.0/
   description: Production server
-- url: http://sandbox-roku.ctv.appsflyer.com/api/v1.0/
+- url: https://sandbox-roku.ctv.appsflyer.com/api/v1.0/
   description: Sandbox server
 security:
 - ApiKeyAuth: []
 paths:
-  /api/v1.0/installs/{app-id}:
+  /installs/{app-id}:
     post:
       summary: Measure installs
       description: To properly measure CTV app installs with AppsFlyer, the following
@@ -132,7 +132,7 @@ paths:
           description: Internal server error
           content: {}
       x-codegen-request-body-name: body
-  /api/v1.0/inapps/{app-id}:
+  /inapps/{app-id}:
     post:
       summary: Measure in-app events
       description: This AppsFlyer API integration allows advertisers to measure any
@@ -457,7 +457,7 @@ paths:
           description: Internal server error
           content: {}
       x-codegen-request-body-name: body
-  /api/v1.0/sessions/{app-id}:
+  /sessions/{app-id}:
     post:
       summary: Measure sessions
       description: This AppsFlyer API integration provide advertisers with the ability
