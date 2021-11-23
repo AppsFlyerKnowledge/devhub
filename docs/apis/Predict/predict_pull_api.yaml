@@ -36,14 +36,21 @@ paths:
           type: string
       - name: view_type
         in: query
-        description: |
+        description: >
          Filter the installs by type as follows: 
           - `acquisition`: Installs
           - `retargeting`: Redownloads
-          - `unified`: Acquisition and redownload combined **[default]**
+          - `unified`: Acquisition and redownload combined
+           
+         Default value is `unified`
         required: false
         schema:
           type: string
+          enum:
+            - acquisition
+            - retargeting 
+            - unified
+          default: unified
       responses:
         200:
           description: Valid data returned (CSV)
