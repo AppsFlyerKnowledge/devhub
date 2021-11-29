@@ -1,0 +1,447 @@
+openapi: 3.0.1
+info:
+  title: Audience External API
+  version: 1.0.0
+servers:
+- url: https://hq1.appsflyer.com/audiences-external-api
+security:
+- ApiKeyAuth: []
+paths:
+  /audience:
+    post:
+      summary: Creates new imported audience
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+              - audience_name
+              - platform
+              type: object
+              properties:
+                audience_name:
+                  minimum: 2
+                  maximum: 100
+                  type: string
+                  example: 'test-audience'
+                ignore_account_identifiers_policy:
+                  type: boolean
+                platform:
+                  $ref: '#/components/schemas/platform'
+                connections:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/connection'
+        required: true
+      responses:
+        200:
+          description: Created audience successfully
+          content:
+            application/json:
+              schema:
+                required:
+                - audience_id
+                - import_key
+                type: object
+                properties:
+                  audience_id:
+                    type: integer
+                    format: int64
+                  import_key:
+                    type: string
+                    example: 'WERWERWER1234'
+        400:
+          description: |
+            Audience already exists
+            
+            The following integrations are invalid: ...
+            
+            Creation is no longer allowed for this account 
+        500:
+          description: Internal error occurred
+  /audience/{audience_id}/connections:
+    get:
+      summary: List audience's existing connections
+      parameters:
+      - name: audience_id
+        in: path
+        required: true
+        schema:
+          minimum: 1
+          type: integer
+      responses:
+        200:
+          description: ""
+          content:
+            application/json:
+              schema:
+                required:
+                - connections
+                type: object
+                properties:
+                  connections:
+                    type: array
+                    items:
+                      required:
+                      - integration_id
+                      - partner_id
+                      - integration_name
+                      - split_ratio
+                      type: object
+                      properties:
+                        integration_id:
+                          $ref: '#/components/schemas/integration_id'
+                        partner_id:
+                          $ref: '#/components/schemas/partner_id'
+                        integration_name:
+                          $ref: '#/components/schemas/integration_name'
+                        split_ratio:
+                          $ref: '#/components/schemas/split_ratio'
+                   
+        400:
+          description: "Audience does not exist under your account"
+        500:
+          description: "Internal error"
+    put:
+      summary: Connect an audience to existing integrations
+      parameters:
+      - name: audience_id
+        in: path
+        required: true
+        schema:
+          minimum: 1
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                connections:
+                  type: array
+                  items:
+                    required:
+                    - integration_id
+                    type: object
+                    properties:
+                      integration_id:
+                        $ref: '#/components/schemas/integration_id'
+                      split_ratio:
+                        $ref: '#/components/schemas/split_ratio'
+        required: true
+      responses:
+        200:
+          description: "Connections were updated with the given connections array"
+          content:
+            application/text:
+              schema:
+                type: string
+                example: "Connections updated successfully"
+        400:
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: object
+        500:
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: object
+      x-codegen-request-body-name: body
+  /audience/{audience_id}/split_syncs:
+    get:
+      summary: Gets the enabled split syncs under audience
+      parameters:
+      - name: audience_id
+        in: path
+        required: true
+        schema:
+          minimum: 1
+          type: integer
+          format: int64
+      responses:
+        200:
+          description: ""
+          content:
+            application/json:
+              schema:
+                required:
+                - connections
+                type: object
+                properties:
+                  connections:
+                    type: array
+                    items:
+                      required:
+                      - integration_id
+                      - integration_name
+                      - partner_id
+                      type: object
+                      properties:
+                        integration_id:
+                          minimum: 1
+                          type: integer
+                          format: int64
+                          x-anyOf:
+                          - type: integer
+                            format: int64
+                            minimum: 1
+                          - {}
+                        partner_id:
+                          minLength: 3
+                          type: string
+                          x-allOf:
+                          - type: string
+                            minLength: 3
+                          - {}
+                        integration_name:
+                          type: string
+                          x-anyOf:
+                          - type: string
+                          - {}
+        400:
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: object
+        500:
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: object
+    put:
+      summary: Updates split sync configuration
+      parameters:
+      - name: audience_id
+        in: path
+        required: true
+        schema:
+          minimum: 1
+          type: integer
+          format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+              - connections
+              type: object
+              properties:
+                connections:
+                  type: array
+                  items:
+                    required:
+                    - integration_id
+                    type: object
+                    properties:
+                      integration_id:
+                        minimum: 1
+                        type: integer
+                        format: int64
+                        x-anyOf:
+                        - type: integer
+                          format: int64
+                          minimum: 1
+                        - {}
+                  x-allOf:
+                  - type: array
+                    items:
+                      type: object
+                      properties:
+                        integration_id:
+                          type: integer
+                          format: int64
+                          minimum: 1
+                          x-anyOf:
+                          - type: integer
+                            format: int64
+                            minimum: 1
+                          - {}
+                      required:
+                      - integration_id
+        required: true
+      responses:
+        200:
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: object
+        400:
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: object
+        500:
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: object
+      x-codegen-request-body-name: body
+  /audience/{audience_id}/upload_now:
+    post:
+      summary: Upload the audience
+      parameters:
+      - name: audience_id
+        in: path
+        required: true
+        schema:
+          minimum: 1
+          type: integer
+          format: int64
+      responses:
+        200:
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: object
+  /connections:
+    get:
+      summary: List account's connections
+      responses:
+        200:
+          description: ""
+          content:
+            application/json:
+              schema:
+                required:
+                - connections
+                type: object
+                properties:
+                  connections:
+                    type: array
+                    items:
+                      required:
+                      - integration_id
+                      - integration_name
+                      - partner_id
+                      type: object
+                      properties:
+                        integration_id:
+                          minimum: 1
+                          type: integer
+                          format: int64
+                          x-anyOf:
+                          - type: integer
+                            format: int64
+                            minimum: 1
+                          - {}
+                        partner_id:
+                          minLength: 3
+                          type: string
+                          x-allOf:
+                          - type: string
+                            minLength: 3
+                          - {}
+                        integration_name:
+                          type: string
+                          x-anyOf:
+                          - type: string
+                          - {}
+        500:
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: object
+  /split_syncs:
+    get:
+      summary: Gets the available split syncs under the account
+      responses:
+        200:
+          description: ""
+          content:
+            application/json:
+              schema:
+                required:
+                - connections
+                type: object
+                properties:
+                  connections:
+                    type: array
+                    items:
+                      required:
+                      - integration_id
+                      - integration_name
+                      - partner_id
+                      type: object
+                      properties:
+                        integration_id:
+                          minimum: 1
+                          type: integer
+                          format: int64
+                          x-anyOf:
+                          - type: integer
+                            format: int64
+                            minimum: 1
+                          - {}
+                        partner_id:
+                          minLength: 3
+                          type: string
+                          x-allOf:
+                          - type: string
+                            minLength: 3
+                          - {}
+                        integration_name:
+                          type: string
+                          x-anyOf:
+                          - type: string
+                          - {}
+        500:
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: object
+components: 
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      name: api_token
+      in: query
+  schemas:
+    connection:
+      title: Connection
+      required:
+      - integration_id
+      type: object
+      properties:
+        integration_id:
+          $ref: '#/components/schemas/integration_id'
+        split_ratio: 
+          type: integer
+          example: 50
+    integration_id:
+      type: integer
+      example: 1234
+    split_ratio:
+      type: object
+      x-anyOf:
+      - type: string
+        example: 'null'
+      - type: integer
+        minimum: 1
+        maximum: 99
+        example: 50
+      example: 50
+    platform:
+      type: string
+      description: |
+        Android, iOS
+      enum:
+        - android
+        - ios
+      example: 'android'
+    partner_id: 
+      type: string
+    integration_name:
+      type: string
+x-id:
+- reitit.swagger/default
