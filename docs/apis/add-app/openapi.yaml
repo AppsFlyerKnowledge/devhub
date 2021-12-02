@@ -1,6 +1,6 @@
 openapi: 3.0.1
 info:
-  title: Add app API
+  title: Add app
   description: API for adding a new app to your Appsflyer account.
   version: 1.0.0
 servers:
@@ -9,17 +9,17 @@ servers:
 security:
   - bearerAuth: []
 tags:
-  - name: Add App
-    description: 'Public API for adding a new app to Appsflyer account'
+  - name: Add app
+    description: 'Judi says Public API for adding a new app to AppsFlyer account'
 
 paths:
   /api/apps/v1/add_app:
     post:
       tags:
-        - 'Add App'
+        - 'Add app'
       summary: ''
       requestBody:
-        description: 'Use the examples below as a template for your request body'
+        description: 'Judi says Use the examples below as a template for your request body'
         content:
           application/json:
             schema:
@@ -28,14 +28,14 @@ paths:
                 - $ref: '#/components/schemas/pending-app'
                 - $ref: '#/components/schemas/3rd-party-store-app'
             examples:
-              Available Android App:
+              Available Android app:
                 value:
                   status: 'available'
                   platform: 'android'
                   time_zone: 'UTC'
                   currency : 'USD'
                   app_url: 'https://play.google.com/store/apps/details?id=com.publisher.name'
-              Available iOS App:
+              Available iOS app:
                 value:
                   status: 'available'
                   platform: 'ios'
