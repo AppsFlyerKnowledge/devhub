@@ -9,6 +9,8 @@ security:
 paths:
   /audience:
     post:
+      tags:
+      - TODO11
       summary: Creates new imported audience
       requestBody:
         content:
@@ -88,6 +90,8 @@ paths:
                     message: "Creation is no longer allowed for this account"
   /audience/{audience_id}/connections:
     get:
+      tags:
+      - TODO22
       summary: List audience's existing connections
       parameters:
       - name: audience_id
@@ -123,6 +127,8 @@ paths:
                     error_code: 1002
                     messege: "Audience does not exist under your account"
     put:
+      tags:
+      - TODO22
       summary: Connect an audience to existing integrations
       parameters:
       - name: audience_id
@@ -188,6 +194,8 @@ paths:
                     message: "The following integrations are invalid: 12, 34"
   /audience/{audience_id}/split_syncs:
     get:
+      tags:
+      - TODO33
       summary: Gets the enabled split syncs under audience
       parameters:
       - name: audience_id
@@ -227,6 +235,8 @@ paths:
                     error_code: 1005
                     messege: "This audience is not a split audience"
     put:
+      tags:
+      - TODO33
       summary: Updates split sync configuration
       parameters:
       - name: audience_id
@@ -290,6 +300,8 @@ paths:
                     messege: "This audience is not a split audience"
   /audience/{audience_id}/upload_now:
     post:
+      tags:
+      - TODO44
       summary: Upload the audience
       parameters:
       - name: audience_id
@@ -325,6 +337,8 @@ paths:
               
   /connections:
     get:
+      tags:
+      - TODO55
       summary: List account's connections
       responses:
         200:
@@ -344,6 +358,8 @@ paths:
       
   /split_syncs:
     get:
+      tags:
+      - TODO66
       summary: Gets the available split syncs under the account
       responses:
         200:
