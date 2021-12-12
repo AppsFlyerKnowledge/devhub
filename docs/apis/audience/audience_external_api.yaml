@@ -32,6 +32,27 @@ paths:
                   type: array
                   items:
                     $ref: '#/components/schemas/connection'
+            examples:
+              Create unconnected audience:
+                value:
+                  audience_name: 'unconnected test audience'
+                  platform: 'android'
+                  connections: []
+              Create 2 partners audience:
+                value:
+                  audience_name: '2 partners test audience'
+                  platform: 'android'
+                  connections: [{integration_id: 1234}, {integration_id: 5678}]
+              Create 2 partners split audience:
+                value:
+                  audience_name: '2 partners split test audience'
+                  platform: 'android'
+                  connections: [{integration_id: 1234, split_ratio: 40}, {integration_id: 5678, split_ratio: 60}]
+              Create 2 partners cg split audience:
+                value:
+                  audience_name: '2 partners split cg test audience'
+                  platform: 'android'
+                  connections: [{integration_id: "control_group", split_ratio: 40}, {integration_id: 5678, split_ratio: 60}]
         required: true
       responses:
         200:
@@ -57,8 +78,6 @@ paths:
             The following integrations are invalid: ...
             
             Creation is no longer allowed for this account 
-        500:
-          description: Internal error occurred
   /audience/{audience_id}/connections:
     get:
       summary: List audience's existing connections
@@ -97,11 +116,8 @@ paths:
                           $ref: '#/components/schemas/integration_name'
                         split_ratio:
                           $ref: '#/components/schemas/split_ratio'
-                   
         400:
           description: "Audience does not exist under your account"
-        500:
-          description: "Internal error"
     put:
       summary: Connect an audience to existing integrations
       parameters:
@@ -128,6 +144,19 @@ paths:
                         $ref: '#/components/schemas/integration_id'
                       split_ratio:
                         $ref: '#/components/schemas/split_ratio'
+            examples:
+              Remove all connections:
+                value:
+                  connections: []
+              Connect 2 partners to an audience:
+                value:
+                  connections: [{integration_id: 1234}, {integration_id: 5678}]
+              Connect 2 partners split audience:
+                value:
+                  connections: [{integration_id: 1234, split_ratio: 40}, {integration_id: 5678, split_ratio: 60}]
+              Connect 2 partners cg split audience:
+                value:
+                  connections: [{integration_id: "control_group", split_ratio: 40}, {integration_id: 5678, split_ratio: 60}]
         required: true
       responses:
         200:
@@ -138,18 +167,9 @@ paths:
                 type: string
                 example: "Connections updated successfully"
         400:
-          description: ""
-          content:
-            application/json:
-              schema:
-                type: object
-        500:
-          description: ""
-          content:
-            application/json:
-              schema:
-                type: object
-      x-codegen-request-body-name: body
+          description: |
+           Audience does not exist
+           The following integrations are invalid: ...
   /audience/{audience_id}/split_syncs:
     get:
       summary: Gets the enabled split syncs under audience
@@ -160,10 +180,9 @@ paths:
         schema:
           minimum: 1
           type: integer
-          format: int64
       responses:
         200:
-          description: ""
+          description: "Array of split syncs that are assigned to an audience"
           content:
             application/json:
               schema:
@@ -181,38 +200,13 @@ paths:
                       type: object
                       properties:
                         integration_id:
-                          minimum: 1
-                          type: integer
-                          format: int64
-                          x-anyOf:
-                          - type: integer
-                            format: int64
-                            minimum: 1
-                          - {}
+                          $ref: '#/components/schemas/integration_id'
                         partner_id:
-                          minLength: 3
-                          type: string
-                          x-allOf:
-                          - type: string
-                            minLength: 3
-                          - {}
+                          $ref: '#/components/schemas/partner_id'
                         integration_name:
-                          type: string
-                          x-anyOf:
-                          - type: string
-                          - {}
+                          $ref: '#/components/schemas/integration_name'
         400:
-          description: ""
-          content:
-            application/json:
-              schema:
-                type: object
-        500:
-          description: ""
-          content:
-            application/json:
-              schema:
-                type: object
+          description: "Audience does not exist under your account"
     put:
       summary: Updates split sync configuration
       parameters:
@@ -222,7 +216,6 @@ paths:
         schema:
           minimum: 1
           type: integer
-          format: int64
       requestBody:
         content:
           application/json:
@@ -239,51 +232,28 @@ paths:
                     type: object
                     properties:
                       integration_id:
-                        minimum: 1
-                        type: integer
-                        format: int64
-                        x-anyOf:
-                        - type: integer
-                          format: int64
-                          minimum: 1
-                        - {}
-                  x-allOf:
-                  - type: array
-                    items:
-                      type: object
-                      properties:
-                        integration_id:
-                          type: integer
-                          format: int64
-                          minimum: 1
-                          x-anyOf:
-                          - type: integer
-                            format: int64
-                            minimum: 1
-                          - {}
-                      required:
-                      - integration_id
+                        $ref: '#/components/schemas/integration_id'
+            examples:
+              Remove all split syncs:
+                value:
+                  connections: []
+              Connect 1 split sync to an audience:
+                value:
+                  connections: [{integration_id: 1234}]
         required: true
       responses:
         200:
-          description: ""
+          description: "Connections were updated with the given connections array"
           content:
-            application/json:
+            application/text:
               schema:
-                type: object
+                type: string
+                example: "Connections split updated successfully"
         400:
-          description: ""
-          content:
-            application/json:
-              schema:
-                type: object
-        500:
-          description: ""
-          content:
-            application/json:
-              schema:
-                type: object
-      x-codegen-request-body-name: body
+          description: |
+           Audience does not exist under your account         
+           The following integrations are invalid:     
+           This audience is not a split audience
   /audience/{audience_id}/upload_now:
     post:
       summary: Upload the audience
@@ -294,14 +264,19 @@ paths:
         schema:
           minimum: 1
           type: integer
-          format: int64
       responses:
         200:
-          description: ""
+          description: "Upload was initiated and will start in the next few minutes"
           content:
-            application/json:
+            application/text:
               schema:
-                type: object
+                type: string
+                example: "Successfully initiated an upload on audience id .."
+        400:
+          description: |
+           "Audience does not exist under your account
+           There are no partners connected, upload is not possible
+           An error occurred while uploading audience id: .."
   /connections:
     get:
       summary: List account's connections
@@ -325,32 +300,11 @@ paths:
                       type: object
                       properties:
                         integration_id:
-                          minimum: 1
-                          type: integer
-                          format: int64
-                          x-anyOf:
-                          - type: integer
-                            format: int64
-                            minimum: 1
-                          - {}
+                          $ref: '#/components/schemas/integration_id'
                         partner_id:
-                          minLength: 3
-                          type: string
-                          x-allOf:
-                          - type: string
-                            minLength: 3
-                          - {}
+                          $ref: '#/components/schemas/partner_id'
                         integration_name:
-                          type: string
-                          x-anyOf:
-                          - type: string
-                          - {}
-        500:
-          description: ""
-          content:
-            application/json:
-              schema:
-                type: object
+                          $ref: '#/components/schemas/integration_name'
   /split_syncs:
     get:
       summary: Gets the available split syncs under the account
@@ -374,33 +328,12 @@ paths:
                       type: object
                       properties:
                         integration_id:
-                          minimum: 1
-                          type: integer
-                          format: int64
-                          x-anyOf:
-                          - type: integer
-                            format: int64
-                            minimum: 1
-                          - {}
+                          $ref: '#/components/schemas/integration_id'
                         partner_id:
-                          minLength: 3
-                          type: string
-                          x-allOf:
-                          - type: string
-                            minLength: 3
-                          - {}
+                          $ref: '#/components/schemas/partner_id'
                         integration_name:
-                          type: string
-                          x-anyOf:
-                          - type: string
-                          - {}
-        500:
-          description: ""
-          content:
-            application/json:
-              schema:
-                type: object
-components: 
+                          $ref: '#/components/schemas/integration_name'
+components:
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
@@ -430,6 +363,8 @@ components:
         minimum: 1
         maximum: 99
         example: 50
+      - type: object
+        example: null
       example: 50
     platform:
       type: string
@@ -441,7 +376,9 @@ components:
       example: 'android'
     partner_id: 
       type: string
+      example: 'amazon_int'
     integration_name:
       type: string
+      example: 'Integration 123'
 x-id:
 - reitit.swagger/default
