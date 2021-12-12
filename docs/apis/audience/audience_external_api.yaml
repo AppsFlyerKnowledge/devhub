@@ -3,9 +3,9 @@ info:
   title: Audience External API
   version: 1.0.0
 servers:
-- url: https://hq1.appsflyer.com/audiences-external-api
+- url: https://hq1.appsflyer.com/api/audiences-external-api
 security:
-- ApiKeyAuth: []
+  - bearerAuth: [] 
 paths:
   /audience:
     post:
@@ -60,24 +60,32 @@ paths:
           content:
             application/json:
               schema:
-                required:
-                - audience_id
-                - import_key
-                type: object
-                properties:
-                  audience_id:
-                    type: integer
-                    format: int64
-                  import_key:
-                    type: string
-                    example: 'WERWERWER1234'
+                $ref: '#/components/schemas/success_response'
+              example: 
+                message: {audience_id: 123, import_key: 'WERWER1234'}
         400:
-          description: |
-            Audience already exists
-            
-            The following integrations are invalid: ...
-            
-            Creation is no longer allowed for this account 
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_response'
+              examples:
+                Audience exists:
+                  value:
+                    error_code: 1001
+                    messege: "Audience already exists under your account"
+                Invalid type:
+                  value:
+                    error_code: 1000
+                    message: {errors: {platform: "must be android or ios"}}
+                Invalid integrations: 
+                  value:
+                    error_code: 1003
+                    message: "The following integrations are invalid: 12, 34"
+                Creation limit:
+                  value:
+                    error_code: 1004
+                    message: "Creation is no longer allowed for this account"
   /audience/{audience_id}/connections:
     get:
       summary: List audience's existing connections
@@ -90,34 +98,30 @@ paths:
           type: integer
       responses:
         200:
-          description: ""
+          description: "Assigned connections of an audience"
           content:
             application/json:
               schema:
                 required:
-                - connections
+                - message
                 type: object
                 properties:
-                  connections:
-                    type: array
-                    items:
-                      required:
-                      - integration_id
-                      - partner_id
-                      - integration_name
-                      - split_ratio
-                      type: object
-                      properties:
-                        integration_id:
-                          $ref: '#/components/schemas/integration_id'
-                        partner_id:
-                          $ref: '#/components/schemas/partner_id'
-                        integration_name:
-                          $ref: '#/components/schemas/integration_name'
-                        split_ratio:
-                          $ref: '#/components/schemas/split_ratio'
+                  message:
+                    type: object
+                    properties: 
+                      connections:
+                        $ref: '#/components/schemas/connections_response'
         400:
-          description: "Audience does not exist under your account"
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_response'
+              examples:
+                Audience does not exist:
+                  value:
+                    error_code: 1002
+                    messege: "Audience does not exist under your account"
     put:
       summary: Connect an audience to existing integrations
       parameters:
@@ -162,14 +166,26 @@ paths:
         200:
           description: "Connections were updated with the given connections array"
           content:
-            application/text:
+            application/json:
               schema:
-                type: string
-                example: "Connections updated successfully"
+                $ref: '#/components/schemas/success_response'
+              example: 
+                message: "Connections updated successfully"
         400:
-          description: |
-           Audience does not exist
-           The following integrations are invalid: ...
+          description: "Bad request"
+          content:  
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_response'
+              examples:
+                Audience does not exist:
+                  value:
+                    error_code: 1002
+                    message: "Audience does not exist under your account"
+                Invalid integrations: 
+                  value:
+                    error_code: 1003
+                    message: "The following integrations are invalid: 12, 34"
   /audience/{audience_id}/split_syncs:
     get:
       summary: Gets the enabled split syncs under audience
@@ -187,26 +203,29 @@ paths:
             application/json:
               schema:
                 required:
-                - connections
+                - message
                 type: object
                 properties:
-                  connections:
-                    type: array
-                    items:
-                      required:
-                      - integration_id
-                      - integration_name
-                      - partner_id
-                      type: object
-                      properties:
-                        integration_id:
-                          $ref: '#/components/schemas/integration_id'
-                        partner_id:
-                          $ref: '#/components/schemas/partner_id'
-                        integration_name:
-                          $ref: '#/components/schemas/integration_name'
+                  message:
+                    type: object
+                    properties: 
+                      connections:
+                        $ref: '#/components/schemas/integrations_response'
         400:
-          description: "Audience does not exist under your account"
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_response'
+              examples:
+                Audience does not exist:
+                  value:
+                    error_code: 1002
+                    messege: "Audience does not exist under your account"
+                Not a spilt audience:
+                  value:
+                    error_code: 1005
+                    messege: "This audience is not a split audience"
     put:
       summary: Updates split sync configuration
       parameters:
@@ -245,15 +264,30 @@ paths:
         200:
           description: "Connections were updated with the given connections array"
           content:
-            application/text:
+            application/json:
               schema:
-                type: string
-                example: "Connections split updated successfully"
+                $ref: '#/components/schemas/success_response'
+              example: 
+                message: "Connections split were updated successfully"
         400:
-          description: |
-           Audience does not exist under your account         
-           The following integrations are invalid:     
-           This audience is not a split audience
+          description: "Bad request"
+          content:  
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_response'
+              examples:
+                Audience does not exist:
+                  value:
+                    error_code: 1002
+                    message: "Audience does not exist under your account"
+                Invalid integrations: 
+                  value:
+                    error_code: 1003
+                    message: "The following integrations are invalid: 12, 34"
+                Not a spilt audience:
+                  value:
+                    error_code: 1005
+                    messege: "This audience is not a split audience"
   /audience/{audience_id}/upload_now:
     post:
       summary: Upload the audience
@@ -268,15 +302,27 @@ paths:
         200:
           description: "Upload was initiated and will start in the next few minutes"
           content:
-            application/text:
+            application/json:
               schema:
-                type: string
-                example: "Successfully initiated an upload on audience id .."
+                $ref: '#/components/schemas/success_response'
+              example: 
+                message: "Successfully initiated upload on audience id: 123"
         400:
-          description: |
-           "Audience does not exist under your account
-           There are no partners connected, upload is not possible
-           An error occurred while uploading audience id: .."
+          description: "Bad request"
+          content:  
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_response'
+              examples:
+                Audience does not exist:
+                  value:
+                    error_code: 1002
+                    message: "Audience does not exist under your account"
+                No connected partners:
+                  value:
+                    error_code: 1006
+                    message: "There are no partners connected, upload is not possible"
+              
   /connections:
     get:
       summary: List account's connections
@@ -287,24 +333,15 @@ paths:
             application/json:
               schema:
                 required:
-                - connections
+                - message
                 type: object
                 properties:
-                  connections:
-                    type: array
-                    items:
-                      required:
-                      - integration_id
-                      - integration_name
-                      - partner_id
-                      type: object
-                      properties:
-                        integration_id:
-                          $ref: '#/components/schemas/integration_id'
-                        partner_id:
-                          $ref: '#/components/schemas/partner_id'
-                        integration_name:
-                          $ref: '#/components/schemas/integration_name'
+                  message:
+                    type: object
+                    properties: 
+                      connections:
+                        $ref: '#/components/schemas/integrations_response'
+      
   /split_syncs:
     get:
       summary: Gets the available split syncs under the account
@@ -315,33 +352,82 @@ paths:
             application/json:
               schema:
                 required:
-                - connections
+                - message
                 type: object
                 properties:
-                  connections:
-                    type: array
-                    items:
-                      required:
-                      - integration_id
-                      - integration_name
-                      - partner_id
-                      type: object
-                      properties:
-                        integration_id:
-                          $ref: '#/components/schemas/integration_id'
-                        partner_id:
-                          $ref: '#/components/schemas/partner_id'
-                        integration_name:
-                          $ref: '#/components/schemas/integration_name'
+                  message:
+                    type: object
+                    properties: 
+                      connections:
+                        $ref: '#/components/schemas/integrations_response'
 components:
   securitySchemes:
-    ApiKeyAuth:
-      type: apiKey
-      name: api_token
-      in: query
+    bearerAuth:            
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
   schemas:
+    error_response:
+      required:
+      - error_code
+      - message
+      properties:
+        error_code:
+          type: integer
+          enum: 
+          - 1000
+          - 1001
+          - 1002
+          - 1003
+          - 1004
+          - 1005
+          - 1006
+          - 1020
+          example: 1002
+        message:
+          type: string
+          example: 'Audience does not exist under your account'
+    success_response:
+      required:
+      - message
+      properties:
+        message:
+          type: object
+          example: null
+    integrations_response:
+      type: array
+      items:
+        required:
+        - integration_id
+        - integration_name
+        - partner_id
+        type: object
+        properties:
+          integration_id:
+            $ref: '#/components/schemas/integration_id'
+          partner_id:
+            $ref: '#/components/schemas/partner_id'
+          integration_name:
+            $ref: '#/components/schemas/integration_name'
+    connections_response:
+      type: array
+      items:
+        required:
+        - integration_id
+        - partner_id
+        - integration_name
+        - split_ratio
+        type: object
+        properties:
+          integration_id:
+            $ref: '#/components/schemas/integration_id'
+          partner_id:
+            $ref: '#/components/schemas/partner_id'
+          integration_name:
+            $ref: '#/components/schemas/integration_name'
+          split_ratio:
+            $ref: '#/components/schemas/split_ratio'
     connection:
-      title: Connection
       required:
       - integration_id
       type: object
