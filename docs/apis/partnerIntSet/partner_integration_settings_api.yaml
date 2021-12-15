@@ -4,7 +4,7 @@ info:
   description: Public API for managing partner integrations
   version: 1.0.0
 servers:
-  - url: https://hq1.appsflyer.com/api/app-integrations
+  - url: https://hq1.appsflyer.com/api/app-integrations/
     description: api server - production
 security:
   - bearerAuth: []
@@ -12,27 +12,258 @@ tags:
   - name: Partner integration settings API (beta)
     description: API for managing partner integrations
 paths:
-  /copy:
+  /v1/partner-params/{pid}/{platform}:
+    get:
+      parameters:
+        - name: pid
+          in: path 
+          required: true
+          schema:
+            type: string
+          # description: TODO 
+          # example: TODO 
+        - name: platform
+          in: path 
+          required: true
+          schema:
+            type: string
+          # description: TODO 
+          # example: TODO 
+      tags:
+        -  Partner parameters
+      summary: Get a list of specific parameters needed for the integration
+
+      responses:
+        '200':
+          description: Retrieved params successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PartnerParamsResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/AccountTypeError'
+              examples:
+                accountTypeError:
+                  value:
+                    ErrorType: UNAUTHORIZED
+                    Message: This api is not available for your account type
+        '500':
+          description: Internal server error - please try again
+  /v1/copy:
     post:
       tags:
-        - Partner integration settings API (beta)
-      summary: Partner integration settings API (beta)
+        - Partner integration settings
+      summary: Copy partner integration settings
       requestBody:
         description: 'Use these examples as a template for your request body:'
         content:
           application/json:
             schema:
               oneOf:
-                - $ref: '#/components/schemas/facebook'
-                - $ref: '#/components/schemas/snapchat'
-                - $ref: '#/components/schemas/tiktok'
+                  - $ref: '#/components/schemas/copyPartnerParams'
             examples:
               Facebook:
                 value:
                   pid: facebook_int
-                  copy_from_app_id: id8765432111
-                  copy_to_app_id: id1133418088
-                  facebook_app_id: "23502200095693"
+                  copy_from_app_id: com.publisher.name
+                  copy_to_app_id: com.publisher.name2
+                  general_params:
+                    facebook_app_id: '123'
+                    gp_referrer_decryption_key: '7924423F4528482B4D6251655468576D5A7134743777217A25432A46294A4044'
+              Snapchat:
+                value:
+                  pid: snapchat_int
+                  copy_from_app_id: com.publisher.name
+                  copy_to_app_id: com.publisher.name2
+                  general_params:
+                    snap_app_id: app id
+                    mact_tos_accepted: true
+              Tiktok:
+                value:
+                  pid: bytedanceglobal_int
+                  copy_from_app_id: com.publisher.name
+                  copy_to_app_id: com.publisher.name2
+                  general_params:
+                    tiktok_app_id: app id
+        required: true
+      responses:
+        '200':
+          description: |
+            Partner integration settings copied successfully
+
+            Response parameters provide a summary of the settings and values copied from the source app to the destination app.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+        '401':
+          description: Unauthorized/TOS not accepted
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/AccountTypeError'
+                  - $ref: '#/components/schemas/UnauthorizedParamError'
+                  - $ref: '#/components/schemas/UnauthorizedAppError'
+                  - $ref: '#/components/schemas/TosError'
+              examples:
+                accountTypeError:
+                  value:
+                    ErrorType: UNAUTHORIZED
+                    Message: This api is not available for your account type
+                appError:
+                  value:
+                    ErrorType: UNAUTHORIZED
+                    Message: App <app id> is not owned by the user
+                paramError:
+                  value:
+                    ErrorType: UNAUTHORIZED
+                    Message: Your app settings do not allow modifying <param Name> for app <app id>
+                tosError:
+                  value:
+                    ErrorType: UNAUTHORIZED
+                    Message: Attribution terms of service were not accepted for app <app id> and <pid>
+        '404':
+          description: Integration not found
+          content:
+            application/json:
+              examples:
+                integrationNotFound:
+                  value:
+                    ErrorType: NOT_FOUND
+                    Message: Integration for <pid> was not found. Please check the pid value
+        '422':
+          description: Missing/invalid input params
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/InvalidValueError'
+                  - $ref: '#/components/schemas/MissingParamError'
+                  - $ref: '#/components/schemas/GeneralFailureError'
+                  - $ref: '#/components/schemas/IntegrationNotEnabledError'
+                  - $ref: '#/components/schemas/UnmatchedPlatformError'
+              examples:
+                invalidValueError:
+                  value:
+                    ErrorType: INVALID_VALUE
+                    Message: <param> value is invalid.
+                missingParamError:
+                  value:
+                    ErrorType: MISSING_PARAMETER
+                    Message: <param> is missing
+                generalFailureError:
+                  value:
+                    ErrorType: GENERAL_FAILURE
+                    Message: At this time the integration can not be activated.Contact your CSM or support@appsflyer.com with a copy of this message
+                integrationNotEnabledError:
+                  value:
+                    ErrorType: INACTIVE_INTEGRATION
+                    Message: Integration for app <app id> with <pid> is not enabled
+                unmatchedPlatformError:
+                  value:
+                    ErrorType: PLATFORM_UNMATCHED
+                    Message: Both apps should be on the same mobile platform
+        '500':
+          description: Internal server error - please try again
+  /v1/integration-params:
+    post:
+      tags:
+        - Integration Parameters
+      summary: Set install referrer decryption key
+      requestBody:
+        description: 'Use these examples as a template for your request body:'
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/setFacebook'
+            examples:
+              Facebook:
+                value:
+                  pid: facebook_int
+                  app_id: com.publisher.name
+                  general_params:
+                    gp_referrer_decryption_key: '7924423F4528482B4D6251655468576D5A7134743777217A25432A46294A4044'
+        required: true
+      responses:
+        '200':
+          description: Integration params saved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/AccountTypeError'
+                  - $ref: '#/components/schemas/UnauthorizedAppError'
+              examples:
+                accountTypeError:
+                  value:
+                    ErrorType: UNAUTHORIZED
+                    Message: This api is not available for your account type
+                appError:
+                  value:
+                    ErrorType: UNAUTHORIZED
+                    Message: App <app id> is not owned by the user
+        '422':
+          description: Missing/invalid input params
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/InvalidValueError'
+                  - $ref: '#/components/schemas/MissingParamError'
+                  - $ref: '#/components/schemas/GeneralFailureError'
+                  - $ref: '#/components/schemas/IntegrationNotEnabledError'
+              examples:
+                invalidValueError:
+                  value:
+                    ErrorType: INVALID_VALUE
+                    Message: <param> value is invalid.
+                missingParamError:
+                  value:
+                    ErrorType: MISSING_PARAMETER
+                    Message: <param> is missing
+                generalFailureError:
+                  value:
+                    ErrorType: GENERAL_FAILURE
+                    Message: At this time the integration can not be activated. Contact your CSM or support@appsflyer.com with a copy of this message
+                integrationNotEnabledError:
+                  value:
+                    ErrorType: INACTIVE_INTEGRATION
+                    Message: Integration for app <app id> with <pid> is not enabled
+        '500':
+          description: Internal server error - please try again
+  /copy:
+    post:
+      deprecated: true
+      tags:
+        - Partner integration settings
+      summary: Deprecated - Copy partner integration settings
+      requestBody:
+        description: 'Use these examples as a template for your request body:'
+        content:
+          application/json:
+            schema:
+              oneOf:
+                - $ref: '#/components/schemas/copyPartnerParams'
+            examples:
+              Facebook:
+                value:
+                  pid: facebook_int
+                  copy_from_app_id: com.publisher.name
+                  copy_to_app_id: com.publisher.name2
+                  facebook_app_id: '23502200095693'
+                  gp_referrer_decryption_key: '7924423F4528482B4D6251655468576D5A7134743777217A25432A46294A4044'
               Snapchat:
                 value:
                   pid: snapchat_int
@@ -49,9 +280,9 @@ paths:
         required: true
       responses:
         '200':
-          description: |
+          description: | 
             Partner integration settings copied successfully.
-            
+
             Response parameters provide a summary of the settings and values copied from the source app to the destination app.
           content:
             application/json:
@@ -134,34 +365,33 @@ components:
       scheme: bearer
       bearerFormat: JWT
       description: |
-        HTTP header containing the API token (bearer token) is required. 
-        Ask your account admin to [obtain the V2.0 token](https://support.appsflyer.com/hc/en-us/articles/360004562377) from the AppsFlyer dashboard.
+        HTTP header containing the API token (bearer token) is required. Ask your account admin to [obtain the V2.0 token](https://support.appsflyer.com/hc/en-us/articles/360004562377) from the AppsFlyer dashboard.
   schemas:
-    facebook:
+    setFacebook:
       title: Facebook Ads
       required:
         - pid
-        - copy_from_app_id
-        - copy_to_app_id
-        - facebook_app_id
+        - app_id
+        - gp_referrer_decryption_key
       type: object
       properties:
         pid:
           $ref: '#/components/schemas/pid'
-        copy_from_app_id:
-          $ref: '#/components/schemas/copy_from_app_id'
-        copy_to_app_id:
-          $ref: '#/components/schemas/copy_to_app_id'
-        facebook_app_id:
-          $ref: '#/components/schemas/facebook_app_id'
-    snapchat:
-      title: Snapchat
+        app_id:
+          $ref: '#/components/schemas/app_id'
+        general_params:
+          type: object
+          properties:
+            gp_referrer_decryption_key:
+              type: string
+              description: |
+                Google Play Referrer decryption key provided by Facebook. Must be a hexadecimal 64-character string.
+    copyPartnerParams:
+      title: Set the parameters to copy
       required:
         - pid
         - copy_from_app_id
         - copy_to_app_id
-        - snap_app_id
-        - mact_tos_accepted
       type: object
       properties:
         pid:
@@ -170,27 +400,10 @@ components:
           $ref: '#/components/schemas/copy_from_app_id'
         copy_to_app_id:
           $ref: '#/components/schemas/copy_to_app_id'
-        snap_app_id:
-          $ref: '#/components/schemas/snap_app_id'
-        mact_tos_accepted:
-          $ref: '#/components/schemas/mact_tos_accepted'
-    tiktok:
-      title: Tiktok
-      required:
-        - pid
-        - copy_from_app_id
-        - copy_to_app_id
-        - tiktok_app_id
-      type: object
-      properties:
-        pid:
-          $ref: '#/components/schemas/pid'
-        copy_from_app_id:
-          $ref: '#/components/schemas/copy_from_app_id'
-        copy_to_app_id:
-          $ref: '#/components/schemas/copy_to_app_id'
-        tiktok_app_id:
-          $ref: '#/components/schemas/tiktok_app_id'
+        general_params:
+          type: object
+        in_app_postbacks_params:
+          type: object
     pid:
       type: string
       description: |
@@ -199,9 +412,7 @@ components:
       type: string
       description: |
         App to copy integration configuration ***from*** ("source app")
-
         Example values:
-
         - **Android:** com.publisher.name
         - **iOS:** id123456789
         - **Windows Phone:** a1b2c3d4e5f6
@@ -209,12 +420,16 @@ components:
       type: string
       description: |
         App to copy integration configuration ***to*** ("destination app")
-
         Example values:
-
         - **Android:** com.publisher.name
         - **iOS:** id123456789
         - **Windows Phone:** a1b2c3d4e5f6
+    app_id:
+      type: string
+      description: |
+        App ID for which the decryption key is being set. Relevant for Android apps only.
+        Example values:
+        - **Android:** com.publisher.name
     snap_app_id:
       type: string
       description: |
@@ -222,42 +437,57 @@ components:
     mact_tos_accepted:
       type: boolean
       description: |
-        Snapchat integration requies that the advertiser accept the Snap [Terms and Conditions for Mobile App Conversion Tracking (MACT)](https://snap.com/en-US/terms/attribution).
+        Snapchat integration requires that the advertiser accept the Snap [Terms and Conditions for Mobile App Conversion Tracking (MACT)](https://snap.com/en-US/terms/attribution).
 
-        Selecting **true** for this parameter indicates that you accept these terms for the destination app. Be sure to check with your marketing team or other responsible party before accepting these terms (if required by your company policies).
+        Selecting **true** for this parameter indicates that you accept these terms for the destination app.
+        If you already accepted the Snap MACT for the destination app, sending this parameter is not required. Be sure to check with your marketing team or other responsible party before accepting these terms (if required by your company policies).
     facebook_app_id:
       type: string
       description: |
-        [Facebook App ID](https://developers.facebook.com/docs/development/create-an-app/app-dashboard/basic-settings#app-id) of the destination app, as assigned by Facebook
+        [Facebook App ID](https://developers.facebook.com/docs/development/create-an-app/app-dashboard/basic-settings#app-id) of the destination app, as assigned by Facebook. Must be numbers only.
     tiktok_app_id:
       type: string
       description: |
         [TikTok App ID](https://ads.tiktok.com/help/article?aid=10001060) of the destination app, as assigned by TikTok
+    gp_referrer_decryption_key:
+      type: string
+      description: |
+        Google Play Referrer decryption key provided by Facebook. Must be a hexadecimal 64-character string.
     Response:
       properties:
-        Click Attribution Lookback Window:
-          type: string
-        Enable Advanced Privacy:
-          type: string
-        Ignore active users for retargeting:
-          type: string
-        Install Re-engagement Click Lookback Window:
-          type: string
-        Re-engagement attribution Enabled:
-          type: string
-        Re-engagement click-through lookback window:
-          type: string
-        Re-engagement view-through attribution:
-          type: string
-        Re-engagement window:
-          type: string
-        Time window for users to be considered inactive:
-          type: string
-        View-Through Attribution lookback window:
-          type: string
-        mapped-in-app-events:
-          type: object
+        general_params:
+          properties:
+            Click Attribution Lookback Window:
+              type: string
+            Enable Advanced Privacy:
+              type: string
+            Ignore active users for retargeting:
+              type: string
+            Install Re-engagement Click Lookback Window:
+              type: string
+            Re-engagement attribution Enabled:
+              type: string
+            Re-engagement click-through lookback window:
+              type: string
+            Re-engagement view-through attribution:
+              type: string
+            Re-engagement window:
+              type: string
+            Time window for users to be considered inactive:
+              type: string
+            View-Through Attribution lookback window:
+              type: string
+        in_app_postbacks_params:
+          properties:
+            mapped-in-app-events:
+              type: object
       type: object
+    PartnerParamsResponse:
+      properties:
+        general_params:
+          type: object
+        in_app_postbacks_params:
+          type: object
     AccountTypeError:
       properties:
         ErrorType:
