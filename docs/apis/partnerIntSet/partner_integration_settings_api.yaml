@@ -19,20 +19,18 @@ paths:
           in: path 
           required: true
           schema:
-            type: string
-          # description: TODO 
-          # example: TODO 
+            $ref: '#/components/schemas/pid'
+          example: facebook_int 
         - name: platform
           in: path 
           required: true
           schema:
-            type: string
-          # description: TODO 
-          # example: TODO 
+            $ref: '#/components/schemas/platform' 
       tags:
-        -  Partner parameters
-      summary: Get a list of specific parameters needed for the integration
-
+        -  Unique partner integration parameters
+      summary: Get a list of unique parameters
+      description: |
+        Get a list of the unique partner parameters needed for the integration. If the partner has no unique parameters, a successful message is recieved with no data.
       responses:
         '200':
           description: Retrieved params successfully
@@ -57,8 +55,10 @@ paths:
   /v1/copy:
     post:
       tags:
-        - Partner integration settings
+        - Integration settings
       summary: Copy partner integration settings
+      description: |
+        Copy the integration settings from one app to another. Copying the parameters can be done only for apps on the same platform. To retrieve the partner's unique parameters needed for the integration, use the [GET request](https://dev.appsflyer.com/hc/reference/get_v1-partner-params-pid-platform). 
       requestBody:
         description: 'Use these examples as a template for your request body:'
         content:
@@ -80,9 +80,9 @@ paths:
                   pid: snapchat_int
                   copy_from_app_id: com.publisher.name
                   copy_to_app_id: com.publisher.name2
+                  mact_tos_accepted: true
                   general_params:
                     snap_app_id: app id
-                    mact_tos_accepted: true
               Tiktok:
                 value:
                   pid: bytedanceglobal_int
@@ -174,8 +174,10 @@ paths:
   /v1/integration-params:
     post:
       tags:
-        - Integration Parameters
+        - Google Play install referrer
       summary: Set install referrer decryption key
+      description: |
+        Set the Google Play install referrer decryption key for each app as recieved by Facebook.
       requestBody:
         description: 'Use these examples as a template for your request body:'
         content:
@@ -247,7 +249,7 @@ paths:
     post:
       deprecated: true
       tags:
-        - Partner integration settings
+        - Integration settings
       summary: Deprecated - Copy partner integration settings
       requestBody:
         description: 'Use these examples as a template for your request body:'
@@ -387,7 +389,7 @@ components:
               description: |
                 Google Play Referrer decryption key provided by Facebook. Must be a hexadecimal 64-character string.
     copyPartnerParams:
-      title: Set the parameters to copy
+      title: Set the parameters for the request
       required:
         - pid
         - copy_from_app_id
@@ -408,6 +410,15 @@ components:
       type: string
       description: |
         AppsFlyer Partner ID
+    platform:
+      type: string
+      description: |
+        iOS/Android/Roku/Windows Phone
+      enum:
+        - ios
+        - android
+        - roku
+        - windowsphone
     copy_from_app_id:
       type: string
       description: |
