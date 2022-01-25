@@ -52,6 +52,7 @@ paths:
               - timestamp
               - type
               - ip
+              - request_id
               type: object
               properties:
                 idfv:
@@ -111,7 +112,13 @@ paths:
                     - {}
                     - type: array
                   example: ["googleadwords_int", "adcolony_int"]
-            
+                request_id:
+                  type: string
+                  description: |
+                    An identifier that is unique per app install.
+                    SDK should send the AppsFlyer ID in this field.
+                    SDKless should send the same value sent in the install event’s uid field.
+                  example: 1644179019889-6748098
         required: false
         
       responses:
@@ -200,6 +207,7 @@ paths:
               - timestamp
               - type
               - ip
+              - request_id
               type: object
               properties:
                 referrers:
@@ -276,7 +284,13 @@ paths:
                     - [`"a"`,`"b"`,`"c"`]: Doesn’t send the event to the specified list of partners (by partner IDs)
                     **Note**: The partner IDs must be taken from predefined.
                   example: ["googleadwords_int", "adcolony_int"]
-
+                request_id:
+                  type: string
+                  description: |
+                    An identifier that is unique per app install.
+                    SDK should send the AppsFlyer ID in this field.
+                    SDKless should send the same value sent in the install event’s uid field.
+                  example: 1644179019889-6748098
         required: true
       responses:
         200:
