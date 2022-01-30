@@ -12,6 +12,8 @@ security:
 paths:
   /installs/{app-id}:
     post:
+      tags:
+      - Measure installs
       summary: Measure installs
       description: To properly measure CTV app installs with AppsFlyer, the following
         API call must be made for every new install
@@ -134,6 +136,8 @@ paths:
       x-codegen-request-body-name: body
   /inapps/{app-id}:
     post:
+      tags:
+      - Measure in-app events
       summary: Measure in-app events
       description: This AppsFlyer API integration allows advertisers to measure any
         post-install in-app event and attribute it to a media source and campaign
@@ -459,6 +463,8 @@ paths:
       x-codegen-request-body-name: body
   /sessions/{app-id}:
     post:
+      tags:
+      - Measure sessions
       summary: Measure sessions
       description: This AppsFlyer API integration provide advertisers with the ability
         to measure post-install sessions and attribute it to a media source and campaign
