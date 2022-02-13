@@ -22,10 +22,16 @@ paths:
           $ref: '#/components/responses/Success'
         400:
           $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/AuthenticationFailed'
+        404:
+          $ref: '#/components/responses/AppNotFound'
+        501:
+          $ref: '#/components/responses/NotImplemented'
         503:
-          $ref: '#/components/responses/GatewayTimeout'
-        504:
           $ref: '#/components/responses/ServiceUnavailable'
+        504:
+          $ref: '#/components/responses/GatewayTimeout'
 
   /impression/app/{platform}/{app_id}:
     post:
@@ -46,10 +52,12 @@ paths:
           $ref: '#/components/responses/AuthenticationFailed'
         404:
           $ref: '#/components/responses/AppNotFound'
+        501:
+          $ref: '#/components/responses/NotImplemented'
         503:
-          $ref: '#/components/responses/GatewayTimeout'
-        504:
           $ref: '#/components/responses/ServiceUnavailable'
+        504:
+          $ref: '#/components/responses/GatewayTimeout'
 
 
 components:
@@ -193,16 +201,28 @@ components:
                 description: |
                   The device’s os_version.
                   Only digits and dots allowed
-              device_id:
-                type: string
-                format: uuid
-                description: "Device identifier"
-              device_id_type:
-                type: string
-                enum:
-                  - vida
-                  - tifa
-                description: "Device identifier type"
+              device_ids:
+                  type: array
+                  description: A vector of the different device IDs. Can be either the Roku ID (RIDA) or a custom ID
+                  example:
+                  - type: rida
+                    value: fa73d67d-f55c-5af3-883a-726253dc7d0e
+                  - type: tifa
+                    value: 045f4137-57b7-45e6-8a45-c303101a086a
+                  items:
+                    required:
+                    - type
+                    - value
+                    type: object
+                    properties:
+                        type:
+                          type: string
+                          enum: [tifa, rida]
+                          description: "Device identifier type"
+                        value:
+                          type: string
+                          format: uuid
+                          description: "Device identifier"
               af_ip:
                 type: string
                 maxLength: 256
@@ -241,12 +261,33 @@ components:
             example: {
               message: "Application ID not found"
             }
-    GatewayTimeout:
-      description: Gateway Timeout. ELB (Amazon Load-balancer) service unavailable.
-      content: {}
+    NotImplemented:
+      description: Not implmented. 
+      content: 
+        application/json:
+            schema:
+              $ref: '#/components/schemas/Error' 
+            example: {
+              message: "Not implmented"
+            }
     ServiceUnavailable:
       description: Service Unavailable. ELB (Amazon Load-balancer) service unavailable.
-      content: {}
+      content:
+        application/json:
+            schema:
+              $ref: '#/components/schemas/Error' 
+            example: {
+              message: "Service unavailable"
+            }
+    GatewayTimeout:
+      description: Gateway Timeout. ELB (Amazon Load-balancer) service unavailable.
+      content: 
+        application/json:
+            schema:
+              $ref: '#/components/schemas/Error' 
+            example: {
+              message: "Gateway timeout"
+            }
 
   schemas:
 
