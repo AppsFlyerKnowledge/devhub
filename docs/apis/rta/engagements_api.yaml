@@ -1,0 +1,261 @@
+openapi: 3.0.1
+info:
+  title:  Engagements REST API
+  version: "1.0"
+servers:
+- url: https://engagements.appsflyer.com/v1.0/s2s
+security:
+- ApiKeyAuth: []
+paths:
+  /click/app/{platform}/{app_id}:
+    post:
+      tags:
+      - Click Engagement
+      summary: Click Engagement
+      parameters:
+        - $ref: '#/components/parameters/AppId'
+        - $ref: '#/components/parameters/Platform'
+      requestBody:
+        $ref: '#/components/requestBodies/CommonBody'
+      responses:
+        200:
+          $ref: '#/components/responses/Success'
+        400:
+          $ref: '#/components/responses/BadRequest'
+        503:
+          $ref: '#/components/responses/GatewayTimeout'
+        504:
+          $ref: '#/components/responses/ServiceUnavailable'
+
+  /impression/app/{platform}/{app_id}:
+    post:
+      tags:
+      - Impression Engagement
+      summary: Impression Engagement
+      parameters:
+        - $ref: '#/components/parameters/AppId'
+        - $ref: '#/components/parameters/Platform'
+      requestBody:
+        $ref: '#/components/requestBodies/CommonBody'
+      responses:
+        200:
+          $ref: '#/components/responses/Success'
+        400:
+          $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/AuthenticationFailed'
+        404:
+          $ref: '#/components/responses/AppNotFound'
+        503:
+          $ref: '#/components/responses/GatewayTimeout'
+        504:
+          $ref: '#/components/responses/ServiceUnavailable'
+
+
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      description: "TBA"
+      name: authorization
+      in: header
+  parameters:
+    AppId:
+      name: app_id
+      in: path
+      required: true
+      schema:
+        type: string
+        description: "App ID of the app for which you are posting"
+        example: id123456789
+    Platform:
+      name: platform
+      in: path
+      required: true
+      schema:
+        type: string
+        enum: [iOS, Android]
+      description: "The application platform"
+      example: "iOS"
+
+  requestBodies: 
+     CommonBody:
+      description: "common body for impression and click"
+      required: true
+      content:
+        application/json:
+          schema:
+            required:
+              - pid
+              - af_c_id
+            type: object
+            properties:
+              pid:
+                type: string
+                description: |
+                  This is the partner unique identifier as defined on AppsFlyer platform.
+                  The following special characters are not allowed: ;, *, !, @, #, ?, $, ^, :, &, ~, `, =, +, ’, >, <, /, {, }, %.
+              af_c_id:
+                type: string
+                maxLength: 64
+                description: "Campaign ID"
+              request_id:
+                type: string
+                format: uuid
+                description: "An identifier that uniquely identifies a request by partner"
+              c:
+                type: string
+                maxLength: 256
+                description: "Campaign name"
+              af_ad_id:
+                type: string
+                maxLength: 64
+                description: "Ad ID"
+              af_ad:
+                type: string
+                maxLength: 256
+                description: "Ad Name"
+              af_campaign_type:
+                type: string
+                enum:
+                  - ua
+                  - retargeting
+                description: "Campaign type"
+              af_prt:
+                type: string
+                maxLength: 24
+                description: "Agency Account Name"
+              af_siteid:
+                type: string
+                maxLength: 24
+                description: "Unique ID that identifies the publisher that displays the ad"
+              af_sub_siteid:
+                type: string
+                maxLength: 24
+                description: "Ad sub-network / Publisher ID"
+              af_network_transaction_id:
+                type: string
+                maxLength: 256
+                description: "Ad network unique transaction identifier"
+              af_lookback_window:
+                type: string
+                maxLength: 256
+                description: |
+                  Attribution lookback window
+                  Configurable number of days/hours for the lookback window attribution period. Available parameter values: 1d - 30d (days) OR 1h-23h (hours). 
+                  Validation: 3 char max and using the scheme above
+              af_ad_placement:
+                type: string
+                maxLength: 256
+                description: "Ad network unique transaction identifier"
+              af_ad_type:
+                type: string
+                enum:
+                  - text
+                  - banner
+                  - interstitial
+                  - video
+                  - rewarded_video
+                  - playable
+                  - audio
+                description: "Ad network unique transaction identifier"
+              af_channel:
+                type: string
+                maxLength: 64
+                description: "The media source channel through which the ads are distributed"
+              af_sub1:
+                type: string
+                maxLength: 256
+                description: "Optional custom parameter defined by the advertiser"
+              af_sub2:
+                type: string
+                maxLength: 256
+                description: "Optional custom parameter defined by the advertiser"
+              af_sub3:
+                type: string
+                maxLength: 256
+                description: "Optional custom parameter defined by the advertiser"
+              af_sub4:
+                type: string
+                maxLength: 256
+                description: "Optional custom parameter defined by the advertiser"
+              af_sub5:
+                type: string
+                maxLength: 256
+                description: "Optional custom parameter defined by the advertiser"
+              af_model:
+                type: string
+                maxLength: 64
+                description: "The device’s model"
+              af_os:
+                type: string
+                maxLength: 12
+                description: |
+                  The device’s os_version.
+                  Only digits and dots allowed
+              device_id:
+                type: string
+                format: uuid
+                description: "Device identifier"
+              device_id_type:
+                type: string
+                enum:
+                  - vida
+                  - tifa
+                description: "Device identifier type"
+              af_ip:
+                type: string
+                maxLength: 256
+                description: |
+                  The device’s IP the agent sent in its request to the partner’s server.
+                  [IPv6 or IPv4]. For, IPv6,values must be the short version (according to RFC5952) and URL Encoded
+
+  responses:  
+    Success:
+      description: Request successful.
+      content: {}
+    BadRequest:
+      description: Bad Request. The request message is not valid.
+      content:
+        application/json:
+            schema:
+              $ref: '#/components/schemas/Error' 
+            example: {
+              message: "Bad Request"
+            }
+    AuthenticationFailed:
+      description: Authentication failed. The authentication token is not valid.
+      content:
+        application/json:
+            schema:
+              $ref: '#/components/schemas/Error' 
+            example: {
+              message: "Authentication failed"
+            }
+    AppNotFound:
+      description: Application ID not found.
+      content:
+        application/json:
+            schema:
+              $ref: '#/components/schemas/Error' 
+            example: {
+              message: "Application ID not found"
+            }
+    GatewayTimeout:
+      description: Gateway Timeout. ELB (Amazon Load-balancer) service unavailable.
+      content: {}
+    ServiceUnavailable:
+      description: Service Unavailable. ELB (Amazon Load-balancer) service unavailable.
+      content: {}
+
+  schemas:
+
+    # Schema for error response body
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+        - message
+  
