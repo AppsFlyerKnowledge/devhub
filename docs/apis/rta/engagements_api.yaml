@@ -94,24 +94,24 @@ components:
         application/json:
           schema:
             required:
-              - pid
-              - af_c_id
+              - af_media_source
+              - af_campaign_id
             type: object
             properties:
-              pid:
+              af_media_source:
                 type: string
                 description: |
                   This is the partner unique identifier as defined on AppsFlyer platform.
                   The following special characters are not allowed: ;, *, !, @, #, ?, $, ^, :, &, ~, `, =, +, ’, >, <, /, {, }, %.
-              af_c_id:
+              af_campaign_id:
                 type: string
                 maxLength: 64
                 description: "Campaign ID"
-              request_id:
+              af_request_id:
                 type: string
                 format: uuid
                 description: "An identifier that uniquely identifies a request by partner"
-              c:
+              af_campaign:
                 type: string
                 maxLength: 256
                 description: "Campaign name"
@@ -166,7 +166,9 @@ components:
                   - rewarded_video
                   - playable
                   - audio
-                description: "Ad network unique transaction identifier"
+                description: |
+                  Ad network unique transaction identifiers.
+                  Case-sensitivity enforcement required.
               af_channel:
                 type: string
                 maxLength: 64
@@ -195,13 +197,13 @@ components:
                 type: string
                 maxLength: 64
                 description: "The device’s model"
-              af_os:
+              af_os_version:
                 type: string
                 maxLength: 12
                 description: |
                   The device’s os_version.
                   Only digits and dots allowed
-              device_ids:
+              af_device_ids:
                   type: array
                   description: A vector of the different device IDs. Can be either the Roku ID (RIDA) or a custom ID
                   example:
