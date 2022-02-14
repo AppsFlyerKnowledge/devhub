@@ -1,0 +1,737 @@
+openapi: 3.0.1
+info:
+  title:  AppsFlyer client-to-server sdk-less API
+  version: "1.0"
+servers:
+- url: https://xxxxxxxxx.appsflyer.com/v1.0/xxxxxx
+security:
+- ApiKeyAuth: []
+paths:
+  /installs/android/{app_id}:
+    post:
+      tags:
+      - Android installs
+      summary: Android installs
+      description: To properly measure installs with AppsFlyer, it is required that
+        the following API call be made upon first app launch
+      parameters:
+        - $ref: '#/components/parameters/AppId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/CommonBody'
+              - $ref: '#/components/schemas/AndroidCommonBody'
+              - $ref: '#/components/schemas/AndroidMeasureBody' 
+      responses:
+        200:
+          $ref: '#/components/responses/Success'
+        400:
+          $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/AuthenticationFailed'
+        404:
+          $ref: '#/components/responses/AppNotFound'
+        501:
+          $ref: '#/components/responses/NotImplemented'
+        503:
+          $ref: '#/components/responses/ServiceUnavailable'
+        504:
+          $ref: '#/components/responses/GatewayTimeout'
+
+  /sessions/android/{app_id}:
+    post:
+      tags:
+      - Android sessions
+      summary: Android sessions
+      description: TBA
+      parameters:
+        - $ref: '#/components/parameters/AppId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/CommonBody'
+              - $ref: '#/components/schemas/AndroidCommonBody'
+              - $ref: '#/components/schemas/AndroidMeasureBody'
+              - $ref: '#/components/schemas/CommonSessionBody'
+      responses:
+        200:
+          $ref: '#/components/responses/Success'
+        400:
+          $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/AuthenticationFailed'
+        404:
+          $ref: '#/components/responses/AppNotFound'
+        501:
+          $ref: '#/components/responses/NotImplemented'
+        503:
+          $ref: '#/components/responses/ServiceUnavailable'
+        504:
+          $ref: '#/components/responses/GatewayTimeout'
+
+  /installs/ios/{app_id}:
+    post:
+      tags:
+      - iOS installs
+      summary: iOS installs
+      description: To properly measure installs with AppsFlyer, it is required that
+        the following API call be made upon first app launch
+      parameters:
+        - $ref: '#/components/parameters/AppId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/CommonBody'
+              - $ref : '#/components/schemas/iosCommonBody'
+              - $ref : '#/components/schemas/iosMeasureBody'
+                
+      responses:
+        200:
+          $ref: '#/components/responses/Success'
+        400:
+          $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/AuthenticationFailed'
+        404:
+          $ref: '#/components/responses/AppNotFound'
+        501:
+          $ref: '#/components/responses/NotImplemented'
+        503:
+          $ref: '#/components/responses/ServiceUnavailable'
+        504:
+          $ref: '#/components/responses/GatewayTimeout'
+  
+  /sessions/ios/{app_id}:
+    post:
+      tags:
+      - iOS sessions
+      summary: iOS sessions
+      description: TBA
+      parameters:
+        - $ref: '#/components/parameters/AppId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/CommonBody'
+              - $ref: '#/components/schemas/iosCommonBody'
+              - $ref: '#/components/schemas/CommonSessionBody'
+                
+      responses:
+        200:
+          $ref: '#/components/responses/Success'
+        400:
+          $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/AuthenticationFailed'
+        404:
+          $ref: '#/components/responses/AppNotFound'
+        501:
+          $ref: '#/components/responses/NotImplemented'
+        503:
+          $ref: '#/components/responses/ServiceUnavailable'
+        504:
+          $ref: '#/components/responses/GatewayTimeout'
+
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      description: | 
+        Create an HMAC signature by hashing the entire raw message.
+        The HMAC is generated using SHA256 and uses the DevKey as the signature’s secret key.
+      name: authorization
+      in: header
+  parameters:
+    AppId:
+      name: app_id
+      in: path
+      required: true
+      schema:
+        type: string
+        description: "App ID of the app for which you are posting"
+        example: id123456789
+    UserAgent:
+      name: user-agent
+      in: header
+      required: true
+      schema:
+        maxLength: 1024
+        minLength: 1
+        type: string
+      description: "The application platform"
+      example: "iOS"
+
+  responses:  
+    Success:
+      description: Request successful.
+      content: {}
+    BadRequest:
+      description: Bad Request. The request message is not valid.
+      content:
+        application/json:
+            schema:
+              $ref: '#/components/schemas/Error' 
+            example: {
+              message: "Bad Request"
+            }
+    AuthenticationFailed:
+      description: Authentication failed. The authentication token is not valid.
+      content:
+        application/json:
+            schema:
+              $ref: '#/components/schemas/Error' 
+            example: {
+              message: "Authentication failed"
+            }
+    AppNotFound:
+      description: Application ID not found.
+      content:
+        application/json:
+            schema:
+              $ref: '#/components/schemas/Error' 
+            example: {
+              message: "Application ID not found"
+            }
+    NotImplemented:
+      description: Not implmented. 
+      content: 
+        application/json:
+            schema:
+              $ref: '#/components/schemas/Error' 
+            example: {
+              message: "Not implmented"
+            }
+    ServiceUnavailable:
+      description: Service Unavailable. ELB (Amazon Load-balancer) service unavailable.
+      content:
+        application/json:
+            schema:
+              $ref: '#/components/schemas/Error' 
+            example: {
+              message: "Service unavailable"
+            }
+    GatewayTimeout:
+      description: Gateway Timeout. ELB (Amazon Load-balancer) service unavailable.
+      content: 
+        application/json:
+            schema:
+              $ref: '#/components/schemas/Error' 
+            example: {
+              message: "Gateway timeout"
+            }
+
+  schemas:
+    # Schema for error response body
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+        - message
+    iosCommonBody:
+      type: object
+      properties:
+        bundle_id:
+          type: string
+          description: facebook attribution Id.
+          example: "e0ba3d4c-6a41-4405-ad49-e109ba986157"
+        app_type:
+          type: string
+          enum:
+            - app_clip
+          description: Use this parameter to indicate if this is an app clip app 
+          example: "app_clip"
+        app_tracking_transparency:
+          type: string
+    AndroidCommonBody:
+      type: object
+      properties:
+        facebook_cookie:
+          type: string
+          description: facebook attribution Id.
+          example: "e0ba3d4c-6a41-4405-ad49-e109ba986157"
+        app_store:
+          type: string
+          description: The 3rd party app store from which the app was downloaded
+          example: "yoozoo"
+    AndroidMeasureBody:
+      type: object
+      properties:
+        deeplink:
+          type: string
+          description: The full deeplink URL
+          example: https://attr.onelink.me/zUt1/67abab92
+        referrers:
+          minItems: 1
+          type: array
+          description: A JSON array representing multiple store referrers
+            data
+          example:
+          - source: google
+            type: store
+            click_timestamp: 1604503583337
+            install_begin_timestamp: 1604503583450
+            referrer: af_tranid=0Fs6FeK-EnClJ7XPEtx0eg&pid=partner_int
+          - source: huawei
+            type: store
+            click_timestamp: 160450358333
+            install_begin_timestamp: 1604503583450
+            referrer: af_tranid=0Fs6FeK-EnClJ7XPEtx0eg&pid=partner_int
+          items:
+            $ref: '#/components/schemas/ReferrerElement'
+    
+    iosMeasureBody:
+      type: object
+      properties:
+        deeplink:
+          type: string
+          description: The full deeplink URL
+          example: https://attr.onelink.me/zUt1/67abab92
+        apple_search_ads_token:
+          type: string
+          description: |
+           Use this parameter to send the Apple Search Ads attribution token.
+           Used to query Apple Search Ads Ad services.
+          example: J5TMpxQ2bjJ+vfe6quLY3HKQehgt6VkSOu5iMmOONzoyI0JmSnCL+ALz32RAZa8+LgPQa5sVb5f5SLgATPS4p/etLbT5Gx66tQAAAVADAAAAjgAAAIB5YveKNb5KsGpMlYvObCb9qP1AterqOHcdLMczlcGbLV9zq4hoWYvipcUtTRc37X0vRrKA03mXCtaeCXijH9AvcuB6AzNay9M97N/PPe10eGQIBa0mVX521X7EwM/qyJhPOI7Rn9G36x+soZfOwZ9lfsn8aPXvoC0IQV3/fRAPJQAAABcMyR1ykIIFOs4FEWWHEt7GdWWuNEU2xAAAAJ8BP1l1uz97xNliElfTIKeQgMoiy/8AAACGBgjMderzWJI+PcOy+tOYOqU2YDEDZRRWd09kie996Rw/z16ZU9HL0hITQmHNbBi+B2NqH4hF2p0VBTSCX4J7fgeSbg3+dJfeZSN2Agz7kWm3dCoGs6Et5U3DT/lu27nUe6whucByU6mFsE8F6kJ+Nw4xbDktTo0vBgtE5HphqT3+EwCJ8kwAAAAAAAAAAAABBEQQBwA=
+        apple_search_ads_iad:
+          $ref: '#/components/schemas/AppleSearchAdsIad' 
+        
+    CommonSessionBody:
+      description: "Common body for iOS and Android session reporting"
+      type: object
+      properties:
+        counter:
+          type: number
+          format: int64
+          description: |
+            A numeric value representing the number of times an app has been opened. 
+            Increment this counter at the beginning of each session
+          example: 5
+    CommonEventBody:
+      type: object
+      properties:
+        af_content_id:
+          minItems: 1
+          type: array
+          items:
+            maxLength: 50
+            minLength: 1
+            type: string
+        af_content_type:
+          minItems: 1
+          type: array
+          items:
+            maxLength: 50
+            minLength: 1
+            type: string
+        af_quantity:
+          minItems: 1
+          type: array
+          items:
+            type: number
+            format: double
+        af_order_id:
+          minItems: 1
+          type: array
+          items:
+            maxLength: 50
+            minLength: 1
+            type: string
+        af_revenue:
+          type: number
+          format: double
+        af_price:
+          type: number
+          format: double
+        af_currency:
+          type: string
+          enum:
+          - NZD
+          - SGD
+          - ANG
+          - MNT
+          - BIF
+          - BBD
+          - HUF
+          - ERN
+          - AZN
+          - BYN
+          - AOA
+          - PYG
+          - MYR
+          - GYD
+          - VUV
+          - SLL
+          - FKP
+          - DJF
+          - GNF
+          - MMK
+          - RSD
+          - CLF
+          - XDR
+          - ZAR
+          - TND
+          - PHP
+          - KGS
+          - XPD
+          - RON
+          - RUB
+          - KMF
+          - CHW
+          - SCR
+          - GIP
+          - XBC
+          - MXV
+          - XXX
+          - TRY
+          - UYU
+          - XCD
+          - FJD
+          - GHS
+          - MVR
+          - AWG
+          - UGX
+          - TOP
+          - CVE
+          - MKD
+          - COP
+          - CUC
+          - GTQ
+          - KZT
+          - MXN
+          - MGA
+          - AUD
+          - BDT
+          - ISK
+          - KRW
+          - DZD
+          - OMR
+          - ZMW
+          - MOP
+          - CUP
+          - JPY
+          - SHP
+          - VES
+          - LSL
+          - ETB
+          - BWP
+          - MAD
+          - AED
+          - NGN
+          - BRL
+          - XTS
+          - GEL
+          - IDR
+          - EUR
+          - GBP
+          - WST
+          - UYI
+          - XAF
+          - SZL
+          - XOF
+          - SEK
+          - UZS
+          - KES
+          - KYD
+          - ILS
+          - KWD
+          - NPR
+          - MRU
+          - BZD
+          - QAR
+          - UAH
+          - XSU
+          - BTN
+          - HTG
+          - DKK
+          - USN
+          - VND
+          - SBD
+          - SSP
+          - STN
+          - JMD
+          - IQD
+          - LBP
+          - XPT
+          - HRK
+          - HKD
+          - JOD
+          - PAB
+          - CDF
+          - XAU
+          - BAM
+          - CNY
+          - SOS
+          - XPF
+          - GMD
+          - DOP
+          - XAG
+          - KPW
+          - BOB
+          - BHD
+          - LRD
+          - BGN
+          - AMD
+          - CZK
+          - CAD
+          - LAK
+          - PLN
+          - LKR
+          - XUA
+          - UYW
+          - MWK
+          - PGK
+          - YER
+          - PEN
+          - KHR
+          - RWF
+          - BSD
+          - XBA
+          - AFN
+          - ZWL
+          - LYD
+          - TMT
+          - HNL
+          - TWD
+          - XBB
+          - IRR
+          - MUR
+          - BOV
+          - THB
+          - ALL
+          - XBD
+          - TJS
+          - SDG
+          - BMD
+          - CRC
+          - USD
+          - NOK
+          - SRD
+          - MZN
+          - CLP
+          - SYP
+          - TZS
+          - EGP
+          - COU
+          - ARS
+          - MDL
+          - INR
+          - CHE
+          - SAR
+          - PKR
+          - TTD
+          - NIO
+          - BND
+          - NAD
+          - SVC
+          - CHF
+      description: Use this JSON to report predefined event parameters
+      example:
+        af_content_id:
+        - "1410642545964326913"
+        af_content_type:
+        - fitted caps
+        af_quantity:
+        - 1
+        af_order_id:
+        - "1410642545964326913"
+        af_revenue: 1.99
+        af_price: 2.456
+        af_currency: MYR
+        
+    CommonBody:
+      type: object
+      required:
+        - advertiser_id_enabled
+        - device_ids
+        - device_language
+        - device_model
+        - device_os_version
+        - download_timestamp
+        - timestamp
+      properties:
+        timestamp:
+          type: string
+          description: |
+            Event timestamp. For install, it represents the first app launch timestamp. 
+            Report this time in Unix time (UTC) Epoch in milliseconds.
+          example: 1604503583337 
+        download_timestamp:
+          type: number
+          format: int64
+          description: |
+            Represents the time the app was downloaded on the device. 
+            Report this time in Unix time (UTC) Epoch in milliseconds.
+          example: 1604503583337
+        device_os_version:
+          type: string
+          description: "The Device’s os version"
+          example: "10.3.3"
+        device_model:
+          type: string
+          description: "The Device’s model"
+          example: "iPhone12,5"
+        device_language:
+          type: string
+          description: "The Device’s language. Shall include both the language code and the country code"
+          example: "en-US"
+        device_ids:
+            type: array
+            description: |
+              Use this Json Json array to pass device identifiers.
+              Supported device identifiers are: 
+              * install_id - An installation id that uniquely identifies an installation on a device. Expected format - String (hexadecimal only )
+              * custom_device_id - an “internal” custom identifier that uniquely identifies a device. Expected format - String (hexadecimal only )
+              * idfa - Id for advertisers
+              * idfv - Id for vendors
+            example:
+            - type: rida
+              value: fa73d67d-f55c-5af3-883a-726253dc7d0e
+            - type: tifa
+              value: 045f4137-57b7-45e6-8a45-c303101a086a
+            items:
+              required:
+              - type
+              - value
+              type: object
+              properties:
+                  type:
+                    type: string
+                    enum: [tifa, rida]
+                    description: "Device identifier type"
+                  value:
+                    type: string
+                    format: uuid
+                    description: "Device identifier"
+        advertiser_id_enabled:
+          type: boolean
+          description: |
+            Use this flag to indicate whether the user opted out sharing of idfa.
+            true = User agreed to share the idfa. (relevant for ios version lower than 14)
+            false = User set his device for LAT (Limited Ad Tracking) 
+        request_id:
+          type: string
+          format: uuid
+          description: "An id that uniquely identifies a request"
+          example: "71dad7da-7926-40d8-9b15-b94a6d46e15a"
+        customer_user_id:
+          type: string
+          description: "Use this parameter to report the user identifier as set in the advertiser's system"
+          example: "15667737-366d-4994-ac8b-653fe6b2be4a"
+        app_version:
+          type: string
+          description: "The app version name"
+          example: "1.0.5"
+        custom_data:
+          type: object
+          additionalProperties: {}
+          description: A custom parameter defined by the advertiser to add additional customized info to the event message
+        custom_dimension:
+          type: string
+          description: A custom parameter defined by the advertiser that is maintained through all LTV activities 
+    ReferrerElement:
+      type: object
+      required:
+        - click_timestamp
+        - install_begin_timestamp
+        - referrer
+        - source
+        - type
+      properties:
+        source:
+          type: string
+          description: Store name
+          example: huawei
+          enum:
+          - huawei
+          - samsung
+          - google
+        type:
+          type: string
+          description: Type of source
+          example: store
+          enum:
+          - store
+        click_timestamp:
+          minimum: 0
+          type: integer
+          description: The device click timestamp that redirected to the store
+          format: int64
+          example: 1592581443
+        install_begin_timestamp:
+          minimum: 0
+          type: integer
+          description: The device install begin timestamp
+          format: int64
+          example: 1592581443
+        referrer:
+          maxLength: 1024
+          minLength: 1
+          type: string
+          description: Referral string that was passed to store at click time
+          example: af_tranid=0Fs6FeK-EnClJ7XPEtx0eg&pid=partner_int
+        click_server_timestamp:
+          minimum: 0
+          type: integer
+          description: The google server click timestamp that redirected to the store
+          format: int64
+          example: 1592581443
+        install_begin_server_timestamp:
+          minimum: 0
+          type: integer
+          description: The google server install begin timestamp
+          format: int64
+          example: 1592581443
+    
+    AppleSearchAdsIad:
+      type: object
+      properties:
+        iad-lineitem-id:
+          type: string
+          example: "15307675"
+        iad-keyword:
+          type: string
+          example: "keyword1 keyword2"
+        iad-org-name:
+          type: string
+          example: "Org Name"
+        iad-conversion-date:
+          type: string
+          example: "2016-10-06T04:06:27Z"
+        iad-attribution:
+          type: string
+          example: "true"
+        iad-adgroup-name:
+          type: string
+          example: "US-iOS-campaign-Exact"
+        iad-campaign-id:
+          type: string
+          example: "15292426"
+        iad-adgroup-id:
+          type: string
+          example: "15307675"
+        iad-lineitem-name:
+          type: string
+          example: "US-iOS-campaign-Name"
+        iad-campaign-name:
+          type: string
+          example: "US-iOS-campaign"
+        iad-click-date:
+          type: string
+          example: "2016-11-29T04:05:50Z"
+    
+  
+           
