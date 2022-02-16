@@ -7,7 +7,7 @@ servers:
 security:
 - ApiKeyAuth: []
 paths:
-  /installs/android/{app_id}:
+  /android/installs/{app_id}:
     post:
       tags:
       - Android installs
@@ -32,16 +32,12 @@ paths:
           $ref: '#/components/responses/BadRequest'
         401:
           $ref: '#/components/responses/AuthenticationFailed'
-        404:
-          $ref: '#/components/responses/AppNotFound'
-        501:
-          $ref: '#/components/responses/NotImplemented'
-        503:
-          $ref: '#/components/responses/ServiceUnavailable'
-        504:
-          $ref: '#/components/responses/GatewayTimeout'
+        403:
+          $ref: '#/components/responses/UnauthorizedRequest'
+        500:
+          $ref: '#/components/responses/InternalServerError'
 
-  /sessions/android/{app_id}:
+  /android/sessions/{app_id}:
     post:
       tags:
       - Android sessions
@@ -66,16 +62,41 @@ paths:
           $ref: '#/components/responses/BadRequest'
         401:
           $ref: '#/components/responses/AuthenticationFailed'
-        404:
-          $ref: '#/components/responses/AppNotFound'
-        501:
-          $ref: '#/components/responses/NotImplemented'
-        503:
-          $ref: '#/components/responses/ServiceUnavailable'
-        504:
-          $ref: '#/components/responses/GatewayTimeout'
+        403:
+          $ref: '#/components/responses/UnauthorizedRequest'
+        500:
+          $ref: '#/components/responses/InternalServerError'
 
-  /installs/ios/{app_id}:
+  /android/inapps/{app_id}:
+    post:
+      tags:
+      - Android in-app events
+      summary: Android in-app events
+      description: TBA
+      parameters:
+        - $ref: '#/components/parameters/AppId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/CommonBody'
+              - $ref: '#/components/schemas/AndroidCommonBody'
+              - $ref: '#/components/schemas/CommonEventBody'
+      responses:
+        200:
+          $ref: '#/components/responses/Success'
+        400:
+          $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/AuthenticationFailed'
+        403:
+          $ref: '#/components/responses/UnauthorizedRequest'
+        500:
+          $ref: '#/components/responses/InternalServerError'
+
+  /ios/installs/{app_id}:
     post:
       tags:
       - iOS installs
@@ -91,8 +112,8 @@ paths:
             schema:
               allOf:
               - $ref: '#/components/schemas/CommonBody'
-              - $ref : '#/components/schemas/iosCommonBody'
-              - $ref : '#/components/schemas/iosMeasureBody'
+              - $ref: '#/components/schemas/iosCommonBody'
+              - $ref: '#/components/schemas/iosMeasureBody'
                 
       responses:
         200:
@@ -101,16 +122,12 @@ paths:
           $ref: '#/components/responses/BadRequest'
         401:
           $ref: '#/components/responses/AuthenticationFailed'
-        404:
-          $ref: '#/components/responses/AppNotFound'
-        501:
-          $ref: '#/components/responses/NotImplemented'
-        503:
-          $ref: '#/components/responses/ServiceUnavailable'
-        504:
-          $ref: '#/components/responses/GatewayTimeout'
+        403:
+          $ref: '#/components/responses/UnauthorizedRequest'
+        500:
+          $ref: '#/components/responses/InternalServerError'
   
-  /sessions/ios/{app_id}:
+  /ios/sessions/{app_id}:
     post:
       tags:
       - iOS sessions
@@ -135,15 +152,40 @@ paths:
           $ref: '#/components/responses/BadRequest'
         401:
           $ref: '#/components/responses/AuthenticationFailed'
-        404:
-          $ref: '#/components/responses/AppNotFound'
-        501:
-          $ref: '#/components/responses/NotImplemented'
-        503:
-          $ref: '#/components/responses/ServiceUnavailable'
-        504:
-          $ref: '#/components/responses/GatewayTimeout'
-
+        403:
+          $ref: '#/components/responses/UnauthorizedRequest'
+        500:
+          $ref: '#/components/responses/InternalServerError'
+  /ios/inapps/{app_id}:
+    post:
+      tags:
+      - iOS in-apps events
+      summary: iOS in-apps events
+      description: To properly measure installs with AppsFlyer, it is required that
+        the following API call be made upon first app launch
+      parameters:
+        - $ref: '#/components/parameters/AppId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/CommonBody'
+              - $ref: '#/components/schemas/iosCommonBody'
+              - $ref: '#/components/schemas/CommonEventBody'
+                
+      responses:
+        200:
+          $ref: '#/components/responses/Success'
+        400:
+          $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/AuthenticationFailed'
+        403:
+          $ref: '#/components/responses/UnauthorizedRequest'
+        500:
+          $ref: '#/components/responses/InternalServerError'
 components:
   securitySchemes:
     ApiKeyAuth:
@@ -195,6 +237,15 @@ components:
             example: {
               message: "Authentication failed"
             }
+    UnauthorizedRequest:
+      description: In case app traffic should be blocked due to Zero package limit.
+      content:
+        application/json:
+            schema:
+              $ref: '#/components/schemas/Error' 
+            example: {
+              message: "Blocked due to Zero package limit."
+            }
     AppNotFound:
       description: Application ID not found.
       content:
@@ -203,6 +254,15 @@ components:
               $ref: '#/components/schemas/Error' 
             example: {
               message: "Application ID not found"
+            }
+    InternalServerError:
+      description: Internal Server Error. 
+      content: 
+        application/json:
+            schema:
+              $ref: '#/components/schemas/Error' 
+            example: {
+              message: "Internal Server Error"
             }
     NotImplemented:
       description: Not implmented. 
@@ -214,7 +274,7 @@ components:
               message: "Not implmented"
             }
     ServiceUnavailable:
-      description: Service Unavailable. ELB (Amazon Load-balancer) service unavailable.
+      description: Service Unavailable.
       content:
         application/json:
             schema:
@@ -223,7 +283,7 @@ components:
               message: "Service unavailable"
             }
     GatewayTimeout:
-      description: Gateway Timeout. ELB (Amazon Load-balancer) service unavailable.
+      description: Gateway Timeout. 
       content: 
         application/json:
             schema:
@@ -275,7 +335,6 @@ components:
           description: The full deeplink URL
           example: https://attr.onelink.me/zUt1/67abab92
         referrers:
-          minItems: 1
           type: array
           description: A JSON array representing multiple store referrers
             data
@@ -642,6 +701,8 @@ components:
         custom_dimension:
           type: string
           description: A custom parameter defined by the advertiser that is maintained through all LTV activities 
+        sharing_filter:
+          $ref: '#/components/schemas/SharingFilter'
     ReferrerElement:
       type: object
       required:
@@ -732,6 +793,30 @@ components:
         iad-click-date:
           type: string
           example: "2016-11-29T04:05:50Z"
-    
-  
-           
+    SharingFilter:
+      description: |
+        AppsFlyer’s *sharing_filter* flag lets you block
+        an event from being shared with ad networks and other 3rd
+        party integrations. 
+        This functionality allows you to protect
+        user-level data that you don’t want to share with 3rd parties.
+        It can be due to privacy policies such as CCPA or GDPR, user
+        opt-out mechanism and others.
+        The filter flag is an optional
+        parameter that can be added to any event that is sent to AppsFlyer
+        using the SDK-Less API."
+      type: array
+      items:
+        type: string
+        minLength: 1
+      minItems: 1
+      oneOf:
+      - type: array
+        items:
+          type: string
+          minLength: 1
+        minItems: 1
+      - type: string 
+        enum: ["all"]
+      example:
+      - all
