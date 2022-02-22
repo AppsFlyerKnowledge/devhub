@@ -126,8 +126,8 @@ components:
               af_campaign_type:
                 type: string
                 enum:
-                  - ua
-                  - retargeting
+                  - USER_ACQUISITION
+                  - RETARGETING
                 description: "Campaign type"
               af_prt:
                 type: string
@@ -197,12 +197,14 @@ components:
                 type: string
                 maxLength: 64
                 description: "The device’s model"
+                example: “SM-S115DL”
               af_os_version:
                 type: string
                 maxLength: 12
                 description: |
                   The device’s os_version.
                   Only digits and dots allowed
+                example: "8.1.0"
               af_device_ids:
                   type: array
                   description: A vector of the different device IDs. Can be either the Roku ID (RIDA) or a custom ID
@@ -231,6 +233,12 @@ components:
                 description: |
                   The device’s IP the agent sent in its request to the partner’s server.
                   [IPv6 or IPv4]. For, IPv6,values must be the short version (according to RFC5952) and URL Encoded
+                example: "14.89.104.36"
+              af_user_agent:
+                type: string
+                maxLength: 256 #TODO - validate this value
+                description: The Device’s User Agent
+                example: "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.121 Safari/537.36 CrKey/1.0.999999 "
 
   responses:  
     Success:
