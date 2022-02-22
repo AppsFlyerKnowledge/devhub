@@ -7,7 +7,32 @@ servers:
 paths:
   /{onelink-id}:
     post:
+      tags: 
+      - OneLink REST API
       summary: Create OneLink attribution link
+      description: |
+        # Example:
+        Feed Me, a grocery delivery service, 
+        wants to send a personalized link via SMS to existing customers to
+        encourage them to download the Feed Me app and buy bananas. 
+        The developer writes a program to scan Feed Me's database that uses each line of data
+        to create OneLink custom attribution links. The following JSON displays data 
+        in the body params that are used to create a OneLink custom attribution link for a Canadian user."
+        ```
+        {
+          "af_ad": "yellow_bananas",
+          "af_adset": "my_adset",
+          "af_android_url": "https://feedme.ca/buybananas",
+          "af_channel": "my_channel",
+          "af_dp": "afbasicapp://mainactivity",
+          "af_ios_url": "https://feedme.ca/buybananas",
+          "c": "my_campaign",
+          "deep_link_value": "bananas",
+          "deep_link_sub1": 10,
+          "is_retargeting": true,
+          "pid": "my_media_source_SMS"
+        }
+        ```
       operationId: create-onelink-attribution-link
       parameters:
         - name: onelink-id
@@ -15,8 +40,9 @@ paths:
           description: Get this from the person using the AppsFlyer dashboard. Taken from the OneLink template screen
           schema:
             type: string
-            default: A1b3
+            example: A1b3
           required: true
+
       requestBody:
         content:
           application/json:
@@ -28,40 +54,77 @@ paths:
                 brand_domain:
                   type: string
                   description: 'Only use this param and request it in the payload if: 1) The Branded Links feature is enabled in your account, and 2) The branded link is configured in your account. If these conditions are not met, do not use this param, as the API call will not work.'
-                  default: mybranded.com
+                  example: mybranded.com
                 ttl:
                   type: string
                   description: 'Time to Live for the full attribution link. Default is 31 days. Value can be specified in days (default), minutes or hours (for example, 10m, 20h, 14d).'
-                  default: 25d
+                  example: 25d
                 data:
                   type: string
                   description: 'JSON format of the query parameters following the AppsFlyer macros for attribution links. **Note**: The media source (pid) parameter is mandatory.'
-                  default: '{"pid": "my_media_source_SMS", "c": "my_campaign" }'
                   format: json
+                  example: '{"pid": "my_media_source_SMS", "c": "my_campaign" }'
       responses:
         '200':
-          description: '200'
+          description: 'The link was created/updated successfully'
           content:
             application/json:
+              schema:
+                type: string
+                example: '"https://myapp.onelink.me/abc123/qwer9876"'
               examples:
                 Result:
                   value: 'https://myapp.onelink.me/abc123/qwer9876'
+              
         '400':
-          description: '400'
+          description: 'Bad request'
           content:
             application/json:
+              schema:
+                description: "error message"
+                type: string
+                example: '"Data sent exceeds limit"'
               examples:
                 API limit reached:
-                  value: '{ error : "Data sent exceeds limit" }'
+                  value: Data sent exceeds limit
+                Invalid/no data in request:
+                  value: Invalid/no data in request
+                Invalid shortlink-id/subdomain:
+                  value: Subdomain undefined / Invalid Shortlink ID
         '401':
-          description: '401'
+          description: 'Unauthorized'
           content:
             application/json:
+              schema:
+                type: string
+                example: '"Authentication Failed"'
               examples:
                 UNAUTHORIZED:
-                  value: '{ error : "Authentication Failed" }'
+                  value: Authentication Failed
+        '409':
+          description: 'the provided shortlink-id already exists for this template'
+          content:
+            application/json:
+              schema:
+                type: string
+                example: '"Shortlink ID already in use"'
+              examples:
+                the provided shortlink-id already exists for this template:
+                  value: Shortlink ID already in use
+        '429':
+          description: 'Client has reached its API limit calls'
+          content:
+            application/json:
+              schema:
+                type: string
+                example: '"API call failed on throttle limit"'
+              examples:
+                Client has reached its API limit calls:
+                  value: API call failed on throttle limit
       deprecated: false
     get:
+      tags: 
+      - OneLink REST API
       summary: Get OneLink attribution link
       operationId: get-onelink-attribution-link
       parameters:
@@ -70,42 +133,62 @@ paths:
           description: Get this from the person using the AppsFlyer dashboard. Taken from the OneLink template screen
           schema:
             type: string
-            default: A1b3
+            example: A1b3
           required: true
         - name: id
           in: query
           description: 'The ID of the short OneLink query params. For example, for the following OneLink attribution link: myapp.onelink.me/abc123/qwer9876 , the shortlink-id is qwer9876'
           schema:
             type: string
-            default: a1b2e3h5
+            example: a1b2e3h5
           required: true
       responses:
         '200':
-          description: '200'
+          description: 'Ok'
           content:
             application/json:
+              schema:
+                description: "The link's parameters"
+                type: string
+                format: json
+                example: '{"pid": "my_media_source_SMS", "c": "my_campaign" }'
               examples:
-                Result:
-                  value: |-
-                    { "pid": "sms-offer"
-                    "c": "april-coupon"
-                    }
-        '401':
-          description: '401'
+                Basic parameters:
+                  value: {"pid": "my_media_source_SMS", "c": "my_campaign" }
+        '400':
+          description: 'Invalid shortlink-id/subdomain'
           content:
             application/json:
+              schema:
+                type: string
+                example: '"Subdomain undefined / Invalid Shortlink ID"'
+              examples:
+                Invalid shortlink-id/subdomain:
+                  value: Subdomain undefined / Invalid Shortlink ID
+        '401':
+          description: 'Unauthorized'
+          content:
+            application/json:
+              schema:
+                type: string
+                example: '"Authentication Failed"'
               examples:
                 UNAUTHORIZED:
-                  value: '{ error : "Authentication Failed" }'
+                  value: Authentication Failed
         '404':
-          description: '404'
+          description: 'The link doesn’t exist'
           content:
             application/json:
+              schema:
+                type: string
+                example: '"Not Found"'
               examples:
-                Shortlink record not found:
+                The link doesn’t exist:
                   value: Not Found
       deprecated: false
     put:
+      tags: 
+      - OneLink REST API
       summary: Update OneLink attribution link
       operationId: update-onelink-attribution-link
       parameters:
@@ -114,14 +197,14 @@ paths:
           description: Get this from the person using the AppsFlyer dashboard. Taken from the OneLink template screen
           schema:
             type: string
-            default: A1b2
+            example: A1b2
           required: true
         - name: id
           in: query
           description: 'The ID of the short OneLink query params. For example, for the following OneLink attribution link: myapp.onelink.me/abc123/qwer9876 , the shortlink-id is qwer9876'
           schema:
             type: string
-            default: a1b2e3h5
+            example: a1b2e3h5
           required: true
       requestBody:
         content:
@@ -133,34 +216,73 @@ paths:
               properties:
                 brand_domain:
                   type: string
-                  default: newbranded.com
+                  example: newbranded.com
                 ttl:
                   type: string
                   description: 'Time to Live for the full attribution link. value can be specified in days (default), minutes or hours (for example, 10m, 20h, 14d).'
-                  default: 22d
+                  example: 22d
                 data:
                   type: string
-                  default: '{"pid": "my_media_source_SMS", "c": "my_campaign" }'
+                  example: '{"pid": "my_media_source_SMS", "c": "my_campaign" }'
                   format: json
       responses:
         '200':
-          description: '200'
+          description: 'The link was created/updated successfully'
           content:
             application/json:
+              schema:
+                type: string
+                example: '"https://myapp.onelink.me/abc123/qwer9876"'
               examples:
                 Result:
                   value: 'https://myapp.onelink.me/abc123/qwer9876'
         '400':
-          description: '400'
+          description: 'Bad request'
           content:
             application/json:
+              schema:
+                description: "error message"
+                type: string
+                example: '"Data sent exceeds limit"'
               examples:
-                Data Error:
-                  value: ' { error : "Invalid/no data in request" }'
                 API limit reached:
-                  value: '{ error : "Data sent exceeds limit" }'
+                  value: Data sent exceeds limit
+                Invalid shortlink-id/subdomain:
+                  value: Subdomain undefined / Invalid Shortlink ID
+        '401':
+          description: 'Unauthorized'
+          content:
+            application/json:
+              schema:
+                type: string
+                example: '"Authentication Failed"'
+              examples:
+                UNAUTHORIZED:
+                  value: Authentication Failed
+        '404':
+          description: 'The link doesn’t exist'
+          content:
+            application/json:
+              schema:
+                type: string
+                example: '"Not Found"'
+              examples:
+                The link doesn’t exist:
+                  value: Not Found
+        '429':
+          description: 'Client has reached its API limit calls'
+          content:
+            application/json:
+              schema:
+                type: string
+                example: '"API call failed on throttle limit"'
+              examples:
+                Client has reached its API limit calls:
+                  value: API call failed on throttle limit
       deprecated: false
     delete:
+      tags: 
+      - OneLink REST API
       summary: Delete OneLink attribution link
       operationId: delete-onelink-attribution-link
       parameters:
@@ -169,35 +291,64 @@ paths:
           description: Get this from the person using the AppsFlyer dashboard. Taken from the OneLink template screen
           schema:
             type: string
-            default: A1b2
+            example: A1b2
           required: true
         - name: id
           in: query
           description: 'The ID of the short OneLink query params. For example, for the following OneLink attribution link: myapp.onelink.me/abc123/qwer9876 , the shortlink-id is qwer9876'
           schema:
             type: string
-            default: a1b2e3h5
+            example: a1b2e3h5
           required: true
       responses:
         '200':
-          description: '200'
+          description: 'The link was deleted successfully'
           content:
             application/json:
+              schema:
+                type: string
+                example: '"ok'
               examples:
                 Result:
-                  value: ok
-        '401':
-          description: '401'
+                  value: 'ok'
+        '400':
+          description: 'Invalid shortlink-id/subdomain'
           content:
             application/json:
+              schema:
+                type: string
+                example: '"Subdomain undefined / Invalid Shortlink ID"'
+              examples:
+                Invalid shortlink-id/subdomain:
+                  value: Subdomain undefined / Invalid Shortlink ID
+        '401':
+          description: 'Unauthorized'
+          content:
+            application/json:
+              schema:
+                type: string
+                example: '"Authentication Failed"'
               examples:
                 UNAUTHORIZED:
-                  value: '{ error : "Authentication Failed" }'
+                  value: Authentication Failed
         '404':
-          description: '404'
+          description: 'The link doesn’t exist'
           content:
             application/json:
+              schema:
+                type: string
+                example: '"Not Found"'
               examples:
-                Shortlink record not found:
+                The link doesn’t exist:
                   value: Not Found
+        '429':
+          description: 'Client has reached its API limit calls'
+          content:
+            application/json:
+              schema:
+                type: string
+                example: '"API call failed on throttle limit"'
+              examples:
+                Client has reached its API limit calls:
+                  value: API call failed on throttle limit
       deprecated: false
