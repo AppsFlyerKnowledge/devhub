@@ -177,9 +177,9 @@ components:
       required: true
       schema:
         type: string
-        enum: [iOS, Android]
+        enum: [smartcast, tizen]
       description: "The application platform"
-      example: "iOS"
+      example: "smartcast"
     AfMediaSource:
       name: af_media_source
       in: query
