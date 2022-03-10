@@ -19,22 +19,24 @@ paths:
         - $ref: '#/components/parameters/AfCampaignId'
         - $ref: '#/components/parameters/AfRequestId'
         - $ref: '#/components/parameters/AfCampaign'
+        - $ref: '#/components/parameters/AfAdSetId'
+        - $ref: '#/components/parameters/AfAdSet'
         - $ref: '#/components/parameters/AfAdId'
         - $ref: '#/components/parameters/AfAd'
         - $ref: '#/components/parameters/AfCampaignType'
         - $ref: '#/components/parameters/AfPrt'
         - $ref: '#/components/parameters/AfSiteId'
         - $ref: '#/components/parameters/AfSubSiteId'
-        - $ref: '#/components/parameters/AfNetworkTransactionId'
+        - $ref: '#/components/parameters/AfClickId'
         - $ref: '#/components/parameters/AflookbackWindow'
         - $ref: '#/components/parameters/AfAdPlacement'
         - $ref: '#/components/parameters/AfAdType'
         - $ref: '#/components/parameters/AfChannel'
-        - $ref: '#/components/parameters/AfSub1'
-        - $ref: '#/components/parameters/AfSub2'
-        - $ref: '#/components/parameters/AfSub3'
-        - $ref: '#/components/parameters/AfSub4'
-        - $ref: '#/components/parameters/AfSub5'
+        - $ref: '#/components/parameters/AfCustom1'
+        - $ref: '#/components/parameters/AfCustom2'
+        - $ref: '#/components/parameters/AfCustom3'
+        - $ref: '#/components/parameters/AfCustom4'
+        - $ref: '#/components/parameters/AfCustom5'
         - $ref: '#/components/parameters/AfModel'
         - $ref: '#/components/parameters/AfOsVersion'
         - $ref: '#/components/parameters/AfDeviceIdType'
@@ -93,22 +95,24 @@ paths:
         - $ref: '#/components/parameters/AfCampaignId'
         - $ref: '#/components/parameters/AfRequestId'
         - $ref: '#/components/parameters/AfCampaign'
+        - $ref: '#/components/parameters/AfAdSetId'
+        - $ref: '#/components/parameters/AfAdSet'
         - $ref: '#/components/parameters/AfAdId'
         - $ref: '#/components/parameters/AfAd'
         - $ref: '#/components/parameters/AfCampaignType'
         - $ref: '#/components/parameters/AfPrt'
         - $ref: '#/components/parameters/AfSiteId'
         - $ref: '#/components/parameters/AfSubSiteId'
-        - $ref: '#/components/parameters/AfNetworkTransactionId'
+        - $ref: '#/components/parameters/AfClickId'
         - $ref: '#/components/parameters/AflookbackWindow'
         - $ref: '#/components/parameters/AfAdPlacement'
         - $ref: '#/components/parameters/AfAdType'
         - $ref: '#/components/parameters/AfChannel'
-        - $ref: '#/components/parameters/AfSub1'
-        - $ref: '#/components/parameters/AfSub2'
-        - $ref: '#/components/parameters/AfSub3'
-        - $ref: '#/components/parameters/AfSub4'
-        - $ref: '#/components/parameters/AfSub5'
+        - $ref: '#/components/parameters/AfCustom1'
+        - $ref: '#/components/parameters/AfCustom2'
+        - $ref: '#/components/parameters/AfCustom3'
+        - $ref: '#/components/parameters/AfCustom4'
+        - $ref: '#/components/parameters/AfCustom5'
         - $ref: '#/components/parameters/AfModel'
         - $ref: '#/components/parameters/AfOsVersion'
         - $ref: '#/components/parameters/AfDeviceIdType'
@@ -204,6 +208,18 @@ components:
       required: false
       schema: 
         $ref: '#/components/schemas/AfCampaign'
+    AfAdSet:
+      name: af_adset
+      in: query
+      required: false
+      schema: 
+        $ref: '#/components/schemas/AfAdSet'
+    AfAdSetId:
+      name: af_adset_id
+      in: query
+      required: false
+      schema: 
+        $ref: '#/components/schemas/AfAdSetId'
     AfAdId:
       name: af_ad_id
       in: query
@@ -240,12 +256,12 @@ components:
       required: false
       schema: 
         $ref: '#/components/schemas/AfSubSiteId'
-    AfNetworkTransactionId:
-      name: af_network_transaction_id
+    AfClickId:
+      name: af_click_id
       in: query
       required: false
       schema: 
-        $ref: '#/components/schemas/AfNetworkTransactionId'
+        $ref: '#/components/schemas/AfClickId'
     AflookbackWindow:
       name: af_lookback_window
       in: query
@@ -270,36 +286,36 @@ components:
       required: false
       schema: 
         $ref: '#/components/schemas/AfChannel'
-    AfSub1:
-      name: af_sub1
+    AfCustom1:
+      name: af_custom1
       in: query
       required: false
       schema: 
-        $ref: '#/components/schemas/AfSub'
-    AfSub2:
-      name: af_sub2
+        $ref: '#/components/schemas/AfCustom'
+    AfCustom2:
+      name: af_custom2
       in: query
       required: false
       schema: 
-        $ref: '#/components/schemas/AfSub'
-    AfSub3:
-      name: af_sub3
+        $ref: '#/components/schemas/AfCustom'
+    AfCustom3:
+      name: af_custom3
       in: query
       required: false
       schema: 
-        $ref: '#/components/schemas/AfSub'
-    AfSub4:
-      name: af_sub4
+        $ref: '#/components/schemas/AfCustom'
+    AfCustom4:
+      name: af_custom4
       in: query
       required: false
       schema: 
-        $ref: '#/components/schemas/AfSub'
-    AfSub5:
-      name: af_sub5
+        $ref: '#/components/schemas/AfCustom'
+    AfCustom5:
+      name: af_custom5
       in: query
       required: false
       schema: 
-        $ref: '#/components/schemas/AfSub'
+        $ref: '#/components/schemas/AfCustom'
     AfModel:
       name: af_model
       in: query
@@ -358,6 +374,10 @@ components:
                 $ref: '#/components/schemas/AfRequestId'
               af_campaign:
                 $ref: '#/components/schemas/AfCampaign'
+              af_adset_id:
+                $ref: '#/components/schemas/AfAdSetId'
+              af_adset:
+                $ref: '#/components/schemas/AfAdSet'
               af_ad_id:
                 $ref: '#/components/schemas/AfAdId'
               af_ad:
@@ -370,8 +390,8 @@ components:
                 $ref: '#/components/schemas/AfSiteId'
               af_sub_siteid:
                 $ref: '#/components/schemas/AfSubSiteId'
-              af_network_transaction_id:
-                $ref: '#/components/schemas/AfNetworkTransactionId'
+              af_click_id:
+                $ref: '#/components/schemas/AfClickId'
               af_lookback_window:
                 $ref: '#/components/schemas/AflookbackWindow'
               af_ad_placement:
@@ -380,16 +400,16 @@ components:
                 $ref: '#/components/schemas/AfAdType'
               af_channel:
                 $ref: '#/components/schemas/AfChannel'
-              af_sub1:
-                $ref: '#/components/schemas/AfSub'
-              af_sub2:
-                $ref: '#/components/schemas/AfSub'
-              af_sub3:
-                $ref: '#/components/schemas/AfSub'
-              af_sub4:
-                $ref: '#/components/schemas/AfSub'
-              af_sub5:
-                $ref: '#/components/schemas/AfSub'
+              af_custom1:
+                $ref: '#/components/schemas/AfCustom'
+              af_custom2:
+                $ref: '#/components/schemas/AfCustom'
+              af_custom3:
+                $ref: '#/components/schemas/AfCustom'
+              af_custom4:
+                $ref: '#/components/schemas/AfCustom'
+              af_custom5:
+                $ref: '#/components/schemas/AfCustom'
               af_model:
                 $ref: '#/components/schemas/AfModel'
               af_os_version:
@@ -488,6 +508,14 @@ components:
       type: string
       maxLength: 256
       description: "Campaign name"
+    AfAdSetId:
+      type: string
+      maxLength: 64
+      description: "Ad Set ID"
+    AfAdSet:
+      type: string
+      maxLength: 256
+      description: "Ad Set Name"
     AfAdId:
       type: string
       maxLength: 64
@@ -514,7 +542,7 @@ components:
       type: string
       maxLength: 24
       description: "Ad sub-network / Publisher ID"
-    AfNetworkTransactionId:
+    AfClickId:
       type: string
       maxLength: 256
       description: "Ad network unique transaction identifier"
@@ -546,7 +574,7 @@ components:
       type: string
       maxLength: 64
       description: "The media source channel through which the ads are distributed"
-    AfSub:
+    AfCustom:
       type: string
       maxLength: 256
       description: "Optional custom parameter defined by the advertiser"
