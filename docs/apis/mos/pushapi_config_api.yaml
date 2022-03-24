@@ -4,7 +4,6 @@ info:
   version: 1.0.0
 servers:
 - url: https://hq1.appsflyer.com/api/pushapi/v1.0/
-  description: Production server
 security:
   - Bearer-Authentication: []
 paths:
@@ -12,7 +11,7 @@ paths:
     get:
       tags:
         - Retrive fields per platform
-      description: Returns a list of the fields(string) for each platform
+      description: Returns a list of the available Message Fields(string[s]) for each platform
       parameters:
       - name: platform
         in: path
@@ -26,43 +25,93 @@ paths:
             - ios
             - windowsphone
       
+
+      
       responses:
         200:
           description: | 
-            Fields successfully retrieved. 
-            List of possiblly returned field names: http://river-settings.eu1.appsflyer.com:2335/pushapi/fields/2.0/ios 
+            Fields successfully retrieved.
+          headers:
+            deprecated:
+              description: is the api version deprecated 
+              schema:
+                type: boolean
+            deprecationDate:
+              description: deprecation date
+              schema:
+                type: string
+            sunsetDate:
+              description: sunset date
+              schema:
+                type: string
+            deprecationMessage:
+              description: deprecation message
+              schema:
+                type: string
           content:
             application/json:
+              example: [advertising_id, app_id]
               schema:
                 type: array
                 items:
                   type: string
         400:
-          description: Bad Type
+          description: |
+            Incorrect platform type specified. Enter a valid platform type.
+
+            Code:InvalidPlatform
+          headers:
+            deprecated:
+              description: is the api version deprecated 
+              schema:
+                type: boolean
+            deprecationDate:
+              description: deprecation date
+              schema:
+                type: string
+            sunsetDate:
+              description: sunset date
+              schema:
+                type: string
+            deprecationMessage:
+              description: deprecation message
+              schema:
+                type: string
           content:
             application/json:
                 schema:
                   $ref: '#/components/schemas/Error' 
                 example: {
-                  message: "Bad type"
-                }
+                            "headers": {
+                              "deprecated": false,
+                              "deprecationDate": null,
+                              "sunsetDate": null,
+                              "deprecationMessage": null
+                            },
+                            "body": {
+                              "error": {
+                                "status": 400,
+                                "code": "InvalidPlatform",
+                                "message": "Incorrect platform type specified. Enter a valid platform type.",
+                                "resource": "/validate-url",
+                                "requestId": "8a3f4fa6-a91c-11ec-b909-0242ac120002"
+                              }
+                            }
+                          }
         401:
           $ref: '#/components/responses/AuthenticationFailed'
-        501:
-          $ref: '#/components/responses/NotImplemented'
-        503:
-          $ref: '#/components/responses/ServiceUnavailable'
-        504:
-          $ref: '#/components/responses/GatewayTimeout'
-  /event-type/{type}:
+        403:
+          $ref: '#/components/responses/AccountProblem'
+
+  /event-type/{endpoint-type}:
     get:
       tags:
-        - Retrive list of skadnetwork event types
-      description: Returns a list of skadnetwork event types 
+        - Retrive event-types per endpoint-type
+      description: Returns a list of the available event types for the specified endpoint type
       parameters:
-      - name: type
+      - name: endpoint-type
         in: path
-        description: The type of events to list
+        description: The endpoint type
         example: "regular"
         required: true
         schema:
@@ -73,7 +122,7 @@ paths:
       responses:
         200:
           description: | 
-            Event type  successfully retrieved.
+            Event types successfully retrieved.
             List of possiblly returned event type:
             - regular: ["Install-in-app-events-organic", "install", "install-organic", "re-engagement", 
             "re-attribution", "reinstall", "reinstall-organic", "install-in-app-events", 
@@ -82,18 +131,36 @@ paths:
           content:
             application/json:
               schema:
+                example: ["in-app-event", "re-download", "Install", "Postbacks-copy", "postback"]
                 type: array
                 items:
                   type: string
         400:
-          description: Bad Type
+          description: |
+           Incorrect endpoint-type type specified. Enter a valid endpoint-type. 
+           
+           Code: InvalidEndpointType
+          headers:
+            deprecated:
+              description: is the api version deprecated? 
+              schema:
+                type: boolean
+            deprecationDate:
+              description: deprecation date
+              schema:
+                type: string
+            sunsetDate:
+              description: sunset date
+              schema:
+                type: string
+            deprecationMessage:
+              description: deprecation message
+              schema:
+                type: string
           content:
             application/json:
                 schema:
                   $ref: '#/components/schemas/Error' 
-                example: {
-                  message: "Bad type"
-                }
         401:
           $ref: '#/components/responses/AuthenticationFailed'
         501:
@@ -106,8 +173,8 @@ paths:
   /validate-url:
     post:
       tags:
-        - Validates URL
-      description: Validates URL
+        - URL Validation
+      description: Validates and tests URL to be used as a Push API endpoint
       requestBody:
         description: Body for validate url
         content:
@@ -121,23 +188,70 @@ paths:
                 url:
                   minLength: 5
                   maxLength: 2048
+                  example: http://some.url.com:40/dir
                   
 
       responses:
         200:
           description: URL validated successfully
-          content: {}
-        400:
-          description: Bad Type
+          headers:
+            deprecated:
+              description: is the api version deprecated? 
+              schema:
+                type: boolean
+            deprecationDate:
+              description: deprecation date
+              schema:
+                type: string
+            sunsetDate:
+              description: sunset date
+              schema:
+                type: string
+            deprecationMessage:
+              description: deprecation message
+              schema:
+                type: string
+          content:
+            application/json:
+                schema:
+                  $ref: '#/components/schemas/URLTestResponse' 
+                  
+        207: 
+          description: Request to test URL returned an error
+          headers:
+            deprecated:
+              description: is the api version deprecated? 
+              schema:
+                type: boolean
+            deprecationDate:
+              description: deprecation date
+              schema:
+                type: string
+            sunsetDate:
+              description: sunset date
+              schema:
+                type: string
+            deprecationMessage:
+              description: deprecation message
+              schema:
+                type: string
+          content:
+            application/json:
+                schema:
+                  $ref: '#/components/schemas/URLTestResponse'
+        422:
+          description: |
+            Your specified URL endpoint doesn't have a valid format.
+            
+            Code: InvalidURL
           content:
             application/json:
                 schema:
                   $ref: '#/components/schemas/Error' 
-                example: {
-                  message: "Bad type"
-                }
         401:
           $ref: '#/components/responses/AuthenticationFailed'
+        429:
+          $ref: '#/components/responses/RateLimited'
         501:
           $ref: '#/components/responses/NotImplemented'
         503:
@@ -180,16 +294,31 @@ paths:
           description: URL validated successfully
           content: {}
         400:
-          description: Bad Type
+          description: Invalid JSON format or no JSON found. Verify the content and resubmit.
           content:
             application/json:
                 schema:
                   $ref: '#/components/schemas/Error' 
-                example: {
-                  message: "Bad type"
-                }
         401:
           $ref: '#/components/responses/AuthenticationFailed'
+        403:
+          description: |
+            The app ID specified wasn't found. Check that the app ID is identical to that in AppsFlyer in your account.
+
+            Code: UnknownAppid
+          content:
+            application/json:
+                schema:
+                  $ref: '#/components/schemas/Error'
+        402:
+          description: |
+            The specified message type ({event-type} isn't part of your subscripton. Contact AppsFlyer support or your AppsFlyer account executive.
+
+            Code: MissingAsset
+          content:
+            application/json:
+                schema:
+                  $ref: '#/components/schemas/Error'
         501:
           $ref: '#/components/responses/NotImplemented'
         503:
@@ -214,16 +343,22 @@ paths:
           description: URL validated successfully
           content: {}
         400:
-          description: Bad Type
+          description: Invalid JSON format or no JSON found. Verify the content and resubmit.
           content:
             application/json:
                 schema:
                   $ref: '#/components/schemas/Error' 
-                example: {
-                  message: "Bad type"
-                }
         401:
           $ref: '#/components/responses/AuthenticationFailed'
+        403:
+          description: |
+            The app ID specified wasn't found. Check that the app ID is identical to that in AppsFlyer in your account.
+
+            Code: UnknownAppid
+          content:
+            application/json:
+                schema:
+                  $ref: '#/components/schemas/Error'
         501:
           $ref: '#/components/responses/NotImplemented'
         503:
@@ -234,9 +369,43 @@ components:
   responses:  
     Success:
       description: Request successful.
+      headers:
+        deprecated:
+          description: is the api version deprecated 
+          schema:
+            type: boolean
+        deprecationDate:
+          description: deprecation date
+          schema:
+            type: string
+        sunsetDate:
+          description: sunset date
+          schema:
+            type: string
+        deprecationMessage:
+          description: deprecation message
+          schema:
+            type: string
       content: {}
     BadRequest:
       description: Bad Request. The request message is not valid.
+      headers:
+        deprecated:
+          description: is the api version deprecated 
+          schema:
+            type: boolean
+        deprecationDate:
+          description: deprecation date
+          schema:
+            type: string
+        sunsetDate:
+          description: sunset date
+          schema:
+            type: string
+        deprecationMessage:
+          description: deprecation message
+          schema:
+            type: string
       content:
         application/json:
             schema:
@@ -246,15 +415,92 @@ components:
             }
     AuthenticationFailed:
       description: Authentication failed. The authentication token is not valid.
+      headers:
+        deprecated:
+          description: is the api version deprecated 
+          schema:
+            type: boolean
+        deprecationDate:
+          description: deprecation date
+          schema:
+            type: string
+        sunsetDate:
+          description: sunset date
+          schema:
+            type: string
+        deprecationMessage:
+          description: deprecation message
+          schema:
+            type: string
       content:
         application/json:
             schema:
               $ref: '#/components/schemas/Error' 
-            example: {
-              message: "Authentication failed"
-            }
+    RateLimited:
+      description: Authentication failed. The authentication token is not valid.
+      headers:
+        deprecated:
+          description: is the api version deprecated 
+          schema:
+            type: boolean
+        deprecationDate:
+          description: deprecation date
+          schema:
+            type: string
+        sunsetDate:
+          description: sunset date
+          schema:
+            type: string
+        deprecationMessage:
+          description: deprecation message
+          schema:
+            type: string
+      content:
+        application/json:
+            schema:
+              $ref: '#/components/schemas/Error' 
+    AccountProblem:
+      description: An account problem ocurred. Please contact your AppsFlyer account executive.
+      headers:
+        deprecated:
+          description: is the api version deprecated 
+          schema:
+            type: boolean
+        deprecationDate:
+          description: deprecation date
+          schema:
+            type: string
+        sunsetDate:
+          description: sunset date
+          schema:
+            type: string
+        deprecationMessage:
+          description: deprecation message
+          schema:
+            type: string
+      content:
+        application/json:
+            schema:
+              $ref: '#/components/schemas/Error' 
     WrongApiVersion:
       description: Wrong API version.
+      headers:
+        deprecated:
+          description: is the api version deprecated 
+          schema:
+            type: boolean
+        deprecationDate:
+          description: deprecation date
+          schema:
+            type: string
+        sunsetDate:
+          description: sunset date
+          schema:
+            type: string
+        deprecationMessage:
+          description: deprecation message
+          schema:
+            type: string
       content:
         application/json:
             schema:
@@ -264,6 +510,23 @@ components:
             }
     NotAuthorized:
       description: Not authorized for Push API.
+      headers:
+        deprecated:
+          description: is the api version deprecated 
+          schema:
+            type: boolean
+        deprecationDate:
+          description: deprecation date
+          schema:
+            type: string
+        sunsetDate:
+          description: sunset date
+          schema:
+            type: string
+        deprecationMessage:
+          description: deprecation message
+          schema:
+            type: string
       content:
         application/json:
             schema:
@@ -273,6 +536,23 @@ components:
             }
     AppNotFound:
       description: Application ID not found.
+      headers:
+        deprecated:
+          description: is the api version deprecated 
+          schema:
+            type: boolean
+        deprecationDate:
+          description: deprecation date
+          schema:
+            type: string
+        sunsetDate:
+          description: sunset date
+          schema:
+            type: string
+        deprecationMessage:
+          description: deprecation message
+          schema:
+            type: string
       content:
         application/json:
             schema:
@@ -281,7 +561,24 @@ components:
               message: "Application ID not found"
             }
     NotImplemented:
-      description: Not implmented. 
+      description: Not implmented.
+      headers:
+        deprecated:
+          description: is the api version deprecated 
+          schema:
+            type: boolean
+        deprecationDate:
+          description: deprecation date
+          schema:
+            type: string
+        sunsetDate:
+          description: sunset date
+          schema:
+            type: string
+        deprecationMessage:
+          description: deprecation message
+          schema:
+            type: string 
       content: 
         application/json:
             schema:
@@ -291,6 +588,23 @@ components:
             }
     ServiceUnavailable:
       description: Service Unavailable. ELB (Amazon Load-balancer) service unavailable.
+      headers:
+        deprecated:
+          description: is the api version deprecated 
+          schema:
+            type: boolean
+        deprecationDate:
+          description: deprecation date
+          schema:
+            type: string
+        sunsetDate:
+          description: sunset date
+          schema:
+            type: string
+        deprecationMessage:
+          description: deprecation message
+          schema:
+            type: string
       content:
         application/json:
             schema:
@@ -300,6 +614,23 @@ components:
             }
     GatewayTimeout:
       description: Gateway Timeout. ELB (Amazon Load-balancer) service unavailable.
+      headers:
+        deprecated:
+          description: is the api version deprecated 
+          schema:
+            type: boolean
+        deprecationDate:
+          description: deprecation date
+          schema:
+            type: string
+        sunsetDate:
+          description: sunset date
+          schema:
+            type: string
+        deprecationMessage:
+          description: deprecation message
+          schema:
+            type: string
       content: 
         application/json:
             schema:
@@ -314,19 +645,48 @@ components:
       description: "Authorization HTTP header containing API V2.0 token (Bearer token) is required.\n\n
         The admin [gets the V2 token in the dashboard](https://support.appsflyer.com/hc/en-us/articles/360004562377), go to your email address"
   schemas:
-    # Schema for error response body
-    Error:
+    URLTestResponse:
       type: object
       properties:
+        testedEndpointURLHTTPResponse:
+          type: integer
+      example: {testedEndpointURLHTTPResponse: 404}
+    # Schema for error response body
+    Error:
+      example: {
+                  "headers": {
+                    "deprecated": false,
+                    "deprecationDate": null,
+                    "sunsetDate": null,
+                    "deprecationMessage": null
+                  },
+                  "body": {
+                    "error": {
+                      "status": 400,
+                      "code": "SomeErrorCode",
+                      "message": "Some error message.",
+                      "resource": "/example-resource",
+                      "requestId": "8a3f4fa6-a91c-11ec-b909-0242ac120002"
+                    }
+                  }
+                }
+      type: object
+      properties:
+        status:
+          type: integer
+        code:
+          type: string
         message:
           type: string
-      required:
-        - message
+        resource:
+          type: string
+        requestId:
+          type: string
     Url:
       type: string
       minLength: 5
       maxLength: 2048
-      example: TODO XXX
+      example: http://some.url.com:40/dir
     Method:
       type: string
       enum:
@@ -842,4 +1202,4 @@ components:
           enum:
             - skadnetwork
           default: skadnetwork
-
+          
