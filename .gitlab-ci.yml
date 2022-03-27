@@ -1,0 +1,7 @@
+# Official framework image. Look for the different tagged releases at:
+# https://hub.docker.com/r/library/node/tags/
+image: node:16
+
+sync-via-rdme-pushapi-config:
+  script:
+    - npx -y rdme@7.0.1 openapi ./docs/apis/mos/pushapi_config_api.yaml --key=V9oyoCB8pLc8TzEn0kuDzV7wShmNlEn9 --id=6238552ac90926011752e49b
