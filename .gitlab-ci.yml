@@ -13,3 +13,8 @@ sync-via-rdme-onelink-api:
 sync-via-rdme-addapp-api:
   script:
     - npx -y rdme@7.0.1 openapi ./docs/apis/add-app/openapi.yaml --key=V9oyoCB8pLc8TzEn0kuDzV7wShmNlEn9 --id=60ffdc00f71e49000fe45cad
+
+sync-via-rdme-ctv-events-api:
+  script:
+    - npx -y rdme@7.0.1 openapi ./docs/apis/rta/ctv_events_api.yaml --key=V9oyoCB8pLc8TzEn0kuDzV7wShmNlEn9 --id=624c355032911400142d1aca
+
