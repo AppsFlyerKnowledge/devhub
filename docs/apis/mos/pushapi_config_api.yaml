@@ -11,7 +11,7 @@ paths:
     get:
       tags:
         - Message Fields
-      summary: Retrive per platform
+      summary: Retrieve per platform
       description: Returns a list of the available Message Fields(string[s]) for each platform
       parameters:
       - name: platform
@@ -106,7 +106,7 @@ paths:
     get:
       tags:
         - Event Types 
-      summary: Retrive per endpoint-type
+      summary: Retrieve per endpoint-type
       description: Returns a list of the available event types for the specified endpoint type
       parameters:
       - name: endpoint-type
