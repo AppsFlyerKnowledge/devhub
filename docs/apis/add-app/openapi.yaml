@@ -10,7 +10,7 @@ security:
   - bearerAuth: []
 tags:
   - name: Add app
-    description: 'Judi says Public API for adding a new app to AppsFlyer account'
+    description: 'Public API for adding a new app to AppsFlyer account'
 
 paths:
   /api/apps/v1/add_app:
@@ -19,7 +19,7 @@ paths:
         - 'Add app'
       summary: ''
       requestBody:
-        description: 'Judi says Use the examples below as a template for your request body'
+        description: 'Use the examples below as a template for your request body'
         content:
           application/json:
             schema:
