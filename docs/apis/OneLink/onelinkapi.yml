@@ -4,6 +4,8 @@ info:
   version: '1.0'
 servers:
   - url: 'https://onelink.appsflyer.com/shortlink/v1/'
+security:
+  - ApiKeyAuth: []
 paths:
   /{onelink-id}:
     post:
@@ -352,3 +354,13 @@ paths:
                 Client has reached its API limit calls:
                   value: API call failed on throttle limit
       deprecated: false
+
+components: 
+  securitySchemes:
+    ApiKeyAuth:        
+      type: apiKey
+      in: header       
+      name: authorization
+      description: |
+        OneLink REST API token for authentication.
+        [Get the API token in the Dashboard](https://support.appsflyer.com/hc/en-us/articles/360001250345-OneLink-API)
