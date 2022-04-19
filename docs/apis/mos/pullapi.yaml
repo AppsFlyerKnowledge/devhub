@@ -7,6 +7,7 @@ servers:
 security:
   - ApiKeyAuth: []
 paths:
+  ## Aggregate (user acquisition and retargeting)
   /{app-id}/partners_report/v5:
     get:
       tags:
@@ -27,7 +28,7 @@ paths:
         400:
           $ref: '#/components/responses/BadRequest' 
         401:
-          $ref: '#/components/responses/AuthenticationFailed' 
+          $ref: '#/components/responses/Unauthorized' 
         404:
           $ref: '#/components/responses/NotFound'
   /{app-id}/partners_by_day_report/v5:
@@ -50,7 +51,7 @@ paths:
         400:
           $ref: '#/components/responses/BadRequest' 
         401:
-          $ref: '#/components/responses/AuthenticationFailed' 
+          $ref: '#/components/responses/Unauthorized' 
         404:
           $ref: '#/components/responses/NotFound'
   /{app-id}/daily_report/v5:
@@ -73,7 +74,7 @@ paths:
         400:
           $ref: '#/components/responses/BadRequest' 
         401:
-          $ref: '#/components/responses/AuthenticationFailed' 
+          $ref: '#/components/responses/Unauthorized' 
         404:
           $ref: '#/components/responses/NotFound' 
   /{app-id}/geo_report/v5:
@@ -96,7 +97,7 @@ paths:
         400:
           $ref: '#/components/responses/BadRequest' 
         401:
-          $ref: '#/components/responses/AuthenticationFailed' 
+          $ref: '#/components/responses/Unauthorized' 
         404:
           $ref: '#/components/responses/NotFound'
   /{app-id}/geo_by_date/v5:
@@ -119,9 +120,556 @@ paths:
         400:
           $ref: '#/components/responses/BadRequest' 
         401:
-          $ref: '#/components/responses/AuthenticationFailed' 
+          $ref: '#/components/responses/Unauthorized' 
         404:
           $ref: '#/components/responses/NotFound'
+  ## Raw data reports (non-organic)
+  /{app-id}/installs_report/v5:
+    get:
+      tags:
+        - Raw data reports (non-organic)
+      summary: Installs
+      parameters:
+        - $ref: '#/components/parameters/AppId' 
+        - $ref: '#/components/parameters/FromDate'
+        - $ref: '#/components/parameters/ToDate'
+        - $ref: '#/components/parameters/MediaSource'
+        - $ref: '#/components/parameters/AttributionTouchType'
+        - $ref: '#/components/parameters/Currency'
+        - $ref: '#/components/parameters/ReAttribution'
+        - $ref: '#/components/parameters/TimeZone'
+        - $ref: '#/components/parameters/Geo'
+        - $ref: '#/components/parameters/MaximumRows'
+        - in: query
+          name: additional_fields
+          explode: false
+          schema:
+            type: array
+            items:
+              enum: ["blocked_reason_rule","store_reinstall","impressions","contributor3_match_type","custom_dimension","conversion_type","gp_click_time","match_type","mediation_network","oaid","deeplink_url","blocked_reason","blocked_sub_reason","gp_broadcast_referrer","gp_install_begin","campaign_type","custom_data","rejected_reason","device_download_time","keyword_match_type","contributor1_match_type","contributor2_match_type","device_model","monetization_network","segment","is_lat","gp_referrer","blocked_reason_value","store_product_page","device_category","app_type","rejected_reason_value","ad_unit","keyword_id","placement","network_account_id","install_app_store","amazon_aid","att"]
+      responses:
+        200:
+          $ref: '#/components/responses/Success'
+        400:
+          $ref: '#/components/responses/BadRequest' 
+        401:
+          $ref: '#/components/responses/Unauthorized' 
+        404:
+          $ref: '#/components/responses/NotFound' 
+  /{app-id}/in_app_events_reports/v5:
+    get:
+      tags:
+        - Raw data reports (non-organic)
+      summary: In-app events
+      parameters:
+        - $ref: '#/components/parameters/AppId' 
+        - $ref: '#/components/parameters/FromDate'
+        - $ref: '#/components/parameters/ToDate'
+        - $ref: '#/components/parameters/MediaSource'
+        - $ref: '#/components/parameters/AttributionTouchType'
+        - $ref: '#/components/parameters/Currency'
+        - $ref: '#/components/parameters/ReAttribution'
+        - $ref: '#/components/parameters/TimeZone'
+        - $ref: '#/components/parameters/Geo'
+        - $ref: '#/components/parameters/MaximumRows'
+        - in: query
+          name: additional_fields
+          explode: false
+          schema:
+            type: array
+            items:
+              enum: ["blocked_reason_rule","store_reinstall","impressions","contributor3_match_type","custom_dimension","conversion_type","gp_click_time","match_type","mediation_network","oaid","deeplink_url","blocked_reason","blocked_sub_reason","gp_broadcast_referrer","gp_install_begin","campaign_type","custom_data","rejected_reason","device_download_time","keyword_match_type","contributor1_match_type","contributor2_match_type","device_model","monetization_network","segment","is_lat","gp_referrer","blocked_reason_value","store_product_page","device_category","app_type","rejected_reason_value","ad_unit","keyword_id","placement","network_account_id","install_app_store","amazon_aid","att"]
+
+      responses:
+        200:
+          $ref: '#/components/responses/Success'
+        400:
+          $ref: '#/components/responses/BadRequest' 
+        401:
+          $ref: '#/components/responses/Unauthorized' 
+        404:
+          $ref: '#/components/responses/NotFound' 
+  /{app-id}/uninstall_events_reports/v5:
+    get:
+      tags:
+        - Raw data reports (non-organic)
+      summary: Uninstalls
+      parameters:
+        - $ref: '#/components/parameters/AppId' 
+        - $ref: '#/components/parameters/FromDate'
+        - $ref: '#/components/parameters/ToDate'
+        - $ref: '#/components/parameters/MediaSource'
+        - $ref: '#/components/parameters/AttributionTouchType'
+        - $ref: '#/components/parameters/Currency'
+        - $ref: '#/components/parameters/ReAttribution'
+        - $ref: '#/components/parameters/TimeZone'
+        - $ref: '#/components/parameters/Geo'
+        - $ref: '#/components/parameters/MaximumRows'
+        - in: query
+          name: additional_fields
+          schema:
+            type: array
+            items:
+              enum: ["blocked_reason_rule","store_reinstall","impressions","contributor3_match_type","gp_click_time","match_type","mediation_network","oaid","deeplink_url","blocked_reason","blocked_sub_reason","gp_broadcast_referrer","gp_install_begin","custom_data","rejected_reason","device_download_time","keyword_match_type","contributor1_match_type","contributor2_match_type","device_model","monetization_network","segment","is_lat","gp_referrer","blocked_reason_value","device_category","rejected_reason_value","ad_unit","keyword_id","placement","network_account_id","install_app_store","amazon_aid"]
+
+      responses:
+        200:
+          $ref: '#/components/responses/Success'
+        400:
+          $ref: '#/components/responses/BadRequest' 
+        401:
+          $ref: '#/components/responses/Unauthorized' 
+        404:
+          $ref: '#/components/responses/NotFound'
+  /{app-id}/reinstall/v5:
+    get:
+      tags:
+        - Raw data reports (non-organic)
+      summary: Reinstalls
+      parameters:
+        - $ref: '#/components/parameters/AppId' 
+        - $ref: '#/components/parameters/FromDate'
+        - $ref: '#/components/parameters/ToDate'
+        - $ref: '#/components/parameters/MediaSource'
+        - $ref: '#/components/parameters/AttributionTouchType'
+        - $ref: '#/components/parameters/Currency'
+        - $ref: '#/components/parameters/ReAttribution'
+        - $ref: '#/components/parameters/TimeZone'
+        - $ref: '#/components/parameters/Geo'
+        - $ref: '#/components/parameters/MaximumRows'
+        - in: query
+          name: additional_fields
+          schema:
+            type: array
+            items:
+              enum: ["blocked_reason_rule","store_reinstall","impressions","contributor3_match_type","custom_dimension","conversion_type","gp_click_time","match_type","mediation_network","oaid","deeplink_url","blocked_reason","blocked_sub_reason","gp_broadcast_referrer","gp_install_begin","campaign_type","custom_data","rejected_reason","device_download_time","keyword_match_type","contributor1_match_type","contributor2_match_type","device_model","monetization_network","segment","is_lat","gp_referrer","blocked_reason_value","store_product_page","device_category","app_type","rejected_reason_value","ad_unit","keyword_id","placement","network_account_id","install_app_store","amazon_aid","att"]
+      responses:
+        200:
+          $ref: '#/components/responses/Success'
+        400:
+          $ref: '#/components/responses/BadRequest' 
+        401:
+          $ref: '#/components/responses/Unauthorized' 
+        404:
+          $ref: '#/components/responses/NotFound'
+  ## Raw data reports (organic)
+  /{app-id}/organic_installs_report/v5:
+    get:
+      tags:
+        - Raw data reports (organic)
+      summary: Organic Installs
+      parameters:
+        - $ref: '#/components/parameters/AppId' 
+        - $ref: '#/components/parameters/FromDate'
+        - $ref: '#/components/parameters/ToDate'
+        - $ref: '#/components/parameters/MediaSource'
+        - $ref: '#/components/parameters/AttributionTouchType'
+        - $ref: '#/components/parameters/Currency'
+        - $ref: '#/components/parameters/TimeZone'
+        - $ref: '#/components/parameters/Geo'
+        - $ref: '#/components/parameters/MaximumRows'
+        - in: query
+          name: additional_fields
+          explode: false
+          schema:
+            type: array
+            items:
+              enum: ["blocked_reason_rule","store_reinstall","impressions","contributor3_match_type","custom_dimension","conversion_type","gp_click_time","match_type","mediation_network","oaid","deeplink_url","blocked_reason","blocked_sub_reason","gp_broadcast_referrer","gp_install_begin","campaign_type","custom_data","rejected_reason","device_download_time","keyword_match_type","contributor1_match_type","contributor2_match_type","device_model","monetization_network","segment","is_lat","gp_referrer","blocked_reason_value","device_category","app_type","rejected_reason_value","ad_unit","keyword_id","placement","network_account_id","install_app_store","amazon_aid","att"] 
+      responses:
+        200:
+          $ref: '#/components/responses/Success'
+        400:
+          $ref: '#/components/responses/BadRequest' 
+        401:
+          $ref: '#/components/responses/Unauthorized' 
+        404:
+          $ref: '#/components/responses/NotFound' 
+  /{app-id}/organic_in_app_events_reports/v5:
+    get:
+      tags:
+        - Raw data reports (organic)
+      summary: Organic In-app events
+      parameters:
+        - $ref: '#/components/parameters/AppId' 
+        - $ref: '#/components/parameters/FromDate'
+        - $ref: '#/components/parameters/ToDate'
+        - $ref: '#/components/parameters/MediaSource'
+        - $ref: '#/components/parameters/AttributionTouchType'
+        - $ref: '#/components/parameters/Currency'
+        - $ref: '#/components/parameters/ReAttribution'
+        - $ref: '#/components/parameters/TimeZone'
+        - $ref: '#/components/parameters/Geo'
+        - $ref: '#/components/parameters/MaximumRows'
+        - in: query
+          name: additional_fields
+          explode: false
+          schema:
+            type: array
+            items:
+              enum: ["blocked_reason_rule","store_reinstall","impressions","contributor3_match_type","custom_dimension","conversion_type","gp_click_time","match_type","mediation_network","oaid","deeplink_url","blocked_reason","blocked_sub_reason","gp_broadcast_referrer","gp_install_begin","campaign_type","custom_data","rejected_reason","device_download_time","keyword_match_type","contributor1_match_type","contributor2_match_type","device_model","monetization_network","segment","gp_referrer","blocked_reason_value","device_category","app_type","rejected_reason_value","ad_unit","keyword_id","placement","network_account_id","install_app_store","amazon_aid","att"] 
+      responses:
+        200:
+          $ref: '#/components/responses/Success'
+        400:
+          $ref: '#/components/responses/BadRequest' 
+        401:
+          $ref: '#/components/responses/Unauthorized' 
+        404:
+          $ref: '#/components/responses/NotFound' 
+  /{app-id}/organic_uninstall_events_reports/v5:
+    get:
+      tags:
+        - Raw data reports (organic)
+      summary: Organic Uninstalls
+      parameters:
+        - $ref: '#/components/parameters/AppId' 
+        - $ref: '#/components/parameters/FromDate'
+        - $ref: '#/components/parameters/ToDate'
+        - $ref: '#/components/parameters/MediaSource'
+        - $ref: '#/components/parameters/AttributionTouchType'
+        - $ref: '#/components/parameters/Currency'
+        - $ref: '#/components/parameters/ReAttribution'
+        - $ref: '#/components/parameters/TimeZone'
+        - $ref: '#/components/parameters/Geo'
+        - $ref: '#/components/parameters/MaximumRows'
+        - in: query
+          name: additional_fields
+          schema:
+            type: array
+            items:
+              enum: ["blocked_reason_rule","store_reinstall","impressions","contributor3_match_type","gp_click_time","match_type","mediation_network","oaid","deeplink_url","blocked_reason","blocked_sub_reason","gp_broadcast_referrer","gp_install_begin","custom_data","rejected_reason","device_download_time","keyword_match_type","contributor1_match_type","contributor2_match_type","device_model","monetization_network","segment","is_lat","gp_referrer","blocked_reason_value","device_category","rejected_reason_value","ad_unit","keyword_id","placement","network_account_id","install_app_store","amazon_aid"] 
+      responses:
+        200:
+          $ref: '#/components/responses/Success'
+        400:
+          $ref: '#/components/responses/BadRequest' 
+        401:
+          $ref: '#/components/responses/Unauthorized' 
+        404:
+          $ref: '#/components/responses/NotFound'
+  /{app-id}/reinstall_organic/v5:
+    get:
+      tags:
+        - Raw data reports (non-organic)
+      summary: Organic Reinstalls
+      parameters:
+        - $ref: '#/components/parameters/AppId' 
+        - $ref: '#/components/parameters/FromDate'
+        - $ref: '#/components/parameters/ToDate'
+        - $ref: '#/components/parameters/MediaSource'
+        - $ref: '#/components/parameters/AttributionTouchType'
+        - $ref: '#/components/parameters/Currency'
+        - $ref: '#/components/parameters/ReAttribution'
+        - $ref: '#/components/parameters/TimeZone'
+        - $ref: '#/components/parameters/Geo'
+        - $ref: '#/components/parameters/MaximumRows'
+        - in: query
+          name: additional_fields
+          schema:
+            type: array
+            items:
+              enum: ["blocked_reason_rule","store_reinstall","impressions","contributor3_match_type","custom_dimension","conversion_type","gp_click_time","match_type","mediation_network","oaid","deeplink_url","blocked_reason","blocked_sub_reason","gp_broadcast_referrer","gp_install_begin","campaign_type","custom_data","rejected_reason","device_download_time","keyword_match_type","contributor1_match_type","contributor2_match_type","device_model","monetization_network","segment","is_lat","gp_referrer","blocked_reason_value","device_category","app_type","rejected_reason_value","ad_unit","keyword_id","placement","network_account_id","install_app_store","amazon_aid","att"] 
+      responses:
+        200:
+          $ref: '#/components/responses/Success'
+        400:
+          $ref: '#/components/responses/BadRequest' 
+        401:
+          $ref: '#/components/responses/Unauthorized' 
+        404:
+          $ref: '#/components/responses/NotFound'
+  ## Ad Revenue Raw data
+  /{app-id}/ad_revenue_raw/v5:
+    get:
+      tags:
+        - Ad Revenue Raw data
+      summary: Attributed Ad Revenue
+      parameters:
+        - $ref: '#/components/parameters/AppId' 
+        - $ref: '#/components/parameters/FromDate'
+        - $ref: '#/components/parameters/ToDate'
+        - $ref: '#/components/parameters/MediaSource'
+        - $ref: '#/components/parameters/AttributionTouchType'
+        - $ref: '#/components/parameters/ReAttribution'
+        - $ref: '#/components/parameters/Currency'
+        - $ref: '#/components/parameters/TimeZone'
+        - $ref: '#/components/parameters/Geo'
+        - $ref: '#/components/parameters/MaximumRows'
+        - in: query
+          name: additional_fields
+          explode: false
+          schema:
+            type: array
+            items:
+              enum: ["blocked_reason_rule","store_reinstall","impressions","contributor3_match_type","gp_click_time","match_type","mediation_network","oaid","deeplink_url","blocked_reason","blocked_sub_reason","gp_broadcast_referrer","gp_install_begin","custom_data","rejected_reason","device_download_time","keyword_match_type","contributor1_match_type","contributor2_match_type","device_model","monetization_network","segment","is_lat","gp_referrer","blocked_reason_value","store_product_page","device_category","rejected_reason_value","ad_unit","keyword_id","placement","network_account_id","install_app_store","amazon_aid"] 
+      responses:
+        200:
+          $ref: '#/components/responses/Success'
+        400:
+          $ref: '#/components/responses/BadRequest' 
+        401:
+          $ref: '#/components/responses/Unauthorized' 
+        404:
+          $ref: '#/components/responses/NotFound' 
+  /{app-id}/ad_revenue_organic_raw/v5:
+    get:
+      tags:
+        - Ad Revenue Raw data
+      summary: Organic Ad Revenue
+      parameters:
+        - $ref: '#/components/parameters/AppId' 
+        - $ref: '#/components/parameters/FromDate'
+        - $ref: '#/components/parameters/ToDate'
+        - $ref: '#/components/parameters/MediaSource'
+        - $ref: '#/components/parameters/AttributionTouchType'
+        - $ref: '#/components/parameters/Currency'
+        - $ref: '#/components/parameters/TimeZone'
+        - $ref: '#/components/parameters/Geo'
+        - $ref: '#/components/parameters/MaximumRows'
+        - in: query
+          name: additional_fields
+          explode: false
+          schema:
+            type: array
+            items:
+              enum: ["blocked_reason_rule","store_reinstall","impressions","contributor3_match_type","gp_click_time","match_type","mediation_network","oaid","deeplink_url","blocked_reason","blocked_sub_reason","gp_broadcast_referrer","gp_install_begin","custom_data","rejected_reason","device_download_time","keyword_match_type","contributor1_match_type","contributor2_match_type","device_model","monetization_network","segment","is_lat","gp_referrer","blocked_reason_value","store_product_page","device_category","rejected_reason_value","ad_unit","keyword_id","placement","network_account_id","install_app_store","amazon_aid"]
+      responses:
+        200:
+          $ref: '#/components/responses/Success'
+        400:
+          $ref: '#/components/responses/BadRequest' 
+        401:
+          $ref: '#/components/responses/Unauthorized' 
+        404:
+          $ref: '#/components/responses/NotFound' 
+  ## Protect360 fraud
+  /{app-id}/blocked_installs_report/v5:
+    get:
+      tags:
+        - Protect360 fraud
+      summary: Installs
+      parameters:
+        - $ref: '#/components/parameters/AppId' 
+        - $ref: '#/components/parameters/FromDate'
+        - $ref: '#/components/parameters/ToDate'
+        - $ref: '#/components/parameters/MediaSource'
+        - $ref: '#/components/parameters/AttributionTouchType'
+        - $ref: '#/components/parameters/Currency'
+        - $ref: '#/components/parameters/TimeZone'
+        - $ref: '#/components/parameters/Geo'
+        - $ref: '#/components/parameters/MaximumRows'
+        - in: query
+          name: additional_fields
+          explode: false
+          schema:
+            type: array
+            items:
+              enum: ["blocked_reason_rule","store_reinstall","impressions","contributor3_match_type","gp_click_time","match_type","mediation_network","oaid","deeplink_url","blocked_reason","blocked_sub_reason","gp_broadcast_referrer","gp_install_begin","custom_data","rejected_reason","device_download_time","keyword_match_type","contributor1_match_type","contributor2_match_type","device_model","monetization_network","segment","is_lat","gp_referrer","blocked_reason_value","store_product_page","device_category","app_type","rejected_reason_value","ad_unit","keyword_id","placement","network_account_id","install_app_store","amazon_aid","att"]
+      responses:
+        200:
+          $ref: '#/components/responses/Success'
+        400:
+          $ref: '#/components/responses/BadRequest' 
+        401:
+          $ref: '#/components/responses/Unauthorized' 
+        404:
+          $ref: '#/components/responses/NotFound' 
+  /{app-id}/detection/v5:
+    get:
+      tags:
+        - Protect360 fraud
+      summary: Post-attribution installs
+      parameters:
+        - $ref: '#/components/parameters/AppId' 
+        - $ref: '#/components/parameters/FromDate'
+        - $ref: '#/components/parameters/ToDate'
+        - $ref: '#/components/parameters/MediaSource'
+        - $ref: '#/components/parameters/AttributionTouchType'
+        - $ref: '#/components/parameters/Currency'
+        - $ref: '#/components/parameters/TimeZone'
+        - $ref: '#/components/parameters/Geo'
+        - $ref: '#/components/parameters/MaximumRows'
+        - in: query
+          name: additional_fields
+          explode: false
+          schema:
+            type: array
+            items:
+              enum: ["contributor3_match_type","detection_date","gp_click_time","match_type","gp_broadcast_referrer","gp_install_begin","custom_data","fraud_reason","rejected_reason","device_download_time","keyword_match_type","contributor1_match_type","contributor2_match_type","device_model","fraud_reasons","fraud_sub_reason","gp_referrer","install_time_tz","device_category","rejected_reason_value","network_account_id","install_app_store","amazon_aid","att"]
+      responses:
+        200:
+          $ref: '#/components/responses/Success'
+        400:
+          $ref: '#/components/responses/BadRequest' 
+        401:
+          $ref: '#/components/responses/Unauthorized' 
+        404:
+          $ref: '#/components/responses/NotFound'
+  /{app-id}/blocked_in_app_events_report/v5:
+    get:
+      tags:
+        - Protect360 fraud
+      summary: In-app events
+      parameters:
+        - $ref: '#/components/parameters/AppId' 
+        - $ref: '#/components/parameters/FromDate'
+        - $ref: '#/components/parameters/ToDate'
+        - $ref: '#/components/parameters/MediaSource'
+        - $ref: '#/components/parameters/AttributionTouchType'
+        - $ref: '#/components/parameters/Currency'
+        - $ref: '#/components/parameters/TimeZone'
+        - $ref: '#/components/parameters/Geo'
+        - $ref: '#/components/parameters/MaximumRows'
+        - in: query
+          name: additional_fields
+          explode: false
+          schema:
+            type: array
+            items:
+              enum: ["blocked_reason_rule","store_reinstall","impressions","contributor3_match_type","custom_dimension","conversion_type","gp_click_time","match_type","mediation_network","oaid","deeplink_url","blocked_reason","blocked_sub_reason","gp_broadcast_referrer","gp_install_begin","campaign_type","custom_data","rejected_reason","device_download_time","keyword_match_type","contributor1_match_type","contributor2_match_type","device_model","monetization_network","segment","is_lat","gp_referrer","blocked_reason_value","store_product_page","device_category","app_type","rejected_reason_value","ad_unit","keyword_id","placement","is_organic","network_account_id","install_app_store","amazon_aid","att"]
+      responses:
+        200:
+          $ref: '#/components/responses/Success'
+        400:
+          $ref: '#/components/responses/BadRequest' 
+        401:
+          $ref: '#/components/responses/Unauthorized' 
+        404:
+          $ref: '#/components/responses/NotFound'
+  /{app-id}/fraud-post-inapps/v5:
+    get:
+      tags:
+        - Protect360 fraud
+      summary: Post-attribution In-app events
+      parameters:
+        - $ref: '#/components/parameters/AppId' 
+        - $ref: '#/components/parameters/FromDate'
+        - $ref: '#/components/parameters/ToDate'
+        - $ref: '#/components/parameters/MediaSource'
+        - $ref: '#/components/parameters/AttributionTouchType'
+        - $ref: '#/components/parameters/Currency'
+        - $ref: '#/components/parameters/TimeZone'
+        - $ref: '#/components/parameters/Geo'
+        - $ref: '#/components/parameters/MaximumRows'
+        - in: query
+          name: additional_fields
+          explode: false
+          schema:
+            type: array
+            items:
+              enum: ["store_reinstall","impressions","contributor3_match_type","detection_date","gp_click_time","match_type","mediation_network","oaid","deeplink_url","gp_broadcast_referrer","gp_install_begin","custom_data","fraud_reason","rejected_reason","device_download_time","keyword_match_type","contributor1_match_type","contributor2_match_type","device_model","monetization_network","segment","is_lat","fraud_reasons","fraud_sub_reason","gp_referrer","device_category","event_time_tz","rejected_reason_value","ad_unit","keyword_id","placement","network_account_id","install_app_store","amazon_aid","att"] 
+      responses:
+        200:
+          $ref: '#/components/responses/Success'
+        400:
+          $ref: '#/components/responses/BadRequest' 
+        401:
+          $ref: '#/components/responses/Unauthorized' 
+        404:
+          $ref: '#/components/responses/NotFound'
+  /{app-id}/blocked_clicks_report/v5:
+    get:
+      tags:
+        - Protect360 fraud
+      summary: Clicks
+      parameters:
+        - $ref: '#/components/parameters/AppId' 
+        - $ref: '#/components/parameters/FromDate'
+        - $ref: '#/components/parameters/ToDate'
+        - $ref: '#/components/parameters/MediaSource'
+        - $ref: '#/components/parameters/AttributionTouchType'
+        - $ref: '#/components/parameters/Currency'
+        - $ref: '#/components/parameters/TimeZone'
+        - $ref: '#/components/parameters/Geo'
+        - $ref: '#/components/parameters/MaximumRows'
+        - in: query
+          name: additional_fields
+          explode: false
+          schema:
+            type: array
+            items:
+              enum: ["blocked_reason_rule","store_reinstall","impressions","contributor3_match_type","gp_click_time","match_type","mediation_network","oaid","deeplink_url","blocked_reason","blocked_sub_reason","gp_broadcast_referrer","gp_install_begin","custom_data","rejected_reason","device_download_time","keyword_match_type","contributor1_match_type","contributor2_match_type","device_model","monetization_network","segment","is_lat","gp_referrer","blocked_reason_value","store_product_page","device_category","rejected_reason_value","ad_unit","keyword_id","placement","network_account_id","install_app_store","amazon_aid"]
+      responses:
+        200:
+          $ref: '#/components/responses/Success'
+        400:
+          $ref: '#/components/responses/BadRequest' 
+        401:
+          $ref: '#/components/responses/Unauthorized' 
+        404:
+          $ref: '#/components/responses/NotFound'
+  /{app-id}/blocked_install_postbacks/v5:
+    get:
+      tags:
+        - Protect360 fraud
+      summary: Blocked install postbacks
+      parameters:
+        - $ref: '#/components/parameters/AppId' 
+        - $ref: '#/components/parameters/FromDate'
+        - $ref: '#/components/parameters/ToDate'
+        - $ref: '#/components/parameters/MediaSource'
+        - $ref: '#/components/parameters/AttributionTouchType'
+        - $ref: '#/components/parameters/Currency'
+        - $ref: '#/components/parameters/TimeZone'
+        - $ref: '#/components/parameters/Geo'
+        - $ref: '#/components/parameters/MaximumRows'
+        - in: query
+          name: additional_fields
+          explode: false
+          schema:
+            type: array
+            items:
+              enum: ["blocked_reason_rule","store_reinstall","impressions","contributor3_match_type","gp_click_time","match_type","mediation_network","oaid","deeplink_url","blocked_reason","postback_retry","blocked_sub_reason","gp_broadcast_referrer","gp_install_begin","custom_data","rejected_reason","device_download_time","keyword_match_type","contributor1_match_type","contributor2_match_type","device_model","monetization_network","segment","is_lat","gp_referrer","blocked_reason_value","device_category","rejected_reason_value","ad_unit","keyword_id","placement","network_account_id","install_app_store","amazon_aid","att"]
+      responses:
+        200:
+          $ref: '#/components/responses/Success'
+        400:
+          $ref: '#/components/responses/BadRequest' 
+        401:
+          $ref: '#/components/responses/Unauthorized' 
+        404:
+          $ref: '#/components/responses/NotFound'
+  
+  ## Protect 360 - Aggregate advanced detection reports
+  # /v4:
+  #   servers:
+  #     - url: https://hq1.appsflyer.com/master/p360/reports/
+  #   get:
+  #     tags:
+  #       - Protect 360 - Aggregate advanced detection reports
+  #     summary: Blocked install postbacks
+  #     parameters:
+  #       - in: query
+  #         name: app-id
+  #         description: Application ID
+  #         example: "id121244"
+  #         required: true
+  #         schema:
+  #           type: string
+  #       - $ref: '#/components/parameters/FromDate'
+  #       - $ref: '#/components/parameters/ToDate'
+  #       - $ref: '#/components/parameters/MediaSource'
+  #       - $ref: '#/components/parameters/AttributionTouchType'
+  #       - $ref: '#/components/parameters/Currency'
+  #       - $ref: '#/components/parameters/TimeZone'
+  #       - $ref: '#/components/parameters/Geo'
+  #       - $ref: '#/components/parameters/MaximumRows'
+  #       - in: query
+  #         name: additional_fields
+  #         explode: false
+  #         schema:
+  #           type: array
+  #           items:
+  #             enum: ["blocked_reason_rule","store_reinstall","impressions","contributor3_match_type","gp_click_time","match_type","mediation_network","oaid","deeplink_url","blocked_reason","postback_retry","blocked_sub_reason","gp_broadcast_referrer","gp_install_begin","custom_data","rejected_reason","device_download_time","keyword_match_type","contributor1_match_type","contributor2_match_type","device_model","monetization_network","segment","is_lat","gp_referrer","blocked_reason_value","device_category","rejected_reason_value","ad_unit","keyword_id","placement","network_account_id","install_app_store","amazon_aid","att"]
+  #     responses:
+  #       200:
+  #         $ref: '#/components/responses/Success'
+  #       400:
+  #         $ref: '#/components/responses/BadRequest' 
+  #       401:
+  #         $ref: '#/components/responses/Unauthorized' 
+  #       404:
+  #         $ref: '#/components/responses/NotFound'
 
 components:
   parameters:
@@ -203,6 +751,14 @@ components:
         - Time zone format takes into account daylight saving time.
         - The timezone value must be identical to the value in the app settings page. For example, if the timezone setting is Paris, the timezone value in the Pull API URL should be timezone=Europe/Paris.
         - Pulling data in the selected time zone is only available from the date when the time zone setting was made. Any data prior to the date of the change uses UTC as the timezone.
+    Geo:
+      name: geo
+      in: query
+      schema:
+        $ref: '#/components/schemas/Geo'
+      description: |
+        Filter the data by country code.
+        Limitation: You can set only one country code filter per API call.
     Currency:
       name: currency
       in: query
@@ -219,12 +775,17 @@ components:
       in: query
       description: |
         Get retargeting conversions data.
-
-        **[Default]** If false, user acquisition data (UA) campaigns returns.
+        **[Default]** is false - user acquisition data (UA) campaigns returns.
         If true, retargeting conversion returns.
       schema:
-        type: boolean
-      example: true
+        type: string
+        enum:
+          - true
+    MaximumRows:
+      name: maximum_rows
+      in: query
+      schema:
+        $ref: '#/components/schemas/MaximumRows'
   responses:  
     Success:
       content:
@@ -232,16 +793,6 @@ components:
           schema:
             type: string
       description: Reports returned in a CSV format
-    BadRequestLookback:
-      description: |
-        Raw Reports historical lookback is limited to 90 days.
-        Use `to` and `from` to limit the date range to 3 months or less.
-      content:
-        application/json:
-            schema:
-              $ref: '#/components/schemas/Error' 
-            example: 
-              message: 
     BadRequest:
       description: Bad Request
       content:
@@ -252,12 +803,15 @@ components:
               CallLimit:
                 value:
                   message: Your API calls limit has been reached for the given report type
-                  description: |
-                    Use `to` and `from` to limit the date range to 3 months or less.
               LookBack:
+                description: Use `to` and `from` to limit the date range to 3 months or less.
                 value:
                   message: Raw Reports historical lookback is limited to 90 days 
-    AuthenticationFailed:
+              InvalidLimit:
+                description: report_rows can have the value 200000 or 1000000. 
+                value:
+                  message: Invalid limit type 
+    Unauthorized:
       description: Account may be suspended. Log in to the dashboard and check the account status. 
       content:
         application/json:
@@ -265,13 +819,13 @@ components:
               $ref: '#/components/schemas/Error' 
             examples:
               InvalidToken:
+                description: Ask an admin for the current token
                 value:
                   message: Supplied API token is invalid
-                description: Ask an admin for the current token
               Suspended:
+                description: Log in to the dashboard and check the account status
                 value:
                   message: Account may be suspended
-                description: Log in to the dashboard and check the account status
     NotFound:
       description: |
         Application ID not found.
@@ -296,7 +850,270 @@ components:
   schemas:
     Error:
       type: string
-    
+    MaximumRows:
+      type: integer
+      enum:
+        - 200000
+        - 1000000
+      description: |
+        Maximum number of rows returned by a single API call.
+        - [Default] if no value is sent, up to 200K rows
+        - 200000: Up to 200K rows return
+        - 1000000: Up to 1M rows return
+      minItems: 0
+    EventName:
+      type: array
+      items: {}
+    Geo:
+      type: string
+      minItems: 0
+      enum:
+        - AF
+        - AX
+        - AL
+        - DZ
+        - AS
+        - AD
+        - AO
+        - AI
+        - AQ
+        - AG
+        - AR
+        - AM
+        - AW
+        - AU
+        - AT
+        - AZ
+        - BS
+        - BH
+        - BD
+        - BB
+        - BY
+        - BE
+        - BZ
+        - BJ
+        - BM
+        - BT
+        - BO
+        - BA
+        - BW
+        - BV
+        - BR
+        - IO
+        - BN
+        - BG
+        - BF
+        - BI
+        - KH
+        - CM
+        - CA
+        - CV
+        - KY
+        - CF
+        - TD
+        - CL
+        - CN
+        - CX
+        - CC
+        - CO
+        - KM
+        - CG
+        - CD
+        - CK
+        - CR
+        - CI
+        - HR
+        - CU
+        - CY
+        - CZ
+        - DK
+        - DJ
+        - DM
+        - DO
+        - EC
+        - EG
+        - SV
+        - GQ
+        - ER
+        - EE
+        - ET
+        - FK
+        - FO
+        - FJ
+        - FI
+        - FR
+        - GF
+        - PF
+        - TF
+        - GA
+        - GM
+        - GE
+        - DE
+        - GH
+        - GI
+        - GR
+        - GL
+        - GD
+        - GP
+        - GU
+        - GT
+        - GG
+        - GN
+        - GW
+        - GY
+        - HT
+        - HM
+        - VA
+        - HN
+        - HK
+        - HU
+        - IS
+        - IN
+        - ID
+        - IR
+        - IQ
+        - IE
+        - IM
+        - IL
+        - IT
+        - JM
+        - JP
+        - JE
+        - JO
+        - KZ
+        - KE
+        - KI
+        - KR
+        - KP
+        - KW
+        - KG
+        - LA
+        - LV
+        - LB
+        - LS
+        - LR
+        - LY
+        - LI
+        - LT
+        - LU
+        - MO
+        - MK
+        - MG
+        - MW
+        - MY
+        - MV
+        - ML
+        - MT
+        - MH
+        - MQ
+        - MR
+        - MU
+        - YT
+        - MX
+        - FM
+        - MD
+        - MC
+        - MN
+        - ME
+        - MS
+        - MA
+        - MZ
+        - MM
+        - NA
+        - NR
+        - NP
+        - NL
+        - AN
+        - NC
+        - NZ
+        - NI
+        - NE
+        - NG
+        - NU
+        - NF
+        - MP
+        - NO
+        - OM
+        - PK
+        - PW
+        - PS
+        - PA
+        - PG
+        - PY
+        - PE
+        - PH
+        - PN
+        - PL
+        - PT
+        - PR
+        - QA
+        - RE
+        - RO
+        - RU
+        - RW
+        - BL
+        - SH
+        - KN
+        - LC
+        - MF
+        - PM
+        - VC
+        - WS
+        - SM
+        - ST
+        - SA
+        - SN
+        - RS
+        - SC
+        - SL
+        - SG
+        - SK
+        - SI
+        - SB
+        - SO
+        - ZA
+        - GS
+        - ES
+        - LK
+        - SD
+        - SR
+        - SJ
+        - SZ
+        - SE
+        - CH
+        - SY
+        - TW
+        - TJ
+        - TZ
+        - TH
+        - TL
+        - TG
+        - TK
+        - TO
+        - TT
+        - TN
+        - TR
+        - TM
+        - TC
+        - TV
+        - UG
+        - UA
+        - AE
+        - GB
+        - US
+        - UM
+        - UY
+        - UZ
+        - VU
+        - VE
+        - VN
+        - VG
+        - VI
+        - WF
+        - EH
+        - YE
+        - ZM
+        - ZW
     TimeZoneOffset:
       type: string
       description: For time zone UTC+10:00 use +10:00
@@ -304,7 +1121,7 @@ components:
     TimeZoneList:
       type: string
       description: Choose a time zone
-      example: Australia/Sydney 
+      minItems: 0
       enum:
         - "Africa/Abidjan"
         - "Africa/Accra"
