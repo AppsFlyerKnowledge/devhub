@@ -1,6 +1,6 @@
 openapi: 3.0.1
 info:
-  title: Partner integration settings API (beta)
+  title: Partner integration settings API
   description: Public API for managing partner integrations
   version: 1.0.0
 servers:
@@ -9,7 +9,7 @@ servers:
 security:
   - bearerAuth: []
 tags:
-  - name: Partner integration settings API (beta)
+  - name: Partner integration settings API
     description: API for managing partner integrations
 paths:
   /v1/partner-params/{pid}/{platform}:
@@ -27,7 +27,7 @@ paths:
           schema:
             $ref: '#/components/schemas/platform' 
       tags:
-        -  Unique partner integration parameters
+        - Unique partner integration parameters
       summary: Get a list of unique parameters
       description: |
         Get a list of the unique partner parameters needed for the integration. If the partner has no unique parameters, a successful message is recieved with no data.
@@ -38,6 +38,72 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PartnerParamsResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                oneOf:  
+                  - $ref: '#/components/schemas/AccountTypeError'
+              examples:
+                accountTypeError:
+                  value:
+                    ErrorType: UNAUTHORIZED
+                    Message: This api is not available for your account type
+        '500':
+          description: Internal server error - please try again
+  /v1/integrations:
+    get:
+      tags:
+        - Active integrations
+      summary: Get active integrations
+      description: |
+        Get a list of the active integrations with your partners arranged by app. An integration is considered active if one of the following is enabled: 
+        - Activate partner
+        - Cost
+        - Ad revenue
+      responses:
+        '200':
+          description: Retrieved active integrations successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ActiveIntegrationsResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/AccountTypeError'
+              examples:
+                accountTypeError:
+                  value:
+                    ErrorType: UNAUTHORIZED
+                    Message: This api is not available for your account type
+        '500':
+          description: Internal server error - please try again
+  /v1/integrations/{appid}:
+    get:
+      parameters:
+        - name: appid
+          in: path
+          required: true
+          schema:
+            $ref: '#/components/schemas/pid'
+          example: com.publisher.name
+      tags:
+        - Active integrations
+      summary: Get active integration parameters.
+      description: |
+        Get a list of all the parameters for all the active integrations for a specific app. This API returns only the parameters under the integration tab.
+      responses:
+        '200':
+          description: Retrieved app active integrations parameters successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AppIntegrationsResponse'
         '401':
           description: Unauthorized
           content:
@@ -65,7 +131,7 @@ paths:
           application/json:
             schema:
               oneOf:
-                  - $ref: '#/components/schemas/copyPartnerParams'
+                - $ref: '#/components/schemas/copyPartnerParams'
             examples:
               Facebook:
                 value:
@@ -74,7 +140,7 @@ paths:
                   copy_to_app_id: com.publisher.name2
                   general_params:
                     facebook_app_id: '123'
-                    gp_referrer_decryption_key: '7924423F4528482B4D6251655468576D5A7134743777217A25432A46294A4044'
+                    gp_referrer_decryption_key: 7924423F4528482B4D6251655468576D5A7134743777217A25432A46294A4044
               Snapchat:
                 value:
                   pid: snapchat_int
@@ -183,14 +249,14 @@ paths:
         content:
           application/json:
             schema:
-                $ref: '#/components/schemas/setFacebook'
+              $ref: '#/components/schemas/setFacebook'
             examples:
               Facebook:
                 value:
                   pid: facebook_int
                   app_id: com.publisher.name
                   general_params:
-                    gp_referrer_decryption_key: '7924423F4528482B4D6251655468576D5A7134743777217A25432A46294A4044'
+                    gp_referrer_decryption_key: 7924423F4528482B4D6251655468576D5A7134743777217A25432A46294A4044
         required: true
       responses:
         '200':
@@ -265,7 +331,7 @@ paths:
                   copy_from_app_id: com.publisher.name
                   copy_to_app_id: com.publisher.name2
                   facebook_app_id: '23502200095693'
-                  gp_referrer_decryption_key: '7924423F4528482B4D6251655468576D5A7134743777217A25432A46294A4044'
+                  gp_referrer_decryption_key: 7924423F4528482B4D6251655468576D5A7134743777217A25432A46294A4044
               Snapchat:
                 value:
                   pid: snapchat_int
@@ -410,6 +476,14 @@ components:
       type: string
       description: |
         AppsFlyer Partner ID
+    appid:
+      type: string
+      description: |
+        You specific app ID.
+        Examples per OS:
+        - **Android:** com.publisher.name
+        - **iOS:** id123456789
+        - **Windows Phone:** a1b2c3d4e5f6 
     platform:
       type: string
       description: |
@@ -422,16 +496,16 @@ components:
     copy_from_app_id:
       type: string
       description: |
-        App to copy integration configuration ***from*** ("source app")
-        Example values:
+        App to copy integration configuration ***from*** ('source app')
+        Examples per OS:
         - **Android:** com.publisher.name
         - **iOS:** id123456789
         - **Windows Phone:** a1b2c3d4e5f6
     copy_to_app_id:
       type: string
       description: |
-        App to copy integration configuration ***to*** ("destination app")
-        Example values:
+        App to copy integration configuration ***to*** ('destination app')
+        Examples per OS:
         - **Android:** com.publisher.name
         - **iOS:** id123456789
         - **Windows Phone:** a1b2c3d4e5f6
@@ -499,6 +573,40 @@ components:
           type: object
         in_app_postbacks_params:
           type: object
+    ActiveIntegrationsResponse:
+      type: object
+      properties:
+        account_id:
+          type: string
+        applications:
+          type: array
+          items:
+            type: object
+            properties:
+              app_id:
+                type: string
+              active_integrations:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    media_source_name: 
+                      type: string
+                    is_integration_active: 
+                      type: boolean
+                    is_cost_active: 
+                      type: boolean
+                    is_adrevenue_active: 
+                      type: boolean
+    AppIntegrationsResponse:
+      type: array
+      items:  
+        type: object
+        properties:
+          general_params:
+            type: object
+          in_app_postbacks_params:
+            type: object    
     AccountTypeError:
       properties:
         ErrorType:
