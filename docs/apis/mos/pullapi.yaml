@@ -18,6 +18,7 @@ paths:
         - $ref: '#/components/parameters/FromDate'
         - $ref: '#/components/parameters/ToDate'
         - $ref: '#/components/parameters/MediaSource'
+        - $ref: '#/components/parameters/Category'
         - $ref: '#/components/parameters/AttributionTouchType'
         - $ref: '#/components/parameters/Currency'
         - $ref: '#/components/parameters/ReAttribution'
@@ -41,6 +42,7 @@ paths:
         - $ref: '#/components/parameters/FromDate'
         - $ref: '#/components/parameters/ToDate'
         - $ref: '#/components/parameters/MediaSource'
+        - $ref: '#/components/parameters/Category'
         - $ref: '#/components/parameters/AttributionTouchType'
         - $ref: '#/components/parameters/Currency'
         - $ref: '#/components/parameters/ReAttribution'
@@ -64,6 +66,7 @@ paths:
         - $ref: '#/components/parameters/FromDate'
         - $ref: '#/components/parameters/ToDate'
         - $ref: '#/components/parameters/MediaSource'
+        - $ref: '#/components/parameters/Category'
         - $ref: '#/components/parameters/AttributionTouchType'
         - $ref: '#/components/parameters/Currency'
         - $ref: '#/components/parameters/ReAttribution'
@@ -87,6 +90,7 @@ paths:
         - $ref: '#/components/parameters/FromDate'
         - $ref: '#/components/parameters/ToDate'
         - $ref: '#/components/parameters/MediaSource'
+        - $ref: '#/components/parameters/Category'
         - $ref: '#/components/parameters/AttributionTouchType'
         - $ref: '#/components/parameters/Currency'
         - $ref: '#/components/parameters/ReAttribution'
@@ -110,6 +114,7 @@ paths:
         - $ref: '#/components/parameters/FromDate'
         - $ref: '#/components/parameters/ToDate'
         - $ref: '#/components/parameters/MediaSource'
+        - $ref: '#/components/parameters/Category'
         - $ref: '#/components/parameters/AttributionTouchType'
         - $ref: '#/components/parameters/Currency'
         - $ref: '#/components/parameters/ReAttribution'
@@ -134,6 +139,7 @@ paths:
         - $ref: '#/components/parameters/FromDate'
         - $ref: '#/components/parameters/ToDate'
         - $ref: '#/components/parameters/MediaSource'
+        - $ref: '#/components/parameters/Category'
         - $ref: '#/components/parameters/AttributionTouchType'
         - $ref: '#/components/parameters/Currency'
         - $ref: '#/components/parameters/ReAttribution'
@@ -166,6 +172,8 @@ paths:
         - $ref: '#/components/parameters/FromDate'
         - $ref: '#/components/parameters/ToDate'
         - $ref: '#/components/parameters/MediaSource'
+        - $ref: '#/components/parameters/Category'
+        - $ref: '#/components/parameters/EventName'
         - $ref: '#/components/parameters/AttributionTouchType'
         - $ref: '#/components/parameters/Currency'
         - $ref: '#/components/parameters/ReAttribution'
@@ -199,6 +207,7 @@ paths:
         - $ref: '#/components/parameters/FromDate'
         - $ref: '#/components/parameters/ToDate'
         - $ref: '#/components/parameters/MediaSource'
+        - $ref: '#/components/parameters/Category'
         - $ref: '#/components/parameters/AttributionTouchType'
         - $ref: '#/components/parameters/Currency'
         - $ref: '#/components/parameters/ReAttribution'
@@ -231,6 +240,7 @@ paths:
         - $ref: '#/components/parameters/FromDate'
         - $ref: '#/components/parameters/ToDate'
         - $ref: '#/components/parameters/MediaSource'
+        - $ref: '#/components/parameters/Category'
         - $ref: '#/components/parameters/AttributionTouchType'
         - $ref: '#/components/parameters/Currency'
         - $ref: '#/components/parameters/ReAttribution'
@@ -263,6 +273,7 @@ paths:
         - $ref: '#/components/parameters/FromDate'
         - $ref: '#/components/parameters/ToDate'
         - $ref: '#/components/parameters/MediaSource'
+        - $ref: '#/components/parameters/Category'
         - $ref: '#/components/parameters/AttributionTouchType'
         - $ref: '#/components/parameters/Currency'
         - $ref: '#/components/parameters/TimeZone'
@@ -294,6 +305,8 @@ paths:
         - $ref: '#/components/parameters/FromDate'
         - $ref: '#/components/parameters/ToDate'
         - $ref: '#/components/parameters/MediaSource'
+        - $ref: '#/components/parameters/Category'
+        - $ref: '#/components/parameters/EventName'
         - $ref: '#/components/parameters/AttributionTouchType'
         - $ref: '#/components/parameters/Currency'
         - $ref: '#/components/parameters/ReAttribution'
@@ -326,6 +339,7 @@ paths:
         - $ref: '#/components/parameters/FromDate'
         - $ref: '#/components/parameters/ToDate'
         - $ref: '#/components/parameters/MediaSource'
+        - $ref: '#/components/parameters/Category'
         - $ref: '#/components/parameters/AttributionTouchType'
         - $ref: '#/components/parameters/Currency'
         - $ref: '#/components/parameters/ReAttribution'
@@ -357,6 +371,7 @@ paths:
         - $ref: '#/components/parameters/FromDate'
         - $ref: '#/components/parameters/ToDate'
         - $ref: '#/components/parameters/MediaSource'
+        - $ref: '#/components/parameters/Category'
         - $ref: '#/components/parameters/AttributionTouchType'
         - $ref: '#/components/parameters/Currency'
         - $ref: '#/components/parameters/ReAttribution'
@@ -389,6 +404,7 @@ paths:
         - $ref: '#/components/parameters/FromDate'
         - $ref: '#/components/parameters/ToDate'
         - $ref: '#/components/parameters/MediaSource'
+        - $ref: '#/components/parameters/Category'
         - $ref: '#/components/parameters/AttributionTouchType'
         - $ref: '#/components/parameters/ReAttribution'
         - $ref: '#/components/parameters/Currency'
@@ -421,6 +437,7 @@ paths:
         - $ref: '#/components/parameters/FromDate'
         - $ref: '#/components/parameters/ToDate'
         - $ref: '#/components/parameters/MediaSource'
+        - $ref: '#/components/parameters/Category'
         - $ref: '#/components/parameters/AttributionTouchType'
         - $ref: '#/components/parameters/Currency'
         - $ref: '#/components/parameters/TimeZone'
@@ -453,6 +470,7 @@ paths:
         - $ref: '#/components/parameters/FromDate'
         - $ref: '#/components/parameters/ToDate'
         - $ref: '#/components/parameters/MediaSource'
+        - $ref: '#/components/parameters/Category'
         - $ref: '#/components/parameters/AttributionTouchType'
         - $ref: '#/components/parameters/Currency'
         - $ref: '#/components/parameters/TimeZone'
@@ -484,6 +502,7 @@ paths:
         - $ref: '#/components/parameters/FromDate'
         - $ref: '#/components/parameters/ToDate'
         - $ref: '#/components/parameters/MediaSource'
+        - $ref: '#/components/parameters/Category'
         - $ref: '#/components/parameters/AttributionTouchType'
         - $ref: '#/components/parameters/Currency'
         - $ref: '#/components/parameters/TimeZone'
@@ -515,6 +534,8 @@ paths:
         - $ref: '#/components/parameters/FromDate'
         - $ref: '#/components/parameters/ToDate'
         - $ref: '#/components/parameters/MediaSource'
+        - $ref: '#/components/parameters/Category'
+        - $ref: '#/components/parameters/EventName'
         - $ref: '#/components/parameters/AttributionTouchType'
         - $ref: '#/components/parameters/Currency'
         - $ref: '#/components/parameters/TimeZone'
@@ -546,6 +567,8 @@ paths:
         - $ref: '#/components/parameters/FromDate'
         - $ref: '#/components/parameters/ToDate'
         - $ref: '#/components/parameters/MediaSource'
+        - $ref: '#/components/parameters/Category'
+        - $ref: '#/components/parameters/EventName'
         - $ref: '#/components/parameters/AttributionTouchType'
         - $ref: '#/components/parameters/Currency'
         - $ref: '#/components/parameters/TimeZone'
@@ -577,6 +600,7 @@ paths:
         - $ref: '#/components/parameters/FromDate'
         - $ref: '#/components/parameters/ToDate'
         - $ref: '#/components/parameters/MediaSource'
+        - $ref: '#/components/parameters/Category'
         - $ref: '#/components/parameters/AttributionTouchType'
         - $ref: '#/components/parameters/Currency'
         - $ref: '#/components/parameters/TimeZone'
@@ -608,6 +632,7 @@ paths:
         - $ref: '#/components/parameters/FromDate'
         - $ref: '#/components/parameters/ToDate'
         - $ref: '#/components/parameters/MediaSource'
+        - $ref: '#/components/parameters/Category'
         - $ref: '#/components/parameters/AttributionTouchType'
         - $ref: '#/components/parameters/Currency'
         - $ref: '#/components/parameters/TimeZone'
@@ -629,47 +654,138 @@ paths:
           $ref: '#/components/responses/Unauthorized' 
         404:
           $ref: '#/components/responses/NotFound'
+  ## Postbacks
+  /{app-id}/postbacks/v5:
+    get:
+      tags:
+        - Postbacks
+      summary: Installs postbacks
+      parameters:
+        - $ref: '#/components/parameters/AppId' 
+        - $ref: '#/components/parameters/FromDate'
+        - $ref: '#/components/parameters/ToDate'
+        - $ref: '#/components/parameters/MediaSource'
+        - $ref: '#/components/parameters/Category'
+        - $ref: '#/components/parameters/AttributionTouchType'
+        - $ref: '#/components/parameters/Currency'
+        - $ref: '#/components/parameters/TimeZone'
+        - $ref: '#/components/parameters/Geo'
+        - $ref: '#/components/parameters/MaximumRows'
+        - in: query
+          name: additional_fields
+          explode: false
+          schema:
+            type: array
+            items:
+              enum: ["blocked_reason_rule","store_reinstall","attributed_touch_hour","impressions","contributor3_match_type","install_hour","event_hour","gp_click_time","match_type","mediation_network","oaid","deeplink_url","blocked_reason","postback_retry","blocked_sub_reason","gp_broadcast_referrer","gp_install_begin","custom_data","rejected_reason","device_download_time","keyword_match_type","contributor1_match_type","contributor2_match_type","device_model","monetization_network","segment","is_lat","gp_referrer","blocked_reason_value","store_product_page","device_category","rejected_reason_value","ad_unit","keyword_id","placement","network_account_id","install_app_store","amazon_aid","att"]
+      responses:
+        200:
+          $ref: '#/components/responses/Success'
+        400:
+          $ref: '#/components/responses/BadRequest' 
+        401:
+          $ref: '#/components/responses/Unauthorized' 
+        404:
+          $ref: '#/components/responses/NotFound' 
+  /{app-id}/in-app-events-postbacks/v5:
+    get:
+      tags:
+        - Postbacks
+      summary: In-app events postbacks
+      parameters:
+        - $ref: '#/components/parameters/AppId' 
+        - $ref: '#/components/parameters/FromDate'
+        - $ref: '#/components/parameters/ToDate'
+        - $ref: '#/components/parameters/MediaSource'
+        - $ref: '#/components/parameters/Category'
+        - $ref: '#/components/parameters/EventName'
+        - $ref: '#/components/parameters/AttributionTouchType'
+        - $ref: '#/components/parameters/Currency'
+        - $ref: '#/components/parameters/TimeZone'
+        - $ref: '#/components/parameters/Geo'
+        - $ref: '#/components/parameters/MaximumRows'
+        - in: query
+          name: additional_fields
+          explode: false
+          schema:
+            type: array
+            items:
+              enum: ["blocked_reason_rule","store_reinstall","attributed_touch_hour","impressions","contributor3_match_type","install_hour","event_hour","gp_click_time","match_type","mediation_network","oaid","deeplink_url","blocked_reason","postback_retry","blocked_sub_reason","gp_broadcast_referrer","gp_install_begin","custom_data","rejected_reason","device_download_time","keyword_match_type","contributor1_match_type","contributor2_match_type","device_model","monetization_network","segment","is_lat","gp_referrer","blocked_reason_value","store_product_page","device_category","rejected_reason_value","ad_unit","keyword_id","placement","network_account_id","install_app_store","amazon_aid","att"]
+      responses:
+        200:
+          $ref: '#/components/responses/Success'
+        400:
+          $ref: '#/components/responses/BadRequest' 
+        401:
+          $ref: '#/components/responses/Unauthorized' 
+        404:
+          $ref: '#/components/responses/NotFound'
+  /{app-id}/retarget_in_app_events_postbacks/v5:
+    get:
+      tags:
+        - Postbacks
+      summary: Retargeting in-app events postbacks
+      parameters:
+        - $ref: '#/components/parameters/AppId' 
+        - $ref: '#/components/parameters/FromDate'
+        - $ref: '#/components/parameters/ToDate'
+        - $ref: '#/components/parameters/MediaSource'
+        - $ref: '#/components/parameters/Category'
+        - $ref: '#/components/parameters/EventName'
+        - $ref: '#/components/parameters/AttributionTouchType'
+        - $ref: '#/components/parameters/Currency'
+        - $ref: '#/components/parameters/TimeZone'
+        - $ref: '#/components/parameters/Geo'
+        - $ref: '#/components/parameters/MaximumRows'
+        - in: query
+          name: additional_fields
+          explode: false
+          schema:
+            type: array
+            items:
+              enum: ["blocked_reason_rule","store_reinstall","attributed_touch_hour","impressions","contributor3_match_type","install_hour","event_hour","gp_click_time","match_type","mediation_network","oaid","deeplink_url","blocked_reason","postback_retry","blocked_sub_reason","gp_broadcast_referrer","gp_install_begin","custom_data","rejected_reason","device_download_time","keyword_match_type","contributor1_match_type","contributor2_match_type","device_model","monetization_network","segment","is_lat","gp_referrer","blocked_reason_value","store_product_page","device_category","rejected_reason_value","ad_unit","keyword_id","placement","network_account_id","install_app_store","amazon_aid","att"]
+      responses:
+        200:
+          $ref: '#/components/responses/Success'
+        400:
+          $ref: '#/components/responses/BadRequest' 
+        401:
+          $ref: '#/components/responses/Unauthorized' 
+        404:
+          $ref: '#/components/responses/NotFound'
+  /{app-id}/retarget_install_postbacks/v5:
+    get:
+      tags:
+        - Postbacks
+      summary: Retargeting conversions postbacks
+      parameters:
+        - $ref: '#/components/parameters/AppId' 
+        - $ref: '#/components/parameters/FromDate'
+        - $ref: '#/components/parameters/ToDate'
+        - $ref: '#/components/parameters/MediaSource'
+        - $ref: '#/components/parameters/Category'
+        - $ref: '#/components/parameters/AttributionTouchType'
+        - $ref: '#/components/parameters/Currency'
+        - $ref: '#/components/parameters/TimeZone'
+        - $ref: '#/components/parameters/Geo'
+        - $ref: '#/components/parameters/MaximumRows'
+        - in: query
+          name: additional_fields
+          explode: false
+          schema:
+            type: array
+            items:
+              enum: ["blocked_reason_rule","store_reinstall","attributed_touch_hour","impressions","contributor3_match_type","install_hour","event_hour","gp_click_time","match_type","mediation_network","oaid","deeplink_url","blocked_reason","postback_retry","blocked_sub_reason","gp_broadcast_referrer","gp_install_begin","custom_data","rejected_reason","device_download_time","keyword_match_type","contributor1_match_type","contributor2_match_type","device_model","monetization_network","segment","is_lat","gp_referrer","blocked_reason_value","device_category","rejected_reason_value","ad_unit","keyword_id","placement","network_account_id","install_app_store","amazon_aid","att"]
+      responses:
+        200:
+          $ref: '#/components/responses/Success'
+        400:
+          $ref: '#/components/responses/BadRequest' 
+        401:
+          $ref: '#/components/responses/Unauthorized' 
+        404:
+          $ref: '#/components/responses/NotFound'
   
-  ## Protect 360 - Aggregate advanced detection reports
-  # /v4:
-  #   servers:
-  #     - url: https://hq1.appsflyer.com/master/p360/reports/
-  #   get:
-  #     tags:
-  #       - Protect 360 - Aggregate advanced detection reports
-  #     summary: Blocked install postbacks
-  #     parameters:
-  #       - in: query
-  #         name: app-id
-  #         description: Application ID
-  #         example: "id121244"
-  #         required: true
-  #         schema:
-  #           type: string
-  #       - $ref: '#/components/parameters/FromDate'
-  #       - $ref: '#/components/parameters/ToDate'
-  #       - $ref: '#/components/parameters/MediaSource'
-  #       - $ref: '#/components/parameters/AttributionTouchType'
-  #       - $ref: '#/components/parameters/Currency'
-  #       - $ref: '#/components/parameters/TimeZone'
-  #       - $ref: '#/components/parameters/Geo'
-  #       - $ref: '#/components/parameters/MaximumRows'
-  #       - in: query
-  #         name: additional_fields
-  #         explode: false
-  #         schema:
-  #           type: array
-  #           items:
-  #             enum: ["blocked_reason_rule","store_reinstall","impressions","contributor3_match_type","gp_click_time","match_type","mediation_network","oaid","deeplink_url","blocked_reason","postback_retry","blocked_sub_reason","gp_broadcast_referrer","gp_install_begin","custom_data","rejected_reason","device_download_time","keyword_match_type","contributor1_match_type","contributor2_match_type","device_model","monetization_network","segment","is_lat","gp_referrer","blocked_reason_value","device_category","rejected_reason_value","ad_unit","keyword_id","placement","network_account_id","install_app_store","amazon_aid","att"]
-  #     responses:
-  #       200:
-  #         $ref: '#/components/responses/Success'
-  #       400:
-  #         $ref: '#/components/responses/BadRequest' 
-  #       401:
-  #         $ref: '#/components/responses/Unauthorized' 
-  #       404:
-  #         $ref: '#/components/responses/NotFound'
 
 components:
   parameters:
@@ -724,12 +840,38 @@ components:
         type: string
         format: date
     MediaSource:
-      description: Use to limit (filter) to a specific media source
+      description: | 
+        Use to limit (filter) to a specific media source
+        Set both the `media_source` and `category` parameters as follows:
+        - For Facebook set `category` and `media_source` to facebook
+        - For Twitter set `category` and `media_source` to twitter
+        - For all other media sources set `category` to standard and `media_source` to the name of the media source.
+        Examples
+        - `media_source=facebook&category=facebook`
+        - `media_source=abc_example&category=standard`
       name: media_source
       in: query
       schema:
         type: string
       example: facebook
+    Category:
+      description: |
+        media_source: To limit (filter) the call to a specific media source. 
+        Set both the `media_source` and `category` parameters as follows:
+        - For Facebook set `category` and `media_source` to facebook
+        - For Twitter set `category` and `media_source` to twitter
+        - For all other media sources set `category` to standard and `media_source` to the name of the media source.
+        Examples
+        - `media_source=facebook&category=facebook`
+        - `media_source=abc_example&category=standard`
+      in: query
+      name: category
+      schema:
+        type: string
+        enum:
+          - standard
+          - facebook
+          - twitter
     AttributionTouchType:
       description: Set this parameter as shown in the example to get view-through attribution (VTA) KPIs. 
       name: attribution_touch_type
@@ -738,6 +880,17 @@ components:
         type: string
         enum:
           - impression 
+    EventName:
+      in: query
+      name: event_name
+      schema:
+        type: array
+        items:
+          type: string
+      explode: false
+      description: | 
+        Filter in-app events by specified events. Select multiple events by using a comma-separated list.
+        Example: `event_name=af_purchase,ftd`
     TimeZone:
       name: timezone
       in: query
@@ -861,9 +1014,6 @@ components:
         - 200000: Up to 200K rows return
         - 1000000: Up to 1M rows return
       minItems: 0
-    EventName:
-      type: array
-      items: {}
     Geo:
       type: string
       minItems: 0
