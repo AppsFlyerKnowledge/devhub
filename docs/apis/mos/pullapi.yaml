@@ -13,6 +13,10 @@ paths:
       tags:
         - Aggregate (user acquisition and retargeting)
       summary: Partners
+      description: | 
+        TODO TODO
+        This a placeholder for a report description.
+        This is an example for a [KB link](https://support.appsflyer.com/hc/en-us/articles/360007530258-Using-Pull-API-raw-data)
       parameters:
         - $ref: '#/components/parameters/AppId' 
         - $ref: '#/components/parameters/FromDate'
@@ -37,6 +41,9 @@ paths:
       tags:
         - Aggregate (user acquisition and retargeting)
       summary: Partners Daily
+      description: | 
+        TODO TODO
+        This a placeholder for a report description.
       parameters:
         - $ref: '#/components/parameters/AppId' 
         - $ref: '#/components/parameters/FromDate'
@@ -61,6 +68,9 @@ paths:
       tags:
         - Aggregate (user acquisition and retargeting)
       summary: Daily Report
+      description: | 
+        TODO TODO
+        This a placeholder for a report description.
       parameters:
         - $ref: '#/components/parameters/AppId' 
         - $ref: '#/components/parameters/FromDate'
@@ -85,6 +95,9 @@ paths:
       tags:
         - Aggregate (user acquisition and retargeting)
       summary: Geo Report
+      description: | 
+        TODO TODO
+        This a placeholder for a report description.
       parameters:
         - $ref: '#/components/parameters/AppId' 
         - $ref: '#/components/parameters/FromDate'
@@ -108,7 +121,10 @@ paths:
     get:
       tags:
         - Aggregate (user acquisition and retargeting)
-      summary: Geo Daily
+      summary: Geo Dail
+      description: | 
+        TODO TODO
+        This a placeholder for a report description.
       parameters:
         - $ref: '#/components/parameters/AppId' 
         - $ref: '#/components/parameters/FromDate'
@@ -134,6 +150,9 @@ paths:
       tags:
         - Raw data reports (non-organic)
       summary: Installs
+      description: | 
+        TODO TODO
+        This a placeholder for a report description.
       parameters:
         - $ref: '#/components/parameters/AppId' 
         - $ref: '#/components/parameters/FromDate'
@@ -167,6 +186,9 @@ paths:
       tags:
         - Raw data reports (non-organic)
       summary: In-app events
+      description: | 
+        TODO TODO
+        This a placeholder for a report description.
       parameters:
         - $ref: '#/components/parameters/AppId' 
         - $ref: '#/components/parameters/FromDate'
@@ -202,6 +224,9 @@ paths:
       tags:
         - Raw data reports (non-organic)
       summary: Uninstalls
+      description: | 
+        TODO TODO
+        This a placeholder for a report description.
       parameters:
         - $ref: '#/components/parameters/AppId' 
         - $ref: '#/components/parameters/FromDate'
@@ -235,6 +260,9 @@ paths:
       tags:
         - Raw data reports (non-organic)
       summary: Reinstalls
+      description: | 
+        TODO TODO
+        This a placeholder for a report description.
       parameters:
         - $ref: '#/components/parameters/AppId' 
         - $ref: '#/components/parameters/FromDate'
@@ -268,6 +296,9 @@ paths:
       tags:
         - Raw data reports (organic)
       summary: Organic Installs
+      description: | 
+        TODO TODO
+        This a placeholder for a report description.
       parameters:
         - $ref: '#/components/parameters/AppId' 
         - $ref: '#/components/parameters/FromDate'
@@ -300,6 +331,9 @@ paths:
       tags:
         - Raw data reports (organic)
       summary: Organic In-app events
+      description: | 
+        TODO TODO
+        This a placeholder for a report description.
       parameters:
         - $ref: '#/components/parameters/AppId' 
         - $ref: '#/components/parameters/FromDate'
@@ -334,6 +368,9 @@ paths:
       tags:
         - Raw data reports (organic)
       summary: Organic Uninstalls
+      description: | 
+        TODO TODO
+        This a placeholder for a report description.
       parameters:
         - $ref: '#/components/parameters/AppId' 
         - $ref: '#/components/parameters/FromDate'
@@ -366,6 +403,9 @@ paths:
       tags:
         - Raw data reports (non-organic)
       summary: Organic Reinstalls
+      description: | 
+        TODO TODO
+        This a placeholder for a report description.
       parameters:
         - $ref: '#/components/parameters/AppId' 
         - $ref: '#/components/parameters/FromDate'
@@ -399,6 +439,9 @@ paths:
       tags:
         - Ad Revenue Raw data
       summary: Attributed Ad Revenue
+      description: | 
+        TODO TODO
+        This a placeholder for a report description.
       parameters:
         - $ref: '#/components/parameters/AppId' 
         - $ref: '#/components/parameters/FromDate'
@@ -432,6 +475,9 @@ paths:
       tags:
         - Ad Revenue Raw data
       summary: Organic Ad Revenue
+      description: | 
+        TODO TODO
+        This a placeholder for a report description.
       parameters:
         - $ref: '#/components/parameters/AppId' 
         - $ref: '#/components/parameters/FromDate'
@@ -465,6 +511,9 @@ paths:
       tags:
         - Protect360 fraud
       summary: Installs
+      description: | 
+        TODO TODO
+        This a placeholder for a report description.
       parameters:
         - $ref: '#/components/parameters/AppId' 
         - $ref: '#/components/parameters/FromDate'
@@ -497,6 +546,9 @@ paths:
       tags:
         - Protect360 fraud
       summary: Post-attribution installs
+      description: | 
+        TODO TODO
+        This a placeholder for a report description.
       parameters:
         - $ref: '#/components/parameters/AppId' 
         - $ref: '#/components/parameters/FromDate'
@@ -529,6 +581,9 @@ paths:
       tags:
         - Protect360 fraud
       summary: In-app events
+      description: | 
+        TODO TODO
+        This a placeholder for a report description.
       parameters:
         - $ref: '#/components/parameters/AppId' 
         - $ref: '#/components/parameters/FromDate'
@@ -562,6 +617,9 @@ paths:
       tags:
         - Protect360 fraud
       summary: Post-attribution In-app events
+      description: | 
+        TODO TODO
+        This a placeholder for a report description.
       parameters:
         - $ref: '#/components/parameters/AppId' 
         - $ref: '#/components/parameters/FromDate'
@@ -595,6 +653,9 @@ paths:
       tags:
         - Protect360 fraud
       summary: Clicks
+      description: | 
+        TODO TODO
+        This a placeholder for a report description.
       parameters:
         - $ref: '#/components/parameters/AppId' 
         - $ref: '#/components/parameters/FromDate'
@@ -627,6 +688,9 @@ paths:
       tags:
         - Protect360 fraud
       summary: Blocked install postbacks
+      description: | 
+        TODO TODO
+        This a placeholder for a report description.
       parameters:
         - $ref: '#/components/parameters/AppId' 
         - $ref: '#/components/parameters/FromDate'
@@ -660,6 +724,9 @@ paths:
       tags:
         - Postbacks
       summary: Installs postbacks
+      description: | 
+        TODO TODO
+        This a placeholder for a report description.
       parameters:
         - $ref: '#/components/parameters/AppId' 
         - $ref: '#/components/parameters/FromDate'
@@ -692,6 +759,9 @@ paths:
       tags:
         - Postbacks
       summary: In-app events postbacks
+      description: | 
+        TODO TODO
+        This a placeholder for a report description.
       parameters:
         - $ref: '#/components/parameters/AppId' 
         - $ref: '#/components/parameters/FromDate'
@@ -725,6 +795,9 @@ paths:
       tags:
         - Postbacks
       summary: Retargeting in-app events postbacks
+      description: | 
+        TODO TODO
+        This a placeholder for a report description.
       parameters:
         - $ref: '#/components/parameters/AppId' 
         - $ref: '#/components/parameters/FromDate'
@@ -758,6 +831,9 @@ paths:
       tags:
         - Postbacks
       summary: Retargeting conversions postbacks
+      description: | 
+        TODO TODO
+        This a placeholder for a report description.
       parameters:
         - $ref: '#/components/parameters/AppId' 
         - $ref: '#/components/parameters/FromDate'
