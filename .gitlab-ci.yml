@@ -13,3 +13,7 @@ sync-via-rdme-onelink-api:
 sync-via-rdme-addapp-api:
   script:
     - npx -y rdme@7.0.1 openapi ./docs/apis/add-app/openapi.yaml --key=V9oyoCB8pLc8TzEn0kuDzV7wShmNlEn9 --id=60ffdc00f71e49000fe45cad
+
+sync-via-rdme-pull-api:
+  script:
+    - npx -y rdme@7.0.1 openapi ./docs/apis/mos/pullapi.yaml --key=V9oyoCB8pLc8TzEn0kuDzV7wShmNlEn9 --id=624594011aecc40014db6e4d
