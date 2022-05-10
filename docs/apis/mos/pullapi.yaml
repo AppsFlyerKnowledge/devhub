@@ -14,9 +14,9 @@ paths:
         - Aggregate (user acquisition and retargeting)
       summary: Partners
       description: | 
-        TODO TODO
-        This a placeholder for a report description.
-        This is an example for a [KB link](https://support.appsflyer.com/hc/en-us/articles/360007530258-Using-Pull-API-raw-data)
+        Data is grouped by media source and campaign. 
+        Data type: LTV 
+        For details, see [KB link](https://support.appsflyer.com/hc/en-us/articles/360007530258-Using-Pull-API-raw-data)
       parameters:
         - $ref: '#/components/parameters/AppId' 
         - $ref: '#/components/parameters/FromDate'
@@ -40,10 +40,10 @@ paths:
     get:
       tags:
         - Aggregate (user acquisition and retargeting)
-      summary: Partners Daily
+      summary: Partners daily
       description: | 
-        TODO TODO
-        This a placeholder for a report description.
+        Data is grouped by date, media source, and campaign.
+        Data type: LTV
       parameters:
         - $ref: '#/components/parameters/AppId' 
         - $ref: '#/components/parameters/FromDate'
@@ -67,10 +67,10 @@ paths:
     get:
       tags:
         - Aggregate (user acquisition and retargeting)
-      summary: Daily Report
+      summary: Daily
       description: | 
-        TODO TODO
-        This a placeholder for a report description.
+        Data is grouped by date, media source, and campaign, and excludes in-app events. 
+        Data type: LTV
       parameters:
         - $ref: '#/components/parameters/AppId' 
         - $ref: '#/components/parameters/FromDate'
@@ -94,10 +94,10 @@ paths:
     get:
       tags:
         - Aggregate (user acquisition and retargeting)
-      summary: Geo Report
+      summary: Geo
       description: | 
-        TODO TODO
-        This a placeholder for a report description.
+        Data is grouped by geo, media source, and campaign.
+        Data type: LTV
       parameters:
         - $ref: '#/components/parameters/AppId' 
         - $ref: '#/components/parameters/FromDate'
@@ -121,10 +121,10 @@ paths:
     get:
       tags:
         - Aggregate (user acquisition and retargeting)
-      summary: Geo Dail
+      summary: Geo daily
       description: | 
-        TODO TODO
-        This a placeholder for a report description.
+        Data is grouped by date, geo, media source, and campaign. 
+        Data type: LTV
       parameters:
         - $ref: '#/components/parameters/AppId' 
         - $ref: '#/components/parameters/FromDate'
@@ -151,8 +151,8 @@ paths:
         - Raw data reports (non-organic)
       summary: Installs
       description: | 
-        TODO TODO
-        This a placeholder for a report description.
+        Records non-organic installs. The record is generated when a user opens the app for the first time.
+        Data fresheness: Real-time
       parameters:
         - $ref: '#/components/parameters/AppId' 
         - $ref: '#/components/parameters/FromDate'
@@ -188,8 +188,8 @@ paths:
         - Raw data reports (non-organic)
       summary: In-app events
       description: | 
-        TODO TODO
-        This a placeholder for a report description.
+        Records the events performed by users. 
+        Data freshness: Real-time
       parameters:
         - $ref: '#/components/parameters/AppId' 
         - $ref: '#/components/parameters/FromDate'
@@ -227,8 +227,8 @@ paths:
         - Raw data reports (non-organic)
       summary: Uninstalls
       description: | 
-        TODO TODO
-        This a placeholder for a report description.
+        Records when a user uninstalls the app. 
+        Data freshness: Daily
       parameters:
         - $ref: '#/components/parameters/AppId' 
         - $ref: '#/components/parameters/FromDate'
@@ -264,8 +264,8 @@ paths:
         - Raw data reports (non-organic)
       summary: Reinstalls
       description: | 
-        TODO TODO
-        This a placeholder for a report description.
+        Records users who after uninstalling the app, engage with a UA media source and reinstall the app during the re-attribution window. 
+        Data freshness: Real-time
       parameters:
         - $ref: '#/components/parameters/AppId' 
         - $ref: '#/components/parameters/FromDate'
@@ -301,8 +301,8 @@ paths:
         - Raw data reports (organic)
       summary: Organic Installs
       description: | 
-        TODO TODO
-        This a placeholder for a report description.
+        Records when the app is opened by a user for the first time.
+        Data freshness: Continuous
       parameters:
         - $ref: '#/components/parameters/AppId' 
         - $ref: '#/components/parameters/FromDate'
@@ -335,10 +335,10 @@ paths:
     get:
       tags:
         - Raw data reports (organic)
-      summary: Organic In-app events
+      summary: Organic in-app events
       description: | 
-        TODO TODO
-        This a placeholder for a report description.
+        Records details about events performed by users.
+        Data freshness: Continuous
       parameters:
         - $ref: '#/components/parameters/AppId' 
         - $ref: '#/components/parameters/FromDate'
@@ -373,10 +373,10 @@ paths:
     get:
       tags:
         - Raw data reports (organic)
-      summary: Organic Uninstalls
+      summary: Organic uninstalls
       description: | 
-        TODO TODO
-        This a placeholder for a report description.
+        Records users uninstalling the app. 
+        Data freshness: Daily
       parameters:
         - $ref: '#/components/parameters/AppId' 
         - $ref: '#/components/parameters/FromDate'
@@ -408,11 +408,11 @@ paths:
   /{app-id}/reinstall_organic/v5:
     get:
       tags:
-        - Raw data reports (non-organic)
-      summary: Organic Reinstalls
+        - Raw data reports (organic)
+      summary: Organic reinstalls
       description: | 
-        TODO TODO
-        This a placeholder for a report description.
+        Records ad revenue for users attributed to a retargeting media source during the re-engagement window.
+        Data freshness: Daily
       parameters:
         - $ref: '#/components/parameters/AppId' 
         - $ref: '#/components/parameters/FromDate'
@@ -446,10 +446,10 @@ paths:
     get:
       tags:
         - Ad Revenue Raw data
-      summary: Attributed Ad Revenue
+      summary: Attributed ad revenue
       description: | 
-        TODO TODO
-        This a placeholder for a report description.
+        Records ad revenue for users attributed to a media source. 
+        Data freshness: Daily
       parameters:
         - $ref: '#/components/parameters/AppId' 
         - $ref: '#/components/parameters/FromDate'
@@ -482,11 +482,11 @@ paths:
   /{app-id}/ad_revenue_organic_raw/v5:
     get:
       tags:
-        - Ad Revenue Raw data
-      summary: Organic Ad Revenue
+        - Ad Revenue Raw Data
+      summary: Organic ad revenue
       description: | 
-        TODO TODO
-        This a placeholder for a report description.
+        Records ad revenue for users not attributed to a media source.
+        Data freshness: Daily
       parameters:
         - $ref: '#/components/parameters/AppId' 
         - $ref: '#/components/parameters/FromDate'
@@ -522,8 +522,8 @@ paths:
         - Protect360 fraud
       summary: Installs
       description: | 
-        TODO TODO
-        This a placeholder for a report description.
+        Records installs identified as fraudulent and therefore not attributed to any media source.
+        Data freshness: Real-time
       parameters:
         - $ref: '#/components/parameters/AppId' 
         - $ref: '#/components/parameters/FromDate'
@@ -558,8 +558,8 @@ paths:
         - Protect360 fraud
       summary: Post-attribution installs
       description: | 
-        TODO TODO
-        This a placeholder for a report description.
+        Records in-app events from fraudulent installs and therefore not attributed at all.
+        Data freshness: Real-time
       parameters:
         - $ref: '#/components/parameters/AppId' 
         - $ref: '#/components/parameters/FromDate'
@@ -594,8 +594,8 @@ paths:
         - Protect360 fraud
       summary: In-app events
       description: | 
-        TODO TODO
-        This a placeholder for a report description.
+        Records in-app events identified as fraudulent by Protect360.  
+        Data freshness: Daily 
       parameters:
         - $ref: '#/components/parameters/AppId' 
         - $ref: '#/components/parameters/FromDate'
@@ -629,10 +629,10 @@ paths:
     get:
       tags:
         - Protect360 fraud
-      summary: Post-attribution In-app events
+      summary: Post-attribution in-app events
       description: | 
-        TODO TODO
-        This a placeholder for a report description.
+        Records in-app events for installs identified as fraudulent after being attributed to a media source or judged fraudulent without regard to the install itself. 
+        Data freshness: Daily
       parameters:
         - $ref: '#/components/parameters/AppId' 
         - $ref: '#/components/parameters/FromDate'
@@ -668,8 +668,8 @@ paths:
         - Protect360 fraud
       summary: Clicks
       description: | 
-        TODO TODO
-        This a placeholder for a report description.
+        Records clicks performed by users blocked by Protect360. 
+        Data freshness: Daily
       parameters:
         - $ref: '#/components/parameters/AppId' 
         - $ref: '#/components/parameters/FromDate'
@@ -704,8 +704,8 @@ paths:
         - Protect360 fraud
       summary: Blocked install postbacks
       description: | 
-        TODO TODO
-        This a placeholder for a report description.
+        Records copies of postbacks sent to a media source resulting in a blocked install. 
+        Data freshness: Real-time
       parameters:
         - $ref: '#/components/parameters/AppId' 
         - $ref: '#/components/parameters/FromDate'
@@ -739,10 +739,10 @@ paths:
     get:
       tags:
         - Postbacks
-      summary: Installs postbacks
+      summary: Install postbacks
       description: | 
-        TODO TODO
-        This a placeholder for a report description.
+        Records install events generated when a user opens the app for the first time.
+        Data freshness: Daily
       parameters:
         - $ref: '#/components/parameters/AppId' 
         - $ref: '#/components/parameters/FromDate'
@@ -775,10 +775,10 @@ paths:
     get:
       tags:
         - Postbacks
-      summary: In-app events postbacks
+      summary: In-app event postbacks
       description: | 
-        TODO TODO
-        This a placeholder for a report description.
+        Records in-app event postbacks sent to the media source.
+        Data freshness: Daily
       parameters:
         - $ref: '#/components/parameters/AppId' 
         - $ref: '#/components/parameters/FromDate'
@@ -812,10 +812,10 @@ paths:
     get:
       tags:
         - Postbacks
-      summary: Retargeting in-app events postbacks
+      summary: Retargeting in-app event postbacks
       description: | 
-        TODO TODO
-        This a placeholder for a report description.
+        Records in-app events users performed during the re-engagement window.
+        Data freshness: Real-time
       parameters:
         - $ref: '#/components/parameters/AppId' 
         - $ref: '#/components/parameters/FromDate'
@@ -851,8 +851,8 @@ paths:
         - Postbacks
       summary: Retargeting conversions postbacks
       description: | 
-        TODO TODO
-        This a placeholder for a report description.
+        Records in-app events users performed during the re-engagement window.
+        Data freshness: Real-time
       parameters:
         - $ref: '#/components/parameters/AppId' 
         - $ref: '#/components/parameters/FromDate'
@@ -917,7 +917,7 @@ components:
     ToDate:
       in: query
       name: to
-      description: To Date to report
+      description: To date to report
       examples: 
         DateOnly:
           summary: Date only
@@ -937,7 +937,7 @@ components:
         format: date
     MediaSource:
       description: | 
-        Use to limit (filter) to a specific media source
+        Use to limit (filter) by a specific media source
         Set both the `media_source` and `category` parameters as follows:
         - For Facebook set `category` and `media_source` to facebook
         - For Twitter set `category` and `media_source` to twitter
@@ -999,7 +999,7 @@ components:
         - Data returns using the app-specific time zone.
         - Time zone format takes into account daylight saving time.
         - The timezone value must be identical to the value in the app settings page. For example, if the timezone setting is Paris, the timezone value in the Pull API URL should be timezone=Europe/Paris.
-        - Pulling data in the selected time zone is only available from the date when the time zone setting was made. Any data prior to the date of the change uses UTC as the timezone.
+        - Pulling data in the selected time zone is only available from the date when the timezone setting was made. Any data prior to the date of the change uses UTC as the timezone.
     Geo:
       name: geo
       in: query
@@ -1051,11 +1051,11 @@ components:
             examples: 
               CallLimit:
                 value:
-                  message: Your API calls limit has been reached for the given report type
+                  message: Your API call limit has been reached for the given report type
               LookBack:
                 description: Use `to` and `from` to limit the date range to 3 months or less.
                 value:
-                  message: Raw Reports historical lookback is limited to 90 days 
+                  message: Raw reports historical lookback is limited to 90 days 
               InvalidLimit:
                 description: report_rows can have the value 200000 or 1000000. 
                 value:
@@ -1077,8 +1077,8 @@ components:
                   message: Account may be suspended
     NotFound:
       description: |
-        Application ID not found.
-        - Ensure that the app id is correct. iOS apps must start with id.
+        App ID wasn't found.
+        - Ensure that the app ID is correct. iOS apps must start with ID.
         - The token doesn't match the app. Are you using the correct token?
       content:
         application/json:
