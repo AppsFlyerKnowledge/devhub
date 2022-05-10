@@ -18,5 +18,12 @@ sync-via-rdme-pull-api:
   script:
     - npx -y rdme@7.0.1 openapi ./docs/apis/mos/pullapi.yaml --key=V9oyoCB8pLc8TzEn0kuDzV7wShmNlEn9 --id=624594011aecc40014db6e4d
   rules:
-    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
     - if: $CI_COMMIT_BRANCH == "main"
+
+sync-via-rdme-ctv-events-api:
+  script:
+    - npx -y rdme@7.0.1 openapi ./docs/apis/rta/ctv_events_api.yaml --key=V9oyoCB8pLc8TzEn0kuDzV7wShmNlEn9 --id=624c355032911400142d1aca
+
+sync-via-rdme-partner-settings-api:
+  script:
+    - npx -y rdme@7.0.1 openapi   ./docs/apis/partnerIntSet/partner_integration_settings_api.yaml --key=V9oyoCB8pLc8TzEn0kuDzV7wShmNlEn9 --id=615eb7b60319170356179796

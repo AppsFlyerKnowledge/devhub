@@ -1,0 +1,566 @@
+openapi: 3.0.1
+info:
+  title: CTV Events API
+  version: 1.0.0
+servers:
+  - url: https://events.appsflyer.com/v1.0/s2s/
+    description: Production server
+  - url: https://sandbox-events.appsflyer.com/v1.0/s2s/
+    description: Sandbox server
+security:
+  - ApiKeyAuth: []
+paths:
+  /first_open/app/{platform}/{app-id}:
+    post:
+      tags:
+      - Measure first app opens
+      summary: Measure first app opens
+      description: To properly measure CTV first app opens with AppsFlyer, the following
+        API call must be made for every first app open
+      parameters:
+        - $ref: '#/components/parameters/AppId'
+        - $ref: '#/components/parameters/Platform'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+              - device_ids
+              - device_model
+              - device_os_version
+              - ip
+              - limit_ad_tracking
+              - user_agent
+              type: object
+              properties:
+                timestamp:
+                  maximum: 1625576172928
+                  minimum: 1625230572928
+                  type: integer
+                  description: Event timestamp in Unix time (UTC)
+                  format: int64
+                  example: 1625576172928
+                request_id:
+                  maxLength: 36
+                  minLength: 36
+                  type: string
+                  description: Unique identifier per request
+                  example: 71dad7da-7926-40d8-9b15-b94a6d46e15a
+                ip:
+                  maxLength: 46
+                  minLength: 1
+                  type: string
+                  description: The device IP address
+                  example: 35.244.183.10
+                user_agent:
+                  maxLength: 256
+                  minLength: 1
+                  type: string
+                  description: The device user agent
+                  example: Roku/DVP-9.21 (AE9.21E04090A)
+                device_os_version:
+                  maxLength: 12
+                  minLength: 1
+                  type: string
+                  description: The device OS version
+                  example: 9.3.0
+                device_model:
+                  maxLength: 12
+                  minLength: 1
+                  type: string
+                  description: The device model
+                  example: 3920X
+                device_ids:
+                  $ref: '#/components/schemas/DeviceIds'  
+                limit_ad_tracking:
+                  type: boolean
+                  description: Limit Ad Tracking flag. Use this flag to mark whether
+                    or not the user has advertiser ID
+                  example: true
+                customer_user_id:
+                  maxLength: 64
+                  minLength: 1
+                  type: string
+                  description: Customer user ID, as set by the developer. This is
+                    used as the user identifier in the advertiser's system
+                  example: 15667737-366d-4994-ac8b-653fe6b2be4a
+                app_version:
+                  maxLength: 12
+                  minLength: 1
+                  type: string
+                  description: The release or version number of the app
+                  example: 1.0.5
+        required: true
+      responses:
+        202:
+          description: The request was accepted
+          content: {}
+        400:
+          description: The authentication succeeded, but mandatory fields in the message
+            body are missing, or fields are invalid
+          content: {}
+        401:
+          description: The app doesn't exist or the authentication failed
+          content: {}
+        403:
+          description: App traffic blocked due to Zero package limit
+          content: {}
+        500:
+          description: Internal server error
+          content: {}
+      x-codegen-request-body-name: body
+  /inapp/app/{platform}/{app-id}:
+    post:
+      tags:
+      - Measure in-app events
+      summary: Measure in-app events
+      description: This AppsFlyer API integration allows advertisers to measure any
+        post-install in-app event and attribute it to a media source and campaign
+      parameters:
+        - $ref: '#/components/parameters/AppId'
+        - $ref: '#/components/parameters/Platform'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+              - device_ids
+              - device_model
+              - device_os_version
+              - event_name
+              - ip
+              - limit_ad_tracking
+              - user_agent
+              type: object
+              properties:
+                timestamp:
+                  maximum: 1625576172928
+                  minimum: 1625230572928
+                  type: integer
+                  description: Event timestamp in Unix time (UTC)
+                  format: int64
+                  example: 1625576172928
+                request_id:
+                  maxLength: 36
+                  minLength: 36
+                  type: string
+                  description: Unique identifier per request
+                  example: 71dad7da-7926-40d8-9b15-b94a6d46e15a
+                ip:
+                  maxLength: 46
+                  minLength: 1
+                  type: string
+                  description: The device IP address
+                  example: 35.244.183.10
+                user_agent:
+                  maxLength: 256
+                  minLength: 1
+                  type: string
+                  description: The device user agent
+                  example: Roku/DVP-9.21 (AE9.21E04090A)
+                device_os_version:
+                  maxLength: 12
+                  minLength: 1
+                  type: string
+                  description: The device OS version
+                  example: 9.3.0
+                device_model:
+                  maxLength: 12
+                  minLength: 1
+                  type: string
+                  description: The device model
+                  example: 3920X
+                device_ids:
+                  $ref: '#/components/schemas/DeviceIds'  
+                limit_ad_tracking:
+                  type: boolean
+                  description: Limit Ad Tracking flag. Use this flag to mark whether
+                    or not the user has advertiser ID
+                  example: true
+                customer_user_id:
+                  maxLength: 64
+                  minLength: 1
+                  type: string
+                  description: Customer user ID, as set by the developer. This is
+                    used as the user identifier in the advertiser's system
+                  example: 15667737-366d-4994-ac8b-653fe6b2be4a
+                app_version:
+                  maxLength: 12
+                  minLength: 1
+                  type: string
+                  description: The release or version number of the app
+                  example: 1.0.5
+                event_name:
+                  maxLength: 64
+                  minLength: 1
+                  type: string
+                  description: A string describing the event name
+                  example: af_purchase
+                event_parameters:
+                  type: object
+                  properties:
+                    af_revenue:
+                      type: number
+                      format: double
+                    af_price:
+                      type: number
+                      format: double
+                    af_currency:
+                      type: string
+                      enum:
+                      - USD
+                      - AED
+                      - AFN
+                      - ALL
+                      - AMD
+                      - ANG
+                      - AOA
+                      - ARS
+                      - AUD
+                      - AWG
+                      - AZN
+                      - BAM
+                      - BBD
+                      - BDT
+                      - BGN
+                      - BHD
+                      - BIF
+                      - BMD
+                      - BND
+                      - BOB
+                      - BRL
+                      - BSD
+                      - BTC
+                      - BTN
+                      - BWP
+                      - BYN
+                      - BZD
+                      - CAD
+                      - CDF
+                      - CHF
+                      - CLF
+                      - CLP
+                      - CNH
+                      - CNY
+                      - COP
+                      - CRC
+                      - CUC
+                      - CUP
+                      - CVE
+                      - CZK
+                      - DJF
+                      - DKK
+                      - DOP
+                      - DZD
+                      - EGP
+                      - ERN
+                      - ETB
+                      - EUR
+                      - FJD
+                      - FKP
+                      - GBP
+                      - GEL
+                      - GGP
+                      - GHS
+                      - GIP
+                      - GMD
+                      - GNF
+                      - GTQ
+                      - GYD
+                      - HKD
+                      - HNL
+                      - HRK
+                      - HTG
+                      - HUF
+                      - IDR
+                      - ILS
+                      - IMP
+                      - INR
+                      - IQD
+                      - IRR
+                      - ISK
+                      - JEP
+                      - JMD
+                      - JOD
+                      - JPY
+                      - KES
+                      - KGS
+                      - KHR
+                      - KMF
+                      - KPW
+                      - KRW
+                      - KWD
+                      - KYD
+                      - KZT
+                      - LAK
+                      - LBP
+                      - LKR
+                      - LRD
+                      - LSL
+                      - LYD
+                      - MAD
+                      - MDL
+                      - MGA
+                      - MKD
+                      - MMK
+                      - MNT
+                      - MOP
+                      - MRO
+                      - MRU
+                      - MUR
+                      - MVR
+                      - MWK
+                      - MXN
+                      - MYR
+                      - MZN
+                      - NAD
+                      - NGN
+                      - NIO
+                      - NOK
+                      - NPR
+                      - NZD
+                      - OMR
+                      - PAB
+                      - PEN
+                      - PGK
+                      - PHP
+                      - PKR
+                      - PLN
+                      - PYG
+                      - QAR
+                      - RON
+                      - RSD
+                      - RUB
+                      - RWF
+                      - SAR
+                      - SBD
+                      - SCR
+                      - SDG
+                      - SEK
+                      - SGD
+                      - SHP
+                      - SLL
+                      - SOS
+                      - SRD
+                      - SSP
+                      - STD
+                      - STN
+                      - SVC
+                      - SYP
+                      - SZL
+                      - THB
+                      - TJS
+                      - TMT
+                      - TND
+                      - TOP
+                      - TRY
+                      - TTD
+                      - TWD
+                      - TZS
+                      - UAH
+                      - UGX
+                      - UYU
+                      - UZS
+                      - VEF
+                      - VES
+                      - VND
+                      - VUV
+                      - WST
+                      - XAF
+                      - XAG
+                      - XAU
+                      - XCD
+                      - XDR
+                      - XOF
+                      - XPD
+                      - XPF
+                      - XPT
+                      - YER
+                      - ZAR
+                      - ZMW
+                      - ZWL
+                      - BYR
+                  description: A JSON object which can contain multiple event parameters.
+                  example:
+                    af_revenue: 1.99
+                    af_price: 2.456
+                    af_currency: MYR
+                event_custom_parameters:
+                  type: string
+                  description: A JSON object which can contain multiple custom event
+                    parameters.
+                  format: json
+        required: true
+      responses:
+        202:
+          description: The request was accepted
+          content: {}
+        400:
+          description: The authentication succeeded, but mandatory fields in the message
+            body are missing, or fields are invalid
+          content: {}
+        401:
+          description: The app doesn't exist or the authentication failed
+          content: {}
+        403:
+          description: App traffic blocked due to Zero package limit
+          content: {}
+        500:
+          description: Internal server error
+          content: {}
+      x-codegen-request-body-name: body
+  /session/app/{platform}/{app-id}:
+    post:
+      tags:
+      - Measure sessions
+      summary: Measure sessions
+      description: This AppsFlyer API integration provide advertisers with the ability
+        to measure post-install sessions and attribute it to a media source and campaign
+      parameters:
+        - $ref: '#/components/parameters/AppId'
+        - $ref: '#/components/parameters/Platform'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+              - device_ids
+              - device_model
+              - device_os_version
+              - ip
+              - limit_ad_tracking
+              - user_agent
+              type: object
+              properties:
+                timestamp:
+                  maximum: 1625576172928
+                  minimum: 1625230572928
+                  type: integer
+                  description: Event timestamp in Unix time (UTC)
+                  format: int64
+                  example: 1625576172928
+                request_id:
+                  maxLength: 36
+                  minLength: 36
+                  type: string
+                  description: Unique identifier per request
+                  example: 71dad7da-7926-40d8-9b15-b94a6d46e15a
+                ip:
+                  maxLength: 46
+                  minLength: 1
+                  type: string
+                  description: The device IP Address
+                  example: 35.244.183.10
+                user_agent:
+                  maxLength: 256
+                  minLength: 1
+                  type: string
+                  description: The device user agent
+                  example: Roku/DVP-9.21 (AE9.21E04090A)
+                device_os_version:
+                  maxLength: 12
+                  minLength: 1
+                  type: string
+                  description: The device OS version
+                  example: 9.3.0
+                device_model:
+                  maxLength: 12
+                  minLength: 1
+                  type: string
+                  description: The device model
+                  example: 3920X
+                device_ids:
+                  $ref: '#/components/schemas/DeviceIds'
+                limit_ad_tracking:
+                  type: boolean
+                  description: Limit Ad Tracking flag. Use this flag to mark whether
+                    or not the user has advertiser ID
+                  example: true
+                customer_user_id:
+                  maxLength: 64
+                  minLength: 1
+                  type: string
+                  description: Customer user ID, as set by the developer. This is
+                    used as the user identifier in the advertiser's system
+                  example: 15667737-366d-4994-ac8b-653fe6b2be4a
+                app_version:
+                  maxLength: 12
+                  minLength: 1
+                  type: string
+                  description: The release or version number of the app
+                  example: 1.0.5
+        required: true
+      responses:
+        202:
+          description: The request was accepted
+          content: {}
+        400:
+          description: The authentication succeeded, but mandatory fields in the message
+            body are missing, or fields are invalid
+          content: {}
+        401:
+          description: The app doesn't exist or the authentication failed
+          content: {}
+        403:
+          description: App traffic blocked due to Zero package limit
+          content: {}
+        500:
+          description: Internal server error
+          content: {}
+      x-codegen-request-body-name: body
+components:
+  parameters:
+    AppId:
+      name: app-id
+      in: path
+      schema:
+        type: string
+      required: true
+      description: |
+    Platform:
+      name: platform
+      in: path
+      schema:
+        type: string
+        enum:
+          - roku
+          - smartcast
+          - tizen
+      required: true
+      description: |
+        The CTV platform of the measured app
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      description: |
+        Create an HMAC signature by hashing the entire raw message.
+        The HMAC is generated using SHA256 and uses the DevKey as the signature’s secret key.
+
+        For example, the raw message is: `{"timestamp":1604503583337,"ip":"127.0.0.1","user_agent":"Roku/DVP-9.21 (AE9.21E04090A)","device_os_version":"9.3.0","device_model":"3920X","device_ids":[{"type":"rida","value":"fa73d67d-f55c-5af3-883a-726253dc7d0e"}],"limit_ad_tracking":false}`
+
+        The DevKey is: `w8sZzy8EaPaxFKfaoTqUi6`
+        The result is: `715b133d5a327b77beb898688a3ad438da0f78071cd3df70e8ec5ecf60751972`
+      name: authorization
+      in: header
+  schemas:
+    DeviceIds:
+      type: array
+      description: A vector of the different device IDs. Can be either advertising ID or a custom ID
+      example:
+      - type: rida
+        value: fa73d67d-f55c-5af3-883a-726253dc7d0e
+      - type: custom
+        value: 045f4137-57b7-45e6-8a45-c303101a086a
+      items:
+        required:
+        - type
+        - value
+        type: object
+        properties:
+            type:
+              type: string
+              enum: [custom, rida, vida, tifa]
+            value:
+              type: string
+x-id:
+- af-wh-ott
