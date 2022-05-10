@@ -17,3 +17,6 @@ sync-via-rdme-addapp-api:
 sync-via-rdme-pull-api:
   script:
     - npx -y rdme@7.0.1 openapi ./docs/apis/mos/pullapi.yaml --key=V9oyoCB8pLc8TzEn0kuDzV7wShmNlEn9 --id=624594011aecc40014db6e4d
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_COMMIT_BRANCH == "main"
