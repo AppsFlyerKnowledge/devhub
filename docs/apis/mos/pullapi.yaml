@@ -901,15 +901,15 @@ components:
         DateOnly:
           summary: Date only
           value:
-            "2021-09-20"
+            "2022-04-22"
         DateHourMin:
           summary: Date-Hour-Mins
           value:
-            "2019-01-20 21:45"
+            "2022-04-22 21:45"
         DateHourMinSecs:
           summary: Date-Hour-Mins-Secs
           value:
-            "2021-08-02 09:45:23"
+            "2022-04-22 21:45:23"
       required: true
       schema: 
         type: string
@@ -922,15 +922,15 @@ components:
         DateOnly:
           summary: Date only
           value:
-            "2021-09-20"
+            "2022-04-22"
         DateHourMin:
           summary: Date-Hour-Mins
           value:
-            "2019-01-20 21:45"
+            "2022-04-22 21:45"
         DateHourMinSecs:
           summary: Date-Hour-Mins-Secs
           value:
-            "2021-08-02 09:45:23"
+            "2022-04-22 21:45:23"
       required: true
       schema: 
         type: string
