@@ -896,7 +896,7 @@ components:
     FromDate:
       in: query
       name: from
-      description: From Date to report
+      description: From date (report start date)
       examples: 
         DateOnly:
           summary: Date only
@@ -917,7 +917,7 @@ components:
     ToDate:
       in: query
       name: to
-      description: To date to report
+      description: To date (report end date)
       examples: 
         DateOnly:
           summary: Date only
@@ -937,8 +937,8 @@ components:
         format: date
     MediaSource:
       description: | 
-        Use to limit (filter) by a specific media source
-        Set both the `media_source` and `category` parameters as follows:
+        Use to filter by a specific media source
+        Set both the `category` and `media_source` parameters as follows:
         - For Facebook set `category` and `media_source` to facebook
         - For Twitter set `category` and `media_source` to twitter
         - For all other media sources set `category` to standard and `media_source` to the name of the media source.
@@ -952,7 +952,7 @@ components:
       example: facebook
     Category:
       description: |
-        media_source: To limit (filter) the call to a specific media source. 
+        media_source: Use to filter the call for a specific media source. 
         Set both the `media_source` and `category` parameters as follows:
         - For Facebook set `category` and `media_source` to facebook
         - For Twitter set `category` and `media_source` to twitter
@@ -1041,7 +1041,7 @@ components:
         text/csv:
           schema:
             type: string
-      description: Reports returned in a CSV format
+      description: Reports returned in CSV format
     BadRequest:
       description: Bad Request
       content:
