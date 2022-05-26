@@ -51,56 +51,24 @@ paths:
             application/json:
               example: [advertising_id, app_id]
               schema:
-                type: array
-                items:
-                  type: string
-        400:
-          description: |
-            Incorrect platform type specified. Enter a valid platform type.
-
-            Code:InvalidPlatform
-          headers:
-            deprecated:
-              description: is the api version deprecated 
-              schema:
-                type: boolean
-            deprecationDate:
-              description: deprecation date
-              schema:
-                type: string
-            sunsetDate:
-              description: sunset date
-              schema:
-                type: string
-            deprecationMessage:
-              description: deprecation message
-              schema:
-                type: string
-          content:
-            application/json:
-                schema:
-                  $ref: '#/components/schemas/Error' 
-                example: {
-                            "headers": {
-                              "deprecated": false,
-                              "deprecationDate": null,
-                              "sunsetDate": null,
-                              "deprecationMessage": null
-                            },
-                            "body": {
-                              "error": {
-                                "status": 400,
-                                "code": "InvalidPlatform",
-                                "message": "Incorrect platform type specified. Enter a valid platform type.",
-                                "resource": "/validate-url",
-                                "requestId": "8a3f4fa6-a91c-11ec-b909-0242ac120002"
-                              }
-                            }
-                          }
+                type: object
+                properties:
+                  fields:
+                    type: array
+                    items:
+                      type: string
+                  request_id:
+                    type: string
         401:
           $ref: '#/components/responses/AuthenticationFailed'
         403:
           $ref: '#/components/responses/AccountProblem'
+        404:
+          $ref: '#/components/responses/VersionDoesntExist'
+        410:
+          $ref: '#/components/responses/VersionNoLongerValid'
+        422:
+          $ref: '#/components/responses/SchemaErrorInvalidPathParam'
 
   /event-type/{endpoint-type}:
     get:
@@ -124,17 +92,21 @@ paths:
           description: | 
             Event types successfully retrieved.
             List of possiblly returned event type:
-            - regular: ["Install-in-app-events-organic", "install", "install-organic", "re-engagement", 
-            "re-attribution", "reinstall", "reinstall-organic", "install-in-app-events", 
-            "re-engagement-in-app-events", "re-attribution-in-app-events" ]
-            - skadnetwork: ["in-app-event", "re-download", "Install", "Postbacks-copy", "postback"]
+            - regular: ["organic-install-in-app-event", "install", "organic-install", "re-engagement", 
+            "re-attribution", "reinstall", "organic-reinstall", "install-in-app-event", 
+            "re-engagement-in-app-event", "re-attribution-in-app-event" ]
+            - skadnetwork: ["in-app-event", "re-download", "install", "postbacks-copy", "postback"]
           content:
             application/json:
               schema:
-                example: ["in-app-event", "re-download", "Install", "Postbacks-copy", "postback"]
-                type: array
-                items:
-                  type: string
+                type: object
+                properties:
+                  event_types: 
+                    type: array
+                    items:
+                      type: string
+                  request_id:
+                    type: string
         400:
           description: |
            Incorrect endpoint-type type specified. Enter a valid endpoint-type. 
@@ -163,12 +135,12 @@ paths:
                   $ref: '#/components/schemas/Error' 
         401:
           $ref: '#/components/responses/AuthenticationFailed'
-        501:
-          $ref: '#/components/responses/NotImplemented'
-        503:
-          $ref: '#/components/responses/ServiceUnavailable'
-        504:
-          $ref: '#/components/responses/GatewayTimeout' 
+        404:
+          $ref: '#/components/responses/VersionDoesntExist'
+        410:
+          $ref: '#/components/responses/VersionNoLongerValid'
+        422:
+          $ref: '#/components/responses/SchemaErrorInvalidPathParam'
 
   /validate-url:
     post:
@@ -187,10 +159,9 @@ paths:
               type: object
               properties:
                 url:
-                  minLength: 5
-                  maxLength: 2048
-                  example: http://some.url.com:40/dir
-                  
+                  $ref: '#/components/schemas/Url'
+                method:
+                  $ref: '#/components/schemas/Method'
 
       responses:
         200:
@@ -240,25 +211,77 @@ paths:
             application/json:
                 schema:
                   $ref: '#/components/schemas/URLTestResponse'
-        422:
-          description: |
-            Your specified URL endpoint doesn't have a valid format.
-            
-            Code: InvalidURL
+         
+        400:
+          description: JSON parsing error
+          headers:
+            deprecated:
+              description: is the api version deprecated 
+              schema:
+                type: boolean
+            deprecationDate:
+              description: deprecation date
+              schema:
+                type: string
+            sunsetDate:
+              description: sunset date
+              schema:
+                type: string
+            deprecationMessage:
+              description: deprecation message
+              schema:
+                type: string
           content:
             application/json:
                 schema:
                   $ref: '#/components/schemas/Error' 
+                example: 
+                    code: InvalidPlatform
+                    message: An error occurred while parsing the JSON body. Check the body and try again..
+                    requestId: 8a3f4fa6-a91c-11ec-b909-0242ac120002
         401:
           $ref: '#/components/responses/AuthenticationFailed'
+        404:
+          $ref: '#/components/responses/VersionDoesntExist'
+        410:
+          $ref: '#/components/responses/VersionNoLongerValid'
+        422:
+          description: Schema Error
+          headers:
+            deprecated:
+              description: is the api version deprecated 
+              schema:
+                type: boolean
+            deprecationDate:
+              description: deprecation date
+              schema:
+                type: string
+            sunsetDate:
+              description: sunset date
+              schema:
+                type: string
+            deprecationMessage:
+              description: deprecation message
+              schema:
+                type: string
+          content:
+            application/json:
+                schema:
+                  $ref: '#/components/schemas/Error' 
+                examples:
+                  Invalid URL:
+                    value:
+                      code: InvalidURL
+                      message: Invalid URL.
+                      request_id: 8a3f4fa6-a91c-11ec-b909-0242ac120002
+                  Invalid Method:
+                    value:
+                      code: InvalidMethod
+                      message: Method must be POST or GET.
+                      request_id: 8a3f4fa6-a91c-11ec-b909-0242ac120002
+
         429:
           $ref: '#/components/responses/RateLimited'
-        501:
-          $ref: '#/components/responses/NotImplemented'
-        503:
-          $ref: '#/components/responses/ServiceUnavailable'
-        504:
-          $ref: '#/components/responses/GatewayTimeout'
 
   /app/{app-id}:
     put:
@@ -293,39 +316,200 @@ paths:
       responses:
         200:
           description: URL validated successfully
-          content: {}
+          headers:
+            deprecated:
+              description: is the api version deprecated? 
+              schema:
+                type: boolean
+            deprecationDate:
+              description: deprecation date
+              schema:
+                type: string
+            sunsetDate:
+              description: sunset date
+              schema:
+                type: string
+            deprecationMessage:
+              description: deprecation message
+              schema:
+                type: string
+          content:
+            application/json:
+                schema:
+                  type: object
+                  properties:
+                    request_id:
+                      type: string
         400:
-          description: Invalid JSON format or no JSON found. Verify the content and resubmit.
+          description: JSON parsing error
+          headers:
+            deprecated:
+              description: is the api version deprecated 
+              schema:
+                type: boolean
+            deprecationDate:
+              description: deprecation date
+              schema:
+                type: string
+            sunsetDate:
+              description: sunset date
+              schema:
+                type: string
+            deprecationMessage:
+              description: deprecation message
+              schema:
+                type: string
           content:
             application/json:
                 schema:
                   $ref: '#/components/schemas/Error' 
+                example: 
+                    code: InvalidPlatform
+                    message: An error occurred while parsing the JSON body. Check the body and try again..
+                    requestId: 8a3f4fa6-a91c-11ec-b909-0242ac120002
         401:
           $ref: '#/components/responses/AuthenticationFailed'
-        403:
-          description: |
-            The app ID specified wasn't found. Check that the app ID is identical to that in AppsFlyer in your account.
-
-            Code: UnknownAppid
-          content:
-            application/json:
-                schema:
-                  $ref: '#/components/schemas/Error'
         402:
-          description: |
-            The specified message type ({event-type} isn't part of your subscripton. Contact AppsFlyer support or your AppsFlyer account executive.
-
-            Code: MissingAsset
+          description: Push API isn't part of your subscription.
+          headers:
+            deprecated:
+              description: is the api version deprecated 
+              schema:
+                type: boolean
+            deprecationDate:
+              description: deprecation date
+              schema:
+                type: string
+            sunsetDate:
+              description: sunset date
+              schema:
+                type: string
+            deprecationMessage:
+              description: deprecation message
+              schema:
+                type: string
           content:
             application/json:
                 schema:
-                  $ref: '#/components/schemas/Error'
-        501:
-          $ref: '#/components/responses/NotImplemented'
-        503:
-          $ref: '#/components/responses/ServiceUnavailable'
-        504:
-          $ref: '#/components/responses/GatewayTimeout' 
+                  $ref: '#/components/schemas/Error' 
+                examples: 
+                  Missing Asset Event Type:
+                    value:
+                      code: MissingAsset
+                      message: The specified message type ({event-type} isn't part of your subscripton. Contact AppsFlyer support or your AppsFlyer account executive.
+                      request_id: 8a3f4fa6-a91c-11ec-b909-0242ac120002
+                  Missing Asset Push API:
+                    value:
+                      code: MissingAsset
+                      message: Push API isn't part of your subscription. Contact AppsFlyer support or your AppsFlyer account executive
+                      request_id: 8a3f4fa6-a91c-11ec-b909-0242ac120002
+        403:
+          description: Account problem occurred
+          headers:
+            deprecated:
+              description: is the api version deprecated 
+              schema:
+                type: boolean
+            deprecationDate:
+              description: deprecation date
+              schema:
+                type: string
+            sunsetDate:
+              description: sunset date
+              schema:
+                type: string
+            deprecationMessage:
+              description: deprecation message
+              schema:
+                type: string
+          content:
+            application/json:
+                schema:
+                  $ref: '#/components/schemas/Error' 
+                examples: 
+                  Account problem:
+                    value:
+                      code: AccountProblem
+                      message: An account problem ocurred. Please contact your AppsFlyer account executive.
+                      request_id: 8a3f4fa6-a91c-11ec-b909-0242ac120002
+                  App ID not found:
+                    value:
+                      code: UnknownAppid
+                      message: The app ID specified wasn't found. Check that the app ID is identical to that in AppsFlyer in your account.
+                      request_id: 8a3f4fa6-a91c-11ec-b909-0242ac120002
+        404:
+          $ref: '#/components/responses/VersionDoesntExist'
+        410:
+          $ref: '#/components/responses/VersionNoLongerValid'
+        422:
+          description: Schema Error
+          headers:
+            deprecated:
+              description: is the api version deprecated 
+              schema:
+                type: boolean
+            deprecationDate:
+              description: deprecation date
+              schema:
+                type: string
+            sunsetDate:
+              description: sunset date
+              schema:
+                type: string
+            deprecationMessage:
+              description: deprecation message
+              schema:
+                type: string
+          content:
+            application/json:
+                schema:
+                  $ref: '#/components/schemas/Error' 
+                examples: 
+                  Invalid JSON format:
+                    value:
+                      code: SchemaError
+                      message: Invalid JSON format or no JSON found. Verify the content and resubmit.
+                      request_id: 8a3f4fa6-a91c-11ec-b909-0242ac120002
+                  Invalid message fields:
+                    value:
+                      code: InvalidMessageFields
+                      message: The selected_fields specified are not unique. Use unique selected_fields.
+                      request_id: 8a3f4fa6-a91c-11ec-b909-0242ac120002
+                  Incorrect message fields:
+                    value:
+                      code: InvalidMessageFields
+                      message: Incorrect message-fields specified.
+                      request_id: 8a3f4fa6-a91c-11ec-b909-0242ac120002
+                  Too many endpoints:
+                    value:
+                      code: TooManyEndpoints
+                      message: Too many endpoints.
+                      request_id: 8a3f4fa6-a91c-11ec-b909-0242ac120002
+                  Missing mandatory fields:
+                    value:
+                      code: MissingMandatoryFields
+                      message: Every endpoint must include the mandatory selected_fields.
+                      request_id: 8a3f4fa6-a91c-11ec-b909-0242ac120002
+                  Missing events:
+                    value:
+                      code: MissingEvents
+                      message: Every endpoint must include selected_inapps when an in-app event-type is selected.
+                      request_id: 8a3f4fa6-a91c-11ec-b909-0242ac120002
+                  Missing event types:
+                    value:
+                      code: MissingEventTypes
+                      message: Every endpoint must include an in-app event-type when listing selected_inapps.
+                      request_id: 8a3f4fa6-a91c-11ec-b909-0242ac120002
+                  Invalid URL:
+                    value:
+                      code: InvalidURL
+                      message: Invalid URL.
+                      request_id: 8a3f4fa6-a91c-11ec-b909-0242ac120002
+                  Repeating URL:
+                    value:
+                      code: RepeatingURL
+                      message: Repeating URL.
+                      request_id: 8a3f4fa6-a91c-11ec-b909-0242ac120002
     get:
       tags:
         - Manage Push API configuration
@@ -342,7 +526,35 @@ paths:
       responses:
         200:
           description: URL validated successfully
-          content: {}
+          headers:
+            deprecated:
+              description: is the api version deprecated? 
+              schema:
+                type: boolean
+            deprecationDate:
+              description: deprecation date
+              schema:
+                type: string
+            sunsetDate:
+              description: sunset date
+              schema:
+                type: string
+            deprecationMessage:
+              description: deprecation message
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  endpoints:
+                    type: array
+                    items:
+                      anyOf:
+                        - $ref: '#/components/schemas/RegularAndroidConfig'
+                        - $ref: '#/components/schemas/RegularIosConfig'
+                        - $ref: '#/components/schemas/SkadConfig'
         400:
           description: Invalid JSON format or no JSON found. Verify the content and resubmit.
           content:
@@ -351,21 +563,73 @@ paths:
                   $ref: '#/components/schemas/Error' 
         401:
           $ref: '#/components/responses/AuthenticationFailed'
-        403:
-          description: |
-            The app ID specified wasn't found. Check that the app ID is identical to that in AppsFlyer in your account.
-
-            Code: UnknownAppid
+        402:
+          description: Push API isn't part of your subscription.
+          headers:
+            deprecated:
+              description: is the api version deprecated 
+              schema:
+                type: boolean
+            deprecationDate:
+              description: deprecation date
+              schema:
+                type: string
+            sunsetDate:
+              description: sunset date
+              schema:
+                type: string
+            deprecationMessage:
+              description: deprecation message
+              schema:
+                type: string
           content:
             application/json:
                 schema:
-                  $ref: '#/components/schemas/Error'
-        501:
-          $ref: '#/components/responses/NotImplemented'
-        503:
-          $ref: '#/components/responses/ServiceUnavailable'
-        504:
-          $ref: '#/components/responses/GatewayTimeout'
+                  $ref: '#/components/schemas/Error' 
+                examples: 
+                  Missing Asset Push API:
+                    value:
+                      code: MissingAsset
+                      message: Push API isn't part of your subscription. Contact AppsFlyer support or your AppsFlyer account executive
+                      request_id: 8a3f4fa6-a91c-11ec-b909-0242ac120002
+        403:
+          description: Account problem occurred
+          headers:
+            deprecated:
+              description: is the api version deprecated 
+              schema:
+                type: boolean
+            deprecationDate:
+              description: deprecation date
+              schema:
+                type: string
+            sunsetDate:
+              description: sunset date
+              schema:
+                type: string
+            deprecationMessage:
+              description: deprecation message
+              schema:
+                type: string
+          content:
+            application/json:
+                schema:
+                  $ref: '#/components/schemas/Error' 
+                examples: 
+                  Account problem:
+                    value:
+                      code: AccountProblem
+                      message: An account problem ocurred. Please contact your AppsFlyer account executive.
+                      request_id: 8a3f4fa6-a91c-11ec-b909-0242ac120002
+                  App ID not found:
+                    value:
+                      code: UnknownAppid
+                      message: The app ID specified wasn't found. Check that the app ID is identical to that in AppsFlyer in your account.
+                      request_id: 8a3f4fa6-a91c-11ec-b909-0242ac120002
+        404:
+          $ref: '#/components/responses/VersionDoesntExist'
+        410:
+          $ref: '#/components/responses/VersionNoLongerValid'
 components:
   responses:  
     Success:
@@ -413,6 +677,84 @@ components:
               $ref: '#/components/schemas/Error' 
             example: {
               message: "Bad Request"
+            }
+    SchemaErrorInvalidPathParam:
+      description: Invalid path-params. Verify the content and resubmit.
+      headers:
+        deprecated:
+          description: is the api version deprecated 
+          schema:
+            type: boolean
+        deprecationDate:
+          description: deprecation date
+          schema:
+            type: string
+        sunsetDate:
+          description: sunset date
+          schema:
+            type: string
+        deprecationMessage:
+          description: deprecation message
+          schema:
+            type: string
+      content:
+        application/json:
+            schema:
+              $ref: '#/components/schemas/Error' 
+            example: {
+              message: "Invalid path-params. Verify the content and resubmit."
+            } 
+    VersionDoesntExist:
+      description: The API version listed in the URL doesn't exist
+      headers:
+        deprecated:
+          description: is the api version deprecated 
+          schema:
+            type: boolean
+        deprecationDate:
+          description: deprecation date
+          schema:
+            type: string
+        sunsetDate:
+          description: sunset date
+          schema:
+            type: string
+        deprecationMessage:
+          description: deprecation message
+          schema:
+            type: string
+      content:
+        application/json:
+            schema:
+              $ref: '#/components/schemas/Error' 
+            example: {
+              message: "The API version listed in the URL doesn't exist. Check the API documentation"
+            }
+    VersionNoLongerValid:
+      description: The API version listed in the URL is no longer valid
+      headers:
+        deprecated:
+          description: is the api version deprecated 
+          schema:
+            type: boolean
+        deprecationDate:
+          description: deprecation date
+          schema:
+            type: string
+        sunsetDate:
+          description: sunset date
+          schema:
+            type: string
+        deprecationMessage:
+          description: deprecation message
+          schema:
+            type: string
+      content:
+        application/json:
+            schema:
+              $ref: '#/components/schemas/Error' 
+            example: {
+              message: "The API version listed in the URL is no longer valid. Check the API documentation"
             }
     AuthenticationFailed:
       description: Authentication failed. The authentication token is not valid.
@@ -646,30 +988,42 @@ components:
       description: "Authorization HTTP header containing API V2.0 token (Bearer token) is required.\n\n
         The admin [gets the V2 token in the dashboard](https://support.appsflyer.com/hc/en-us/articles/360004562377), go to your email address"
   schemas:
+    GetConfigurationReponseBody:
+      type: object
+      properties:
+        endpoints:
+          type: array
+          items:
+            type: object
+            properties:
+              method:
+                type: string
+              event_types:
+                type: array
+                items:
+                  type: string
+              url:
+                type: string
+              selected_fields:
+                type: array
+                items:
+                  type: string
+
+        
     URLTestResponse:
       type: object
       properties:
-        testedEndpointURLHTTPResponse:
+        tested_endpoint_url_http_response:
           type: integer
-      example: {testedEndpointURLHTTPResponse: 404}
+      example: 
+        tested_endpoint_url_http_response: 404
+        request_id: 907ea912-9ce9-4dec-9423-b0a04404e1e2
     # Schema for error response body
     Error:
       example: {
-                  "headers": {
-                    "deprecated": false,
-                    "deprecationDate": null,
-                    "sunsetDate": null,
-                    "deprecationMessage": null
-                  },
-                  "body": {
-                    "error": {
-                      "status": 400,
-                      "code": "SomeErrorCode",
-                      "message": "Some error message.",
-                      "resource": "/example-resource",
-                      "requestId": "8a3f4fa6-a91c-11ec-b909-0242ac120002"
-                    }
-                  }
+                  "code": "SomeErrorCode",
+                  "message": "Some error message.",
+                  "request_id": "8a3f4fa6-a91c-11ec-b909-0242ac120002"
                 }
       type: object
       properties:
@@ -679,13 +1033,10 @@ components:
           type: string
         message:
           type: string
-        resource:
-          type: string
-        requestId:
+        request_id:
           type: string
     Url:
       type: string
-      minLength: 5
       maxLength: 2048
       example: http://some.url.com:40/dir
     Method:
@@ -711,16 +1062,16 @@ components:
           type: array
           items:
             enum:
-              - "install-in-app-events-organic"
+              - "organic-install-in-app-event"
               - "install"                      
-              - "install-organic"              
+              - "organic-install"              
               - "re-engagement"                
               - "re-attribution"               
               - "reinstall"                    
-              - "reinstall-organic"            
-              - "install-in-app-events"        
-              - "re-engagement-in-app-events"  
-              - "re-attribution-in-app-events"
+              - "organic-reinstall"            
+              - "install-in-app-event"        
+              - "re-engagement-in-app-event"  
+              - "re-attribution-in-app-event"
         selected_fields:
           oneOf:
             - type: string
@@ -856,13 +1207,13 @@ components:
               - type: string
                 enum:
                 - all
-                title: All fields
+                title: ALL INAPPS
               - type: array
-                title: Select fields
+                title: SELECTED INAPPS
                 items:
                   type: string
                 maxLength: 100
-        disabled:
+        enabled:
           type: boolean
         integration_type:
           type: string
@@ -1048,7 +1399,7 @@ components:
       required:
         - url
         - method
-        - integration_type 
+        - attributing_entity 
         - event_types
         - enabled 
       properties:
@@ -1065,143 +1416,13 @@ components:
               - in-app-event
               - postback
               - postbacks-copy
-        selected_fields:
-          oneOf:
-            - type: string
-              enum:
-                - all
-              title: All fields
-            - type: string
-              enum:
-                - defualt
-              title: Default fields
-            - type: array
-              title: Select fields
-              items:
-                enum:
-                  - api_version
-                  - af_c_id
-                  - campaign
-                  - af_adset_id
-                  - af_adset
-                  - af_ad_id
-                  - af_ad
-                  - af_ad_type
-                  - af_channel
-                  - af_cost_currency
-                  - af_cost_model
-                  - af_cost_value
-                  - af_keywords
-                  - af_attribution_lookback
-                  - af_prt
-                  - af_reengagement_window
-                  - af_siteid
-                  - af_sub_siteid
-                  - af_sub1
-                  - af_sub2
-                  - af_sub3
-                  - af_sub4
-                  - af_sub5
-                  - is_retargeting
-                  - media_source
-                  - original_url
-                  - user_agent
-                  - advertising_id
-                  - android_id
-                  - amazon_aid
-                  - app_id
-                  - app_name
-                  - app_version
-                  - appsflyer_id
-                  - bundle_id
-                  - carrier
-                  - country_code
-                  - custom_data
-                  - customer_user_id
-                  - device_category
-                  - device_type
-                  - device_model
-                  - event_name
-                  - event_revenue
-                  - event_revenue_currency
-                  - event_time
-                  - event_value
-                  - idfa
-                  - idfv
-                  - imei
-                  - install_app_store
-                  - install_time
-                  - ip
-                  - language
-                  - operator
-                  - os_version
-                  - platform
-                  - sdk_version
-                  - wifi
-                  - gp_broadcast_referrer
-                  - city
-                  - attributed_touch_time
-                  - attributed_touch_type
-                  - contributor_1_af_prt
-                  - contributor_1_campaign
-                  - contributor_1_match_type
-                  - contributor_1_media_source
-                  - contributor_1_touch_time
-                  - contributor_1_touch_type
-                  - contributor_2_af_prt
-                  - contributor_2_campaign
-                  - contributor_2_match_type
-                  - contributor_2_media_source
-                  - contributor_2_touch_time
-                  - contributor_2_touch_type
-                  - contributor_3_af_prt
-                  - contributor_3_campaign
-                  - contributor_3_match_type
-                  - contributor_3_media_source
-                  - contributor_3_touch_time
-                  - contributor_3_touch_type
-                  - dma
-                  - event_revenue_usd
-                  - event_source
-                  - http_referrer
-                  - is_primary_attribution
-                  - is_receipt_validated
-                  - match_type
-                  - postal_code
-                  - region
-                  - retargeting_conversion_type
-                  - state
-                  - network_account_id
-                  - gp_click_time
-                  - gp_install_begin
-                  - gp_referrer
-                  - keyword_match_type
-                  - selected_currency
-                  - revenue_in_selected_currency
-                  - cost_in_selected_currency
-                  - attributed_touch_time_selected_timezone
-                  - install_time_selected_timezone
-                  - event_time_selected_timezone
-                  - selected_timezone
-                  - deeplink_url
-                  - oaid
-                  - keyword_id
-                  - store_reinstall
-                  - is_lat
-                  - device_download_time
-                  - device_download_time_selected_timezone
-                  - conversion_type
-                  - custom_dimension
-                  - campaign_type
-                  - att
-                  - app_type
-                  - store_product_page
         enabled:
           type: boolean
           default: true
-        integration_type:
+        attributing_entity:
           type: string
           enum:
             - skadnetwork
+            - appsflyer
           default: skadnetwork
           
