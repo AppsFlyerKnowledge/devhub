@@ -70,7 +70,7 @@ paths:
         422:
           $ref: '#/components/responses/SchemaErrorInvalidPathParam'
 
-  /event-type/{endpoint-type}:
+  /event-types/{endpoint-type}:
     get:
       tags:
         - Event Types 
@@ -107,32 +107,6 @@ paths:
                       type: string
                   request_id:
                     type: string
-        400:
-          description: |
-           Incorrect endpoint-type specified. Enter a valid endpoint-type. 
-           
-           Code: InvalidEndpointType
-          headers:
-            deprecated:
-              description: Is the API version deprecated? 
-              schema:
-                type: boolean
-            deprecationDate:
-              description: deprecation date
-              schema:
-                type: string
-            sunsetDate:
-              description: sunset date
-              schema:
-                type: string
-            deprecationMessage:
-              description: deprecation message
-              schema:
-                type: string
-          content:
-            application/json:
-                schema:
-                  $ref: '#/components/schemas/Error' 
         401:
           $ref: '#/components/responses/AuthenticationFailed'
         404:
@@ -279,9 +253,6 @@ paths:
                       code: InvalidMethod
                       message: Method must be POST or GET.
                       request_id: 8a3f4fa6-a91c-11ec-b909-0242ac120002
-
-        429:
-          $ref: '#/components/responses/RateLimited'
 
   /app/{app-id}:
     put:
