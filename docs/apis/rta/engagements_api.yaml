@@ -13,6 +13,9 @@ paths:
       tags:
       - Click Engagement
       summary: Click Engagement
+      security:
+      - HeaderApiKeyAuth: []
+      - QueryParamApiKeyAuth: []
       parameters:
         - $ref: '#/components/parameters/AppId'
         - $ref: '#/components/parameters/Platform'
@@ -63,6 +66,8 @@ paths:
       tags:
       - Click Engagement
       summary: Click Engagement
+      security:
+      - HeaderApiKeyAuth: []
       parameters:
         - $ref: '#/components/parameters/AppId'
         - $ref: '#/components/parameters/Platform'
@@ -89,6 +94,9 @@ paths:
       tags:
       - Impression Engagement
       summary: Impression Engagement
+      security:
+      - HeaderApiKeyAuth: []
+      - QueryParamApiKeyAuth: []
       parameters:
         - $ref: '#/components/parameters/AppId'
         - $ref: '#/components/parameters/Platform'
@@ -139,6 +147,8 @@ paths:
       tags:
       - Impression Engagement
       summary: Impression Engagement
+      security:
+      - HeaderApiKeyAuth: []
       parameters:
         - $ref: '#/components/parameters/AppId'
         - $ref: '#/components/parameters/Platform'
@@ -164,12 +174,12 @@ components:
   securitySchemes:
     HeaderApiKeyAuth:
       type: apiKey
-      description: "TBA"
+      description: API key passed as a header field
       name: authorization
       in: header
     QueryParamApiKeyAuth:
       type: apiKey
-      description: "TBA"
+      description: API key passed as a query parameter
       name: authorization
       in: query
   parameters:
