@@ -12,7 +12,7 @@ paths:
       tags:
         - Message Fields
       summary: Retrieve per platform
-      description: Returns a list of the available Message Fields(string[s]) for each platform
+      description: Returns a list of the available message fields for each platform
       parameters:
       - name: platform
         in: path
@@ -29,7 +29,7 @@ paths:
       responses:
         200:
           description: | 
-            Fields successfully retrieved.
+            Fields successfully retrieved
           headers:
             deprecated:
               description: is the api version deprecated 
@@ -91,7 +91,7 @@ paths:
         200:
           description: | 
             Event types successfully retrieved.
-            List of possiblly returned event type:
+            The permitted event types are:
             - regular: ["organic-install-in-app-event", "install", "organic-install", "re-engagement", 
             "re-attribution", "reinstall", "organic-reinstall", "install-in-app-event", 
             "re-engagement-in-app-event", "re-attribution-in-app-event" ]
@@ -109,12 +109,12 @@ paths:
                     type: string
         400:
           description: |
-           Incorrect endpoint-type type specified. Enter a valid endpoint-type. 
+           Incorrect endpoint-type specified. Enter a valid endpoint-type. 
            
            Code: InvalidEndpointType
           headers:
             deprecated:
-              description: is the api version deprecated? 
+              description: Is the API version deprecated? 
               schema:
                 type: boolean
             deprecationDate:
@@ -297,7 +297,7 @@ paths:
         schema:
           type: string
       requestBody:
-        description: Body for validate url
+        description: Body for validate URL
         content:
           application/json:
             schema:
@@ -803,7 +803,7 @@ components:
             schema:
               $ref: '#/components/schemas/Error' 
     AccountProblem:
-      description: An account problem ocurred. Please contact your AppsFlyer account executive.
+      description: An account problem occurred. Please contact your AppsFlyer account executive.
       headers:
         deprecated:
           description: is the api version deprecated 
@@ -930,7 +930,7 @@ components:
               message: "Not implmented"
             }
     ServiceUnavailable:
-      description: Service Unavailable. ELB (Amazon Load-balancer) service unavailable.
+      description: Service unavailable. ELB (Amazon Load-balancer) service unavailable.
       headers:
         deprecated:
           description: is the api version deprecated 
@@ -985,8 +985,8 @@ components:
     Bearer-Authentication:
       type: http
       scheme: bearer
-      description: "Authorization HTTP header containing API V2.0 token (Bearer token) is required.\n\n
-        The admin [gets the V2 token in the dashboard](https://support.appsflyer.com/hc/en-us/articles/360004562377), go to your email address"
+      description: "Authorization HTTP header containing API V2 token (bearer token) is required.\n\n
+        The admin [gets the V2 token in the dashboard](https://support.appsflyer.com/hc/en-us/articles/360004562377) "
   schemas:
     GetConfigurationReponseBody:
       type: object
