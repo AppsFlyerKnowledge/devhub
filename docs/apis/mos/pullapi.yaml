@@ -182,7 +182,7 @@ paths:
           $ref: '#/components/responses/Unauthorized' 
         404:
           $ref: '#/components/responses/NotFound' 
-  /{app-id}/in_app_events_reports/v5:
+  /{app-id}/in_app_events_report/v5:
     get:
       tags:
         - Raw data reports (non-organic)
@@ -221,7 +221,7 @@ paths:
           $ref: '#/components/responses/Unauthorized' 
         404:
           $ref: '#/components/responses/NotFound' 
-  /{app-id}/uninstall_events_reports/v5:
+  /{app-id}/uninstall_events_report/v5:
     get:
       tags:
         - Raw data reports (non-organic)
@@ -331,7 +331,7 @@ paths:
           $ref: '#/components/responses/Unauthorized' 
         404:
           $ref: '#/components/responses/NotFound' 
-  /{app-id}/organic_in_app_events_reports/v5:
+  /{app-id}/organic_in_app_events_report/v5:
     get:
       tags:
         - Raw data reports (organic)
@@ -369,7 +369,7 @@ paths:
           $ref: '#/components/responses/Unauthorized' 
         404:
           $ref: '#/components/responses/NotFound' 
-  /{app-id}/organic_uninstall_events_reports/v5:
+  /{app-id}/organic_uninstall_events_report/v5:
     get:
       tags:
         - Raw data reports (organic)
