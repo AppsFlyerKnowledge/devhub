@@ -5,7 +5,8 @@ info:
 servers:
 - url: https://engagements.appsflyer.com/v1.0/s2s
 security:
-- ApiKeyAuth: []
+- HeaderApiKeyAuth: []
+- QueryParamApiKeyAuth: []
 paths:
   /click/app/{platform}/{app_id}:
     get:
@@ -161,11 +162,16 @@ paths:
 
 components:
   securitySchemes:
-    ApiKeyAuth:
+    HeaderApiKeyAuth:
       type: apiKey
       description: "TBA"
       name: authorization
       in: header
+    QueryParamApiKeyAuth:
+      type: apiKey
+      description: "TBA"
+      name: authorization
+      in: query
   parameters:
     AppId:
       name: app_id
@@ -527,8 +533,8 @@ components:
     AfCampaignType:
       type: string
       enum:
-        - USER_ACQUISITION
-        - RETARGETING
+        - user_acquisition
+        - retargeting
       description: "Campaign type"
     AfPrt:
       type: string

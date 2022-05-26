@@ -37,3 +37,13 @@ sync-via-rdme-partner-settings-api:
     - npx -y rdme@7.0.1 openapi   ./docs/apis/partnerIntSet/partner_integration_settings_api.yaml --key=V9oyoCB8pLc8TzEn0kuDzV7wShmNlEn9 --id=615eb7b60319170356179796
   rules:
     - if: $CI_COMMIT_BRANCH == "master"
+
+sync-via-rdme-engagements-api:
+  script:
+    - npx -y rdme@7.0.1 openapi ./docs/apis/rta/engagements_api.yaml --key=V9oyoCB8pLc8TzEn0kuDzV7wShmNlEn9 --id=6203fb9db858c900490628e6
+  rules:
+    - if: $CI_COMMIT_BRANCH == "master"
+
+
+
+    
