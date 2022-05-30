@@ -48,8 +48,8 @@ paths:
               examples:
                 accountTypeError:
                   value:
-                    ErrorType: UNAUTHORIZED
-                    Message: This api is not available for your account type
+                    status: UNAUTHORIZED
+                    message: This api is not available for your account type
         '500':
           description: Internal server error - please try again
   /v1/integrations:
@@ -79,8 +79,8 @@ paths:
               examples:
                 accountTypeError:
                   value:
-                    ErrorType: UNAUTHORIZED
-                    Message: This api is not available for your account type
+                    status: UNAUTHORIZED
+                    message: This api is not available for your account type
         '500':
           description: Internal server error - please try again
   /v1/integrations/{appid}:
@@ -114,8 +114,8 @@ paths:
               examples:
                 accountTypeError:
                   value:
-                    ErrorType: UNAUTHORIZED
-                    Message: This api is not available for your account type
+                    status: UNAUTHORIZED
+                    message: This api is not available for your account type
         '500':
           description: Internal server error - please try again
   /v1/copy:
@@ -180,20 +180,20 @@ paths:
               examples:
                 accountTypeError:
                   value:
-                    ErrorType: UNAUTHORIZED
-                    Message: This api is not available for your account type
+                    status: UNAUTHORIZED
+                    message: This api is not available for your account type
                 appError:
                   value:
-                    ErrorType: UNAUTHORIZED
-                    Message: App <app id> is not owned by the user
+                    status: UNAUTHORIZED
+                    message: App <app id> is not owned by the user
                 paramError:
                   value:
-                    ErrorType: UNAUTHORIZED
-                    Message: Your app settings do not allow modifying <param Name> for app <app id>
+                    status: UNAUTHORIZED
+                    message: Your app settings do not allow modifying <param Name> for app <app id>
                 tosError:
                   value:
-                    ErrorType: UNAUTHORIZED
-                    Message: Attribution terms of service were not accepted for app <app id> and <pid>
+                    status: UNAUTHORIZED
+                    message: Attribution terms of service were not accepted for app <app id> and <pid>
         '404':
           description: Integration not found
           content:
@@ -201,8 +201,8 @@ paths:
               examples:
                 integrationNotFound:
                   value:
-                    ErrorType: NOT_FOUND
-                    Message: Integration for <pid> was not found. Please check the pid value
+                    status: NOT_FOUND
+                    message: Integration for <pid> was not found. Please check the pid value
         '422':
           description: Missing/invalid input params
           content:
@@ -217,24 +217,24 @@ paths:
               examples:
                 invalidValueError:
                   value:
-                    ErrorType: INVALID_VALUE
-                    Message: <param> value is invalid.
+                    status: INVALID_VALUE
+                    message: <param> value is invalid.
                 missingParamError:
                   value:
-                    ErrorType: MISSING_PARAMETER
-                    Message: <param> is missing
+                    status: MISSING_PARAMETER
+                    message: <param> is missing
                 generalFailureError:
                   value:
-                    ErrorType: GENERAL_FAILURE
-                    Message: At this time the integration can not be activated.Contact your CSM or support@appsflyer.com with a copy of this message
+                    status: GENERAL_FAILURE
+                    message: At this time the integration can not be activated.Contact your CSM or support@appsflyer.com with a copy of this message
                 integrationNotEnabledError:
                   value:
-                    ErrorType: INACTIVE_INTEGRATION
-                    Message: Integration for app <app id> with <pid> is not enabled
+                    status: INACTIVE_INTEGRATION
+                    message: Integration for app <app id> with <pid> is not enabled
                 unmatchedPlatformError:
                   value:
-                    ErrorType: PLATFORM_UNMATCHED
-                    Message: Both apps should be on the same mobile platform
+                    status: PLATFORM_UNMATCHED
+                    message: Both apps should be on the same mobile platform
         '500':
           description: Internal server error - please try again
   /v1/integration-params:
@@ -276,12 +276,12 @@ paths:
               examples:
                 accountTypeError:
                   value:
-                    ErrorType: UNAUTHORIZED
-                    Message: This api is not available for your account type
+                    status: UNAUTHORIZED
+                    message: This api is not available for your account type
                 appError:
                   value:
-                    ErrorType: UNAUTHORIZED
-                    Message: App <app id> is not owned by the user
+                    status: UNAUTHORIZED
+                    message: App <app id> is not owned by the user
         '422':
           description: Missing/invalid input params
           content:
@@ -295,20 +295,20 @@ paths:
               examples:
                 invalidValueError:
                   value:
-                    ErrorType: INVALID_VALUE
-                    Message: <param> value is invalid.
+                    status: INVALID_VALUE
+                    message: <param> value is invalid.
                 missingParamError:
                   value:
-                    ErrorType: MISSING_PARAMETER
-                    Message: <param> is missing
+                    status: MISSING_PARAMETER
+                    message: <param> is missing
                 generalFailureError:
                   value:
-                    ErrorType: GENERAL_FAILURE
-                    Message: At this time the integration can not be activated. Contact your CSM or support@appsflyer.com with a copy of this message
+                    status: GENERAL_FAILURE
+                    message: At this time the integration can not be activated. Contact your CSM or support@appsflyer.com with a copy of this message
                 integrationNotEnabledError:
                   value:
-                    ErrorType: INACTIVE_INTEGRATION
-                    Message: Integration for app <app id> with <pid> is not enabled
+                    status: INACTIVE_INTEGRATION
+                    message: Integration for app <app id> with <pid> is not enabled
         '500':
           description: Internal server error - please try again
   /copy:
@@ -369,20 +369,20 @@ paths:
               examples:
                 accountTypeError:
                   value:
-                    ErrorType: UNAUTHORIZED
-                    Message: This api is not available for your account type
+                    status: UNAUTHORIZED
+                    message: This api is not available for your account type
                 appError:
                   value:
-                    ErrorType: UNAUTHORIZED
-                    Message: App <app id> is not owned by the user
+                    status: UNAUTHORIZED
+                    message: App <app id> is not owned by the user
                 paramError:
                   value:
-                    ErrorType: UNAUTHORIZED
-                    Message: Your app settings do not allow modifying <param Name> for app <app id>
+                    status: UNAUTHORIZED
+                    message: Your app settings do not allow modifying <param Name> for app <app id>
                 tosError:
                   value:
-                    ErrorType: UNAUTHORIZED
-                    Message: Attribution terms of service were not accepted for app <app id> and <pid>
+                    status: UNAUTHORIZED
+                    message: Attribution terms of service were not accepted for app <app id> and <pid>
         '404':
           description: Integration not found
           content:
@@ -390,8 +390,8 @@ paths:
               examples:
                 integrationNotFound:
                   value:
-                    ErrorType: NOT_FOUND
-                    Message: Integration for <pid> was not found. Please check the pid value
+                    status: NOT_FOUND
+                    message: Integration for <pid> was not found. Please check the pid value
         '422':
           description: Missing/invalid input params
           content:
@@ -406,24 +406,24 @@ paths:
               examples:
                 invalidValueError:
                   value:
-                    ErrorType: INVALID_VALUE
-                    Message: <param> value is invalid.
+                    status: INVALID_VALUE
+                    message: <param> value is invalid.
                 missingParamError:
                   value:
-                    ErrorType: MISSING_PARAMETER
-                    Message: <param> is missing
+                    status: MISSING_PARAMETER
+                    message: <param> is missing
                 generalFailureError:
                   value:
-                    ErrorType: GENERAL_FAILURE
-                    Message: At this time the integration can not be activated.Contact your CSM or support@appsflyer.com with a copy of this message
+                    status: GENERAL_FAILURE
+                    message: At this time the integration can not be activated.Contact your CSM or support@appsflyer.com with a copy of this message
                 integrationNotEnabledError:
                   value:
-                    ErrorType: INACTIVE_INTEGRATION
-                    Message: Integration for app <app id> with <pid> is not enabled
+                    status: INACTIVE_INTEGRATION
+                    message: Integration for app <app id> with <pid> is not enabled
                 unmatchedPlatformError:
                   value:
-                    ErrorType: PLATFORM_UNMATCHED
-                    Message: Both apps should be on the same mobile platform
+                    status: PLATFORM_UNMATCHED
+                    message: Both apps should be on the same mobile platform
         '500':
           description: Internal server error - please try again
 components:
@@ -609,64 +609,64 @@ components:
             type: object    
     AccountTypeError:
       properties:
-        ErrorType:
+        status:
           type: string
-        Message:
+        message:
           type: string
       type: object
     UnauthorizedParamError:
       properties:
-        ErrorType:
+        status:
           type: string
-        Message:
+        message:
           type: string
       type: object
     UnauthorizedAppError:
       properties:
-        ErrorType:
+        status:
           type: string
-        Message:
+        message:
           type: string
       type: object
     TosError:
       properties:
-        ErrorType:
+        status:
           type: string
-        Message:
+        message:
           type: string
       type: object
     InvalidValueError:
       properties:
-        ErrorType:
+        status:
           type: string
-        Message:
+        message:
           type: string
       type: object
     MissingParamError:
       properties:
-        ErrorType:
+        status:
           type: string
-        Message:
+        message:
           type: string
       type: object
     GeneralFailureError:
       properties:
-        ErrorType:
+        status:
           type: string
-        Message:
+        message:
           type: string
       type: object
     IntegrationNotEnabledError:
       properties:
-        ErrorType:
+        status:
           type: string
-        Message:
+        message:
           type: string
       type: object
     UnmatchedPlatformError:
       properties:
-        ErrorType:
+        status:
           type: string
-        Message:
+        message:
           type: string
       type: object
