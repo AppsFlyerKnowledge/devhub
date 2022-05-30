@@ -70,29 +70,29 @@ paths:
         422:
           $ref: '#/components/responses/SchemaErrorInvalidPathParam'
 
-  /event-types/{endpoint-type}:
+  /event-types/{attributing-entity}:
     get:
       tags:
         - Event Types 
-      summary: Retrieve per endpoint-type
+      summary: Retrieve per attributing-entity
       description: Returns a list of the available event types for the specified endpoint type
       parameters:
-      - name: endpoint-type
+      - name: attributing-entity
         in: path
         description: The endpoint type
-        example: "regular"
+        example: "appsflyer"
         required: true
         schema:
           type: string
           enum:
-            - regular
+            - appsflyer
             - skadnetwork
       responses:
         200:
           description: | 
             Event types successfully retrieved.
             The permitted event types are:
-            - regular: ["organic-install-in-app-event", "install", "organic-install", "re-engagement", 
+            - appsflyer: ["organic-install-in-app-event", "install", "organic-install", "re-engagement", 
             "re-attribution", "reinstall", "organic-reinstall", "install-in-app-event", 
             "re-engagement-in-app-event", "re-attribution-in-app-event" ]
             - skadnetwork: ["in-app-event", "re-download", "install", "postbacks-copy", "postback"]
@@ -1189,8 +1189,8 @@ components:
         integration_type:
           type: string
           enum:
-            - regular
-          default: regular
+            - appsflyer
+          default: appsflyer
     RegularAndroidConfig:
       title: Regular Android Config
       type: object
@@ -1362,8 +1362,8 @@ components:
         integration_type:
           type: string
           enum:
-            - regular
-          default: regular
+            - appsflyer
+          default: appsflyer
     SkadConfig:
       title: SKADnetwork iOS Config
       type: object
