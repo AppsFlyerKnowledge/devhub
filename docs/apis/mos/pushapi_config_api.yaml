@@ -1172,18 +1172,15 @@ components:
                   - custom_dimension
                   - campaign_type
         selected_inapps:
-          type: array
-          items:
-            oneOf:
-              - type: string
-                enum:
+          oneOf:
+            - type: string
+              enum:
                 - all
-                title: ALL INAPPS
-              - type: array
-                title: SELECTED INAPPS
-                items:
-                  type: string
-                maxLength: 100
+              title: All Inapps
+            - type: array
+              title: Select Inapps
+              items:
+                type: string
         enabled:
           type: boolean
         integration_type:
@@ -1352,9 +1349,9 @@ components:
             - type: string
               enum:
                 - all
-              title: All fields
+              title: All Inapps
             - type: array
-              title: Select fields
+              title: Select Inapps
               items:
                 type: string
         enabled:
