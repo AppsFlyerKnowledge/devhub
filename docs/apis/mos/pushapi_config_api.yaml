@@ -1206,16 +1206,16 @@ components:
           type: array
           items:
             enum:
-              - "install-in-app-events-organic"
+              - "organic-install-in-app-event"
               - "install"                      
-              - "install-organic"              
+              - "organic-install"              
               - "re-engagement"                
               - "re-attribution"               
               - "reinstall"                    
-              - "reinstall-organic"            
-              - "install-in-app-events"        
-              - "re-engagement-in-app-events"  
-              - "re-attribution-in-app-events"
+              - "organic-reinstall"            
+              - "install-in-app-event"        
+              - "re-engagement-in-app-event"  
+              - "re-attribution-in-app-event"
         selected_fields:
           oneOf:
             - type: string
