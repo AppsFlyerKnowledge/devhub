@@ -19,7 +19,7 @@ paths:
       requestBody:
         $ref: '#/components/requestBodies/CommonBody'
       responses:
-        200:
+        202:
           $ref: '#/components/responses/Success'
         400:
           $ref: '#/components/responses/BadRequest'
@@ -60,7 +60,9 @@ components:
           schema:
             required:
               - af_media_source
-              - af_campaign_id
+              - af_request_id
+              - af_ip 
+              - af_egagement_type
             type: object
             properties:
               af_media_source:
@@ -125,7 +127,16 @@ components:
   responses:  
     Success:
       description: Request successful.
-      content: {}
+      content: 
+        application/json:
+            schema:
+              type: object
+              properties:
+                transaction_id:
+                  type: string 
+            example: {
+              "transaction_id": "31BfH9aQNPs5XyB/vBiQPw"
+            }
     BadRequest:
       description: Bad Request. The request message is not valid.
       content:
