@@ -4,43 +4,43 @@ image: node:16
 
 sync-via-rdme-pushapi-config:
   script:
-    - npx -y rdme@7.0.1 openapi ./docs/apis/mos/pushapi_config_api.yaml --key=V9oyoCB8pLc8TzEn0kuDzV7wShmNlEn9 --id=6238552ac90926011752e49b
+    - npx -y rdme@7.0.1 openapi ./docs/apis/mos/pushapi_config_api.yaml --key=rdme_xn8s9h0fb20a2df26bd435f6c42b1c7d59b240b0354348510d0c2f14216e353fb8fe63 --id=6238552ac90926011752e49b
   rules:
     - if: $CI_COMMIT_BRANCH == "master"
 
 sync-via-rdme-onelink-api:
   script:
-    - npx -y rdme@7.0.1 openapi ./docs/apis/OneLink/onelinkapi.yml --key=V9oyoCB8pLc8TzEn0kuDzV7wShmNlEn9 --id=624693c6fa631302dde62cf4
+    - npx -y rdme@7.0.1 openapi ./docs/apis/OneLink/onelinkapi.yml --key=rdme_xn8s9h0fb20a2df26bd435f6c42b1c7d59b240b0354348510d0c2f14216e353fb8fe63 --id=624693c6fa631302dde62cf4
   rules:
     - if: $CI_COMMIT_BRANCH == "master"
 
 sync-via-rdme-addapp-api:
   script:
-    - npx -y rdme@7.0.1 openapi ./docs/apis/add-app/openapi.yaml --key=V9oyoCB8pLc8TzEn0kuDzV7wShmNlEn9 --id=60ffdc00f71e49000fe45cad
+    - npx -y rdme@7.0.1 openapi ./docs/apis/add-app/openapi.yaml --key=rdme_xn8s9h0fb20a2df26bd435f6c42b1c7d59b240b0354348510d0c2f14216e353fb8fe63 --id=60ffdc00f71e49000fe45cad
   rules:
     - if: $CI_COMMIT_BRANCH == "master"
 
 sync-via-rdme-pull-api:
   script:
-    - npx -y rdme@7.0.1 openapi ./docs/apis/mos/pullapi.yaml --key=V9oyoCB8pLc8TzEn0kuDzV7wShmNlEn9 --id=624594011aecc40014db6e4d
+    - npx -y rdme@7.0.1 openapi ./docs/apis/mos/pullapi.yaml --key=rdme_xn8s9h0fb20a2df26bd435f6c42b1c7d59b240b0354348510d0c2f14216e353fb8fe63 --id=624594011aecc40014db6e4d
   rules:
     - if: $CI_COMMIT_BRANCH == "master"
 
 sync-via-rdme-ctv-events-api:
   script:
-    - npx -y rdme@7.0.1 openapi ./docs/apis/rta/ctv_events_api.yaml --key=V9oyoCB8pLc8TzEn0kuDzV7wShmNlEn9 --id=624c355032911400142d1aca
+    - npx -y rdme@7.0.1 openapi ./docs/apis/rta/ctv_events_api.yaml --key=rdme_xn8s9h0fb20a2df26bd435f6c42b1c7d59b240b0354348510d0c2f14216e353fb8fe63 --id=624c355032911400142d1aca
   rules:
     - if: $CI_COMMIT_BRANCH == "master"
 
 sync-via-rdme-partner-settings-api:
   script:
-    - npx -y rdme@7.0.1 openapi   ./docs/apis/partnerIntSet/partner_integration_settings_api.yaml --key=V9oyoCB8pLc8TzEn0kuDzV7wShmNlEn9 --id=615eb7b60319170356179796
+    - npx -y rdme@7.0.1 openapi   ./docs/apis/partnerIntSet/partner_integration_settings_api.yaml --key=rdme_xn8s9h0fb20a2df26bd435f6c42b1c7d59b240b0354348510d0c2f14216e353fb8fe63 --id=615eb7b60319170356179796
   rules:
     - if: $CI_COMMIT_BRANCH == "master"
 
 sync-via-rdme-engagements-api:
   script:
-    - npx -y rdme@7.0.1 openapi ./docs/apis/rta/engagements_api.yaml --key=V9oyoCB8pLc8TzEn0kuDzV7wShmNlEn9 --id=6203fb9db858c900490628e6
+    - npx -y rdme@7.0.1 openapi ./docs/apis/rta/engagements_api.yaml --key=rdme_xn8s9h0fb20a2df26bd435f6c42b1c7d59b240b0354348510d0c2f14216e353fb8fe63 --id=6203fb9db858c900490628e6
   rules:
     - if: $CI_COMMIT_BRANCH == "master"
 
