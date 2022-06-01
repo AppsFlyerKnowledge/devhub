@@ -17,7 +17,6 @@ paths:
       - name: platform
         in: path
         description: The platform related to this configuration 
-        example: "ios"
         required: true
         schema:
           type: string
