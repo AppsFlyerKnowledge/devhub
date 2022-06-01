@@ -1,0 +1,315 @@
+openapi: 3.0.1
+info:
+  title:  Preload Measurement API
+  version: "1.0"
+servers:
+- url: https://engagements.appsflyer.com/v1.0/s2s/download/app/android
+security:
+- HeaderApiKeyAuth: []
+paths:
+  /{app_id}:
+    post:
+      tags:
+      - Download Events
+      summary: Download event
+      security:
+      - HeaderApiKeyAuth: []
+      parameters:
+        - $ref: '#/components/parameters/AppId'
+      requestBody:
+        $ref: '#/components/requestBodies/CommonBody'
+      responses:
+        200:
+          $ref: '#/components/responses/Success'
+        400:
+          $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/AuthenticationFailed'
+        404:
+          $ref: '#/components/responses/AppNotFound'
+        501:
+          $ref: '#/components/responses/NotImplemented'
+        503:
+          $ref: '#/components/responses/ServiceUnavailable'
+        504:
+          $ref: '#/components/responses/GatewayTimeout'
+
+components:
+  securitySchemes:
+    HeaderApiKeyAuth:
+      type: apiKey
+      description: AppsFlyer will provide a secret key (uuid v4) which is unique per partner integration
+      name: authorization
+      in: header
+  parameters:
+    AppId:
+      name: app_id
+      in: path
+      required: true
+      schema:
+        type: string
+        description: "App ID of the app for which you are posting"
+        example: com.example.testapp
+
+  requestBodies: 
+     CommonBody:
+      description: "common body for impression and click"
+      required: true
+      content:
+        application/json:
+          schema:
+            required:
+              - af_media_source
+              - af_campaign_id
+            type: object
+            properties:
+              af_media_source:
+                $ref: '#/components/schemas/AfMediaSource'
+              af_request_id:
+                $ref: '#/components/schemas/AfRequestId'
+              af_ip:
+                $ref: '#/components/schemas/AfIp'
+              af_egagement_type:
+                $ref: '#/components/schemas/AfEngagementType'
+              af_campaign_id:
+                $ref: '#/components/schemas/AfCampaignId'
+              af_campaign:
+                $ref: '#/components/schemas/AfCampaign'
+              af_adset_id:
+                $ref: '#/components/schemas/AfAdSetId'
+              af_adset:
+                $ref: '#/components/schemas/AfAdSet'
+              af_ad_id:
+                $ref: '#/components/schemas/AfAdId'
+              af_ad:
+                $ref: '#/components/schemas/AfAd'
+              af_campaign_type:
+                $ref: '#/components/schemas/AfCampaignType'
+              af_prt:
+                $ref: '#/components/schemas/AfPrt'
+              af_siteid:
+                $ref: '#/components/schemas/AfSiteId'
+              af_sub_siteid:
+                $ref: '#/components/schemas/AfSubSiteId'
+              af_click_id:
+                $ref: '#/components/schemas/AfClickId'
+              af_lookback_window:
+                $ref: '#/components/schemas/AflookbackWindow'
+              af_ad_placement:
+                $ref: '#/components/schemas/AfAdPlacement'
+              af_ad_type:
+                $ref: '#/components/schemas/AfAdType'
+              af_channel:
+                $ref: '#/components/schemas/AfChannel'
+              af_custom1:
+                $ref: '#/components/schemas/AfCustom'
+              af_custom2:
+                $ref: '#/components/schemas/AfCustom'
+              af_custom3:
+                $ref: '#/components/schemas/AfCustom'
+              af_custom4:
+                $ref: '#/components/schemas/AfCustom'
+              af_custom5:
+                $ref: '#/components/schemas/AfCustom'
+              af_model:
+                $ref: '#/components/schemas/AfModel'
+              af_os_version:
+                $ref: '#/components/schemas/AfOsVersion'
+              af_device_id_type:
+                $ref: '#/components/schemas/AfDeviceIdType'
+              af_device_id_value:
+                $ref: '#/components/schemas/AfDeviceIdValue'
+              af_user_agent:
+                $ref: '#/components/schemas/AfUserAgent'
+
+  responses:  
+    Success:
+      description: Request successful.
+      content: {}
+    BadRequest:
+      description: Bad Request. The request message is not valid.
+      content:
+        application/json:
+            schema:
+              $ref: '#/components/schemas/Error' 
+            example: {
+              message: "Bad Request"
+            }
+    AuthenticationFailed:
+      description: Authentication failed. The authentication token is not valid.
+      content:
+        application/json:
+            schema:
+              $ref: '#/components/schemas/Error' 
+            example: {
+              message: "Authentication failed"
+            }
+    AppNotFound:
+      description: Application ID not found.
+      content:
+        application/json:
+            schema:
+              $ref: '#/components/schemas/Error' 
+            example: {
+              message: "Application ID not found"
+            }
+    NotImplemented:
+      description: Not implmented. 
+      content: 
+        application/json:
+            schema:
+              $ref: '#/components/schemas/Error' 
+            example: {
+              message: "Not implmented"
+            }
+    ServiceUnavailable:
+      description: Service Unavailable. ELB (Amazon Load-balancer) service unavailable.
+      content:
+        application/json:
+            schema:
+              $ref: '#/components/schemas/Error' 
+            example: {
+              message: "Service unavailable"
+            }
+    GatewayTimeout:
+      description: Gateway Timeout. ELB (Amazon Load-balancer) service unavailable.
+      content: 
+        application/json:
+            schema:
+              $ref: '#/components/schemas/Error' 
+            example: {
+              message: "Gateway timeout"
+            }
+
+  schemas:
+    # Schema for error response body
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+        - message
+    AfMediaSource:
+      type: string
+      description: |
+        This is the partner unique identifier as defined on AppsFlyer platform.
+          The following special characters are not allowed: ;, *, !, @, #, ?, $, ^, :, &, ~, `, =, +, ’, >, <, /, {, }, %.
+    AfEngagementType:
+      type: string
+      enum:
+        - preload
+        - click_to_download
+      description: The type of engagement
+    AfCampaignId:
+      type: string
+      maxLength: 64
+      description: "Campaign ID"
+    AfRequestId:
+      type: string
+      format: uuid
+      description: "An identifier that uniquely identifies a request by partner"
+    AfCampaign:
+      type: string
+      maxLength: 256
+      description: "Campaign name"
+    AfAdSetId:
+      type: string
+      maxLength: 64
+      description: "Ad Set ID"
+    AfAdSet:
+      type: string
+      maxLength: 256
+      description: "Ad Set Name"
+    AfAdId:
+      type: string
+      maxLength: 64
+      description: "Ad ID"
+    AfAd:
+      type: string
+      maxLength: 256
+      description: "Ad Name"
+    AfCampaignType:
+      type: string
+      enum:
+        - user_acquisition
+        - retargeting
+      description: "Campaign type"
+    AfPrt:
+      type: string
+      maxLength: 24
+      description: "Agency Account Name"
+    AfSiteId:
+      type: string
+      maxLength: 24
+      description: "Unique ID that identifies the publisher that displays the ad"
+    AfSubSiteId:
+      type: string
+      maxLength: 24
+      description: "Ad sub-network / Publisher ID"
+    AfClickId:
+      type: string
+      maxLength: 256
+      description: "Ad network unique transaction identifier"
+    AflookbackWindow:
+      type: string
+      maxLength: 256
+      description: |
+        Attribution lookback window
+        Configurable number of days/hours for the lookback window attribution period. Available parameter values: 1d - 30d (days) OR 1h-23h (hours). 
+        Validation: 3 char max and using the scheme above
+    AfAdPlacement:
+      type: string
+      maxLength: 256
+      description: "Ad network unique transaction identifier"
+    AfAdType:
+      type: string
+      enum:
+        - text
+        - banner
+        - interstitial
+        - video
+        - rewarded_video
+        - playable
+        - audio
+      description: |
+        Ad network unique transaction identifiers.
+        Case-sensitivity enforcement required.
+    AfChannel:
+      type: string
+      maxLength: 64
+      description: "The media source channel through which the ads are distributed"
+    AfCustom:
+      type: string
+      maxLength: 256
+      description: "Optional custom parameter defined by the advertiser"
+    AfModel:
+      type: string
+      maxLength: 64
+      description: "The device’s model"
+      example: “SM-S115DL”
+    AfOsVersion:
+      type: string
+      maxLength: 12
+      description: |
+        The device’s os_version.
+        Only digits and dots allowed
+      example: "8.1.0"
+    AfDeviceIdType:
+        type: string
+        description: "Device identifier type"
+    AfDeviceIdValue:
+        type: string
+        description: "Device identifier type"
+    AfIp:
+      type: string
+      maxLength: 256
+      description: |
+        The device’s IP the agent sent in its request to the partner’s server.
+        [IPv6 or IPv4]. For, IPv6,values must be the short version (according to RFC5952) and URL Encoded
+        example: "14.89.104.36" 
+    AfUserAgent:
+      type: string
+      maxLength: 256 #TODO - validate this value
+      description: The Device’s User Agent
+      example: "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.121 Safari/537.36 CrKey/1.0.999999 "
