@@ -1,6 +1,6 @@
 openapi: 3.0.1
 info:
-  title: PushAPI Configuration API
+  title: Push API Configuration API
   version: 1.0.0
 servers:
 - url: https://hq1.appsflyer.com/api/pushapi/v1.0/
@@ -1051,7 +1051,7 @@ components:
               title: All fields
             - type: string
               enum:
-                - defualt
+                - default
               title: Default fields
             - type: array
               title: Select fields
@@ -1224,7 +1224,7 @@ components:
               title: All fields
             - type: string
               enum:
-                - defualt
+                - default
               title: Default fields
             - type: array
               title: Select fields
