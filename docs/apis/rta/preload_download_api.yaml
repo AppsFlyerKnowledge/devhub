@@ -4,6 +4,9 @@ info:
   version: "1.0"
 servers:
 - url: https://engagements.appsflyer.com/v1.0/s2s/download/app/android
+  description: Production server
+- url: https://sandbox-engagements.appsflyer.com/v1.0/s2s/download/app/android/
+  description: Sandbox server
 security:
 - HeaderApiKeyAuth: []
 paths:
@@ -213,7 +216,8 @@ components:
       description: "Campaign ID"
     AfRequestId:
       type: string
-      format: uuid
+      format: ^[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i
+      example: 6ccccc43-730d-470b-8adf-3a698ed0f508
       description: | 
         An identifier that uniquely identifies a request by partner.
         Value must be in a UUID format.
