@@ -214,7 +214,9 @@ components:
     AfRequestId:
       type: string
       format: uuid
-      description: "An identifier that uniquely identifies a request by partner"
+      description: | 
+        An identifier that uniquely identifies a request by partner.
+        Value must be in a UUID format.
     AfCampaign:
       type: string
       maxLength: 256
@@ -646,7 +648,7 @@ components:
         description: |
           Device identifier type.
           Depends on the device identifier provided. 
-          In case it is `gaid`, the value be a UUID format
+          In case it is `gaid`, the value must be in a UUID format
     AfDeviceIdEncoding:
         type: string
         enum:
@@ -654,6 +656,7 @@ components:
         description: "Device identifier encoding method"
     AfIp:
       type: string
+      pattern: ^(([0-2]*[0-9]+[0-9]+)\.([0-2]*[0-9]+[0-9]+)\.([0-2]*[0-9]+[0-9]+)\.([0-2]*[0-9]+[0-9]+))$
       maxLength: 256
       description: |
         The device’s IP the agent sent in its request to the partner’s server.
