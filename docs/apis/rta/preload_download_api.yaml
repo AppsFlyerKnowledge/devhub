@@ -25,9 +25,7 @@ paths:
           $ref: '#/components/responses/BadRequest'
         401:
           $ref: '#/components/responses/AuthenticationFailed'
-        404:
-          $ref: '#/components/responses/AppNotFound'
-        501:
+        500:
           $ref: '#/components/responses/NotImplemented'
         503:
           $ref: '#/components/responses/ServiceUnavailable'
@@ -151,22 +149,13 @@ components:
               message: "Bad Request"
             }
     AuthenticationFailed:
-      description: Authentication failed. The authentication token is not valid.
+      description: Authentication failed. Unknown secret.
       content:
         application/json:
             schema:
               $ref: '#/components/schemas/Error' 
             example: {
               message: "Authentication failed"
-            }
-    AppNotFound:
-      description: Application ID not found.
-      content:
-        application/json:
-            schema:
-              $ref: '#/components/schemas/Error' 
-            example: {
-              message: "Application ID not found"
             }
     NotImplemented:
       description: Not implmented. 
@@ -178,7 +167,7 @@ components:
               message: "Not implmented"
             }
     ServiceUnavailable:
-      description: Service Unavailable. ELB (Amazon Load-balancer) service unavailable.
+      description: Service Unavailable. 
       content:
         application/json:
             schema:
@@ -187,7 +176,7 @@ components:
               message: "Service unavailable"
             }
     GatewayTimeout:
-      description: Gateway Timeout. ELB (Amazon Load-balancer) service unavailable.
+      description: Gateway Timeout. 
       content: 
         application/json:
             schema:
