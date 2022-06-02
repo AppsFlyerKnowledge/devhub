@@ -73,36 +73,34 @@ components:
                 $ref: '#/components/schemas/AfIp'
               af_egagement_type:
                 $ref: '#/components/schemas/AfEngagementType'
-              af_campaign_id:
-                $ref: '#/components/schemas/AfCampaignId'
               af_campaign:
                 $ref: '#/components/schemas/AfCampaign'
-              af_adset_id:
-                $ref: '#/components/schemas/AfAdSetId'
+              af_campaign_id:
+                $ref: '#/components/schemas/AfCampaignId'
               af_adset:
                 $ref: '#/components/schemas/AfAdSet'
-              af_ad_id:
-                $ref: '#/components/schemas/AfAdId'
+              af_adset_id:
+                $ref: '#/components/schemas/AfAdSetId'
               af_ad:
                 $ref: '#/components/schemas/AfAd'
-              af_campaign_type:
-                $ref: '#/components/schemas/AfCampaignType'
+              af_ad_id:
+                $ref: '#/components/schemas/AfAdId'
               af_prt:
                 $ref: '#/components/schemas/AfPrt'
-              af_siteid:
-                $ref: '#/components/schemas/AfSiteId'
-              af_sub_siteid:
-                $ref: '#/components/schemas/AfSubSiteId'
               af_click_id:
                 $ref: '#/components/schemas/AfClickId'
               af_lookback_window:
                 $ref: '#/components/schemas/AflookbackWindow'
-              af_ad_placement:
-                $ref: '#/components/schemas/AfAdPlacement'
               af_ad_type:
                 $ref: '#/components/schemas/AfAdType'
               af_channel:
                 $ref: '#/components/schemas/AfChannel'
+              af_cost_model:
+                $ref: '#/components/schemas/AfCostModel'
+              af_cost_value:
+                $ref: '#/components/schemas/AfCostValue'
+              af_cost_currency:
+                $ref: '#/components/schemas/AfCostCurrency'
               af_custom1:
                 $ref: '#/components/schemas/AfCustom'
               af_custom2:
@@ -117,12 +115,18 @@ components:
                 $ref: '#/components/schemas/AfModel'
               af_os_version:
                 $ref: '#/components/schemas/AfOsVersion'
+              af_siteid:
+                $ref: '#/components/schemas/AfSiteId'
+              af_sub_siteid:
+                $ref: '#/components/schemas/AfSubSiteId'
+              af_user_agent:
+                $ref: '#/components/schemas/AfUserAgent'
               af_device_id_type:
                 $ref: '#/components/schemas/AfDeviceIdType'
               af_device_id_value:
                 $ref: '#/components/schemas/AfDeviceIdValue'
-              af_user_agent:
-                $ref: '#/components/schemas/AfUserAgent'
+              af_device_id_encoding:
+                $ref: '#/components/schemas/AfDeviceIdEncoding'
 
   responses:  
     Success:
@@ -203,9 +207,10 @@ components:
         - message
     AfMediaSource:
       type: string
+      pattern: ^[^+-=@]
       description: |
         This is the partner unique identifier as defined on AppsFlyer platform.
-          The following special characters are not allowed: ;, *, !, @, #, ?, $, ^, :, &, ~, `, =, +, ’, >, <, /, {, }, %.
+        It cannot start with: +,-,=,@
     AfEngagementType:
       type: string
       enum:
@@ -215,6 +220,7 @@ components:
     AfCampaignId:
       type: string
       maxLength: 64
+      pattern: ^[^+-=@]
       description: "Campaign ID"
     AfRequestId:
       type: string
@@ -223,22 +229,27 @@ components:
     AfCampaign:
       type: string
       maxLength: 256
+      pattern: ^[^+-=@]
       description: "Campaign name"
     AfAdSetId:
       type: string
+      pattern: ^[^+-=@]
       maxLength: 64
       description: "Ad Set ID"
     AfAdSet:
       type: string
       maxLength: 256
+      pattern: ^[^+-=@]
       description: "Ad Set Name"
     AfAdId:
       type: string
       maxLength: 64
+      pattern: ^[^+-=@]
       description: "Ad ID"
     AfAd:
       type: string
       maxLength: 256
+      pattern: ^[^+-=@]
       description: "Ad Name"
     AfCampaignType:
       type: string
@@ -248,27 +259,32 @@ components:
       description: "Campaign type"
     AfPrt:
       type: string
-      maxLength: 24
+      maxLength: 256
+      pattern: ^[^+-=@]
       description: "Agency Account Name"
     AfSiteId:
       type: string
-      maxLength: 24
+      maxLength: 256
+      pattern: ^[^+-=@]
       description: "Unique ID that identifies the publisher that displays the ad"
     AfSubSiteId:
       type: string
-      maxLength: 24
+      maxLength: 256
+      pattern: ^[^+-=@]
       description: "Ad sub-network / Publisher ID"
     AfClickId:
       type: string
       maxLength: 256
+      pattern: ^[^+-=@]
       description: "Ad network unique transaction identifier"
     AflookbackWindow:
       type: string
       maxLength: 256
       description: |
         Attribution lookback window
-        Configurable number of days/hours for the lookback window attribution period. Available parameter values: 1d - 30d (days) OR 1h-23h (hours). 
-        Validation: 3 char max and using the scheme above
+        Configurable number of days/hours for the lookback window attribution period. 
+        Supported values: 1d - 30d (days) OR 1h-23h (hours). 
+        ** Only valid if `af_engagement_type=click_to_download` **
     AfAdPlacement:
       type: string
       maxLength: 256
@@ -285,33 +301,368 @@ components:
         - audio
       description: |
         Ad network unique transaction identifiers.
-        Case-sensitivity enforcement required.
     AfChannel:
       type: string
       maxLength: 64
+      pattern: ^[^+-=@]
       description: "The media source channel through which the ads are distributed"
+    AfCostModel:
+      type: string
+      enum:
+        - cpi
+        - cpa
+        - cpe
+        - cpr
+        - cpm
+        - cpc
+      description: |
+        Cost model
+    AfCostValue:
+      type: string
+      pattern: ^[0-9]*(\.)?[0-9]+$
+    AfCostCurrency:
+      type: string
+      description: |
+        Use a currency code which is compliant with ISO-4217.
+      enum:
+        - ADP
+        - AED
+        - AFA
+        - AFN
+        - ALK
+        - ALL
+        - AMD
+        - ANG
+        - AOA
+        - AOK
+        - AON
+        - AOR
+        - ARA
+        - ARP
+        - ARS
+        - ARY
+        - ATS
+        - AUD
+        - AWG
+        - AYM
+        - AZM
+        - AZN
+        - BAD
+        - BAM
+        - BBD
+        - BDT
+        - BEC
+        - BEF
+        - BEL
+        - BGJ
+        - BGK
+        - BGL
+        - BGN
+        - BHD
+        - BIF
+        - BMD
+        - BND
+        - BOB
+        - BOP
+        - BOV
+        - BRB
+        - BRC
+        - BRE
+        - BRL
+        - BRN
+        - BRR
+        - BSD
+        - BTN
+        - BUK
+        - BWP
+        - BYB
+        - BYN
+        - BYR
+        - BZD
+        - CAD
+        - CDF
+        - CHC
+        - CHE
+        - CHF
+        - CHW
+        - CLF
+        - CLP
+        - CNY
+        - COP
+        - COU
+        - CRC
+        - CSD
+        - CSJ
+        - CSK
+        - CUC
+        - CUP
+        - CVE
+        - CYP
+        - CZK
+        - DDM
+        - DEM
+        - DJF
+        - DKK
+        - DOP
+        - DZD
+        - ECS
+        - ECV
+        - EEK
+        - EGP
+        - ERN
+        - ESA
+        - ESB
+        - ESP
+        - ETB
+        - EUR
+        - FIM
+        - FJD
+        - FKP
+        - FRF
+        - GBP
+        - GEK
+        - GEL
+        - GHC
+        - GHP
+        - GHS
+        - GIP
+        - GMD
+        - GNE
+        - GNF
+        - GNS
+        - GQE
+        - GRD
+        - GTQ
+        - GWE
+        - GWP
+        - GYD
+        - HKD
+        - HNL
+        - HRD
+        - HRK
+        - HTG
+        - HUF
+        - IDR
+        - IEP
+        - ILP
+        - ILR
+        - ILS
+        - INR
+        - IQD
+        - IRR
+        - ISJ
+        - ISK
+        - ITL
+        - JMD
+        - JOD
+        - JPY
+        - KES
+        - KGS
+        - KHR
+        - KMF
+        - KPW
+        - KRW
+        - KWD
+        - KYD
+        - KZT
+        - LAJ
+        - LAK
+        - LBP
+        - LKR
+        - LRD
+        - LSL
+        - LSM
+        - LTL
+        - LTT
+        - LUC
+        - LUF
+        - LUL
+        - LVL
+        - LVR
+        - LYD
+        - MAD
+        - MDL
+        - MGA
+        - MGF
+        - MKD
+        - MLF
+        - MMK
+        - MNT
+        - MOP
+        - MRO
+        - MRU
+        - MTL
+        - MTP
+        - MUR
+        - MVQ
+        - MVR
+        - MWK
+        - MXN
+        - MXP
+        - MXV
+        - MYR
+        - MZE
+        - MZM
+        - MZN
+        - NAD
+        - NGN
+        - NIC
+        - NIO
+        - NLG
+        - NOK
+        - NPR
+        - NZD
+        - OMR
+        - PAB
+        - PEH
+        - PEI
+        - PEN
+        - PES
+        - PGK
+        - PHP
+        - PKR
+        - PLN
+        - PLZ
+        - PTE
+        - PYG
+        - QAR
+        - RHD
+        - ROK
+        - ROL
+        - RON
+        - RSD
+        - RUB
+        - RUR
+        - RWF
+        - SAR
+        - SBD
+        - SCR
+        - SDD
+        - SDG
+        - SDP
+        - SEK
+        - SGD
+        - SHP
+        - SIT
+        - SKK
+        - SLL
+        - SOS
+        - SRD
+        - SRG
+        - SSP
+        - STD
+        - STN
+        - SUR
+        - SVC
+        - SYP
+        - SZL
+        - THB
+        - TJR
+        - TJS
+        - TMM
+        - TMT
+        - TND
+        - TOP
+        - TPE
+        - TRL
+        - TRY
+        - TTD
+        - TWD
+        - TZS
+        - UAH
+        - UAK
+        - UGS
+        - UGW
+        - UGX
+        - USD
+        - USN
+        - USS
+        - UYI
+        - UYN
+        - UYP
+        - UYU
+        - UYW
+        - UZS
+        - VEB
+        - VEF
+        - VES
+        - VNC
+        - VND
+        - VUV
+        - WST
+        - XAF
+        - XAG
+        - XAU
+        - XBA
+        - XBB
+        - XBC
+        - XBD
+        - XCD
+        - XDR
+        - XEU
+        - XFO
+        - XFU
+        - XOF
+        - XPD
+        - XPF
+        - XPT
+        - XRE
+        - XSU
+        - XTS
+        - XUA
+        - XXX
+        - YDD
+        - YER
+        - YUD
+        - YUM
+        - YUN
+        - ZAL
+        - ZAR
+        - ZMK
+        - ZMW
+        - ZRN
+        - ZRZ
+        - ZWC
+        - ZWD
+        - ZWL
+        - ZWN
+        - ZWR
     AfCustom:
       type: string
       maxLength: 256
+      pattern: ^[^+-=@]
       description: "Optional custom parameter defined by the advertiser"
     AfModel:
       type: string
       maxLength: 64
+      pattern: ^[^+-=@]
       description: "The device’s model"
       example: “SM-S115DL”
     AfOsVersion:
       type: string
       maxLength: 12
+      pattern: ^[0-9]*[\.]?[0-9]*[\.]?[0-9]+$
       description: |
         The device’s os_version.
         Only digits and dots allowed
       example: "8.1.0"
     AfDeviceIdType:
         type: string
+        enum:
+          - gaid
+          - oaid
         description: "Device identifier type"
     AfDeviceIdValue:
         type: string
-        description: "Device identifier type"
+        description: |
+          Device identifier type.
+          Depends on the device identifier provided. 
+          In case it is `gaid`, the value be a UUID format
+    AfDeviceIdEncoding:
+        type: string
+        enum:
+          - sha256
+        description: "Device identifier encoding method"
     AfIp:
       type: string
       maxLength: 256
@@ -321,6 +672,7 @@ components:
         example: "14.89.104.36" 
     AfUserAgent:
       type: string
-      maxLength: 256 #TODO - validate this value
+      maxLength: 256 
+      pattern: ^[^+-=@]
       description: The Device’s User Agent
       example: "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.121 Safari/537.36 CrKey/1.0.999999 "
