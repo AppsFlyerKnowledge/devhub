@@ -63,7 +63,7 @@ components:
               - af_media_source
               - af_request_id
               - af_ip 
-              - af_egagement_type
+              - af_engagement_type
             type: object
             properties:
               af_media_source:
@@ -72,7 +72,7 @@ components:
                 $ref: '#/components/schemas/AfRequestId'
               af_ip:
                 $ref: '#/components/schemas/AfIp'
-              af_egagement_type:
+              af_engagement_type:
                 $ref: '#/components/schemas/AfEngagementType'
               af_campaign:
                 $ref: '#/components/schemas/AfCampaign'
