@@ -96,8 +96,7 @@ paths:
           description: The request was accepted
           content: {}
         400:
-          description: The authentication succeeded, but mandatory fields in the message
-            body are missing, or fields are invalid
+          description: Mandatory fields in the message body are missing, or fields are invalid
           content: {}
         401:
           description: The app doesn't exist or the authentication failed
@@ -396,8 +395,7 @@ paths:
           description: The request was accepted
           content: {}
         400:
-          description: The authentication succeeded, but mandatory fields in the message
-            body are missing, or fields are invalid
+          description: Mandatory fields in the message body are missing, or fields are invalid
           content: {}
         401:
           description: The app doesn't exist or the authentication failed
