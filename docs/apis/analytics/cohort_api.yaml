@@ -225,7 +225,9 @@ components:
     RateLimitError:
       description: Rate Limit Error. 
       content:
-        application/json: {}
+        application/json: 
+          schema:
+            type: string
 
   schemas:
     Filters:
