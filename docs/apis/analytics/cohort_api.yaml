@@ -22,14 +22,12 @@ paths:
       responses:
         200:
           $ref: '#/components/responses/Success'
-        400:
-          $ref: '#/components/responses/BadRequest'
         401:
           $ref: '#/components/responses/Unauthorized'
-        404:
-          $ref: '#/components/responses/NotFound'
         422:
           $ref: '#/components/responses/UnprocessableEntity'
+        429:
+          $ref: '#/components/responses/RateLimitError'
 
 components:
   securitySchemes:
@@ -112,6 +110,9 @@ components:
                 type: string
                 enum:
                   - hour
+                  - day
+                  - week
+                  - month
                 description: |
                   Hourly granularity for the previous 72 hours by setting `granularity=hour` and setting the from and to range to include the time of day.
               partial_data:
@@ -176,53 +177,43 @@ components:
               type: object
               additionalProperties: {} 
         text/csv: {}
-
-    BadRequest:
-      description: Bad Request. The request message is not valid.
-      content:
-        application/json:
-            schema:
-              $ref: '#/components/schemas/Error' 
-            example: {
-              message: "Bad Request"
-            }
+    
     Unauthorized:
       description: Authentication failed.
       content:
         application/json:
             schema:
-              $ref: '#/components/schemas/Error' 
-            example: {
-              message: "Authentication failed"
-            }
-    NotFound:
+              type: object
+              properties:
+                data:
+                  type: string
+                status:
+                  type: string  
+            example: {}
+    UnprocessableEntity:
       description: Not found. 
       content: 
         application/json:
             schema:
-              $ref: '#/components/schemas/Error' 
+             type: object
+             properties:
+              error:
+                type: string
+              expose:
+                type: string 
             example: {
-              message: "Not implmented"
+              error: "Invalid value: daya for key: granularity. Expected one of: hour, week, month, day",
+              expose: false
             }
-    UnprocessableEntity:
-      description: Unprocessable entity. 
+    RateLimitError:
+      description: Rate Limit Error. 
       content:
-        application/json:
-            schema:
-              $ref: '#/components/schemas/Error' 
-            example: {
-              message: "Service unavailable"
-            }
+        application/json: {}
 
   schemas:
     # Schema for error response body
     Error:
-      type: object
-      properties:
-        message:
-          type: string
-      required:
-        - message
+      
     Filters:
       type: object
       properties:
