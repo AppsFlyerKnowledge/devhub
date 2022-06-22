@@ -76,7 +76,7 @@ components:
               - aggregation_type
             type: object
             properties:
-              cohort _type:
+              cohort_type:
                 type: string
                 enum:
                   - user_acquisition
@@ -85,12 +85,6 @@ components:
                 description: |
                   - `unified` combines the performance of user acquisition and retargeting campaigns.
                   - If an event is attributed to both retargeting and user acquisition campaigns, only the retargeting event is included in KPIs returned, meaning `is_primary=true`.
-              min_cohort_size:
-                type: integer
-                minimum: 1
-                description: |
-                  Minimum cohort size is used to reduce the number of records returned by excluding cohorts having few users. This means that the *users* KPI has a value equal or greater to that specified.
-                  *Default*: 1
               from:
                 type: string
                 pattern: ^\d{4}\-\d{2}\-\d{2}\s*(?:\d{2}:\d{2}(?::\d{2})?)?$
@@ -106,28 +100,6 @@ components:
                   For a single day: `from` and `to values are identical.
                   Hour is used when `granularity=hour`
                 example: "2022-04-22 21:45"
-              granularity:
-                type: string
-                enum:
-                  - hour
-                  - day
-                  - week
-                  - month
-                description: |
-                  Hourly granularity for the previous 72 hours by setting `granularity=hour` and setting the from and to range to include the time of day.
-              partial_data:
-                type: boolean
-                description: |
-                  To avoid data distortion and misinterpretation Cohort returns data of complete days. However, the data of partial days can be useful. 
-                  The number of complete cohort days for a query is calculated as the difference between today's date and the to date.
-                  *Default* If `false`, complete days return.
-                  If `true`, up to 180 cohort days return, including days having incomplete data. 
-                  **Example**: On May 10, the number of complete cohort days for users converting during April 1-30, is 10. 
-                  If false [default], cohort days 0-9, return. This is the number of days (10) between the last conversion date and today. 
-                  If true, cohort days 1-40 return. Days 11-40 contain partial data and do not return. For example, since April 20, only 20 days have elapsed, and so on.
-                  **Note**: Partial data is only allowed when the aggregation type is cumulative.
-              filters:
-                $ref: '#/components/schemas/Filters'
               kpis:
                 type: array
                 minItems: 1
@@ -144,6 +116,11 @@ components:
                     - roi
                     - sessions 
                     - uninstalls
+              aggregation_type:
+                type: string
+                enum:
+                  - cumulative
+                  - on_day
               groupings:
                 type: array
                 minItems: 1
@@ -167,6 +144,51 @@ components:
                     - af_adset_id
                     - geo
                     - date
+              min_cohort_size:
+                type: integer
+                minimum: 1
+                description: |
+                  Minimum cohort size is used to reduce the number of records returned by excluding cohorts having few users. This means that the *users* KPI has a value equal or greater to that specified.
+                  *Default*: 1
+              granularity:
+                type: string
+                enum:
+                  - hour
+                  - day
+                  - week
+                  - month
+                description: |
+                  Hourly granularity for the previous 72 hours by setting `granularity=hour` and setting the from and to range to include the time of day.
+              partial_data:
+                type: boolean
+                description: |
+                  To avoid data distortion and misinterpretation Cohort returns data of complete days. However, the data of partial days can be useful. 
+                  The number of complete cohort days for a query is calculated as the difference between today's date and the to date.
+                  *Default* If `false`, complete days return.
+                  If `true`, up to 180 cohort days return, including days having incomplete data. 
+                  **Example**: On May 10, the number of complete cohort days for users converting during April 1-30, is 10. 
+                  If false [default], cohort days 0-9, return. This is the number of days (10) between the last conversion date and today. 
+                  If true, cohort days 1-40 return. Days 11-40 contain partial data and do not return. For example, since April 20, only 20 days have elapsed, and so on.
+                  **Note**: Partial data is only allowed when the aggregation type is cumulative.
+              filters:
+                $ref: '#/components/schemas/Filters'
+              preferred_currency:
+                type: boolean
+                description: |
+                  - If true, revenue is returned using the app-specific currency set in the platform. 
+                  - *Default* If false, results return in USD.
+              preferred_timezone:
+                type: boolean
+                description: |
+                  - If true, times are expressed using the app-specific time zone set in the platform.
+                  - *Default* If false, times are expressed using UTC time zone.
+              
+              per_user:
+                type: boolean
+                description: |
+                  Divide the KPI function by the number of app users. Applies only to relevant KPIs.
+                  - If true, KPI values are divided by the number of users in the cohort.
+                  - If false, KPI values are not divided by the number of users.
 
   responses:  
     Success:
@@ -211,9 +233,6 @@ components:
         application/json: {}
 
   schemas:
-    # Schema for error response body
-    Error:
-      
     Filters:
       type: object
       properties:
@@ -294,24 +313,4 @@ components:
             A purchase made on period 3 means it was made on January 4. 
             Similarly, a user who installs on January 11, this is period 0. A purchase made on January 14 would be period 3.
             More information you can find [here](https://support.appsflyer.com/hc/en-us/articles/360004799057#using-period-filters).
-        preferred_currency:
-          type: boolean
-          description: |
-            - If true, revenue is returned using the app-specific currency set in the platform. 
-            - *Default* If false, results return in USD.
-        preferred_timezone:
-          type: boolean
-          description: |
-            - If true, times are expressed using the app-specific time zone set in the platform.
-            - *Default* If false, times are expressed using UTC time zone.
-        aggregation_type:
-          type: string
-          enum:
-            - cumulative
-            - on_day
-        per_user:
-          type: boolean
-          description: |
-            Divide the KPI function by the number of app users. Applies only to relevant KPIs.
-            - If true, KPI values are divided by the number of users in the cohort.
-            - If false, KPI values are not divided by the number of users.
+        
