@@ -1,0 +1,326 @@
+openapi: 3.0.1
+info:
+  title:  Cohort API
+  version: "1.0"
+servers:
+- url: https://hq1.appsflyer.com/api/cohorts/v1/data/app/
+  description: Production server
+security:
+- HeaderApiKeyAuth: []
+paths:
+  /{app_id}:
+    post:
+      tags:
+      - Cohort Report
+      summary: Create Cohort Report
+      security:
+      - BearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/AppId'
+      requestBody:
+        $ref: '#/components/requestBodies/createReportBody'
+      responses:
+        200:
+          $ref: '#/components/responses/Success'
+        400:
+          $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: '#/components/responses/NotFound'
+        422:
+          $ref: '#/components/responses/UnprocessableEntity'
+
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: |
+        Reach out to your CSM to enable Cohort API and then [get the token in the dashboard](https://support.appsflyer.com/hc/en-us/articles/360004562377)
+
+  parameters:
+    AppId:
+      name: app_id
+      in: path
+      required: true
+      schema:
+        type: string
+        description: "App ID of the app for which you get the report"
+        example: com.example.testapp
+    Format:
+      name: format
+      in: query
+      required: false 
+      schema:
+        type: string
+        enum:
+          - csv
+          - json
+      description: |
+        Results return as `csv` or `JSON`. The `csv` file structure is tabular while that of the `JSON` record orientated.
+        *Default* `csv` the [file name](https://support.appsflyer.com/hc/en-us/articles/360004799057#csv-file-name-structure) depends on the query.
+        `JSON` containing a query and results section
+
+  requestBodies: 
+     createReportBody:
+      description: "Body for create report request"
+      required: true
+      content:
+        application/json:
+          schema:
+            required:
+              - cohort_type
+              - from
+              - to 
+              - groupings
+              - kpis
+              - aggregation_type
+            type: object
+            properties:
+              cohort _type:
+                type: string
+                enum:
+                  - user_acquisition
+                  - retargeting
+                  - unified
+                description: |
+                  - `unified` combines the performance of user acquisition and retargeting campaigns.
+                  - If an event is attributed to both retargeting and user acquisition campaigns, only the retargeting event is included in KPIs returned, meaning `is_primary=true`.
+              min_cohort_size:
+                type: integer
+                minimum: 1
+                description: |
+                  Minimum cohort size is used to reduce the number of records returned by excluding cohorts having few users. This means that the *users* KPI has a value equal or greater to that specified.
+                  *Default*: 1
+              from:
+                type: string
+                pattern: ^\d{4}\-\d{2}\-\d{2}\s*(?:\d{2}:\d{2}(?::\d{2})?)?$
+                description: |
+                  Lower bound of the LTV attribution date range. The earliest date supported is 720 days before the current date.
+                  Hour is used when `granularity=hour`
+                example: "2022-04-22 21:45"
+              to:
+                type: string
+                pattern: ^\d{4}\-\d{2}\-\d{2}\s*(?:\d{2}:\d{2}(?::\d{2})?)?$
+                description: |
+                  Higher bound of the LTV attribution date range.
+                  For a single day: `from` and `to values are identical.
+                  Hour is used when `granularity=hour`
+                example: "2022-04-22 21:45"
+              granularity:
+                type: string
+                enum:
+                  - hour
+                description: |
+                  Hourly granularity for the previous 72 hours by setting `granularity=hour` and setting the from and to range to include the time of day.
+              partial_data:
+                type: boolean
+                description: |
+                  To avoid data distortion and misinterpretation Cohort returns data of complete days. However, the data of partial days can be useful. 
+                  The number of complete cohort days for a query is calculated as the difference between today's date and the to date.
+                  *Default* If `false`, complete days return.
+                  If `true`, up to 180 cohort days return, including days having incomplete data. 
+                  **Example**: On May 10, the number of complete cohort days for users converting during April 1-30, is 10. 
+                  If false [default], cohort days 0-9, return. This is the number of days (10) between the last conversion date and today. 
+                  If true, cohort days 1-40 return. Days 11-40 contain partial data and do not return. For example, since April 20, only 20 days have elapsed, and so on.
+                  **Note**: Partial data is only allowed when the aggregation type is cumulative.
+              filters:
+                $ref: '#/components/schemas/Filters'
+              kpis:
+                type: array
+                minItems: 1
+                maxItems: 1
+                items:
+                  type: string
+                  enum:
+                    - users
+                    - ecpi
+                    - cost
+                    - event_name
+                    - revenue
+                    - ROAS
+                    - roi
+                    - sessions 
+                    - uninstalls
+              groupings:
+                type: array
+                minItems: 1
+                maxItems: 7
+                items:
+                  type: string
+                  enum:
+                    - af_ad
+                    - af_ad_id
+                    - c
+                    - af_c_id
+                    - af_channel
+                    - pid
+                    - af_sub1
+                    - af_keywords
+                    - af_prt
+                    - cohort_type
+                    - site_id
+                    - attributed_touch_type
+                    - af_adset
+                    - af_adset_id
+                    - geo
+                    - date
+
+  responses:  
+    Success:
+      description: Request successful.
+      content: 
+        application/json:
+            schema:
+              type: object
+              additionalProperties: {} 
+        text/csv: {}
+
+    BadRequest:
+      description: Bad Request. The request message is not valid.
+      content:
+        application/json:
+            schema:
+              $ref: '#/components/schemas/Error' 
+            example: {
+              message: "Bad Request"
+            }
+    Unauthorized:
+      description: Authentication failed.
+      content:
+        application/json:
+            schema:
+              $ref: '#/components/schemas/Error' 
+            example: {
+              message: "Authentication failed"
+            }
+    NotFound:
+      description: Not found. 
+      content: 
+        application/json:
+            schema:
+              $ref: '#/components/schemas/Error' 
+            example: {
+              message: "Not implmented"
+            }
+    UnprocessableEntity:
+      description: Unprocessable entity. 
+      content:
+        application/json:
+            schema:
+              $ref: '#/components/schemas/Error' 
+            example: {
+              message: "Service unavailable"
+            }
+
+  schemas:
+    # Schema for error response body
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+        - message
+    Filters:
+      type: object
+      properties:
+        af_ad:
+          type: string
+          description: Ad
+        af_ad_id:
+          type: string
+          description: Ad ID
+        c:
+          type: string
+          description: Campaign
+        af_c_id:
+          type: string
+          description: Campaign ID
+        af_channel:
+          type: string
+          description: Channel
+        pid:
+          type: string
+          description: Media Source
+        af_sub1:
+          type: string
+          description: Sub Param 1
+        af_keywords:
+          type: string
+          description: Keywords
+        af_prt:
+          type: string
+          description: Agency
+        cohort_type:
+          type: string
+          enum:
+            - user_acquisition
+            - retargeting
+            - unified
+          description: Conversion Type
+        site_id:
+          type: string
+          description: Site ID
+        revenue_type:
+          type: string
+          enum:
+            - regular
+            - ad_monetization
+          description: Revenue Type
+        attributed_touch_type:
+          type: string
+          enum:
+            - click
+            - impression
+            - TV
+            - pre-installed
+          description: Attributed Touch Type
+        af_adset:
+          type: string
+          description: Adset
+        af_adset_id:
+          type: string
+          description: Adset ID
+        geo:
+          type: string
+          enum:
+            - TBA
+          description: Country
+        # date:
+        #   type: string
+        #   description: Date
+        period:
+          type: array
+          items:
+            type: integer
+            minimum: 0
+            maximum: 180
+          description: |
+            Period refers to the day post-attribution, where period 0 is the attribution day. 
+            For example, a user installs the app on January 1. This is the attribution day. A purchase made on period 0 means it was made on January 1.
+            A purchase made on period 3 means it was made on January 4. 
+            Similarly, a user who installs on January 11, this is period 0. A purchase made on January 14 would be period 3.
+            More information you can find [here](https://support.appsflyer.com/hc/en-us/articles/360004799057#using-period-filters).
+        preferred_currency:
+          type: boolean
+          description: |
+            - If true, revenue is returned using the app-specific currency set in the platform. 
+            - *Default* If false, results return in USD.
+        preferred_timezone:
+          type: boolean
+          description: |
+            - If true, times are expressed using the app-specific time zone set in the platform.
+            - *Default* If false, times are expressed using UTC time zone.
+        aggregation_type:
+          type: string
+          enum:
+            - cumulative
+            - on_day
+        per_user:
+          type: boolean
+          description: |
+            Divide the KPI function by the number of app users. Applies only to relevant KPIs.
+            - If true, KPI values are divided by the number of users in the cohort.
+            - If false, KPI values are not divided by the number of users.
