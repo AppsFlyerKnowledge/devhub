@@ -205,13 +205,8 @@ components:
       content:
         application/json:
             schema:
-              type: object
-              properties:
-                data:
-                  type: string
-                status:
-                  type: string  
-            example: {}
+              type: string
+            example: "Authentication error"
     UnprocessableEntity:
       description: Not found. 
       content: 
