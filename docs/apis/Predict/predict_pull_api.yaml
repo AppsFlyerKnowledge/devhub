@@ -34,6 +34,19 @@ paths:
         required: true
         schema:
           type: string
+      - name: source_type
+        in: query
+        description: > 
+          The attribution source the query is made for:
+            - `skan` SKADNetwork attribution data
+            - `af` AppsFlyer attribution data
+        example: "skan"
+        required: true
+        schema:
+          type: string
+          enum:
+            - skan
+            - af
       - name: view_type
         in: query
         description: >
@@ -41,8 +54,6 @@ paths:
           - `acquisition`: Installs
           - `retargeting`: Redownloads
           - `unified`: Acquisition and redownload combined
-           
-         Default value is `unified`
         required: false
         schema:
           type: string
