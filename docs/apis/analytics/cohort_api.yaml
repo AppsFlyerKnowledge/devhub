@@ -208,7 +208,7 @@ components:
               type: string
             example: "Authentication error"
     UnprocessableEntity:
-      description: Not found. 
+      description: Unprocessable entity.
       content: 
         application/json:
             schema:
