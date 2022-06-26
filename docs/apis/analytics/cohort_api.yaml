@@ -155,10 +155,8 @@ components:
                 enum:
                   - hour
                   - day
-                  - week
-                  - month
                 description: |
-                  Hourly granularity for the previous 72 hours by setting `granularity=hour` and setting the from and to range to include the time of day.
+                  Hourly granularity for the previous 72 hours by setting `granularity=hour` and setting the `from` and `to` range to include the time of day.
               partial_data:
                 type: boolean
                 description: |
