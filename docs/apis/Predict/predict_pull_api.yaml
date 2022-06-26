@@ -1,6 +1,6 @@
 openapi: 3.0.1
 info:
-  title: PredictSK Pull API
+  title: Predict Pull API
   version: 1.0.0
 servers:
 - url: https://hq1.appsflyer.com/api/predict-sk/v1/data/app
@@ -11,7 +11,7 @@ paths:
   /{app-id}:
     get:
       summary: PredictSK aggregated report
-      description: "The PredictSK aggregated report returns attribution metrics reported by Apple SKAdNetwork (real data) and other data points using the install or postback arrival date. The report is available through Data Locker or the API."
+      description: "The Predict aggregated report returns predicted performance metrics, for both SKAdNetwork attribution and AF attribution models. The report is available through Data Locker or the API."
       parameters:
       - name: app-id
         in: path
@@ -34,6 +34,19 @@ paths:
         required: true
         schema:
           type: string
+      - name: source_type
+        in: query
+        description: > 
+          The attribution source the query is made for:
+            - `skan` SKADNetwork attribution data
+            - `af` AppsFlyer attribution data
+        example: "skan"
+        required: true
+        schema:
+          type: string
+          enum:
+            - skan
+            - af
       - name: view_type
         in: query
         description: >
@@ -41,8 +54,6 @@ paths:
           - `acquisition`: Installs
           - `retargeting`: Redownloads
           - `unified`: Acquisition and redownload combined
-           
-         Default value is `unified`
         required: false
         schema:
           type: string
