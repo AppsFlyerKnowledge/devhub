@@ -10,7 +10,7 @@ security:
 paths:
   /{app-id}:
     get:
-      summary: PredictSK aggregated report
+      summary: Predict Pull API
       description: "The Predict aggregated report returns predicted performance metrics, for both SKAdNetwork attribution and AF attribution models. The report is available through Data Locker or the API."
       parameters:
       - name: app-id
@@ -23,14 +23,14 @@ paths:
       - name: start_date
         in: query
         description: "The date type used in the date range bounded by **start_date** and **end_date**\n\n start_date is the lower bound of requested dates\n\n **Note!** Install date differs from postback arrival date.\n\n Expects YYYY-MM-DD format"
-        example: "2021-11-06"
+        example: "2021-11-05"
         required: true
         schema:
           type: string
       - name: end_date
         in: query
         description: "end_date is the upper bound of requested dates\n\n Maximum number of days per report call: 90 days\n\n Expects YYYY-MM-DD format"
-        example: "2021-11-05"
+        example: "2021-11-06"
         required: true
         schema:
           type: string
