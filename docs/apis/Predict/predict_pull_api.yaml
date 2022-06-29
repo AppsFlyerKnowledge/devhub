@@ -10,7 +10,9 @@ security:
 paths:
   /{app-id}:
     get:
-      summary: Predict Pull API
+      tags:
+      - Predict Pull Report
+      summary: Get report
       description: "The Predict aggregated report returns predicted performance metrics, for both SKAdNetwork attribution and AF attribution models. The report is available through Data Locker or the API."
       parameters:
       - name: app-id
