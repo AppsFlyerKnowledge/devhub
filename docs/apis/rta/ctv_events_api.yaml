@@ -515,6 +515,7 @@ components:
         type: string
       required: true
       description: |
+        Application ID
     Platform:
       name: platform
       in: path
@@ -524,6 +525,7 @@ components:
           - roku
           - smartcast
           - tizen
+          - webos
       required: true
       description: |
         The CTV platform of the measured app
@@ -557,7 +559,7 @@ components:
         properties:
             type:
               type: string
-              enum: [custom, rida, vida, tifa]
+              enum: [custom, rida, vida, tifa, lgudid]
             value:
               type: string
 x-id:
