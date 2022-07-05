@@ -7,6 +7,8 @@ servers:
 paths:
   /{app-id}:
     get:
+      tags:
+        - Conversion Data for SDK attribution testing
       summary: Get the conversion data
       parameters:
         - name: app-id
@@ -29,7 +31,12 @@ paths:
           example: ABCDEw4F78vGTeTuY12345 
         - name: device_id
           in: query
-          description: The ID of this specific install
+          description: |
+            The UID of this specific install. 
+            ** Not to be confused with Advertiser ID**.
+            Instrcutions to retrieve the UID:
+            - [Android](https://dev.appsflyer.com/hc/docs/testing-android#inspect-conversion-data)
+            - [iOS](https://dev.appsflyer.com/hc/docs/testing-ios#inspect-conversion-data) 
           schema:
             type: string
           required: true
