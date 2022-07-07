@@ -199,7 +199,6 @@ components:
         type: string
         enum: [smartcast, tizen]
       description: "The application platform"
-      example: "smartcast"
     AfMediaSource:
       name: af_media_source
       in: query
