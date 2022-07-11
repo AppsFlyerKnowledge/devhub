@@ -1,6 +1,6 @@
 openapi: 3.0.1
 info:
-  title:  Engagements REST API
+  title:  Engagements API
   version: "1.0"
 servers:
 - url: https://engagements.appsflyer.com/v1.0/s2s
