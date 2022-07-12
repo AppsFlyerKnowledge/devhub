@@ -445,7 +445,7 @@ paths:
   /{app-id}/ad_revenue_raw/v5:
     get:
       tags:
-        - Ad Revenue Raw data
+        - Ad Revenue raw data
       summary: Attributed ad revenue
       description: | 
         Records ad revenue for users attributed to a media source. 
@@ -482,7 +482,7 @@ paths:
   /{app-id}/ad_revenue_organic_raw/v5:
     get:
       tags:
-        - Ad Revenue Raw Data
+        - Ad Revenue raw data
       summary: Organic ad revenue
       description: | 
         Records ad revenue for users not attributed to a media source.
