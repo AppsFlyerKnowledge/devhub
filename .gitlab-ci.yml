@@ -20,9 +20,15 @@ sync-via-rdme-addapp-api:
   rules:
     - if: $CI_COMMIT_BRANCH == "master"
 
-sync-via-rdme-pull-api:
+sync-via-rdme-raw-data-pull-api-token-v2:
   script:
-    - npx -y rdme@7.0.1 openapi ./docs/apis/mos/pullapi.yaml --key=rdme_xn8s9h0fb20a2df26bd435f6c42b1c7d59b240b0354348510d0c2f14216e353fb8fe63 --id=624594011aecc40014db6e4d
+    - npx -y rdme@7.0.1 openapi ./docs/apis/mos/raw_data_pull_api_tokenv2.yaml --key=rdme_xn8s9h0fb20a2df26bd435f6c42b1c7d59b240b0354348510d0c2f14216e353fb8fe63 --id=624594011aecc40014db6e4d
+  rules:
+    - if: $CI_COMMIT_BRANCH == "master"
+
+sync-via-rdme-raw-data-pull-api-token-v1:
+  script:
+    - npx -y rdme@7.0.1 openapi ./docs/apis/mos/raw_data_pull_api_tokenv1.yaml --key=rdme_xn8s9h0fb20a2df26bd435f6c42b1c7d59b240b0354348510d0c2f14216e353fb8fe63 --id=62d4514efabb0500da0b2d90
   rules:
     - if: $CI_COMMIT_BRANCH == "master"
 

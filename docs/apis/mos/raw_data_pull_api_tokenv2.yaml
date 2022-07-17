@@ -1,149 +1,13 @@
 openapi: 3.0.1
 info:
-  title: Pull API
+  title: Raw Data Pull API
   version: 1.0.0
 servers:
-- url: https://hq.appsflyer.com/export/
+- url: https://hq1.appsflyer.com/api/raw-data/export/app/
 security:
-  - ApiKeyAuth: []
+  - Bearer-Authentication: []
 paths:
-  ## Aggregate (user acquisition and retargeting)
-  /{app-id}/partners_report/v5:
-    get:
-      tags:
-        - Aggregate (user acquisition and retargeting)
-      summary: Partners
-      description: | 
-        Data is grouped by media source and campaign. 
-        Data type: LTV 
-        For details, see [KB link](https://support.appsflyer.com/hc/en-us/articles/360007530258-Using-Pull-API-raw-data)
-      parameters:
-        - $ref: '#/components/parameters/AppId' 
-        - $ref: '#/components/parameters/FromDate'
-        - $ref: '#/components/parameters/ToDate'
-        - $ref: '#/components/parameters/MediaSource'
-        - $ref: '#/components/parameters/Category'
-        - $ref: '#/components/parameters/AttributionTouchType'
-        - $ref: '#/components/parameters/Currency'
-        - $ref: '#/components/parameters/ReAttribution'
-        - $ref: '#/components/parameters/TimeZone'
-      responses:
-        200:
-          $ref: '#/components/responses/Success'
-        400:
-          $ref: '#/components/responses/BadRequest' 
-        401:
-          $ref: '#/components/responses/Unauthorized' 
-        404:
-          $ref: '#/components/responses/NotFound'
-  /{app-id}/partners_by_day_report/v5:
-    get:
-      tags:
-        - Aggregate (user acquisition and retargeting)
-      summary: Partners daily
-      description: | 
-        Data is grouped by date, media source, and campaign.
-        Data type: LTV
-      parameters:
-        - $ref: '#/components/parameters/AppId' 
-        - $ref: '#/components/parameters/FromDate'
-        - $ref: '#/components/parameters/ToDate'
-        - $ref: '#/components/parameters/MediaSource'
-        - $ref: '#/components/parameters/Category'
-        - $ref: '#/components/parameters/AttributionTouchType'
-        - $ref: '#/components/parameters/Currency'
-        - $ref: '#/components/parameters/ReAttribution'
-        - $ref: '#/components/parameters/TimeZone'
-      responses:
-        200:
-          $ref: '#/components/responses/Success'
-        400:
-          $ref: '#/components/responses/BadRequest' 
-        401:
-          $ref: '#/components/responses/Unauthorized' 
-        404:
-          $ref: '#/components/responses/NotFound'
-  /{app-id}/daily_report/v5:
-    get:
-      tags:
-        - Aggregate (user acquisition and retargeting)
-      summary: Daily
-      description: | 
-        Data is grouped by date, media source, and campaign, and excludes in-app events. 
-        Data type: LTV
-      parameters:
-        - $ref: '#/components/parameters/AppId' 
-        - $ref: '#/components/parameters/FromDate'
-        - $ref: '#/components/parameters/ToDate'
-        - $ref: '#/components/parameters/MediaSource'
-        - $ref: '#/components/parameters/Category'
-        - $ref: '#/components/parameters/AttributionTouchType'
-        - $ref: '#/components/parameters/Currency'
-        - $ref: '#/components/parameters/ReAttribution'
-        - $ref: '#/components/parameters/TimeZone'
-      responses:
-        200:
-          $ref: '#/components/responses/Success'
-        400:
-          $ref: '#/components/responses/BadRequest' 
-        401:
-          $ref: '#/components/responses/Unauthorized' 
-        404:
-          $ref: '#/components/responses/NotFound' 
-  /{app-id}/geo_report/v5:
-    get:
-      tags:
-        - Aggregate (user acquisition and retargeting)
-      summary: Geo
-      description: | 
-        Data is grouped by geo, media source, and campaign.
-        Data type: LTV
-      parameters:
-        - $ref: '#/components/parameters/AppId' 
-        - $ref: '#/components/parameters/FromDate'
-        - $ref: '#/components/parameters/ToDate'
-        - $ref: '#/components/parameters/MediaSource'
-        - $ref: '#/components/parameters/Category'
-        - $ref: '#/components/parameters/AttributionTouchType'
-        - $ref: '#/components/parameters/Currency'
-        - $ref: '#/components/parameters/ReAttribution'
-        - $ref: '#/components/parameters/TimeZone'
-      responses:
-        200:
-          $ref: '#/components/responses/Success'
-        400:
-          $ref: '#/components/responses/BadRequest' 
-        401:
-          $ref: '#/components/responses/Unauthorized' 
-        404:
-          $ref: '#/components/responses/NotFound'
-  /{app-id}/geo_by_date/v5:
-    get:
-      tags:
-        - Aggregate (user acquisition and retargeting)
-      summary: Geo daily
-      description: | 
-        Data is grouped by date, geo, media source, and campaign. 
-        Data type: LTV
-      parameters:
-        - $ref: '#/components/parameters/AppId' 
-        - $ref: '#/components/parameters/FromDate'
-        - $ref: '#/components/parameters/ToDate'
-        - $ref: '#/components/parameters/MediaSource'
-        - $ref: '#/components/parameters/Category'
-        - $ref: '#/components/parameters/AttributionTouchType'
-        - $ref: '#/components/parameters/Currency'
-        - $ref: '#/components/parameters/ReAttribution'
-        - $ref: '#/components/parameters/TimeZone'
-      responses:
-        200:
-          $ref: '#/components/responses/Success'
-        400:
-          $ref: '#/components/responses/BadRequest' 
-        401:
-          $ref: '#/components/responses/Unauthorized' 
-        404:
-          $ref: '#/components/responses/NotFound'
+  
   ## Raw data reports (non-organic)
   /{app-id}/installs_report/v5:
     get:
@@ -1088,13 +952,12 @@ components:
               message: AppsFlyer 404 error message page displays
 
   securitySchemes:
-    ApiKeyAuth:        
-      type: apiKey
-      in: query       
-      name: api_token
-      description: |
-        Pull API token for authentication.
-        [Get the API token in the Dashboard](https://support.appsflyer.com/hc/en-us/articles/360004562377)
+    Bearer-Authentication:
+      type: http
+      scheme: bearer
+      description: "Authorization HTTP header containing API V2 token (bearer token) is required.\n\n
+        The admin [gets the V2 token in the dashboard](https://support.appsflyer.com/hc/en-us/articles/360004562377) "
+
 
   schemas:
     Error:
