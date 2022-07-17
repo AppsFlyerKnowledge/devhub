@@ -32,6 +32,13 @@ sync-via-rdme-raw-data-pull-api-token-v1:
   rules:
     - if: $CI_COMMIT_BRANCH == "master"
 
+sync-via-rdme-aggregate-pull-api:
+  script:
+    - npx -y rdme@7.0.1 openapi ./docs/apis/analytics/aggregate_pull_api.yaml --key=rdme_xn8s9h0fb20a2df26bd435f6c42b1c7d59b240b0354348510d0c2f14216e353fb8fe63 --id=62d4578cf287de0014239d8c
+  rules:
+    - if: $CI_COMMIT_BRANCH == "master"
+    
+
 sync-via-rdme-ctv-events-api:
   script:
     - npx -y rdme@7.0.1 openapi ./docs/apis/rta/ctv_events_api.yaml --key=rdme_xn8s9h0fb20a2df26bd435f6c42b1c7d59b240b0354348510d0c2f14216e353fb8fe63 --id=624c355032911400142d1aca
