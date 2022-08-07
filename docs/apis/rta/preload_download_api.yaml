@@ -660,7 +660,7 @@ components:
         description: "Device identifier encoding method"
     AfIp:
       type: string
-      pattern: ^(([0-2]*[0-9]+[0-9]+)\.([0-2]*[0-9]+[0-9]+)\.([0-2]*[0-9]+[0-9]+)\.([0-2]*[0-9]+[0-9]+))$
+      pattern: ^(([1-2]{0,1}[0-9]{0,1}[0-9]{1})\.([1-2]{0,1}[0-9]{0,1}[0-9]{1})\.([1-2]{0,1}[0-9]{0,1}[0-9]{1})\.([1-2]{0,1}[0-9]{0,1}[0-9]{1}))$
       maxLength: 256
       description: |
         The device’s IP the agent sent in its request to the partner’s server.
