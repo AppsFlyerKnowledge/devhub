@@ -117,7 +117,7 @@ paths:
           $ref: '#/components/responses/Unauthorized' 
         404:
           $ref: '#/components/responses/NotFound'
-  /{app-id}/geo_by_date/v5:
+  /{app-id}/geo_by_date_report/v5:
     get:
       tags:
         - Aggregate (user acquisition and retargeting)
