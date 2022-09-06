@@ -3,7 +3,7 @@ info:
   title: Depracated Raw Data Pull API V1 Token
   version: 1.0.0
 servers:
-- url: https://hq1.appsflyer.com/api/raw-data/export/app/
+- url: https://hq.appsflyer.com/export/
 security:
   - ApiKeyAuth: []
 paths:
