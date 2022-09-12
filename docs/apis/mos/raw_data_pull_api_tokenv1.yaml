@@ -276,7 +276,7 @@ paths:
           $ref: '#/components/responses/Unauthorized' 
         404:
           $ref: '#/components/responses/NotFound'
-  /{app-id}/reinstall_organic/v5:
+  /{app-id}/reinstalls_organic/v5:
     get:
       deprecated: true
       tags:
@@ -914,6 +914,9 @@ components:
         type: string
         enum:
           - true
+          - false
+        default:
+          false
     MaximumRows:
       name: maximum_rows
       in: query
