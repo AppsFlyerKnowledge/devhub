@@ -125,7 +125,7 @@ paths:
           $ref: '#/components/responses/Unauthorized' 
         404:
           $ref: '#/components/responses/NotFound'
-  /{app-id}/reinstall/v5:
+  /{app-id}/reinstalls/v5:
     get:
       deprecated: true
       tags:
