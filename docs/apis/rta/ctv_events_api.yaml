@@ -379,6 +379,8 @@ paths:
                       - ZMW
                       - ZWL
                       - BYR
+                    af_duration_seconds:
+                      type: integer
                   description: A JSON object which can contain multiple event parameters.
                   example:
                     af_revenue: 1.99
