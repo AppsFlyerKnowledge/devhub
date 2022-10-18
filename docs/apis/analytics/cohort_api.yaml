@@ -269,11 +269,15 @@ components:
           type: string
           description: Site ID
         revenue_type:
-          type: string
-          enum:
-            - regular
-            - ad_monetization
-          description: Revenue Type
+          type: array
+          items:
+            type: string
+            enum:
+              - regular
+              - ad_monetization
+            description: Revenue Type
+            minimum: 0
+            maximum: 1
         attributed_touch_type:
           type: string
           enum:
