@@ -1,6 +1,6 @@
 openapi: 3.0.1
 info:
-  title: Depracated Raw Data Pull API V1 Token
+  title: Deprecated Raw Data Pull API V1 Token
   version: 1.0.0
 servers:
 - url: https://hq.appsflyer.com/export/
