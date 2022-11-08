@@ -1,11 +1,11 @@
 openapi: 3.0.1
 info:
-  title: Aggregate Pull API
+  title: Aggregate Pull API V2 Token
   version: 1.0.0
 servers:
-- url: https://hq.appsflyer.com/export/
+- url: https://hq1.appsflyer.com/api/agg-data/export/app/
 security:
-  - ApiKeyAuth: []
+  - Bearer-Authentication: []
 paths:
   ## Aggregate (user acquisition and retargeting)
   /{app-id}/partners_report/v5:
@@ -350,13 +350,11 @@ components:
               message: AppsFlyer 404 error message page displays
 
   securitySchemes:
-    ApiKeyAuth:        
-      type: apiKey
-      in: query       
-      name: api_token
-      description: |
-        Pull API token for authentication.
-        [Get the API token in the Dashboard](https://support.appsflyer.com/hc/en-us/articles/360004562377)
+    Bearer-Authentication:
+      type: http
+      scheme: bearer
+      description: "Authorization HTTP header containing API V2 token (bearer token) is required.\n\n
+        The admin [gets the V2 token in the dashboard](https://support.appsflyer.com/hc/en-us/articles/360004562377)"
 
   schemas:
     Error:

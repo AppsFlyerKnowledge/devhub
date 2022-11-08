@@ -32,12 +32,17 @@ sync-via-rdme-raw-data-pull-api-token-v1:
   rules:
     - if: $CI_COMMIT_BRANCH == "master"
 
-sync-via-rdme-aggregate-pull-api:
+sync-via-rdme-aggregate-pull-api-v1:
   script:
-    - npx -y rdme@7.0.1 openapi ./docs/apis/analytics/aggregate_pull_api.yaml --key=rdme_xn8s9h0fb20a2df26bd435f6c42b1c7d59b240b0354348510d0c2f14216e353fb8fe63 --id=62d4578cf287de0014239d8c
+    - npx -y rdme@7.0.1 openapi ./docs/apis/analytics/aggregate_pull_api_v1.yaml --key=rdme_xn8s9h0fb20a2df26bd435f6c42b1c7d59b240b0354348510d0c2f14216e353fb8fe63 --id=62d4578cf287de0014239d8c
   rules:
     - if: $CI_COMMIT_BRANCH == "master"
-    
+
+sync-via-rdme-aggregate-pull-api-v2:
+ script:
+   - npx -y rdme@7.0.1 openapi ./docs/apis/analytics/aggregate_pull_api_v2.yaml --key=rdme_xn8s9h0fb20a2df26bd435f6c42b1c7d59b240b0354348510d0c2f14216e353fb8fe63 --id=636a481d2d5ae60049dee908
+ rules:
+   - if: $CI_COMMIT_BRANCH == "master"
 
 sync-via-rdme-ctv-events-api:
   script:
