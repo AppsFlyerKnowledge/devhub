@@ -1,0 +1,67 @@
+openapi: 3.0.1
+info:
+  title: AdRevenue Account Integrations API
+  description: API for configuring or changing partner integrations.
+  version: 1.0.0
+servers:
+  - url: https://hq1.appsflyer.com/api/adrevenue/v1.0
+    description: api server - production
+security:
+  - bearerAuth: []
+tags:
+  - name: AdRevenue Account Integrations API
+
+paths:
+  /integrations:
+    post:
+      tags:
+        - AdRevenue Account Integrations API
+      summary: ''
+      requestBody:
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/available-app'
+        required: true
+      responses:
+        '200':
+          description: app added succesfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+        '400':
+          description: invalid request or schema
+        '422':
+          description: invalid request or schema
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    integrations:
+      title: 'An array describing the ad revenue integrations for which all the hierarchical data is defined.'
+      required:
+        - platform
+        - status
+        - currency
+        - app_url
+      type: 'object'
+      properties:
+        platform:
+          $ref: '#/components/schemas/platform'
+        status:
+          $ref: '#/components/schemas/status'
+        time_zone:
+          $ref: '#/components/schemas/time_zone'
+        currency:
+          $ref: '#/components/schemas/currency'
+        app_url:
+          allOf:
+            - $ref: '#/components/schemas/app_url'
+    
