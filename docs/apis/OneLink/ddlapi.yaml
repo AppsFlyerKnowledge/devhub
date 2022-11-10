@@ -80,7 +80,6 @@ paths:
                 is_first:
                   type: boolean
                   description: "Is first app launch"
-                  example: true
                 open_referrer:
                   type: string
                   description: "App from which the current app was opened"
