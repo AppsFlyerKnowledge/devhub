@@ -87,8 +87,9 @@ sync-via-rdme-gcdapi:
     - if: $CI_COMMIT_BRANCH == "master"
 
     
+sync-via-rdme-ddlapi:
+  script:
+    - npx -y rdme@7.0.1 openapi ./docs/apis/OneLink/ddlapi.yaml --key=rdme_xn8s9h0fb20a2df26bd435f6c42b1c7d59b240b0354348510d0c2f14216e353fb8fe63 --id=5f7d78862614180733ad85d7
+  rules:
+    - if: $CI_COMMIT_BRANCH == "master"
 
-
-
-
-    
