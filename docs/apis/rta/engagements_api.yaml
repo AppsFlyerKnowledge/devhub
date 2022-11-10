@@ -197,7 +197,7 @@ components:
       required: true
       schema:
         type: string
-        enum: [smartcast, tizen]
+        enum: [smartcast, tizen, roku, webos, vidaa, playstation, android, ios]
       description: "The application platform"
     AfMediaSource:
       name: af_media_source
@@ -607,6 +607,15 @@ components:
       example: "8.1.0"
     AfDeviceIdType:
         type: string
+        enum:
+          - vida
+          - tifa
+          - rida
+          - lgudid
+          - fire
+          - advertising_id
+          - idfa
+          - custom
         description: "Device identifier type"
     AfDeviceIdValue:
         type: string
