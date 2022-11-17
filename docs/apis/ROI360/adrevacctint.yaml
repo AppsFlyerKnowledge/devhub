@@ -21,11 +21,13 @@ paths:
         content:
           application/json:
             schema:
-                $ref: '#/components/schemas/available-app'
+              type: array
+              items:
+                $ref: '#/components/schemas/integration'
         required: true
       responses:
         '200':
-          description: app added succesfully
+          description:  CHANGE ME
           content:
             application/json:
               schema:
@@ -44,24 +46,63 @@ components:
       scheme: bearer
       bearerFormat: JWT
   schemas:
-    integrations:
+    integration:
       title: 'An array describing the ad revenue integrations for which all the hierarchical data is defined.'
       required:
-        - platform
-        - status
-        - currency
-        - app_url
+        - app_id
+        - network
+        - credentials
+        - products
       type: 'object'
       properties:
-        platform:
-          $ref: '#/components/schemas/platform'
-        status:
-          $ref: '#/components/schemas/status'
-        time_zone:
-          $ref: '#/components/schemas/time_zone'
-        currency:
-          $ref: '#/components/schemas/currency'
-        app_url:
-          allOf:
-            - $ref: '#/components/schemas/app_url'
+        app_id:
+          type: string
+          description: The `app_id` for which the integration is defined
+        network:
+          type: string
+        credentials:
+          type: array
+          items:
+            oneOf:
+              - $ref: '#/components/schemas/AdColony_cred'
+              - $ref: '#/components/schemas/AdMost_cred'
+        products:
+          type: array
+          items:
+            $ref: '#/components/schemas/product'
+    product:
+      description: The products block lists the products & integration types that the customer wishes to configure for the defined partner `network`.
+      required:
+        - name
+        - enabled
+      type: object
+      properties:
+        name:
+          type: string
+        enabled:
+          type: string
+          enum:
+            - true
+            - false
+          example: true
+        source_event:
+          type: string
+        event_name:
+          type: string
+    AdColony_cred:
+      type: object
+      properties:
+        app_id:
+          type: string
+        api_key:
+          type: string
+    AdMost_cred:
+      type: object
+      properties:
+        app_id:
+          type: string
+        token:
+          type: string
+    
+
     
