@@ -8,45 +8,181 @@ servers:
     description: api server - production
 security:
   - bearerAuth: []
-tags:
-  - name: AdRevenue Account Integrations API
 
 paths:
   /integrations:
     post:
       tags:
-        - AdRevenue Account Integrations API
-      summary: ''
+        - "Account Integration"
+      summary: "Set integration"
       requestBody:
         content:
           application/json:
             schema:
-              type: array
-              items:
-                $ref: '#/components/schemas/integration'
+              type: object
+              required:
+                - integrations
+              properties:
+                integrations:
+                  type: array
+                  minItems: 1
+                  maxItems: 1000
+                  items:
+                    $ref: '#/components/schemas/Integration'
         required: true
       responses:
+        200:
+          $ref: '#/components/responses/Success'
+        400:
+          description: Various errors
+          content: 
+            application/json:
+                schema:
+                  $ref: '#/components/schemas/Error'
+                examples:
+                  InvalidJson:
+                    summary: Invalid json
+                    description: Invalid json
+                    value:
+                      message: "Incorrect JSON format. Please verify and resubmit"
+                      request_id: "f1c0af47-bb7a-4e25-a261-d94d07689bb8"
+                  MissingAppId:
+                    summary: Missing app_id
+                    description: Missing app_id
+                    value:
+                      message: "integration 0: missing mandatory field 'app_id"
+                      request_id: "f1c0af47-bb7a-4e25-a261-d94d07689bb8"
+                  MissingNetwork:
+                    summary: Missing network
+                    description: Missing network
+                    value:
+                      message: "integration 0, app_id='com.config_1.test', network='': invalid 'Network' field. value length must be at least 1 runes"
+                      request_id: "f1c0af47-bb7a-4e25-a261-d94d07689bb8"
+                  UnsupportedNetwork:
+                    summary: Unsupported network
+                    description: Unsupported network
+                    value:
+                      message: "integration 0, appID='com.config_1.test', network='made-up': unsupported network"
+                      request_id: "f1c0af47-bb7a-4e25-a261-d94d07689bb8"
+                  MissingCredentials:
+                    summary: Missing credentials
+                    description: Missing credentials (when credentials are required for product)
+                    value:
+                      message: "integration 0, appID='com.config_5.test', network='tapdaq': missing 'attribution_user_level' credentials for defined partner network"
+                      request_id: "f1c0af47-bb7a-4e25-a261-d94d07689bb8" 
+                  Invalid credentials:
+                    summary: Invalid credentials
+                    description: Invalid credentials
+                    value:
+                      message: "integration 0, appID='com.config_4.test', network='chartboosts2s_int': invalid credentials - missing field: user_signature"
+                      request_id: "f1c0af47-bb7a-4e25-a261-d94d07689bb8"
+                  MissingEnabledField:
+                    summary: Missing enabled field
+                    description: Missing enabled field
+                    value:
+                      message: "integration 0, app_id='com.config_3.test', network='tapdaq_int': invalid 'Enabled' field. value is required"
+                      request_id: "f1c0af47-bb7a-4e25-a261-d94d07689bb8"
+                  MissingSourceEvent:
+                    summary: Missing source_event
+                    description: Missing source_event (only for attribution_app_level)
+                    value:
+                      message: "integration 0, appID='com.config_4.test', network='chartboosts2s_int': missing field: source_event"
+                      request_id: "f1c0af47-bb7a-4e25-a261-d94d07689bb8"
+                  UnsupportedProduct:
+                    summary: Unsupported product
+                    description: Unsupported product per requested network
+                    value:
+                      message: "integration 0, appID='com.config_4.test', network='chartboosts2s_int': network does not support 'attribution_user_level' integration type"
+                      request_id: "f1c0af47-bb7a-4e25-a261-d94d07689bb8"
+                  AppIdNotFound:
+                    summary: App Id Not Found
+                    description: app_id is not under the account linked to the authorization token
+                    value:
+                      message: "integration 0: app_id 'com.config.test' not permitted for provided token"
+                      request_id: "f1c0af47-bb7a-4e25-a261-d94d07689bb8"
+                  IntegrationsOffBounds:
+                    summary: Off bounds
+                    description: number of integration is outside limt range (1-1000)
+                    value:
+                      message: "app_id='', network='': invalid 'Integrations' field. value must contain between 1 and 1000 items, inclusive"
+                      request_id: "f1c0af47-bb7a-4e25-a261-d94d07689bb8"
+                  InvalidSourceEvent:
+                    summary: invalid source_event
+                    description: invalid source_event
+                    value:
+                      message: "integration 0, appID='com.config_4.test', network='chartboosts2s_int': invalid source event suffix 'something_monetized"
+                      request_id: "f1c0af47-bb7a-4e25-a261-d94d07689bb8"
+        '401':
+          $ref: '#/components/responses/MissingAuthorizationToken'
+        '403':
+          $ref: '#/components/responses/AppIdNotFound'
+    get:
+      tags:
+        - "Account Integration"
+      summary: "List integrations"
+      responses:
         '200':
-          description:  CHANGE ME
+          description: Integration returned
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  ok:
-                    type: boolean
-        '400':
-          description: invalid request or schema
-        '422':
-          description: invalid request or schema
+                type: array
+                items:
+                  type: object
+                  $ref: '#/components/schemas/Integration'
+        '401':
+          $ref: '#/components/responses/MissingAuthorizationToken'
 components:
   securitySchemes:
     bearerAuth:
       type: http
       scheme: bearer
       bearerFormat: JWT
+  responses:  
+    Success:
+      description: Valid request
+      content: 
+        application/json:
+            schema:
+              type: object
+              properties: 
+                message:
+                  type: string
+                request_id:
+                  type: string 
+              example:
+                message: "Successfully processed 1 integration updates"
+                request_id: "f1c0af47-bb7a-4e25-a261-d94d07689bb8" 
+    MissingAuthorizationToken:
+      description: Missing authorization token
+      content: 
+        application/json:
+            schema:
+              type: object
+              properties: 
+                error:
+                  type: string 
+              example:
+                error: "Missing authorization header"
+
+    AppIdNotFound:
+      description: app_id is not under the account linked to the authorization token
+      content: 
+        application/json:
+            schema:
+              $ref: '#/components/schemas/Error' 
+              example:
+                message: "integration 0: app_id 'com.config.test' not permitted for provided token"
+                request_id: "f1c0af47-bb7a-4e25-a261-d94d07689bb8"
+    
   schemas:
-    integration:
+    Error:
+      properties:
+        message:
+          type: string
+        request_id:
+          type: string
+    Integration:
       title: 'An array describing the ad revenue integrations for which all the hierarchical data is defined.'
       required:
         - app_id
@@ -60,17 +196,37 @@ components:
           description: The `app_id` for which the integration is defined
         network:
           type: string
+        event_name:
+          type: string
         credentials:
-          type: array
-          items:
-            oneOf:
-              - $ref: '#/components/schemas/AdColony_cred'
-              - $ref: '#/components/schemas/AdMost_cred'
+          oneOf:
+            - $ref: '#/components/schemas/AdColony'
+            - $ref: '#/components/schemas/AdMost'
+            - $ref: '#/components/schemas/Applovin'
+            - $ref: '#/components/schemas/Applovin_MAX'
+            - $ref: '#/components/schemas/Appodeal'
+            - $ref: '#/components/schemas/ByteDance_China'
+            - $ref: '#/components/schemas/Chartboost'
+            - $ref: '#/components/schemas/Facebook'
+            - $ref: '#/components/schemas/Fyber'
+            - $ref: '#/components/schemas/GAM_DV360_DDM'
+            - $ref: '#/components/schemas/Google_Admob'
+            - $ref: '#/components/schemas/Inmobi'
+            - $ref: '#/components/schemas/IronSource'
+            - $ref: '#/components/schemas/Mintegral'
+            - $ref: '#/components/schemas/Tapdaq'
+            - $ref: '#/components/schemas/Tapjoy'
+            - $ref: '#/components/schemas/TikTok_for_business'
+            - $ref: '#/components/schemas/Topon'
+            - $ref: '#/components/schemas/Tradplusad'
+            - $ref: '#/components/schemas/Unity'
+            - $ref: '#/components/schemas/Voodoo_ads'
+            - $ref: '#/components/schemas/Vungle'
         products:
           type: array
           items:
-            $ref: '#/components/schemas/product'
-    product:
+            $ref: '#/components/schemas/Product'
+    Product:
       description: The products block lists the products & integration types that the customer wishes to configure for the defined partner `network`.
       required:
         - name
@@ -79,6 +235,12 @@ components:
       properties:
         name:
           type: string
+          enum:
+            - "attribution_app_level"
+            - "attribution_user_level"
+            - "attribution_sdk_level"
+            - "attribution_ad_impression"
+            - "attribution_sdk_and_user_level"
         enabled:
           type: string
           enum:
@@ -87,22 +249,175 @@ components:
           example: true
         source_event:
           type: string
-        event_name:
-          type: string
-    AdColony_cred:
+    AdColony:
       type: object
       properties:
         app_id:
           type: string
         api_key:
           type: string
-    AdMost_cred:
+    AdMost:
       type: object
       properties:
         app_id:
           type: string
         token:
           type: string
-    
-
-    
+    Applovin:
+      type: object
+      properties:
+        report_key:
+          type: string
+        app_package_name:
+          type: string
+    Applovin_MAX:
+      type: object
+      properties:
+        report_key:
+          type: string
+        app_package_name:
+          type: string
+    Appodeal:
+      type: object
+      properties:
+        api_key:
+          type: string
+        user_id:
+          type: string
+        application_id:
+          type: string
+        application_key:
+          type: string
+    ByteDance_China:
+      type: object
+      properties:
+        app_id:
+          type: string
+        secure_key:
+          type: string
+        account_id:
+          type: string
+    Chartboost:
+      type: object
+      properties:
+        app_id:
+          type: string
+        user_signature:
+          type: string
+        userid:
+          type: string
+    Facebook:
+      type: object
+      properties:
+        oauth:
+          type: string
+        audience_network_app_id:
+          type: string
+    Fyber:
+      type: object
+      properties:
+        app_id:
+          type: string
+        client_id:
+          type: string
+        client_secret:
+          type: string
+    GAM_DV360_DDM:
+      type: object
+      properties:
+        oauth:
+          type: string
+    Google_Admob:
+      type: object
+      properties:
+        oauth:
+          type: string
+        admob_app_id:
+          type: string
+    Inmobi:
+      type: object
+      properties:
+        api_key:
+          type: string
+        user_name:
+          type: string
+        app_id:
+          type: string
+    IronSource:
+      type: object
+      properties:
+        refresh_token:
+          type: string
+        app_key:
+          type: string
+        secret_key:
+          type: string
+        user_name:
+          type: string
+    Mintegral:
+      type: object
+      properties:
+        app_id:
+          type: string
+        secret:
+          type: string
+        skey:
+          type: string
+    Tapdaq:
+      type: object
+      properties:
+        application_id:
+          type: string
+        report_key:
+          type: string
+    Tapjoy:
+      type: object
+      properties:
+        application_id:
+          type: string
+        marketing_api_key:
+          type: string
+    TikTok_for_business:
+      type: object
+      properties:
+        app_id:
+          type: string
+        secure_key:
+          type: string
+        account_id:
+          type: string
+    Topon:
+      type: object
+      properties:
+        network_app_id:
+          type: string
+        publisher_key:
+          type: string
+    Tradplusad:
+      type: object
+      properties:
+        network_app_id:
+          type: string
+        api_key:
+          type: string
+    Unity:
+      type: object
+      properties:
+        api_key:
+          type: string
+        game_id:
+          type: string
+    Voodoo_ads:
+      type: object
+      properties:
+        bundle_id:
+          type: string
+        access_token:
+          type: string 
+    Vungle:
+      type: object
+      properties:
+        app_id:
+          type: string
+        token:
+          type: string 
