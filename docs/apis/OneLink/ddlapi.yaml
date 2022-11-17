@@ -78,7 +78,11 @@ paths:
                     - 4 = restricted
                   example: 1
                 is_first:
-                  type: boolean
+                  type: string
+                  enum:
+                    - false
+                    - true
+                  example: true
                   description: "Is first app launch"
                 open_referrer:
                   type: string
@@ -245,7 +249,10 @@ paths:
                   description: "Device locale used for authentication and probabilistic modeling"
                   example: "en-US"
                 is_first:
-                  type: boolean
+                  type: string
+                  enum:
+                    - true
+                    - false
                   description: "Is first app launch"
                   example: true
                 ip:
