@@ -196,6 +196,27 @@ components:
           description: The `app_id` for which the integration is defined
         network:
           type: string
+          enum:
+            - adcolony_int
+            - admost_int
+            - applovin_int
+            - applovinmax_int
+            - appodeal_int
+            - bytedance_int
+            - bytedanceglobal_int
+            - chartboosts2s_int
+            - sponsorpay_int
+            - inmobi_int
+            - ironsource_int
+            - mintegral_int
+            - odeeo_int
+            - tapdaq_int
+            - tapjoy_int
+            - toponad_int
+            - tradplus_int
+            - unityads_int
+            - vungle_int
+            - yandexdirect_int
         event_name:
           type: string
         credentials:
