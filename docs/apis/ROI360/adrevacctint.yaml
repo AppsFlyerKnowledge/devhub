@@ -239,7 +239,6 @@ components:
             - $ref: '#/components/schemas/Topon'
             - $ref: '#/components/schemas/Tradplusad'
             - $ref: '#/components/schemas/Unity'
-            - $ref: '#/components/schemas/Voodoo_ads'
             - $ref: '#/components/schemas/Vungle'
             - $ref: '#/components/schemas/Odeeo'
         products:
@@ -409,13 +408,6 @@ components:
           type: string
         source_ids:
           type: string
-    Voodoo_ads:
-      type: object
-      properties:
-        bundle_id:
-          type: string
-        api_key:
-          type: string 
     Vungle:
       type: object
       properties:
