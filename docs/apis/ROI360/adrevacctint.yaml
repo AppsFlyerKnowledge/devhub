@@ -241,6 +241,7 @@ components:
             - $ref: '#/components/schemas/Unity'
             - $ref: '#/components/schemas/Voodoo_ads'
             - $ref: '#/components/schemas/Vungle'
+            - $ref: '#/components/schemas/Odeeo'
         products:
           type: array
           items:
@@ -422,3 +423,8 @@ components:
           type: string
         application_id:
           type: string 
+    Odeeo:
+      type: object
+      properties:
+        api_key:
+          type: string
