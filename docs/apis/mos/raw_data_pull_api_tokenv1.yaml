@@ -1,7 +1,9 @@
 openapi: 3.0.1
 info:
-  title: Deprecated Raw Data Pull API V1 Token
+  title: Raw Data Pull API V1 Token
   version: 1.0.0
+  description: |
+    > It is recommended to use the v2 version based on Bearer authentication.
 servers:
 - url: https://hq.appsflyer.com/export/
 security:
@@ -11,7 +13,7 @@ paths:
   ## Raw data reports (non-organic)
   /{app-id}/installs_report/v5:
     get:
-      deprecated: true
+      deprecated: false
       tags:
         - Raw data reports (non-organic)
       summary: Installs
@@ -49,7 +51,7 @@ paths:
           $ref: '#/components/responses/NotFound' 
   /{app-id}/in_app_events_report/v5:
     get:
-      deprecated: true
+      deprecated: false
       tags:
         - Raw data reports (non-organic)
       summary: In-app events
@@ -89,7 +91,7 @@ paths:
           $ref: '#/components/responses/NotFound' 
   /{app-id}/uninstall_events_report/v5:
     get:
-      deprecated: true
+      deprecated: false
       tags:
         - Raw data reports (non-organic)
       summary: Uninstalls
@@ -127,7 +129,7 @@ paths:
           $ref: '#/components/responses/NotFound'
   /{app-id}/reinstalls/v5:
     get:
-      deprecated: true
+      deprecated: false
       tags:
         - Raw data reports (non-organic)
       summary: Reinstalls
@@ -165,7 +167,7 @@ paths:
   ## Raw data reports (organic)
   /{app-id}/organic_installs_report/v5:
     get:
-      deprecated: true
+      deprecated: false
       tags:
         - Raw data reports (organic)
       summary: Organic Installs
@@ -202,7 +204,7 @@ paths:
           $ref: '#/components/responses/NotFound' 
   /{app-id}/organic_in_app_events_report/v5:
     get:
-      deprecated: true
+      deprecated: false
       tags:
         - Raw data reports (organic)
       summary: Organic in-app events
@@ -241,7 +243,7 @@ paths:
           $ref: '#/components/responses/NotFound' 
   /{app-id}/organic_uninstall_events_report/v5:
     get:
-      deprecated: true
+      deprecated: false
       tags:
         - Raw data reports (organic)
       summary: Organic uninstalls
@@ -278,7 +280,7 @@ paths:
           $ref: '#/components/responses/NotFound'
   /{app-id}/reinstalls_organic/v5:
     get:
-      deprecated: true
+      deprecated: false
       tags:
         - Raw data reports (organic)
       summary: Organic reinstalls
@@ -316,7 +318,7 @@ paths:
   ## Ad Revenue Raw data
   /{app-id}/ad_revenue_raw/v5:
     get:
-      deprecated: true
+      deprecated: false
       tags:
         - Ad Revenue raw data
       summary: Attributed ad revenue
@@ -354,7 +356,7 @@ paths:
           $ref: '#/components/responses/NotFound' 
   /{app-id}/ad_revenue_organic_raw/v5:
     get:
-      deprecated: true
+      deprecated: false
       tags:
         - Ad Revenue raw data
       summary: Organic ad revenue
@@ -392,7 +394,7 @@ paths:
   ## Protect360 fraud
   /{app-id}/blocked_installs_report/v5:
     get:
-      deprecated: true
+      deprecated: false
       tags:
         - Protect360 fraud
       summary: Installs
@@ -429,7 +431,7 @@ paths:
           $ref: '#/components/responses/NotFound' 
   /{app-id}/detection/v5:
     get:
-      deprecated: true
+      deprecated: false
       tags:
         - Protect360 fraud
       summary: Post-attribution installs
@@ -466,7 +468,7 @@ paths:
           $ref: '#/components/responses/NotFound'
   /{app-id}/blocked_in_app_events_report/v5:
     get:
-      deprecated: true
+      deprecated: false
       tags:
         - Protect360 fraud
       summary: In-app events
@@ -504,7 +506,7 @@ paths:
           $ref: '#/components/responses/NotFound'
   /{app-id}/fraud-post-inapps/v5:
     get:
-      deprecated: true
+      deprecated: false
       tags:
         - Protect360 fraud
       summary: Post-attribution in-app events
@@ -542,7 +544,7 @@ paths:
           $ref: '#/components/responses/NotFound'
   /{app-id}/blocked_clicks_report/v5:
     get:
-      deprecated: true
+      deprecated: false
       tags:
         - Protect360 fraud
       summary: Clicks
@@ -579,7 +581,7 @@ paths:
           $ref: '#/components/responses/NotFound'
   /{app-id}/blocked_install_postbacks/v5:
     get:
-      deprecated: true
+      deprecated: false
       tags:
         - Protect360 fraud
       summary: Blocked install postbacks
@@ -617,7 +619,7 @@ paths:
   ## Postbacks
   /{app-id}/postbacks/v5:
     get:
-      deprecated: true
+      deprecated: false
       tags:
         - Postbacks
       summary: Install postbacks
@@ -654,7 +656,7 @@ paths:
           $ref: '#/components/responses/NotFound' 
   /{app-id}/in-app-events-postbacks/v5:
     get:
-      deprecated: true
+      deprecated: false
       tags:
         - Postbacks
       summary: In-app event postbacks
@@ -692,7 +694,7 @@ paths:
           $ref: '#/components/responses/NotFound'
   /{app-id}/retarget_in_app_events_postbacks/v5:
     get:
-      deprecated: true
+      deprecated: false
       tags:
         - Postbacks
       summary: Retargeting in-app event postbacks
@@ -730,7 +732,7 @@ paths:
           $ref: '#/components/responses/NotFound'
   /{app-id}/retarget_install_postbacks/v5:
     get:
-      deprecated: true
+      deprecated: false
       tags:
         - Postbacks
       summary: Retargeting conversions postbacks
