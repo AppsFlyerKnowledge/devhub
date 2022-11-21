@@ -97,3 +97,9 @@ sync-via-rdme-adrevacctint:
     - npx -y rdme@7.0.1 openapi ./docs/apis/ROI360/adrevacctint.yaml --key=rdme_xn8s9h0fb20a2df26bd435f6c42b1c7d59b240b0354348510d0c2f14216e353fb8fe63 --id=637632d64f5e250092a83dee
   rules:
     - if: $CI_COMMIT_BRANCH == "master"
+
+sync-via-rdme-skad-schema:
+  script:
+    - npx -y rdme@7.0.1 openapi ./docs/apis/SKAD/skadapi.yaml --key=rdme_xn8s9h0fb20a2df26bd435f6c42b1c7d59b240b0354348510d0c2f14216e353fb8fe63 --id=614ccf47b65e440012ac9c96
+  rules:
+    - if: $CI_COMMIT_BRANCH == "master"

@@ -1,6 +1,6 @@
 openapi: '3.0.3'
 info:
-  title: SKAN conversion mapping (CV) schema for ad networks
+  title: SKAN CV schema API for ad networks
   version: '0.1'
 security:
   - bearerAuth: []
@@ -9,7 +9,9 @@ servers:
 paths:
   /v1:
     get:
-      summary: Get the CV schema for specified apps
+      tags:
+      - "SKAN CV schema API for ad networks"
+      summary: Get SKAN CV schema
       description: Specify one or more apps using the app ID
       operationId: get-conversion-value-mapping-schema
       parameters:
