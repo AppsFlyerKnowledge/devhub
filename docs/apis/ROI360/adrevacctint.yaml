@@ -228,10 +228,7 @@ components:
             - $ref: '#/components/schemas/Appodeal'
             - $ref: '#/components/schemas/ByteDance_China'
             - $ref: '#/components/schemas/Chartboost'
-            - $ref: '#/components/schemas/Facebook'
             - $ref: '#/components/schemas/Fyber'
-            - $ref: '#/components/schemas/GAM_DV360_DDM'
-            - $ref: '#/components/schemas/Google_Admob'
             - $ref: '#/components/schemas/Inmobi'
             - $ref: '#/components/schemas/IronSource'
             - $ref: '#/components/schemas/Mintegral'
@@ -275,28 +272,28 @@ components:
       properties:
         app_id:
           type: string
-        api_key:
+        user_credentials:
           type: string
     AdMost:
       type: object
       properties:
-        app_id:
+        network_app_id:
           type: string
         token:
           type: string
     Applovin:
       type: object
       properties:
-        report_key:
+        api_key:
           type: string
-        app_package_name:
+        filter_package_name:
           type: string
     Applovin_MAX:
       type: object
       properties:
         report_key:
           type: string
-        app_package_name:
+        package_name:
           type: string
     Appodeal:
       type: object
@@ -305,14 +302,14 @@ components:
           type: string
         user_id:
           type: string
-        application_id:
+        network_app_id:
           type: string
-        application_key:
+        app_key:
           type: string
     ByteDance_China:
       type: object
       properties:
-        app_id:
+        network_app_id:
           type: string
         secure_key:
           type: string
@@ -321,64 +318,45 @@ components:
     Chartboost:
       type: object
       properties:
-        app_id:
+        network_app_id:
           type: string
         user_signature:
           type: string
-        userid:
-          type: string
-    Facebook:
-      type: object
-      properties:
-        oauth:
-          type: string
-        audience_network_app_id:
+        user_id:
           type: string
     Fyber:
       type: object
       properties:
-        app_id:
+        network_app_id:
           type: string
         client_id:
           type: string
         client_secret:
-          type: string
-    GAM_DV360_DDM:
-      type: object
-      properties:
-        oauth:
-          type: string
-    Google_Admob:
-      type: object
-      properties:
-        oauth:
-          type: string
-        admob_app_id:
           type: string
     Inmobi:
       type: object
       properties:
         api_key:
           type: string
-        user_name:
+        user_id:
           type: string
-        app_id:
+        network_app_id:
           type: string
     IronSource:
       type: object
       properties:
         refresh_token:
           type: string
-        app_key:
+        network_app_id:
           type: string
         secret_key:
           type: string
-        user_name:
+        username:
           type: string
     Mintegral:
       type: object
       properties:
-        app_id:
+        network_app_id:
           type: string
         secret:
           type: string
@@ -387,21 +365,21 @@ components:
     Tapdaq:
       type: object
       properties:
-        application_id:
+        network_app_id:
           type: string
         report_key:
           type: string
     Tapjoy:
       type: object
       properties:
-        application_id:
+        network_app_id:
           type: string
-        marketing_api_key:
+        api_key:
           type: string
     TikTok_for_business:
       type: object
       properties:
-        app_id:
+        network_app_id:
           type: string
         secure_key:
           type: string
@@ -426,19 +404,19 @@ components:
       properties:
         api_key:
           type: string
-        game_id:
+        source_ids:
           type: string
     Voodoo_ads:
       type: object
       properties:
         bundle_id:
           type: string
-        access_token:
+        api_key:
           type: string 
     Vungle:
       type: object
       properties:
         app_id:
           type: string
-        token:
+        application_id:
           type: string 
