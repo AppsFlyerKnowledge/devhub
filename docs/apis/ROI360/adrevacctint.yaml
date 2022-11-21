@@ -217,6 +217,7 @@ components:
             - unityads_int
             - vungle_int
             - yandexdirect_int
+          example: adcolony_int 
         event_name:
           type: string
         credentials:
@@ -259,6 +260,7 @@ components:
             - "attribution_sdk_level"
             - "attribution_ad_impression"
             - "attribution_sdk_and_user_level"
+          example: attribution_app_level
         enabled:
           type: string
           enum:
