@@ -1,6 +1,6 @@
 openapi: 3.0.1
 info:
-  title: Deprecated Aggregate Pull API
+  title: Aggregate Pull API V1 Token
   version: 1.0.0
 servers:
 - url: https://hq.appsflyer.com/export/
@@ -10,7 +10,7 @@ paths:
   ## Aggregate (user acquisition and retargeting)
   /{app-id}/partners_report/v5:
     get:
-      deprecated: true
+      deprecated: false
       tags:
         - Aggregate (user acquisition and retargeting)
       summary: Partners
@@ -39,7 +39,7 @@ paths:
           $ref: '#/components/responses/NotFound'
   /{app-id}/partners_by_date_report/v5:
     get:
-      deprecated: true
+      deprecated: false
       tags:
         - Aggregate (user acquisition and retargeting)
       summary: Partners daily
@@ -67,7 +67,7 @@ paths:
           $ref: '#/components/responses/NotFound'
   /{app-id}/daily_report/v5:
     get:
-      deprecated: true
+      deprecated: false
       tags:
         - Aggregate (user acquisition and retargeting)
       summary: Daily
@@ -95,7 +95,7 @@ paths:
           $ref: '#/components/responses/NotFound' 
   /{app-id}/geo_report/v5:
     get:
-      deprecated: true
+      deprecated: false
       tags:
         - Aggregate (user acquisition and retargeting)
       summary: Geo
@@ -123,7 +123,7 @@ paths:
           $ref: '#/components/responses/NotFound'
   /{app-id}/geo_by_date_report/v5:
     get:
-      deprecated: true
+      deprecated: false
       tags:
         - Aggregate (user acquisition and retargeting)
       summary: Geo daily
