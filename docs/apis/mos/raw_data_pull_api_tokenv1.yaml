@@ -26,7 +26,6 @@ paths:
         - $ref: '#/components/parameters/ToDate'
         - $ref: '#/components/parameters/MediaSource'
         - $ref: '#/components/parameters/Category'
-        - $ref: '#/components/parameters/AttributionTouchType'
         - $ref: '#/components/parameters/Currency'
         - $ref: '#/components/parameters/ReAttribution'
         - $ref: '#/components/parameters/TimeZone'
@@ -65,7 +64,6 @@ paths:
         - $ref: '#/components/parameters/MediaSource'
         - $ref: '#/components/parameters/Category'
         - $ref: '#/components/parameters/EventName'
-        - $ref: '#/components/parameters/AttributionTouchType'
         - $ref: '#/components/parameters/Currency'
         - $ref: '#/components/parameters/ReAttribution'
         - $ref: '#/components/parameters/TimeZone'
@@ -104,7 +102,6 @@ paths:
         - $ref: '#/components/parameters/ToDate'
         - $ref: '#/components/parameters/MediaSource'
         - $ref: '#/components/parameters/Category'
-        - $ref: '#/components/parameters/AttributionTouchType'
         - $ref: '#/components/parameters/Currency'
         - $ref: '#/components/parameters/ReAttribution'
         - $ref: '#/components/parameters/TimeZone'
@@ -142,7 +139,6 @@ paths:
         - $ref: '#/components/parameters/ToDate'
         - $ref: '#/components/parameters/MediaSource'
         - $ref: '#/components/parameters/Category'
-        - $ref: '#/components/parameters/AttributionTouchType'
         - $ref: '#/components/parameters/Currency'
         - $ref: '#/components/parameters/ReAttribution'
         - $ref: '#/components/parameters/TimeZone'
@@ -180,7 +176,6 @@ paths:
         - $ref: '#/components/parameters/ToDate'
         - $ref: '#/components/parameters/MediaSource'
         - $ref: '#/components/parameters/Category'
-        - $ref: '#/components/parameters/AttributionTouchType'
         - $ref: '#/components/parameters/Currency'
         - $ref: '#/components/parameters/TimeZone'
         - $ref: '#/components/parameters/Geo'
@@ -218,7 +213,6 @@ paths:
         - $ref: '#/components/parameters/MediaSource'
         - $ref: '#/components/parameters/Category'
         - $ref: '#/components/parameters/EventName'
-        - $ref: '#/components/parameters/AttributionTouchType'
         - $ref: '#/components/parameters/Currency'
         - $ref: '#/components/parameters/ReAttribution'
         - $ref: '#/components/parameters/TimeZone'
@@ -256,7 +250,6 @@ paths:
         - $ref: '#/components/parameters/ToDate'
         - $ref: '#/components/parameters/MediaSource'
         - $ref: '#/components/parameters/Category'
-        - $ref: '#/components/parameters/AttributionTouchType'
         - $ref: '#/components/parameters/Currency'
         - $ref: '#/components/parameters/ReAttribution'
         - $ref: '#/components/parameters/TimeZone'
@@ -293,7 +286,6 @@ paths:
         - $ref: '#/components/parameters/ToDate'
         - $ref: '#/components/parameters/MediaSource'
         - $ref: '#/components/parameters/Category'
-        - $ref: '#/components/parameters/AttributionTouchType'
         - $ref: '#/components/parameters/Currency'
         - $ref: '#/components/parameters/ReAttribution'
         - $ref: '#/components/parameters/TimeZone'
@@ -331,7 +323,6 @@ paths:
         - $ref: '#/components/parameters/ToDate'
         - $ref: '#/components/parameters/MediaSource'
         - $ref: '#/components/parameters/Category'
-        - $ref: '#/components/parameters/AttributionTouchType'
         - $ref: '#/components/parameters/ReAttribution'
         - $ref: '#/components/parameters/Currency'
         - $ref: '#/components/parameters/TimeZone'
@@ -369,7 +360,6 @@ paths:
         - $ref: '#/components/parameters/ToDate'
         - $ref: '#/components/parameters/MediaSource'
         - $ref: '#/components/parameters/Category'
-        - $ref: '#/components/parameters/AttributionTouchType'
         - $ref: '#/components/parameters/Currency'
         - $ref: '#/components/parameters/TimeZone'
         - $ref: '#/components/parameters/Geo'
@@ -407,7 +397,6 @@ paths:
         - $ref: '#/components/parameters/ToDate'
         - $ref: '#/components/parameters/MediaSource'
         - $ref: '#/components/parameters/Category'
-        - $ref: '#/components/parameters/AttributionTouchType'
         - $ref: '#/components/parameters/Currency'
         - $ref: '#/components/parameters/TimeZone'
         - $ref: '#/components/parameters/Geo'
@@ -444,7 +433,6 @@ paths:
         - $ref: '#/components/parameters/ToDate'
         - $ref: '#/components/parameters/MediaSource'
         - $ref: '#/components/parameters/Category'
-        - $ref: '#/components/parameters/AttributionTouchType'
         - $ref: '#/components/parameters/Currency'
         - $ref: '#/components/parameters/TimeZone'
         - $ref: '#/components/parameters/Geo'
@@ -482,7 +470,6 @@ paths:
         - $ref: '#/components/parameters/MediaSource'
         - $ref: '#/components/parameters/Category'
         - $ref: '#/components/parameters/EventName'
-        - $ref: '#/components/parameters/AttributionTouchType'
         - $ref: '#/components/parameters/Currency'
         - $ref: '#/components/parameters/TimeZone'
         - $ref: '#/components/parameters/Geo'
@@ -520,7 +507,6 @@ paths:
         - $ref: '#/components/parameters/MediaSource'
         - $ref: '#/components/parameters/Category'
         - $ref: '#/components/parameters/EventName'
-        - $ref: '#/components/parameters/AttributionTouchType'
         - $ref: '#/components/parameters/Currency'
         - $ref: '#/components/parameters/TimeZone'
         - $ref: '#/components/parameters/Geo'
@@ -557,7 +543,6 @@ paths:
         - $ref: '#/components/parameters/ToDate'
         - $ref: '#/components/parameters/MediaSource'
         - $ref: '#/components/parameters/Category'
-        - $ref: '#/components/parameters/AttributionTouchType'
         - $ref: '#/components/parameters/Currency'
         - $ref: '#/components/parameters/TimeZone'
         - $ref: '#/components/parameters/Geo'
@@ -594,7 +579,6 @@ paths:
         - $ref: '#/components/parameters/ToDate'
         - $ref: '#/components/parameters/MediaSource'
         - $ref: '#/components/parameters/Category'
-        - $ref: '#/components/parameters/AttributionTouchType'
         - $ref: '#/components/parameters/Currency'
         - $ref: '#/components/parameters/TimeZone'
         - $ref: '#/components/parameters/Geo'
@@ -632,7 +616,6 @@ paths:
         - $ref: '#/components/parameters/ToDate'
         - $ref: '#/components/parameters/MediaSource'
         - $ref: '#/components/parameters/Category'
-        - $ref: '#/components/parameters/AttributionTouchType'
         - $ref: '#/components/parameters/Currency'
         - $ref: '#/components/parameters/TimeZone'
         - $ref: '#/components/parameters/Geo'
@@ -670,7 +653,6 @@ paths:
         - $ref: '#/components/parameters/MediaSource'
         - $ref: '#/components/parameters/Category'
         - $ref: '#/components/parameters/EventName'
-        - $ref: '#/components/parameters/AttributionTouchType'
         - $ref: '#/components/parameters/Currency'
         - $ref: '#/components/parameters/TimeZone'
         - $ref: '#/components/parameters/Geo'
@@ -708,7 +690,6 @@ paths:
         - $ref: '#/components/parameters/MediaSource'
         - $ref: '#/components/parameters/Category'
         - $ref: '#/components/parameters/EventName'
-        - $ref: '#/components/parameters/AttributionTouchType'
         - $ref: '#/components/parameters/Currency'
         - $ref: '#/components/parameters/TimeZone'
         - $ref: '#/components/parameters/Geo'
@@ -745,7 +726,6 @@ paths:
         - $ref: '#/components/parameters/ToDate'
         - $ref: '#/components/parameters/MediaSource'
         - $ref: '#/components/parameters/Category'
-        - $ref: '#/components/parameters/AttributionTouchType'
         - $ref: '#/components/parameters/Currency'
         - $ref: '#/components/parameters/TimeZone'
         - $ref: '#/components/parameters/Geo'
@@ -854,14 +834,6 @@ components:
           - standard
           - facebook
           - twitter
-    AttributionTouchType:
-      description: Set this parameter as shown in the example to get view-through attribution (VTA) KPIs. 
-      name: attribution_touch_type
-      in: query
-      schema:
-        type: string
-        enum:
-          - impression 
     EventName:
       in: query
       name: event_name
