@@ -1,0 +1,139 @@
+openapi: '3.0.3'
+info:
+  title: GCD v5.0 API for SDK attribution testing 
+  version: '0.1'
+servers:
+- url: https://gcdsdk.appsflyer.com/install_data/v5.0/
+paths:
+  /{app-id}:
+    get:
+      tags:
+        - Conversion Data for SDK attribution testing
+      summary: Get the conversion data
+      parameters:
+        - name: app-id
+          in: path
+          description: The app ID
+          schema:
+            type: string
+          required: true
+          examples:
+            iOS:
+              value: id155071234
+            Android:
+              value: com.appsflyer.myapp
+        - name: af_sig
+          in: header
+          required: true
+          schema:
+            type: string
+          description: |
+            Create an HMAC signature by concatenating the values of the following fields:
+
+            Concatenate the value of `af_request_epoch_ms` with `device_id and `app_id`, separated an invisible character `**\u2063**` 
+            (E.g. 1661969117203 1591184059153-1591377216180180185 com.zzkko) 
+            >Note: for iOS make sure the app id is a full one, i.e. starts with id 
+
+            The HMAC is generated using SHA256 and uses the DevKey as the signature’s secret key. 
+            To retrieve the DevKey, in the AppsFlyer dashboard, go ***Configuration*** > ***App Settings***.
+
+            You can find [here](https://appsflyersdk.github.io/calcGcdV5Sha/) an HMAC calculator to assist in calculating this token. 
+            
+          example: "ce2d1e6b4619b9e19bc6be116183b92e43aa01e182b15012a7215bdd879ec327" 
+        - name: af_request_epoch_ms
+          in: header
+          required: true
+          schema:
+            type: string
+            example: 1661969117203
+          description: |
+            The milli-seconds since UNIX epoch
+        - name: device_id
+          in: query
+          description: |
+            The UID of this specific install. 
+            ** Not to be confused with Advertiser ID**.
+            Instructions to retrieve the UID:
+            - [Android](https://dev.appsflyer.com/hc/docs/testing-android#inspect-conversion-data)
+            - [iOS](https://dev.appsflyer.com/hc/docs/testing-ios#inspect-conversion-data) 
+          schema:
+            type: string
+          required: true
+          example: 1600009251234-1234567
+      responses:
+        '200':
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+              examples:
+                Organic:
+                  value:
+                    af_status: Organic
+                    af_message: organic install
+                    install_time: 2021-08-23 06:59:51.194
+                Non-Organic:
+                  value:
+                    is_universal_link: null
+                    adgroup: null
+                    match_type: id_matching
+                    campaign: None
+                    is_branded_link: null
+                    media_source: liazkam
+                    adset_id: null
+                    campaign_id: null
+                    esp_name: null
+                    iscache: true
+                    install_time: 2021-10-04 11:26:24.967
+                    adgroup_id: null
+                    redirect_response_data: null
+                    orig_cost: 0.0
+                    click_time: 2021-10-04 11:25:15.477
+                    agency: null
+                    cost_cents_USD: 0
+                    is_retargeting: false
+                    af_cpi: null
+                    af_click_lookback: 7d
+                    engmnt_source: null
+                    af_siteid: null
+                    idfa: BD3D610E-9128-4597-96FA-04E23D70D1ED
+                    http_referrer: null
+                    retargeting_conversion_type: none
+                    is_incentivized: false
+                    af_sub5: null
+                    af_sub4: null
+                    adset: null
+                    af_sub1: null
+                    af_sub3: null
+                    af_sub2: null
+                    af_status: Non-organic
+        '404':
+          description: 'Not Found'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error_reason: 
+                    type: string
+                    description: "Error reason"
+                  status_code:
+                    type: integer
+                    description: "Error number"
+              examples:
+                Not-Found:
+                  value:
+                    error_reason: "Attribution data for this AppsFlyer ID is not available" 
+                    status_code: 404 
+
+
+
+                    
+
+                  
+
+                
+
+                  
