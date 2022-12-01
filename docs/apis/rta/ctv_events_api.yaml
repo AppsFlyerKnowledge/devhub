@@ -530,6 +530,9 @@ components:
           - webos
           - playstation
           - vidaa
+          - steam
+          - quest
+          - battlenet
       required: true
       description: |
         The CTV platform of the measured app
