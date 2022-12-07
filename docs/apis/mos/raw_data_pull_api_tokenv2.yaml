@@ -411,7 +411,7 @@ paths:
         - Protect360 fraud
       summary: Post-attribution installs
       description: | 
-        Records in-app events from fraudulent installs and therefore not attributed at all.
+        Reports include installs attributed to a media source but later found to be fraudulent.
         Data freshness: Real-time
       parameters:
         - $ref: '#/components/parameters/AppId' 
