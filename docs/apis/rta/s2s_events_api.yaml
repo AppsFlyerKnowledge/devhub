@@ -1,0 +1,530 @@
+openapi: 3.0.1
+info:
+  title:  Server-to-server events API (for mobile)
+  version: "1.0"
+  description: |
+    The AppsFlyer platform attributes and records mobile app events sent by the AppsFlyer SDK and by APIs. Use the S2S API to report events that take place outside the app; for example, a user renews their subscription using your web interface. S2S events, once recorded, are available across the platform, including dashboards, raw data, and analytics. 
+    AppsFlyer populates S2S events with:
+
+    - Values sent in the S2S message
+    - Some AppsFlyer install attribution values like, install time and media source. 
+servers:
+- url: https://api2.appsflyer.com/
+  description: Production server
+security:
+- ApiKeyAuth: []
+paths:
+  /inappevent/{app_id}:
+    post:
+      tags:
+      - Inapp Events
+      summary: Send Event
+      description: |
+        To properly measure installs with AppsFlyer, it is required that
+        the following API call be made upon first app launch
+        > ⚠️ 
+        > **JSON payload limitation** JSON payload size: up to 1KB
+        > **Rate limitation** POST limitation volume: 60,000 POSTs per minute. To increase this limit, contact your CSM
+        
+        > 📘 
+        > **Encode URLs** - [Encode (percent) code reserved characters](https://tools.ietf.org/html/rfc3986#section-2.1) before forming the method URL. 
+
+      parameters:
+        - in: path
+          name: app_id
+          required: true
+          schema:
+            type: string
+            description: |
+              The app identifier used in the AppsFlyer dashboard. 
+              Insert it precisely as it appears on the dashboard.
+              **iOS apps**: Ensure to prefix with `id`. Failure to do so results in a valid 200 OK return code; without recording the event.
+              **Windows**: Get the app ID from the *Microsoft App Store*.
+
+              > 📘 What if I can't send a device identifier?
+              >  You may be unable to send the identifier for a reason out of your control, for example, because the user has limited ad tracking (LAT) or uses iOS 14, and did not give ATT consent. If IDFV is available send it. 
+              >  Not sending an advertising ID/device identifier can cause: 
+              >  **Postback issues**: The media source will receive the postback but without a device identifier; consequently the media source can't associate it with a user. 
+              >  **Audiences segmentation** and rule failure. Audiences rulesets require [identifiers](https://support.appsflyer.com/hc/en-us/articles/115002689186#useridentifier-advanced-setting). It’s always best practice to send a device ID or customer user ID according to the ID type your ruleset uses, for every S2S event. However, if AppsFlyer identifiers have been sent through other means (SDK or past S2S event), new in-app events will be matched to the correct users even if no identifiers are sent with the events.       
+            example: id123456789
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/IdsObject'
+                - $ref: '#/components/schemas/CommonBody'
+      responses:
+        200:
+          description: |
+            On receipt of a message, minimum data validation is performed. As such, you can get an OK response even though the event may not completely record in AppsFlyer
+          content:
+            application/json:
+              schema:
+                {}
+              examples:
+                Success:
+                  value: OK
+        400:
+          description:  |
+            |Message|How to handle|
+            |--- |--- |--- |
+            |Failed to Authenticate|Ensure that the authentication key is correct|
+            |appsflyer_id is a mandatory field|<ul><li>Make sure you pass the correct AppsFlyer ID in the JSON</li><li>JSON is `stringified()` and formatted correctly</li></ul>|
+            |Bad request|When the request failed at least one of the validation criteria|
+            |Payload is missing or failed to parse|<ul><li>Make sure that the JSON is stringified and formatted correctly</li><li>If more than one event is included in the JSON payload. Make sure to send one event per request.</li></ul>
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                Authentication Failed:
+                  value: "Failed to Authenticate"
+                  description: "Ensure that the authentication key is correct."
+                Missing appsflyer_id:
+                  value: "appsflyer_id is a mandatory field"
+                Bad request: 
+                  value: "Bad request"
+                Parsing Failed:
+                  value: "Payload is missing or failed to parse"
+        401:
+          description: |
+            |Message|How to handle|
+            |--- |--- |--- |
+            |Unauthorized|When the key provided in the authentication header is not the `<dev_key>` for this app|
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                Unauthorized:
+                  value: "Unauthorized"
+        403:
+          description: |
+            |Message|How to handle|
+            |--- |--- |--- |
+            |Forbidden|When the app ID in the URL is incorrect|
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                Forbidden:
+                  value: "Forbidden"
+        500:
+          description: |
+            |Message|How to handle|
+            |--- |--- |--- |
+            |Internal Server Error|Verify that the JSON is `stringified()` and formatted correctly|
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                Internal Server Error:
+                  value: "Internal Server Error"
+                  
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      description: "To get the API key, in AppsFlyer dashboard go to: App Settings > Dev Key"
+      name: authentication
+      in: header
+  schemas:
+    CommonBody:
+      type: object
+      required:
+        - appsflyer_id
+        - eventName
+        - eventValue
+      properties:
+        appsflyer_id:
+          type: string
+          description: |
+            A unique identifier, generated by AppsFlyer, when the app launches for the first time.
+          example: 1415211453000-6513894
+        customer_user_id:
+          type: string
+          example: customer_user_id 
+          description: |
+            [Customer user ID](https://support.appsflyer.com/hc/en-us/articles/207032016), a unique user identifier set by the app owner.
+        att:
+          type: integer
+          enum:
+            - 0
+            - 1
+            - 2
+            - 3
+          description: |
+            iOS [ATTrackingManager authorization status](https://developer.apple.com/documentation/apptrackingtransparency/attrackingmanager/authorizationstatus/)
+
+            - If the device OS version is iOS 14 or later, populate attwith ATTrackingManager.
+            - The iOS values for [ATTrackingManager](https://developer.apple.com/documentation/apptrackingtransparency/attrackingmanager/authorizationstatus/) are:
+              - 0: Not determined
+              - 1: Restricted
+              - 2: Denied
+              - 3: Authorize
+
+            > 📘 
+            >
+            > We recommend that you populate `att` with the ATTrackingManager value as it impacts which identifiers are shared with partners in accordance with your [Aggregated Advanced Privacy settings](https://support.appsflyer.com/hc/en-us/articles/360018515798).
+        ip:
+          type: integer
+          description: |
+            The mobile device's IP address during the event occurrence.
+            If sent, the IP address is used to populate geo fields.
+            If not sent, AppsFlyer populates the geo fields using the values from the install attribution event. The IP address isn't populated.
+          example: 192.0.2.1
+          pattern: ^(([1-2]{0,1}[0-9]{0,1}[0-9]{1})\.([1-2]{0,1}[0-9]{0,1}[0-9]{1})\.([1-2]{0,1}[0-9]{0,1}[0-9]{1})\.([1-2]{0,1}[0-9]{0,1}[0-9]{1}))$
+          maxLength: 256
+        eventName:
+          type: string
+          description: |
+            Specify the event name. Ensure that the event names are aligned with the marketer's requirements.
+        eventValue:
+          type: string
+          format: json
+          description: |
+            >⚠️
+            > 
+            > If you send an event without a value then send: `"eventValue":""`
+            - Event values must be sent without additional symbols or formatting. 
+            - For `af_revenue` a decimal point can be used. Negative values should be preceded by a `-`
+            - [Explicit TikTok For Business instructions](https://support.appsflyer.com/hc/en-us/articles/360002254918#paypurchase-2)
+          example: '{ "af_revenue": "6", "af_currency": "USD", "af_content_type": "wallets", "af_content_id": "15854", "your_custom_attribute" :"456.123" }'
+        app_version_name:
+          type: string
+          example: my_app_version
+        app_store:
+          type: string
+          example: my_android_store_is_best
+          description: |
+            Equivalent to `AF_STORE` in Android apps. The store from which the app was downloaded.
+        eventTime:
+          type: string
+          format: date-time
+          example: "2019-05-15 12:17:01.123"
+          description: |
+            The time the event occurred using UTC timezone.
+            - **Default**: If no `eventTime` is sent, the time is set to the HTTP message arrival time.
+            - **Format**: string yyyy-mm-dd hh:mm:ss.sss the time needs to be in UTC timezone.
+
+            **Close of day**:
+
+            - If you implement `eventTime` the event must reach AppsFlyer by no later 02:00 of the following day. Meaning, if the event took place on Monday at 17:00 UTC, it must reach AppsFlyer servers by no later than Tuesday 02:00 UTC. 
+            - Events received after close-of-day are stamped with the actual arrival time.
+            - Events having a future time (meaning after the arrival time):
+              - Events that arrive before midnight will be stamped with the `eventTime`.
+              - Events that arrive after midnight will be stamped with the arrival time.
+            
+            **Example**
+            - Times are in UTC
+            - An event is sent with `eventTime` = Monday 21:00.
+
+            |Time of arrival|Time recorded by AppsFlyer|Remark|
+            |--- |--- |--- |
+            |Tuesday 01:00   |Monday 21:00   |Arrived before close-of-business.   |
+            |Wednesday 09:00    |Wednesday 09:00   |Arrived after close-of-business. Time is set to arrival time.    |
+        eventCurrency:
+          type: string
+          enum:
+          - NZD
+          - SGD
+          - ANG
+          - MNT
+          - BIF
+          - BBD
+          - HUF
+          - ERN
+          - AZN
+          - BYN
+          - AOA
+          - PYG
+          - MYR
+          - GYD
+          - VUV
+          - SLL
+          - FKP
+          - DJF
+          - GNF
+          - MMK
+          - RSD
+          - CLF
+          - XDR
+          - ZAR
+          - TND
+          - PHP
+          - KGS
+          - XPD
+          - RON
+          - RUB
+          - KMF
+          - CHW
+          - SCR
+          - GIP
+          - XBC
+          - MXV
+          - XXX
+          - TRY
+          - UYU
+          - XCD
+          - FJD
+          - GHS
+          - MVR
+          - AWG
+          - UGX
+          - TOP
+          - CVE
+          - MKD
+          - COP
+          - CUC
+          - GTQ
+          - KZT
+          - MXN
+          - MGA
+          - AUD
+          - BDT
+          - ISK
+          - KRW
+          - DZD
+          - OMR
+          - ZMW
+          - MOP
+          - CUP
+          - JPY
+          - SHP
+          - VES
+          - LSL
+          - ETB
+          - BWP
+          - MAD
+          - AED
+          - NGN
+          - BRL
+          - XTS
+          - GEL
+          - IDR
+          - EUR
+          - GBP
+          - WST
+          - UYI
+          - XAF
+          - SZL
+          - XOF
+          - SEK
+          - UZS
+          - KES
+          - KYD
+          - ILS
+          - KWD
+          - NPR
+          - MRU
+          - BZD
+          - QAR
+          - UAH
+          - XSU
+          - BTN
+          - HTG
+          - DKK
+          - USN
+          - VND
+          - SBD
+          - SSP
+          - STN
+          - JMD
+          - IQD
+          - LBP
+          - XPT
+          - HRK
+          - HKD
+          - JOD
+          - PAB
+          - CDF
+          - XAU
+          - BAM
+          - CNY
+          - SOS
+          - XPF
+          - GMD
+          - DOP
+          - XAG
+          - KPW
+          - BOB
+          - BHD
+          - LRD
+          - BGN
+          - AMD
+          - CZK
+          - CAD
+          - LAK
+          - PLN
+          - LKR
+          - XUA
+          - UYW
+          - MWK
+          - PGK
+          - YER
+          - PEN
+          - KHR
+          - RWF
+          - BSD
+          - XBA
+          - AFN
+          - ZWL
+          - LYD
+          - TMT
+          - HNL
+          - TWD
+          - XBB
+          - IRR
+          - MUR
+          - BOV
+          - THB
+          - ALL
+          - XBD
+          - TJS
+          - SDG
+          - BMD
+          - CRC
+          - USD
+          - NOK
+          - SRD
+          - MZN
+          - CLP
+          - SYP
+          - TZS
+          - EGP
+          - COU
+          - ARS
+          - MDL
+          - INR
+          - CHE
+          - SAR
+          - PKR
+          - TTD
+          - NIO
+          - BND
+          - NAD
+          - SVC
+          - CHF
+        bundleIdentifier:
+          type: string
+          example: com.myapp
+          description: |
+            A unique app identifier. In raw-data, the parameter populates Bundle ID. 
+            **Best practice** - Always populate this parameter. Many ad networks require it for campaign optimization. 
+        sharing_filter:
+          description: |
+            The sharing filter blocks the sharing of S2S events via postbacks/API with integrated partners and other third-party integrations. 
+
+            Use the filter to fulfill regulatory requirements like GDPR and CCPA, to comply with user opt-out mechanisms, and for other business logic reasons. 
+
+            The `sharing_filter` has the following options:
+
+            - `all`: All partners are blocked. Don't share the event with anyone. Example: "sharing_filter": "all"
+            - List of partner ids in an array. 
+
+            For a list of partner ids, contact your CSM or AppsFlyer support. 
+          type: array
+          items:
+            type: string
+            minLength: 1
+          minItems: 1
+          oneOf:
+          - type: array
+            items:
+              type: string
+              minLength: 1
+            minItems: 1
+          - type: string 
+            enum: ["all"]
+          example:
+          - "googleadwords_int"
+          - "adcolony_int"
+        custom_dimension:
+          type: string
+          description: Reserved for AppsFlyer future use
+        app_type:
+          type: string
+          enum:
+            - ""
+            - app_clip
+          description: If the user event takes place in an app_clip, send the parameter. In all other cases don't send the parameter.
+        custom_data:
+          type: string
+          format: json
+          description: |
+            Send custom data to the AppsFlyer platform. Similar to sending data from the SDK using `setAdditionalData` 
+            In raw data: populates custom_data field.
+          example: '{"key_group" : { "key_a1" : "value a1", "key_a2" : "value a2" }, "key_b" : "value b"}'  
+        os: 
+          type: string
+          example: "14.5.1"
+          description: |
+            The device operating system version.
+
+            > ⚠️
+            > To enable correct data processing you **must** send this parameter. 
+            > For backward compatibility reasons, we don't enforce this, so it isn't marked as obligatory.
+
+            > 📘 Note 🍏
+            > Starting July 1, 2021, for iOS apps,  if you don't send this parameter we regard the data as having come from a device running iOS 14.5.
+        aie:
+          type: boolean
+          description: |
+            Use this flag to indicate if the user opted out of sharing their advertiser ID. 
+
+            Use this field for devices running Android (all versions), or iOS versions before 14. 
+            > 📘 Note 
+            > For iOS 14.5+, use the att parameter. 
+
+            Populate this field as follows: 
+            - `true`: if the user agreed to share the advertiser ID. 
+            - `false`: if the user enabled Limited Ad Tracking (LAT). 
+
+    AndroidIdsBody:
+      title: Android Ids
+      type: object
+      properties:
+        advertising_id:
+          type: string
+          example: 9c9a82fb-d5de-4cd1-90c3-527441c11828
+          description: Where available populate with the device GAID (advertising ID)
+        oaid:
+          type: string
+          example: 1fe9a970-efbb-29e0-0bdd-f5dbbf751ab5
+        amazon_aid:
+          type: string
+        imei:
+          type: string
+          example: AA-BBBBBB-CCCCCC-D
+    ErrorResponse:
+      type: string
+    IdfvId:
+      title: iOS IDFV
+      type: object
+      properties:
+        idfv:
+          type: string
+          example: 95C9BD22-4A4C-41C8-9548-ED07C5C8C145
+          description: Where available populate with the device IDFV
+    IdfaId:
+      title: iOS IDFA
+      type: object
+      properties:
+        idfa:
+          type: string
+          example: 9876F1SS-2983-3855-27RR-2R626772VFNB
+          description: Where available populate with the device IDFA
+    IdsObject:
+      oneOf:
+      - $ref: '#/components/schemas/AndroidIdsBody'
+      - $ref: '#/components/schemas/IdfvId'
+      - $ref: '#/components/schemas/IdfaId'
+    
+
+
+
+
