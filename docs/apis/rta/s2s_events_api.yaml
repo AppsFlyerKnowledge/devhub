@@ -129,7 +129,7 @@ components:
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
-      description: "To get the API key, in AppsFlyer dashboard go to: App Settings > Dev Key"
+      description: "To get the authentication key, in AppsFlyer dashboard go to: App Settings > Dev Key"
       name: authentication
       in: header
   schemas:
