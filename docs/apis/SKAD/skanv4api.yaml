@@ -1,0 +1,355 @@
+openapi: '3.0.3'
+info:
+  title: SKAN 4.0 Conversion Value Schema
+  version: '0.1'
+security:
+  - bearerAuth: []
+servers:
+- url: https://hq1.appsflyer.com/api/skad/conversion_schema
+paths:
+  /v1:
+    get:
+      tags:
+      - "SKAN 4.0 Conversion Value Schema"
+      summary: Get SKAN CV schema
+      description: Specify one or more apps using the app ID
+      operationId: get-conversion-value-mapping-schema
+      parameters:
+      - name: app_id
+        in: query
+        description: Set 0-many app IDs. If no app ID is set, the schema of all apps returns. In all other cases, the schema of the specified 
+          app IDs returns.
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        '200':
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+               type: object
+               properties:
+                  data:
+                     type: object
+                     properties:
+                        app_id:
+                           type: string
+                           description: "App Store app id"
+                        configuration_mode:
+                           type: string
+                           enum:
+                             - skan4
+                           description: "Measurment mode selected set by the advertiser" 
+                        last_config_change:
+                           type: string
+                           description: "Time the advertiser updated the conversion value settings"
+                        measurement_window: 
+                           type: integer
+                           description: "Activity window duration (in hours)"
+                        postbacks:
+                          type: array
+                          items:
+                            anyOf:
+                              - $ref: '#/components/schemas/Postback_FineCoarse'
+                              - $ref: '#/components/schemas/Postback_Coarse'
+              example:
+                  data:
+                    app_id: "id12345678"
+                    last_config_change: "2022-11-07 09:32:07.362"
+                    configuration_mode: "skan4"
+                    postbacks: [
+                      {
+                        "postback_sequence_index": 0,                              
+                        "measurement_window": 48, 
+                        "lock_window_type": "in-app",
+                        "lock_window_event": "af_purchase",
+                        "lock_window_time": ,                                                              
+                        "conversion_value_mapping": {
+                          "fine": [
+                            {
+                              "conversion_value": 0,
+                              "min_time_post_install": 0, 
+                              "max_time_post_install": 48,
+                              "events": [] 
+                            },
+                            {
+                              "conversion_value": 5,
+                              "min_time_post_install": 0, 
+                              "max_time_post_install": 48,
+                              "events": [
+                                  {
+                                    "event_name": "af_trial_purchase",
+                                    "mapped_event_name": "mobile_add_to_cart",
+                                    "conversion_event": false,
+                                    "event_counter": 1,
+                                    "min_event_counter": 0,
+                                    "max_event_counter": 1
+                                  }] 
+                            }],
+                          "coarse": [
+                            {
+                              "coarse_conversion_value": "low",                  
+                              "min_time_post_install": 0,
+                              "max_time_post_install": 48,
+                              "events": [
+                                  {
+                                    "event_name": "af_app_opened",
+                                    "mapped_event_name": "mobile_active_app",
+                                    "conversion_event": false, 
+                                    "event_counter": 1,
+                                    "min_event_counter": 0,
+                                    "max_event_counter": 1,
+                                    "min_event_revenue": 4.001,
+                                    "max_event_revenue": 5,
+                                    "event_currency": "USD",
+                                    "event_revenue_usd": 4.5
+                                  }]
+                            }
+                          ]
+                        }
+                      },
+                      {
+                        "postback_sequence_index": 1,                          
+                        "measurement_window": 168, 
+                        "lock_window_type": "in-app",
+                        "lock_window_event": "af_purchase",
+                        "lock_window_time": ,                                     
+                        "conversion_value_mapping": {
+                          "coarse": [
+                            {
+                              "coarse_conversion_value": "medium",
+                              "measurement_window": 168,
+                              "min_time_post_install": 48, 
+                              "max_time_post_install": 168,
+                              "events": [
+                                  {
+                                    "event_name": "af_app_opened",
+                                    "mapped_event_name": "mobile_active_app",
+                                    "conversion_event": false, 
+                                    "event_counter": 1,
+                                    "min_event_counter": 0,
+                                    "max_event_counter": 1,
+                                    "min_event_revenue": 4.001,
+                                    "max_event_revenue": 5,
+                                    "event_currency": "USD",
+                                    "event_revenue_usd": 4.5
+                                    }]
+                            }]
+                        }
+                      },
+                      {
+                        "postback_sequence_index": 2,                          
+                        "measurement_window": 840, 
+                        "lock_window_type": "high-coarse",
+                        "lock_window_event": ,
+                        "lock_window_time": ,                                          
+                        "conversion_value_mapping": {
+                          "coarse": [
+                            {
+                              "coarse_conversion_value": "high",               
+                              "measurement_window": 840,
+                              "min_time_post_install": 168, 
+                              "max_time_post_install": 840,
+                              "events": [
+                                  {
+                                    "event_name": "rv_10",
+                                    "mapped_event_name": "mobile_add_to_cart",
+                                    "conversion_event": false, 
+                                    "event_counter": 1,
+                                    "min_event_counter": 0,
+                                    "max_event_counter": 1,
+                                    "min_event_revenue": 4.001,
+                                    "max_event_revenue": 5,
+                                    "event_currency": "USD",
+                                    "event_revenue_usd": 4.5
+                                  }] 
+                            }]
+                        }
+                      }
+                    ]
+
+        '400':
+          description: 'Request is malformed'
+          content:
+            application/json:
+              examples:
+                Request malformed:
+                  value: "{}"
+              schema:
+                type: object
+                properties: {}
+        '401':
+          description: 'Authentication error'
+          content:
+            text/plain:
+              examples:
+                Authentication error:
+                  value: "{}"
+              schema:
+                type: object
+                properties: {}
+        '404':
+          description: 'Server error or resource temporarily not found'
+          content:
+            text/plain:
+              examples:
+                Server error:
+                  value: "{}"
+              schema:
+                type: object
+                properties: {}
+        '429':
+          description: 'Exceeded rate limitation'
+          content:
+            text/plain:
+              examples:
+                Result:
+                  value: Exceeded rate limitation
+components:
+  securitySchemes:
+    bearerAuth: 
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    Postback_FineCoarse:
+      title: First postback
+      properties:
+        postback_sequence_index:
+          type: integer
+          description: |
+            Possible values: 0
+        measurement_window: 
+            type: integer
+            description: "Activity window duration (in hours)"
+        lock_window_type:
+          type: string
+        lock_window_event:
+          type: string
+        lock_window_time:
+          type: string
+        conversion_value_mapping:
+          type: array
+          description: "Conversion values mapping"
+          items:
+            type: object
+            properties:
+              fine:
+                type: array
+                items:
+                  $ref: '#/components/schemas/FineConversionValue'
+              coarse:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CoarseConversionValue'
+    Postback_Coarse:
+      title: Second and third postbacks
+      properties:
+        postback_sequence_index:
+          type: integer
+          description: |
+            Possible values: 1, 2
+        measurement_window: 
+            type: integer
+            description: "Activity window duration (in hours)"
+        lock_window_type:
+          type: string
+        lock_window_event:
+          type: string
+        lock_window_time:
+          type: string
+        conversion_value_mapping:
+          type: array
+          description: "Conversion values mapping"
+          items:
+            type: object
+            properties:
+              coarse:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CoarseConversionValue'
+    FineConversionValue:
+      properties:
+        conversion_value:
+          description: "Conversion value"
+          type: integer
+          minimum: 0
+          maximum: 63
+        min_time_post_install:
+          type: integer
+          description: "The lower bound, hours post-install, indicating when the user was last active in the app."
+        max_time_post_install:
+          type: integer
+          description: "The upper bound, hours post-install, indicating when the user was last active in the app"
+        events:
+          type: array
+          items:
+            $ref: '#/components/schemas/Event'
+    CoarseConversionValue:
+      properties:
+        conversion_value:
+          description: "Conversion value"
+          type: string
+          enum:
+            - low
+            - medium
+            - high
+        min_time_post_install:
+          type: integer
+          description: "The lower bound, hours post-install, indicating when the user was last active in the app."
+        max_time_post_install:
+          type: integer
+          description: "The upper bound, hours post-install, indicating when the user was last active in the app"
+        events:
+          type: array
+          items:
+            $ref: '#/components/schemas/Event'    
+    Event:
+      properties:
+        event_name:
+          type: string
+          description: "Advertiser in-app event name"
+        mapped_event_name:
+          type: string
+          description: "Partner's in-app event name. The advertiser maps event_name to mapped_event_name on a per app basis in AppsFlyer."
+        event_counter:
+          type: integer
+          description: "The number of times the user performed an event."
+        conversion_event:
+          type: boolean
+          description: "In the case of more than one event, if true, this event is a conversion event as defined by the advertiser"
+        event_currency:
+          type: string
+          description: "Currency for event_revenue"
+        event_revenue:
+          type: integer
+          description: "In case of a revenue event, monetary value using event_currency"
+        min_event_revenue:
+          type: number
+          format: float
+          description: "The lower bound of the event revenue range"  
+        max_event_revenue:
+          type: number
+          format: float
+          description: "The upper bound of the event counter range. Example: To calculate the revenue, (min_event_revenue + max_event_revenue)/2" 
+        event_revenue_usd:
+          type: number
+          format: float
+          description: "In case of a revenue event, monetary value" 
+        min_event_counter:
+          type: integer
+          description: "The lower bound of the event counter range" 
+        max_event_counter:
+          type: integer
+          description: "The upper bound of the event counter range. Example: To calcualte the number of ocurrences, roundup (min_event_counter + max_event_counter )/ 2" 
+
+
+        
+                  
+
+
+    
