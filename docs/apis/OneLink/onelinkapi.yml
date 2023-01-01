@@ -44,6 +44,18 @@ paths:
             type: string
             example: A1b3
           required: true
+        - name: id
+          in: query
+          description: |
+            The ID of the shortlink created. 
+            If not passed, the ID is a random string.
+            > ⚠️ 
+            > If fired twice, the second call would receive a response of: 
+            > `409 - Shortlink ID already in use`
+          schema:
+            type: string
+            example: my_shortlink_id
+          required: false
 
       requestBody:
         content:
