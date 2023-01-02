@@ -1,0 +1,119 @@
+/* *,
+*:before,
+*:after {
+    box-sizing: border-box;
+} */
+
+body {
+    font-family: Gilroy;
+}
+
+.carousel {
+    position: relative;
+    width: 50%;
+    height: 450px;
+    margin: 0 auto;
+    padding: 30px;
+    background-image: url("assets/carousel_bg_vector2.png"), url("assets/carousel_bg_vector1.png");
+    background-repeat: no-repeat;
+    background-position: top  right, bottom left;
+    background-size: 35%;
+}
+
+.carousel-content {
+    position: relative;
+    overflow: hidden;
+    transition: width .4s;
+    height: 450px;
+    margin-top: 30px;
+    /* height: 100%; */
+}
+
+.slide {
+    height: 100%;
+    position: absolute;
+    z-index: 1;
+    transition: left .4s cubic-bezier(.47, .13, .15, .89);
+}
+
+.card {
+    margin: 0 20px;
+    height: 320px;
+    background: #FFFFFF;
+    box-shadow: 0px 6px 13px 1px rgb(25 20 51 / 10%);
+    border-radius: 8.51687px;
+    padding: 25px 15px;
+}
+
+.card h3 {
+    margin: 0px;
+}
+
+.card a {
+    color: black;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.card a img {
+    width: 15px;
+    position: absolute;
+    margin: 3px 3px;
+}
+
+.nav {
+    position: absolute;
+    top: 210px;
+    width: 20px;
+    height: 20px;
+    z-index: 2;
+    cursor: pointer;
+    border-radius: 50%;
+    border: none;
+    outline: none;
+    color: white;
+    -webkit-user-select: none;
+}
+
+.nav-left {
+    left: -50px;
+}
+
+.nav-right {
+    right: 0px;
+}
+
+.carousel-arrow-icon-left {
+    margin-left: 5px;
+    margin-top: 2px;
+    width: 50px;
+    height: 50px;
+    background: #FFFFFF;
+    box-shadow: 0px 31.4901px 56.6821px 2.9232px rgb(25 20 51 / 10%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.carousel-arrow-icon-right {
+    margin-left: 8px;
+    margin-top: 2px;
+    width: 50px;
+    height: 50px;
+    background: #FFFFFF;
+    box-shadow: 0px 23px 25px -10px rgb(25 20 51 / 10%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav .arrow img {
+    width: 15px;
+}
+
+.nav .carousel-arrow-icon-left img {
+    rotate: 180deg;
+}
+
