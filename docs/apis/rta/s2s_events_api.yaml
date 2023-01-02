@@ -21,7 +21,7 @@ paths:
       summary: Send Event
       description: |
         To properly measure installs with AppsFlyer, it is required that
-        the following API call be made upon first app launch
+        the following API is made on the app's first launch
         > ⚠️ 
         > **JSON payload limitation** JSON payload size: up to 1KB
         > **Rate limitation** POST limitation volume: 60,000 POSTs per minute. To increase this limit, contact your CSM
@@ -37,13 +37,13 @@ paths:
             type: string
             description: |
               The app identifier used in the AppsFlyer dashboard. 
-              Insert it precisely as it appears on the dashboard.
+              Insert it excatly as it appears on the dashboard.
               **iOS apps**: Ensure to prefix with `id`. Failure to do so results in a valid 200 OK return code; without recording the event.
               **Windows**: Get the app ID from the *Microsoft App Store*.
 
               > 📘 What if I can't send a device identifier?
-              >  You may be unable to send the identifier for a reason out of your control, for example, because the user has limited ad tracking (LAT) or uses iOS 14, and did not give ATT consent. If IDFV is available send it. 
-              >  Not sending an advertising ID/device identifier can cause: 
+              >  You may be unable to send the identifier for a reason out of your control, for example, because the user has limited ad tracking (LAT) or uses iOS 14, and did not give ATT consent. 
+              > Not sending an advertising ID/device identifier can result in: 
               >  **Postback issues**: The media source will receive the postback but without a device identifier; consequently the media source can't associate it with a user. 
               >  **Audiences segmentation** and rule failure. Audiences rulesets require [identifiers](https://support.appsflyer.com/hc/en-us/articles/115002689186#useridentifier-advanced-setting). It’s always best practice to send a device ID or customer user ID according to the ID type your ruleset uses, for every S2S event. However, if AppsFlyer identifiers have been sent through other means (SDK or past S2S event), new in-app events will be matched to the correct users even if no identifiers are sent with the events.       
             example: id123456789
@@ -162,10 +162,10 @@ components:
 
             - If the device OS version is iOS 14 or later, populate attwith ATTrackingManager.
             - The iOS values for [ATTrackingManager](https://developer.apple.com/documentation/apptrackingtransparency/attrackingmanager/authorizationstatus/) are:
-              - 0: Not determined
-              - 1: Restricted
-              - 2: Denied
-              - 3: Authorize
+              - `0`: Not determined
+              - `1`: Restricted
+              - `2`: Denied
+              - `3`: Authorize
 
             > 📘 
             >
