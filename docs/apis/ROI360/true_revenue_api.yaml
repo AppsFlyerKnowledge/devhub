@@ -1,9 +1,8 @@
 openapi: 3.0.1
 info:
-  title: True Revenue Tax API
+  title: True Revenue tax API
   description: |
-    When recording in-app revenue, be that IAP or IAS (subscriptions), you are actually reporting gross revenue into the system. Factors such as store commission, tax, or other revenue related elements should be taken into account for each and every transaction.
-    True revenue comes to save this heavy lifting for you, so that eventually, all of your revenue metrics will be based on net revenue and calculated accordingly.
+    When recording revenue, usually just gross revenue is recorded in AppsFlyer. However, the in-app purchase (IAP) and subscription revenue solution takes into account tax payments to provide the true revenue (net revenue) for each transaction.
 
   version: 1.0.0
 servers:
@@ -16,15 +15,15 @@ paths:
   /update_taxes/app/{app_id}:
     post:
       tags:
-        - "Tax rate rules"
-      summary: "Create rule"
+        - "Create tax rate rule"
+      summary: "Create tax rate rule"
       parameters:
       - name: app_id
         in: path
         required: true
         schema:
           type: string
-        description: "App ID of the app for which you are setting tax rate rule"
+        description: "App ID of the app for which you are setting the tax rate rule"
         example: id123456789
       requestBody:
         content:
@@ -63,29 +62,29 @@ paths:
                     summary: Subdivision or Postal code without country
                     description: Subdivision or Postal code without country
                     value:
-                      message: "For the returned object, country must be defined"
+                      message: "Country must be defined for the returned object"
                   TaxRateAlreadyExists:
                    summary: Tax rate already exists
                    description: Tax rate already exists
                    value:
-                     message: "For the returned object, a tax rate already exists"
+                     message: "A tax rate is already defined for the returned object"
                   TaxRateMissing:
                    summary: Tax rate missing
                    description: Tax rate missing
                    value:
-                     message: "For the returned object, the parameter tax_rate is missing"
+                     message: "The parameter tax_rate is missing for the returned object"
                      request_id: "f1c0af47-bb7a-4e25-a261-d94d07689bb8"
                   MissingCountry:
                     summary: Missing country
                     description: Missing country
                     value:
-                      message: "For the returned object, the parameter country is missing"
+                      message: "The parameter country is missing for the returned object"
                       request_id: "f1c0af47-bb7a-4e25-a261-d94d07689bb8"
                   TaxNameMissing:
                     summary: Missing tax name
                     description: Missing tax name
                     value:
-                      message: "For the returned object, the parameter tax_name is missing"
+                      message: "The parameter tax_name is missing for the returned object"
                   InvalidSourceEvent:
                    summary: invalid source_event
                    description: invalid source_event
@@ -101,7 +100,7 @@ paths:
                   MissingAuthorizationToken:
                     summary: Missing authorization token
                     value:
-                      message: "Please contact your CSM for further information"
+                      message: "Get the API V2 token from your AppsFlyer admin"
                       request_id: "f1c0af47-bb7a-4e25-a261-d94d07689bb8"
         '404':
           description: Token unauthorized
@@ -149,7 +148,7 @@ paths:
                   InternalError:
                     summary: Internal Server Error
                     value:
-                      message: "Internal error. please try again later."
+                      message: "Internal error. Please try again later."
                       request_id: "f1c0af47-bb7a-4e25-a261-d94d07689bb8"
             
 
@@ -157,7 +156,7 @@ paths:
     get:
       tags:
         - "Tax rate rules"
-      summary: "List integrations"
+      summary: "Get list of tax rate rules"
       parameters:
       - name: app_id
         in: path
@@ -244,7 +243,7 @@ components:
       scheme: bearer
       bearerFormat: JWT
       description: |
-        To be able to call the API a relevant authorization token should be available for you in AppsFlyer platform (HQ) >> user dropdown (top right corner) >> API tokens >> API token V2.0
+        To call the API, get the API V2 authorization token from your AppsFlyer admin. They can retrieve it from the AppsFlyer platform (HQ)
   responses:  
     Success:
       description: Valid request
@@ -258,7 +257,7 @@ components:
                 request_id:
                   type: string 
               example:
-                message: "Successfully processed 1 integration updates"
+                message: "Successfully processed 1 integration update"
                 request_id: "f1c0af47-bb7a-4e25-a261-d94d07689bb8" 
   schemas:
     Error:
@@ -276,20 +275,20 @@ components:
         tax_name:
           type: string
           description: |
-            The *tax_name* appears in the customer’s invoice, and is usually a short name that describes the specific type of tax, such as Sales, VAT, or GST.
+            Name appearing in the customer invoice that describes the specific type of tax, such as sales, VAT, GST 
           example:
             Sales
         tax_rate:
           type: number
           format: float
           description: |
-            The *tax_rate* is a number (up to 4 decimal places) that represents the tax **percentage** to be collected.
+            Number up to 4 decimal places representing the tax percentage to be collected
           example: 7.25
         tax_exclusive:
           type: boolean
           default: false
           description: |
-            The *tax_exclusive* is a boolean parameter. If false, the amount calculated based on the tax_rate included in the overall amount, else, the amount calculated is added to the overall amount.
+            Boolean parameter, either true or false. False means tax is included in the overall revenue. True means tax is in addition to the overall stated revenue. For example, in the USA or Canada, where the sticker price doesn't include sales tax.
         country:
           type: string
           minItems: 0
@@ -543,21 +542,21 @@ components:
           description: |
             Two-letter ISO country code for which the tax is applied
             > ⚠️
-            > In case where country, subdivision and postal_code are empty, as well as the remaining parameters are included and valid, the rule will be considered as the default tax rule.
+            > When country, subdivision, and postal code fields are left empty, and the remaining parameters are included and valid, the default tax rule is applied.
         subdivision:
           type: string
           description: |
             > ⚠️
-            > Subdivision is null by default, the granularity of the tax_rate derived from the most granular breakdown available based on the following hierarchy: country | subdivision | postal_code
-            > For some countries (for example, the United States) we will report an additional two-letter state. Should be handled according to [SUBDIVISION CODES (ISO 3166-2)](https://service.unece.org/trade/locode/2022-1%20SubdivisionCodes.htm) → expected value format “country_code-subdivision_code”
+            > Subdivision is null by default. The granularity of the tax_rate is derived from the most granular breakdown available based on the following hierarchy: country | subdivision | postal code.
+            > For some countries, there can be an additional state/subdivision. This is handled according to [ISO 3166-2 subdivision codes](https://service.unece.org/trade/locode/2022-2%20SubdivisionCodes.htm). This must include the country code and subdivision code.
           example: US-CA
         postal_code:
           type: string
           description: |
-            String of numbers and letters that represent groupings of people in geographic areas.
+            String of numbers and letters that represents a group of people in a geographic area
             > ⚠️
-            > postal_code is null by default, the granularity of the tax_rate derived from the most granular breakdown available based on the following hierarchy: country | subdivision | postal_code 
-          example: "57717"
+            > Postal_code is null by default. The granularity of the tax_rate is derived from the most granular breakdown available based on the following hierarchy: country | subdivision | postal code.
+          example: "L4J8E3"
         deduction_order:
           type: integer
           enum:
@@ -566,14 +565,7 @@ components:
             - 2
           default: 0
           description: |
-            The deduction_order is an enum that can be set to one of the following:
-            - 0 - store commission is deducted first from the gross revenue and tax is deducted from the amount remaining after store commission
-            - 1 - tax is deducted first from the gross and store commission is deducted from the amount remaining after tax
-            - 2 - both tax and store commission are deducted from the total revenue
-
-
-
-
-
-
-
+            The deduction_order is an enum that can be set to one of 0, 1, or 2.
+            - 0 - Store commission is deducted first from the gross revenue and tax is deducted from the remaining amount.
+            - 1 - Tax is deducted first from the gross revenue and store commission is deducted remaining amount.
+            - 2 - Both tax and store commission are deducted from the total revenue.
