@@ -109,3 +109,9 @@ sync-via-rdme-s2s-events:
     - npx -y rdme@8.4.0 openapi ./docs/apis/rta/s2s_events_api.yaml --key=rdme_xn8s9h0fb20a2df26bd435f6c42b1c7d59b240b0354348510d0c2f14216e353fb8fe63 --id=6395db9fa17cb50068ac9e3e
   rules:
     - if: $CI_COMMIT_BRANCH == "master"
+
+sync-via-rdme-roi360-truetax:
+  script:
+    - npx -y rdme@8.1.1 openapi ./docs/apis/ROI360/true_revenue_api.yaml --key=rdme_xn8s9h0fb20a2df26bd435f6c42b1c7d59b240b0354348510d0c2f14216e353fb8fe63 --id=6398560a4c453f0087905fc4
+  rules:
+    - if: $CI_COMMIT_BRANCH == "master"
