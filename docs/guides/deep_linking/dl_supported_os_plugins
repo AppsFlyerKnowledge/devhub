@@ -1,0 +1,21 @@
+---
+title: Supported OS and plugins
+category: 6384c30e5a754e005f668a74
+order: 2
+hidden: true
+---
+
+![](https://files.readme.io/40ccfeb-OneLink_big_slide-01.png "OneLink OS support")
+
+## Mobile OS's
+OneLink has easy integration to the AppsFlyer SDKs for the major mobile operating systems.
+
+The following links will guide to the documentation to get started: 
+
+* [Android](https://dev.appsflyer.com/docs/android)
+* [iOS](https://dev.appsflyer.com/docs/ios)
+
+Plugins:
+
+* [Unity](https://dev.appsflyer.com/hc/docs/deeplinkintegrate)
+* [React Native](https://github.com/AppsFlyerSDK/appsflyer-react-native-plugin/blob/master/Docs/DeepLink.md)
