@@ -3,7 +3,7 @@ title: Android Extended Deferred Deep Linking
 category: 6384c30e5a754e005f668a74
 parentDoc: 6387276d97e08d00104d4435
 order: 3
-hidden: true
+hidden: false
 ---
 
 ## Overview

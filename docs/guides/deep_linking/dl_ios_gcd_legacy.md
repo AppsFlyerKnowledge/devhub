@@ -3,7 +3,7 @@ title: iOS Legacy APIs
 category: 6384c30e5a754e005f668a74
 parentDoc: 63a8517990401800247b99ce
 order: 4
-hidden: true
+hidden: false
 ---
 
 ## Direct Deep Linking

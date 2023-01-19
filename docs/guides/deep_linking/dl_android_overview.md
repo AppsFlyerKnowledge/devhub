@@ -2,7 +2,7 @@
 title: Android
 category: 6384c30e5a754e005f668a74
 order: 4
-hidden: true
+hidden: false
 ---
 This section provides instructions for an Android developer to set up OneLink (deep linking and deferred deep linking) to work in the app.
 

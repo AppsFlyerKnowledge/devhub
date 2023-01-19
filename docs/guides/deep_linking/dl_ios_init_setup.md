@@ -3,7 +3,7 @@ title: iOS initial setup
 category: 6384c30e5a754e005f668a74
 parentDoc: 63a8517990401800247b99ce
 order: 1
-hidden: true
+hidden: false
 ---
 
 **At a glance**: The initial app setup enables the marketer to create links that send existing app users directly into the app. The initial setup is also a prerequisite for deep linking and deferred deep linking.

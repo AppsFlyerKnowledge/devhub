@@ -2,7 +2,7 @@
 title: Deep Linking work flow
 category: 6384c30e5a754e005f668a74
 order: 2
-hidden: true
+hidden: false
 ---
 ## Setup
 
@@ -44,7 +44,7 @@ In some cases, UDL isn't activated for deferred deep-linking. For example, when:
     - The time period between click and install exceeds the UDL lookback window of 15 minutes.
 To guarantee deferred deep-linking works in such cases, we recommend implementing the `onConversionDataSuccess` (OCDS) method, which is part of the GCD API. OCDS is usually used to retrieve [conversion data](https://dev.appsflyer.com/hc/docs/conversion-data) and prior to UDL, was the exclusive method for handling deferred deep linking.
 **Important**: When implementing both UDL and OCDS, it is the developer's responsibility to guarantee that **only one** of the methods handles deferred deep linking.
-See instructions for implementing extended deferred deep linking for [Android](TBA) and [iOS](TBA).
+See instructions for implementing extended deferred deep linking for [Android](dl_android_ocds_ddl.md) and [iOS](dl_ios_ocds_ddl.md).
 
 ### Legacy: Use only GCD API for Deep-Linking
 Developers already using OneLink may be using the legacy methods for deep linking and deferred deep linking, instead of UDL. 

@@ -3,7 +3,7 @@ title: Android initial setup
 category: 6384c30e5a754e005f668a74
 parentDoc: 6387276d97e08d00104d4435
 order: 1
-hidden: true
+hidden: false
 ---
 
 **At a glance**: The initial app setup enables the marketer to create links that send existing app users directly into the app. The initial setup is also a prerequisite for deep linking and deferred deep linking.

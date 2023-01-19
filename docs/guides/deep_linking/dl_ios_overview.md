@@ -2,7 +2,7 @@
 title: iOS
 category: 6384c30e5a754e005f668a74
 order: 5
-hidden: true
+hidden: false
 ---
 This section provides instructions for an iOS developer to setup OneLink (deep linking and deferred deep linking) to work in the app.
 

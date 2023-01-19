@@ -2,7 +2,7 @@
 title: User invite attribution
 category: 6384c30e5a754e005f668a74
 order: 3
-hidden: true
+hidden: false
 ---
 
 ## Overview
