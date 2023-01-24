@@ -165,26 +165,6 @@ components:
           example: customer_user_id 
           description: |
             [Customer user ID](https://support.appsflyer.com/hc/en-us/articles/207032016), a unique user identifier set by the app owner.
-        att:
-          type: integer
-          enum:
-            - 0
-            - 1
-            - 2
-            - 3
-          description: |
-            iOS [ATTrackingManager authorization status](https://developer.apple.com/documentation/apptrackingtransparency/attrackingmanager/authorizationstatus/)
-
-            - If the device OS version is iOS 14 or later, populate attwith ATTrackingManager.
-            - The iOS values for [ATTrackingManager](https://developer.apple.com/documentation/apptrackingtransparency/attrackingmanager/authorizationstatus/) are:
-              - `0`: Not determined
-              - `1`: Restricted
-              - `2`: Denied
-              - `3`: Authorize
-
-            > 📘 
-            >
-            > We recommend that you populate `att` with the ATTrackingManager value as it impacts which identifiers are shared with partners in accordance with your [Aggregated Advanced Privacy settings](https://support.appsflyer.com/hc/en-us/articles/360018515798).
         ip:
           type: integer
           description: |
