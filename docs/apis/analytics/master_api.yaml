@@ -1,0 +1,750 @@
+openapi: 3.0.1
+info:
+  title:  Master API
+  version: "1.0"
+servers:
+- url: https://hq.appsflyer.com/export/master_reportE
+  description: Production server
+security:
+  - Bearer-Authentication: []
+paths:
+  /v4:
+    get:
+      tags:
+      - Master Report
+      summary: Get Master Report
+      parameters:
+        - $ref: '#/components/parameters/AppId'
+        - $ref: '#/components/parameters/From'
+        - $ref: '#/components/parameters/To'
+        - $ref: '#/components/parameters/Groupings'
+        - $ref: '#/components/parameters/Kpis'
+        - $ref: '#/components/parameters/Calculated_kpis'
+        - $ref: '#/components/parameters/Filter_Media_Source'
+        - $ref: '#/components/parameters/Filter_Campaign'
+        - $ref: '#/components/parameters/Filter_Partner'
+        - $ref: '#/components/parameters/Filter_Channel'
+        - $ref: '#/components/parameters/Filter_siteid'
+        - $ref: '#/components/parameters/Filter_Geo'
+        - $ref: '#/components/parameters/Currency'
+        - $ref: '#/components/parameters/TimeZone'
+        - $ref: '#/components/parameters/Format'
+      responses:
+        200:
+          $ref: '#/components/responses/Success'
+        401:
+          $ref: '#/components/responses/Unauthorized'
+        403:
+          $ref: '#/components/responses/InvalidFormat'
+        404:
+          $ref: '#/components/responses/NotFound'
+        416:
+          $ref: '#/components/responses/NoGroupings'
+
+components:
+  securitySchemes:
+    Bearer-Authentication:
+      type: http
+      scheme: bearer
+      description: "Authorization HTTP header containing API V2 token (bearer token) is required.\n\n
+        The admin [gets the V2 token in the dashboard](https://support.appsflyer.com/hc/en-us/articles/360004562377) "
+  responses:  
+    Success:
+      description: Request successful.
+      content: 
+        application/json:
+            schema:
+              type: object
+              additionalProperties: {} 
+        text/csv: {}
+    
+    # 401
+    Unauthorized:
+      description: Account may be suspended. Log in to the dashboard and check the account status. 
+      content:
+        application/json:
+            schema:
+              $ref: '#/components/schemas/Error' 
+            examples:
+              InvalidToken:
+                summary: Invalid authorization token
+                value:
+                  message: The supplied API token is invalid
+    # 403
+    InvalidFormat:
+      description: Invalid format
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error' 
+          examples:
+            UnrecognizedDateFormat:
+              summary: Unrecognized date format
+              value:
+                Unrecognized date format.
+            FromDateAfterToDate:
+              summary: From date after to date
+              value:
+                From date can't be after To date.
+            NoKPIsProvided:
+              summary: No KPIs provided
+              value: No KPIs provided.
+            FormulasNotUnicode:
+              summary: Formulas not in Unicode
+              value: One or more of the formula's operators are not supported when not Unicode.
+            NoCalculatedNames:
+              summary: No calculated KPI name provided
+              value: No calculated KPI name provided.
+            NotAuthorizedAppIds:
+              summary: Not authorized app ids
+              description: |
+                - This error occurs when you make a request for data related to an app that is not listed in your dashboard.
+                - Verify that the app ID you pass in the app_id parameter is the correct app ID.
+                - For Android, the app ID is the package ID.
+                - For iOS, the app ID is the [App ID rather than the bundle ID](https://developer.apple.com/library/archive/documentation/General/Conceptual/DevPedia-CocoaCore/AppID.html).
+              value: "Not authorized app-ids: <app_ids>"
+    # 404
+    NotFound:
+      description: |
+        - There is a networking problem
+        - Master API is not part of your subscription plan
+      content:
+        application/json:
+            schema:
+              $ref: '#/components/schemas/Error' 
+            examples: 
+              NotFound:
+                description: Master API not part of your subscription plan
+                value: Not found
+    
+    # 416
+    NoGroupings:
+      description: TBA
+      content:
+        application/json:
+          schema:
+              $ref: '#/components/schemas/Error' 
+          examples: 
+            NoGroupings:
+              summary: No groupings selected
+              description: |
+                - The master API provides aggregate reports. These reports require KPIs according to which data is aggregated.
+                - Specify the desired groupings in the groupings parameter.
+              value: No Groupings Selected
+            SomethingWentWrong:
+              summary: something went wrong
+              description: |
+                - Check that the date format complies with yyyy-mm-dd
+                - If the KPI type is Cohort, ensure that the cohort day range is 1-90. Cohort day 0 isn't supported.
+              value: Something went wrong. Please re-try to download in a minute, choose a narrower time range, or contact AppsFlyer support.
+            TimeRangeUtcOnly:
+              summary: Requested time range in UTC only
+              value: The requested time range is in UTC only (prior to the timezone change)
+            SelectAuthorizedAppId:
+              summary: Please select authorized app-id
+              value: Please select authorized app-id
+            WrongApiFields:
+              description: "The field doesn't exist or is not permitted"
+              summary: Wrong API Fields
+              value: Wrong API Fields
+            OtherReason:
+              description: "The report size exceeds 200K"
+              summary: Other reason
+              value: Other reason
+  parameters:
+    AppId:
+      name: app_id
+      in: query
+      required: true
+      schema:
+        oneOf:
+          - type: string
+            enum:
+              - all
+            title: All app ids
+          - type: array
+            title: Select app IDs
+            items:
+              type: string
+      style: form
+      explode: false
+      description: |
+        - App identifier, as found in AppsFlyer.
+        - Insert the app ID exactly as found in AppsFlyer
+        - Prefix iOS apps with `id`
+        - Use `app_id=all` to query for all your apps
+      example: com.example.testapp
+    From:
+      name: from
+      in: query
+      required: true
+      schema:
+        type: string
+        pattern: ^\d{4}\-\d{2}\-\d{2}?$
+        description: |
+          Lower bound of the LTV attribution date range.
+          Format: `yyyy-mm-dd`
+        example: "2022-04-22"
+    To:
+      name: to
+      in: query
+      required: true
+      schema:
+        type: string
+        pattern: ^\d{4}\-\d{2}\-\d{2}?$
+        description: |
+          Higher bound of the LTV attribution date range
+          - Number of the days in the range: 1-31 days
+          - For a single day: `from` and `to` values are identical. 
+          Format: `yyyy-mm-dd`
+        example: "2022-04-22"
+    Groupings:
+      name: groupings
+      in: query
+      required: true
+      schema:
+        type: array
+        items:
+          type: string
+          enum:
+            - app_id
+            - pid
+            - af_prt
+            - c
+            - af_adset
+            - af_ad
+            - af_channel
+            - af_siteid
+            - af_keywords
+            - is_primary
+            - af_c_id
+            - af_adset_id
+            - af_ad_id
+            - install_time
+            - attributed_touch_type
+            - geo
+    Kpis:
+      name: kpis
+      in: query
+      required: true
+      schema:
+          type: array
+          minItems: 1
+          items:
+            oneOf:
+              - $ref: '#/components/schemas/LTV_params'
+              - $ref: '#/components/schemas/LTV_event_counter'
+              - $ref: '#/components/schemas/LTV_users'
+              - $ref: '#/components/schemas/LTV_sales_in_usd'
+              - $ref: '#/components/schemas/Retention_day_x'
+              - $ref: '#/components/schemas/Retention_rate_day_x'
+              - $ref: '#/components/schemas/Activity_params'
+              - $ref: '#/components/schemas/Activity_event_counter'
+              - $ref: '#/components/schemas/Activity_sales_in_usd'
+              - $ref: '#/components/schemas/Activity_average_unique_users'
+              - $ref: '#/components/schemas/Cohort_total_sessions_per_user'
+              - $ref: '#/components/schemas/Cohort_sessions_per_user'
+              - $ref: '#/components/schemas/Cohort_days_to_total_sessions'
+              - $ref: '#/components/schemas/Protect360_params'
+              
+    Calculated_kpis:
+      description: |
+        you can add calculated KPIs to your master API reports. This enables you to have your own calculated reports included in your Master API reports.
+        You can insert any number of built-in KPIs in the calculated KPI formulas.
+        Standard arithmetic operators are supported: addition (+) encoded as `%2b`, subtraction (-), multiplication (*), division (/) encoded as `%2f`.
+        Calculated KPI field names must start with `calculated_kpi_`, followed by any valid string, such as, `calculated_kpi_purchaserate`.
+
+        ** Examples:**
+        *First three days combined retention*
+        `calculated_kpi_3days_retention=retention_day_1%2Bretention_day_2%2Bretention_day_3`
+        
+        *Average revenue per impression*
+        `calculated_kpi_rev_per_impression=revenue%2Fimpression`
+
+        *Cohort day 7 ROI*
+        `calculated_kpi_roi_day_7=(cohort_day_7_total_revenue_per_user-average_ecpi)%2Faverage_ecpi`
+      name: calculated_kpis
+      in: query
+      required: false
+      schema:
+        type: object
+        additionalProperties:
+          type: string
+        example:
+          calculated_kpi_3days_retention: retention_day_1%2Bretention_day_2%2Bretention_day_3
+      style: form
+      explode: true
+    Filter_Campaign:
+      name: c
+      in: query
+      description: Filtering by campaign name 
+      schema:
+        type: array
+        items:
+          type: string
+    Filter_Channel:
+      name: af_channel
+      in: query
+      schema:
+        type: array
+        items:
+          type: string
+      description: Filtering by channel name 
+    Filter_Media_Source:
+      name: pid
+      in: query
+      schema:
+        type: array
+        items:
+          type: string
+      description: Used for selecting the rows, which the specified media source/s are displayed in. Comma-separated multiple selection is supported
+    Filter_Partner:
+      name: af_prt
+      in: query
+      schema:
+        type: array
+        items:
+          type: string
+      description: Filtering by agency name 
+    Filter_siteid:
+      name: af_siteid
+      in: query
+      schema:
+        type: array
+        items:
+          type: string
+      description: Filtering by publisher id 
+    Filter_Geo:
+      name: geo
+      in: query
+      description: Filtering by country 
+      schema:
+        type: array
+        items:
+          enum:
+            - AF
+            - AX
+            - AL
+            - DZ
+            - AS
+            - AD
+            - AO
+            - AI
+            - AQ
+            - AG
+            - AR
+            - AM
+            - AW
+            - AU
+            - AT
+            - AZ
+            - BS
+            - BH
+            - BD
+            - BB
+            - BY
+            - BE
+            - BZ
+            - BJ
+            - BM
+            - BT
+            - BO
+            - BA
+            - BW
+            - BV
+            - BR
+            - IO
+            - BN
+            - BG
+            - BF
+            - BI
+            - KH
+            - CM
+            - CA
+            - CV
+            - KY
+            - CF
+            - TD
+            - CL
+            - CN
+            - CX
+            - CC
+            - CO
+            - KM
+            - CG
+            - CD
+            - CK
+            - CR
+            - CI
+            - HR
+            - CU
+            - CY
+            - CZ
+            - DK
+            - DJ
+            - DM
+            - DO
+            - EC
+            - EG
+            - SV
+            - GQ
+            - ER
+            - EE
+            - ET
+            - FK
+            - FO
+            - FJ
+            - FI
+            - FR
+            - GF
+            - PF
+            - TF
+            - GA
+            - GM
+            - GE
+            - DE
+            - GH
+            - GI
+            - GR
+            - GL
+            - GD
+            - GP
+            - GU
+            - GT
+            - GG
+            - GN
+            - GW
+            - GY
+            - HT
+            - HM
+            - VA
+            - HN
+            - HK
+            - HU
+            - IS
+            - IN
+            - ID
+            - IR
+            - IQ
+            - IE
+            - IM
+            - IL
+            - IT
+            - JM
+            - JP
+            - JE
+            - JO
+            - KZ
+            - KE
+            - KI
+            - KR
+            - KP
+            - KW
+            - KG
+            - LA
+            - LV
+            - LB
+            - LS
+            - LR
+            - LY
+            - LI
+            - LT
+            - LU
+            - MO
+            - MK
+            - MG
+            - MW
+            - MY
+            - MV
+            - ML
+            - MT
+            - MH
+            - MQ
+            - MR
+            - MU
+            - YT
+            - MX
+            - FM
+            - MD
+            - MC
+            - MN
+            - ME
+            - MS
+            - MA
+            - MZ
+            - MM
+            - NA
+            - NR
+            - NP
+            - NL
+            - AN
+            - NC
+            - NZ
+            - NI
+            - NE
+            - NG
+            - NU
+            - NF
+            - MP
+            - NO
+            - OM
+            - PK
+            - PW
+            - PS
+            - PA
+            - PG
+            - PY
+            - PE
+            - PH
+            - PN
+            - PL
+            - PT
+            - PR
+            - QA
+            - RE
+            - RO
+            - RU
+            - RW
+            - BL
+            - SH
+            - KN
+            - LC
+            - MF
+            - PM
+            - VC
+            - WS
+            - SM
+            - ST
+            - SA
+            - SN
+            - RS
+            - SC
+            - SL
+            - SG
+            - SK
+            - SI
+            - SB
+            - SO
+            - ZA
+            - GS
+            - ES
+            - LK
+            - SD
+            - SR
+            - SJ
+            - SZ
+            - SE
+            - CH
+            - SY
+            - TW
+            - TJ
+            - TZ
+            - TH
+            - TL
+            - TG
+            - TK
+            - TO
+            - TT
+            - TN
+            - TR
+            - TM
+            - TC
+            - TV
+            - UG
+            - UA
+            - AE
+            - GB
+            - US
+            - UM
+            - UY
+            - UZ
+            - VU
+            - VE
+            - VN
+            - VG
+            - VI
+            - WF
+            - EH
+            - YE
+            - ZM
+            - ZW
+    Currency:
+      name: currency
+      in: query
+      schema:
+        type: string
+        enum:
+          - preferred
+          - USD
+    TimeZone:
+      name: timezone
+      in: query
+      schema:
+        type: string
+        enum:
+          - preferred
+          - USD
+    Format:
+      name: format
+      in: query
+      description: |
+        By default, the response data is received in CSV file format. If you prefer to get the data in JSON format append `format=json` to the URI
+      schema:
+        type: string
+        enum:
+          - ""
+          - json
+    
+  schemas:
+    Error:
+      type: string
+    LTV_params:
+      title: LTV generic parameters
+      type: string
+      enum:
+        - impressions
+        - clicks
+        - installs
+        - cr
+        - sessions
+        - loyal_users
+        - loyal_users_rate
+        - cost
+        - revenue
+        - roi
+        - arpu_ltv
+        - average_ecpi
+        - uninstalls
+        - uninstalls_rate
+    LTV_event_counter:
+      title: Number of event occurrences
+      description: |
+        event\_counter\_[event_name]
+        event_name must be lower case
+      type: string
+      pattern: ^event_counter_[^A-Z]+$
+    LTV_users:
+      title: Number of unique users per event
+      description: |
+        unique\_users\_[event_name]
+        event_name must be lower case
+      type: string
+      pattern: "^unique_users_[^A-Z]+$"
+    LTV_sales_in_usd:
+      title: Revenue in USD per event
+      description: |
+        sales\_in\_usd\_[event_name]
+        event_name must be lower case
+      type: string
+      pattern: "^unique_users_[^A-Z]+$"
+    Retention_day_x:
+      title: Number of retained users at day X
+      description: |
+        retention\_day\_[x]
+      type: string
+      pattern: "^retention_day_[0-9]+$"
+    Retention_rate_day_x:
+      title: Number of retained users at day X out of installing users
+      description: |
+        retention\_rate\_day\_[x]
+      type: string
+      pattern: "^retention_day_[0-9]+$"
+    Activity_params:
+      title: Activity generic parameters
+      type: string
+      enum:
+        - activity_average_dau	
+        - activity_average_mau	
+        - activity_average_dau_mau_rate
+        - activity_average_arpdau	
+        - activity_sessions	
+        - activity_revenue
+    Activity_event_counter:
+      title: Number of events generated by users
+      description: |
+        activity\_event\_counter\_[event_name]
+        event_name must be lower case
+      type: string
+      pattern: "^activity_event_counter_[^A-Z]+$"
+    Activity_sales_in_usd:
+      title: Revenue reported as part of the reported events
+      description: |
+        activity\_sales\_in\_usd\_[event_name]
+        event_name must be lower case
+      type: string
+      pattern: "^activity_sales_in_usd_[^A-Z]+$"
+    Activity_average_unique_users:
+      title: Average unique users performing a given event
+      description: |
+        activity\_average\_unique\_users\_[event_name]
+        event_name must be lower case
+      type: string
+      pattern: "^activity_average_unique_users_[^A-Z]+$"
+    Cohort_total_sessions_per_user:
+      title: Cohort - Cumulative sessions per user
+      description: |
+        Cohort Day x - Cumulative sessions per user up to day x (including day x)
+      type: string
+      pattern: "^cohort_day_[0-9]+_total_sessions_per_user$"
+    Cohort_sessions_per_user:
+      title: Cohort - Sessions on day x
+      description: |
+        Cohort Day x - Cumulative sessions per user up to day x (including day x)
+      type: string
+      pattern: "^cohort_day_[0-9]+_sessions_per_user$"
+    Cohort_days_to_total_sessions:
+      title: Cohort - Days to total sessions per user
+      description: |
+        Replaces specifying KPIs `Cohort_day_1_total_sessions_per_user` to `Cohort_day_x_total_sessions_per_user` on the URL.
+        For example: `cohort_3_days_total_sessions_per_user` on the URL produces 3 report columns:
+        Cohort_day_1_total_sessions_per_user+ Cohort_day_2_total_sessions_per_user+Cohort_day_3_total_sessions_per_user
+      type: string
+      pattern: "^cohort_[0-9]+_days_total_sessions_per_user$"
+    Protect360_params:
+      title: Protect360 generic parameters
+      type: string
+      enum:
+        - protect360_total_installs
+        - blocked_installs
+        - blocked_installs_rate
+        - post_attribution_installs
+        - post_attribution_installs_rate
+        - total_fraudulent_installs
+        - fraudulent_installs_rate
+        - real_time_fake_installs
+        - post_attribution_fake_installs
+        - real_time_hijacked_installs
+        - post_attribution_installs_hijacked_installs
+        - validation_rules_blocked_installs
+        - validation_rules_blocked_attribution
+        - blocked_installs_siteid_blacklist
+        - post_attribution_installs_siteid_blacklist
+        - blocked_installs_bots
+        - post_attribution_installs_bots
+        - blocked_installs_behavioral_anomalies
+        - post_attribution_installs_behavioral_anomalies
+        - blocked_installs_install_validation
+        - blocked_installs_install_hijacking
+        - post_attribution_installs_installs_hijacking
+        - blocked_installs_ctit_anomalies
+        - post_attribution_installs_ctit_anomalies
+        - blocked_installs_click_flood
+        - post_attribution_installs_click_flood
+        - protect360_total_clicks
+        - blocked_clicks
+        - blocked_clicks_rate
+        - protect360_total_in_apps
+        - blocked_in-app-events
+        - blocked_in-app-events_rate
+        - install_fraud_new_devices_total
+        - install_fraud_new_devices_total_installs_rate
+        - install_fraud_new_devices_total_loyal_user_rate
+        - install_fraud_lat_devices_total
+        - install_fraud_lat_devices_total_installs_rate
+        - install_fraud_lat_devices_total_loyal_user_rate
+        - conversion_rate
+        - click_flood_over_1_hour_rate
+        - click_flood_over_5_hours_rate
+    
+
+ 
