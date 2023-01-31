@@ -29,10 +29,10 @@ Developers perform the OneLink setup in the app:
 - Implementing extended deferred deep linking
 
 ### Initial setup
-Initial app setup for [Android](https://dev.appsflyer.com/hc/docs/initial-setup-for-deep-linking-and-deferred-deep-linking) and [iOS](https://dev.appsflyer.com/hc/docs/initial-setup-2): Opens the app (using Android App Links, Universal Links, or URI schemes)
+Initial app setup for [Android](dl_android_init_setup) and [iOS](dl_ios_init_setup): Opens the app (using Android App Links, Universal Links, or URI schemes)
 
 ### Implement Unified Deep Linking (UDL)
-Implement the unified deep linking (UDL) API for [Android](https://dev.appsflyer.com/hc/docs/unified-deep-linking-udl) and [iOS](https://dev.appsflyer.com/hc/docs/unified-deep-linking-udl-1) to retrieve data from the click and use that data to redirect users for a personalized experience to a specific in-app activity (deep linking or deferred deep linking). 
+Implement the unified deep linking (UDL) API for [Android](dl_android_unified_deep_linking) and [iOS](dl_ios_unified_deep_linking) to retrieve data from the click and use that data to redirect users for a personalized experience to a specific in-app activity (deep linking or deferred deep linking). 
 This API is fast, easy to use, and supports both owned and paid media sources.
 
 Note: For new users, the UDL method only returns parameters relevant to deferred deep linking: `deep_link_value` and `deep_link_sub1-10`. If you try to get any other parameters (`media_source`, `campaign`, `af_sub1-5`, etc.), they return `null`.
@@ -53,4 +53,4 @@ The legacy methods exclusively use the GCD API, which consists of two methods: `
 **Recommended**: Apps with only the GCD API implemented should implement [UDL](#implement-unified-deep-linking-udl) and [extended deferred deep linking](#optional-implement-extended-deferred-deep-linking).
 
 ### User invites
-Allow users to refer others to the app using OneLink links by [creating user invites](https://dev.appsflyer.com/hc/docs/user-invite-attribution).
+Allow users to refer others to the app using OneLink links by [creating user invites](dl_user_invite)
