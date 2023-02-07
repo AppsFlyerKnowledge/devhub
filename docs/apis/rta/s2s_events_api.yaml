@@ -138,7 +138,6 @@ components:
       title: Android Ids
       type: object
       required:
-        - advertising_id
         - appsflyer_id
         - eventName
         - eventValue
