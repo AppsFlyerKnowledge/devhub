@@ -67,7 +67,6 @@ paths:
                         "measurement_window": 48, 
                         "lock_window_type": "in-app",
                         "lock_window_event": "af_purchase",
-                        "lock_window_time": ,                                                              
                         "conversion_value_mapping": {
                           "fine": [
                             {
@@ -117,7 +116,6 @@ paths:
                         "measurement_window": 168, 
                         "lock_window_type": "in-app",
                         "lock_window_event": "af_purchase",
-                        "lock_window_time": ,                                     
                         "conversion_value_mapping": {
                           "coarse": [
                             {
@@ -145,8 +143,6 @@ paths:
                         "postback_sequence_index": 2,                          
                         "measurement_window": 840, 
                         "lock_window_type": "high-coarse",
-                        "lock_window_event": ,
-                        "lock_window_time": ,                                          
                         "conversion_value_mapping": {
                           "coarse": [
                             {
@@ -350,8 +346,6 @@ components:
           $ref: '#/components/schemas/LockWindowType'
         lock_window_event:
           $ref: '#/components/schemas/LockWindowEvent'
-        lock_window_time:
-          $ref: '#/components/schemas/LockWindowTime'
         conversion_value_mapping:
           type: array
           description: "Conversion values mapping"
@@ -379,8 +373,6 @@ components:
           $ref: '#/components/schemas/LockWindowType'
         lock_window_event:
           $ref: '#/components/schemas/LockWindowEvent'
-        lock_window_time:
-          $ref: '#/components/schemas/LockWindowTime'
         conversion_value_mapping:
           type: array
           description: "Conversion values mapping"
@@ -402,12 +394,6 @@ components:
       type: string
       description: |
         The name of the in-app event that locks the window
-    LockWindowTime:
-      type: integer
-      minimum: 1
-      maximum: 840
-      description: |
-        The post-install time the lock will occur. Possible values: 1-840 (hours)
     FineConversionValue:
       properties:
         conversion_value:
