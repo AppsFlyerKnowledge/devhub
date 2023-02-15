@@ -164,14 +164,6 @@ components:
           summary: Date only
           value:
             "2022-04-22"
-        DateHourMin:
-          summary: Date-Hour-Mins
-          value:
-            "2022-04-22 21:45"
-        DateHourMinSecs:
-          summary: Date-Hour-Mins-Secs
-          value:
-            "2022-04-22 21:45:23"
       required: true
       schema: 
         type: string
@@ -185,14 +177,6 @@ components:
           summary: Date only
           value:
             "2022-04-22"
-        DateHourMin:
-          summary: Date-Hour-Mins
-          value:
-            "2022-04-22 21:45"
-        DateHourMinSecs:
-          summary: Date-Hour-Mins-Secs
-          value:
-            "2022-04-22 21:45:23"
       required: true
       schema: 
         type: string
