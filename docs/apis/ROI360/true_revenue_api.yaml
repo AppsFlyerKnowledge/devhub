@@ -29,7 +29,29 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/TaxRateRule'
+              type: object
+              properties:
+                taxes:
+                  type: array
+                  minItems: 1
+                  items:
+                    $ref: '#/components/schemas/TaxRateRule'
+              example:
+                taxes:
+                  - tax_name: Portugal (EUR)
+                    tax_rate: 20
+                    country: PT
+                    subdivision: ''
+                    postal_code: ''
+                    tax_exclusive: false
+                    deduction_order: 1
+                  - tax_name: Croatia (EUR)
+                    tax_rate: 20
+                    country: HR
+                    subdivision: ''
+                    postal_code: ''
+                    tax_exclusive: false
+                    deduction_order: 1
         required: true
       responses:
         200:
@@ -168,10 +190,13 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  type: object
-                  $ref: '#/components/schemas/TaxRateRule'
+                type: object
+                properties:
+                  taxes:
+                    type: array
+                    items:
+                      type: object
+                      $ref: '#/components/schemas/TaxRateRule'
         '401':
           description: Missing authorization token
           content: 
