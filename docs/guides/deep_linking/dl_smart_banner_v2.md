@@ -79,7 +79,7 @@ Start showing the Smart Banner according to the banner key provided in the snipp
 | :-------- | :---------------- | :------------------- |
 | `String` | `bannerContainerQuery` | If passed, the SDK tries to locate an element in the page with this query and treats it as the entry point for the banner placement. Otherwise, `document.body` is used. |
 | `Integer` | `bannerZIndex` | Smart Banners are by default set to the max z-index value, so they won't be hidden by the website elements. This can be changed if you want some website components to be on top of the banner. |
-| `<Key, Value Dictionary>` | `bannerContainerQuery` | If passed, these keys and values (for example, `deep_link_value: apples`) are added as query parameters to the OneLink URL. |
+| `<Key, Value Dictionary>` | `additionalParams` | If passed, these keys and values (for example, `deep_link_value: apples`) are added as query parameters to the OneLink URL. |
 
 **Usage examples**
 
