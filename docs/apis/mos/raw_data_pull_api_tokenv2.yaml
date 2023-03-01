@@ -16,7 +16,7 @@ paths:
       summary: Installs
       description: | 
         Records non-organic installs. The record is generated when a user opens the app for the first time.
-        Data fresheness: Real-time
+        Data freshness: Real-time
       parameters:
         - $ref: '#/components/parameters/AppId' 
         - $ref: '#/components/parameters/FromDate'
@@ -28,6 +28,8 @@ paths:
         - $ref: '#/components/parameters/TimeZone'
         - $ref: '#/components/parameters/Geo'
         - $ref: '#/components/parameters/MaximumRows'
+        - $ref: '#/components/parameters/FromInstallTime'
+        - $ref: '#/components/parameters/ToInstallTime'
         - in: query
           name: additional_fields
           explode: false
@@ -65,6 +67,8 @@ paths:
         - $ref: '#/components/parameters/TimeZone'
         - $ref: '#/components/parameters/Geo'
         - $ref: '#/components/parameters/MaximumRows'
+        - $ref: '#/components/parameters/FromInstallTime'
+        - $ref: '#/components/parameters/ToInstallTime'
         - in: query
           name: additional_fields
           explode: false
@@ -102,6 +106,8 @@ paths:
         - $ref: '#/components/parameters/TimeZone'
         - $ref: '#/components/parameters/Geo'
         - $ref: '#/components/parameters/MaximumRows'
+        - $ref: '#/components/parameters/FromInstallTime'
+        - $ref: '#/components/parameters/ToInstallTime'
         - in: query
           name: additional_fields
           schema:
@@ -138,6 +144,8 @@ paths:
         - $ref: '#/components/parameters/TimeZone'
         - $ref: '#/components/parameters/Geo'
         - $ref: '#/components/parameters/MaximumRows'
+        - $ref: '#/components/parameters/FromInstallTime'
+        - $ref: '#/components/parameters/ToInstallTime'
         - in: query
           name: additional_fields
           schema:
@@ -173,6 +181,8 @@ paths:
         - $ref: '#/components/parameters/TimeZone'
         - $ref: '#/components/parameters/Geo'
         - $ref: '#/components/parameters/MaximumRows'
+        - $ref: '#/components/parameters/FromInstallTime'
+        - $ref: '#/components/parameters/ToInstallTime'
         - in: query
           name: additional_fields
           explode: false
@@ -210,6 +220,8 @@ paths:
         - $ref: '#/components/parameters/TimeZone'
         - $ref: '#/components/parameters/Geo'
         - $ref: '#/components/parameters/MaximumRows'
+        - $ref: '#/components/parameters/FromInstallTime'
+        - $ref: '#/components/parameters/ToInstallTime'
         - in: query
           name: additional_fields
           explode: false
@@ -246,6 +258,8 @@ paths:
         - $ref: '#/components/parameters/TimeZone'
         - $ref: '#/components/parameters/Geo'
         - $ref: '#/components/parameters/MaximumRows'
+        - $ref: '#/components/parameters/FromInstallTime'
+        - $ref: '#/components/parameters/ToInstallTime'
         - in: query
           name: additional_fields
           schema:
@@ -281,6 +295,8 @@ paths:
         - $ref: '#/components/parameters/TimeZone'
         - $ref: '#/components/parameters/Geo'
         - $ref: '#/components/parameters/MaximumRows'
+        - $ref: '#/components/parameters/FromInstallTime'
+        - $ref: '#/components/parameters/ToInstallTime'
         - in: query
           name: additional_fields
           schema:
@@ -317,6 +333,8 @@ paths:
         - $ref: '#/components/parameters/TimeZone'
         - $ref: '#/components/parameters/Geo'
         - $ref: '#/components/parameters/MaximumRows'
+        - $ref: '#/components/parameters/FromInstallTime'
+        - $ref: '#/components/parameters/ToInstallTime'
         - in: query
           name: additional_fields
           explode: false
@@ -352,6 +370,8 @@ paths:
         - $ref: '#/components/parameters/TimeZone'
         - $ref: '#/components/parameters/Geo'
         - $ref: '#/components/parameters/MaximumRows'
+        - $ref: '#/components/parameters/FromInstallTime'
+        - $ref: '#/components/parameters/ToInstallTime'
         - in: query
           name: additional_fields
           explode: false
@@ -388,6 +408,8 @@ paths:
         - $ref: '#/components/parameters/TimeZone'
         - $ref: '#/components/parameters/Geo'
         - $ref: '#/components/parameters/MaximumRows'
+        - $ref: '#/components/parameters/FromInstallTime'
+        - $ref: '#/components/parameters/ToInstallTime'
         - in: query
           name: additional_fields
           explode: false
@@ -423,6 +445,8 @@ paths:
         - $ref: '#/components/parameters/TimeZone'
         - $ref: '#/components/parameters/Geo'
         - $ref: '#/components/parameters/MaximumRows'
+        - $ref: '#/components/parameters/FromInstallTime'
+        - $ref: '#/components/parameters/ToInstallTime'
         - in: query
           name: additional_fields
           explode: false
@@ -459,6 +483,8 @@ paths:
         - $ref: '#/components/parameters/TimeZone'
         - $ref: '#/components/parameters/Geo'
         - $ref: '#/components/parameters/MaximumRows'
+        - $ref: '#/components/parameters/FromInstallTime'
+        - $ref: '#/components/parameters/ToInstallTime'
         - in: query
           name: additional_fields
           explode: false
@@ -495,6 +521,8 @@ paths:
         - $ref: '#/components/parameters/TimeZone'
         - $ref: '#/components/parameters/Geo'
         - $ref: '#/components/parameters/MaximumRows'
+        - $ref: '#/components/parameters/FromInstallTime'
+        - $ref: '#/components/parameters/ToInstallTime'
         - in: query
           name: additional_fields
           explode: false
@@ -530,6 +558,8 @@ paths:
         - $ref: '#/components/parameters/TimeZone'
         - $ref: '#/components/parameters/Geo'
         - $ref: '#/components/parameters/MaximumRows'
+        - $ref: '#/components/parameters/FromInstallTime'
+        - $ref: '#/components/parameters/ToInstallTime'
         - in: query
           name: additional_fields
           explode: false
@@ -565,6 +595,8 @@ paths:
         - $ref: '#/components/parameters/TimeZone'
         - $ref: '#/components/parameters/Geo'
         - $ref: '#/components/parameters/MaximumRows'
+        - $ref: '#/components/parameters/FromInstallTime'
+        - $ref: '#/components/parameters/ToInstallTime'
         - in: query
           name: additional_fields
           explode: false
@@ -601,6 +633,8 @@ paths:
         - $ref: '#/components/parameters/TimeZone'
         - $ref: '#/components/parameters/Geo'
         - $ref: '#/components/parameters/MaximumRows'
+        - $ref: '#/components/parameters/FromInstallTime'
+        - $ref: '#/components/parameters/ToInstallTime'
         - in: query
           name: additional_fields
           explode: false
@@ -637,6 +671,8 @@ paths:
         - $ref: '#/components/parameters/TimeZone'
         - $ref: '#/components/parameters/Geo'
         - $ref: '#/components/parameters/MaximumRows'
+        - $ref: '#/components/parameters/FromInstallTime'
+        - $ref: '#/components/parameters/ToInstallTime'
         - in: query
           name: additional_fields
           explode: false
@@ -673,6 +709,8 @@ paths:
         - $ref: '#/components/parameters/TimeZone'
         - $ref: '#/components/parameters/Geo'
         - $ref: '#/components/parameters/MaximumRows'
+        - $ref: '#/components/parameters/FromInstallTime'
+        - $ref: '#/components/parameters/ToInstallTime'
         - in: query
           name: additional_fields
           explode: false
@@ -708,6 +746,8 @@ paths:
         - $ref: '#/components/parameters/TimeZone'
         - $ref: '#/components/parameters/Geo'
         - $ref: '#/components/parameters/MaximumRows'
+        - $ref: '#/components/parameters/FromInstallTime'
+        - $ref: '#/components/parameters/ToInstallTime'
         - in: query
           name: additional_fields
           explode: false
@@ -873,7 +913,47 @@ components:
       in: query
       schema:
         $ref: '#/components/schemas/MaximumRows'
-  responses:  
+    FromInstallTime:
+      in: query
+      name: from_install_time
+      description: From install time
+      examples:
+        DateOnly:
+          summary: Date only
+          value:
+            "2022-04-22"
+        DateHourMin:
+          summary: Date-Hour-Mins
+          value:
+            "2022-04-22 21:45"
+        DateHourMinSecs:
+          summary: Date-Hour-Mins-Secs
+          value:
+            "2022-04-22 21:45:23"
+      schema:
+        type: string
+        format: date
+    ToInstallTime:
+      in: query
+      name: to_install_time
+      description: To install time
+      examples:
+        DateOnly:
+          summary: Date only
+          value:
+            "2022-04-22"
+        DateHourMin:
+          summary: Date-Hour-Mins
+          value:
+            "2022-04-22 21:45"
+        DateHourMinSecs:
+          summary: Date-Hour-Mins-Secs
+          value:
+            "2022-04-22 21:45:23"
+      schema:
+        type: string
+        format: date
+  responses:
     Success:
       content:
         text/csv:
