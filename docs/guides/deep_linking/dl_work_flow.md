@@ -37,7 +37,7 @@ This API is fast, easy to use, and supports both owned and paid media sources.
 
 Note: For new users, the UDL method only returns parameters relevant to deferred deep linking: `deep_link_value` and `deep_link_sub1-10`. If you try to get any other parameters (`media_source`, `campaign`, `af_sub1-5`, etc.), they return `null`.
 
-### [Optional] Implement extended deferred deep linking
+### [Recommended] Implement extended deferred deep linking
 In some cases, UDL isn't activated for deferred deep-linking. For example, when:
     - A user clicks a link from a Self Reporting Network (SRN) like Facebook or Twitter.
     - A user clicks a link that doesn't contain parameters like `deep_link_value` or `deep_link_sub1-10`.
