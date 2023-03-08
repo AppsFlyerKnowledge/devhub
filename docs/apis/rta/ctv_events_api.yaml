@@ -108,6 +108,107 @@ paths:
           description: Internal server error
           content: {}
       x-codegen-request-body-name: body
+
+  /session/app/{platform}/{app-id}:
+    post:
+      tags:
+      - Measure sessions
+      summary: Measure sessions
+      description: This AppsFlyer API integration provide advertisers with the ability
+        to measure post-install sessions and attribute it to a media source and campaign
+      parameters:
+        - $ref: '#/components/parameters/AppId'
+        - $ref: '#/components/parameters/Platform'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+              - device_ids
+              - device_model
+              - device_os_version
+              - ip
+              - limit_ad_tracking
+              - user_agent
+              type: object
+              properties:
+                timestamp:
+                  maximum: 1625576172928
+                  minimum: 1625230572928
+                  type: integer
+                  description: Event timestamp in Unix time (UTC)
+                  format: int64
+                  example: 1625576172928
+                request_id:
+                  maxLength: 36
+                  minLength: 36
+                  type: string
+                  description: Unique identifier per request
+                  example: 71dad7da-7926-40d8-9b15-b94a6d46e15a
+                ip:
+                  maxLength: 46
+                  minLength: 1
+                  type: string
+                  description: The device IP Address
+                  example: 35.244.183.10
+                user_agent:
+                  maxLength: 256
+                  minLength: 1
+                  type: string
+                  description: The device user agent
+                  example: Roku/DVP-9.21 (AE9.21E04090A)
+                device_os_version:
+                  maxLength: 12
+                  minLength: 1
+                  type: string
+                  description: The device OS version
+                  example: 9.3.0
+                device_model:
+                  maxLength: 12
+                  minLength: 1
+                  type: string
+                  description: The device model
+                  example: 3920X
+                device_ids:
+                  $ref: '#/components/schemas/DeviceIds'
+                limit_ad_tracking:
+                  type: boolean
+                  description: Limit Ad Tracking flag. Use this flag to mark whether
+                    or not the user has advertiser ID
+                  example: true
+                customer_user_id:
+                  maxLength: 64
+                  minLength: 1
+                  type: string
+                  description: Customer user ID, as set by the developer. This is
+                    used as the user identifier in the advertiser's system
+                  example: 15667737-366d-4994-ac8b-653fe6b2be4a
+                app_version:
+                  maxLength: 12
+                  minLength: 1
+                  type: string
+                  description: The release or version number of the app
+                  example: 1.0.5
+        required: true
+      responses:
+        202:
+          description: The request was accepted
+          content: {}
+        400:
+          description: The authentication succeeded, but mandatory fields in the message
+            body are missing, or fields are invalid
+          content: {}
+        401:
+          description: The app doesn't exist or the authentication failed
+          content: {}
+        403:
+          description: App traffic blocked due to Zero package limit
+          content: {}
+        500:
+          description: Internal server error
+          content: {}
+      x-codegen-request-body-name: body
+
   /inapp/app/{platform}/{app-id}:
     post:
       tags:
@@ -409,105 +510,7 @@ paths:
           description: Internal server error
           content: {}
       x-codegen-request-body-name: body
-  /session/app/{platform}/{app-id}:
-    post:
-      tags:
-      - Measure sessions
-      summary: Measure sessions
-      description: This AppsFlyer API integration provide advertisers with the ability
-        to measure post-install sessions and attribute it to a media source and campaign
-      parameters:
-        - $ref: '#/components/parameters/AppId'
-        - $ref: '#/components/parameters/Platform'
-      requestBody:
-        content:
-          application/json:
-            schema:
-              required:
-              - device_ids
-              - device_model
-              - device_os_version
-              - ip
-              - limit_ad_tracking
-              - user_agent
-              type: object
-              properties:
-                timestamp:
-                  maximum: 1625576172928
-                  minimum: 1625230572928
-                  type: integer
-                  description: Event timestamp in Unix time (UTC)
-                  format: int64
-                  example: 1625576172928
-                request_id:
-                  maxLength: 36
-                  minLength: 36
-                  type: string
-                  description: Unique identifier per request
-                  example: 71dad7da-7926-40d8-9b15-b94a6d46e15a
-                ip:
-                  maxLength: 46
-                  minLength: 1
-                  type: string
-                  description: The device IP Address
-                  example: 35.244.183.10
-                user_agent:
-                  maxLength: 256
-                  minLength: 1
-                  type: string
-                  description: The device user agent
-                  example: Roku/DVP-9.21 (AE9.21E04090A)
-                device_os_version:
-                  maxLength: 12
-                  minLength: 1
-                  type: string
-                  description: The device OS version
-                  example: 9.3.0
-                device_model:
-                  maxLength: 12
-                  minLength: 1
-                  type: string
-                  description: The device model
-                  example: 3920X
-                device_ids:
-                  $ref: '#/components/schemas/DeviceIds'
-                limit_ad_tracking:
-                  type: boolean
-                  description: Limit Ad Tracking flag. Use this flag to mark whether
-                    or not the user has advertiser ID
-                  example: true
-                customer_user_id:
-                  maxLength: 64
-                  minLength: 1
-                  type: string
-                  description: Customer user ID, as set by the developer. This is
-                    used as the user identifier in the advertiser's system
-                  example: 15667737-366d-4994-ac8b-653fe6b2be4a
-                app_version:
-                  maxLength: 12
-                  minLength: 1
-                  type: string
-                  description: The release or version number of the app
-                  example: 1.0.5
-        required: true
-      responses:
-        202:
-          description: The request was accepted
-          content: {}
-        400:
-          description: The authentication succeeded, but mandatory fields in the message
-            body are missing, or fields are invalid
-          content: {}
-        401:
-          description: The app doesn't exist or the authentication failed
-          content: {}
-        403:
-          description: App traffic blocked due to Zero package limit
-          content: {}
-        500:
-          description: Internal server error
-          content: {}
-      x-codegen-request-body-name: body
+  
 components:
   parameters:
     AppId:
