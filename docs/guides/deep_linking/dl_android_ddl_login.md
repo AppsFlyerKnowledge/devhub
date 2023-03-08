@@ -1,6 +1,7 @@
 ---
 title: Android Deferred Deep Linking post user event
 category: 6384c30e5a754e005f668a74
+parentDoc: 6387276d97e08d00104d4435
 order: 4
 hidden: false
 ---
@@ -19,3 +20,4 @@ It is the developer's responsibility to save the deferred deep linking and direc
 
 ## Code example
 In [this](https://github.com/AppsFlyerSDK/appsflyer-onelink-android-sample-apps/tree/DDL_after_Login/java/basic_app) Github branch you can find a code sample which waits for a pseudo-user authencation before continuing to the deep linking destination. Once the authentication is verified, the user is directed to the destination. This flow is relevant for both deferred deep linking and direct deep linking (when the app is already installed).
+You can see that the [application context](https://github.com/AppsFlyerSDK/appsflyer-onelink-android-sample-apps/blob/8dcb03c48199d5123e776463ae74e7dd274c6fdc/java/basic_app/app/src/main/java/com/appsflyer/onelink/appsflyeronelinkbasicapp/AppsflyerBasicApp.java#L11) has no AppsFlyer SDK code. The AppsFlyer code moved entirely into the [activity](https://github.com/AppsFlyerSDK/appsflyer-onelink-android-sample-apps/blob/8dcb03c48199d5123e776463ae74e7dd274c6fdc/java/basic_app/app/src/main/java/com/appsflyer/onelink/appsflyeronelinkbasicapp/LoginActivity.java#L29) which perform the user event.
