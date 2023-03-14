@@ -3,12 +3,12 @@ info:
   title:  Master API
   version: "1.0"
 servers:
-- url: https://hq.appsflyer.com/export/master_reportE
+- url: https://hq1.appsflyer.com/api/master-agg-data/v4
   description: Production server
 security:
   - Bearer-Authentication: []
 paths:
-  /v4:
+  /app/{app_id}:
     get:
       tags:
       - Master Report
@@ -154,9 +154,10 @@ components:
   parameters:
     AppId:
       name: app_id
-      in: query
+      in: path
       required: true
       schema:
+        # Support in Multiple app. Waiting approval by dev
         oneOf:
           - type: string
             enum:
@@ -166,14 +167,9 @@ components:
             title: Select app IDs
             items:
               type: string
-      style: form
-      explode: false
-      description: |
-        - App identifier, as found in AppsFlyer.
-        - Insert the app ID exactly as found in AppsFlyer
-        - Prefix iOS apps with `id`
-        - Use `app_id=all` to query for all your apps
-      example: com.example.testapp
+              example: com.example.testapp
+      style: simple
+      explode: true
     From:
       name: from
       in: query

@@ -112,13 +112,19 @@ sync-via-rdme-s2s-events:
 
 sync-via-rdme-roi360-truetax:
   script:
-    - npx -y rdme@8.1.1 openapi ./docs/apis/ROI360/true_revenue_api.yaml --key=rdme_xn8s9h0fb20a2df26bd435f6c42b1c7d59b240b0354348510d0c2f14216e353fb8fe63 --id=63eb8607ce3ff30366cc2b8c
+    - npx -y rdme@8.4.0 openapi ./docs/apis/ROI360/true_revenue_api.yaml --key=rdme_xn8s9h0fb20a2df26bd435f6c42b1c7d59b240b0354348510d0c2f14216e353fb8fe63 --id=63eb8607ce3ff30366cc2b8c
+  rules:
+    - if: $CI_COMMIT_BRANCH == "master"
+
+sync-via-rdme-master-api:
+  script:
+    - npx -y rdme@8.4.0 openapi ./docs/apis/analytics/master_api.yaml --key=rdme_xn8s9h0fb20a2df26bd435f6c42b1c7d59b240b0354348510d0c2f14216e353fb8fe63 --id=63d267e835fb4100501bba5a
   rules:
     - if: $CI_COMMIT_BRANCH == "master"
 
 # Guides
 sync-via-rdme-deep-linking-guides:
   script:
-    - npx -y rdme@8.1.1 docs ./docs/guides/deep_linking/ --version=0.1 --key=rdme_xn8s9h0fb20a2df26bd435f6c42b1c7d59b240b0354348510d0c2f14216e353fb8fe63  
+    - npx -y rdme@8.4.0 docs ./docs/guides/deep_linking/ --version=0.1 --key=rdme_xn8s9h0fb20a2df26bd435f6c42b1c7d59b240b0354348510d0c2f14216e353fb8fe63  
   rules:
     - if: $CI_COMMIT_BRANCH == "master"
