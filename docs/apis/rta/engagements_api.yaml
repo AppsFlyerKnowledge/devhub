@@ -197,7 +197,7 @@ components:
       required: true
       schema:
         type: string
-        enum: [smartcast, tizen, roku, webos, vidaa, playstation, android, ios, steam, quest, battlenet]
+        enum: [smartcast, tizen, roku, webos, vidaa, playstation, android, ios, steam, quest, battlenet, epic, switch, xbox]
       description: "The application platform"
     AfMediaSource:
       name: af_media_source

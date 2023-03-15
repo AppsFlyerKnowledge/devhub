@@ -537,6 +537,8 @@ components:
           - quest
           - battlenet
           - epic
+          - switch
+          - xbox
       required: true
       description: |
         The CTV platform of the measured app
