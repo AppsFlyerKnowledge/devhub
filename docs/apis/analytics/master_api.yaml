@@ -169,7 +169,7 @@ components:
               type: string
               example: com.example.testapp
       style: simple
-      explode: true
+      explode: false
     From:
       name: from
       in: query
@@ -197,6 +197,7 @@ components:
     Groupings:
       name: groupings
       in: query
+      explode: false
       required: true
       schema:
         type: array
@@ -223,6 +224,7 @@ components:
       name: kpis
       in: query
       required: true
+      explode: false
       schema:
           type: array
           minItems: 1
