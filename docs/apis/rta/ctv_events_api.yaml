@@ -44,6 +44,7 @@ paths:
                   maxLength: 36
                   minLength: 36
                   type: string
+                  pattern: ^[a-z0-9]{8}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{12}$
                   description: Unique identifier per request
                   example: 71dad7da-7926-40d8-9b15-b94a6d46e15a
                 ip:
@@ -573,6 +574,8 @@ components:
             type:
               type: string
               enum: [custom, rida, vida, tifa, lgudid]
+              description: |
+                `custom` format if GUID
             value:
               type: string
 x-id:
