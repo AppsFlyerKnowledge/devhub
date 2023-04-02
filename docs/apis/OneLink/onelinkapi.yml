@@ -126,15 +126,16 @@ paths:
                 the provided shortlink-id already exists for this template:
                   value: Shortlink ID already in use
         '429':
-          description: 'Client has reached its API limit calls'
+          description: 'Limit exceeded'
           content:
             application/json:
               schema:
                 type: string
-                example: '"API call failed on throttle limit"'
               examples:
-                Client has reached its API limit calls:
-                  value: API call failed on throttle limit
+                Monthly quota exceeded:
+                  value: Monthly quota exceeded
+                Rate limit exceeded:
+                  value: Rate limit exceeded
       deprecated: false
     get:
       tags: 
@@ -291,8 +292,10 @@ paths:
                 type: string
                 example: '"API call failed on throttle limit"'
               examples:
-                Client has reached its API limit calls:
-                  value: API call failed on throttle limit
+                Monthly quota exceeded:
+                  value: Monthly quota exceeded
+                Rate limit exceeded:
+                  value: Rate limit exceeded
       deprecated: false
     delete:
       tags: 
@@ -363,8 +366,10 @@ paths:
                 type: string
                 example: '"API call failed on throttle limit"'
               examples:
-                Client has reached its API limit calls:
-                  value: API call failed on throttle limit
+                Monthly quota exceeded:
+                  value: Monthly quota exceeded
+                Rate limit exceeded:
+                  value: Rate limit exceeded
       deprecated: false
 
 components: 
