@@ -541,6 +541,7 @@ components:
           - switch
           - xbox
       required: true
+      example: roku
       description: |
         The CTV platform of the measured app
   securitySchemes:
