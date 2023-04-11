@@ -574,9 +574,18 @@ components:
         properties:
             type:
               type: string
-              enum: [custom, rida, vida, tifa, lgudid]
+              enum: 
+              - custom
+              - rida
+              - vida
+              - tifa
+              - lgudid
+              - vidaaid
+              - steamid
+              - epicid
+              - psid
               description: |
-                `custom` format if GUID
+                `custom` format is GUID
             value:
               type: string
 x-id:
