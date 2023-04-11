@@ -291,6 +291,7 @@ components:
     Filter_Media_Source:
       name: pid
       in: query
+      explode: false
       schema:
         type: array
         items:
