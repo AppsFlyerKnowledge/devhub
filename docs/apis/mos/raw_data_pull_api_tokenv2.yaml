@@ -24,7 +24,6 @@ paths:
         - $ref: '#/components/parameters/MediaSource'
         - $ref: '#/components/parameters/Category'
         - $ref: '#/components/parameters/Currency'
-        - $ref: '#/components/parameters/ReAttribution'
         - $ref: '#/components/parameters/TimeZone'
         - $ref: '#/components/parameters/Geo'
         - $ref: '#/components/parameters/MaximumRows'
@@ -63,7 +62,6 @@ paths:
         - $ref: '#/components/parameters/Category'
         - $ref: '#/components/parameters/EventName'
         - $ref: '#/components/parameters/Currency'
-        - $ref: '#/components/parameters/ReAttribution'
         - $ref: '#/components/parameters/TimeZone'
         - $ref: '#/components/parameters/Geo'
         - $ref: '#/components/parameters/MaximumRows'
@@ -102,7 +100,6 @@ paths:
         - $ref: '#/components/parameters/MediaSource'
         - $ref: '#/components/parameters/Category'
         - $ref: '#/components/parameters/Currency'
-        - $ref: '#/components/parameters/ReAttribution'
         - $ref: '#/components/parameters/TimeZone'
         - $ref: '#/components/parameters/Geo'
         - $ref: '#/components/parameters/MaximumRows'
@@ -140,7 +137,6 @@ paths:
         - $ref: '#/components/parameters/MediaSource'
         - $ref: '#/components/parameters/Category'
         - $ref: '#/components/parameters/Currency'
-        - $ref: '#/components/parameters/ReAttribution'
         - $ref: '#/components/parameters/TimeZone'
         - $ref: '#/components/parameters/Geo'
         - $ref: '#/components/parameters/MaximumRows'
@@ -216,7 +212,6 @@ paths:
         - $ref: '#/components/parameters/Category'
         - $ref: '#/components/parameters/EventName'
         - $ref: '#/components/parameters/Currency'
-        - $ref: '#/components/parameters/ReAttribution'
         - $ref: '#/components/parameters/TimeZone'
         - $ref: '#/components/parameters/Geo'
         - $ref: '#/components/parameters/MaximumRows'
@@ -254,7 +249,6 @@ paths:
         - $ref: '#/components/parameters/MediaSource'
         - $ref: '#/components/parameters/Category'
         - $ref: '#/components/parameters/Currency'
-        - $ref: '#/components/parameters/ReAttribution'
         - $ref: '#/components/parameters/TimeZone'
         - $ref: '#/components/parameters/Geo'
         - $ref: '#/components/parameters/MaximumRows'
@@ -291,7 +285,6 @@ paths:
         - $ref: '#/components/parameters/MediaSource'
         - $ref: '#/components/parameters/Category'
         - $ref: '#/components/parameters/Currency'
-        - $ref: '#/components/parameters/ReAttribution'
         - $ref: '#/components/parameters/TimeZone'
         - $ref: '#/components/parameters/Geo'
         - $ref: '#/components/parameters/MaximumRows'
@@ -313,6 +306,80 @@ paths:
           $ref: '#/components/responses/Unauthorized' 
         404:
           $ref: '#/components/responses/NotFound'
+  ## Retargeting
+  /{app-id}/installs-retarget/v5:
+    get:
+      tags:
+        - Retargeting
+      summary: Conversions (re-engagements & re-attributions)
+      description: |
+        Re-engagement: Record of a user opening the app after engaging with a retargeting campaign.
+        Re-attribution (retargeting-reinstall): Event generated when a user, having uninstalled the app, engages with a retargeting media source and reinstalls the app during the re-attribution window.
+        Data freshness: Real-time
+      parameters:
+        - $ref: '#/components/parameters/AppId'
+        - $ref: '#/components/parameters/FromDate'
+        - $ref: '#/components/parameters/ToDate'
+        - $ref: '#/components/parameters/MediaSource'
+        - $ref: '#/components/parameters/Category'
+        - $ref: '#/components/parameters/Currency'
+        - $ref: '#/components/parameters/TimeZone'
+        - $ref: '#/components/parameters/Geo'
+        - $ref: '#/components/parameters/MaximumRows'
+        - in: query
+          name: additional_fields
+          explode: false
+          schema:
+            type: array
+            items:
+              enum: [ "blocked_reason_rule","store_reinstall","impressions","contributor3_match_type","custom_dimension","conversion_type","gp_click_time","match_type","mediation_network","oaid","deeplink_url","blocked_reason","blocked_sub_reason","gp_broadcast_referrer","gp_install_begin","campaign_type","custom_data","rejected_reason","device_download_time","keyword_match_type","contributor1_match_type","contributor2_match_type","device_model","monetization_network","segment","is_lat","gp_referrer","blocked_reason_value","store_product_page","device_category","app_type","rejected_reason_value","ad_unit","keyword_id","placement","network_account_id","install_app_store","amazon_aid","att" ]
+            default: [ "blocked_reason_rule","store_reinstall","impressions","contributor3_match_type","custom_dimension","conversion_type","gp_click_time","match_type","mediation_network","oaid","deeplink_url","blocked_reason","blocked_sub_reason","gp_broadcast_referrer","gp_install_begin","campaign_type","custom_data","rejected_reason","device_download_time","keyword_match_type","contributor1_match_type","contributor2_match_type","device_model","monetization_network","segment","is_lat","gp_referrer","blocked_reason_value","store_product_page","device_category","app_type","rejected_reason_value","ad_unit","keyword_id","placement","network_account_id","install_app_store","amazon_aid","att" ]
+      responses:
+        200:
+          $ref: '#/components/responses/Success'
+        400:
+          $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: '#/components/responses/NotFound'
+  /{app-id}/in-app-events-retarget/v5:
+    get:
+      tags:
+        - Retargeting
+      summary: In-app events
+      description: |
+        In-app events performed by the user during the re-engagement window.
+        Data freshness: Real-time
+      parameters:
+        - $ref: '#/components/parameters/AppId'
+        - $ref: '#/components/parameters/FromDate'
+        - $ref: '#/components/parameters/ToDate'
+        - $ref: '#/components/parameters/MediaSource'
+        - $ref: '#/components/parameters/Category'
+        - $ref: '#/components/parameters/EventName'
+        - $ref: '#/components/parameters/Currency'
+        - $ref: '#/components/parameters/TimeZone'
+        - $ref: '#/components/parameters/Geo'
+        - $ref: '#/components/parameters/MaximumRows'
+        - in: query
+          name: additional_fields
+          explode: false
+          schema:
+            type: array
+            items:
+              enum: [ "blocked_reason_rule","store_reinstall","impressions","contributor3_match_type","custom_dimension","conversion_type","gp_click_time","match_type","mediation_network","oaid","deeplink_url","blocked_reason","blocked_sub_reason","gp_broadcast_referrer","gp_install_begin","campaign_type","custom_data","rejected_reason","device_download_time","keyword_match_type","contributor1_match_type","contributor2_match_type","device_model","monetization_network","segment","is_lat","gp_referrer","blocked_reason_value","store_product_page","device_category","app_type","rejected_reason_value","ad_unit","keyword_id","placement","network_account_id","install_app_store","amazon_aid","att" ]
+            default: [ "blocked_reason_rule","store_reinstall","impressions","contributor3_match_type","custom_dimension","conversion_type","gp_click_time","match_type","mediation_network","oaid","deeplink_url","blocked_reason","blocked_sub_reason","gp_broadcast_referrer","gp_install_begin","campaign_type","custom_data","rejected_reason","device_download_time","keyword_match_type","contributor1_match_type","contributor2_match_type","device_model","monetization_network","segment","is_lat","gp_referrer","blocked_reason_value","store_product_page","device_category","app_type","rejected_reason_value","ad_unit","keyword_id","placement","network_account_id","install_app_store","amazon_aid","att" ]
+
+      responses:
+        200:
+          $ref: '#/components/responses/Success'
+        400:
+          $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: '#/components/responses/NotFound'
   ## Ad Revenue Raw data
   /{app-id}/ad_revenue_raw/v5:
     get:
@@ -328,7 +395,6 @@ paths:
         - $ref: '#/components/parameters/ToDate'
         - $ref: '#/components/parameters/MediaSource'
         - $ref: '#/components/parameters/Category'
-        - $ref: '#/components/parameters/ReAttribution'
         - $ref: '#/components/parameters/Currency'
         - $ref: '#/components/parameters/TimeZone'
         - $ref: '#/components/parameters/Geo'
@@ -361,7 +427,7 @@ paths:
         Records ad revenue for users not attributed to a media source.
         Data freshness: Daily
       parameters:
-        - $ref: '#/components/parameters/AppId' 
+        - $ref: '#/components/parameters/AppId'
         - $ref: '#/components/parameters/FromDate'
         - $ref: '#/components/parameters/ToDate'
         - $ref: '#/components/parameters/MediaSource'
@@ -388,7 +454,42 @@ paths:
         401:
           $ref: '#/components/responses/Unauthorized' 
         404:
-          $ref: '#/components/responses/NotFound' 
+          $ref: '#/components/responses/NotFound'
+  /{app-id}/ad-revenue-raw-retarget/v5:
+    get:
+      tags:
+        - Ad Revenue raw data
+      summary: Retargeting ad revenue
+      description: |
+        Ad revenue of users attributed to a retargeting media source during the re-engagement window. 
+        Data freshness: Daily
+      parameters:
+        - $ref: '#/components/parameters/AppId'
+        - $ref: '#/components/parameters/FromDate'
+        - $ref: '#/components/parameters/ToDate'
+        - $ref: '#/components/parameters/MediaSource'
+        - $ref: '#/components/parameters/Category'
+        - $ref: '#/components/parameters/Currency'
+        - $ref: '#/components/parameters/TimeZone'
+        - $ref: '#/components/parameters/Geo'
+        - $ref: '#/components/parameters/MaximumRows'
+        - in: query
+          name: additional_fields
+          explode: false
+          schema:
+            type: array
+            items:
+              enum: ["blocked_reason_rule","store_reinstall","impressions","contributor3_match_type","gp_click_time","match_type","mediation_network","oaid","deeplink_url","blocked_reason","blocked_sub_reason","gp_broadcast_referrer","gp_install_begin","custom_data","rejected_reason","device_download_time","keyword_match_type","contributor1_match_type","contributor2_match_type","device_model","monetization_network","segment","is_lat","gp_referrer","blocked_reason_value","store_product_page","device_category","rejected_reason_value","ad_unit","keyword_id","placement","network_account_id","install_app_store","amazon_aid"]
+            default: ["blocked_reason_rule","store_reinstall","impressions","contributor3_match_type","gp_click_time","match_type","mediation_network","oaid","deeplink_url","blocked_reason","blocked_sub_reason","gp_broadcast_referrer","gp_install_begin","custom_data","rejected_reason","device_download_time","keyword_match_type","contributor1_match_type","contributor2_match_type","device_model","monetization_network","segment","is_lat","gp_referrer","blocked_reason_value","store_product_page","device_category","rejected_reason_value","ad_unit","keyword_id","placement","network_account_id","install_app_store","amazon_aid"]
+      responses:
+        200:
+          $ref: '#/components/responses/Success'
+        400:
+          $ref: '#/components/responses/BadRequest'
+        401:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: '#/components/responses/NotFound'
   ## Protect360 fraud
   /{app-id}/blocked_installs_report/v5:
     get:
@@ -895,19 +996,6 @@ components:
       description: |
         Currency of revenue and cost.
         Aggregate Pull API reports always use the app-specific currency.
-    ReAttribution:
-      name: reattr
-      in: query
-      description: |
-        Get retargeting conversions data.
-        **[Default]** is false - user acquisition data (UA) campaigns returns.
-        If true, retargeting conversion returns.
-      schema:
-        type: string
-        enum:
-          - true
-          - false
-        default: false
     MaximumRows:
       name: maximum_rows
       in: query
