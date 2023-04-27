@@ -75,7 +75,7 @@ SubjectKeyIdentifier [
 
 **To add the intent-filter to the main activity:**
 
-1. Get the auto-generated intent-filter code from the marketer. The intent-filter code is used in the AndroidManifest.XML. 
+1. Get the auto-generated intent-filter code from the [marketer](https://support.appsflyer.com/hc/en-us/articles/207032246#add-redirection-logic-for-existing-app-users). The intent-filter code is used in the AndroidManifest.XML. 
 2. Open the app's `AndroidManifest.xml` file.
 3. Add the intent-filter to the **main activity**.
 If there already is an intent-filter for the Android App Link in the main activity, overwrite it. 
