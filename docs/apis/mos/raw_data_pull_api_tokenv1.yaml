@@ -850,7 +850,6 @@ components:
       in: query
       schema:
         oneOf:
-          - $ref: '#/components/schemas/TimeZoneOffset'
           - $ref: '#/components/schemas/TimeZoneList'
       description: |
         - **[Default]** If the parameter is not sent, data returns using UTC.
@@ -1222,10 +1221,6 @@ components:
         - YE
         - ZM
         - ZW
-    TimeZoneOffset:
-      type: string
-      description: For time zone UTC+10:00 use +10:00
-      example: +10:00
     TimeZoneList:
       type: string
       description: Choose a time zone
