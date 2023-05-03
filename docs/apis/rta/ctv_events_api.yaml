@@ -1,6 +1,6 @@
 openapi: 3.0.1
 info:
-  title: CTV Events API
+  title: PC/Console/CTV Events API
   version: 1.0.0
 servers:
   - url: https://events.appsflyer.com/v1.0/s2s/
