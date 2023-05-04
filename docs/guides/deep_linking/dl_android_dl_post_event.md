@@ -1,9 +1,10 @@
 ---
-title: Android Deferred Deep Linking post user event
+title: Android Deep Linking post user event
 category: 6384c30e5a754e005f668a74
 parentDoc: 6387276d97e08d00104d4435
 order: 4
 hidden: false
+slug: dl_android_dl_post_event
 ---
 
 ## Overview
