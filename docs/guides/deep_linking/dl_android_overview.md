@@ -1,8 +1,10 @@
 ---
-title: Android
-category: 6384c30e5a754e005f668a74
-order: 4
+title: "Android"
+slug: "dl_android_overview"
+category: 6384c30e5a754e005f668a74 
 hidden: false
+createdAt: "2022-11-30T09:50:37.381Z"
+updatedAt: "2023-01-03T14:01:23.820Z"
 ---
 This section provides instructions for an Android developer to set up OneLink (deep linking and deferred deep linking) to work in the app.
 

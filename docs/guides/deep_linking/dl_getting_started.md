@@ -1,8 +1,10 @@
 ---
-title: Getting started
+title: "Getting started"
+slug: "dl_getting_started"
 category: 6384c30e5a754e005f668a74
-order: 1
 hidden: false
+createdAt: "2022-11-30T09:50:37.345Z"
+updatedAt: "2023-01-03T12:50:26.292Z"
 ---
 ![](https://files.readme.io/ab7e812-GS_OneLink_.gif "GS_OneLink .gif")
 

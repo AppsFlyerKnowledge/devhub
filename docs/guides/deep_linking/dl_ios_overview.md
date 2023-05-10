@@ -1,8 +1,10 @@
 ---
-title: iOS
+title: "iOS"
+slug: "dl_ios_overview"
 category: 6384c30e5a754e005f668a74
-order: 5
 hidden: false
+createdAt: "2022-12-25T13:34:49.007Z"
+updatedAt: "2022-12-25T13:46:52.172Z"
 ---
 This section provides instructions for an iOS developer to setup OneLink (deep linking and deferred deep linking) to work in the app.
 
