@@ -3,7 +3,7 @@ info:
   title: GCD v5.0 API for SDK attribution testing 
   version: '0.1'
 servers:
-- url: https://gcdsdk.appsflyer.com/install_data/v5.0/
+- url: https://gcd-s2s.appsflyer.com/install_data/v5.0/
 paths:
   /{app-id}:
     get:
@@ -30,7 +30,7 @@ paths:
           description: |
             Create an HMAC signature by concatenating the values of the following fields:
 
-            Concatenate the value of `af_request_epoch_ms` with `device_id and `app_id`, separated an invisible character `**\u2063**` 
+            Concatenate the value of `af_request_epoch_ms` with `device_id` and `app_id`, separated an invisible character `**\u2063**` 
             (E.g. 1661969117203 1591184059153-1591377216180180185 com.zzkko) 
             >Note: for iOS make sure the app id is a full one, i.e. starts with id 
 
