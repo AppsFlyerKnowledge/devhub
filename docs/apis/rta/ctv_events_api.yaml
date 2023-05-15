@@ -15,7 +15,10 @@ paths:
       tags:
       - Measure first app opens
       summary: Measure first app opens
-      description: To properly measure CTV first app opens with AppsFlyer, the following
+      description: |
+        > ℹ️ This is a server to server API. If you need to report events directly from your application's client please see [this section](doc:c2s-integrations-overview) or contact your CSM
+
+        To properly measure CTV first app opens with AppsFlyer, the following
         API call must be made for every first app open
       parameters:
         - $ref: '#/components/parameters/AppId'
@@ -51,7 +54,7 @@ paths:
                   maxLength: 46
                   minLength: 1
                   type: string
-                  description: The device IP address
+                  description: The device IP address - IPv4 or IPv6
                   example: 35.244.183.10
                 user_agent:
                   maxLength: 256
@@ -115,7 +118,10 @@ paths:
       tags:
       - Measure sessions
       summary: Measure sessions
-      description: This AppsFlyer API integration provide advertisers with the ability
+      description: |
+        > ℹ️ This is a server to server API. If you need to report events directly from your application's client please see [this section](doc:c2s-integrations-overview) or contact your CSM
+        
+        This AppsFlyer API integration provide advertisers with the ability
         to measure post-install sessions and attribute it to a media source and campaign
       parameters:
         - $ref: '#/components/parameters/AppId'
@@ -150,7 +156,7 @@ paths:
                   maxLength: 46
                   minLength: 1
                   type: string
-                  description: The device IP Address
+                  description: The device IP Address - IPv4 or IPv6
                   example: 35.244.183.10
                 user_agent:
                   maxLength: 256
@@ -215,7 +221,10 @@ paths:
       tags:
       - Measure in-app events
       summary: Measure in-app events
-      description: This AppsFlyer API integration allows advertisers to measure any
+      description: |
+        > ℹ️ This is a server to server API. If you need to report events directly from your application's client please see [this section](doc:c2s-integrations-overview) or contact your CSM
+
+        This AppsFlyer API integration allows advertisers to measure any
         post-install in-app event and attribute it to a media source and campaign
       parameters:
         - $ref: '#/components/parameters/AppId'
@@ -251,7 +260,7 @@ paths:
                   maxLength: 46
                   minLength: 1
                   type: string
-                  description: The device IP address
+                  description: The device IP address - IPv4 or IPv6
                   example: 35.244.183.10
                 user_agent:
                   maxLength: 256
