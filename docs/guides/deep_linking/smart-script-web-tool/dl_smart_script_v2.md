@@ -141,19 +141,52 @@ To set up the Smart Script in Google Tag Manager:
 
 ### Create a QR code with the Smart Script result
 
-**Prerequisite**: Smart Script V2.1+
+**Prerequisite**: Smart Script V2.6+
+
+> 📘 Best practices
+> 
+> - Customize the QR code according to your app brand with a center logo and a relevant code color
+> - Show the QR code when users are on desktop and show the button with the link when users are on mobile
 
 **To create a QR code**:
 
 1. Create a div tag with a specific ID in your site's HTML page to host the QR code.  
    You can style the div tag however you want.
-2. After you run the Smart Script and generate a OneLink URL, call the following function and pass it the div ID:
+2. After you run the Smart Script and generate a OneLink URL, call the following method `displayQrCode`
+
+#### `displayQrCode`
+
+***
+
+**Method signature**
 
 ```javascript
-window.AF_SMART_SCRIPT.displayQrCode("my_qr_code_div_id");
+const qrOptions = {
+  logo,
+  colorCode
+}
+
+window.AF_SMART_SCRIPT.displayQrCode(divId, qrOptions)
 ```
 
-3. Best practice: Once you have the result, show the QR code when users are on desktop and show the button with the link when users are on mobile.
+**Input arguments**
+
+| Type     | Mandatory | Name        | Description                                                                 | Comment                                                                               |
+| :------- | :-------- | :---------- | :-------------------------------------------------------------------------- | :------------------------------------------------------------------------------------ |
+| `String` | Yes       | `divID`     | A `div` tag with a specific ID in your site's HTML page to host the QR code |                                                                                       |
+| `Object` | No        | `qrOptions` | Configuration object (see details in the table below)                       | If the object is missing, the QR code will be created without a logo in default color |
+
+**`qrOptions` object**
+
+| Type     | Mandatory | Name        | Description                            | Comment                                                                          |
+| :------- | :-------- | :---------- | :------------------------------------- | :------------------------------------------------------------------------------- |
+| `String` | No        | `logo`      | A valid image URL or an image data-URI | If the value is invalid, the QR code will be generated without the logo          |
+| `String` | No        | `colorCode` | Hex color of the QR code               | If the value is invalid, the code color will fallback to the default black color |
+
+**Usage examples:**
+
+- _QR code without logo and without custom color_ [Github example](https://appsflyersdk.github.io/appsflyer-onelink-smart-script/examples/qr_code.html?incmp=gogo&inmedia=email)
+- _QR code with logo and custom code color_ [Github example](https://appsflyersdk.github.io/appsflyer-onelink-smart-script/examples/qr_code_logo_color.html?incmp=gogo&inmedia=email)
 
 ### Fire an impression
 
@@ -242,10 +275,6 @@ See [example](https://appsflyersdk.github.io/appsflyer-onelink-smart-script/exam
 ### Smart Script set up with Google Tag Manager
 
 See [example](https://appsflyersdk.github.io/appsflyer-onelink-smart-script/examples/google_tag_manager.html?my_source=email&app_dest=planes&typeid=b787&msg_id=f7h8) of the conversion of an incoming URL to an outgoing OneLink URL using OneLink Smart Script set up using Google Tag Manager. 
-
-### QR code
-
-See [example](https://appsflyersdk.github.io/appsflyer-onelink-smart-script/examples/qr_code.html?inmedia=my_email&incmp=my_campaign) of how the Smart Script generates a QR code.
 
 ### Impressions - OneLink Template with mobile-only support
 
