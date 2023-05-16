@@ -21,6 +21,7 @@ paths:
         schema:
           type: string
           enum:
+            - ""
             - android
             - ios
             - windowsphone
@@ -79,11 +80,11 @@ paths:
       - name: attributing-entity
         in: path
         description: The endpoint type
-        example: "appsflyer"
         required: true
         schema:
           type: string
           enum:
+            - ""
             - appsflyer
             - skadnetwork
       responses:
@@ -1012,6 +1013,7 @@ components:
     Method:
       type: string
       enum:
+        - ""
         - GET
         - POST
     RegularIosConfig:
