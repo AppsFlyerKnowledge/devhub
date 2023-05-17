@@ -93,7 +93,7 @@ Typical usage of deferred SDK start is when an app would like to request consent
 To receive confirmation that the SDK was started successfully, create an `AppsFlyerRequestListener` object and pass it as the third argument of `start`:
 
 ```java
-AppsFlyerLib.getInstance().start(getApplicationContext(), <YOUR_DEV_KEY>, new AppsFlyerRequestListener() {
+AppsFlyerLib.getInstance().start(getApplicationContext(), <AF_DEV_KEY>, new AppsFlyerRequestListener() {
   @Override
   public void onSuccess() {
     Log.d(LOG_TAG, "Launch sent successfully, got 200 response code from server");
@@ -108,7 +108,7 @@ AppsFlyerLib.getInstance().start(getApplicationContext(), <YOUR_DEV_KEY>, new Ap
 });
 ```
 ```kotlin
-AppsFlyerLib.getInstance().start(this, <YOUR_DEV_KEY>, object : AppsFlyerRequestListener {
+AppsFlyerLib.getInstance().start(this, <AF_DEV_KEY>, object : AppsFlyerRequestListener {
   override fun onSuccess() {
     Log.d(LOG_TAG, "Launch sent successfully")
     }
@@ -203,7 +203,7 @@ Other than [`setCustomerIdAndLogSession`](https://dev.appsflyer.com/hc/docs/andr
 
 ```java
 public class AFApplication extends Application {
-  private static final String AF_DEV_KEY = <MY_AF_DEV_KEY>;
+  private static final String AF_DEV_KEY = <AF_DEV_KEY>;
   @Override
   public void onCreate() {
     super.onCreate();
