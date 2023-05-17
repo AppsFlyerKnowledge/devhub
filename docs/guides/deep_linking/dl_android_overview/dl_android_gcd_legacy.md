@@ -37,10 +37,10 @@ This in-app routing to a specific activity in the app is possible due to the par
 To implement the `onAppOpenAttribution` method and set up the parameter behaviors, the following action checklist of procedures must be completed.
 
 #### Procedure checklist
-1. [Deciding app behavior and `deep_link_value`](https://dev.appsflyer.com/hc/docs/android-legacy-apis#deciding-app-behavior) (and other parameter names and values) - with the marketer
-2. [Planning method input, i.e. `deep_link_value`](https://dev.appsflyer.com/hc/docs/android-legacy-apis#planning-method-input) (and other parameter names and values) - with the marketer
-3. [Implementing the `onAppOpenAttribution()` logic](https://dev.appsflyer.com/hc/docs/android-legacy-apis#implementing-onappopenattribution-logic)
-4. [Implementing the `onAttributionFailure()` logic](https://dev.appsflyer.com/hc/docs/android-legacy-apis#implementing-onattributionfailure-logic)
+1. [Deciding app behavior and `deep_link_value`](#deciding-app-behavior) (and other parameter names and values) - with the marketer
+2. [Planning method input, i.e. `deep_link_value`](#planning-method-input) (and other parameter names and values) - with the marketer
+3. [Implementing the `onAppOpenAttribution()` logic](#implementing-onappopenattribution-logic)
+4. [Implementing the `onAttributionFailure()` logic](#implementing-onattributionfailure-logic)
 
 #### Deciding app behavior
 
@@ -155,10 +155,10 @@ It is the developer's responsibility to make sure the parameters are handled cor
 ### Procedures
 To implement the `onConversionDataSuccess` method and set up the parameter behaviors, the following action checklist of procedures need to be completed.
 
-1. [Deciding app behavior on first launch, and `deep_link_value`](https://dev.appsflyer.com/hc/docs/android-legacy-apis#deciding-app-behavior-on-first-launch) (and other parameter names and values) - with the marketer
-2. [Planning method input, i.e. `deep_link_value`](https://dev.appsflyer.com/hc/docs/android-legacy-apis#planning-method-input-1) (and other parameter names and values) - with the marketer
-3. [Implementing the `onConversionDataSuccess()` logic](https://dev.appsflyer.com/hc/docs/android-legacy-apis#implementing-onconversiondatasuccess-logic)
-4. [Implementing the `onConversionDataFail()` logic](https://dev.appsflyer.com/hc/docs/android-legacy-apis#implementing-onconversiondatafailure-logic)
+1. [Deciding app behavior on first launch, and `deep_link_value`](#deciding-app-behavior-on-first-launch) (and other parameter names and values) - with the marketer
+2. [Planning method input, i.e. `deep_link_value`](#planning-method-input-1) (and other parameter names and values) - with the marketer
+3. [Implementing the `onConversionDataSuccess()` logic](#implementing-onconversiondatasuccess-logic)
+4. [Implementing the `onConversionDataFail()` logic](#implementing-onconversiondatafailure-logic)
 
 #### Deciding app behavior on first launch
 
