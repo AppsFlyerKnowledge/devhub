@@ -1,687 +1,1970 @@
-<!DOCTYPE html>
-<html lang="en">
+<style>
+    .hub-is-home #hub-landing-top {
+        display: none;
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="style.css">
-    <title>AppsFlyer developer hub</title>
-</head>
+    }
 
-<body>
-    <style>
-        .hub-is-home #hub-landing-top {
-            display: none;
-    
+    #hub-container#hub-container {
+        padding-top: 0;
+    }
+
+    .hub-container {
+        max-width: none;
+        width: 100%;
+        margin: 0;
+    }
+
+    #header-top {
+        max-height: 64px;
+    }
+
+    .hub-content-container {
+        display: flex;
+        width: 100%;
+        justify-content: center;
+    }
+
+    #hub-landing-page {
+        width: 100%;
+        margin-top: 0;
+    }
+
+    #hub-landing-page img {
+        max-width: none;
+    }
+
+    /* LANDING PAGE - HERO SECTION */
+    .landing-page__hero {
+        display: flex;
+        width: 100%;
+        background: #f4fcff;
+        justify-content: space-around;
+        max-height: 250px;
+        padding-left: 4em;
+        padding-right: 4em;
+        padding-top: 16px;
+    }
+
+    @media (max-width: 600px) {
+        .landing-page__hero {
+            padding-right: 2em;
+            padding-left: 2em;
         }
-    
-        #hub-container#hub-container {
-            padding-top: 0;
+    }
+
+    .hero-svg {
+        z-index: -1;
+        width: 100%;
+    }
+
+    .landing-page__hero-inner {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        justify-content: center;
+        max-width: none;
+    }
+
+    .landing-page__hero-inner-container {
+        display: flex;
+        max-width: 1100px;
+    }
+
+
+    .landing-page__hero-right {
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .landing-page__hero-image {
+        height: 500px;
+        padding-top: 64px;
+        width: auto;
+        z-index: 2;
+    }
+
+    @media (max-width: 1000px) {
+        .landing-page__hero-image {
+            height: 400px;
         }
-    
-        .hub-container {
-            max-width: none;
-            width: 100%;
-            margin: 0;
+    }
+
+    @media (max-width: 800px) {
+        .landing-page__hero-image {
+            height: 250px;
         }
-    
-        #header-top {
-            max-height: 64px;
+    }
+
+    @media (max-width: 600px) {
+        .landing-page__hero-image {
+            height: 0;
         }
-    
-        .hub-content-container {
-            display: flex;
-            width: 100%;
-            justify-content: center;
+    }
+
+    .landing-page__hero-title {
+        color: black;
+        font-size: 48px;
+        max-width: 400px;
+        padding-top: 0;
+    }
+
+    @media (max-width: 1000px) {
+        .landing-page__hero-title {
+            font-size: 48px;
+            padding-top: 16px;
         }
-    
-        #hub-landing-page {
-            width: 100%;
+    }
+
+    @media (max-width: 800px) {
+        .landing-page__hero-title {
+            font-size: 34px;
+            padding-top: 16px;
+        }
+    }
+
+    @media (max-width: 600px) {
+        .landing-page__hero-title {
+            font-size: 28px;
+            padding-top: 8px;
             margin-top: 0;
         }
-    
-        #hub-landing-page img {
-            max-width: none;
-        }
-    
-        /* LANDING PAGE - HERO SECTION */
-        .landing-page__hero {
-            display: flex;
-            width: 100%;
-            background: #f4fcff;
-            justify-content: space-around;
-            max-height: 250px;
-            padding-left: 4em;
-            padding-right: 4em;
-            padding-top: 16px;
-        }
-    
-        @media (max-width: 600px) {
-            .landing-page__hero {
-                padding-right: 2em;
-                padding-left: 2em;
-            }
-        }
-    
-        .hero-svg {
-            z-index: -1;
-            width: 100%;
-        }
-    
-        .landing-page__hero-inner {
-            display: flex;
-            flex-direction: column;
-            height: 100%;
-            justify-content: center;
-            max-width: none;
-        }
-    
-        .landing-page__hero-inner-container {
-            display: flex;
-            max-width: 1100px;
-        }
-    
-    
-        .landing-page__hero-right {
-            display: flex;
-            width: 100%;
-            justify-content: center;
-            align-items: center;
-        }
-    
-        .landing-page__hero-image {
-            height: 500px;
-            padding-top: 64px;
-            width: auto;
-            z-index: 2;
-        }
-    
-        @media (max-width: 1000px) {
-            .landing-page__hero-image {
-                height: 400px;
-            }
-        }
-    
-        @media (max-width: 800px) {
-            .landing-page__hero-image {
-                height: 250px;
-            }
-        }
-    
-        @media (max-width: 600px) {
-            .landing-page__hero-image {
-                height: 0;
-            }
-        }
-    
-        .landing-page__hero-title {
-            color: black;
-            font-size: 48px;
-            max-width: 400px;
-            padding-top: 0;
-        }
-    
-        @media (max-width: 1000px) {
-            .landing-page__hero-title {
-                font-size: 48px;
-                padding-top: 16px;
-            }
-        }
-    
-        @media (max-width: 800px) {
-            .landing-page__hero-title {
-                font-size: 34px;
-                padding-top: 16px;
-            }
-        }
-    
-        @media (max-width: 600px) {
-            .landing-page__hero-title {
-                font-size: 28px;
-                padding-top: 8px;
-                margin-top: 0;
-            }
-        }
-    
+    }
+
+    .landing-page__hero-content {
+        z-index: 2;
+        line-height: 1.5;
+    }
+
+    @media (max-width: 600px) {
         .landing-page__hero-content {
-            z-index: 2;
-            line-height: 1.5;
-        }
-    
-        @media (max-width: 600px) {
-            .landing-page__hero-content {
-                padding-top: 4px;
-            }
-        }
-    
-        /* LANDING PAGE - CARD STRIPS CONTAINER */
-        .landing-page__cards {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            margin-top: 4px;
-        }
-    
-        /* LANDING PAGE - CARD STRIP*/
-        .landing-page {
-            max-width: 1100px;
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 16px;
-        }
-    
-        /* LANDING PAGE - CARD*/
-        .landing-page .landing-page__item {
-            flex: 1;
-            width: 100%;
-            margin-left: 18px;
-            margin-right: 18px;
-            text-align: center;
-            background: #FFFFFF;
-            box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-            padding-top: 16px;
-            padding-right: 16px;
-        }
-    
-        .landing-page .landing-page__item .landing-page__item-container {
-            display: flex;
-            height: 100%;
-            justify-content: flex-start;
-            align-items: center;
-            text-align: left;
-            padding-left: 0;
-            padding-right: 16px;
-        }
-    
-        .landing-page__item-inner {
-            display: flex;
-            flex-direction: column;
-            height: 100%;
-            justify-content: center;
             padding-top: 4px;
-            padding-bottom: 8px;
         }
-      
-      .landing-page__item-inner .landing-page__sub-item {
-        
-      }
-      
-      .landing-page__item-inner .landing-page__sub-item .sub-item-header{
-        font-weight: 500;
-      }
+    }
+
+    /* LANDING PAGE - CARD STRIPS CONTAINER */
+    .landing-page__cards {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-top: 4px;
+    }
+
+    /* LANDING PAGE - CARD STRIP*/
+    .landing-page {
+        max-width: 1100px;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 16px;
+    }
+
+    /* LANDING PAGE - CARD*/
+    .landing-page .landing-page__item {
+        flex: 1;
+        width: 100%;
+        margin-left: 18px;
+        margin-right: 18px;
+        text-align: center;
+        background: #FFFFFF;
+        box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        padding-top: 16px;
+        padding-right: 16px;
+    }
+
+    .landing-page .landing-page__item .landing-page__item-container {
+        display: flex;
+        height: 100%;
+        justify-content: flex-start;
+        align-items: center;
+        text-align: left;
+        padding-left: 0;
+        padding-right: 16px;
+    }
+
+    .landing-page__item-inner {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        justify-content: center;
+        padding-top: 4px;
+        padding-bottom: 8px;
+    }
+  
+  .landing-page__item-inner .landing-page__sub-item {
     
+  }
+  
+  .landing-page__item-inner .landing-page__sub-item .sub-item-header{
+    font-weight: 500;
+  }
+
+    .landing-page .landing-page__item .landing-page__item-container .landing-page__item-thumbnail {
+        width: 80px;
+        height: 80px;
+        margin-left: 2em;
+        margin-right: 2em;
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+
+    @media (max-width: 600px) {
         .landing-page .landing-page__item .landing-page__item-container .landing-page__item-thumbnail {
             width: 80px;
             height: 80px;
-            margin-left: 2em;
-            margin-right: 2em;
-            margin-top: 0;
-            margin-bottom: 0;
+            margin-left: 1em;
+            margin-right: 1em;
         }
-    
-        @media (max-width: 600px) {
-            .landing-page .landing-page__item .landing-page__item-container .landing-page__item-thumbnail {
-                width: 80px;
-                height: 80px;
-                margin-left: 1em;
-                margin-right: 1em;
-            }
+    }
+
+    .landing-page .landing-page__item .landing-page__item-container .landing-page__item-title {
+        text-align: left;
+        padding-bottom: 12px;
+        font-size: 26px;
+        margin: 0;
+    }
+
+    .landing-page .landing-page__item .landing-page__item-container .landing-page__item-content {
+        display: flex;
+        justify-content: flex-start;
+        text-align: left;
+        font-weight: normal;
+        line-height: 1.5;
+    }
+
+    .landing-page__item-links {
+        display: flex;
+        flex-wrap: wrap;
+        flex: 0 1 50%;
+        justify-content: flex-start;
+        margin-top: 16px;
+        margin-bottom: 8px;
+    }
+
+    .landing-page__item-link.landing-page__item-link.landing-page__item-link {
+        display: flex;
+        align-items: center;
+        margin: 2px;
+        margin-right: 16px;
+	      border-bottom: solid 1px black;
+        color: #434446;
+      	text-decoration: none;
+
+    }
+
+    .landing-page__item-link:before {
+        margin: 0;
+        margin-right: 8px;
+    }
+
+    /*  .landing-page__item-link:after {
+              content: "\2794";
+        margin-left: 4px;
+        margin-right: 8px;
+    } */
+  
+    .landing-page__item-link:hover {
+        color: grey;
+    }
+
+
+    .landing-page__item-link.ios:before {
+        content: url("https://files.readme.io/19fdc72-apple-icon.svg");
+    }
+
+    .landing-page__item-link.android:before {
+        content: url("https://files.readme.io/d7dc5a3-android-icon.svg");
+    }
+
+    .landing-page__item-link.webtools:before {
+        content: url("https://files.readme.io/289df3f-web-tools-icon.svg");
+    }
+
+    .landing-page__item-link.unity:before {
+        content: url("https://files.readme.io/59acdf6-unity-icon.svg");
+    }
+
+    .landing-page__item-link.flutter:before {
+        content: url("https://files.readme.io/1f70175-flutter-icon.svg");
+    }
+
+    .landing-page__item-link.reactnative:before {
+        content: url("https://files.readme.io/3e1288d-reactnative-icon.svg");
+    }
+
+    .landing-page__item-link:hover.webtools:before {
+        opacity: 0.5;
+    }
+
+    .landing-page__item-link:hover.ios:before {
+        opacity: 0.5;
+    }
+
+    .landing-page__item-link:hover.unity:before {
+        opacity: 0.5;
+    }
+
+    .landing-page__item-link:hover.reactnative:before {
+        opacity: 0.5;
+    }
+
+    .landing-page__item-link:hover.flutter:before {
+        opacity: 0.5;
+    }
+
+
+    .landing-page__item-link:hover.android:before {
+        content: url("https://files.readme.io/8332104-android-icon-hover.svg");
+    }
+
+    .landing-page__item-link[href*="http"]:not([href*="dev.appsflyer.com"]):after {
+        font-family: 'FontAwesome';
+        display: inline-block;
+        line-height: 8px;
+        vertical-align: top;
+        width: 16px;
+        height: 12px;
+        margin-left: 2px;
+        margin-right: 0px;
+        padding: 4px;
+        padding-right: 0px;
+        font-size: 10px;
+        content: "\f08e";
+	      border: none;
+    }
+
+    /* LANDING PAGE - FOOTER */
+    .landing-page__footer {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        align-items: center;
+        margin-top: 64px;
+        margin-bottom: 64px;
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    .landing-page__footer-inner {
+        width: 100%;
+        max-width: 1100px;
+    }
+
+    .landing-page__footer-content {
+        display: flex;
+        position: relative;
+        margin-bottom: 16px;
+        align-items: center;
+        height: 100%;
+    }
+
+    .landing-page__footer-content:before,
+    .landing-page__footer-content:after {
+        position: absolute;
+        content: "";
+        height: 1px;
+        width: 100%;
+        background: #e5e8ed;
+    }
+
+    .landing-page__footer-content:before {
+        top: -16px;
+    }
+
+    .landing-page__footer-content:after {
+        bottom: -16px;
+    }
+
+    .landing-page__footer-left {
+        display: flex;
+        width: 100%;
+        height: 100%;
+        justify-content: flex-start;
+        align-items: center;
+    }
+
+    .landing-page__footer-right {
+        display: flex;
+        width: 100%;
+        justify-content: flex-end;
+    }
+
+    .landing-page__footer-bottom {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .landing-page__footer-bottom.footer-bottom-left {
+        display: flex;
+        width: 100%;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        margin: 8px;
+    }
+
+    .landing-page__footer-bottom.footer-bottom-right {
+        display: flex;
+        justify-content: flex-end;
+        width: 100%;
+    }
+
+    .landing-page__footer-bottom.footer-bottom-right #copyrights {
+        padding: 16px;
+        padding-right: 0;
+    }
+
+    .landing-page__footer-bottom.footer-bottom-left a {
+        padding: 16px;
+        padding-top: 8px;
+        padding-bottom: 8px;
+        padding-left: 0;
+
+    }
+
+    .landing-page__social {
+        opacity: 87%;
+    }
+
+    @media (max-width: 600px) {
+        .landing-page__social img {
+            width: 32px;
         }
-    
-        .landing-page .landing-page__item .landing-page__item-container .landing-page__item-title {
-            text-align: left;
-            padding-bottom: 12px;
-            font-size: 26px;
-            margin: 0;
+    }
+
+    .landing-page__social:hover {
+        opacity: 50%;
+    }
+  
+    /* top level  */
+    ul.smt-menu {
+        position: fixed;
+        right: 200px;
+        width: 200px;
+        /* MUST BE SET TO FIXED WITH */
+        margin: 0 0 0 0 !important;
+        padding: 0 0 0 0 !important;
+        list-style: none !important;
+        z-index: 99999;
+        visibility: visible;
+    }
+
+    /* no focus dotted line  */
+    ul.smt-menu :focus {
+        outline: 0 !important;
+    }
+
+    /* container of menu items */
+    ul.smt-menu ul {
+        position: absolute !important;
+        display: none;
+        list-style: none !important;
+        text-indent: none !important;
+        width: 100%;
+        padding: 0 0 0 0 !important;
+        margin: 0 0 0 0 !important;
+        border: 1px solid #999;
+    }
+
+    /* list items (includes trigger) */
+    ul.smt-menu li {
+        margin: 0;
+        padding: 0 !important;
+        display: block !important;
+        float: left !important;
+        width: 100% !important;
+    }
+
+    /* item wrapper */
+    ul.smt-menu li.smt-item {
+        float: none !important;
+        display: block !important;
+    }
+
+    /* down arrow at end of trigger link */
+    ul.smt-menu li .smt-trigger-link .smt-downArrow {
+        display: inline-block;
+        height: 13px;
+        width: 13px;
+        background: url(bullet_arrow_down.png) no-repeat;
+    }
+
+    /* hover state for button which opens menu */
+    ul.smt-menu li:hover .smt-trigger-link,
+    ul.smt-menu li.sfhover .smt-trigger-link {}
+
+    /* triggers has-layout for ie6 */
+    * html .smt-trigger-link,
+    .smt-link {
+        display: inline-block;
+    }
+
+    /* styles trigger link */
+    ul.smt-menu a.smt-trigger-link {
+        display: block !important;
+        padding: 0px !important;
+        text-decoration: none !important;
+        font-family: arial !important;
+        font-size: 12px !important;
+        color: #000 !important;
+        background-color: #fff;
+        cursor: pointer;
+        border: 0px solid black;
+    }
+
+    /* styles item link tags */
+    a.smt-link {
+        display: block !important;
+        padding: 3px 7px !important;
+        text-decoration: none !important;
+        font-family: arial !important;
+        font-size: 12px !important;
+        line-height: 12px !important;
+        color: #000 !important;
+        background-color: #fff;
+        cursor: pointer;
+        border: 0px solid black;
+    }
+
+    /* menu items */
+    ul.smt-menu li li a {
+        background-color: #fff;
+    }
+
+    /* hover state for menu items */
+    ul.smt-menu li li a:hover {
+        background-color: #999 !important;
+        color: #fff !important;
+    }
+
+    /* the world "language" in trigger  */
+    ul.smt-menu span.smt-word {
+        font-weight: normal !important;
+        padding-right: 5px !important;
+    }
+
+    /* the name of language in trigger  */
+    ul.smt-menu span.smt-lang {
+        font-weight: bold !important;
+        color: #000 !important;
+    }
+
+    /* hover state for name of language in trigger */
+    ul.smt-menu li:hover span.smt-word,
+    ul.smt-menu li.sfhover span.smt-word {}
+
+    /* hover state for the world "language" in trigger */
+    ul.smt-menu li:hover span.smt-lang,
+    ul.smt-menu li.sfhover span.smt-lang {
+        color: #000 !important;
+    }
+
+</style>
+<div class="landing-page__hero">
+    <div class="landing-page__hero-inner-container">
+        <div class="landing-page__left">
+            <div class="landing-page__hero-inner">
+                <h3 class="landing-page__hero-title">AppsFlyer developer hub</h3>
+                <div class="landing-page__hero-content">
+                    Welcome to the AppsFlyer developer hub. Here you’ll find comprehensive guides and documentation to
+                    help developers work with AppsFlyer as quickly as possible. Let’s jump right in!
+                </div>
+            </div>
+        </div>
+        <div class="landing-page__hero-right">
+            <img class="landing-page__hero-image" src="https://files.readme.io/bdf8c79-devhub-hero.svg">
+        </div>
+    </div>
+</div>
+<svg class="hero-svg" viewBox="0 80 1920 149" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path
+        d="M1920 0.5L-0.000610352 0.5V145.669C-0.000610352 145.669 432.522 245.575 955.02 140.038C1477.52 34.5 1920 145.669 1920 145.669L1920 0.5Z"
+        fill="#F4FCFF" />
+</svg>
+<div class="landing-page__cards">
+    <div class="landing-page">
+        <div class="landing-page__item">
+            <div class="landing-page__item-container">
+                <img class="landing-page__item-thumbnail" src="https://files.readme.io/42b98f3-sdk_integration.svg">
+                <div class="landing-page__item-inner">
+                    <h2 class="landing-page__item-title">AppsFlyer SDKs</h2>
+                    <div class="landing-page__item-content">AppsFlyer provides SDKs for a wide range of platforms,
+                        enabling quick and easy integration of AppsFlyer features into your app and marketing stack.
+                    </div>
+                  <div class="landing-page__sub-item">
+                    <div class="sub-item-header">Native SDKs</div>
+                    <div class="landing-page__item-links">
+                        <a class="landing-page__item-link android" href="https://dev.appsflyer.com/hc/docs/android-sdk">Android SDK</a>
+                        <a class="landing-page__item-link ios" href="https://dev.appsflyer.com/hc/docs/ios-sdk">iOS SDK</a>                    
+                    </div>
+                  </div>
+                  <div class="landing-page__sub-item">
+                    <div class="sub-item-header">
+                      Plugins
+                    </div>
+                    <div class="landing-page__item-links">
+
+                        <a class="landing-page__item-link unity" href="https://support.appsflyer.com/hc/en-us/articles/360007314277">Unity SDK</a>
+                        <a class="landing-page__item-link reactnative" target="_blank"
+                            href="https://github.com/AppsFlyerSDK/appsflyer-react-native-plugin">React Native SDK</a>
+                        <a class="landing-page__item-link flutter" target="_blank"
+                            href="https://github.com/AppsFlyerSDK/appsflyer-flutter-plugin">Flutter SDK</a>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="landing-page">
+        <div class="landing-page__item">
+            <div class="landing-page__item-container">
+                <img class="landing-page__item-thumbnail" src="https://files.readme.io/ebb69c1-onelink.svg">
+                <div class="landing-page__item-inner">
+                    <h2 class="landing-page__item-title">OneLink</h2>
+                    <div class="landing-page__item-content">Implement deep linking in your app with OneLink, AppsFlyer's cross-platform deep linking solution.</div>
+                    <div class="landing-page__item-links">
+                        <a class="landing-page__item-link android" href="https://dev.appsflyer.com/hc/docs/android">Android SDK</a>
+                        <a class="landing-page__item-link ios"
+                            href="https://dev.appsflyer.com/hc/docs/ios">iOS SDK</a>
+                        <a class="landing-page__item-link webtools"
+                            href="https://dev.appsflyer.com/hc/docs/onelink-smart-script">Web tools</a>
+                      <a class="landing-page__item-link webtools"
+                            href="https://dev.appsflyer.com/hc/reference/onelink_rest_api">OneLink REST API</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="landing-page">
+        <div class="landing-page__item">
+            <div class="landing-page__item-container">
+                <img class="landing-page__item-thumbnail" src="https://files.readme.io/f210201-app-clips.svg">
+                <div class="landing-page__item-inner">
+                    <h2 class="landing-page__item-title">App Clips attribution</h2>
+                    <div class="landing-page__item-content">App Clips enable users with iOS 14 or later to quickly
+                        access and experience your app. AppsFlyer SDK integration gives you valuable App Clip
+                        attribution data.</div>
+                    <div class="landing-page__item-links">
+                        <a class="landing-page__item-link ios"
+                            href="https://dev.appsflyer.com/hc/docs/app-clip-sdk-integration">SDK integration</a>
+                        <a class="landing-page__item-link"
+                            href="https://dev.appsflyer.com/hc/docs/app-clip-to-full-app-install">Full app install
+                            configuration</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  <div class="landing-page">
+        <div class="landing-page__item">
+            <div class="landing-page__item-container">
+                <img class="landing-page__item-thumbnail" src="https://files.readme.io/7f874b0-validation-rules.svg">
+                <div class="landing-page__item-inner">
+                    <h2 class="landing-page__item-title">Validation Rules</h2>
+                    <div class="landing-page__item-content">Create, update and remove Validation Rules programmatically. Control your app’s traffic with custom logic and conditions for campaign targeting, or for fraud prevention.</div>
+                    <div class="landing-page__item-links">
+                        <a class="landing-page__item-link"
+                            href="https://dev.appsflyer.com/hc/reference/overview">Validation Rules API</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<div class="landing-page__footer">
+    <div class="landing-page__footer-inner">
+        <div class="landing-page__footer-content">
+            <div class="landing-page__footer-left">
+                <a class="landing-page__social" target="_blank" href="https://www.facebook.com/AppsFlyer"><img
+                        src="https://cdn.appsflyer.com/kb/devhub/images/facebook-social.svg" /></a>
+                <a class="landing-page__social" target="_blank" href="https://www.instagram.com/lifeatappsflyer/"><img
+                        src="https://cdn.appsflyer.com/kb/devhub/images/instagram-social.svg" /></a>
+                <a class="landing-page__social" target="_blank"
+                    href="https://www.linkedin.com/company/appsflyerhq/"><img
+                        src="https://cdn.appsflyer.com/kb/devhub/images/linkedin-social.svg" /></a>
+                <a class="landing-page__social" target="_blank" href="https://twitter.com/AppsFlyer"><img
+                        src="https://cdn.appsflyer.com/kb/devhub/images/twitter-social.svg" /></a>
+                <a class="landing-page__social" target="_blank" href="https://www.youtube.com/c/Appsflyer"><img
+                        src="https://cdn.appsflyer.com/kb/devhub/images/youtube-social.svg" /></a>
+            </div>
+            <div class="landing-page__footer-right">
+                <svg width="139" height="42" viewBox="0 0 139 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd"
+                        d="M23.5554 0.742258L16.2353 10.3637C15.7351 11.0209 15.669 12.1987 16.0866 12.9979L22.2063 24.6935C22.6237 25.4911 23.3678 25.6062 23.8672 24.9506L31.1882 15.3276C31.6875 14.6714 31.7545 13.4922 31.3359 12.694L25.2169 0.997764C24.9742 0.536122 24.6236 0.303056 24.2739 0.3162C24.02 0.326459 23.7661 0.465914 23.5554 0.742258ZM43.8947 10.5211C40.3885 10.5211 37.5473 13.432 37.5473 17.0213V29.3629H39.9918V17.0213H39.9956C39.9956 14.8157 41.7407 13.0278 43.8956 13.0278C46.0492 13.0278 47.7943 14.8157 47.7943 17.0213H47.7978V18.4341H41.5178V20.9366H47.7978V29.3629H50.2435V17.0213C50.2435 13.432 47.4011 10.5211 43.8947 10.5211ZM101.876 29.3629H104.32V10.5211H101.876V29.3629ZM58.0856 16.4746C54.5808 16.4746 51.7393 19.3846 51.7393 22.9745H51.7349V34.9752H54.1794V22.9745H54.1913C54.1913 20.7541 55.9492 18.954 58.116 18.954C60.2844 18.954 62.0417 20.7541 62.0417 22.9745C62.0417 25.1942 60.2844 26.9943 58.116 26.9943C56.8935 26.9943 55.8008 26.4208 55.0814 25.5225V28.6998C55.9758 29.1932 56.9999 29.4743 58.0856 29.4743C61.5927 29.4743 64.4348 26.5634 64.4348 22.9745C64.4348 19.3846 61.5927 16.4746 58.0856 16.4746ZM65.5152 22.9745C65.5152 19.3846 68.3561 16.4746 71.8622 16.4746C75.3675 16.4746 78.2096 19.3846 78.2096 22.9745C78.2096 26.5634 75.3675 29.4743 71.8622 29.4743C70.7768 29.4743 69.7509 29.1932 68.857 28.6998V25.5225C69.5768 26.4208 70.6688 26.9943 71.8917 26.9943C74.061 26.9943 75.8183 25.1942 75.8183 22.9745C75.8183 20.7541 74.061 18.954 71.8917 18.954C69.7242 18.954 67.9676 20.7541 67.9676 22.9745H67.9547V34.9752H65.5109V22.9745H65.5152ZM97.617 13.0262C95.4612 13.0262 93.7142 14.8153 93.7142 17.0213V18.6903H100.469V21.1934H93.7142V29.3629H91.2694V17.0213C91.2694 13.432 94.1115 10.5217 97.6164 10.5211H100.695V13.0249H97.617V13.0262ZM114.554 16.5561V24.4242H114.553C114.522 26.0073 113.263 27.2813 111.707 27.2813C110.155 27.2813 108.894 26.0073 108.865 24.4242H108.862V16.5561H106.418V24.4322H106.422C106.451 26.9626 108.176 29.0717 110.487 29.6328V34.975H112.931V29.6328C115.241 29.0717 116.967 26.9626 116.996 24.4322H116.998V16.5561H114.554ZM126.468 26.4342C127.417 25.8745 128.046 24.9666 128.295 23.9593H130.789C130.508 25.8402 129.426 27.5787 127.69 28.6049C124.653 30.3992 120.773 29.3336 119.02 26.2252C117.267 23.1168 118.306 19.1416 121.343 17.3466C124.378 15.5516 128.262 16.6166 130.015 19.7253C130.224 20.0963 130.391 20.479 130.522 20.8698L125.385 23.9064L122.845 25.409L121.622 23.2406L127.112 19.9953C125.891 18.8784 124.061 18.6312 122.566 19.5154C120.7 20.6195 120.06 23.0614 121.138 24.974C122.215 26.8843 124.601 27.5393 126.468 26.4342ZM138.452 16.4746C136.978 16.4746 135.626 16.9895 134.551 17.8509V16.5336H132.105V29.3631H134.551V22.9745H134.551C134.551 20.7676 136.298 18.9787 138.452 18.9787V18.9774H138.947V16.4746H138.452ZM81.4076 20.5092L87.4876 23.4124C89.0148 24.1408 89.6747 25.9982 88.9622 27.5604C88.4453 28.696 87.3476 29.3592 86.2002 29.3612V29.3628H79.0921V26.8612H86.1999V26.8577C86.4269 26.8593 86.6463 26.7282 86.7478 26.5035C86.8887 26.1944 86.7587 25.8277 86.4563 25.6841L86.4549 25.6831L86.4541 25.6828L86.4547 25.6812L80.3742 22.7773C78.8576 22.0438 78.2011 20.1934 78.9115 18.635C79.4287 17.4995 80.5266 16.8365 81.6747 16.8353V16.8321H88.6118V19.3352H81.6747V19.34C81.4487 19.341 81.2314 19.4702 81.1299 19.6939C80.9919 19.9982 81.1165 20.3575 81.4095 20.5069L81.4076 20.5092ZM0.173117 13.5156L6.1967 25.2647C6.60777 26.0649 7.62151 26.7148 8.45899 26.7128L20.7463 26.6862C21.5853 26.6843 21.9313 26.0332 21.5205 25.2311L15.4966 13.4829C15.0856 12.6811 14.0721 12.0329 13.234 12.0348L0.946729 12.0611C0.93718 12.0611 0.927866 12.0613 0.918552 12.0614L0.918391 12.0615C0.909131 12.0616 0.899869 12.0618 0.890375 12.0618C0.0932828 12.0925 -0.228873 12.7318 0.173117 13.5156ZM27.1599 34.1747L23.5122 27.2052C23.268 26.7368 23.4602 26.3531 23.9417 26.3348H23.9668L31.2881 26.2559C31.7865 26.2505 32.3942 26.6313 32.6428 27.1071L36.2892 34.0759C36.5371 34.5517 36.3355 34.9415 35.8355 34.9467L28.5145 35.0258C28.0149 35.0316 27.4078 34.6501 27.1599 34.1747ZM17.4787 33.0548L21.8414 27.3218C21.9657 27.1564 22.1178 27.0727 22.2684 27.0673C22.4776 27.0602 22.687 27.199 22.8307 27.4744L26.4777 34.4439C26.7257 34.9181 26.6859 35.6211 26.3885 36.0132L22.0267 41.7456C21.7287 42.137 21.286 42.0687 21.0365 41.593L17.3898 34.6238C17.1415 34.1487 17.18 33.4463 17.4787 33.0548Z"
+                        fill="#000000" />
+                </svg>
+            </div>
+        </div>
+        <div class="landing-page__footer-bottom">
+            <div class="landing-page__footer-bottom footer-bottom-left">
+                <a target="_blank" href="https://www.appsflyer.com/privacy-policy/">Privacy policy</a>
+                <a target="_blank" href="https://www.appsflyer.com/terms-of-use/">Terms of use</a>
+                <a target="_blank" href="https://www.appsflyer.com/product/gdpr-ccpa">GDPR & CCPA</a>
+                <a target="_blank" href="https://www.appsflyer.com/cookie-policy">Cookies</a>
+            </div>
+            <div class="landing-page__footer-bottom footer-bottom-right">
+                <div id="copyrights">.</div>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    ul.glide__slides {
+        list-style: none;
+    }
+
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        font-family: Gilroy;
+    }
+
+    .markdown-body a[href*=http]:not([href*="dev.appsflyer.com"]):not(.landing-page__social):after {
+        display: none;
+    }
+
+    .carousel-container {
+        background-image: url("https://files.readme.io/e0be18e-carousel_bg_vector2.svg"), url("https://files.readme.io/8d7d0ee-carousel_bg_vector1.svg");
+        background-repeat: no-repeat;
+        background-position-y: top, bottom;
+        background-position-x: 86%, 10%;
+        background-size: 360px;
+        width: 80%;
+        height: 650px;
+        position: relative;
+        margin: 0px 10%;
+        margin-top: -40px;
+    }
+
+    .carousel-container-center {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .landing-page__hero h3 {
+        font-size: 48px !important;
+    }
+
+    .carousel-container-center>h3 {
+        max-width: 1500px;
+        width: 100%;
+        font-size: 36px !important;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-left: 50px;
+        margin-bottom: 20px;
+    }
+
+
+    .carousel {
+        margin: 0 auto;
+        /* padding: 0 30px; */
+        /* margin-bottom: 40px; */
+        max-width: 1200px;
+    }
+
+    .carousel-content {
+        transition: width .4s;
+    }
+
+    .slide {
+        background-color: transparent;
+        transition: left .4s cubic-bezier(.47, .13, .15, .89);
+    }
+
+    .card {
+        position: relative;
+        /* Shadow L */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        padding: 20px 10px;
+        margin: 16px;
+        background: #FFFFFF;
+        /* Shadow L */
+        box-shadow: 0px 1px 3px rgba(0, 51, 99, 0.15);
+        border-radius: 10px;
+        color: #220D4E;
+        max-width: 310px;
+        animation: 0.3s cubic-bezier(0.165, 0.84, 0.44, 1) homeTiles;
+        transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+        transform: scale(0.95, 0.95) translateZ(0);
+    }
+
+    .card:hover {
+        transform: scale(1, 1) translateZ(0);
+        cursor: pointer;
+    }
+
+    .card h3 {
+        margin: 0px;
+        font-size: 1.5em;
+    }
+
+    .card p {
+        font-size: 1.1em;
+        text-align: center;
+        letter-spacing: 0.5px;
+        line-height: 1.75em;
+        height: 80px;
+        margin-top: 10px;
+    }
+
+    .card span {
+        color: black !important;
+        display: block;
+        font-weight: 600;
+        font-size: 1.1em;
+        margin-top: 10px;
+        margin-bottom: 0;
+        text-decoration: none !important;
+    }
+
+    .card a.cookbook {
+        top: 75%;
+    }
+
+    img.arrow {
+        width: 15px;
+        position: absolute;
+        margin: 8px 3px;
+    }
+
+    .carousel-arrow-icon {
+        position: absolute;
+        cursor: pointer;
+        top: 9rem;
+        margin-left: 5px;
+        margin-top: 2px;
+        width: 50px;
+        height: 50px;
+        background: #FFFFFF;
+        box-shadow: 0px 31.4901px 56.6821px 2.9232px rgb(25 20 51 / 10%);
+        border-radius: 50%;
+        border: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .carousel-arrow-icon-left {
+        left: -3rem;
+        rotate: 180deg;
+    }
+
+    .carousel-arrow-icon-right {
+        right: -3rem;
+    }
+
+    .carousel__navigation-button {
+        width: 5px !important;
+        height: 13px;
+        background-color: #00c2ff;
+        margin: 0px 2px;
+        border: 1px solid #333;
+        border-radius: 50%;
+        /* transition: transform 0.1s; */
+    }
+
+
+    .glide__bullet.carousel__navigation-button.glide__bullet--active {
+        background-color: #333;
+        transition: 0.3s;
+    }
+
+    .carousel__nav_bottom {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 20px;
+    }
+
+
+    /* loading spinner */
+    .lds-dual-ring {
+        position: absolute;
+        width: 80px;
+    }
+
+    .lds-dual-ring:after {
+        content: " ";
+        display: block;
+        width: 64px;
+        height: 64px;
+        margin: 8px;
+        border-radius: 50%;
+        border: 6px solid #00c2ff;
+        border-color: #00c2ff transparent #00c2ff transparent;
+        animation: lds-dual-ring 1.2s linear infinite;
+    }
+
+    @keyframes lds-dual-ring {
+        0% {
+            transform: rotate(0deg);
         }
-    
-        .landing-page .landing-page__item .landing-page__item-container .landing-page__item-content {
-            display: flex;
-            justify-content: flex-start;
-            text-align: left;
-            font-weight: normal;
-            line-height: 1.5;
+
+        100% {
+            transform: rotate(360deg);
         }
-    
-        .landing-page__item-links {
-            display: flex;
-            flex-wrap: wrap;
-            flex: 0 1 50%;
-            justify-content: flex-start;
-            margin-top: 16px;
-            margin-bottom: 8px;
+    }
+
+    .actions {
+        display: flex;
+        z-index: 2;
+        margin-top: 10px;
+    }
+
+    .action {
+        cursor: pointer;
+        border-radius: 8px;
+        margin: 0;
+        margin-right: 20px;
+        margin-top: 20px;
+        padding: 18px;
+        font-size: 0.9em;
+    }
+
+    .primary-action {
+        background: #220D4E;
+        color: white;
+    }
+
+    .text-action {
+        color: #220D4E;
+        background-color: transparent;
+        border: gainsboro;
+        padding: 18px 9px;
+    }
+
+    .text-action .arrow {
+        margin: 0 3px;
+    }
+
+    .primary-action:hover {
+        color: #220D4E;
+        background-color: transparent;
+        transition: 0.3s;
+    }
+
+    .primary-action-outline {
+        border: 2px solid #220D4E;
+        border-radius: 8px;
+        background-color: transparent;
+        color: #220D4E;
+    }
+
+    .primary-action-outline:hover {
+        background-color: #220D4E !important;
+        color: white;
+        transition: 0.3s;
+    }
+
+    .carousel-view-more {
+        display: flex;
+        margin: 0 auto;
+        padding: 0 30px;
+        justify-content: center;
+    }
+
+    .primary-action-outline img {
+        width: 15px;
+        padding: 0px 5px;
+        position: absolute;
+        margin-top: 0;
+    }
+
+    /* ===================================================================== */
+
+    .hub-is-home #hub-landing-top {
+        display: none;
+
+    }
+
+    #hub-container#hub-container {
+        padding-top: 0;
+    }
+
+    .hub-container {
+        max-width: none;
+        width: 100%;
+        margin: 0;
+    }
+
+    #header-top {
+        max-height: 64px;
+    }
+
+    .hub-content-container {
+        display: flex;
+        width: 100%;
+        justify-content: center;
+    }
+
+    #hub-landing-page {
+        width: 100%;
+        margin-top: 0;
+    }
+
+    #hub-landing-page img {
+        max-width: none;
+    }
+
+    /* LANDING PAGE - HERO SECTION */
+    .landing-page__hero {
+        display: flex;
+        /* width: 100%; */
+        background: #f4fcff;
+        justify-content: space-around;
+        max-height: 360px;
+        padding-left: 4em;
+        padding-right: 4em;
+        padding-top: 16px;
+        margin-top: -50px;
+    }
+
+    @media (max-width: 600px) {
+        .landing-page__hero {
+            padding-right: 2em;
+            padding-left: 2em;
         }
-    
-        .landing-page__item-link.landing-page__item-link.landing-page__item-link {
-            display: flex;
-            align-items: center;
-            margin: 2px;
-            margin-right: 16px;
-              border-bottom: solid 1px black;
-            color: #434446;
-              text-decoration: none;
-    
+    }
+
+    .hero-svg {
+        z-index: -1;
+        width: 100%;
+    }
+
+    .landing-page__hero-inner {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        justify-content: flex-start;
+        max-width: none;
+        z-index: 10;
+        position: relative;
+        padding-top: 50px;
+    }
+
+    .landing-page__hero-inner-container {
+        display: flex;
+        max-width: 1500px;
+    }
+
+
+    .landing-page__hero-right {
+        display: flex;
+        width: 40%;
+        justify-content: flex-end;
+        align-items: center;
+    }
+
+    .landing-page__hero-image {
+        height: 350px;
+        width: auto;
+        z-index: 2;
+        margin-top: -50px;
+    }
+
+    @media (max-width: 1000px) {
+        .landing-page__hero-image {
+            height: 400px;
         }
-    
-        .landing-page__item-link:before {
-            margin: 0;
-            margin-right: 8px;
+    }
+
+    @media (max-width: 800px) {
+        .landing-page__hero-image {
+            height: 250px;
         }
-    
-        /*  .landing-page__item-link:after {
-                  content: "\2794";
-            margin-left: 4px;
-            margin-right: 8px;
-        } */
-      
-        .landing-page__item-link:hover {
-            color: grey;
+    }
+
+    @media (max-width: 600px) {
+        .landing-page__hero-image {
+            height: 0;
         }
-    
-    
-        .landing-page__item-link.ios:before {
-            content: url("https://files.readme.io/19fdc72-apple-icon.svg");
+    }
+
+    .landing-page__hero-title {
+        color: black;
+        font-size: 48px !important;
+        margin-top: 16px !important;
+        margin-bottom: 20px;
+        max-width: 400px;
+        padding-top: 0;
+    }
+
+    @media (max-width: 1000px) {
+        .landing-page__hero-title {
+            font-size: 48px;
+            padding-top: 16px;
         }
-    
-        .landing-page__item-link.android:before {
-            content: url("https://files.readme.io/d7dc5a3-android-icon.svg");
+    }
+
+    @media (max-width: 800px) {
+        .landing-page__hero-title {
+            font-size: 34px;
+            padding-top: 16px;
         }
-    
-        .landing-page__item-link.webtools:before {
-            content: url("https://files.readme.io/289df3f-web-tools-icon.svg");
-        }
-    
-        .landing-page__item-link.unity:before {
-            content: url("https://files.readme.io/59acdf6-unity-icon.svg");
-        }
-    
-        .landing-page__item-link.flutter:before {
-            content: url("https://files.readme.io/1f70175-flutter-icon.svg");
-        }
-    
-        .landing-page__item-link.reactnative:before {
-            content: url("https://files.readme.io/3e1288d-reactnative-icon.svg");
-        }
-    
-        .landing-page__item-link:hover.webtools:before {
-            opacity: 0.5;
-        }
-    
-        .landing-page__item-link:hover.ios:before {
-            opacity: 0.5;
-        }
-    
-        .landing-page__item-link:hover.unity:before {
-            opacity: 0.5;
-        }
-    
-        .landing-page__item-link:hover.reactnative:before {
-            opacity: 0.5;
-        }
-    
-        .landing-page__item-link:hover.flutter:before {
-            opacity: 0.5;
-        }
-    
-    
-        .landing-page__item-link:hover.android:before {
-            content: url("https://files.readme.io/8332104-android-icon-hover.svg");
-        }
-    
-        .landing-page__item-link[href*="http"]:not([href*="dev.appsflyer.com"]):after {
-            font-family: 'FontAwesome';
-            display: inline-block;
-            line-height: 8px;
-            vertical-align: top;
-            width: 16px;
-            height: 12px;
-            margin-left: 2px;
-            margin-right: 0px;
-            padding: 4px;
-            padding-right: 0px;
-            font-size: 10px;
-            content: "\f08e";
-              border: none;
-        }
-    
-        /* LANDING PAGE - FOOTER */
-        .landing-page__footer {
-            display: flex;
-            flex-direction: column;
-            width: 100%;
-            align-items: center;
-            margin-top: 64px;
-            margin-bottom: 64px;
-            padding-left: 16px;
-            padding-right: 16px;
-        }
-    
-        .landing-page__footer-inner {
-            width: 100%;
-            max-width: 1100px;
-        }
-    
-        .landing-page__footer-content {
-            display: flex;
-            position: relative;
-            margin-bottom: 16px;
-            align-items: center;
-            height: 100%;
-        }
-    
-        .landing-page__footer-content:before,
-        .landing-page__footer-content:after {
-            position: absolute;
-            content: "";
-            height: 1px;
-            width: 100%;
-            background: #e5e8ed;
-        }
-    
-        .landing-page__footer-content:before {
-            top: -16px;
-        }
-    
-        .landing-page__footer-content:after {
-            bottom: -16px;
-        }
-    
-        .landing-page__footer-left {
-            display: flex;
-            width: 100%;
-            height: 100%;
-            justify-content: flex-start;
-            align-items: center;
-        }
-    
-        .landing-page__footer-right {
-            display: flex;
-            width: 100%;
-            justify-content: flex-end;
-        }
-    
-        .landing-page__footer-bottom {
-            display: flex;
-            justify-content: center;
-            width: 100%;
-        }
-    
-        .landing-page__footer-bottom.footer-bottom-left {
-            display: flex;
-            width: 100%;
-            justify-content: flex-start;
-            flex-wrap: wrap;
-            margin: 8px;
-        }
-    
-        .landing-page__footer-bottom.footer-bottom-right {
-            display: flex;
-            justify-content: flex-end;
-            width: 100%;
-        }
-    
-        .landing-page__footer-bottom.footer-bottom-right #copyrights {
-            padding: 16px;
-            padding-right: 0;
-        }
-    
-        .landing-page__footer-bottom.footer-bottom-left a {
-            padding: 16px;
+    }
+
+    @media (max-width: 600px) {
+        .landing-page__hero-title {
+            font-size: 28px;
             padding-top: 8px;
-            padding-bottom: 8px;
-            padding-left: 0;
-    
+            margin-top: 0;
         }
-    
-        .landing-page__social {
-            opacity: 87%;
+    }
+
+    .landing-page__hero-content {
+        z-index: 2;
+        line-height: 1.5;
+        font-size: 1.2em;
+        max-width: 64%;
+    }
+
+    @media (max-width: 600px) {
+        .landing-page__hero-content {
+            padding-top: 4px;
         }
-    
-        @media (max-width: 600px) {
-            .landing-page__social img {
-                width: 32px;
-            }
+    }
+
+    .landing-page__cards_wrapper {
+        display: flex;
+        justify-content: center;
+    }
+
+    .landing-page__cards h3 {
+        max-width: 1500px;
+        width: 80%;
+        font-size: 36px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 450px;
+        margin-bottom: 40px;
+        margin-left: 50px;
+    }
+
+
+    /* LANDING PAGE - CARD STRIP*/
+    .landing-page {
+        max-width: 1500px;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-left: 10px;
+        margin-right: 10px;
+        margin-bottom: 20px;
+        background: #FFFFFF;
+        box-shadow: 0px 0px 20px 2px rgb(0 0 0 / 10%);
+        border-radius: 8px;
+    }
+
+    #sdks_section {
+        background-image: url(https://files.readme.io/d7ac204-wave_bg.svg);
+        background-repeat: no-repeat;
+        background-position-y: 40px;
+        background-size: 100% 115%;
+        min-height: 2000px;
+        margin-bottom: -250px;
+        margin-top: -300px;
+    }
+
+    /* LANDING PAGE - CARD STRIPS CONTAINER */
+    .landing-page__cards {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-top: 4px;
+        width: 1500px;
+    }
+
+    /* LANDING PAGE - CARD STRIP*/
+    .landing-page {
+        max-width: 1300px;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 16px;
+    }
+
+    /* LANDING PAGE - CARD*/
+    .landing-page .landing-page__item {
+        flex: 1;
+        width: 100%;
+        margin-left: 18px;
+        margin-right: 18px;
+        text-align: center;
+        /* background: #FFFFFF; */
+        /* box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.1); */
+        border-radius: 8px;
+        padding-top: 16px;
+        padding-right: 16px;
+    }
+
+    .landing-page .landing-page__item .landing-page__item-container {
+        display: flex;
+        height: 100%;
+        justify-content: flex-start;
+        align-items: center;
+        text-align: left;
+        padding-left: 0;
+        padding-right: 16px;
+    }
+
+    .landing-page__item-inner {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        justify-content: center;
+        padding-top: 4px;
+        padding-bottom: 8px;
+    }
+
+    .landing-page__item-inner .landing-page__sub-items-container {
+        display: flex;
+        justify-content: space-between;
+        padding-right: 32px;
+    }
+
+    .landing-page__item-inner .landing-page__sub-item {
+        padding-top: 16px;
+        padding-bottom: 16px;
+        margin-right: 32px;
+        margin-left: 0;
+        width: 500px;
+
+    }
+
+    .sub-item-header {
+        font-weight: 700;
+        position: relative;
+        padding-left: 8px;
+        background: rgba(0, 0, 0, 0.05)
+    }
+
+    .landing-page .landing-page__item .landing-page__item-container .landing-page__item-thumbnail {
+        width: 80px;
+        height: 80px;
+        margin-left: 2em;
+        margin-right: 2em;
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+
+    @media (max-width: 600px) {
+        .landing-page .landing-page__item .landing-page__item-container .landing-page__item-thumbnail {
+            width: 80px;
+            height: 80px;
+            margin-left: 1em;
+            margin-right: 1em;
         }
-    
-        .landing-page__social:hover {
-            opacity: 50%;
+    }
+
+    .landing-page .landing-page__item .landing-page__item-container .landing-page__item-title {
+        text-align: left;
+        padding-bottom: 12px;
+        font-size: 26px;
+        margin: 0;
+    }
+
+    .landing-page .landing-page__item .landing-page__item-container .landing-page__item-content {
+        display: flex;
+        justify-content: flex-start;
+        text-align: left;
+        font-weight: normal;
+        line-height: 1.5;
+    }
+
+    .landing-page__item-links {
+        display: flex;
+        flex-wrap: wrap;
+        flex: 0 1 50%;
+        max-width: 500px;
+        justify-content: flex-start;
+        margin-top: 16px;
+        margin-bottom: 8px;
+    }
+
+    .landing-page__item-link.landing-page__item-link.landing-page__item-link {
+        display: flex;
+        align-items: center;
+        margin: 2px;
+        margin-left: 4px;
+        margin-right: 16px;
+        border-bottom: solid 1px black;
+        color: #434446;
+        text-decoration: none;
+    }
+
+    .landing-page__item-link:before {
+        margin: 0;
+        margin-right: 8px;
+    }
+
+    /*  .landing-page__item-link:after {
+              content: "\2794";
+        margin-left: 4px;
+        margin-right: 8px;
+    } */
+
+    .landing-page__item-link:hover {
+        color: grey;
+    }
+
+    .landing-page__item-link.link-overview:before {
+        background-image: url("https://files.readme.io/d92c4b3-AF_Logo.svg");
+        background-size: 18px;
+        width: 18px;
+        height: 20px;
+        content: "";
+    }
+
+    .landing-page__item-link.ios:before {
+        content: url("https://files.readme.io/19fdc72-apple-icon.svg");
+    }
+
+    .landing-page__item-link.android:before {
+        content: url("https://files.readme.io/d7dc5a3-android-icon.svg");
+    }
+
+    .landing-page__item-link.webtools:before {
+        content: url("https://files.readme.io/289df3f-web-tools-icon.svg");
+    }
+
+    .landing-page__item-link.unity:before {
+        content: url("https://files.readme.io/59acdf6-unity-icon.svg");
+    }
+
+    .landing-page__item-link.unreal:before {
+        content: url("https://files.readme.io/186b6c4-unrealengine-icon.svg");
+    }
+
+    .landing-page__item-link.flutter:before {
+        content: url("https://files.readme.io/1f70175-flutter-icon.svg");
+    }
+
+    .landing-page__item-link.reactnative:before {
+        content: url("https://files.readme.io/3e1288d-reactnative-icon.svg");
+    }
+
+    .landing-page__item-link.nativescript:before {
+        content: url("https://files.readme.io/e49cea6-nativescript-icon.svg");
+    }
+
+    .landing-page__item-link.cordova:before {
+        content: url("https://files.readme.io/5f757d6-apache_cordova-icon.svg");
+    }
+
+    .landing-page__item-link.xamarin:before {
+        content: url("https://files.readme.io/00bb794-xamarin-icon.svg");
+    }
+
+    .landing-page__item-link.capacitor:before {
+        content: url("https://files.readme.io/ad0d405-capacitor-icon.svg");
+    }
+
+    .landing-page__item-link:hover.webtools:before {
+        opacity: 0.5;
+    }
+
+    .landing-page__item-link:hover.ios:before {
+        opacity: 0.5;
+    }
+
+    .landing-page__item-link:hover.link-overview:before {
+        opacity: 0.5;
+    }
+
+    .landing-page__item-link:hover.unity:before {
+        opacity: 0.5;
+    }
+
+    .landing-page__item-link:hover.unreal:before {
+        opacity: 0.5;
+    }
+
+    .landing-page__item-link:hover.reactnative:before {
+        opacity: 0.5;
+    }
+
+    .landing-page__item-link:hover.nativescript:before {
+        opacity: 0.5;
+    }
+
+    .landing-page__item-link:hover.cordova:before {
+        opacity: 0.5;
+    }
+
+    .landing-page__item-link:hover.xamarin:before {
+        opacity: 0.5;
+    }
+
+    .landing-page__item-link:hover.capacitor:before {
+        opacity: 0.5;
+    }
+
+    .landing-page__item-link:hover.flutter:before {
+        opacity: 0.5;
+    }
+
+
+    .landing-page__item-link:hover.android:before {
+        content: url("https://files.readme.io/8332104-android-icon-hover.svg");
+    }
+
+    .landing-page__item-link-inner.new:after {
+        position: relative;
+        content: "New";
+        font-weight: 700;
+        background: #220d4e;
+        color: white;
+        border-radius: 4px;
+        font-size: 8px;
+        vertical-align: super;
+        margin-left: 4px;
+        line-height: 1.5;
+        padding-left: 2px;
+        padding-right: 2px;
+    }
+
+
+    .landing-page__item-link[href*="http"]:not([href*="dev.appsflyer.com"]):after {
+        font-family: 'FontAwesome';
+        display: inline-block;
+        line-height: 8px;
+        vertical-align: top;
+        width: 16px;
+        height: 12px;
+        margin-left: 2px;
+        margin-right: 0px;
+        padding: 4px;
+        padding-right: 0px;
+        font-size: 10px;
+        content: "\f08e";
+        border: none;
+    }
+
+    /* LANDING PAGE - FOOTER */
+    .landing-page__footer {
+        display: flex;
+        flex-direction: column;
+        /* width: 100%; */
+        align-items: center;
+        margin-top: 200px;
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    .landing-page__footer-inner {
+        width: 100%;
+        max-width: 1500px;
+    }
+
+    .landing-page__footer-content {
+        display: flex;
+        position: relative;
+        margin-bottom: 16px;
+        align-items: center;
+        height: 100%;
+    }
+
+    .landing-page__footer-content:before,
+    .landing-page__footer-content:after {
+        position: absolute;
+        content: "";
+        height: 1px;
+        width: 100%;
+        background: #e5e8ed;
+    }
+
+    .landing-page__footer-content:before {
+        top: -16px;
+    }
+
+    .landing-page__footer-content:after {
+        bottom: -16px;
+    }
+
+    .landing-page__footer-left {
+        display: flex;
+        width: 100%;
+        height: 100%;
+        justify-content: flex-start;
+        align-items: center;
+    }
+
+    .landing-page__footer-right {
+        display: flex;
+        width: 100%;
+        justify-content: flex-end;
+    }
+
+    .landing-page__footer-bottom {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .landing-page__footer-bottom.footer-bottom-left {
+        display: flex;
+        width: 100%;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        margin: 8px;
+    }
+
+    .landing-page__footer-bottom.footer-bottom-right {
+        display: flex;
+        justify-content: flex-end;
+        width: 100%;
+    }
+
+    .landing-page__footer-bottom.footer-bottom-right #copyrights {
+        padding: 16px;
+        padding-right: 0;
+    }
+
+    .landing-page__footer-bottom.footer-bottom-left a {
+        padding: 16px;
+        padding-top: 8px;
+        padding-bottom: 8px;
+        padding-left: 0;
+
+    }
+
+    .landing-page__social {
+        opacity: 87%;
+    }
+
+    @media (max-width: 600px) {
+        .landing-page__social img {
+            width: 32px;
         }
-      
-        /* top level  */
-        ul.smt-menu {
-            position: fixed;
-            right: 200px;
-            width: 200px;
-            /* MUST BE SET TO FIXED WITH */
-            margin: 0 0 0 0 !important;
-            padding: 0 0 0 0 !important;
-            list-style: none !important;
-            z-index: 99999;
-            visibility: visible;
-        }
-    
-        /* no focus dotted line  */
-        ul.smt-menu :focus {
-            outline: 0 !important;
-        }
-    
-        /* container of menu items */
-        ul.smt-menu ul {
-            position: absolute !important;
-            display: none;
-            list-style: none !important;
-            text-indent: none !important;
-            width: 100%;
-            padding: 0 0 0 0 !important;
-            margin: 0 0 0 0 !important;
-            border: 1px solid #999;
-        }
-    
-        /* list items (includes trigger) */
-        ul.smt-menu li {
-            margin: 0;
-            padding: 0 !important;
-            display: block !important;
-            float: left !important;
-            width: 100% !important;
-        }
-    
-        /* item wrapper */
-        ul.smt-menu li.smt-item {
-            float: none !important;
-            display: block !important;
-        }
-    
-        /* down arrow at end of trigger link */
-        ul.smt-menu li .smt-trigger-link .smt-downArrow {
-            display: inline-block;
-            height: 13px;
-            width: 13px;
-            background: url(bullet_arrow_down.png) no-repeat;
-        }
-    
-        /* hover state for button which opens menu */
-        ul.smt-menu li:hover .smt-trigger-link,
-        ul.smt-menu li.sfhover .smt-trigger-link {}
-    
-        /* triggers has-layout for ie6 */
-        * html .smt-trigger-link,
-        .smt-link {
-            display: inline-block;
-        }
-    
-        /* styles trigger link */
-        ul.smt-menu a.smt-trigger-link {
-            display: block !important;
-            padding: 0px !important;
-            text-decoration: none !important;
-            font-family: arial !important;
-            font-size: 12px !important;
-            color: #000 !important;
-            background-color: #fff;
-            cursor: pointer;
-            border: 0px solid black;
-        }
-    
-        /* styles item link tags */
-        a.smt-link {
-            display: block !important;
-            padding: 3px 7px !important;
-            text-decoration: none !important;
-            font-family: arial !important;
-            font-size: 12px !important;
-            line-height: 12px !important;
-            color: #000 !important;
-            background-color: #fff;
-            cursor: pointer;
-            border: 0px solid black;
-        }
-    
-        /* menu items */
-        ul.smt-menu li li a {
-            background-color: #fff;
-        }
-    
-        /* hover state for menu items */
-        ul.smt-menu li li a:hover {
-            background-color: #999 !important;
-            color: #fff !important;
-        }
-    
-        /* the world "language" in trigger  */
-        ul.smt-menu span.smt-word {
-            font-weight: normal !important;
-            padding-right: 5px !important;
-        }
-    
-        /* the name of language in trigger  */
-        ul.smt-menu span.smt-lang {
-            font-weight: bold !important;
-            color: #000 !important;
-        }
-    
-        /* hover state for name of language in trigger */
-        ul.smt-menu li:hover span.smt-word,
-        ul.smt-menu li.sfhover span.smt-word {}
-    
-        /* hover state for the world "language" in trigger */
-        ul.smt-menu li:hover span.smt-lang,
-        ul.smt-menu li.sfhover span.smt-lang {
-            color: #000 !important;
-        }
-    
-    </style>
-    <div class="landing-page__hero">
-        <div class="landing-page__hero-inner-container">
-            <div class="landing-page__left">
-                <div class="landing-page__hero-inner">
-                    <h3 class="landing-page__hero-title">AppsFlyer developer hub</h3>
-                    <div class="landing-page__hero-content">
-                        Welcome to the AppsFlyer developer hub. Here you’ll find comprehensive guides and documentation to
-                        help developers work with AppsFlyer as quickly as possible. Let’s jump right in!
-                    </div>
+    }
+
+    .landing-page__social:hover {
+        opacity: 50%;
+    }
+
+    /* top level  */
+    ul.smt-menu {
+        position: fixed;
+        right: 200px;
+        width: 200px;
+        /* MUST BE SET TO FIXED WITH */
+        margin: 0 0 0 0 !important;
+        padding: 0 0 0 0 !important;
+        list-style: none !important;
+        z-index: 99999;
+        visibility: visible;
+    }
+
+    /* no focus dotted line  */
+    ul.smt-menu :focus {
+        outline: 0 !important;
+    }
+
+    /* container of menu items */
+    ul.smt-menu ul {
+        position: absolute !important;
+        display: none;
+        list-style: none !important;
+        text-indent: none !important;
+        width: 100%;
+        padding: 0 0 0 0 !important;
+        margin: 0 0 0 0 !important;
+        border: 1px solid #999;
+    }
+
+    /* list items (includes trigger) */
+    ul.smt-menu li {
+        margin: 0;
+        padding: 0 !important;
+        display: block !important;
+        float: left !important;
+        width: 100% !important;
+    }
+
+    /* item wrapper */
+    ul.smt-menu li.smt-item {
+        float: none !important;
+        display: block !important;
+    }
+
+    /* down arrow at end of trigger link */
+    ul.smt-menu li .smt-trigger-link .smt-downArrow {
+        display: inline-block;
+        height: 13px;
+        width: 13px;
+        background: url(bullet_arrow_down.png) no-repeat;
+    }
+
+    /* triggers has-layout for ie6 */
+    * html .smt-trigger-link,
+    .smt-link {
+        display: inline-block;
+    }
+
+    /* styles trigger link */
+    ul.smt-menu a.smt-trigger-link {
+        display: block !important;
+        padding: 0px !important;
+        text-decoration: none !important;
+        font-family: arial !important;
+        font-size: 12px !important;
+        color: #000 !important;
+        background-color: #fff;
+        cursor: pointer;
+        border: 0px solid black;
+    }
+
+    /* styles item link tags */
+    a.smt-link {
+        display: block !important;
+        padding: 3px 7px !important;
+        text-decoration: none !important;
+        font-family: arial !important;
+        font-size: 12px !important;
+        line-height: 12px !important;
+        color: #000 !important;
+        background-color: #fff;
+        cursor: pointer;
+        border: 0px solid black;
+    }
+
+    /* menu items */
+    ul.smt-menu li li a {
+        background-color: #fff;
+    }
+
+    /* hover state for menu items */
+    ul.smt-menu li li a:hover {
+        background-color: #999 !important;
+        color: #fff !important;
+    }
+
+    /* the world "language" in trigger  */
+    ul.smt-menu span.smt-word {
+        font-weight: normal !important;
+        padding-right: 5px !important;
+    }
+
+    /* the name of language in trigger  */
+    ul.smt-menu span.smt-lang {
+        font-weight: bold !important;
+        color: #000 !important;
+    }
+
+    /* hover state for the world "language" in trigger */
+    ul.smt-menu li:hover span.smt-lang,
+    ul.smt-menu li.sfhover span.smt-lang {
+        color: #000 !important;
+    }
+
+    .slides {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .slides li {
+        list-style: none;
+        width: 340px;
+    }
+
+    .slides li a {
+        text-decoration: none !important;
+    }
+
+    .overview {
+        margin-bottom: 0;
+    }
+
+    .link-overview {
+        margin-bottom: 20px !important;
+    }
+</style>
+
+<div class="landing-page__hero">
+    <div class="landing-page__hero-inner-container">
+        <div class="landing-page__left">
+            <div class="landing-page__hero-inner">
+                <h3 class="landing-page__hero-title">AppsFlyer Developer Hub</h3>
+                <div class="landing-page__hero-content">
+                    Welcome to the AppsFlyer developer hub. Here you'll find comprehensive guides and documentation
+                    to
+                    help developers work with AppsFlyer as quickly as possible. Let's jump right in!
                 </div>
+                <div class="actions">
+                    <a id="go_to_sdks" href="#sdk_h"><button class="action primary-action">AppsFlyer
+                            SDKs</button></a>
+                    <a id="go_to_api"
+                        href="https://dev.appsflyer.com/hc/reference/api-reference-overview"><button
+                            class="action primary-action-outline">API
+                            reference</button></a>
+                    <a href="https://support.appsflyer.com/hc/en-us"><button class="action text-action">Marketer
+                            Help
+                            Center<img class="arrow"
+                                src="https://files.readme.io/3ce9ae5-Line_Arrow.svg"></img></button></a>
+                </div>
+
             </div>
-            <div class="landing-page__hero-right">
-                <img class="landing-page__hero-image" src="https://files.readme.io/bdf8c79-devhub-hero.svg">
+        </div>
+        <div class="landing-page__hero-right">
+            <img class="landing-page__hero-image" src="https://files.readme.io/bdf8c79-devhub-hero.svg">
+        </div>
+    </div>
+</div>
+<svg class="hero-svg" viewBox="0 80 1920 149" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path
+        d="M1920 0.5L-0.000610352 0.5V145.669C-0.000610352 145.669 432.522 245.575 955.02 140.038C1477.52 34.5 1920 145.669 1920 145.669L1920 0.5Z"
+        fill="#F4FCFF" />
+</svg>
+
+<div class="container carousel-container">
+    <div class="carousel-container-center">
+        <h3>Quick Starts</h3>
+        <div id="recpies_carousel" class="glide multi carousel">
+            <div class="glide__wrapper carousel-content">
+                <div class="glide__track" data-glide-el="track">
+                    <ul class="slides">
+                        <li>
+                            <a href="https://dev.appsflyer.com/hc/docs/android-sdk">
+                            <div class="slide slide1">
+                                <div class="card">
+                                    <h3>Android SDK</h3>
+                                    <p>AppsFlyer's Android mobile SDK integration
+                                    </p>
+                                    <span>Go to guide<img
+                                            src="https://files.readme.io/3ce9ae5-Line_Arrow.svg"
+                                            class="arrow"></img></span>
+
+                                </div>
+                            </div>
+                        </a>
+                        </li>
+                        <li>
+                            <a href="https://dev.appsflyer.com/hc/docs/ios-sdk">
+                                <div class="slide slide2">
+                                    <div class="card">
+                                        <h3>iOS SDK</h3>
+                                        <p>AppsFlyer's iOS mobile SDK integration</p>
+                                        <span>Go to guide<img src="https://files.readme.io/3ce9ae5-Line_Arrow.svg"
+                                                class="arrow"></img></span>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://dev.appsflyer.com/hc/docs/dl_android_unified_deep_linking">
+                                <div class="slide slide3">
+                                    <div class="card">
+                                        <h3>Deep Linking Android</h3>
+                                        <p>OneLink is AppsFlyer's deep linking solution in Android apps</p>
+                                        <span>Go to guide
+                                            <img src="https://files.readme.io/3ce9ae5-Line_Arrow.svg"
+                                                class="arrow"></img></span>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://dev.appsflyer.com/hc/docs/dl_ios_unified_deep_linking">
+                                <div class="slide slide4">
+                                    <div class="card">
+                                        <h3>Deep Linking iOS</h3>
+                                        <p>OneLink is AppsFlyer's deep linking solution in iOS apps</p>
+                                        <span>Go to guide
+                                            <img src="https://files.readme.io/3ce9ae5-Line_Arrow.svg"
+                                                class="arrow"></img></span>
+
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://dev.appsflyer.com/hc/docs/unity-plugin">
+                                <div class="slide slide5">
+                                    <div class="card">
+                                        <h3>Unity</h3>
+                                        <p>AppsFlyer's Unity SDK integration</p>
+                                        <span>Go to guide<img src="https://files.readme.io/3ce9ae5-Line_Arrow.svg"
+                                                class="arrow"></img></span>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://dev.appsflyer.com/hc/docs/in-app-events-sdk">
+                            <div class="slide slide6">
+                                <div class="card">
+                                    <h3>In-app events</h3>
+                                    <p>In-app events enables you to log user interactions with your app
+                                    </p>
+                                    <span>Go to guide<img src="https://files.readme.io/3ce9ae5-Line_Arrow.svg"
+                                            class="arrow"></img></span>
+                                </div>
+                            </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a
+                                href="https://dev.appsflyer.com/hc/docs/dl_smart_script_v2">
+                                <div class="slide slide7">
+                                    <div class="card">
+                                        <h3>Smart Script</h3>
+                                        <p>SmartScript is a web-to-app JS tool converting incoming URLs into OneLink
+                                            URLs
+                                        </p>
+                                        <span>Go to guide
+                                            <img src="https://files.readme.io/3ce9ae5-Line_Arrow.svg"
+                                                class="arrow"></img></span>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a
+                                href="https://dev.appsflyer.com/hc/docs/dl_smart_banner_v2">
+                                <div class="slide slide7">
+                                    <div class="card">
+                                        <h3>Smart Banner</h3>
+                                        <p>A web-to-app tool displaying a banner on your brand's mobile website
+                                        </p>
+                                        <span>Go to guide
+                                            <img src="https://files.readme.io/3ce9ae5-Line_Arrow.svg"
+                                                class="arrow"></img></span>
+
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a
+                                href="https://dev.appsflyer.com/hc/docs/c2s-integrations-overview">
+                                <div class="slide slide7">
+                                    <div class="card">
+                                        <h3>Gaming & CTV SDKs</h3>
+                                        <p>AppsFlyer's Gaming and CTV SDK integration (BETA)
+                                        </p>
+                                        <span>Go to guide
+                                            <img src="https://files.readme.io/3ce9ae5-Line_Arrow.svg"
+                                                class="arrow"></img></span>
+
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
-    <svg class="hero-svg" viewBox="0 80 1920 149" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path
-            d="M1920 0.5L-0.000610352 0.5V145.669C-0.000610352 145.669 432.522 245.575 955.02 140.038C1477.52 34.5 1920 145.669 1920 145.669L1920 0.5Z"
-            fill="#F4FCFF" />
-    </svg>
-    <div class="container">
-        <div class="carousel">
-            <div class="nav nav-left">
-                <div class="arrow carousel-arrow-icon-left">
-                    <img src="assets/Line Arrow.svg" class=""></img>
-                </div>
-            </div>
-    
-            <div class="carousel-content">
-                <div class="slide slide-1">
-                    <div class="card">
-                        <h3>Android</h3>    
-                        <p>Protect360's real-time and post-attribution fraud detection ensured Fetch Rewards only paid for legitimate installs. Protect360’s custom </p>
-                        <a href="#">read more <img src="assets/Line Arrow.svg" class=""></img></a>
-                    </div>
-                </div>
-                <div class="slide slide-2">
-                    <div class="card">
-                        <h3>iOS</h3>
-                    </div>
-                </div>
-                <div class="slide slide-3">
-                    <div class="card">
-                        <h3>OneLink - UDL Android</h3>
-                    </div>
-                </div>
-                <div class="slide slide-1">
-                    <div class="card">
-                        <h3>OneLink - UDL iOs</h3>
-                    </div>
-                </div>
-                <div class="slide slide-2">
-                    <div class="card">
-                        <h3>Unity</h3>
-                    </div>
-                </div>
-                <div class="slide slide-3">
-                    <div class="card">
-                        <h3>In-app events</h3>
-                    </div>
-                </div>
-                <div class="slide slide-3">
-                    <div class="card">
-                        <h3>Smart Script</h3>
-                    </div>
-                </div>
-            </div>
-    
-            <div class="nav nav-right">
-                <div class="arrow carousel-arrow-icon-right">
-                    <img src="assets/Line Arrow.svg" class=""></img>
-                </div>
-            </div>
-        </div>
-    </div>
+</div>
+<section id="sdks_section" class="landing-page__cards_wrapper">
     <div class="landing-page__cards">
+        <h3 id="sdk_h">SDKs</h3>
         <div class="landing-page">
             <div class="landing-page__item">
                 <div class="landing-page__item-container">
-                    <img class="landing-page__item-thumbnail" src="https://files.readme.io/42b98f3-sdk_integration.svg">
+                    <img class="landing-page__item-thumbnail"
+                        src="https://files.readme.io/42b98f3-sdk_integration.svg">
                     <div class="landing-page__item-inner">
                         <h2 class="landing-page__item-title">AppsFlyer SDKs</h2>
-                        <div class="landing-page__item-content">AppsFlyer provides SDKs for a wide range of platforms,
-                            enabling quick and easy integration of AppsFlyer features into your app and marketing stack.
+                        <div class="landing-page__item-content">AppsFlyer provides SDKs for a wide range of
+                            platforms,
+                            enabling quick and easy integration of AppsFlyer features into your app and marketing
+                            stack.
                         </div>
-                      <div class="landing-page__sub-item">
-                        <div class="sub-item-header">Native SDKs</div>
-                        <div class="landing-page__item-links">
-                            <a class="landing-page__item-link android" href="https://dev.appsflyer.com/hc/docs/android-sdk">Android SDK</a>
-                            <a class="landing-page__item-link ios" href="https://dev.appsflyer.com/hc/docs/ios-sdk">iOS SDK</a>                    
+                        <div class="landing-page__item-links overview">
+                            <a class="landing-page__item-link link-overview"
+                                href="https://dev.appsflyer.com/hc/docs/getting-started">AppsFlyer SDKs overview</a>
                         </div>
-                      </div>
-                      <div class="landing-page__sub-item">
-                        <div class="sub-item-header">
-                          Plugins
+                        <div class="landing-page__sub-items-container">
+                            <div class="landing-page__sub-item">
+                                    
+                                <div class="sub-item-header">Native SDKs</div>
+                                <div class="landing-page__item-links">
+                                    <a class="landing-page__item-link android"
+                                        href="https://dev.appsflyer.com/hc/docs/android-sdk">Android SDK</a>
+                                    <a class="landing-page__item-link ios"
+                                        href="https://dev.appsflyer.com/hc/docs/ios-sdk">iOS SDK</a>
+                                </div>
+                            </div>
+                            <div class="landing-page__sub-item">
+                                <div class="sub-item-header">
+                                    Multi-platform Plugins
+                                </div>
+                                <div class="landing-page__item-links">
+                                    <a class="landing-page__item-link reactnative" target="_blank"
+                                        href="https://github.com/AppsFlyerSDK/appsflyer-react-native-plugin">React
+                                        Native</a>
+                                    <a class="landing-page__item-link nativescript" target="_blank"
+                                        href="https://github.com/AppsFlyerSDK/appsflyer-nativescript-plugin">NativeScript</a>
+                                    <a class="landing-page__item-link flutter" target="_blank"
+                                        href="https://github.com/AppsFlyerSDK/appsflyer-flutter-plugin">Flutter</a>
+                                    <a class="landing-page__item-link cordova" target="_blank"
+                                        href="https://github.com/AppsFlyerSDK/appsflyer-cordova-plugin">Cordova</a>
+                                    <a class="landing-page__item-link xamarin" target="_blank"
+                                        href="https://github.com/AppsFlyerSDK/XamarinAndroidBinding">Xamarin
+                                        (Android)</a>
+                                    <a class="landing-page__item-link xamarin" target="_blank"
+                                        href="https://github.com/AppsFlyerSDK/XamariniOSBinding">Xamarin (iOS)</a>
+                                    <a class="landing-page__item-link capacitor" target="_blank"
+                                        href="https://github.com/AppsFlyerSDK/appsflyer-capacitor-plugin">
+                                        <div class="landing-page__item-link-inner">Capacitor</div>
+                                    </a>
+                                </div>
+                            </div>
                         </div>
-                        <div class="landing-page__item-links">
-    
-                            <a class="landing-page__item-link unity" href="https://support.appsflyer.com/hc/en-us/articles/360007314277">Unity SDK</a>
-                            <a class="landing-page__item-link reactnative" target="_blank"
-                                href="https://github.com/AppsFlyerSDK/appsflyer-react-native-plugin">React Native SDK</a>
-                            <a class="landing-page__item-link flutter" target="_blank"
-                                href="https://github.com/AppsFlyerSDK/appsflyer-flutter-plugin">Flutter SDK</a>
+                        <div class="landing-page__sub-items-container">
+                            <div class="landing-page__sub-item">
+                                <div class="sub-item-header">Game development</div>
+                                <div class="landing-page__item-links">
+                                    <a class="landing-page__item-link unity"
+                                        href="https://dev.appsflyer.com/hc/docs/unity-plugin">Unity SDK</a>
+                                    <a class="landing-page__item-link unreal"
+                                        href="https://github.com/AppsFlyerSDK/appsflyer-unreal-plugin">Unreal Engine
+                                        SDK</a>
+                                    <a class="landing-page__item-link cocos2d"
+                                        href="https://github.com/AppsFlyerSDK/appsflyer-cocos2dx-plugin">Cocos2d
+                                        SDK</a>
+                                </div>
+                            </div>
+                            <div class="landing-page__sub-item">
+                                <div class="sub-item-header">3rd-party integrations</div>
+                                <div class="landing-page__item-links">
+                                    <a class="landing-page__item-link"
+                                        href="https://github.com/AppsFlyerSDK/appsflyer-adobe-mobile-android-extension">Adobe
+                                        (Android)</a>
+                                    <a class="landing-page__item-link"
+                                        href="https://github.com/AppsFlyerSDK/appsflyer-adobe-mobile-ios-extension">Adobe
+                                        (iOS)</a>
+                                    <a class="landing-page__item-link"
+                                        href="https://github.com/AppsFlyerSDK/appsflyer-segment-android-plugin">Segment
+                                        (Android)</a>
+                                    <a class="landing-page__item-link"
+                                        href="https://github.com/AppsFlyerSDK/segment-appsflyer-ios">Segment
+                                        (iOS)</a>
+                                </div>
+                            </div>
                         </div>
-                        </div>
+
                     </div>
                 </div>
             </div>
@@ -692,14 +1975,20 @@
                     <img class="landing-page__item-thumbnail" src="https://files.readme.io/ebb69c1-onelink.svg">
                     <div class="landing-page__item-inner">
                         <h2 class="landing-page__item-title">OneLink</h2>
-                        <div class="landing-page__item-content">Implement deep linking in your app with OneLink, AppsFlyer's cross-platform deep linking solution.</div>
+                        <div class="landing-page__item-content">Implement deep linking in your app with OneLink,
+                            AppsFlyer's
+                            cross-platform deep linking solution.</div>
                         <div class="landing-page__item-links">
-                            <a class="landing-page__item-link android" href="https://dev.appsflyer.com/hc/docs/android">Android SDK</a>
+                            <a class="landing-page__item-link android"
+                                href="https://dev.appsflyer.com/hc/docs/dl_android_overview">Android
+                                SDK</a>
                             <a class="landing-page__item-link ios"
-                                href="https://dev.appsflyer.com/hc/docs/ios">iOS SDK</a>
+                                href="https://dev.appsflyer.com/hc/docs/dl_ios_overview">iOS SDK</a>
                             <a class="landing-page__item-link webtools"
-                                href="https://dev.appsflyer.com/hc/docs/onelink-smart-script">Web tools</a>
-                          <a class="landing-page__item-link webtools"
+                                href="https://dev.appsflyer.com/hc/docs/dl_smart_script_v2">Smart Script</a>
+                            <a class="landing-page__item-link webtools"
+                                href="https://dev.appsflyer.com/hc/docs/dl_smart_banner_v2">Smart Banner</a>
+                            <a class="landing-page__item-link webtools"
                                 href="https://dev.appsflyer.com/hc/reference/onelink_rest_api">OneLink REST API</a>
                         </div>
                     </div>
@@ -712,75 +2001,60 @@
                     <img class="landing-page__item-thumbnail" src="https://files.readme.io/f210201-app-clips.svg">
                     <div class="landing-page__item-inner">
                         <h2 class="landing-page__item-title">App Clips attribution</h2>
-                        <div class="landing-page__item-content">App Clips enable users with iOS 14 or later to quickly
+                        <div class="landing-page__item-content">App Clips enable users with iOS 14 or later to
+                            quickly
                             access and experience your app. AppsFlyer SDK integration gives you valuable App Clip
                             attribution data.</div>
                         <div class="landing-page__item-links">
                             <a class="landing-page__item-link ios"
-                                href="https://dev.appsflyer.com/hc/docs/app-clip-sdk-integration">SDK integration</a>
+                                href="https://dev.appsflyer.com/hc/docs/app-clip-sdk-integration">SDK
+                                integration</a>
                             <a class="landing-page__item-link"
-                                href="https://dev.appsflyer.com/hc/docs/app-clip-to-full-app-install">Full app install
+                                href="https://dev.appsflyer.com/hc/docs/app-clip-to-full-app-install">Full app
+                                install
                                 configuration</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-      <div class="landing-page">
-            <div class="landing-page__item">
-                <div class="landing-page__item-container">
-                    <img class="landing-page__item-thumbnail" src="https://files.readme.io/7f874b0-validation-rules.svg">
-                    <div class="landing-page__item-inner">
-                        <h2 class="landing-page__item-title">Validation Rules</h2>
-                        <div class="landing-page__item-content">Create, update and remove Validation Rules programmatically. Control your app’s traffic with custom logic and conditions for campaign targeting, or for fraud prevention.</div>
-                        <div class="landing-page__item-links">
-                            <a class="landing-page__item-link"
-                                href="https://dev.appsflyer.com/hc/reference/overview">Validation Rules API</a>
-                        </div>
-                    </div>
-                </div>
+    </div>
+</section>
+<div class="landing-page__footer">
+    <div class="landing-page__footer-inner">
+        <div class="landing-page__footer-content">
+            <div class="landing-page__footer-left">
+                <a class="landing-page__social" target="_blank" href="https://www.facebook.com/AppsFlyer"><img
+                        src="https://cdn.appsflyer.com/kb/devhub/images/facebook-social.svg" /></a>
+                <a class="landing-page__social" target="_blank"
+                    href="https://www.instagram.com/lifeatappsflyer/"><img
+                        src="https://cdn.appsflyer.com/kb/devhub/images/instagram-social.svg" /></a>
+                <a class="landing-page__social" target="_blank"
+                    href="https://www.linkedin.com/company/appsflyerhq/"><img
+                        src="https://cdn.appsflyer.com/kb/devhub/images/linkedin-social.svg" /></a>
+                <a class="landing-page__social" target="_blank" href="https://twitter.com/AppsFlyer"><img
+                        src="https://cdn.appsflyer.com/kb/devhub/images/twitter-social.svg" /></a>
+                <a class="landing-page__social" target="_blank" href="https://www.youtube.com/c/Appsflyer"><img
+                        src="https://cdn.appsflyer.com/kb/devhub/images/youtube-social.svg" /></a>
+            </div>
+            <div class="landing-page__footer-right">
+                <svg width="139" height="42" viewBox="0 0 139 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd"
+                        d="M23.5554 0.742258L16.2353 10.3637C15.7351 11.0209 15.669 12.1987 16.0866 12.9979L22.2063 24.6935C22.6237 25.4911 23.3678 25.6062 23.8672 24.9506L31.1882 15.3276C31.6875 14.6714 31.7545 13.4922 31.3359 12.694L25.2169 0.997764C24.9742 0.536122 24.6236 0.303056 24.2739 0.3162C24.02 0.326459 23.7661 0.465914 23.5554 0.742258ZM43.8947 10.5211C40.3885 10.5211 37.5473 13.432 37.5473 17.0213V29.3629H39.9918V17.0213H39.9956C39.9956 14.8157 41.7407 13.0278 43.8956 13.0278C46.0492 13.0278 47.7943 14.8157 47.7943 17.0213H47.7978V18.4341H41.5178V20.9366H47.7978V29.3629H50.2435V17.0213C50.2435 13.432 47.4011 10.5211 43.8947 10.5211ZM101.876 29.3629H104.32V10.5211H101.876V29.3629ZM58.0856 16.4746C54.5808 16.4746 51.7393 19.3846 51.7393 22.9745H51.7349V34.9752H54.1794V22.9745H54.1913C54.1913 20.7541 55.9492 18.954 58.116 18.954C60.2844 18.954 62.0417 20.7541 62.0417 22.9745C62.0417 25.1942 60.2844 26.9943 58.116 26.9943C56.8935 26.9943 55.8008 26.4208 55.0814 25.5225V28.6998C55.9758 29.1932 56.9999 29.4743 58.0856 29.4743C61.5927 29.4743 64.4348 26.5634 64.4348 22.9745C64.4348 19.3846 61.5927 16.4746 58.0856 16.4746ZM65.5152 22.9745C65.5152 19.3846 68.3561 16.4746 71.8622 16.4746C75.3675 16.4746 78.2096 19.3846 78.2096 22.9745C78.2096 26.5634 75.3675 29.4743 71.8622 29.4743C70.7768 29.4743 69.7509 29.1932 68.857 28.6998V25.5225C69.5768 26.4208 70.6688 26.9943 71.8917 26.9943C74.061 26.9943 75.8183 25.1942 75.8183 22.9745C75.8183 20.7541 74.061 18.954 71.8917 18.954C69.7242 18.954 67.9676 20.7541 67.9676 22.9745H67.9547V34.9752H65.5109V22.9745H65.5152ZM97.617 13.0262C95.4612 13.0262 93.7142 14.8153 93.7142 17.0213V18.6903H100.469V21.1934H93.7142V29.3629H91.2694V17.0213C91.2694 13.432 94.1115 10.5217 97.6164 10.5211H100.695V13.0249H97.617V13.0262ZM114.554 16.5561V24.4242H114.553C114.522 26.0073 113.263 27.2813 111.707 27.2813C110.155 27.2813 108.894 26.0073 108.865 24.4242H108.862V16.5561H106.418V24.4322H106.422C106.451 26.9626 108.176 29.0717 110.487 29.6328V34.975H112.931V29.6328C115.241 29.0717 116.967 26.9626 116.996 24.4322H116.998V16.5561H114.554ZM126.468 26.4342C127.417 25.8745 128.046 24.9666 128.295 23.9593H130.789C130.508 25.8402 129.426 27.5787 127.69 28.6049C124.653 30.3992 120.773 29.3336 119.02 26.2252C117.267 23.1168 118.306 19.1416 121.343 17.3466C124.378 15.5516 128.262 16.6166 130.015 19.7253C130.224 20.0963 130.391 20.479 130.522 20.8698L125.385 23.9064L122.845 25.409L121.622 23.2406L127.112 19.9953C125.891 18.8784 124.061 18.6312 122.566 19.5154C120.7 20.6195 120.06 23.0614 121.138 24.974C122.215 26.8843 124.601 27.5393 126.468 26.4342ZM138.452 16.4746C136.978 16.4746 135.626 16.9895 134.551 17.8509V16.5336H132.105V29.3631H134.551V22.9745H134.551C134.551 20.7676 136.298 18.9787 138.452 18.9787V18.9774H138.947V16.4746H138.452ZM81.4076 20.5092L87.4876 23.4124C89.0148 24.1408 89.6747 25.9982 88.9622 27.5604C88.4453 28.696 87.3476 29.3592 86.2002 29.3612V29.3628H79.0921V26.8612H86.1999V26.8577C86.4269 26.8593 86.6463 26.7282 86.7478 26.5035C86.8887 26.1944 86.7587 25.8277 86.4563 25.6841L86.4549 25.6831L86.4541 25.6828L86.4547 25.6812L80.3742 22.7773C78.8576 22.0438 78.2011 20.1934 78.9115 18.635C79.4287 17.4995 80.5266 16.8365 81.6747 16.8353V16.8321H88.6118V19.3352H81.6747V19.34C81.4487 19.341 81.2314 19.4702 81.1299 19.6939C80.9919 19.9982 81.1165 20.3575 81.4095 20.5069L81.4076 20.5092ZM0.173117 13.5156L6.1967 25.2647C6.60777 26.0649 7.62151 26.7148 8.45899 26.7128L20.7463 26.6862C21.5853 26.6843 21.9313 26.0332 21.5205 25.2311L15.4966 13.4829C15.0856 12.6811 14.0721 12.0329 13.234 12.0348L0.946729 12.0611C0.93718 12.0611 0.927866 12.0613 0.918552 12.0614L0.918391 12.0615C0.909131 12.0616 0.899869 12.0618 0.890375 12.0618C0.0932828 12.0925 -0.228873 12.7318 0.173117 13.5156ZM27.1599 34.1747L23.5122 27.2052C23.268 26.7368 23.4602 26.3531 23.9417 26.3348H23.9668L31.2881 26.2559C31.7865 26.2505 32.3942 26.6313 32.6428 27.1071L36.2892 34.0759C36.5371 34.5517 36.3355 34.9415 35.8355 34.9467L28.5145 35.0258C28.0149 35.0316 27.4078 34.6501 27.1599 34.1747ZM17.4787 33.0548L21.8414 27.3218C21.9657 27.1564 22.1178 27.0727 22.2684 27.0673C22.4776 27.0602 22.687 27.199 22.8307 27.4744L26.4777 34.4439C26.7257 34.9181 26.6859 35.6211 26.3885 36.0132L22.0267 41.7456C21.7287 42.137 21.286 42.0687 21.0365 41.593L17.3898 34.6238C17.1415 34.1487 17.18 33.4463 17.4787 33.0548Z"
+                        fill="#000000" />
+                </svg>
+            </div>
+        </div>
+        <div class="landing-page__footer-bottom">
+            <div class="landing-page__footer-bottom footer-bottom-left">
+                <a target="_blank" href="https://www.appsflyer.com/privacy-policy/">Privacy policy</a>
+                <a target="_blank" href="https://www.appsflyer.com/terms-of-use/">Terms of use</a>
+                <a target="_blank" href="https://www.appsflyer.com/product/gdpr-ccpa">GDPR & CCPA</a>
+                <a target="_blank" href="https://www.appsflyer.com/cookie-policy">Cookies</a>
+            </div>
+            <div class="landing-page__footer-bottom footer-bottom-right">
+                <div id="copyrights">.</div>
             </div>
         </div>
     </div>
-    </div>
-    <div class="landing-page__footer">
-        <div class="landing-page__footer-inner">
-            <div class="landing-page__footer-content">
-                <div class="landing-page__footer-left">
-                    <a class="landing-page__social" target="_blank" href="https://www.facebook.com/AppsFlyer"><img
-                            src="https://cdn.appsflyer.com/kb/devhub/images/facebook-social.svg" /></a>
-                    <a class="landing-page__social" target="_blank" href="https://www.instagram.com/lifeatappsflyer/"><img
-                            src="https://cdn.appsflyer.com/kb/devhub/images/instagram-social.svg" /></a>
-                    <a class="landing-page__social" target="_blank"
-                        href="https://www.linkedin.com/company/appsflyerhq/"><img
-                            src="https://cdn.appsflyer.com/kb/devhub/images/linkedin-social.svg" /></a>
-                    <a class="landing-page__social" target="_blank" href="https://twitter.com/AppsFlyer"><img
-                            src="https://cdn.appsflyer.com/kb/devhub/images/twitter-social.svg" /></a>
-                    <a class="landing-page__social" target="_blank" href="https://www.youtube.com/c/Appsflyer"><img
-                            src="https://cdn.appsflyer.com/kb/devhub/images/youtube-social.svg" /></a>
-                </div>
-                <div class="landing-page__footer-right">
-                    <svg width="139" height="42" viewBox="0 0 139 42" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" clip-rule="evenodd"
-                            d="M23.5554 0.742258L16.2353 10.3637C15.7351 11.0209 15.669 12.1987 16.0866 12.9979L22.2063 24.6935C22.6237 25.4911 23.3678 25.6062 23.8672 24.9506L31.1882 15.3276C31.6875 14.6714 31.7545 13.4922 31.3359 12.694L25.2169 0.997764C24.9742 0.536122 24.6236 0.303056 24.2739 0.3162C24.02 0.326459 23.7661 0.465914 23.5554 0.742258ZM43.8947 10.5211C40.3885 10.5211 37.5473 13.432 37.5473 17.0213V29.3629H39.9918V17.0213H39.9956C39.9956 14.8157 41.7407 13.0278 43.8956 13.0278C46.0492 13.0278 47.7943 14.8157 47.7943 17.0213H47.7978V18.4341H41.5178V20.9366H47.7978V29.3629H50.2435V17.0213C50.2435 13.432 47.4011 10.5211 43.8947 10.5211ZM101.876 29.3629H104.32V10.5211H101.876V29.3629ZM58.0856 16.4746C54.5808 16.4746 51.7393 19.3846 51.7393 22.9745H51.7349V34.9752H54.1794V22.9745H54.1913C54.1913 20.7541 55.9492 18.954 58.116 18.954C60.2844 18.954 62.0417 20.7541 62.0417 22.9745C62.0417 25.1942 60.2844 26.9943 58.116 26.9943C56.8935 26.9943 55.8008 26.4208 55.0814 25.5225V28.6998C55.9758 29.1932 56.9999 29.4743 58.0856 29.4743C61.5927 29.4743 64.4348 26.5634 64.4348 22.9745C64.4348 19.3846 61.5927 16.4746 58.0856 16.4746ZM65.5152 22.9745C65.5152 19.3846 68.3561 16.4746 71.8622 16.4746C75.3675 16.4746 78.2096 19.3846 78.2096 22.9745C78.2096 26.5634 75.3675 29.4743 71.8622 29.4743C70.7768 29.4743 69.7509 29.1932 68.857 28.6998V25.5225C69.5768 26.4208 70.6688 26.9943 71.8917 26.9943C74.061 26.9943 75.8183 25.1942 75.8183 22.9745C75.8183 20.7541 74.061 18.954 71.8917 18.954C69.7242 18.954 67.9676 20.7541 67.9676 22.9745H67.9547V34.9752H65.5109V22.9745H65.5152ZM97.617 13.0262C95.4612 13.0262 93.7142 14.8153 93.7142 17.0213V18.6903H100.469V21.1934H93.7142V29.3629H91.2694V17.0213C91.2694 13.432 94.1115 10.5217 97.6164 10.5211H100.695V13.0249H97.617V13.0262ZM114.554 16.5561V24.4242H114.553C114.522 26.0073 113.263 27.2813 111.707 27.2813C110.155 27.2813 108.894 26.0073 108.865 24.4242H108.862V16.5561H106.418V24.4322H106.422C106.451 26.9626 108.176 29.0717 110.487 29.6328V34.975H112.931V29.6328C115.241 29.0717 116.967 26.9626 116.996 24.4322H116.998V16.5561H114.554ZM126.468 26.4342C127.417 25.8745 128.046 24.9666 128.295 23.9593H130.789C130.508 25.8402 129.426 27.5787 127.69 28.6049C124.653 30.3992 120.773 29.3336 119.02 26.2252C117.267 23.1168 118.306 19.1416 121.343 17.3466C124.378 15.5516 128.262 16.6166 130.015 19.7253C130.224 20.0963 130.391 20.479 130.522 20.8698L125.385 23.9064L122.845 25.409L121.622 23.2406L127.112 19.9953C125.891 18.8784 124.061 18.6312 122.566 19.5154C120.7 20.6195 120.06 23.0614 121.138 24.974C122.215 26.8843 124.601 27.5393 126.468 26.4342ZM138.452 16.4746C136.978 16.4746 135.626 16.9895 134.551 17.8509V16.5336H132.105V29.3631H134.551V22.9745H134.551C134.551 20.7676 136.298 18.9787 138.452 18.9787V18.9774H138.947V16.4746H138.452ZM81.4076 20.5092L87.4876 23.4124C89.0148 24.1408 89.6747 25.9982 88.9622 27.5604C88.4453 28.696 87.3476 29.3592 86.2002 29.3612V29.3628H79.0921V26.8612H86.1999V26.8577C86.4269 26.8593 86.6463 26.7282 86.7478 26.5035C86.8887 26.1944 86.7587 25.8277 86.4563 25.6841L86.4549 25.6831L86.4541 25.6828L86.4547 25.6812L80.3742 22.7773C78.8576 22.0438 78.2011 20.1934 78.9115 18.635C79.4287 17.4995 80.5266 16.8365 81.6747 16.8353V16.8321H88.6118V19.3352H81.6747V19.34C81.4487 19.341 81.2314 19.4702 81.1299 19.6939C80.9919 19.9982 81.1165 20.3575 81.4095 20.5069L81.4076 20.5092ZM0.173117 13.5156L6.1967 25.2647C6.60777 26.0649 7.62151 26.7148 8.45899 26.7128L20.7463 26.6862C21.5853 26.6843 21.9313 26.0332 21.5205 25.2311L15.4966 13.4829C15.0856 12.6811 14.0721 12.0329 13.234 12.0348L0.946729 12.0611C0.93718 12.0611 0.927866 12.0613 0.918552 12.0614L0.918391 12.0615C0.909131 12.0616 0.899869 12.0618 0.890375 12.0618C0.0932828 12.0925 -0.228873 12.7318 0.173117 13.5156ZM27.1599 34.1747L23.5122 27.2052C23.268 26.7368 23.4602 26.3531 23.9417 26.3348H23.9668L31.2881 26.2559C31.7865 26.2505 32.3942 26.6313 32.6428 27.1071L36.2892 34.0759C36.5371 34.5517 36.3355 34.9415 35.8355 34.9467L28.5145 35.0258C28.0149 35.0316 27.4078 34.6501 27.1599 34.1747ZM17.4787 33.0548L21.8414 27.3218C21.9657 27.1564 22.1178 27.0727 22.2684 27.0673C22.4776 27.0602 22.687 27.199 22.8307 27.4744L26.4777 34.4439C26.7257 34.9181 26.6859 35.6211 26.3885 36.0132L22.0267 41.7456C21.7287 42.137 21.286 42.0687 21.0365 41.593L17.3898 34.6238C17.1415 34.1487 17.18 33.4463 17.4787 33.0548Z"
-                            fill="#000000" />
-                    </svg>
-                </div>
-            </div>
-            <div class="landing-page__footer-bottom">
-                <div class="landing-page__footer-bottom footer-bottom-left">
-                    <a target="_blank" href="https://www.appsflyer.com/privacy-policy/">Privacy policy</a>
-                    <a target="_blank" href="https://www.appsflyer.com/terms-of-use/">Terms of use</a>
-                    <a target="_blank" href="https://www.appsflyer.com/product/gdpr-ccpa">GDPR & CCPA</a>
-                    <a target="_blank" href="https://www.appsflyer.com/cookie-policy">Cookies</a>
-                </div>
-                <div class="landing-page__footer-bottom footer-bottom-right">
-                    <div id="copyrights">.</div>
-                </div>
-            </div>
-        </div>
-    </div>    
-    <script src="script.js"></script>
-</body>
-
-</html>
+</div>

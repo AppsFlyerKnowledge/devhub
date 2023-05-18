@@ -1,4 +1,275 @@
 <style>
+    ul.glide__slides {
+        list-style: none;
+    }
+
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        font-family: Gilroy;
+    }
+
+    .markdown-body a[href*=http]:not([href*="dev.appsflyer.com"]):not(.landing-page__social):after {
+        display: none;
+    }
+
+    .carousel-container {
+        background-image: url("https://files.readme.io/e0be18e-carousel_bg_vector2.svg"), url("https://files.readme.io/8d7d0ee-carousel_bg_vector1.svg");
+        background-repeat: no-repeat;
+        background-position-y: top, bottom;
+        background-position-x: 86%, 10%;
+        background-size: 360px;
+        width: 80%;
+        height: 650px;
+        position: relative;
+        margin: 0px 10%;
+        margin-top: -40px;
+    }
+
+    .carousel-container-center {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .landing-page__hero h3 {
+        font-size: 48px !important;
+    }
+
+    .carousel-container-center>h3 {
+        max-width: 1500px;
+        width: 100%;
+        font-size: 36px !important;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-left: 50px;
+        margin-bottom: 20px;
+    }
+
+
+    .carousel {
+        margin: 0 auto;
+        /* padding: 0 30px; */
+        /* margin-bottom: 40px; */
+        max-width: 1400px;
+    }
+
+    .carousel-content {
+        transition: width .4s;
+    }
+
+    .slide {
+        background-color: transparent;
+        transition: left .4s cubic-bezier(.47, .13, .15, .89);
+    }
+
+    .card {
+        position: relative;
+        /* Shadow L */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        padding: 20px 10px;
+        margin: 16px;
+        background: #FFFFFF;
+        /* Shadow L */
+        box-shadow: 0px 1px 3px rgba(0, 51, 99, 0.15);
+        border-radius: 10px;
+        color: #220D4E;
+        max-width: 310px;
+        animation: 0.3s cubic-bezier(0.165, 0.84, 0.44, 1) homeTiles;
+        transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+        transform: scale(0.95, 0.95) translateZ(0);
+    }
+
+    .card:hover {
+        transform: scale(1, 1) translateZ(0);
+        cursor: pointer;
+    }
+
+    .card h3 {
+        margin: 0px;
+        font-size: 1.5em;
+    }
+
+    .card p {
+        font-size: 1.1em;
+        text-align: center;
+        letter-spacing: 0.5px;
+        line-height: 1.75em;
+        height: 80px;
+        margin-top: 10px;
+    }
+
+    .card span {
+        color: black !important;
+        display: block;
+        font-weight: 600;
+        font-size: 1.1em;
+        margin-top: 10px;
+        margin-bottom: 0;
+        text-decoration: none !important;
+    }
+
+    .card a.cookbook {
+        top: 75%;
+    }
+
+    img.arrow {
+        width: 15px;
+        position: absolute;
+        margin: 8px 3px;
+    }
+
+    .carousel-arrow-icon {
+        position: absolute;
+        cursor: pointer;
+        top: 9rem;
+        margin-left: 5px;
+        margin-top: 2px;
+        width: 50px;
+        height: 50px;
+        background: #FFFFFF;
+        box-shadow: 0px 31.4901px 56.6821px 2.9232px rgb(25 20 51 / 10%);
+        border-radius: 50%;
+        border: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .carousel-arrow-icon-left {
+        left: -3rem;
+        rotate: 180deg;
+    }
+
+    .carousel-arrow-icon-right {
+        right: -3rem;
+    }
+
+    .carousel__navigation-button {
+        width: 5px !important;
+        height: 13px;
+        background-color: #00c2ff;
+        margin: 0px 2px;
+        border: 1px solid #333;
+        border-radius: 50%;
+        /* transition: transform 0.1s; */
+    }
+
+
+    .glide__bullet.carousel__navigation-button.glide__bullet--active {
+        background-color: #333;
+        transition: 0.3s;
+    }
+
+    .carousel__nav_bottom {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 20px;
+    }
+
+
+    /* loading spinner */
+    .lds-dual-ring {
+        position: absolute;
+        width: 80px;
+    }
+
+    .lds-dual-ring:after {
+        content: " ";
+        display: block;
+        width: 64px;
+        height: 64px;
+        margin: 8px;
+        border-radius: 50%;
+        border: 6px solid #00c2ff;
+        border-color: #00c2ff transparent #00c2ff transparent;
+        animation: lds-dual-ring 1.2s linear infinite;
+    }
+
+    @keyframes lds-dual-ring {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    .actions {
+        display: flex;
+        z-index: 2;
+        margin-top: 10px;
+    }
+
+    .action {
+        cursor: pointer;
+        border-radius: 8px;
+        margin: 0;
+        margin-right: 20px;
+        margin-top: 20px;
+        padding: 18px;
+        font-size: 0.9em;
+    }
+
+    .primary-action {
+        background: #220D4E;
+        color: white;
+    }
+
+    .text-action {
+        color: #220D4E;
+        background-color: transparent;
+        border: gainsboro;
+        padding: 18px 9px;
+    }
+
+    .text-action .arrow {
+        margin: 0 3px;
+    }
+
+    .primary-action:hover {
+        color: #220D4E;
+        background-color: transparent;
+        transition: 0.3s;
+    }
+
+    .primary-action-outline {
+        border: 2px solid #220D4E;
+        border-radius: 8px;
+        background-color: transparent;
+        color: #220D4E;
+    }
+
+    .primary-action-outline:hover {
+        background-color: #220D4E !important;
+        color: white;
+        transition: 0.3s;
+    }
+
+    .carousel-view-more {
+        display: flex;
+        margin: 0 auto;
+        padding: 0 30px;
+        justify-content: center;
+    }
+
+    .primary-action-outline img {
+        width: 15px;
+        padding: 0px 5px;
+        position: absolute;
+        margin-top: 0;
+    }
+
+    /* ===================================================================== */
+
     .hub-is-home #hub-landing-top {
         display: none;
 
@@ -36,13 +307,14 @@
     /* LANDING PAGE - HERO SECTION */
     .landing-page__hero {
         display: flex;
-        width: 100%;
+        /* width: 100%; */
         background: #f4fcff;
         justify-content: space-around;
-        max-height: 250px;
+        max-height: 360px;
         padding-left: 4em;
         padding-right: 4em;
         padding-top: 16px;
+        margin-top: -50px;
     }
 
     @media (max-width: 600px) {
@@ -61,28 +333,31 @@
         display: flex;
         flex-direction: column;
         height: 100%;
-        justify-content: center;
+        justify-content: flex-start;
         max-width: none;
+        z-index: 10;
+        position: relative;
+        padding-top: 50px;
     }
 
     .landing-page__hero-inner-container {
         display: flex;
-        max-width: 1100px;
+        max-width: 1500px;
     }
 
 
     .landing-page__hero-right {
         display: flex;
-        width: 100%;
-        justify-content: center;
+        width: 40%;
+        justify-content: flex-end;
         align-items: center;
     }
 
     .landing-page__hero-image {
-        height: 500px;
-        padding-top: 64px;
+        height: 350px;
         width: auto;
         z-index: 2;
+        margin-top: -50px;
     }
 
     @media (max-width: 1000px) {
@@ -105,7 +380,9 @@
 
     .landing-page__hero-title {
         color: black;
-        font-size: 48px;
+        font-size: 48px !important;
+        margin-top: 16px !important;
+        margin-bottom: 20px;
         max-width: 400px;
         padding-top: 0;
     }
@@ -135,12 +412,57 @@
     .landing-page__hero-content {
         z-index: 2;
         line-height: 1.5;
+        font-size: 1.2em;
+        max-width: 64%;
     }
 
     @media (max-width: 600px) {
         .landing-page__hero-content {
             padding-top: 4px;
         }
+    }
+
+    .landing-page__cards_wrapper {
+        display: flex;
+        justify-content: center;
+    }
+
+    .landing-page__cards h3 {
+        max-width: 1500px;
+        width: 80%;
+        font-size: 36px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 450px;
+        margin-bottom: 40px;
+        margin-left: 50px;
+    }
+
+
+    /* LANDING PAGE - CARD STRIP*/
+    .landing-page {
+        max-width: 1500px;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-left: 10px;
+        margin-right: 10px;
+        margin-bottom: 20px;
+        background: #FFFFFF;
+        box-shadow: 0px 0px 20px 2px rgb(0 0 0 / 10%);
+        border-radius: 8px;
+    }
+
+    #sdks_section {
+        background-image: url(https://files.readme.io/d7ac204-wave_bg.svg);
+        background-repeat: no-repeat;
+        background-position-y: 40px;
+        background-size: 100% 115%;
+        min-height: 2000px;
+        margin-bottom: -250px;
+        margin-top: -300px;
     }
 
     /* LANDING PAGE - CARD STRIPS CONTAINER */
@@ -150,11 +472,12 @@
         justify-content: center;
         align-items: center;
         margin-top: 4px;
+        width: 1500px;
     }
 
     /* LANDING PAGE - CARD STRIP*/
     .landing-page {
-        max-width: 1100px;
+        max-width: 1300px;
         width: 100%;
         display: flex;
         justify-content: space-between;
@@ -169,8 +492,8 @@
         margin-left: 18px;
         margin-right: 18px;
         text-align: center;
-        background: #FFFFFF;
-        box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.1);
+        /* background: #FFFFFF; */
+        /* box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.1); */
         border-radius: 8px;
         padding-top: 16px;
         padding-right: 16px;
@@ -194,14 +517,28 @@
         padding-top: 4px;
         padding-bottom: 8px;
     }
-  
-  .landing-page__item-inner .landing-page__sub-item {
-    
-  }
-  
-  .landing-page__item-inner .landing-page__sub-item .sub-item-header{
-    font-weight: 500;
-  }
+
+    .landing-page__item-inner .landing-page__sub-items-container {
+        display: flex;
+        justify-content: space-between;
+        padding-right: 32px;
+    }
+
+    .landing-page__item-inner .landing-page__sub-item {
+        padding-top: 16px;
+        padding-bottom: 16px;
+        margin-right: 32px;
+        margin-left: 0;
+        width: 500px;
+
+    }
+
+    .sub-item-header {
+        font-weight: 700;
+        position: relative;
+        padding-left: 8px;
+        background: rgba(0, 0, 0, 0.05)
+    }
 
     .landing-page .landing-page__item .landing-page__item-container .landing-page__item-thumbnail {
         width: 80px;
@@ -240,6 +577,7 @@
         display: flex;
         flex-wrap: wrap;
         flex: 0 1 50%;
+        max-width: 500px;
         justify-content: flex-start;
         margin-top: 16px;
         margin-bottom: 8px;
@@ -249,11 +587,11 @@
         display: flex;
         align-items: center;
         margin: 2px;
+        margin-left: 4px;
         margin-right: 16px;
-	      border-bottom: solid 1px black;
+        border-bottom: solid 1px black;
         color: #434446;
-      	text-decoration: none;
-
+        text-decoration: none;
     }
 
     .landing-page__item-link:before {
@@ -266,11 +604,18 @@
         margin-left: 4px;
         margin-right: 8px;
     } */
-  
+
     .landing-page__item-link:hover {
         color: grey;
     }
 
+    .landing-page__item-link.link-overview:before {
+        background-image: url("https://files.readme.io/d92c4b3-AF_Logo.svg");
+        background-size: 18px;
+        width: 18px;
+        height: 20px;
+        content: "";
+    }
 
     .landing-page__item-link.ios:before {
         content: url("https://files.readme.io/19fdc72-apple-icon.svg");
@@ -288,12 +633,32 @@
         content: url("https://files.readme.io/59acdf6-unity-icon.svg");
     }
 
+    .landing-page__item-link.unreal:before {
+        content: url("https://files.readme.io/186b6c4-unrealengine-icon.svg");
+    }
+
     .landing-page__item-link.flutter:before {
         content: url("https://files.readme.io/1f70175-flutter-icon.svg");
     }
 
     .landing-page__item-link.reactnative:before {
         content: url("https://files.readme.io/3e1288d-reactnative-icon.svg");
+    }
+
+    .landing-page__item-link.nativescript:before {
+        content: url("https://files.readme.io/e49cea6-nativescript-icon.svg");
+    }
+
+    .landing-page__item-link.cordova:before {
+        content: url("https://files.readme.io/5f757d6-apache_cordova-icon.svg");
+    }
+
+    .landing-page__item-link.xamarin:before {
+        content: url("https://files.readme.io/00bb794-xamarin-icon.svg");
+    }
+
+    .landing-page__item-link.capacitor:before {
+        content: url("https://files.readme.io/ad0d405-capacitor-icon.svg");
     }
 
     .landing-page__item-link:hover.webtools:before {
@@ -304,11 +669,35 @@
         opacity: 0.5;
     }
 
+    .landing-page__item-link:hover.link-overview:before {
+        opacity: 0.5;
+    }
+
     .landing-page__item-link:hover.unity:before {
         opacity: 0.5;
     }
 
+    .landing-page__item-link:hover.unreal:before {
+        opacity: 0.5;
+    }
+
     .landing-page__item-link:hover.reactnative:before {
+        opacity: 0.5;
+    }
+
+    .landing-page__item-link:hover.nativescript:before {
+        opacity: 0.5;
+    }
+
+    .landing-page__item-link:hover.cordova:before {
+        opacity: 0.5;
+    }
+
+    .landing-page__item-link:hover.xamarin:before {
+        opacity: 0.5;
+    }
+
+    .landing-page__item-link:hover.capacitor:before {
         opacity: 0.5;
     }
 
@@ -320,6 +709,22 @@
     .landing-page__item-link:hover.android:before {
         content: url("https://files.readme.io/8332104-android-icon-hover.svg");
     }
+
+    .landing-page__item-link-inner.new:after {
+        position: relative;
+        content: "New";
+        font-weight: 700;
+        background: #220d4e;
+        color: white;
+        border-radius: 4px;
+        font-size: 8px;
+        vertical-align: super;
+        margin-left: 4px;
+        line-height: 1.5;
+        padding-left: 2px;
+        padding-right: 2px;
+    }
+
 
     .landing-page__item-link[href*="http"]:not([href*="dev.appsflyer.com"]):after {
         font-family: 'FontAwesome';
@@ -334,24 +739,23 @@
         padding-right: 0px;
         font-size: 10px;
         content: "\f08e";
-	      border: none;
+        border: none;
     }
 
     /* LANDING PAGE - FOOTER */
     .landing-page__footer {
         display: flex;
         flex-direction: column;
-        width: 100%;
+        /* width: 100%; */
         align-items: center;
-        margin-top: 64px;
-        margin-bottom: 64px;
+        margin-top: 200px;
         padding-left: 16px;
         padding-right: 16px;
     }
 
     .landing-page__footer-inner {
         width: 100%;
-        max-width: 1100px;
+        max-width: 1500px;
     }
 
     .landing-page__footer-content {
@@ -439,7 +843,7 @@
     .landing-page__social:hover {
         opacity: 50%;
     }
-  
+
     /* top level  */
     ul.smt-menu {
         position: fixed;
@@ -492,10 +896,6 @@
         width: 13px;
         background: url(bullet_arrow_down.png) no-repeat;
     }
-
-    /* hover state for button which opens menu */
-    ul.smt-menu li:hover .smt-trigger-link,
-    ul.smt-menu li.sfhover .smt-trigger-link {}
 
     /* triggers has-layout for ie6 */
     * html .smt-trigger-link,
@@ -553,26 +953,61 @@
         color: #000 !important;
     }
 
-    /* hover state for name of language in trigger */
-    ul.smt-menu li:hover span.smt-word,
-    ul.smt-menu li.sfhover span.smt-word {}
-
     /* hover state for the world "language" in trigger */
     ul.smt-menu li:hover span.smt-lang,
     ul.smt-menu li.sfhover span.smt-lang {
         color: #000 !important;
     }
 
+    .slides {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .slides li {
+        list-style: none;
+        width: 340px;
+    }
+
+    .slides li a {
+        text-decoration: none !important;
+    }
+
+    .overview {
+        margin-bottom: 0;
+    }
+
+    .link-overview {
+        margin-bottom: 20px !important;
+    }
 </style>
+
 <div class="landing-page__hero">
     <div class="landing-page__hero-inner-container">
         <div class="landing-page__left">
             <div class="landing-page__hero-inner">
-                <h3 class="landing-page__hero-title">AppsFlyer developer hub</h3>
+                <h3 class="landing-page__hero-title">AppsFlyer Developer Hub</h3>
                 <div class="landing-page__hero-content">
-                    Welcome to the AppsFlyer developer hub. Here you’ll find comprehensive guides and documentation to
-                    help developers work with AppsFlyer as quickly as possible. Let’s jump right in!
+                    Welcome to the AppsFlyer developer hub. Here you'll find comprehensive guides and documentation
+                    to
+                    help developers work with AppsFlyer as quickly as possible. Let's jump right in!
                 </div>
+                <div class="actions">
+                    <a id="go_to_sdks" href="#sdk_h"><button class="action primary-action">AppsFlyer
+                            SDKs</button></a>
+                    <a id="go_to_api"
+                        href="https://dev.appsflyer.com/hc/reference/api-reference-overview"><button
+                            class="action primary-action-outline">API
+                            reference</button></a>
+                    <a href="https://support.appsflyer.com/hc/en-us"><button class="action text-action">Marketer
+                            Help
+                            Center<img class="arrow"
+                                src="https://files.readme.io/3ce9ae5-Line_Arrow.svg"></img></button></a>
+                </div>
+
             </div>
         </div>
         <div class="landing-page__hero-right">
@@ -585,104 +1020,315 @@
         d="M1920 0.5L-0.000610352 0.5V145.669C-0.000610352 145.669 432.522 245.575 955.02 140.038C1477.52 34.5 1920 145.669 1920 145.669L1920 0.5Z"
         fill="#F4FCFF" />
 </svg>
-<div class="landing-page__cards">
-    <div class="landing-page">
-        <div class="landing-page__item">
-            <div class="landing-page__item-container">
-                <img class="landing-page__item-thumbnail" src="https://files.readme.io/42b98f3-sdk_integration.svg">
-                <div class="landing-page__item-inner">
-                    <h2 class="landing-page__item-title">AppsFlyer SDKs</h2>
-                    <div class="landing-page__item-content">AppsFlyer provides SDKs for a wide range of platforms,
-                        enabling quick and easy integration of AppsFlyer features into your app and marketing stack.
-                    </div>
-                  <div class="landing-page__sub-item">
-                    <div class="sub-item-header">Native SDKs</div>
-                    <div class="landing-page__item-links">
-                        <a class="landing-page__item-link android" href="https://dev.appsflyer.com/hc/docs/android-sdk">Android SDK</a>
-                        <a class="landing-page__item-link ios" href="https://dev.appsflyer.com/hc/docs/ios-sdk">iOS SDK</a>                    
-                    </div>
-                  </div>
-                  <div class="landing-page__sub-item">
-                    <div class="sub-item-header">
-                      Plugins
-                    </div>
-                    <div class="landing-page__item-links">
 
-                        <a class="landing-page__item-link unity" href="https://support.appsflyer.com/hc/en-us/articles/360007314277">Unity SDK</a>
-                        <a class="landing-page__item-link reactnative" target="_blank"
-                            href="https://github.com/AppsFlyerSDK/appsflyer-react-native-plugin">React Native SDK</a>
-                        <a class="landing-page__item-link flutter" target="_blank"
-                            href="https://github.com/AppsFlyerSDK/appsflyer-flutter-plugin">Flutter SDK</a>
-                    </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="landing-page">
-        <div class="landing-page__item">
-            <div class="landing-page__item-container">
-                <img class="landing-page__item-thumbnail" src="https://files.readme.io/ebb69c1-onelink.svg">
-                <div class="landing-page__item-inner">
-                    <h2 class="landing-page__item-title">OneLink</h2>
-                    <div class="landing-page__item-content">Implement deep linking in your app with OneLink, AppsFlyer's cross-platform deep linking solution.</div>
-                    <div class="landing-page__item-links">
-                        <a class="landing-page__item-link android" href="https://dev.appsflyer.com/hc/docs/android">Android SDK</a>
-                        <a class="landing-page__item-link ios"
-                            href="https://dev.appsflyer.com/hc/docs/ios">iOS SDK</a>
-                        <a class="landing-page__item-link webtools"
-                            href="https://dev.appsflyer.com/hc/docs/onelink-smart-script">Web tools</a>
-                      <a class="landing-page__item-link webtools"
-                            href="https://dev.appsflyer.com/hc/reference/onelink_rest_api">OneLink REST API</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="landing-page">
-        <div class="landing-page__item">
-            <div class="landing-page__item-container">
-                <img class="landing-page__item-thumbnail" src="https://files.readme.io/f210201-app-clips.svg">
-                <div class="landing-page__item-inner">
-                    <h2 class="landing-page__item-title">App Clips attribution</h2>
-                    <div class="landing-page__item-content">App Clips enable users with iOS 14 or later to quickly
-                        access and experience your app. AppsFlyer SDK integration gives you valuable App Clip
-                        attribution data.</div>
-                    <div class="landing-page__item-links">
-                        <a class="landing-page__item-link ios"
-                            href="https://dev.appsflyer.com/hc/docs/app-clip-sdk-integration">SDK integration</a>
-                        <a class="landing-page__item-link"
-                            href="https://dev.appsflyer.com/hc/docs/app-clip-to-full-app-install">Full app install
-                            configuration</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-  <div class="landing-page">
-        <div class="landing-page__item">
-            <div class="landing-page__item-container">
-                <img class="landing-page__item-thumbnail" src="https://files.readme.io/7f874b0-validation-rules.svg">
-                <div class="landing-page__item-inner">
-                    <h2 class="landing-page__item-title">Validation Rules</h2>
-                    <div class="landing-page__item-content">Create, update and remove Validation Rules programmatically. Control your app’s traffic with custom logic and conditions for campaign targeting, or for fraud prevention.</div>
-                    <div class="landing-page__item-links">
-                        <a class="landing-page__item-link"
-                            href="https://dev.appsflyer.com/hc/reference/overview">Validation Rules API</a>
-                    </div>
+<div class="container carousel-container">
+    <div class="carousel-container-center">
+        <h3>Quick Starts</h3>
+        <div id="recpies_carousel" class="glide multi carousel">
+            <div class="glide__wrapper carousel-content">
+                <div class="glide__track" data-glide-el="track">
+                    <ul class="slides">
+                        <li>
+                            <a href="https://dev.appsflyer.com/hc/docs/android-sdk">
+                            <div class="slide slide1">
+                                <div class="card">
+                                    <h3>Android SDK</h3>
+                                    <p>AppsFlyer's Android mobile SDK integration
+                                    </p>
+                                    <span>Go to guide<img
+                                            src="https://files.readme.io/3ce9ae5-Line_Arrow.svg"
+                                            class="arrow"></img></span>
+
+                                </div>
+                            </div>
+                        </a>
+                        </li>
+                        <li>
+                            <a href="https://dev.appsflyer.com/hc/docs/ios-sdk">
+                                <div class="slide slide2">
+                                    <div class="card">
+                                        <h3>iOS SDK</h3>
+                                        <p>AppsFlyer's iOS mobile SDK integration</p>
+                                        <span>Go to guide<img src="https://files.readme.io/3ce9ae5-Line_Arrow.svg"
+                                                class="arrow"></img></span>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://dev.appsflyer.com/hc/docs/dl_android_unified_deep_linking">
+                                <div class="slide slide3">
+                                    <div class="card">
+                                        <h3>Deep Linking Android</h3>
+                                        <p>OneLink is AppsFlyer's deep linking solution in Android apps</p>
+                                        <span>Go to guide
+                                            <img src="https://files.readme.io/3ce9ae5-Line_Arrow.svg"
+                                                class="arrow"></img></span>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://dev.appsflyer.com/hc/docs/dl_ios_unified_deep_linking">
+                                <div class="slide slide4">
+                                    <div class="card">
+                                        <h3>Deep Linking iOS</h3>
+                                        <p>OneLink is AppsFlyer's deep linking solution in iOS apps</p>
+                                        <span>Go to guide
+                                            <img src="https://files.readme.io/3ce9ae5-Line_Arrow.svg"
+                                                class="arrow"></img></span>
+
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://dev.appsflyer.com/hc/docs/unity-plugin">
+                                <div class="slide slide5">
+                                    <div class="card">
+                                        <h3>Unity</h3>
+                                        <p>AppsFlyer's Unity SDK integration</p>
+                                        <span>Go to guide<img src="https://files.readme.io/3ce9ae5-Line_Arrow.svg"
+                                                class="arrow"></img></span>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://dev.appsflyer.com/hc/docs/in-app-events-sdk">
+                            <div class="slide slide6">
+                                <div class="card">
+                                    <h3>In-app events</h3>
+                                    <p>In-app events enables you to log user interactions with your app
+                                    </p>
+                                    <span>Go to guide<img src="https://files.readme.io/3ce9ae5-Line_Arrow.svg"
+                                            class="arrow"></img></span>
+                                </div>
+                            </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a
+                                href="https://dev.appsflyer.com/hc/docs/dl_smart_script_v2">
+                                <div class="slide slide7">
+                                    <div class="card">
+                                        <h3>Smart Script</h3>
+                                        <p>SmartScript is a web-to-app JS tool converting incoming URLs into OneLink
+                                            URLs
+                                        </p>
+                                        <span>Go to guide
+                                            <img src="https://files.readme.io/3ce9ae5-Line_Arrow.svg"
+                                                class="arrow"></img></span>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a
+                                href="https://dev.appsflyer.com/hc/docs/dl_smart_banner_v2">
+                                <div class="slide slide7">
+                                    <div class="card">
+                                        <h3>Smart Banner</h3>
+                                        <p>A web-to-app tool displaying a banner on your brand's mobile website
+                                        </p>
+                                        <span>Go to guide
+                                            <img src="https://files.readme.io/3ce9ae5-Line_Arrow.svg"
+                                                class="arrow"></img></span>
+
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a
+                                href="https://dev.appsflyer.com/hc/docs/c2s-integrations-overview">
+                                <div class="slide slide7">
+                                    <div class="card">
+                                        <h3>Gaming & CTV SDKs</h3>
+                                        <p>AppsFlyer's Gaming and CTV SDK integration (BETA)
+                                        </p>
+                                        <span>Go to guide
+                                            <img src="https://files.readme.io/3ce9ae5-Line_Arrow.svg"
+                                                class="arrow"></img></span>
+
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a
+                                href="https://dev.appsflyer.com/hc/docs/react-native-plugin">
+                                <div class="slide slide7">
+                                    <div class="card">
+                                        <h3>React Plugin</h3>
+                                        <p>AppsFlyer's React SDK integration
+                                        </p>
+                                        <span>Go to guide
+                                            <img src="https://files.readme.io/3ce9ae5-Line_Arrow.svg"
+                                                class="arrow"></img></span>
+
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
     </div>
 </div>
-</div>
+<section id="sdks_section" class="landing-page__cards_wrapper">
+    <div class="landing-page__cards">
+        <h3 id="sdk_h">SDKs</h3>
+        <div class="landing-page">
+            <div class="landing-page__item">
+                <div class="landing-page__item-container">
+                    <img class="landing-page__item-thumbnail"
+                        src="https://files.readme.io/42b98f3-sdk_integration.svg">
+                    <div class="landing-page__item-inner">
+                        <h2 class="landing-page__item-title">AppsFlyer SDKs</h2>
+                        <div class="landing-page__item-content">AppsFlyer provides SDKs for a wide range of
+                            platforms,
+                            enabling quick and easy integration of AppsFlyer features into your app and marketing
+                            stack.
+                        </div>
+                        <div class="landing-page__item-links overview">
+                            <a class="landing-page__item-link link-overview"
+                                href="https://dev.appsflyer.com/hc/docs/getting-started">AppsFlyer SDKs overview</a>
+                        </div>
+                        <div class="landing-page__sub-items-container">
+                            <div class="landing-page__sub-item">
+                                    
+                                <div class="sub-item-header">Native SDKs</div>
+                                <div class="landing-page__item-links">
+                                    <a class="landing-page__item-link android"
+                                        href="https://dev.appsflyer.com/hc/docs/android-sdk">Android SDK</a>
+                                    <a class="landing-page__item-link ios"
+                                        href="https://dev.appsflyer.com/hc/docs/ios-sdk">iOS SDK</a>
+                                </div>
+                            </div>
+                            <div class="landing-page__sub-item">
+                                <div class="sub-item-header">
+                                    Multi-platform Plugins
+                                </div>
+                                <div class="landing-page__item-links">
+                                    <a class="landing-page__item-link reactnative" target="_blank"
+                                        href="https://github.com/AppsFlyerSDK/appsflyer-react-native-plugin">React
+                                        Native</a>
+                                    <a class="landing-page__item-link nativescript" target="_blank"
+                                        href="https://github.com/AppsFlyerSDK/appsflyer-nativescript-plugin">NativeScript</a>
+                                    <a class="landing-page__item-link flutter" target="_blank"
+                                        href="https://github.com/AppsFlyerSDK/appsflyer-flutter-plugin">Flutter</a>
+                                    <a class="landing-page__item-link cordova" target="_blank"
+                                        href="https://github.com/AppsFlyerSDK/appsflyer-cordova-plugin">Cordova</a>
+                                    <a class="landing-page__item-link xamarin" target="_blank"
+                                        href="https://github.com/AppsFlyerSDK/XamarinAndroidBinding">Xamarin
+                                        (Android)</a>
+                                    <a class="landing-page__item-link xamarin" target="_blank"
+                                        href="https://github.com/AppsFlyerSDK/XamariniOSBinding">Xamarin (iOS)</a>
+                                    <a class="landing-page__item-link capacitor" target="_blank"
+                                        href="https://github.com/AppsFlyerSDK/appsflyer-capacitor-plugin">
+                                        <div class="landing-page__item-link-inner">Capacitor</div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="landing-page__sub-items-container">
+                            <div class="landing-page__sub-item">
+                                <div class="sub-item-header">Game development</div>
+                                <div class="landing-page__item-links">
+                                    <a class="landing-page__item-link unity"
+                                        href="https://dev.appsflyer.com/hc/docs/unity-plugin">Unity SDK</a>
+                                    <a class="landing-page__item-link unreal"
+                                        href="https://github.com/AppsFlyerSDK/appsflyer-unreal-plugin">Unreal Engine
+                                        SDK</a>
+                                    <a class="landing-page__item-link cocos2d"
+                                        href="https://github.com/AppsFlyerSDK/appsflyer-cocos2dx-plugin">Cocos2d
+                                        SDK</a>
+                                </div>
+                            </div>
+                            <div class="landing-page__sub-item">
+                                <div class="sub-item-header">3rd-party integrations</div>
+                                <div class="landing-page__item-links">
+                                    <a class="landing-page__item-link"
+                                        href="https://github.com/AppsFlyerSDK/appsflyer-adobe-mobile-android-extension">Adobe
+                                        (Android)</a>
+                                    <a class="landing-page__item-link"
+                                        href="https://github.com/AppsFlyerSDK/appsflyer-adobe-mobile-ios-extension">Adobe
+                                        (iOS)</a>
+                                    <a class="landing-page__item-link"
+                                        href="https://github.com/AppsFlyerSDK/appsflyer-segment-android-plugin">Segment
+                                        (Android)</a>
+                                    <a class="landing-page__item-link"
+                                        href="https://github.com/AppsFlyerSDK/segment-appsflyer-ios">Segment
+                                        (iOS)</a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="landing-page">
+            <div class="landing-page__item">
+                <div class="landing-page__item-container">
+                    <img class="landing-page__item-thumbnail" src="https://files.readme.io/ebb69c1-onelink.svg">
+                    <div class="landing-page__item-inner">
+                        <h2 class="landing-page__item-title">OneLink</h2>
+                        <div class="landing-page__item-content">Implement deep linking in your app with OneLink,
+                            AppsFlyer's
+                            cross-platform deep linking solution.</div>
+                        <div class="landing-page__item-links">
+                            <a class="landing-page__item-link android"
+                                href="https://dev.appsflyer.com/hc/docs/dl_android_overview">Android
+                                SDK</a>
+                            <a class="landing-page__item-link ios"
+                                href="https://dev.appsflyer.com/hc/docs/dl_ios_overview">iOS SDK</a>
+                            <a class="landing-page__item-link webtools"
+                                href="https://dev.appsflyer.com/hc/docs/dl_smart_script_v2">Smart Script</a>
+                            <a class="landing-page__item-link webtools"
+                                href="https://dev.appsflyer.com/hc/docs/dl_smart_banner_v2">Smart Banner</a>
+                            <a class="landing-page__item-link webtools"
+                                href="https://dev.appsflyer.com/hc/reference/onelink_rest_api">OneLink REST API</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="landing-page">
+            <div class="landing-page__item">
+                <div class="landing-page__item-container">
+                    <img class="landing-page__item-thumbnail" src="https://files.readme.io/f210201-app-clips.svg">
+                    <div class="landing-page__item-inner">
+                        <h2 class="landing-page__item-title">App Clips attribution</h2>
+                        <div class="landing-page__item-content">App Clips enable users with iOS 14 or later to
+                            quickly
+                            access and experience your app. AppsFlyer SDK integration gives you valuable App Clip
+                            attribution data.</div>
+                        <div class="landing-page__item-links">
+                            <a class="landing-page__item-link ios"
+                                href="https://dev.appsflyer.com/hc/docs/app-clip-sdk-integration">SDK
+                                integration</a>
+                            <a class="landing-page__item-link"
+                                href="https://dev.appsflyer.com/hc/docs/app-clip-to-full-app-install">Full app
+                                install
+                                configuration</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 <div class="landing-page__footer">
     <div class="landing-page__footer-inner">
         <div class="landing-page__footer-content">
             <div class="landing-page__footer-left">
                 <a class="landing-page__social" target="_blank" href="https://www.facebook.com/AppsFlyer"><img
                         src="https://cdn.appsflyer.com/kb/devhub/images/facebook-social.svg" /></a>
-                <a class="landing-page__social" target="_blank" href="https://www.instagram.com/lifeatappsflyer/"><img
+                <a class="landing-page__social" target="_blank"
+                    href="https://www.instagram.com/lifeatappsflyer/"><img
                         src="https://cdn.appsflyer.com/kb/devhub/images/instagram-social.svg" /></a>
                 <a class="landing-page__social" target="_blank"
                     href="https://www.linkedin.com/company/appsflyerhq/"><img
