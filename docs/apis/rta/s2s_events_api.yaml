@@ -204,23 +204,6 @@ components:
             The time the event occurred using UTC timezone.
             - **Default**: If no `eventTime` is sent, the time is set to the HTTP message arrival time.
             - **Format**: string yyyy-mm-dd hh:mm:ss.sss the time needs to be in UTC timezone.
-
-            **Close of day**:
-
-            - If you implement `eventTime` the event must reach AppsFlyer by no later 02:00 of the following day. Meaning, if the event took place on Monday at 17:00 UTC, it must reach AppsFlyer servers by no later than Tuesday 02:00 UTC. 
-            - Events received after close-of-day are stamped with the actual arrival time.
-            - Events having a future time (meaning after the arrival time):
-              - Events that arrive before midnight will be stamped with the `eventTime`.
-              - Events that arrive after midnight will be stamped with the arrival time.
-            
-            **Example**
-            - Times are in UTC
-            - An event is sent with `eventTime` = Monday 21:00.
-
-            |Time of arrival|Time recorded by AppsFlyer|Remark|
-            |--- |--- |--- |
-            |Tuesday 01:00   |Monday 21:00   |Arrived before close-of-business.   |
-            |Wednesday 09:00    |Wednesday 09:00   |Arrived after close-of-business. Time is set to arrival time.    |
         eventCurrency:
           type: string
           enum:
@@ -420,7 +403,14 @@ components:
             - `all`: All partners are blocked. Don't share the event with anyone. Example: "sharing_filter": "all"
             - List of partner ids in an array. 
 
-            For a list of partner ids, contact your CSM or AppsFlyer support. 
+            **Note:** 
+              To find out the required partner IDs:
+              1. Run the [Get active integrations API](https://dev.appsflyer.com/hc/reference/get_v1-integrations) for a list of all active integrations
+              2. Use the `media_source_name` values from the [API response](https://dev.appsflyer.com/hc/reference/get_v1-integrations) as input values to the method `partners` array. 
+
+              **Exceptions**:
+              - For Apple Search Ads use `Apple Search Ads` (and not `iossearchads_int`).
+              - For Twitter, use `twitter` (and not `twitter_int`)
           type: array
           items:
             type: string
@@ -779,9 +769,16 @@ components:
             The `sharing_filter` has the following options:
 
             - `all`: All partners are blocked. Don't share the event with anyone. Example: "sharing_filter": "all"
-            - List of partner ids in an array. 
+            - List of partner ids in an array.            
+            
+            **Note:** 
+              To find out the required partner IDs:
+              1. Run the [Get active integrations API](https://dev.appsflyer.com/hc/reference/get_v1-integrations) for a list of all active integrations
+              2. Use the `media_source_name` values from the [API response](https://dev.appsflyer.com/hc/reference/get_v1-integrations) as input values to the method `partners` array. 
 
-            For a list of partner ids, contact your CSM or AppsFlyer support. 
+              **Exceptions**:
+              - For Apple Search Ads use `Apple Search Ads` (and not `iossearchads_int`).
+              - For Twitter, use `twitter` (and not `twitter_int`)
           type: array
           items:
             type: string
@@ -1139,7 +1136,14 @@ components:
             - `all`: All partners are blocked. Don't share the event with anyone. Example: "sharing_filter": "all"
             - List of partner ids in an array. 
 
-            For a list of partner ids, contact your CSM or AppsFlyer support. 
+            **Note:** 
+              To find out the required partner IDs:
+              1. Run the [Get active integrations API](https://dev.appsflyer.com/hc/reference/get_v1-integrations) for a list of all active integrations
+              2. Use the `media_source_name` values from the [API response](https://dev.appsflyer.com/hc/reference/get_v1-integrations) as input values to the method `partners` array. 
+
+              **Exceptions**:
+              - For Apple Search Ads use `Apple Search Ads` (and not `iossearchads_int`).
+              - For Twitter, use `twitter` (and not `twitter_int`)
           type: array
           items:
             type: string
