@@ -53,7 +53,7 @@ Get from the marketer: The expected behavior of the link when it is clicked.
 When a OneLink is clicked and the user has the app installed on their device, the `onAppOpenAttribution` method is called by the AppsFlyer SDK. This is referred to as a retargeting re-engagement.
 
 The `onAppOpenAttribution` method gets variables as an input like this: `Map <String, String>`.
-The input data structure is described [here](https://dev.appsflyer.com/hc/docs/gcd-input-parameters).
+The input data structure is described [here](https://dev.appsflyer.com/hc/docs/android-sample-payloads).
 
 #### Implementing onAppOpenAttribution() logic
 
