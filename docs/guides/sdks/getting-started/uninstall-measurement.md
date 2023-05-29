@@ -6,6 +6,7 @@ parentDoc: 609a858fb96cee00165e8fca
 hidden: false
 createdAt: "2022-04-18T11:38:21.705Z"
 updatedAt: "2022-04-18T11:45:01.694Z"
+order: 7
 ---
 ## Overview
 Integrate uninstall measurement into your apps.

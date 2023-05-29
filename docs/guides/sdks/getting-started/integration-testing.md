@@ -6,6 +6,7 @@ parentDoc: 609a858fb96cee00165e8fca
 hidden: false
 createdAt: "2021-08-01T14:48:25.376Z"
 updatedAt: "2021-12-26T11:09:53.081Z"
+order: 3
 ---
 ## Overview
 After completing the [SDK integration](doc:sdk-integration), it's recommended to test it. Testing ensures accurate and comprehensive data collection and delivery.

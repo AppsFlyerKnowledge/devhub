@@ -6,6 +6,7 @@ parentDoc: 609a858fb96cee00165e8fca
 hidden: false
 createdAt: "2022-04-24T11:55:56.519Z"
 updatedAt: "2022-08-17T12:59:46.273Z"
+order: 6
 ---
 ## Overview
 Learn how to enable your app to measure push notification campaigns and send related attribution data to AppsFlyer.

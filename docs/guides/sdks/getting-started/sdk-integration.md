@@ -7,6 +7,7 @@ excerpt: "Links to SDK integration instructions for various supported platforms.
 hidden: false
 createdAt: "2021-05-11T13:18:59.767Z"
 updatedAt: "2021-09-05T08:19:48.040Z"
+order: 2
 ---
 AppsFlyer SDK integration instructions for various platforms. By integrating the SDK, you get [app attribution](https://support.appsflyer.com/hc/en-us/articles/207447053#what-is-attribution%C2%A0) out-of-the-box.
 

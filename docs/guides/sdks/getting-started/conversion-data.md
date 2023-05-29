@@ -6,6 +6,7 @@ parentDoc: 609a858fb96cee00165e8fca
 hidden: false
 createdAt: "2021-05-12T10:50:55.001Z"
 updatedAt: "2021-07-04T13:15:40.138Z"
+order: 5
 ---
 Conversion data describes the channel(s) through which users got to your app.
 

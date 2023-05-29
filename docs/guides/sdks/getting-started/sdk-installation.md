@@ -7,6 +7,7 @@ excerpt: "Links to SDK installation instructions for various supported platforms
 hidden: false
 createdAt: "2021-05-11T13:17:50.404Z"
 updatedAt: "2021-06-28T18:24:24.334Z"
+order: 1
 ---
 AppsFlyer SDK installation instructions for various platforms:
 [block:html]

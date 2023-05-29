@@ -7,6 +7,7 @@ parentDoc: 609a858fb96cee00165e8fca
 hidden: false
 createdAt: "2021-05-10T19:12:47.385Z"
 updatedAt: "2022-08-25T17:31:26.899Z"
+order: 4
 ---
 In-app events provide insights into how users interact with your app. AppsFlyer SDKs enable you to easily log these interactions.
 

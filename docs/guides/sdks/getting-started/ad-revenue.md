@@ -6,6 +6,7 @@ parentDoc: 609a858fb96cee00165e8fca
 hidden: false
 createdAt: "2022-01-12T08:35:51.103Z"
 updatedAt: "2022-02-21T10:40:02.285Z"
+order: 8
 ---
 Ad revenue from partners can be reported to AppsFlyer with impression-level granularity via SDK. Impression-level data via SDK:
 - Has better data freshness and earlier availability in AppsFlyer.
