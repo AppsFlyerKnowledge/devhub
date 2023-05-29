@@ -101,20 +101,12 @@ Once the app is installed, In the Xcode terminal, search for `conversions.appsfl
 }
 [/block]
 **Step 2: Inspect conversion data**  
-Go to [the conversion data test API](https://dev.appsflyer.com/hc/reference/get_app-id-2) and fill in the required fields:
+Go to [the conversion data test API](https://dev.appsflyer.com/hc/reference/gcd-get-data) and fill in the required fields:
 
 1. `app-id`: Your app ID
 2. `device_id`: paste the value of `uid` from step 1.
-3. `af_request_epoch_ms` - Current epoch timestamp. You can get it [here](https://www.unixtimestamp.com/)
-4. The `af_sig` created by concatenating the values of the following fields:
-Concatenate the value of `af_request_epoch_ms` with `device_id` and `app_id`, separated an invisible character `\u2063`.
-(E.g. 1661969117203 1591184059153-1591377216180180185 com.zzkko) 
->Note: for iOS make sure the app id is a full one, i.e. starts with `id`
+3. `devkey` - Application's devkey. Learn [here](https://support.appsflyer.com/hc/en-us/articles/207032126#integration-2-integrating-the-sdk) how to get it.
 
-The HMAC is generated using SHA256 and uses the DevKey as the signature’s secret key. 
-To retrieve the DevKey, in the AppsFlyer dashboard, go ***Configuration*** > ***App Settings***.
-
-You can find [here](https://appsflyersdk.github.io/calcGcdV5Sha/) an HMAC calculator to assist in calculating this token.
 
 Then, click **Try it!** to execute the test.
 

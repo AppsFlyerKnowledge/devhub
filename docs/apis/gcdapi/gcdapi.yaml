@@ -10,6 +10,7 @@ paths:
       tags:
         - Conversion Data for SDK attribution testing
       summary: Get the conversion data
+      operationId: gcd-get-data
       parameters:
         - name: app-id
           in: path

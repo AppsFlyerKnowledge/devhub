@@ -80,12 +80,18 @@ sync-via-rdme-predict-pull-api:
   rules:
     - if: $CI_COMMIT_BRANCH == "master"
 
-sync-via-rdme-gcdapi-v5:
+# sync-via-rdme-gcdapi-v5:
+#   script:
+#     - npx -y rdme@8.4.0 openapi ./docs/apis/gcdapi/gcdapi_v5.yaml --key=rdme_xn8s9h0fb20a2df26bd435f6c42b1c7d59b240b0354348510d0c2f14216e353fb8fe63 --id=638628a899eda80f20cabab9
+#   rules:
+#     - if: $CI_COMMIT_BRANCH == "master"
+
+sync-via-rdme-gcdapi-v4:
   script:
-    - npx -y rdme@8.4.0 openapi ./docs/apis/gcdapi/gcdapi_v5.yaml --key=rdme_xn8s9h0fb20a2df26bd435f6c42b1c7d59b240b0354348510d0c2f14216e353fb8fe63 --id=638628a899eda80f20cabab9
+    - npx -y rdme@8.4.0 openapi ./docs/apis/gcdapi/gcdapi.yaml --key=rdme_xn8s9h0fb20a2df26bd435f6c42b1c7d59b240b0354348510d0c2f14216e353fb8fe63 --id=638628a899eda80f20cabab9
   rules:
     - if: $CI_COMMIT_BRANCH == "master"
-    
+
 sync-via-rdme-ddlapi:
   script:
     - npx -y rdme@8.4.0 openapi ./docs/apis/OneLink/ddlapi.yaml --key=rdme_xn8s9h0fb20a2df26bd435f6c42b1c7d59b240b0354348510d0c2f14216e353fb8fe63 --id=5f7d78862614180733ad85d7
