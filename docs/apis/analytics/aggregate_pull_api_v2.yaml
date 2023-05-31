@@ -219,6 +219,7 @@ components:
       schema:
         type: string
         enum:
+          - ""
           - impression 
     EventName:
       in: query
@@ -272,6 +273,7 @@ components:
       schema:
         type: string
         enum:
+          - ""
           - true
     MaximumRows:
       name: maximum_rows
