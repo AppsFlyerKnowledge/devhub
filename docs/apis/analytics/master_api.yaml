@@ -204,6 +204,7 @@ components:
         items:
           type: string
           enum:
+            - ""
             - app_id
             - pid
             - af_prt
