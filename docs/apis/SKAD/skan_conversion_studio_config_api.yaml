@@ -1,0 +1,147 @@
+openapi: '3.0.3'
+info:
+  title: SKAN conversion studio configuration
+  version: '0.1'
+security:
+  - bearerAuth: []
+servers:
+- url: https://hq1.appsflyer.com/api/conversion-studio-config/v1/
+paths:
+  /app/{app_id}:
+    post:
+     tags:
+      - "SKAN conversion studio configuration"
+     summary: Copy SKAN schema
+     description: |
+      Copy the SKAN conversion value (CV) schema from 1 app to another.
+     operationId: skan-studio-duplicate-config
+     parameters:
+     - name: app_id
+       in: path
+       explode: true
+       style: simple
+       schema:
+         type: array
+         minItems: 2
+         maxItems: 2
+         items:
+           type: string
+       required: true
+       description: |
+        **First item**: source app ID (the app ID of the app from which you want to copy the CV schema)
+        **Second item**: destination app ID (the app ID for the app to which you want to copy the CV schema)
+     responses:
+       '200':
+         description: 'OK'
+         content:
+           application/json:
+             schema:
+               type: object
+               additionalProperties: true
+       '403':
+          description: Forbidden
+          content: 
+            application/json:
+                schema:
+                  $ref: '#/components/schemas/Error'
+                examples:
+                  MultipleAppNotAllowed:
+                    summary: Multiple App Not Allowed
+                    value:
+                      message: "please insert only source and destination apps"
+                  OperationForbidden:
+                    summary: Operation Forbidden 
+                    value:
+                      message: "only advertisers are allowed to access this API"
+                  SkanModeNotSupported:
+                    summary: SKAN Mode Not Supported 
+                    value:
+                      message: "Only config with skan4 and custom_encode mode can be duplicated"
+       '404':
+         description: Not Found
+         content: 
+           application/json:
+               schema:
+                 $ref: '#/components/schemas/Error'
+               examples:
+                 NotFound:
+                   summary: Not Found
+                   value:
+                     message: "Method not allowed"
+       
+    get:
+      tags:
+      - "SKAN conversion studio configuration"
+      summary: Get SKAN schema
+      description: Get the SKAN conversion schema you have configured for a specific app.
+      operationId: skan-studio-read-config
+      parameters:
+      - name: app_id
+        in: path
+        schema: 
+          type: string
+        required: true
+      responses:
+        '200':
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+               type: object
+               additionalProperties: true
+        '403':
+          description: Forbidden
+          content: 
+            application/json:
+                schema:
+                  $ref: '#/components/schemas/Error'
+                examples:
+                  MultipleAppNotAllowed:
+                    summary: Multiple App Not Allowed
+                    value:
+                      message: "please insert only source and destination apps"
+                  OperationForbidden:
+                    summary: Operation Forbidden 
+                    value:
+                      message: "only advertisers are allowed to access this API"
+                  SkanModeNotSupported:
+                    summary: SKAN Mode Not Supported 
+                    value:
+                      message: "Only config with skan4 and custom_encode mode can be duplicated"
+        '404':
+          description: Not Found
+          content: 
+            application/json:
+                schema:
+                  $ref: '#/components/schemas/Error'
+                examples:
+                  NotFound:
+                    summary: Not Found
+                    value:
+                      message: "Method not allowed"
+
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: |
+        Reach out to your CSM to enable Cohort API and then [get the token in the dashboard](https://support.appsflyer.com/hc/en-us/articles/360004562377)
+
+  requestBodies: 
+     createReportBody:
+      description: "Body for create report request"
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            additionalProperties: true
+  
+  schemas:
+    Error:
+      properties:
+        message:
+          type: string
+        request_id:
+          type: string
