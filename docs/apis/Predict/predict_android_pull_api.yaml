@@ -1,9 +1,9 @@
 openapi: 3.0.1
 info:
-  title: Predict IOS Pull API
+  title: Predict Android Pull API
   version: 1.0.0
 servers:
-- url: https://hq1.appsflyer.com/api/predict-sk/v1/data/app
+- url: https://hq1.appsflyer.com/api/predict-android/v1/data/app
   description: Production server
 security:
   - Bearer-Authentication: []
@@ -13,18 +13,18 @@ paths:
       tags:
       - Predict aggregated report
       summary: Get report
-      description: "The Predict aggregated report returns predicted performance metrics, for both SKAdNetwork attribution and AF attribution models. The report is available through Data Locker or the API."
+      description: "The Predict aggregated report returns predicted performance metrics for Android models. The report is available through the API."
       parameters:
       - name: app-id
         in: path
         description: "The app identifier as found in the AppsFlyer dashboard. Insert it exactly as it displays in the dashboard"
-        example: "id123456789"
+        example: "com.example.app"
         required: true
         schema:
           type: string
       - name: start_date
         in: query
-        description: "The date type used in the date range bounded by **start_date** and **end_date**\n\n start_date is the lower bound of requested dates\n\n **Note!** Install date differs from postback arrival date.\n\n Expects YYYY-MM-DD format"
+        description: "The date type used in the date range bounded by **start_date** and **end_date**\n\n start_date is the lower bound of requested dates\n\n **Note!** Install date differs from postback arrival date.\n\n Expects `YYYY-MM-DD` format"
         example: "2021-11-05"
         required: true
         schema:
@@ -32,40 +32,12 @@ paths:
           pattern: ^\d{4}\-\d{2}\-\d{2}$
       - name: end_date
         in: query
-        description: "end_date is the upper bound of requested dates\n\n Maximum number of days per report call: 90 days\n\n Expects YYYY-MM-DD format"
+        description: "end_date is the upper bound of requested dates\n\n Maximum number of days per report call: 90 days\n\n Expects `YYYY-MM-DD` format"
         example: "2021-11-06"
         required: true
         schema:
           type: string
           pattern: ^\d{4}\-\d{2}\-\d{2}$
-      - name: source_type
-        in: query
-        description: > 
-          The attribution source the query is made for:
-            - `skan` SKADNetwork attribution data
-            - `af` AppsFlyer attribution data
-        example: "skan"
-        required: true
-        schema:
-          type: string
-          enum:
-            - skan
-            - af
-      - name: view_type
-        in: query
-        description: >
-         Filter the installs by type as follows: 
-          - `acquisition`: Installs
-          - `retargeting`: Redownloads
-          - `unified`: Acquisition and redownload combined
-        required: false
-        schema:
-          type: string
-          enum:
-            - acquisition
-            - retargeting 
-            - unified
-          default: unified
       responses:
         200:
           description: Valid data returned (CSV)
