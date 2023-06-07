@@ -1,0 +1,241 @@
+openapi: 3.0.3
+info:
+  title: Additional Identifiers API
+  version: 1.0.0
+servers:
+- url: https://hq1.appsflyer.com/api/audience-bulk-api/v1/additional-identifiers
+security:
+  - Bearer-Authentication: []
+paths:
+  /app/{app-id}:
+    put: 
+      summary: Add, Modify or Remove
+      tags:
+        - "Additional Identifiers Handling"
+      operationId: audience-put-additional-identifier
+      parameters:
+        - in: path
+          name: app-id
+          description: Application ID
+          example: "id121244"
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              oneOf:
+                - $ref: '#/components/schemas/AddModifyIdentifierBody'
+                - $ref: '#/components/schemas/RemoveIdentifierBody'
+      responses:
+        202:
+          $ref: '#/components/responses/Success'
+        400:
+          $ref: '#/components/responses/Error'
+        404:
+          $ref: '#/components/responses/Error'
+
+components:
+  securitySchemes:
+    Bearer-Authentication:
+      type: http
+      scheme: bearer
+      description: "Authorization HTTP header containing API V2 token (bearer token) is required.\n\n
+        The admin [gets the V2 token in the dashboard](https://support.appsflyer.com/hc/en-us/articles/360004562377) "
+     
+  responses:
+    Success:
+      description: Request successful.
+      content: 
+        application/json:
+            schema:
+              type: object
+              properties: 
+                message:
+                  type: string
+                received:
+                  type: string
+                trace-id:
+                  type: string
+            example:
+              message: "Accepted for processing"
+              received: 1000
+              invalid: 2
+              trace-id: "698ed323-c787-45b5-b792-463c67c94064"
+    Error:
+      description: Issue with request data
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - error
+              - trace-id
+            properties:
+              error:
+                type: string
+              trace-id:
+                type: string
+              valid:
+                type: integer
+              invalid:
+                type: integer
+          examples:
+            InvalidKeyType:
+              summary: Invalid Key Type
+              value:
+                error: "Request body must have a valid key_type"
+                trace-id: "18a5f685-ea4d-4ca9-beab-a542a3786d12"
+            DataWithoutElements:
+              summary: Data without elements
+              value:
+                error: "Request 'data' should not exceeds the size of 4000 in a single request"
+                trace-id: "b325a7fa-b573-4efe-9bfb-5ae7de40e72c"
+            DataSizeExceeded:
+              summary: Data size exceeded
+              value:
+                error: "Request 'data' should not exceeds the size of 4000 in a single request"
+                trace-id: "b325a7fa-b573-4efe-9bfb-5ae7de40e72c"
+            TooManyInvalidElements:
+              summary: Too many invalid elements
+              value:
+                error: "Request data has too many invalid 'data' elements"
+                valid: 2
+                invalid: 30
+                trace-id: "33551c1d-5682-405e-a959-c8729ca74735"
+            PageNotFound:
+              summary: Page not found
+              value:
+                error: "Request 'data' should not exceeds the size of 4000 in a single request"
+                trace-id: "b325a7fa-b573-4efe-9bfb-5ae7de40e72c"
+
+  schemas:
+    AddModifyIdentifierBody:
+      title: Add\Modify Identifier
+      type: object
+      required:
+        - key_type
+        - data
+      properties:
+        key_type:
+          $ref: '#/components/schemas/KeyType'
+        action:
+          type: string
+          enum:
+            - ""
+            - add
+          default: add
+          description: |
+            Default value: add
+        data:
+          $ref: '#/components/schemas/DataAdd'
+    RemoveIdentifierBody:
+      title: Remove Identifier
+      type: object
+      required:
+        - key_type
+        - data
+      properties:
+        key_type:
+          $ref: '#/components/schemas/KeyType'
+        action:
+          type: string
+          enum:
+            - ""
+            - remove
+          default: remove
+          description: |
+            Default value: remove
+        data:
+          $ref: '#/components/schemas/DataRemove'
+    KeyType:
+      type: string
+      enum:
+        - ""
+        - idfa
+        - gaid
+        - idfv
+        - customer_user_id
+        - imei
+        - oaid
+      description: |
+        The identifier used as the unique value to represent the user in each data row of the request.
+        The value specified here applies to every row in the request.
+    DataAdd:
+      type: array
+      items:
+        type: object
+        required:
+          - key_value
+          - identifiers
+        properties:
+          key_value:
+            $ref: '#/components/schemas/KeyValue'
+          Identifiers:
+            $ref: '#/components/schemas/IdentifiersAdd'
+    DataRemove:
+      type: array
+      items:
+        type: object
+        required:
+          - key_value
+          - identifiers
+        properties:
+          key_value:
+            $ref: '#/components/schemas/KeyValue'
+          Identifiers:
+            $ref: '#/components/schemas/IdentifiersRemove'
+
+    KeyValue:
+      type: string
+      description: |
+        Valid identifier value for the key_type specified
+    IdentifiersAdd:
+      type: object
+      description: |
+         Must include a value for at least 1 of these 3 identifiers
+      properties:
+        hashed_emails:
+          type: array
+          description: |
+            An array of up to 2 hashed email addresses
+          maxItems: 2
+          items:
+            type: string
+            pattern: ^[a-fA-F0-9]{64}$
+            description: |
+              - Lowercase
+              - No white spaces
+              - SHA256 hashed
+              Example value before hashing: name@domain.com
+            example: 99e9a5b2334f447022f47a08422abed1742dee5e83408ea6e7b2ed3d50ddb1af
+        phone_number_sha256:
+          type: string
+          pattern: "^[a-fA-F0-9]{64}$"
+          description: |
+            Phone number
+            - No symbols, letters, or leading zeroes
+            - Include country code
+            - SHA256 hashed
+            Example value before hashing: 442070313000
+          example: 99e9a5b2334f447022f47a08422abed1742dee5e83408ea6e7b2ed3d50ddb1af
+        phone_number_e164_sha256:
+          type: string
+          pattern: ^[a-fA-F0-9]{64}$
+          description: |
+            Phone number in E164 format 
+            - E164 phone number
+            - SHA256 hashed
+            Example value before hashing: +442070313000
+          example: 99e9a5b2334f447022f47a08422abed1742dee5e83408ea6e7b2ed3d50ddb1af
+    IdentifiersRemove:
+      type: array
+      items:
+        type: string
+        enum:
+          - ""
+          - "hashed_emails"
+          - "phone_number_sha256"
+          - "phone_number_e164_sha256"
+        
