@@ -24,7 +24,11 @@ paths:
           type: string
       - name: start_date
         in: query
-        description: "The date type used in the date range bounded by **start_date** and **end_date**\n\n start_date is the lower bound of requested dates\n\n **Note!** Install date differs from postback arrival date.\n\n Expects YYYY-MM-DD format"
+        description: |
+          The date type used in the date range bounded by **start_date** and **end_date**
+          start_date is the lower bound of requested dates
+          **Note!** Install date differs from postback arrival date.
+          Expects `YYYY-MM-DD` format
         example: "2021-11-05"
         required: true
         schema:
@@ -32,7 +36,10 @@ paths:
           pattern: ^\d{4}\-\d{2}\-\d{2}$
       - name: end_date
         in: query
-        description: "end_date is the upper bound of requested dates\n\n Maximum number of days per report call: 90 days\n\n Expects YYYY-MM-DD format"
+        description: |
+          end_date is the upper bound of requested dates
+          Maximum number of days per report call: 90 days
+          Expects `YYYY-MM-DD` format
         example: "2021-11-06"
         required: true
         schema:
@@ -90,5 +97,6 @@ components:
     Bearer-Authentication:
       type: http
       scheme: bearer
-      description: "Authorization HTTP header containing API V2.0 token (Bearer token) is required.\n\n
-        The admin [gets the V2 token in the dashboard](https://support.appsflyer.com/hc/en-us/articles/360004562377), go to your email address"
+      description: |
+        Authorization HTTP header containing API V2.0 token (Bearer token) is required.
+        The admin [gets the V2 token in the dashboard](https://support.appsflyer.com/hc/en-us/articles/360004562377), go to your email address
