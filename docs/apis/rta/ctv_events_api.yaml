@@ -490,9 +490,7 @@ paths:
                       - ZMW
                       - ZWL
                       - BYR
-                    af_duration_seconds:
-                      type: integer
-                  description: A JSON object which can contain multiple event parameters.
+                  description: A JSON object which can contain multiple event parameters. Learn more [here](https://support.appsflyer.com/hc/en-us/articles/4410481112081-Rich-in-app-events-Event-structure)
                   example:
                     af_revenue: 1.99
                     af_price: 2.456
