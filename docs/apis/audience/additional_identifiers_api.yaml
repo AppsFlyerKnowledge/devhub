@@ -172,7 +172,7 @@ components:
         properties:
           key_value:
             $ref: '#/components/schemas/KeyValue'
-          Identifiers:
+          identifiers:
             $ref: '#/components/schemas/IdentifiersAdd'
     DataRemove:
       type: array
@@ -184,7 +184,7 @@ components:
         properties:
           key_value:
             $ref: '#/components/schemas/KeyValue'
-          Identifiers:
+          identifiers:
             $ref: '#/components/schemas/IdentifiersRemove'
 
     KeyValue:
