@@ -214,6 +214,29 @@ AppsFlyerLib.getInstance().subscribeForDeepLink(object : DeepLinkListener{
 
 ⇲ Github links: [Java](https://github.com/AppsFlyerSDK/appsflyer-onelink-android-sample-apps/blob/master/java/basic_app/app/src/main/java/com/appsflyer/onelink/appsflyeronelinkbasicapp/AppsflyerBasicApp.java#L31-L70)
 
+### Deferred Deep Linking after network consent
+
+In some cases the application might require consent from the user in order to connect to the network, in a dialog similar to this one:
+[block:image]
+{
+  "images": [
+    {
+      "image": [
+        "https://files.readme.io/c4ac931-network_consent_dialog.png",
+        "c4ac931-network_consent_dialog.png",
+        null
+      ],
+      "align": "center",
+      "sizing": "250px"
+    }
+  ]
+}
+[/block]
+
+In order to support deferred deep linking once the network consent is given we recommend:
+- [Deferring] (https://dev.appsflyer.com/hc/docs/integrate-android-sdk#deferring-sdk-start) the SDK `start` once the consent is given.
+- Implement [eDDL](./dl_android_ocds_ddl) to allow UDL to handle the deferred deep linking
+
 ## Testing deferred deep linking
 
 ### Before you begin

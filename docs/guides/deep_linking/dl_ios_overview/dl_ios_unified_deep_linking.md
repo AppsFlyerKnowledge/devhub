@@ -171,6 +171,29 @@ fileprivate func walkToSceneWithParams(deepLinkObj: DeepLink) {
 
 ⇲ Github links: [Swift](https://github.com/AppsFlyerSDK/appsflyer-onelink-ios-sample-apps/blob/a96399329a369b30263ea4f8cc4558029ea603b3/swift/basic_app/basic_app/AppDelegate.swift#L126)
 
+### Deferred Deep Linking after network consent
+
+In some cases the application might require consent from the user in order to connect to the network, in a dialog similar to this one:
+[block:image]
+{
+  "images": [
+    {
+      "image": [
+        "https://files.readme.io/c4ac931-network_consent_dialog.png",
+        "c4ac931-network_consent_dialog.png",
+        null
+      ],
+      "align": "center",
+      "sizing": "250px"
+    }
+  ]
+}
+[/block]
+
+In order to support deferred deep linking once the network consent is given we recommend:
+- [Deferring] (https://dev.appsflyer.com/hc/docs/integrate-ios-sdk#starting-the-ios-sdk) the SDK `start` once the consent is given.
+- Implement [eDDL](./dl_ios_ocds_ddl) to allow UDL to handle the deferred deep linking
+
 ## Testing deferred deep linking
 
 ### Before you begin
