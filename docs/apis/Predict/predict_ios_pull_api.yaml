@@ -29,7 +29,7 @@ paths:
           start_date is the lower bound of requested dates
           **Note!** Install date differs from postback arrival date.
           Expects `YYYY-MM-DD` format
-        example: "2021-11-05"
+        example: "2023-11-05"
         required: true
         schema:
           type: string
@@ -40,7 +40,7 @@ paths:
           end_date is the upper bound of requested dates
           Maximum number of days per report call: 90 days
           Expects `YYYY-MM-DD` format
-        example: "2021-11-06"
+        example: "2023-11-06"
         required: true
         schema:
           type: string
@@ -76,22 +76,87 @@ paths:
       responses:
         200:
           description: Valid data returned (CSV)
-          content: {}
+          content: { }
         400:
           description: Bad request - Missing or invalid query parameters
-          content: {}
+          content:
+            application/json:
+              schema:
+                type: string
+              examples:
+                Bad Request:
+                  value:
+                    {
+                      "error": {
+                        "status": 400,
+                        "code": "BadRequest",
+                        "message": "Missing or invalid query parameters. Please make sure to include all required parameters.",
+                      }
+                    }
         401:
           description: Unauthorized - Authorization token is missing or invalid. Make sure you use the token correctly
-          content: {}
+          content:
+            application/json:
+              schema:
+                type: string
+              examples:
+                Unauthorized:
+                  value:
+                    {
+                      "error": {
+                        "status": 401,
+                        "code": "Unauthorized",
+                        "message": "Authorization token is missing or invalid. Make sure you use the token correctly"
+                      }
+                    }
         403:
-          description: No permission - You don't have permission to access this report. If you are an analytics partner ask the advertiser to give you permission.
-          content: {}
+          description: No permission - You don't have permission to access this report.
+          content:
+            application/json:
+              schema:
+                type: string
+              examples:
+                NoPermission:
+                  value:
+                    {
+                      "error": {
+                        "status": 403,
+                        "code": "Forbidden",
+                        "message": "You don't have permission to access this report. If you are an analytics partner ask the advertiser to give you permission."
+                      }
+                    }
         404:
           description: Not found - Handle any network or firewall-related problems. Make sure that AppsFlyer [IP addresses are allowlisted](https://support.appsflyer.com/hc/en-us/articles/207447093-AppsFlyer-server-IP-address-ranges-allowlisting-)
-          content: {}
+          content:
+            application/json:
+              schema:
+                type: string
+              examples:
+                NotFound:
+                  value:
+                    {
+                      "error": {
+                        "status": 404,
+                        "code": "NotFound",
+                        "message": "The requested URL was not found. Handle any network problems and make sure you used the correct app-id in the query"
+                      }
+                    }
         429:
           description: Too many requests - Exceeded rate limitation
-          content: {}
+          content:
+            application/json:
+              schema:
+                type: string
+              examples:
+                BadAppName:
+                  value:
+                    {
+                      "error": {
+                        "status": 429,
+                        "code": "TooManyReq",
+                        "message": "Too many requests - Exceeded rate limitation"
+                      }
+                    }
 components:
   securitySchemes:
     Bearer-Authentication:

@@ -3,7 +3,7 @@ info:
   title: Predict Android Pull API
   version: 1.0.0
 servers:
-- url: https://hq1.appsflyer.com/api/predict-android/v1/data/app
+- url: https://hq1.appsflyer.com/api/predict-android/v1.0/data/app
   description: Production server
 security:
   - Bearer-Authentication: []
@@ -29,7 +29,7 @@ paths:
           start_date is the lower bound of requested dates
           **Note!** Install date differs from postback arrival date.
           Expects `YYYY-MM-DD` format
-        example: "2021-11-05"
+        example: "2023-11-05"
         required: true
         schema:
           type: string
@@ -40,7 +40,7 @@ paths:
           end_date is the upper bound of requested dates
           Maximum number of days per report call: 90 days
           Expects `YYYY-MM-DD` format"
-        example: "2021-11-06"
+        example: "2023-11-06"
         required: true
         schema:
           type: string
@@ -56,10 +56,15 @@ paths:
               schema:
                 type: string
               examples:
-                Missing Parameter:
+                Bad Request:
                   value:
-                    code: 400
-                    message: Bad request - Missing or invalid query parameters. Please make sure to include all required parameters.
+                    {
+                      "error": {
+                        "status": 400,
+                        "code": "BadRequest",
+                        "message": "Missing or invalid query parameters. Please make sure to include all required parameters.",
+                      }
+                    }
         401:
           description: Unauthorized - Authorization token is missing or invalid. Make sure you use the token correctly
           content:
@@ -69,19 +74,29 @@ paths:
               examples:
                 Unauthorized:
                   value:
-                    code: 401
-                    message: Unauthorized - Authorization token is missing or invalid. Make sure you use the token correctly
+                    {
+                      "error": {
+                        "status": 401,
+                        "code": "Unauthorized",
+                        "message": "Authorization token is missing or invalid. Make sure you use the token correctly"
+                      }
+                    }
         403:
-          description: No permission - You don't have permission to access this report. If you are an analytics partner ask the advertiser to give you permission.
+          description: No permission - You don't have permission to access this report.
           content:
             application/json:
               schema:
                 type: string
               examples:
-                NoPermission:
+                Forbidden:
                   value:
-                    code: 403
-                    message: No permission - You don't have permission to access this report. If you are an analytics partner ask the advertiser to give you permission.
+                    {
+                      "error": {
+                        "status": 403,
+                        "code": "Forbidden",
+                        "message": "You don't have permission to access this report. If you are an analytics partner ask the advertiser to give you permission."
+                      }
+                    }
         404:
           description: Not found - Handle any network or firewall-related problems. Make sure that AppsFlyer [IP addresses are allowlisted](https://support.appsflyer.com/hc/en-us/articles/207447093-AppsFlyer-server-IP-address-ranges-allowlisting-)
           content:
@@ -89,14 +104,15 @@ paths:
               schema:
                 type: string
               examples:
-                BadAppName:
+                Not Found:
                   value:
-                    code: 404
-                    message: Please make sure you mentioned the correct app-id in the request.
-                ErrorResponse:
-                  value:
-                    code: 404
-                    message: Not found - Handle any network or firewall-related problems. Make sure that AppsFlyer [IP addresses are allowlisted](https://support.appsflyer.com/hc/en-us/articles/207447093-AppsFlyer-server-IP-address-ranges-allowlisting-)
+                    {
+                      "error": {
+                        "status": 404,
+                        "code": "NotFound",
+                        "message": "The requested URL was not found. Handle any network problems and make sure you used the correct app-id in the query"
+                      }
+                    }
         429:
           description: Too many requests - Exceeded rate limitation
           content:
@@ -104,11 +120,15 @@ paths:
               schema:
                 type: string
               examples:
-                BadAppName:
+                Too Many Requests:
                   value:
-                    code: 429
-                    message: Too many requests - Exceeded rate limitation
-
+                    {
+                      "error": {
+                        "status": 429,
+                        "code": "TooManyRequests",
+                        "message": "Too many requests - Exceeded rate limitation"
+                      }
+                    }
 components:
   securitySchemes:
     Bearer-Authentication:
