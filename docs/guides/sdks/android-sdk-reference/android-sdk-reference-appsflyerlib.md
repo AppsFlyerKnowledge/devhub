@@ -162,9 +162,9 @@ You must provide the following parameters in the `parameters` `Map`:
 
 ```java
 HashMap<String, String> urlParameters = new HashMap<>();
-parameters.put("pid", "exampleDomain"); // Required
-parameters.put("is_retargeting", "true"); // Required
-AppsFlyerLib.getInstance().appendParametersToDeepLinkingURL("example.com", parameters);
+urlParameters.put("pid", "exampleDomain"); // Required
+urlParameters.put("is_retargeting", "true"); // Required
+AppsFlyerLib.getInstance().appendParametersToDeepLinkingURL("example.com", urlParameters);
 ```
 ```kotlin
 AppsFlyerLib.getInstance().appendParametersToDeepLinkingURL("example.com",
@@ -1432,7 +1432,7 @@ AppsFlyerLib.getInstance().setResolveDeepLinkURLs("clickdomain.com", "myclickdom
 ### setSharingFilterForPartners
 
 <span class="annotation-added">Added in V6.4</span>  
-**Method signature**
+**Method signat
 
 ```java
 void setSharingFilterForPartners(java.lang.String... partners)
