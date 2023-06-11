@@ -76,7 +76,7 @@ paths:
       responses:
         200:
           description: Valid data returned (CSV)
-          content: { }
+          content: {}
         400:
           description: Bad request - Missing or invalid query parameters
           content:
