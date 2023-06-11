@@ -3,7 +3,6 @@ info:
   title: Push API Configuration API
   version: 1.0.0
 servers:
-- url: https://hq1.appsflyer.com/api/pushapi/v2.0/
 - url: https://hq1.appsflyer.com/api/pushapi/v1.0/
 security:
   - Bearer-Authentication: []
@@ -96,7 +95,7 @@ paths:
             - appsflyer: ["organic-install-in-app-event", "install", "organic-install", "re-engagement", 
             "re-attribution", "reinstall", "organic-reinstall", "install-in-app-event", 
             "re-engagement-in-app-event", "re-attribution-in-app-event" ]
-            - skadnetwork: ["skad-in-app-events", "skad-re-downloads", "skad-installs", "skad-postbacks-copy", "skad-postbacks"]
+            - skadnetwork: ["in-app-event", "re-download", "install", "postbacks-copy", "postback"]
           content:
             application/json:
               schema:
