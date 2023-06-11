@@ -12,7 +12,7 @@ In some cases the user is required to go through some kind of an event before co
 Examples for such user events:
 1. Login process
 2. Splash screen 
-3. Consenting to usage terms.
+3. Consenting to usage terms
 
 ## Implementation
 In order to sync easily and safely between the user event and the deferred deep linking flow, it is recommended to [initiate](https://dev.appsflyer.com/hc/docs/integrate-ios-sdk#initializing-the-ios-sdk) and [start](https://dev.appsflyer.com/hc/docs/integrate-ios-sdk#starting-the-ios-sdk) the SDK in the `view controller` where the user event is performed. For example, the main view controller, which holds the authentication status. This is different from the normal flow, where the SDK and initiated and started in the `application context`. 

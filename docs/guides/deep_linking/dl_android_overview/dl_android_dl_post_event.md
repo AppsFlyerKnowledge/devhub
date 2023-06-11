@@ -12,7 +12,7 @@ In some cases the user is required to go through some kind of an event before co
 Examples for such user events:
 1. Login process
 2. Splash screen 
-3. Consenting to usage terms.
+3. Consenting to usage terms
 
 ## Implementation
 In order to sync easily and safely between the user event and the deferred deep linking flow, it is recommended to [initiate](https://dev.appsflyer.com/hc/docs/integrate-android-sdk#initializing-the-android-sdk) and [start](https://dev.appsflyer.com/hc/docs/integrate-android-sdk#deferring-sdk-start) the SDK in the `activity context` where the user event is performed. For example, the view which implements the login process. This is different from the normal flow, where the SDK and initiated and started in the `application context`. 
