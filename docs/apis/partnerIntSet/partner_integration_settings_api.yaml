@@ -94,7 +94,7 @@ paths:
           example: com.publisher.name
       tags:
         - Active integrations
-      summary: Get active integration parameters.
+      summary: Get active integration parameters
       description: |
         Get a list of all the parameters for all the active integrations for a specific app. This API returns only the parameters under the integration tab.
       responses:
