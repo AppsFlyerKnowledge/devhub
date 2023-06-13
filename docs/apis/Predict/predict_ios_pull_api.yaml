@@ -11,9 +11,10 @@ paths:
   /{app-id}:
     get:
       tags:
-      - Predict aggregated report
+      - Predict iOS aggregated report
       summary: Get report
       description: "The Predict aggregated report returns predicted performance metrics, for both SKAdNetwork attribution and AF attribution models. The report is available through Data Locker or the API."
+      operationId: predict-ios-pull-api-get
       parameters:
       - name: app-id
         in: path

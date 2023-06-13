@@ -74,7 +74,13 @@ sync-via-rdme-cohort-api:
   rules:
     - if: $CI_COMMIT_BRANCH == "master"
 
-sync-via-rdme-predict-pull-api:
+sync-via-rdme-predict-android-pull-api:
+  script:
+    - npx -y rdme@8.4.0 openapi ./docs/apis/Predict/predict_android_pull_api.yaml --key=rdme_xn8s9h0fb20a2df26bd435f6c42b1c7d59b240b0354348510d0c2f14216e353fb8fe63 --id=64881d5b71faad000a4d8805
+  rules:
+    - if: $CI_COMMIT_BRANCH == "master"
+
+sync-via-rdme-predict-ios-pull-api:
   script:
     - npx -y rdme@8.4.0 openapi ./docs/apis/Predict/predict_ios_pull_api.yaml --key=rdme_xn8s9h0fb20a2df26bd435f6c42b1c7d59b240b0354348510d0c2f14216e353fb8fe63 --id=619ca39dba52150073eae7b8
   rules:

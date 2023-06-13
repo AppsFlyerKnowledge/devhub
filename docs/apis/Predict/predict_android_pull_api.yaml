@@ -11,9 +11,10 @@ paths:
   /{app-id}:
     get:
       tags:
-      - Predict aggregated report
+      - Predict Android aggregated report
       summary: Get report
       description: "The Predict aggregated report returns predicted performance metrics, for Android apps."
+      operationId: predict-android-pull-api-get
       parameters:
       - name: app-id
         in: path
