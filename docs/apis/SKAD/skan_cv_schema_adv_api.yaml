@@ -1,0 +1,83 @@
+openapi: 3.0.3
+info:
+  title: SKAN CV Schema API for Advertisers
+  version: 1.0.0
+servers:
+  - url: https://api.appsflyer.com/skan-pull-cs-api/v1
+paths:
+  /conversion-studio-schema/app/{app_id}:
+    get:
+      tags:
+      - "Conversion value (CV) schema"
+      summary: Retrieve CV schema 
+      operationId: skan-pull-cs-api-get 
+      parameters:
+        - name: app_id
+          in: path
+          description: The ID of the app
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Valid data returned
+          content:
+            text/csv:
+              schema:
+                type: string
+        '400':
+          description: Bad request
+          content: 
+            application/json:
+                schema:
+                  $ref: '#/components/schemas/Error'
+                examples:
+                  BadRequest:
+                    summary: Bad request
+                    value: "Bad request"
+        '401':
+          description: Unauthorized
+          content: 
+            application/json:
+                schema:
+                  $ref: '#/components/schemas/Error'
+                examples:
+                  NotFound:
+                    summary: Authorization token is missing or invalid
+                    value: "Unauthorized"
+                  TooManyRequests:
+                    summary: Exceeded rate limitation
+                    value: "Too many requests"
+        '403':
+          description: |
+            You don't have permission to access this report. If you are an analytics partner ask the advertiser to give you permission. 
+          content: 
+            application/json:
+                schema:
+                  $ref: '#/components/schemas/Error'
+                examples:
+                  NoPermission:
+                    summary: No permission
+                    value: "No permission"
+        '404':
+          description: Not Found
+          content: 
+            application/json:
+                schema:
+                  $ref: '#/components/schemas/Error'
+                examples:
+                  NotFound:
+                    summary: Not Found
+                    value: "Not found"
+      security:
+        - bearerAuth: []
+components:
+  schemas:
+    Error:
+      type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Token required for authorization. Please refer to [this link](https://support.appsflyer.com/hc/en-us/articles/360004562377) for instructions on how to obtain the token.
