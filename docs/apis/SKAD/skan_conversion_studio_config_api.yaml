@@ -1,6 +1,6 @@
 openapi: '3.0.3'
 info:
-  title: SKAN conversion studio configuration
+  title: SKAN conversion studio API
   version: '0.1'
 security:
   - bearerAuth: []
@@ -10,7 +10,7 @@ paths:
   /app/{app_id}:
     post:
      tags:
-      - "SKAN conversion studio configuration"
+      - "SKAN conversion studio API"
      summary: Copy SKAN schema
      description: |
       Copy the SKAN conversion value (CV) schema from 1 app to another.
@@ -71,7 +71,7 @@ paths:
        
     get:
       tags:
-      - "SKAN conversion studio configuration"
+      - "SKAN conversion studio API"
       summary: Get SKAN schema
       description: Get the SKAN conversion schema you have configured for a specific app.
       operationId: skan-studio-read-config
