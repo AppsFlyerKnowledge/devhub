@@ -117,7 +117,7 @@ Whenever an App Link fails to open the app, the URI scheme can be used as a fall
 ### Deciding on a URI scheme
 
 **To decide on a URI scheme:**
-1. Contact the marketer and iOS developer. 
+1. Contact the marketer. 
 2. Choose a URI scheme. For example: `yourappname://`
 > ℹ️
 >

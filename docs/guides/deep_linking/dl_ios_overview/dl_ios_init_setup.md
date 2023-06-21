@@ -82,7 +82,7 @@ Whenever a Universal Link fails to open the app, the URI scheme can be used as a
 ### Deciding on a URI scheme
 
 **To decide on a URI scheme:**
-1. Contact the marketer and Android developer. 
+1. Contact the marketer. 
 2. Choose a URI scheme. For example: `yourappname://`
 
 > 📘
