@@ -1,0 +1,99 @@
+openapi: 3.0.0  
+info:  
+  title: Audiences User Attribution Import API 
+  version: 1.0.0  
+security:
+  - bearerAuth: []
+servers:  
+  - url: https://hq1.appsflyer.com/api  
+paths:  
+  /user-attributes-import-api/set-user-data:  
+    post:  
+      tags:
+      - Audiences User Attribution Import API 
+      summary: Import User Attributes  
+      security:  
+        - bearerAuth: []  
+      requestBody:  
+        required: true  
+        content:  
+          application/json:  
+            schema:  
+              type: object  
+              properties:  
+                import_key:  
+                  type: string  
+                attributes_values:  
+                  type: array  
+                  items:  
+                    type: object  
+                    properties:  
+                      device_id:  
+                        type: string  
+                      customer_id:  
+                        type: string  
+                      app_ids:  
+                        type: array  
+                        items:  
+                          type: string  
+                      attributes:  
+                        type: array  
+                        items:  
+                          type: object  
+                          properties:  
+                            attribute_key:  
+                              type: string  
+                            attribute_value:  
+                              type: string  
+            examples:
+              MultiDevice:
+                summary: "multiple device IDs, attribute keys, and attribute values"
+                value:
+                  import_key: "c733e4d7-b538-4d12-a2ef-ffffffffffff"  
+                  attributes_values:  
+                    - device_id: "0bcfc579-f1f3-4452-9111f"  
+                      customer_id: "2222222"  
+                      app_ids: ["game.a.demo"]  
+                      attributes:  
+                        - attribute_key: "score"  
+                          attribute_value: 5  
+                        - attribute_key: "favorite_sport"  
+                          attribute_value: "cricket"  
+                    - device_id: "555555-d1d1-d1d1-555-fffffffff"  
+                      customer_id: "111111"  
+                      app_ids: ["game.a.demo"]  
+                      attributes:  
+                        - attribute_key: "order"  
+                          attribute_value: 7  
+                        - attribute_key: "number"  
+                          attribute_value: 8
+              SingleDevice:
+                summary: "Single device ID and multiple attribute keys and values"
+                value:  
+                  import_key: "c733e4d7-b538-4d12-a2ef-ffffffffffff"  
+                  attributes_values:  
+                    - device_id: "0bcfc579-f1f3-4452-9111f"  
+                      customer_id: "12345678"  
+                      app_ids: ["game.a.demo"]  
+                      attributes:  
+                        - attribute_key: "score"  
+                          attribute_value: 90  
+                        - attribute_key: "favorite-sport"  
+                          attribute_value: "cricket"  
+                        - attribute_key: "orderNumber"  
+                          attribute_value: 93  
+                        - attribute_key: "netPromoterScore"  
+                          attribute_value: 94
+                      required:  
+                        - import_key  
+                        - attributes_values  
+      responses:  
+        '200':  
+          description: OK  
+components:
+  securitySchemes:  
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: |
+        Reach out to your CSM to enable Cohort API and then [get the token in the dashboard](https://support.appsflyer.com/hc/en-us/articles/360004562377) 
