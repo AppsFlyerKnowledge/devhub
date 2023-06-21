@@ -41,7 +41,7 @@ In the use case outlined here `onConversionDataSuccess` takes advantage of the f
    >  Implement only `onConversionDataSuccess` and `onConversionDataFail`.  
    > The methods `onAppOpenAttribution` and `onAttributionFailure` are mutually exclusive with UDL, and will not be called.
 2. Detect deferred deep linking scenarios by filtering-in the conversion data payload with:
-   - `af_status == Non-Organic`
+   - `af_status == Non-organic`
    - `is_first_launch == true`
 3. When deferred deep linking is detected, filter-out the cases that were already handled by UDL.  
    In the example that follows, all the links contain `deep_link_value`.  
