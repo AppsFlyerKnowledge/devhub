@@ -5,15 +5,14 @@ info:
 security:
   - bearerAuth: []
 servers:  
-  - url: https://hq1.appsflyer.com/api  
+  - url: https://hq1.appsflyer.com/api/user-attributes-import-api 
 paths:  
-  /user-attributes-import-api/set-user-data:  
+  /set-user-data:  
     post:  
       tags:
       - Audiences User Attribution Import API 
       summary: Import User Attributes  
-      security:  
-        - bearerAuth: []  
+      operationId: audiences-user-attr-import-post 
       requestBody:  
         required: true  
         content:  
@@ -53,7 +52,7 @@ paths:
                   attributes_values:  
                     - device_id: "0bcfc579-f1f3-4452-9111f"  
                       customer_id: "2222222"  
-                      app_ids: ["game.a.demo"]  
+                      app_ids: ["com.example11.mygoodapp"]  
                       attributes:  
                         - attribute_key: "score"  
                           attribute_value: 5  
@@ -61,7 +60,7 @@ paths:
                           attribute_value: "cricket"  
                     - device_id: "555555-d1d1-d1d1-555-fffffffff"  
                       customer_id: "111111"  
-                      app_ids: ["game.a.demo"]  
+                      app_ids: ["com.example22.mybestapp"]  
                       attributes:  
                         - attribute_key: "order"  
                           attribute_value: 7  
@@ -74,7 +73,7 @@ paths:
                   attributes_values:  
                     - device_id: "0bcfc579-f1f3-4452-9111f"  
                       customer_id: "12345678"  
-                      app_ids: ["game.a.demo"]  
+                      app_ids: ["com.example.myapp"]  
                       attributes:  
                         - attribute_key: "score"  
                           attribute_value: 90  
