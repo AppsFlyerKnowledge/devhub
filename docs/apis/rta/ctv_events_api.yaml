@@ -548,6 +548,7 @@ components:
           - epic
           - switch
           - xbox
+          - nativepc
       required: true
       description: |
         The CTV platform of the measured app
