@@ -44,7 +44,9 @@ In the application `build.gradle` file, add the [latest Android SDK](https://mvn
 ```groovy
 dependencies {
     // Get the latest version from https://mvnrepository.com/artifact/com.appsflyer/af-android-sdk
-    implementation 'com.appsflyer:af-android-sdk:6.9.0' 
+    implementation 'com.appsflyer:af-android-sdk:<<HERE_LATEST_VERSION>>'
+    // For example
+    // implementation 'com.appsflyer:af-android-sdk:6.12.1>> 
 }
 ```
 
