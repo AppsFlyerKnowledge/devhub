@@ -23,7 +23,7 @@ updatedAt: "2023-03-01T12:21:52.568Z"
 [/block]
 ## Overview
 
-This method provides support for creating a [click URLs](https://dev.appsflyer.com/hc/reference/get_click-app-platform-app-id), to be used mainly by non mobile platforms (e.g. Steam, CTVs etc). When the click is matched to an installation, an attribution will be noted.
+This method provides support for creating a click URLs, to be used mainly by non mobile platforms (e.g. Steam, CTVs etc). When the click is matched to an installation, an attribution will be noted.
 
 ## Arguments
 [block:html]
