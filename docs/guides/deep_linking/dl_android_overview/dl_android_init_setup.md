@@ -98,7 +98,7 @@ If there already is an intent-filter for the Android App Link in the main activi
 > ℹ️
 >
 > When `android:autoVerify="true"` is present on any of your intent filters, installing your app on devices with Android 6 and higher causes the system to attempt to verify all hosts associated with the URLs in any of your app's intent filters. 
-> For each unique host name found in the above intent filters, Android queries the corresponding websites for the Digital Asset Links file at `https://hostname/.well-known/assetlinks.json`. Once the OneLink is created, AppsFlyer creates and hosts this path for you. You can test the App Links configuration using the [AppsFlyer link validator](https://www.appsflyer.com/tools/link-validator/). 
+> For each unique host name found in the above intent filters, Android queries the corresponding websites for the Digital Asset Links file at `https://hostname/.well-known/assetlinks.json`. Once the OneLink is created, AppsFlyer creates and hosts this path for you.  
 > [Learn more](https://developer.android.com/training/app-links/verify-site-associations#request-verify)
 
 Github link: [XML](https://github.com/AppsFlyerSDK/appsflyer-onelink-android-sample-apps/blob/5b202b983b33d62bd5d80102ab27f17e2b1cb25f/java/basic_app/app/src/main/AndroidManifest.xml#L39-L49)
