@@ -3,7 +3,7 @@ info:
   title: SKAN CV Schema API for Advertisers
   version: 1.0.0
 servers:
-  - url: https://api.appsflyer.com/skan-pull-cs-api/v1
+  - url: https://hq1.appsflyer.com/api/skan-pull-cs-api/v1
 paths:
   /conversion-studio-schema/app/{app_id}:
     get:
