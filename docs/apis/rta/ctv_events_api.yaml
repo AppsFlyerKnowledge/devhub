@@ -60,18 +60,21 @@ paths:
                   maxLength: 256
                   minLength: 1
                   type: string
+                  pattern: ^[^@=]+$
                   description: The device user agent
                   example: Roku/DVP-9.21 (AE9.21E04090A)
                 device_os_version:
-                  maxLength: 12
+                  maxLength: 24
                   minLength: 1
                   type: string
+                  pattern: ^[0-9.\-]+$
                   description: The device OS version
                   example: 9.3.0
                 device_model:
-                  maxLength: 12
+                  maxLength: 50
                   minLength: 1
                   type: string
+                  pattern: ^[A-Za-z0-9.\(\)\- ]+$
                   description: The device model
                   example: 3920X
                 device_ids:
@@ -89,9 +92,10 @@ paths:
                     used as the user identifier in the advertiser's system
                   example: 15667737-366d-4994-ac8b-653fe6b2be4a
                 app_version:
-                  maxLength: 12
+                  maxLength: 24
                   minLength: 1
                   type: string
+                  pattern: ^[A-Za-z0-9.\-]+$
                   description: The release or version number of the app
                   example: 1.0.5
         required: true
@@ -168,12 +172,14 @@ paths:
                   maxLength: 12
                   minLength: 1
                   type: string
+                  pattern: ^[0-9.\-]+$
                   description: The device OS version
                   example: 9.3.0
                 device_model:
-                  maxLength: 12
+                  maxLength: 50
                   minLength: 1
                   type: string
+                  pattern: ^[A-Za-z0-9.\(\)\- ]+$
                   description: The device model
                   example: 3920X
                 device_ids:
@@ -191,9 +197,10 @@ paths:
                     used as the user identifier in the advertiser's system
                   example: 15667737-366d-4994-ac8b-653fe6b2be4a
                 app_version:
-                  maxLength: 12
+                  maxLength: 24
                   minLength: 1
                   type: string
+                  pattern: ^[0-9.\-]+$
                   description: The release or version number of the app
                   example: 1.0.5
         required: true
@@ -272,12 +279,14 @@ paths:
                   maxLength: 12
                   minLength: 1
                   type: string
+                  pattern: ^[0-9.\-]+$
                   description: The device OS version
                   example: 9.3.0
                 device_model:
-                  maxLength: 12
+                  maxLength: 50
                   minLength: 1
                   type: string
+                  pattern: ^[A-Za-z0-9.\(\)\- ]+$
                   description: The device model
                   example: 3920X
                 device_ids:
@@ -295,9 +304,10 @@ paths:
                     used as the user identifier in the advertiser's system
                   example: 15667737-366d-4994-ac8b-653fe6b2be4a
                 app_version:
-                  maxLength: 12
+                  maxLength: 24
                   minLength: 1
                   type: string
+                  pattern: ^[A-Za-z0-9.\-]+$
                   description: The release or version number of the app
                   example: 1.0.5
                 event_name:
@@ -526,6 +536,7 @@ components:
       in: path
       schema:
         type: string
+        pattern: ^[A-Za-z0-9.\-]+$
       required: true
       description: |
         Application ID
@@ -596,5 +607,6 @@ components:
                 `custom` format is GUID
             value:
               type: string
+              pattern: ^[A-Za-z0-9\-]+$
 x-id:
 - af-wh-ott
