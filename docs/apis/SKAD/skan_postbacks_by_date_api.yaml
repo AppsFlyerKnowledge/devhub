@@ -348,7 +348,7 @@ paths:
               In the SKAdNetwork dashboard, verify that data is available for the specified date range.
               Verify that `start_date` is a date earlier than yesterday.
           content:
-            text/csv:
+            text/plain:
               schema:
                 type: string
         '400':
