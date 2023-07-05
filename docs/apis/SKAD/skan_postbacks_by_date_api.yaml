@@ -1,0 +1,404 @@
+openapi: 3.0.3
+info:
+  title: SKAN aggregated postback by arrival date API
+  version: 1.0.0
+servers:
+  - url: https://hq1.appsflyer.com/api/skadnetworks-postbacks/v3/data
+    description: SKAN v4.0
+  - url: https://hq1.appsflyer.com/api/skadnetworks-postbacks/v2/data
+    description: SKAN v3.0
+security:
+  - bearerAuth: []
+paths:
+  /conversion-studio-schema/app/{app_id}:
+    get:
+      tags:
+      - "SKAN postbacks"
+      summary: Retrieve by arrival date
+      operationId: skan-agg-postback-arrival-date-api-get 
+      parameters:
+        - name: app_id
+          in: path
+          description: The ID of the app
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: start_date
+          description: |
+            The postback arrival date range is bounded by `start_date` and `end_date`. 
+            Note! The arrival date differs from the install date used in the SKAdNetwork dashboard and reports.
+            - Format: YYYY-MM-DD 
+            - Earliest date permitted: 2020-11-01
+          examples: 
+            DateOnly:
+              summary: Date only
+              value:
+                "2020-11-12"
+          required: true
+          schema: 
+            type: string
+            format: date
+        - in: query
+          name: end_date
+          description: |
+            The postback arrival date range is bounded by `start_date` and `end_date`. 
+            Note! The arrival date differs from the install date used in the SKAdNetwork dashboard and reports.
+            - Format: YYYY-MM-DD 
+            - Maximum number of days per report call: 60 days
+          examples: 
+            DateOnly:
+              summary: Date only
+              value:
+                "2020-11-12"
+          required: true
+          schema: 
+            type: string
+            format: date
+        - in: query
+          name: ad_network_name
+          description: Filter by media source
+          schema:
+            type: string
+        - in: query
+          name : geo
+          description: |
+            Filter by two-letter ISO country code using ISO 3166 (alpha-2). 
+          example: US
+          schema:
+            type: string
+            enum:
+              - AF
+              - AX
+              - AL
+              - DZ
+              - AS
+              - AD
+              - AO
+              - AI
+              - AQ
+              - AG
+              - AR
+              - AM
+              - AW
+              - AU
+              - AT
+              - AZ
+              - BS
+              - BH
+              - BD
+              - BB
+              - BY
+              - BE
+              - BZ
+              - BJ
+              - BM
+              - BT
+              - BO
+              - BA
+              - BW
+              - BV
+              - BR
+              - IO
+              - BN
+              - BG
+              - BF
+              - BI
+              - KH
+              - CM
+              - CA
+              - CV
+              - KY
+              - CF
+              - TD
+              - CL
+              - CN
+              - CX
+              - CC
+              - CO
+              - KM
+              - CG
+              - CD
+              - CK
+              - CR
+              - CI
+              - HR
+              - CU
+              - CY
+              - CZ
+              - DK
+              - DJ
+              - DM
+              - DO
+              - EC
+              - EG
+              - SV
+              - GQ
+              - ER
+              - EE
+              - ET
+              - FK
+              - FO
+              - FJ
+              - FI
+              - FR
+              - GF
+              - PF
+              - TF
+              - GA
+              - GM
+              - GE
+              - DE
+              - GH
+              - GI
+              - GR
+              - GL
+              - GD
+              - GP
+              - GU
+              - GT
+              - GG
+              - GN
+              - GW
+              - GY
+              - HT
+              - HM
+              - VA
+              - HN
+              - HK
+              - HU
+              - IS
+              - IN
+              - ID
+              - IR
+              - IQ
+              - IE
+              - IM
+              - IL
+              - IT
+              - JM
+              - JP
+              - JE
+              - JO
+              - KZ
+              - KE
+              - KI
+              - KR
+              - KP
+              - KW
+              - KG
+              - LA
+              - LV
+              - LB
+              - LS
+              - LR
+              - LY
+              - LI
+              - LT
+              - LU
+              - MO
+              - MK
+              - MG
+              - MW
+              - MY
+              - MV
+              - ML
+              - MT
+              - MH
+              - MQ
+              - MR
+              - MU
+              - YT
+              - MX
+              - FM
+              - MD
+              - MC
+              - MN
+              - ME
+              - MS
+              - MA
+              - MZ
+              - MM
+              - NA
+              - NR
+              - NP
+              - NL
+              - AN
+              - NC
+              - NZ
+              - NI
+              - NE
+              - NG
+              - NU
+              - NF
+              - MP
+              - NO
+              - OM
+              - PK
+              - PW
+              - PS
+              - PA
+              - PG
+              - PY
+              - PE
+              - PH
+              - PN
+              - PL
+              - PT
+              - PR
+              - QA
+              - RE
+              - RO
+              - RU
+              - RW
+              - BL
+              - SH
+              - KN
+              - LC
+              - MF
+              - PM
+              - VC
+              - WS
+              - SM
+              - ST
+              - SA
+              - SN
+              - RS
+              - SC
+              - SL
+              - SG
+              - SK
+              - SI
+              - SB
+              - SO
+              - ZA
+              - GS
+              - ES
+              - LK
+              - SD
+              - SR
+              - SJ
+              - SZ
+              - SE
+              - CH
+              - SY
+              - TW
+              - TJ
+              - TZ
+              - TH
+              - TL
+              - TG
+              - TK
+              - TO
+              - TT
+              - TN
+              - TR
+              - TM
+              - TC
+              - TV
+              - UG
+              - UA
+              - AE
+              - GB
+              - US
+              - UM
+              - UY
+              - UZ
+              - VU
+              - VE
+              - VN
+              - VG
+              - VI
+              - WF
+              - EH
+              - YE
+              - ZM
+              - ZW
+        - in: query
+          name: skad_redownload
+          schema:
+            type: boolean
+        - in: query
+          name: skad_source_app_id
+          description: Filter by source app ID
+          schema:
+            type: string 
+        - in: query
+          name: ad_network_campaign_id
+          description: |
+            Filter by ad network campaign ID.
+            **Note**: This is not the campaign ID reported by SKAdNetwork.
+          schema:
+            type: string  
+        - in: query
+          name: modeled_conversion_values
+          schema:
+            type: boolean
+          description: |
+            - Only supported from V2
+            - If `true`, the postback populates the “count” column with modeled conversion value data.  See available field for modeled data
+            - If `false`, the postback presents the conversion value count and with all available fields as received by listed in the report structure, without modeled data.
+            - Default value is `false`.
+
+      responses:
+        '200':
+          description: |
+            Valid data returned. Contents of CSV file described [here](https://support.appsflyer.com/hc/en-us/articles/360016646557#report-structure-and-example)
+            *Empty report* - no data found for the specified date range (CSV, only column names are returned).
+              In the SKAdNetwork dashboard, verify that data is available for the specified date range.
+              Verify that `start_date` is a date earlier than yesterday.
+          content:
+            text/csv:
+              schema:
+                type: string
+        '400':
+          description: Bad request
+          content: 
+            application/json:
+                schema:
+                  $ref: '#/components/schemas/Error'
+                examples:
+                    BadRequest:
+                      summary: Bad request
+                      value: "Bad request"
+        '401':
+          description: Unauthorized
+          content: 
+            application/json:
+                schema:
+                  $ref: '#/components/schemas/Error'
+                examples:
+                  NotFound:
+                    summary: Authorization token is missing or invalid
+                    value: "Unauthorized"
+        '403':
+          description: |
+            You don't have permission to access this report. If you are an analytics partner ask the advertiser to give you permission. 
+          content: 
+            application/json:
+                schema:
+                  $ref: '#/components/schemas/Error'
+                examples:
+                  NoPermission:
+                    summary: No permission
+                    value: "No permission"
+        '404':
+          description: Not Found
+          content: 
+            application/json:
+                schema:
+                  $ref: '#/components/schemas/Error'
+                examples:
+                  NotFound:
+                    summary: Not Found
+                    value: "Not found"
+components:
+  schemas:
+    Error:
+      type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Token required for authorization. Please refer to [this link](https://support.appsflyer.com/hc/en-us/articles/360004562377) for instructions on how to obtain the token.
