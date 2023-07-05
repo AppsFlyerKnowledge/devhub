@@ -3,10 +3,10 @@ info:
   title: SKAN aggregated postback by arrival date API
   version: 1.0.0
 servers:
-  - url: https://hq1.appsflyer.com/api/skadnetworks-postbacks/v2/data
-    description: SKAN v3.0
   - url: https://hq1.appsflyer.com/api/skadnetworks-postbacks/v3/data
     description: SKAN v4.0
+  - url: https://hq1.appsflyer.com/api/skadnetworks-postbacks/v2/data
+    description: SKAN v3.0
 security:
   - bearerAuth: []
 paths:
@@ -330,15 +330,23 @@ paths:
             **Note**: This is not the campaign ID reported by SKAdNetwork.
           schema:
             type: string  
-
-
-
-
-
+        - in: query
+          name: modeled_conversion_values
+          schema:
+            type: boolean
+          description: |
+            - Only supported from V2
+            - If `true`, the postback populates the “count” column with modeled conversion value data.  See available field for modeled data
+            - If `false`, the postback presents the conversion value count and with all available fields as received by listed in the report structure, without modeled data.
+            - Default value is `false`.
 
       responses:
         '200':
-          description: Valid data returned
+          description: |
+            Valid data returned. Contents of CSV file described [here](https://support.appsflyer.com/hc/en-us/articles/360016646557#report-structure-and-example)
+            *Empty report* - no data found for the specified date range (CSV, only column names are returned).
+              In the SKAdNetwork dashboard, verify that data is available for the specified date range.
+              Verify that `start_date` is a date earlier than yesterday.
           content:
             text/csv:
               schema:
@@ -363,9 +371,6 @@ paths:
                   NotFound:
                     summary: Authorization token is missing or invalid
                     value: "Unauthorized"
-                  TooManyRequests:
-                    summary: Exceeded rate limitation
-                    value: "Too many requests"
         '403':
           description: |
             You don't have permission to access this report. If you are an analytics partner ask the advertiser to give you permission. 
