@@ -3,14 +3,14 @@ info:
   title: SKAN aggregated postback by arrival date API
   version: 1.0.0
 servers:
-  - url: https://hq1.appsflyer.com/api/skadnetworks-postbacks/v3/data
+  - url: https://hq1.appsflyer.com/api/skadnetworks-postbacks/v3/
     description: SKAN v4.0
-  - url: https://hq1.appsflyer.com/api/skadnetworks-postbacks/v2/data
+  - url: https://hq1.appsflyer.com/api/skadnetworks-postbacks/v2/
     description: SKAN v3.0
 security:
   - bearerAuth: []
 paths:
-  /conversion-studio-schema/app/{app_id}:
+  /data/app/{app_id}:
     get:
       tags:
       - "SKAN postbacks"
