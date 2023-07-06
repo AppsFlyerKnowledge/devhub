@@ -14,7 +14,7 @@ paths:
     get:
       tags:
       - "SKAN performance report"
-      summary: Retrieve resport
+      summary: Retrieve report
       description: |
         > ℹ️ You can choose between SKAN v4.0 and v3.0 by changing the *Base URL* on the right 
 
