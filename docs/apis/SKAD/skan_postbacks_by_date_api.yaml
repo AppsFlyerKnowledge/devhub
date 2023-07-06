@@ -16,6 +16,8 @@ paths:
       - "SKAN postbacks"
       summary: Retrieve by arrival date
       operationId: skan-agg-postback-arrival-date-api-get 
+      description: |
+        > ℹ️ You can choose between SKAN v4.0 and v3.0 by changing the *Base URL* on the right
       parameters:
         - name: app_id
           in: path
@@ -336,7 +338,7 @@ paths:
             type: boolean
           description: |
             - Only supported from V2
-            - If `true`, the postback populates the “count” column with modeled conversion value data.  See available field for modeled data
+            - If `true`, the postback populates the “count” column with modeled conversion value data.  [See available field for modeled data](https://support.appsflyer.com/hc/en-us/articles/360016646557#report-structure-and-example).
             - If `false`, the postback presents the conversion value count and with all available fields as received by listed in the report structure, without modeled data.
             - Default value is `false`.
 
