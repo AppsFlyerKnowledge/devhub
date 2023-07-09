@@ -29,7 +29,6 @@ paths:
             schema:
               required:
               - device_ids
-              - device_model
               - device_os_version
               - ip
               - limit_ad_tracking
@@ -136,7 +135,6 @@ paths:
             schema:
               required:
               - device_ids
-              - device_model
               - device_os_version
               - ip
               - limit_ad_tracking
@@ -242,7 +240,6 @@ paths:
             schema:
               required:
               - device_ids
-              - device_model
               - device_os_version
               - event_name
               - ip
@@ -319,6 +316,9 @@ paths:
                 event_parameters:
                   type: object
                   properties:
+                    af_duration_seconds:
+                      type: number
+                      format: integer
                     af_revenue:
                       type: number
                       format: double
@@ -510,6 +510,7 @@ paths:
                   description: A JSON object which can contain multiple custom event
                     parameters.
                   format: json
+                  maxLength: 2048
         required: true
       responses:
         202:
