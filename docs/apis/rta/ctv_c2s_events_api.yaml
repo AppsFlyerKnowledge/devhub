@@ -1,11 +1,11 @@
 openapi: 3.0.1
 info:
-  title: PC/Console/CTV Events API
+  title: PC/Console/CTV Client-app Events API
   version: 1.0.0
 servers:
-  - url: https://events.appsflyer.com/v1.0/s2s/
+  - url: https://events.appsflyer.com/v1.0/c2s/
     description: Production server
-  - url: https://sandbox-events.appsflyer.com/v1.0/s2s/
+  - url: https://sandbox-events.appsflyer.com/v1.0/c2s/
     description: Sandbox server
 security:
   - ApiKeyAuth: []
@@ -16,10 +16,11 @@ paths:
       - Measure first app opens
       summary: Measure first app opens
       description: |
-        > ℹ️ This is a server to server API. If you need to report events directly from your application's client please see [this section](doc:c2s-integrations-overview) or contact your CSM
+        > ℹ️ This is  API is used to to report events directly from your application's client. If you need Server-to-Server please see [this section](https://dev.appsflyer.com/hc/reference/post_first-open-app-platform-app-id) 
 
         To properly measure CTV first app opens with AppsFlyer, the following
         API call must be made for every first app open
+      operationId: ctv-c2s-events-firstopens-post
       parameters:
         - $ref: '#/components/parameters/AppId'
         - $ref: '#/components/parameters/Platform'
@@ -28,20 +29,14 @@ paths:
           application/json:
             schema:
               required:
+              - request_id
               - device_ids
+              - device_model
               - device_os_version
-              - ip
               - limit_ad_tracking
-              - user_agent
+              - app_version
               type: object
               properties:
-                timestamp:
-                  maximum: 1625576172928
-                  minimum: 1625230572928
-                  type: integer
-                  description: Event timestamp in Unix time (UTC)
-                  format: int64
-                  example: 1625576172928
                 request_id:
                   maxLength: 36
                   minLength: 36
@@ -49,19 +44,6 @@ paths:
                   pattern: ^[a-z0-9]{8}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{12}$
                   description: Unique identifier per request
                   example: 71dad7da-7926-40d8-9b15-b94a6d46e15a
-                ip:
-                  maxLength: 46
-                  minLength: 1
-                  type: string
-                  description: The device IP address - IPv4 or IPv6
-                  example: 35.244.183.10
-                user_agent:
-                  maxLength: 256
-                  minLength: 1
-                  type: string
-                  pattern: ^[^@=]+$
-                  description: The device user agent
-                  example: Roku/DVP-9.21 (AE9.21E04090A)
                 device_os_version:
                   maxLength: 24
                   minLength: 1
@@ -122,10 +104,11 @@ paths:
       - Measure sessions
       summary: Measure sessions
       description: |
-        > ℹ️ This is a server to server API. If you need to report events directly from your application's client please see [this section](doc:c2s-integrations-overview) or contact your CSM
-        
+        > ℹ️ This is  API is used to to report events directly from your application's client. If you need Server-to-Server please see [this section](https://dev.appsflyer.com/hc/reference/post_session-app-platform-app-id)         
+
         This AppsFlyer API integration provide advertisers with the ability
         to measure post-install sessions and attribute it to a media source and campaign
+      operationId: ctv-c2s-events-sessions-post
       parameters:
         - $ref: '#/components/parameters/AppId'
         - $ref: '#/components/parameters/Platform'
@@ -134,38 +117,20 @@ paths:
           application/json:
             schema:
               required:
+              - request_id
               - device_ids
+              - device_model
               - device_os_version
-              - ip
               - limit_ad_tracking
-              - user_agent
+              - app_version
               type: object
               properties:
-                timestamp:
-                  maximum: 1625576172928
-                  minimum: 1625230572928
-                  type: integer
-                  description: Event timestamp in Unix time (UTC)
-                  format: int64
-                  example: 1625576172928
                 request_id:
                   maxLength: 36
                   minLength: 36
                   type: string
                   description: Unique identifier per request
                   example: 71dad7da-7926-40d8-9b15-b94a6d46e15a
-                ip:
-                  maxLength: 46
-                  minLength: 1
-                  type: string
-                  description: The device IP Address - IPv4 or IPv6
-                  example: 35.244.183.10
-                user_agent:
-                  maxLength: 256
-                  minLength: 1
-                  type: string
-                  description: The device user agent
-                  example: Roku/DVP-9.21 (AE9.21E04090A)
                 device_os_version:
                   maxLength: 12
                   minLength: 1
@@ -227,51 +192,33 @@ paths:
       - Measure in-app events
       summary: Measure in-app events
       description: |
-        > ℹ️ This is a server to server API. If you need to report events directly from your application's client please see [this section](doc:c2s-integrations-overview) or contact your CSM
-
+        > ℹ️ This is  API is used to to report events directly from your application's client. If you need Server-to-Server please see [this section](https://dev.appsflyer.com/hc/reference/post_inapp-app-platform-app-id)         
         This AppsFlyer API integration allows advertisers to measure any
         post-install in-app event and attribute it to a media source and campaign
       parameters:
         - $ref: '#/components/parameters/AppId'
         - $ref: '#/components/parameters/Platform'
+      operationId: ctv-c2s-events-inapps-post
       requestBody:
         content:
           application/json:
             schema:
               required:
+              - request_id
               - device_ids
+              - device_model
               - device_os_version
               - event_name
-              - ip
               - limit_ad_tracking
-              - user_agent
+              - app_version
               type: object
               properties:
-                timestamp:
-                  maximum: 1625576172928
-                  minimum: 1625230572928
-                  type: integer
-                  description: Event timestamp in Unix time (UTC)
-                  format: int64
-                  example: 1625576172928
                 request_id:
                   maxLength: 36
                   minLength: 36
                   type: string
                   description: Unique identifier per request
                   example: 71dad7da-7926-40d8-9b15-b94a6d46e15a
-                ip:
-                  maxLength: 46
-                  minLength: 1
-                  type: string
-                  description: The device IP address - IPv4 or IPv6
-                  example: 35.244.183.10
-                user_agent:
-                  maxLength: 256
-                  minLength: 1
-                  type: string
-                  description: The device user agent
-                  example: Roku/DVP-9.21 (AE9.21E04090A)
                 device_os_version:
                   maxLength: 12
                   minLength: 1
