@@ -20,4 +20,4 @@ jobs:
       - name: Run `openapi` command 🚀
         uses: readmeio/rdme@v8
         with:
-          rdme: openapi ./rta/ctv_c2s_events_api.yaml --key=${{ secrets.README_API_KEY }} --id=64ab0d5419d95b00eadb1b71
+          rdme: openapi ./docs/apis/rta/ctv_c2s_events_api.yaml --key=${{ secrets.README_API_KEY }} --id=64ab0d5419d95b00eadb1b71
