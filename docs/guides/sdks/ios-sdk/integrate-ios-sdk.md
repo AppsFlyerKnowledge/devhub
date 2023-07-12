@@ -388,8 +388,6 @@ To register the AppsFlyer endpoint:
 
 According to Apple, you can set only one endpoint. Copies of received postbacks are available in the [postbacks copy report](https://support.appsflyer.com/hc/en-us/articles/360014261518-SKAN-raw-data-reports#report-types).
 
-## Before you begin
-
 ## Enabling debug mode
 
 You can enable debug logs by setting [isDebug](doc:ios-sdk-reference-appsflyerlib#isdebug) to `true`:
