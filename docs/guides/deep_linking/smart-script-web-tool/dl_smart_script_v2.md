@@ -106,7 +106,10 @@ var result = window.AF_SMART_SCRIPT.generateOneLinkURL({
             //}
             // Optionally - fire an impression.
             // The impression will fire to https://impressions.onelink.me//.... 
-            window.AF_SMART_SCRIPT.fireImpressionsLink();
+            setTimeout(() => {
+              window.AF_SMART_SCRIPT.fireImpressionsLink();
+              console.log("Impression fired"); 
+            }, 1000);
       }
 ```
 
@@ -133,7 +136,10 @@ To set up the Smart Script in Google Tag Manager:
             //}
             // Optionally - fire an impression.
             // The impression will fire to https://impressions.onelink.me//.... 
-            window.AF_SMART_SCRIPT.fireImpressionsLink();            
+            setTimeout(() => {
+              window.AF_SMART_SCRIPT.fireImpressionsLink();
+              console.log("Impression fired"); 
+            }, 1000);            
       }
 ```
 
@@ -200,9 +206,17 @@ You can fire an impression when a page loads, a CTA or banner displays, etc. **N
 2. Make sure the result is valid (and not null).
 3. Run the following impression function:
 
+> 🚧 A must-do workaround
+> 
+> Please wrap the call to `fireImpressionsLink` with `setTimeout` to make sure there is at least 1 second of delay between the call to `generateOneLinkURL` and `fireImpressionsLink`
+
 ```javascript
-window.AF_SMART_SCRIPT.fireImpressionsLink();
+setTimeout(() => {
+  window.AF_SMART_SCRIPT.fireImpressionsLink();
+  console.log("Impression fired"); 
+}, 1000);
 ```
+You can find examples for firing impressions for [mobile only](#impressions---onelink-template-with-mobile-only-support) and for [cross platform support](#impressions---onelink-template-with-cross-platform-support)
 
 ## Arguments
 
@@ -288,6 +302,10 @@ See [example](https://appsflyersdk.github.io/appsflyer-onelink-smart-script/exam
 
 See [example](https://appsflyersdk.github.io/appsflyer-onelink-smart-script/examples/impressions_cross_platform.html?incmp=gogo&inmedia=email) of an impressions fired using a OneLink template who has cross-platform support.  
 For example an impression fired from a non-mobile platform (e.g desktop or console).
+
+> 📘 Firing an impression from a cross platform landing page
+> 
+> You can find here a [code example](https://github.com/AppsFlyerSDK/appsflyer-sample-app-smartscript-demo-page/blob/8c0b6e7385b3b0cedd1208a530f002438a336e76/index.html#L241-L244) for firing an impression from a [demo landing page](https://appsflyersdk.github.io/appsflyer-sample-app-smartscript-demo-page/)  
 
 > 🚧 A must-do workaround
 > 
