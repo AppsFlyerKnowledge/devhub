@@ -9,6 +9,7 @@ createdAt: "2020-11-02T17:46:42.932Z"
 updatedAt: "2023-05-02T12:44:20.646Z"
 order: 2
 ---
+
 ## Before you begin
 
 - You must [install the Android SDK](doc:install-android-sdk). 
@@ -32,8 +33,6 @@ order: 2
 [/block]
 
 
-
-
 It's recommended to initialize the SDK in the [global Application class/subclass]. That is to ensure the SDK can start in any scenario (for example, deep linking).
 
 **Step 1: Import AppsFlyerLib**  
@@ -46,8 +45,6 @@ import com.appsflyer.AppsFlyerLib;
 import com.appsflyer.AppsFlyerLib
 ```
 
-
-
 **Step 2: Initialize the SDK**  
 In the global Application `onCreate`, call [`init`](doc:android-sdk-reference-appsflyerlib#init) with the following arguments:
 
@@ -57,8 +54,6 @@ AppsFlyerLib.getInstance().init(<AF_DEV_KEY>, null, this);
 ```kotlin
 AppsFlyerLib.getInstance().init(<AF_DEV_KEY>, null, this)
 ```
-
-
 
 1. The first argument is your AppsFlyer dev key.
 2. The second argument is a Nullable [`AppsFlyerConversionListener`](doc:android-sdk-reference-appsflyerconversionlistener). If you don't need conversion data, we recommend passing a `null` as the second argument. For more information, see [Conversion data](doc:conversion-data-android).
@@ -74,8 +69,6 @@ AppsFlyerLib.getInstance().start(this);
 ```kotlin
 AppsFlyerLib.getInstance().start(this)
 ```
-
-
 
 ### Deferring SDK start
 
@@ -122,8 +115,6 @@ AppsFlyerLib.getInstance().start(this, <AF_DEV_KEY>, object : AppsFlyerRequestLi
 })
 ```
 
-
-
 - The `onSuccess()` callback method is invoked for every `200` response to an attribution request made by the SDK.
 - The `onError(String error)` callback method is invoked for any other response and returns the response as the error string.
 
@@ -164,22 +155,46 @@ class AFApplication : Application() {
 }
 ```
 
-
-
 [Github link](https://github.com/AppsFlyerSDK/appsflyer-onelink-android-sample-apps/blob/80763ef8c93c49b1f0226455ae35d089f7968ede/java/basic_app/app/src/main/java/com/appsflyer/onelink/appsflyeronelinkbasicapp/AppsflyerBasicApp.java#L144-L145)
 
 ## Setting the Customer User ID
 
 <span class="annotation-optional">Optional</span>  
-The Customer User ID (CUID) is a unique user identifier created outside the SDK by the app owner. If made available to the SDK, it can be associated with installs and other in-app events. These CUID-tagged events can be cross-referenced with user data from other devices and applications.
 
-There are two ways to set the CUID, depending on whether or not the SDK is started from the `Application` class or the `Activity` class (see [Starting the Android SDK](#starting-the-android-sdk)).
+The Customer User ID (CUID) is a unique user identifier created by the app owner outside the SDK. It can be associated with in-app events if provided to the SDK. Once associated with the CUID, these events can be cross-referenced with user data from other devices and applications.
 
-### Set the CUID in the Application class
+### Set the customer User ID
 
-If you started the SDK from the `Application` class (see [Starting the Android SDK](#starting-the-android-sdk)), pause the SDK to prevent the install data from being sent to AppsFlyer before the CUID is provided.  
+Once the CUID is available, you can set it by calling  [`setCustomerUserId`](https://dev.appsflyer.com/hc/docs/android-sdk-reference-appsflyerlib#setcustomeruserid).
 
-To achieve the delay, set [`waitForCustomerUserId`](https://dev.appsflyer.com/hc/docs/android-sdk-reference-appsflyerlib#waitforcustomeruserid) to `true` before calling  [`init`](doc:android-sdk-reference-appsflyerlib#init) and [`start`](doc:android-sdk-reference-appsflyerlib#start).
+```java
+
+...
+AppsFlyerLib.getInstance().init(AF_DEV_KEY, conversionListener, this);  
+AppsFlyerLib.getInstance().start(this , AF_DEV_KEY );
+...
+// Do your magic to get the customerUserID...
+...
+AppsFlyerLib.getInstance().setCustomerUserId(<MY_CUID>);
+```
+
+The CUID can only be associated with in-app events after it was set. Since `start` was called before `setCustomerUserID`, the install event will not be associated with the CUID. If you need to associate the install event with the CUID, see the below section.
+
+### Associate the CUID with the install event
+
+If it’s important for you to associate the install event with the CUID, you should set it before calling `start`. 
+
+You can set the CUID before `start`  in two ways, depending on whether you start the SDK in the `Application` or the `Activity` class. 
+
+**When starting from the application class**
+
+If you started the SDK from the `Application` class (see: [`Starting the Android SDK`](https://dev.appsflyer.com/hc/docs/integrate-android-sdk#starting-the-android-sdk)) and you want the CUID to be associated with the install event, put the SDK in waiting mode to prevent the install data from being sent to AppsFlyer before the CUID is provided.
+
+To activate the waiting mode, set [`waitForCustomerUserId`](https://dev.appsflyer.com/hc/docs/android-sdk-reference-appsflyerlib#waitforcustomeruserid) to `true` after [`init`](https://dev.appsflyer.com/hc/docs/android-sdk-reference-appsflyerlib#init) and before [`start`](https://dev.appsflyer.com/hc/docs/android-sdk-reference-appsflyerlib#start).
+
+### 📘Important
+
+ It's important to remember that putting the SDK in a waiting mode may block the SDK from sending the install event and consequently prevent attribution. This can occur, for example, when the user launches the application for the first time and then exits before the SDK can set the CUID. 
 
 ```java
 AppsFlyerLib.getInstance().init(AF_DEV_KEY, getConversionListener(), getApplicationContext());
@@ -187,20 +202,21 @@ AppsFlyerLib.getInstance().waitForCustomerUserId(true);
 AppsFlyerLib.getInstance().start(this);
 ```
 
+After calling [`start`](https://dev.appsflyer.com/hc/docs/android-sdk-reference-appsflyerlib#start), you can add your custom code that makes the CUID available.
 
-
-After calling [`start`](doc:android-sdk-reference-appsflyerlib#start), you can add your custom code that makes the CUID available.  
-Once the CUID is available, the final step includes setting the CUID, releasing the SDK from the waiting mode, and sending the attribution data with the customer ID to AppsFlyer. This step is performed using the call to [`setCustomerIdAndLogSession`](https://dev.appsflyer.com/hc/docs/android-sdk-reference-appsflyerlib#setcustomeridandlogsession). 
+Once the CUID is available, the final step includes setting the CUID, releasing the SDK from the waiting mode, and sending the attribution data with the customer ID to AppsFlyer. This step is performed using the call to [`setCustomerIdAndLogSession`](https://dev.appsflyer.com/hc/docs/android-sdk-reference-appsflyerlib#setcustomeridandlogsession).
 
 ```java
 AppsFlyerLib.getInstance().setCustomerIdAndLogSession(<CUSTOMER_ID>, this);
 ```
 
+Other than [`setCustomerIdAndLogSession`](https://dev.appsflyer.com/hc/docs/android-sdk-reference-appsflyerlib#setcustomeridandlogsession), do not use [`setCustomerUserId`](https://dev.appsflyer.com/hc/docs/android-sdk-reference-appsflyerlib#setcustomeruserid) or any other AppsFlyer SDK functionality, as the waiting SDK will ignore it.
 
+### Note
 
-Other than [`setCustomerIdAndLogSession`](https://dev.appsflyer.com/hc/docs/android-sdk-reference-appsflyerlib#setcustomeridandlogsession), do not use [`setCustomerUserId`](https://dev.appsflyer.com/hc/docs/android-sdk-reference-appsflyerlib#setcustomeruserid) or any other AppsFlyer SDK functionality, as the waiting SDK will ignore it. 
+If you wish to remove the waiting mode from the SDK initialization flow, it is not enough to delete the call to `waitForCustomerUserId(true)`. It is also required to replace it with `waitForCustomerUserID(false)`. Simply removing the call is insufficient because the 'waitForCustomerUserId' boolean flag is stored in the Android Shared Preferences. 
 
-** Example code** 
+**Example code**
 
 ```java
 public class AFApplication extends Application {
@@ -226,37 +242,9 @@ public class AFApplication extends Application {
 }
 ```
 
+**When starting from the Activity class**
 
-
-> 📘 Note
-> 
-> If you wish to remove the waiting mode from the SDK initialization fow, it is not enough to delete the call to `waitForCustomerUserId(true)`. It is also required to replace it with `waitForCustomerUserID(false)`. Simply removing the call is insufficient because the 'waitForCustomerUserId' boolean flag is stored in the Android Shared Preferences.
-
-### Set the CUID in an Activity class
-
-If you started the SDK from an `Activity` class (see [Deferring SDK start](#deferring-sdk-start)), we recommend setting the CUID before calling  [`init`](doc:android-sdk-reference-appsflyerlib#init) and [`start`](doc:android-sdk-reference-appsflyerlib#start). This ensures that the install event can be recorded with the CUID. 
-
-Use the [`setCustomerUserId`](https://dev.appsflyer.com/hc/docs/android-sdk-reference-appsflyerlib#setcustomeruserid) function to set the CUID.
-
-```java
-public void setCustomerUserId(String id);
-```
-
-
-
-**Usage example:**
-
-```java
-// Do your magic to get the customerUserID
-...
-AppsFlyerLib.getInstance().init(AF_DEV_KEY, conversionListener, this);  
-AppsFlyerLib.getInstance().setCustomerUserId(<MY_CUID>);
-...
-//Now you can call start    
-AppsFlyerLib.getInstance().start(this , AF_DEV_KEY );
-```
-
-
+If you started the SDK from an `Activity` (see: [`Deferring SDK start`](https://dev.appsflyer.com/hc/docs/integrate-android-sdk#deferring-sdk-start)) class and you want the CUID to be associated with the install event, set the CUID before[`start`](https://dev.appsflyer.com/hc/docs/android-sdk-reference-appsflyerlib#start).
 
 ## Enabling debug mode
 
@@ -269,8 +257,6 @@ AppsFlyerLib.getInstance().setDebugLog(true);
 ```kotlin
 AppsFlyerLib.getInstance().setDebugLog(true)
 ```
-
-
 
 > 📘 Note
 > 
