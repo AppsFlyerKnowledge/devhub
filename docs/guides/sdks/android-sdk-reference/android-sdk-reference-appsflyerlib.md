@@ -1432,12 +1432,12 @@ AppsFlyerLib.getInstance().setResolveDeepLinkURLs("clickdomain.com", "myclickdom
 ### setSharingFilterForPartners
 
 <span class="annotation-added">Added in V6.4</span>  
-**Method signat
+**Method signature**
 
 ```java
 void setSharingFilterForPartners(java.lang.String... partners)
 ```
-
+This function replaces the deprecated [`setSharingFilter`](#setsharingfilter) and [`setSharingFilterForAllPartners`](#setsharingfilterforallpartners)
 
 
 **Description**  
@@ -1483,12 +1483,12 @@ AppsFlyerLib.getInstance().setSharingFilterForPartners("") // Reset list (defaul
 ```java
 void setSharingFilter(java.lang.String... partners)
 ```
-
+This function is deprecated and has been replaced by [`setSharingFilterForPartners`](#setsharingfilterforpartners)
 
 
 **Description**  
-Stops events from propagating to the specified AppsFlyer partners.
-
+Stops events from propagating to the specified AppsFlyer partners. 
+(Deprecated and replaced by setSharingFilterForPartners)
 **Input arguments**
 
 | Type        | Name       | Description                                                                                           |
@@ -1506,7 +1506,7 @@ Stops events from propagating to the specified AppsFlyer partners.
 ```java
 void setSharingFilterForAllPartners()
 ```
-
+This function is deprecated and has been replaced by [`setSharingFilterForPartners`](#setsharingfilterforpartners)
 
 
 **Description**  

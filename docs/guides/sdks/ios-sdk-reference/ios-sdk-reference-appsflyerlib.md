@@ -965,6 +965,8 @@ AppsFlyerLib.shared().setPartnerData(partnerId:"test_int", partnerInfo:partnerIn
 - (void)setSharingFilterForPartners:(NSArray<NSString *> * _Nullable)sharingFilter;
 ```
 
+This function replaces the deprecated [`setSharingFilterForAllPartners`](#setsharingfilterforallpartners)
+
 **Description**  
 Lets you configure which partners should the SDK exclude from data-sharing.
 
@@ -1026,8 +1028,10 @@ AppsFlyerLib.shared().setSharingFilterForPartners(nil) // Reset list (default)
 setSharingFilterForAllPartners()
 ```
 
+This function is deprecated and has been replaced by [`setSharingFilterForPartners`](#setsharingFilterforpartners)
+
 **Description**  
-Block an event from being shared with integrated partners. This method overwrites `-[setSharingFilter](#setsharingfilter)`.
+Block an event from being shared with integrated partners.
 
 **Input arguments**  
 This method takes no input arguments.
