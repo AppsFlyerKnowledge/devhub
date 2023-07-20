@@ -9,7 +9,7 @@ paths:
     get:
       tags:
       - "Conversion value (CV) schema"
-      summary: Retrieve CV schema 
+      summary: Get CV schema 
       operationId: skan-pull-cs-api-get 
       parameters:
         - name: app_id

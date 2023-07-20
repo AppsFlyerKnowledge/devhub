@@ -14,10 +14,11 @@ paths:
     get:
       tags:
       - "SKAN postbacks"
-      summary: Retrieve by arrival date
+      summary: Get aggregated postbacks
       operationId: skan-agg-postback-arrival-date-api-get 
       description: |
-        > ℹ️ You can choose between SKAN v4.0 and v3.0 by changing the *Base URL* on the right
+        > ℹ️ For the base URL (on the right), select either SKAN V3 or SKAN V4. 
+        > If you select SKAN V4, but results are for SKAN V3 postbacks, the SKAN V4 fields return `null`.
       parameters:
         - name: app_id
           in: path
