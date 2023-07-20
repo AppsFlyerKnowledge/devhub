@@ -14,10 +14,10 @@ To enable the app to emulate belonging to the same vendor as the tested app, it 
 
 1. Clone [the IDFV testing tool app repository](https://github.com/AppsFlyerSDK/my-idfv-by-appsflyer.git) to your local machine.
 2. Open **Xcode** and select the project in the **Project Navigator.**
-3. Under **TARGETS** select the target for your app.
+3. Under **TARGETS** select the target for your IDFV testing tool app.
 4. Expand the **Signing** section.
-5. In **Bundle Identifier**, enter an identifier with an identical prefix to the one of the app you are testing.
+5. In **Bundle Identifier**, enter an identifier with an identical prefix to the identifier of the app you are testing.
 
-   **For example,** if your tested app's Bundle Identifier is `com.MyCompany.apps.myapp`, you should change the the utility app’ Bundle Identifier (`MyIDFVByAppsflyer`)  into `com.MyCompany.apps.MyIDFVByAppsflyer`.
-6. Build and install the utility app on the device. The new app receives the same IDFV as your other apps.
-7. Launch the app. The IDFV number is displayed in the app. You can use the IDFV when [manually regisering the device as a testing device](https://support.appsflyer.com/hc/en-us/articles/207031996#add-a-device-manually-via-the-user-interface).
+   **For example,** if your tested app's Bundle Identifier is `com.MyCompany.apps.myapp`, you should change the IDFV testing tool Bundle Identifier (`MyIDFVByAppsflyer`)  into `com.MyCompany.apps.MyIDFVByAppsflyer`.
+6. Build and install the IDFV testing tool on the device. The new app receives the same IDFV as your tested app.
+7. Launch the IDFV testing tool app. The IDFV number is displayed in the app. You can use the IDFV when [manually regisering the device as a testing device](https://support.appsflyer.com/hc/en-us/articles/207031996#add-a-device-manually-via-the-user-interface).
