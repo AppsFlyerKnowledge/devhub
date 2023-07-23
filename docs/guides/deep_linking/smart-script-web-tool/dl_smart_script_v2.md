@@ -321,3 +321,11 @@ Incoming parameters (e.g. `utm_source`) from a landing page are not passed to ot
 Importing Smart Script in every website page preserves the incoming URL parameters, and allows Smart Script to use them in other pages.
 
 You can find here [an example](https://appsflyersdk.github.io/appsflyer-onelink-smart-script/examples/save_params_demo/save_params_demo_home.html?utm_source=my_source&utm_channel=my_channel) of this use case.
+
+### Copy HTTP referrer to outgoing URL
+
+> 📘 
+> 
+> Available from version 2.7.0.
+
+This [example](https://appsflyersdk.github.io/appsflyer-onelink-smart-script/examples/webReferrer.html?utm_source=my_source&utm_channel=my_channel) demonstrates how to copy the HTTP `document.referrer` to a key defined by `webReferrer`in the outgoing URL. The referrer is saved in the first page of the website  the user lands in, and may be used in any consecutive page in this domain which runs Smart Script with this argument.
