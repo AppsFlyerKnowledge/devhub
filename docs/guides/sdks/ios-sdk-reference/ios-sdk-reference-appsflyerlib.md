@@ -360,7 +360,7 @@ Prints SDK messages to the console log. Should be disabled for production builds
 > No need to call `start()`
 
 **Description**  
-API to shut down all SDK activities. This will disable all requests from the SDK.
+API to shut down all SDK activities. This will disable all requests from the SDK except for those related to fetching SKAd Network data from the server.
 
 | Type   | Name        |
 | :----- | :---------- |
