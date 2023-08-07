@@ -255,7 +255,7 @@ You can use an existing OneLink link or ask your marketer to create a new one fo
 - Ask your marketer for a **OneLink template**. 
   - It will look something like this `https://onelink-basic-app.onelink.me/H5hv`. 
   - This example uses the OneLink subdomain `onelink-basic-app.onelink.me` and the OneLink template ID `H5hv`
-- [Configure Universal Links](dl_ios_init_setup.md#procedures-for-ios-universal-links).
+- [Configure Universal Links]().
 
 ### Create the test link
 Use the same method as in [deferred deep linking](#testing-deferred-deep-linking).
