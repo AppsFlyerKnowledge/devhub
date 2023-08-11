@@ -6,7 +6,7 @@ servers:
   - url: https://hq1.appsflyer.com/api/mng
 
 paths:
-  /app:
+  /apps:
     get:
       tags:
       - "Get app list"
