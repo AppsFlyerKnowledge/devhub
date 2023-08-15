@@ -1,4 +1,9 @@
-
+---
+title: "Install the IDFV test tool app"
+slug: "install-the-idfv-test-tool-app"
+category: 64db3f94a0904a00795a53b9
+hidden: false
+---
 
 The IDFV testing tool app allows AppsFlyer to identify your device as a testing device by preserving your app's IDFV (Identifier For Vendor) across consecutive installations.
 
