@@ -93,7 +93,7 @@ Parameters can be either:
     "21-0": "af_cost_value",
     "22-0": "af_click_lookback",
     "18-0": "af_channel",
-    "19-0": "ad_adname",
+    "19-0": "af_adname",
     "18-1": "String",
     "19-1": "String",
     "18-2": "The media source channel through which the ads are distributed. For example:  UAC_Search, UAC_Display, Instagram, Facebook Audience Network etc.",
