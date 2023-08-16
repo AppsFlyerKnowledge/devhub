@@ -59,7 +59,7 @@ Learn more about `onAppOpenAttribution()` for [iOS](https://dev.appsflyer.com/do
 **Description**
 
 Get conversion data after an install. Useful for deferred deep linking.
-Learn more about `onConversionDataSuccess()` for [iOS](https://dev.appsflyer.com/docs/deferred-deep-linking#implementing-onconversiondatasuccess-logic).
+Learn more about `onConversionDataSuccess()` for [iOS](https://dev.appsflyer.com/hc/docs/dl_ios_ocds_ddl).
 
 **Method signature**
 [block:code]
