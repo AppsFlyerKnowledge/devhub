@@ -74,10 +74,10 @@ To enable users to invite their friends to your app, you need a way to generate 
    linkGenerator.setBrandDomain("brand.domain.com");
    ```
 
-7. Create a `CreateOneLinkHttpTask.ResponseListener` to retrieve the user invite link when it's available:
+7. Create a `LinkGenerator.ResponseListener` to retrieve the user invite link when it's available:
 
    ```java
-   CreateOneLinkHttpTask.ResponseListener listener = new CreateOneLinkHttpTask.ResponseListener() {
+   LinkGenerator.ResponseListener listener = new LinkGenerator.ResponseListener() {
                @Override
                public void onResponse(String s) {
                    Log.d(LOG_TAG, "Share invite link: " + s);
@@ -91,6 +91,8 @@ To enable users to invite their friends to your app, you need a way to generate 
             
    };
    ```
+> 📘 Note
+> Since SDK v6.9.0 `LinkGenerator.ResponseListener` replaced `CreateOneLinkHttpTask.ResponseListener`  
 
 - `onResponse()` is called when the user invite is created successfully.
 - `onResponseError()` is called when link generation fails.
