@@ -1464,7 +1464,7 @@ To find out the required partner IDs:
 AppsFlyerLib.getInstance().setSharingFilterForPartners("partner1_int"); // Single partner
 AppsFlyerLib.getInstance().setSharingFilterForPartners("partner1_int", "partner2_int"); // Multiple partners
 AppsFlyerLib.getInstance().setSharingFilterForPartners("all"); // All partners
-AppsFlyerLib.getInstance().setSharingFilterForPartners(""); // Reset list (default)
+AppsFlyerLib.getInstance().setSharingFilterForPartners(); // Reset list (default)
 ```
 ```kotlin
 AppsFlyerLib.getInstance().setSharingFilterForPartners("partner1_int") // Single partner

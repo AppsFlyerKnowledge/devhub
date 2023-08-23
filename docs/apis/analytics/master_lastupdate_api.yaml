@@ -1,0 +1,54 @@
+openapi: 3.0.1
+info:
+  title:  Master freshness API
+  version: "1.0"
+servers:
+- url: https://hq1.appsflyer.com/api/master-agg-data/
+  description: Production server
+security:
+- HeaderApiKeyAuth: []
+paths:
+  /lastupdate:
+    get:
+      tags:
+      - Freshness Report
+      summary: Get last update
+      operationId: master-lastupdate
+      responses:
+        200:
+          $ref: '#/components/responses/Success'
+        401:
+          $ref: '#/components/responses/Unauthorized'
+
+components:
+  securitySchemes:
+    Bearer-Authentication:
+      type: http
+      scheme: bearer
+      description: "Authorization HTTP header containing API V2 token (bearer token) is required.\n\n
+        The admin [gets the V2 token in the dashboard](https://support.appsflyer.com/hc/en-us/articles/360004562377)"
+  responses:  
+    # 200
+    Success:
+      description: Request successful.
+      content:
+        text/plain:
+          schema:
+            type: string
+            example: "2023-08-13"
+    
+    # 401
+    Unauthorized:
+      description: Account may be suspended. Log in to the dashboard and check the account status. 
+      content:
+        application/json:
+            schema:
+              $ref: '#/components/schemas/Error' 
+            examples:
+              InvalidToken:
+                summary: Invalid authorization token
+                value:
+                  message: The supplied API token is invalid
+  schemas:
+    Error:
+      type: string
