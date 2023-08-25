@@ -284,7 +284,7 @@ You can utilize Xcode's compilation configuration capabilities to configure an e
 This is achieved by configuring a User-Defined Setting in your project's Build Settings and exposing it via an `info.plist` property.
 
 **Step 1: Add a debug app to AppsFlyer**
-[Add a new pending iOS app to AppsFlyer](https://support.appsflyer.com/hc/en-us/articles/207377436-Adding-a-New-Application-to-the-AppsFlyer-Dashboard) or ask a team member with dashboard access to add it. Choose any available app ID–You will need it in step 3.
+[Add a new pending iOS app to AppsFlyer](https://support.appsflyer.com/hc/en-us/articles/207377436-Adding-a-New-Application-to-the-AppsFlyer-Dashboard) or ask a team member with dashboard access to add it. Choose any available app ID–You will need it in step 3. Make sure the ID is 9 digits and starts with four 1s, for example, 111167538. 
 
 **Step 2: Add a User-Defined Setting**
  1. In Xcode, in the file navigator view, select your project root and go to **Build Settings**.
