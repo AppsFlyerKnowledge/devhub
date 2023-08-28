@@ -269,6 +269,10 @@ paths:
                   example: "2015-01-22T08:45:33.412"
                 oaid:
                   title: oaid
+                  description: |
+                    The Open Anonymous Identifier (OAID) value assigned to the device.
+                    
+                    > **Note**: To avoid an attribution mismatch, if you choose a hashed value (MD5 or SHA-1) for the **type** property, make sure that the corresponding parameter value in the click URL is also hashed.
                   $ref: '#/components/schemas/CommonIdObject'
                 type:
                   type: string
@@ -276,6 +280,10 @@ paths:
                   example: "SM-A115M"
                 gaid:
                   title: gaid
+                  description: |
+                    The Google Advertising ID (GAID) value assigned to the device.
+                    
+                    > **Note**: To avoid an attribution mismatch, if you choose a hashed value (MD5 or SHA-1) for the **type** property, make sure that the corresponding parameter value in the click URL is also hashed.
                   $ref: '#/components/schemas/CommonIdObject'
                 sharing_filter:
                   type: string
