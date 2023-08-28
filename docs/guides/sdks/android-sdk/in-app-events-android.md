@@ -451,8 +451,8 @@ Predefined event parameter constants follow a `AFInAppEventParameterName.PARAMET
 | `"af_success"`                     | <div id="af_success">`SUCCESS`</div>                                              | `String`                                     |
 | `"af_price"`                       | <div id="af_price">`PRICE`</div>                                                  | `float`                                      |
 | `"af_content_type"`                | <div id="af_content_type">`CONTENT_TYPE`</div>                                    | `String`                                     |
-| `"af_content_id"`                  | <div id="af_content_id">`CONTENT_ID`</div>                                        | `String[]`                                   |
-| `"af_content_list"`                | <div id="af_content_list">`CONTENT_LIST`</div>                                    | `String`                                     |
+| `"af_content_id"`                  | <div id="af_content_id">`CONTENT_ID`</div>                                        | `String`                                   |
+| `"af_content_list"`                | <div id="af_content_list">`CONTENT_LIST`</div>                                    | `String[]`                                     |
 | `"af_currency"`                    | <div id="af_currency">`CURRENCY`</div>                                            | `String`                                     |
 | `"af_quantity"`                    | <div id="af_quantity">`QUANTITY`</div>                                            | `int`                                        |
 | `"af_registration_method"`         | <div id="af_registration_method">`REGISTRATION_METHOD`</div>                      | `String`                                     |
