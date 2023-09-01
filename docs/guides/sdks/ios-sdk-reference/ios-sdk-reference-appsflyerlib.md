@@ -1052,6 +1052,7 @@ setUserEmails(userEmails: [String]?, with: EmailCryptType)
 
 **Description**  
 Use this to set the user email(s).
+**Note**: `MD-5` and `SHA-1` encryption types are deprecated starting with SDK V6.9.0. Currently, only `SHA-256` and `NONE` are supported.
 
 **Input arguments**
 

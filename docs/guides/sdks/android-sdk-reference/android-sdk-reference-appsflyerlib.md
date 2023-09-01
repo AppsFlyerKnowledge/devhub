@@ -1536,7 +1536,7 @@ Set the user emails and encrypt them.
 
 | Type                                  | Name          | Description                                                                                                                                                                                                                         |
 | :------------------------------------ | :------------ | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `AppsFlyerProperties.EmailsCryptType` | `cryptMethod` | Encryption methods: <ul><li>AppsFlyerProperties.EmailsCryptType.NONE</li><li>AppsFlyerProperties.EmailsCryptType.SHA1</li><li>AppsFlyerProperties.EmailsCryptType.MD5</li><li> AppsFlyerProperties.EmailsCryptType.SHA256</li></ul> |
+| `AppsFlyerProperties.EmailsCryptType` | `cryptMethod` | Encryption methods: <ul><li>AppsFlyerProperties.EmailsCryptType.NONE</li><li> AppsFlyerProperties.EmailsCryptType.SHA256</li></ul> |
 | `String...`                           | `emails`      | One or more  user emails.                                                                                                                                                                                                           |
 
 **Returns**  
