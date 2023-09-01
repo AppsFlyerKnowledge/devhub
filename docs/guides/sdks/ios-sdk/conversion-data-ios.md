@@ -159,5 +159,5 @@ Deferred deep linking (Legacy method)
 
 When the app is opened via deferred deep linking, [`onConversionDataSuccess`](doc:ios-sdk-reference-appsflyerlibdelegate#onconversiondatasuccess)'s payload returns deep linking data, as well as attribution data.
 
-- The recommended best practice is to implement deep linking with [Unified Deep Linking (UDL)](doc:unified-deep-linking-udl-1)
-- For existing clients and reference, here is our [legacy iOS deep linking guide](ios-legacy-apis#deferred-deep-linking), using [`onConversionDataSuccess`](doc:ios-sdk-reference-appsflyerlibdelegate#onconversiondatasuccess).
+- The recommended best practice is to implement deep linking with [Unified Deep Linking (UDL)](https://dev.appsflyer.com/hc/docs/dl_ios_unified_deep_linking)
+- For existing clients and reference, here is our [legacy iOS deep linking guide](https://dev.appsflyer.com/hc/docs/dl_ios_gcd_legacy), using [`onConversionDataSuccess`](doc:ios-sdk-reference-appsflyerlibdelegate#onconversiondatasuccess).
