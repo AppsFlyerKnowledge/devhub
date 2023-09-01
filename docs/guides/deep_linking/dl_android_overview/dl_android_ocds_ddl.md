@@ -19,7 +19,7 @@ Extended deferred deep linking allows deep linking for new users in certain scen
   - Time between click and install exceeds the UDL lookback window (15 minutes).
 
 To allow deferred deep linking when UDL returns `NOT_FOUND`, `onConversionDataSuccess` callback should check whether it should handle the deferred deep linking.  
-`onConversionDataSuccess` is part of the Get Conversion Data(GCD) API. Its main purpose is to [gather conversion data inside the device](../sdks/getting-started/conversion-data).  
+`onConversionDataSuccess` is part of the Get Conversion Data(GCD) API. Its main purpose is to [gather conversion data inside the device](https://dev.appsflyer.com/hc/docs/conversion-data).  
 In the use case outlined here `onConversionDataSuccess` takes advantage of the fact that all deferred deep linking parameters are passed to the callback, on top of the conversion data. 
 
 ## Prerequisites
