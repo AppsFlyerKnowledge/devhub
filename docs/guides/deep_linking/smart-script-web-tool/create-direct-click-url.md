@@ -34,7 +34,7 @@ This method provides support for creating a click URLs, to be used mainly by non
 
 ## Game landing page demo
 
-You can find here a fully functional [demo landing page](https://appsflyersdk.github.io/appsflyer-sample-app-smartscript-demo-page/) which demonstrates integrating the `generateDirectClickURL` [Smart Script code](https://github.com/AppsFlyerSDK/appsflyer-sample-app-smartscript-demo-page/blob/8c0b6e7385b3b0cedd1208a530f002438a336e76/index.html#L326-L331).
+You can find here a fully functional [demo landing page](https://appsflyersdk.github.io/appsflyer-sample-app-smartscript-demo-page/) which demonstrates integrating the `generateDirectClickURL` [Smart Script code](https://github.com/AppsFlyerSDK/appsflyer-sample-app-smartscript-demo-page/blob/master/index.html#L340-345).
 
 ## Code example for a Steam game
 [block:code]
