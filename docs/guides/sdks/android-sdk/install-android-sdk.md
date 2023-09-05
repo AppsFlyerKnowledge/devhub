@@ -61,11 +61,19 @@ dependencies {
 Setting required permissions
 ----------------------------
 
-Add the following permissions to `AndroidManifest.xml`:
+Add the following permissions to `AndroidManifest.xml` in the `manifest` section:
 
 ```xml AndroidManfiest.xml
-<uses-permission android:name="android.permission.INTERNET" />
-<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package=YOUR_PACKAGE_NAME>
+
+      <uses-permission android:name="android.permission.INTERNET" />
+      <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+      ...
+
+</manifest>
 ```
 
 ### The AD_ID permission
