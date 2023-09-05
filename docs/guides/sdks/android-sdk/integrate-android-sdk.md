@@ -15,7 +15,7 @@ order: 2
 - You must [install the Android SDK](doc:install-android-sdk). 
 - Ensure that in your app `build.gradle` file, `applicationId`'s value (in the `defaultConfig` block) matches the app's app ID in AppsFlyer.
 - Get the [AppsFlyer dev key](https://support.appsflyer.com/hc/en-us/articles/207032126#integration-2-integrating-the-sdk). It is required to successfully initialize the SDK.
-- The codes in this document are example implementations. Make sure to change the `<AF_DEV_KEY>` and other placeholders as needed.
+- The codes in this document are example implementations. Make sure to change the `<YOUR_DEV_KEY>` and other placeholders as needed.
 - All the steps in this document are mandatory unless stated otherwise.
 
 ## Initializing the Android SDK
@@ -49,10 +49,10 @@ import com.appsflyer.AppsFlyerLib
 In the global Application `onCreate`, call [`init`](doc:android-sdk-reference-appsflyerlib#init) with the following arguments:
 
 ```java
-AppsFlyerLib.getInstance().init(<AF_DEV_KEY>, null, this);
+AppsFlyerLib.getInstance().init(<YOUR_DEV_KEY>, null, this);
 ```
 ```kotlin
-AppsFlyerLib.getInstance().init(<AF_DEV_KEY>, null, this)
+AppsFlyerLib.getInstance().init(<YOUR_DEV_KEY>, null, this)
 ```
 
 1. The first argument is your AppsFlyer dev key.
@@ -87,7 +87,7 @@ Typical usage of deferred SDK start is when an app would like to request consent
 To receive confirmation that the SDK was started successfully, create an `AppsFlyerRequestListener` object and pass it as the third argument of `start`:
 
 ```java
-AppsFlyerLib.getInstance().start(getApplicationContext(), <AF_DEV_KEY>, new AppsFlyerRequestListener() {
+AppsFlyerLib.getInstance().start(getApplicationContext(), <YOUR_DEV_KEY>, new AppsFlyerRequestListener() {
   @Override
   public void onSuccess() {
     Log.d(LOG_TAG, "Launch sent successfully, got 200 response code from server");
@@ -102,7 +102,7 @@ AppsFlyerLib.getInstance().start(getApplicationContext(), <AF_DEV_KEY>, new Apps
 });
 ```
 ```kotlin
-AppsFlyerLib.getInstance().start(this, <AF_DEV_KEY>, object : AppsFlyerRequestListener {
+AppsFlyerLib.getInstance().start(this, <YOUR_DEV_KEY>, object : AppsFlyerRequestListener {
   override fun onSuccess() {
     Log.d(LOG_TAG, "Launch sent successfully")
     }
@@ -132,7 +132,7 @@ public class AFApplication extends Application {
     public void onCreate() {
         super.onCreate();
         // ...
-        AppsFlyerLib.getInstance().init(<AF_DEV_KEY>, null, this);
+        AppsFlyerLib.getInstance().init(<YOUR_DEV_KEY>, null, this);
         AppsFlyerLib.getInstance().start(this);
         // ...
     }
@@ -147,7 +147,7 @@ class AFApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         // ...
-        AppsFlyerLib.getInstance().init(<AF_DEV_KEY>, null, this)
+        AppsFlyerLib.getInstance().init(<YOUR_DEV_KEY>, null, this)
         AppsFlyerLib.getInstance().start(this)
         // ...
     }
@@ -170,8 +170,8 @@ Once the CUID is available, you can set it by calling  [`setCustomerUserId`](ht
 ```java
 
 ...
-AppsFlyerLib.getInstance().init(AF_DEV_KEY, conversionListener, this);  
-AppsFlyerLib.getInstance().start(this , AF_DEV_KEY );
+AppsFlyerLib.getInstance().init(<YOUR_DEV_KEY>, conversionListener, this);  
+AppsFlyerLib.getInstance().start(this , <YOUR_DEV_KEY> );
 ...
 // Do your magic to get the customerUserID...
 ...
@@ -197,7 +197,7 @@ To activate the waiting mode, set [`waitForCustomerUserId`](https://dev.appsfly
  It's important to remember that putting the SDK in a waiting mode may block the SDK from sending the install event and consequently prevent attribution. This can occur, for example, when the user launches the application for the first time and then exits before the SDK can set the CUID. 
 
 ```java
-AppsFlyerLib.getInstance().init(AF_DEV_KEY, getConversionListener(), getApplicationContext());
+AppsFlyerLib.getInstance().init(<YOUR_DEV_KEY>, getConversionListener(), getApplicationContext());
 AppsFlyerLib.getInstance().waitForCustomerUserId(true);
 AppsFlyerLib.getInstance().start(this);
 ```
@@ -220,7 +220,6 @@ If you wish to remove the waiting mode from the SDK initialization flow, it is n
 
 ```java
 public class AFApplication extends Application {
-  private static final String AF_DEV_KEY = <AF_DEV_KEY>;
   @Override
   public void onCreate() {
     super.onCreate();
@@ -228,7 +227,7 @@ public class AFApplication extends Application {
     new AppsFlyerConversionListener() {
       ...
     };
-    AppsFlyerLib.getInstance().init(AF_DEV_KEY, getConversionListener(), getApplicationContext());
+    AppsFlyerLib.getInstance().init(<YOUR_DEV_KEY>, getConversionListener(), getApplicationContext());
     AppsFlyerLib.getInstance().waitForCustomerUserId(true);
     AppsFlyerLib.getInstance().start(this);
     // Do your magic to get the customerUserID

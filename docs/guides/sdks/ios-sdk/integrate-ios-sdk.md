@@ -13,7 +13,7 @@ order: 2
 
 - Before integrating, you must [Install the SDK](doc:install-ios-sdk).
 - This document contains example implementations. Make sure to replace the following: 
-  - `<AF_DEV_KEY>`: The AppsFlyer dev key.
+  - `<YOUR_DEV_KEY>`: The AppsFlyer dev key.
   - `<APPLE_APP_ID>`: The Apple App ID (without the `id` prefix).
   - Additional placeholders, where needed.
 
@@ -61,11 +61,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
  In `didFinishLaunchingWithOptions` configure your Apple App ID and AppsFlyer dev key:
 
 ```objectivec
-[[AppsFlyerLib shared] setAppsFlyerDevKey:@"<AF_DEV_KEY>"];
+[[AppsFlyerLib shared] setAppsFlyerDevKey:@"<YOUR_DEV_KEY>"];
 [[AppsFlyerLib shared] setAppleAppID:@"<APPLE_APP_ID>"];
 ```
 ```swift
-AppsFlyerLib.shared().appsFlyerDevKey = "<AF_DEV_KEY>"
+AppsFlyerLib.shared().appsFlyerDevKey = "<YOUR_DEV_KEY>"
 AppsFlyerLib.shared().appleAppID = "<APPLE_APP_ID>"
 ```
 
@@ -181,7 +181,7 @@ AppsFlyerLib.shared()?.start(completionHandler: { (dictionary, error) in
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     /** APPSFLYER INIT **/
-    [AppsFlyerLib shared].appsFlyerDevKey = @"<AF_DEV_KEY>";
+    [AppsFlyerLib shared].appsFlyerDevKey = @"<YOUR_DEV_KEY>";
     [AppsFlyerLib shared].appleAppID = @"<APPLE_APP_ID>";
     /* Uncomment the following line to see AppsFlyer debug logs */
     // [AppsFlyerLib shared].isDebug = true;
@@ -215,7 +215,7 @@ import AppsFlyerLib
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        AppsFlyerLib.shared().appsFlyerDevKey = "<AF_DEV_KEY>"
+        AppsFlyerLib.shared().appsFlyerDevKey = "<YOUR_DEV_KEY>"
         AppsFlyerLib.shared().appleAppID = "<APPLE_APP_ID>"
         /* Uncomment the following line to see AppsFlyer debug logs */
         // AppsFlyerLib.shared().isDebug = true

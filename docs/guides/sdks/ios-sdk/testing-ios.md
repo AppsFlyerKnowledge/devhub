@@ -224,10 +224,10 @@ You are trying to see installs and in-app events in the log. The log shows "Apps
 The dev key is not set. Make sure to set it in appDelegate in the `didFinishLaunchingWithOptions` method:
 
 ```objc
-[AppsFlyerLib shared].appsFlyerDevKey = @"<AF_DEV_KEY>";
+[AppsFlyerLib shared].appsFlyerDevKey = @"<YOUR_DEV_KEY>";
 ```
 ```swift
-AppsFlyerLib.shared().appsFlyerDevKey = "<AF_DEV_KEY>"
+AppsFlyerLib.shared().appsFlyerDevKey = "<YOUR_DEV_KEY>"
 ```
 
 #### Install always attributed to organic
