@@ -1,5 +1,5 @@
 ---
-title: "[Legacy] iOS organic search attribution"
+title: "iOS organic search attribution"
 slug: "dl_ios_organic_search_attr"
 category: 6384c30e5a754e005f668a74
 parentDoc: 63a8517990401800247b99ce

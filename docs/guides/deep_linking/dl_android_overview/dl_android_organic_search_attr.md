@@ -1,5 +1,5 @@
 ---
-title: "[Legacy] Android Organic Search Attribution"
+title: "Android Organic Search Attribution"
 slug: "dl_android_organic_search_attr"
 category: 6384c30e5a754e005f668a74
 parentDoc: 6387276d97e08d00104d4435
