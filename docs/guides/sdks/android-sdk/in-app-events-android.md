@@ -119,7 +119,7 @@ You can provide [`logEvent`](doc:android-sdk-reference-appsflyerlib#logevent) wi
 ```java
 AppsFlyerLib.getInstance().logEvent(getApplicationContext(),
                                     AFInAppEventType.PURCHASE,
-                                    eventValue,
+                                    eventValues,
                                     new AppsFlyerRequestListener() {
                     @Override
                     public void onSuccess() {
@@ -136,7 +136,7 @@ AppsFlyerLib.getInstance().logEvent(getApplicationContext(),
 ```kotlin
 AppsFlyerLib.getInstance().logEvent(getApplicationContext(),
                                     AFInAppEventType.PURCHASE,
-                                    eventValue,
+                                    eventValues,
                                     object : AppsFlyerRequestListener {
             override fun onSuccess() {
                 Log.d(LOG_TAG, "Event sent successfully")
