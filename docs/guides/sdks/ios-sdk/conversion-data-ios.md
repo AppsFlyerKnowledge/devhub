@@ -53,8 +53,12 @@ Getting conversion data in iOS SDK
 import UIKit
 import AppsFlyerLib
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, AppsFlyerLibDelegate {
-    // ...
+class AppDelegate: UIResponder, UIApplicationDelegate {
+    // ..
+}
+
+extension AppDelegate: AppsFlyerLibDelegate {
+
     func onConversionDataSuccess(_ installData: [AnyHashable: Any]) {
         // Invoked when conversion data resolution succeeds
     }
@@ -62,7 +66,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, AppsFlyerLibDelegate {
     func onConversionDataFail(_ error: Error!) {
         // Invoked when conversion data resolution fails
     }
-    // ...
 }
 ```
 
@@ -128,6 +131,10 @@ import AppsFlyerLib
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, AppsFlyerLibDelegate {
     // ...
+}
+
+extension AppDelegate: AppsFlyerLibDelegate {
+
     func onConversionDataSuccess(_ installData: [AnyHashable: Any]) {
         if let status = installData["af_status"] as? String {
             if (status == "Non-organic") {
