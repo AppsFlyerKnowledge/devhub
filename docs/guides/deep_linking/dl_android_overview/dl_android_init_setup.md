@@ -35,7 +35,9 @@ If the app is in still in development, locate the `debug.keystore`
 3. Run the command:
     
 ```shell
-keytool -list -v -keystore [APK-KEY].keystore
+// keytool -list -v -keystore <<KEY_STORE_FILE>>
+// For example, the default keystore file 
+keytool -list -v -keystore ~/.android/debug.keystore
 ```
 
 > 🚧 
