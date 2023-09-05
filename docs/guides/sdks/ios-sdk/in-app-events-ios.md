@@ -117,15 +117,19 @@ You can pass a `completionHandler` to [`logEvent`](doc:ios-sdk-reference-appsfly
     }];
 ```
 ```swift
-AppsFlyerLib.shared().logEvent(name: "In app event name", values: ["id": 12345, "name": "John doe"], completionHandler: { (response: [String : Any]?, error: Error?) in
-             if let response = response {
-               print("In app event callback Success: ", response)
-             }
-             if let error = error {
-               print("In app event callback ERROR:", error)
-             }
-           })
-        }
+AppsFlyerLib.shared().logEvent(name: AFEventAddToWishlist,
+          values: [
+             AFEventParamPrice: 20,
+             AFEventParamContentId: "123456"
+          ],
+          completionHandler: { (response: [String : Any]?, error: Error?) in
+            if let response = response {
+              print("In app event callback Success: ", response)
+            }
+            if let error = error {
+              print("In app event callback ERROR:", error)
+            }
+          });
 ```
 
 In the event that an error occurs when recording the in-app event, an error code and string description are provided, as indicated in the table that follows.
