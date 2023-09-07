@@ -60,16 +60,21 @@ To integrate the Android ad revenue SDK connector, you need to import, initializ
 ### Initialize the Android ad revenue SDK
 
 - In the app global class, inside the `onCreate` method, call [`initialize`](https://dev.appsflyer.com/hc/docs/appsflyeradrevenue#initaliaze), and put the following code:
-[block:code]
-{
-  "codes": [
-    {
-      "code": "import com.appsflyer.adrevenue.AppsFlyerAdRevenue;\n\npublic class MyApplication extends Application {\n    \n    @Override\n    public void onCreate() {\n        super.onCreate();\n        \n        AppsFlyerAdRevenue.Builder afRevenueBuilder = new AppsFlyerAdRevenue.Builder(this);     \n        \n        AppsFlyerAdRevenue.initialize(afRevenueBuilder.build());",
-      "language": "java"
+```java
+import com.appsflyer.adrevenue.AppsFlyerAdRevenue;
+
+public class MyApplication extends Application {
+    
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        
+        AppsFlyerAdRevenue.Builder afRevenueBuilder = new AppsFlyerAdRevenue.Builder(this);     
+        
+        AppsFlyerAdRevenue.initialize(afRevenueBuilder.build());
     }
-  ]
 }
-[/block]
+```
 ### Trigger the logAdRevenue API call
 
 - Trigger the [`logAdRevenue`](https://dev.appsflyer.com/hc/docs/appsflyeradrevenue#logadrevenue) API call upon every valid impression, including mandatory, and any optional, arguments.
