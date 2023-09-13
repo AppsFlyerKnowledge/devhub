@@ -72,7 +72,7 @@ To integrate the iOS ad revenue SDK connector, you need to import, initialize, a
 {
   "codes": [
     {
-      "code": "let adRevenueParams:[AnyHashable: Any] = [\n            kAppsFlyerAdRevenueCountry : \"us\",\n            kAppsFlyerAdRevenueAdUnit : \"02134568\",     //Add ! here\n            kAppsFlyerAdRevenueAdType : \"Banner\",  //Add ! here\n            kAppsFlyerAdRevenuePlacement : \"place\",\n            kAppsFlyerAdRevenueECPMPayload : \"encrypt\",\n            \"foo\" : \"testcustom\",\n            \"bar\" : \"testcustom2\"\n        ]\n        \n        AppsFlyerAdRevenue.shared().logAdRevenue(\n            monetizationNetwork: \"facebook\",\n            mediationNetwork: MediationNetworkType.moPub,\n            eventRevenue: 0.026,\n            revenueCurrency: \"USD\",\n            additionalParameters: adRevenueParams)",
+      "code": "let adRevenueParams:[AnyHashable: Any] = [\n            kAppsFlyerAdRevenueCountry : \"us\",\n            kAppsFlyerAdRevenueAdUnit : \"02134568\",     \n            kAppsFlyerAdRevenueAdType : \"Banner\",  \n            kAppsFlyerAdRevenuePlacement : \"place\",\n            kAppsFlyerAdRevenueECPMPayload : \"encrypt\",\n            \"foo\" : \"testcustom\",\n            \"bar\" : \"testcustom2\"\n        ]\n        \n        AppsFlyerAdRevenue.shared().logAdRevenue(\n            monetizationNetwork: \"facebook\",\n            mediationNetwork: MediationNetworkType.googleAdMob,\n            eventRevenue: 0.026,\n            revenueCurrency: \"USD\",\n            additionalParameters: adRevenueParams)",
       "language": "swift"
     }
   ]
