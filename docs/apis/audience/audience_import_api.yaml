@@ -1,0 +1,168 @@
+openapi: 3.0.1
+info:
+  title: Audience Import API
+  version: 1.0.0
+servers:
+- url: https://hq1.appsflyer.com/api/audiences-import-api/
+security:
+  - bearerAuth: [] 
+paths:
+  /v2/{action}:
+    post:
+      tags:
+      - Import audience
+      summary: Import a new audience
+      operationId: audience-import-post
+      parameters:
+      - name: action
+        in: path
+        description: |
+          - To add devices: `add`
+          - To remove devices: `remove`
+        schema:
+          type: string
+          enum:
+            - ""
+            - add
+            - remove
+        required: true
+
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+              - import_key
+              - platform
+              - devices
+              type: object
+              properties:
+                import_key:
+                  type: string
+                  example: 'EKFH2UMC5PPCU8J7M5QQCBPKIH89E6NCOB7XQFWMC'
+                  description: |
+                    Unique key that identifies the audience
+                    - Use the same `import_key` for both the add and remove endpoints. 
+                platform:
+                  type: string
+                  enum:
+                    - ""
+                    - ios
+                    - android
+                devices:
+                  type: array
+                  description: |
+                    Required identifiers:
+                    For **Android** audiences: `app_id` + one of: `gaid` OR `oiad` OR `imei` OR `cuid` OR `braze_id` OR `amplitude_id`
+                    For **iOS** audiences: `app_id` + one of: `idfv` OR `cuid` OR `braze_id` OR `amplitude_id`
+                    *Note*: `app_id` is not required for as-is audiences.
+                  items:
+                    $ref: '#/components/schemas/device_identifier'
+        required: true
+      responses:
+        200:
+          description: Created audience successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/success_response'
+              example: 
+                message: "The request was successful"
+        400:
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_response'
+              examples:
+                Audience exists:
+                  summary: "Invalid audience platform"
+                  value:
+                    messege: "Invalid audience platform, this audience is already configured for Android/iOS. To use a different platform, please create a new audience in the UI"
+                No app Id:
+                  summary: "No app_id"
+                  value:
+                    message: "X or more of your rows do not contain an app id. You must attach an app id to each row."
+                No valid unique identifier: 
+                  summary: "No valid unique identifier" 
+                  value:
+                    message: "X or more of your rows does not contain a valid unique identifier"
+                Reached devices limit:
+                  summary: "Reached devices limit"
+                  value:
+                    message: "Cannot process more than Y devices per request (n devices counted in this request)"
+                Device list empty:
+                  summary: "Device list empty"
+                  value:
+                    message: "Device list cannot be empty"
+                Unkown device ID:
+                  summary: "Unkown device ID"
+                  value:
+                    message: "We couldn’t understand one or more of your device IDs"
+                Cannot remove:
+                  summary: "Cannot remove"
+                  value:
+                    message: "X or more of devices to remove contain more than one identifier per device"
+        '403':
+          description: Forbidden
+          content: 
+            application/json:
+                schema:
+                  $ref: '#/components/schemas/error_response'
+                examples:
+                  Forbidden:
+                    summary: Unauthorized request
+                    value:
+                      message: "Forbidden"
+  
+components:
+  securitySchemes:
+    bearerAuth:            
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Token required for authorization. Please refer to [this link](https://support.appsflyer.com/hc/en-us/articles/360004562377) for instructions on how to obtain the token.
+
+  schemas:
+    error_response:
+      required:
+      - message
+      properties:
+        message:
+          type: string
+    success_response:
+      required:
+      - message
+      properties:
+        message:
+          type: string
+    device_identifier:
+      
+      type: object
+      properties:
+        app_id:
+          type: string
+        idfv:
+          type: string
+        idfa:
+          type: string
+        gaid:
+          type: string
+        oaid:
+          type: string
+        imei:
+          type: string
+        cuid:
+          type: string
+        emails:
+          type: string
+        phone:
+          type: string
+        phone_e164:
+          type: string
+        braze_id:
+          type: string
+        amplitude_id:
+          type: string
+    
+    
