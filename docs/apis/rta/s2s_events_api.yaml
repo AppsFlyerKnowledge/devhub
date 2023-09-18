@@ -73,6 +73,7 @@ paths:
             |appsflyer_id is a mandatory field|<ul><li>Make sure you pass the correct AppsFlyer ID in the JSON</li><li>JSON is `stringified()` and formatted correctly</li></ul>|
             |Bad request|When the request failed at least one of the validation criteria|
             |Payload is missing or failed to parse|<ul><li>Make sure that the JSON is stringified and formatted correctly</li><li>If more than one event is included in the JSON payload. Make sure to send one event per request.</li></ul>
+            |app_id|<ul><li>`app_id` doesn't match the authentcation token</li><li>Make sure that the app_id is correct.</li></ul>
           content:
             application/json:
               schema:
@@ -103,7 +104,7 @@ paths:
           description: |
             |Message|How to handle|
             |--- |--- |--- |
-            |Forbidden|When the app ID in the URL is incorrect|
+            |Forbidden|“Zero Package” does not accept attribution events|
           content:
             application/json:
               schema:
