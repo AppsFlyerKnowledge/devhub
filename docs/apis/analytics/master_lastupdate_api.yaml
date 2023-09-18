@@ -6,7 +6,7 @@ servers:
 - url: https://hq1.appsflyer.com/api/master-agg-data/
   description: Production server
 security:
-- HeaderApiKeyAuth: []
+- Bearer-Authentication: []
 paths:
   /lastupdate:
     get:
