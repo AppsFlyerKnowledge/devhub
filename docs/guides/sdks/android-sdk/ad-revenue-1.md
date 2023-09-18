@@ -74,18 +74,38 @@ public class MyApplication extends Application {
         AppsFlyerAdRevenue.initialize(afRevenueBuilder.build());
     }
 }
-```
+
+```java
 ### Trigger the logAdRevenue API call
 
 - Trigger the [`logAdRevenue`](https://dev.appsflyer.com/hc/docs/appsflyeradrevenue#logadrevenue) API call upon every valid impression, including mandatory, and any optional, arguments.
-[block:code]
-{
-  "codes": [
-    {
-      "code": "// Make sure you import the following:\n\nimport com.appsflyer.adrevenue.adnetworks.AppsFlyerAdNetworkEventType;\nimport com.appsflyer.adrevenue.adnetworks.generic.MediationNetwork;\nimport com.appsflyer.adrevenue.adnetworks.generic.Scheme;\n\nimport java.util.Currency;\nimport java.util.HashMap;\nimport java.util.Locale;\n\n// Create optional customParams\n\nMap<String, String> customParams = new HashMap<>();\ncustomParams.put(Scheme.COUNTRY, \"US\");\ncustomParams.put(Scheme.AD_UNIT, \"89b8c0159a50ebd1\");\ncustomParams.put(Scheme.AD_TYPE, "Banner");\ncustomParams.put(Scheme.PLACEMENT, \"place\");\ncustomParams.put(Scheme.ECPM_PAYLOAD, \"encrypt\");\ncustomParams.put(\"foo\", \"test1\");\ncustomParams.put(\"bar\", \"test2\");\n\n// Record a single impression\nAppsFlyerAdRevenue.logAdRevenue(\n        \"ironsource\",\n        MediationNetwork.googleadmob,\n        Currency.getInstance(Locale.US),\n        0.99,\n        customParams\n);",
-      "language": "java",
-      "name": "Example"
-    }
-  ]
-}
-[/block]
+// Make sure you import the following:
+
+import com.appsflyer.adrevenue.adnetworks.AppsFlyerAdNetworkEventType;
+import com.appsflyer.adrevenue.adnetworks.generic.MediationNetwork;
+import com.appsflyer.adrevenue.adnetworks.generic.Scheme;
+
+import java.util.Currency;
+import java.util.HashMap;
+import java.util.Locale;
+
+// Create optional customParams
+
+Map<String, String> customParams = new HashMap<>();
+customParams.put(Scheme.COUNTRY, "US");
+customParams.put(Scheme.AD_UNIT, "89b8c0159a50ebd1");
+customParams.put(Scheme.AD_TYPE, "Banner");
+customParams.put(Scheme.PLACEMENT, "place");
+customParams.put(Scheme.ECPM_PAYLOAD, "encrypt");
+customParams.put("foo", "test1");
+customParams.put("bar", "test2");
+
+// Record a single impression
+AppsFlyerAdRevenue.logAdRevenue(
+        "ironsource",
+        MediationNetwork.googleadmob,
+        Currency.getInstance(Locale.US),
+        0.99,
+        customParams
+);
+```

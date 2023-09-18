@@ -68,13 +68,22 @@ To integrate the iOS ad revenue SDK connector, you need to import, initialize, a
 ### Trigger the logAdRevenue API call
 
 - Trigger the [`logAdRevenue`](https://dev.appsflyer.com/hc/docs/appsflyeradrevenue-1#logadrevenue) API call upon every valid impression, including mandatory, and any optional, arguments.
-[block:code]
-{
-  "codes": [
-    {
-      "code": "let adRevenueParams:[AnyHashable: Any] = [\n            kAppsFlyerAdRevenueCountry : \"us\",\n            kAppsFlyerAdRevenueAdUnit : \"02134568\",     \n            kAppsFlyerAdRevenueAdType : \"Banner\",  \n            kAppsFlyerAdRevenuePlacement : \"place\",\n            kAppsFlyerAdRevenueECPMPayload : \"encrypt\",\n            \"foo\" : \"testcustom\",\n            \"bar\" : \"testcustom2\"\n        ]\n        \n        AppsFlyerAdRevenue.shared().logAdRevenue(\n            monetizationNetwork: \"facebook\",\n            mediationNetwork: MediationNetworkType.googleAdMob,\n            eventRevenue: 0.026,\n            revenueCurrency: \"USD\",\n            additionalParameters: adRevenueParams)",
-      "language": "swift"
-    }
-  ]
-}
-[/block]
+
+```swift
+let adRevenueParams:[AnyHashable: Any] = [
+                    kAppsFlyerAdRevenueCountry : "us",
+                    kAppsFlyerAdRevenueAdUnit : "02134568",
+                    kAppsFlyerAdRevenueAdType : "Banner",
+                    kAppsFlyerAdRevenuePlacement : "place",
+                    kAppsFlyerAdRevenueECPMPayload : "encrypt",
+                    "foo" : "testcustom",
+                    "bar" : "testcustom2"
+                ]
+                
+AppsFlyerAdRevenue.shared().logAdRevenue(
+    monetizationNetwork: "facebook",
+    mediationNetwork: MediationNetworkType.googleAdMob,
+    eventRevenue: 0.026,
+    revenueCurrency: "USD",
+    additionalParameters: adRevenueParams)
+```
