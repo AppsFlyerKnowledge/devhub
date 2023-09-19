@@ -1,15 +1,15 @@
 ---
-title: "iOS organic search attribution"
-slug: "dl_ios_organic_search_attr"
+title: "iOS Attribution parameters based on click URL"
+slug: "dl_ios_attr_params_based_click"
 category: 6384c30e5a754e005f668a74
 parentDoc: 63a8517990401800247b99ce
-excerpt: "**At a glance**:  Attribute existing users who re-engage with your app after an organic web search."
+excerpt: "**At a glance**:  Set attribution parameters based on click URL"
 hidden: false
-createdAt: "2022-12-29T10:10:09.873Z"
-updatedAt: "2023-03-08T17:08:12.424Z"
 ---
 ## Overview
-App owners using Universal Links for deep linking (without OneLink), who have a domain associated with their app can attribute sessions initiated via this domain using the `appendParametersToDeepLinkingURL` method.
+Organic search attribution can be set from AppsFlyer without updating the SDK. [Learn more](https://support.appsflyer.com/hc/en-us/articles/15123194526353#setup).
+
+Use the `appendParametersToDeepLinkingURL` method to dynamically set the media source and other parameters based on the clicked URL domain name.
 
 ## Prerequisites
 - iOS SDK 6.0.8+.

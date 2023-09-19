@@ -1,14 +1,15 @@
 ---
-title: "Android Organic Search Attribution"
-slug: "dl_android_organic_search_attr"
+title: "Android Attribution parameters based on click URL"
+slug: "dl_android_attr_params_based_click"
 category: 6384c30e5a754e005f668a74
 parentDoc: 6387276d97e08d00104d4435
+excerpt: "**At a glance**:  Set attribution parameters based on click URL"
 hidden: false
-createdAt: "2022-11-30T12:23:56.339Z"
-updatedAt: "2023-01-19T15:14:19.199Z"
 ---
 ## Overview
-App owners using Android App Links for deep linking (without OneLink), who have a domain associated with their app can attribute sessions initiated via this domain using the `appendParametersToDeepLinkingURL` method.
+Organic search attribution can be set from AppsFlyer without updating the SDK. [Learn more](https://support.appsflyer.com/hc/en-us/articles/15123194526353#setup).
+
+Use the `appendParametersToDeepLinkingURL` method to dynamically set the media source and other parameters based on the clicked URL domain name.
 
 ## Prerequisites
 - Android SDK 6.0.1+.
