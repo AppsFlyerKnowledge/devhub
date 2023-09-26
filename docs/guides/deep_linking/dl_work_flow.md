@@ -40,10 +40,18 @@ Initial app setup for [Android](dl_android_init_setup) and [iOS](dl_ios_init_set
 
 ### Implement Unified Deep Linking (UDL)
 
-Implement the unified deep linking (UDL) API for [Android](dl_android_unified_deep_linking) and [iOS](dl_ios_unified_deep_linking) to retrieve data from the click and use that data to redirect users for a personalized experience to a specific in-app activity (deep linking or deferred deep linking).  
+Implement the unified deep linking (UDL) API to retrieve data from the click and use that data to redirect users for a personalized experience to a specific in-app activity (deep linking or deferred deep linking).  
 This API is fast, easy to use, and supports both owned and paid media sources.
 
 Note: For new users, the UDL method only returns parameters relevant to deferred deep linking: `deep_link_value` and `deep_link_sub1-10`. If you try to get any other parameters (`media_source`, `campaign`, `af_sub1-5`, etc.), they return `null`.
+
+#### Implement UDL
+
+[block:html]
+{
+  "html": "<div class=\"button-container\">\n  <a class=\"button android\" href=\"https://dev.appsflyer.com/hc/docs/dl_android_unified_deep_linking\">Android SDK</a>\n  <a class=\"button ios\" href=\"https://dev.appsflyer.com/hc/docs/dl_ios_unified_deep_linking\">iOS SDK</a>\n  <a class=\"button unity\" href=\"https://dev.appsflyer.com/hc/docs/unifieddeeplink\">Unity plugin</a>\n</div>\n\n<style>\n  .button-container {\n  \tdisplay: flex;\n  }\n  .button {\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    width: 150px;\n\t  border-radius: 6px;\n    padding: 8px;\n    margin-right: 4px;\n\t}\n  \n  .button:before {\n  \tmargin-right: 4px;\n  }\n\n  .button.android {\n    border: solid 2px #3DDC84;\n  }\n\n  .button.ios {\n  \tborder-radius: 6px;\n    padding: 8px;\n    border: solid 2px #7D7D7D;\n  }\n  \n   .button.unity {\n    border: solid 2px #3DDC84;\n    border-color: var(--project-primary-color);\n  }\n\n\n  .ios:before {\n        content: url(\"https://files.readme.io/19fdc72-apple-icon.svg\");\n  }\n\n  .android:before {\n        content: url(\"https://files.readme.io/d7dc5a3-android-icon.svg\");\n  }\n\n.unity:before {\n    content: url(\"https://files.readme.io/59acdf6-unity-icon.svg\");\n}\n\n.reactnative:before {\n   content: url(\"https://files.readme.io/3e1288d-reactnative-icon.svg\");\n}\n\n.flutter:before {\n    content: url(\"https://files.readme.io/1f70175-flutter-icon.svg\");\n}\n</style>"
+}
+[/block]
 
 ### [Recommended] Implement extended deferred deep linking
 
