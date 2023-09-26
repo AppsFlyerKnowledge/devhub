@@ -107,6 +107,7 @@ paths:
         - $ref: '#/components/parameters/ToInstallTime'
         - in: query
           name: additional_fields
+          explode: false
           schema:
             type: array
             items:
@@ -144,6 +145,7 @@ paths:
         - $ref: '#/components/parameters/ToInstallTime'
         - in: query
           name: additional_fields
+          explode: false
           schema:
             type: array
             items:
@@ -256,6 +258,7 @@ paths:
         - $ref: '#/components/parameters/ToInstallTime'
         - in: query
           name: additional_fields
+          explode: false
           schema:
             type: array
             items:
@@ -292,6 +295,7 @@ paths:
         - $ref: '#/components/parameters/ToInstallTime'
         - in: query
           name: additional_fields
+          explode: false
           schema:
             type: array
             items:
