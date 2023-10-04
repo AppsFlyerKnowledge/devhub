@@ -8,7 +8,8 @@ createdAt: "2021-07-27T21:45:38.893Z"
 updatedAt: "2022-11-29T15:55:40.188Z"
 order: 3
 ---
-Before you begin
+
+## Before you begin
 ----------------
 
 To successfully complete the tests in this document, you must:
@@ -16,7 +17,7 @@ To successfully complete the tests in this document, you must:
 - [Integrate the SDK](doc:integrate-android-sdk)
 - [Register your testing device](https://support.appsflyer.com/hc/en-us/articles/207031996).
 
-Test Android SDK integration
+## Test Android SDK integration
 ----------------------------
 
 The test consists of:
@@ -63,7 +64,7 @@ https://app.appsflyer.com/com.my.app?pid=devtest&c=test1&advertising_id=********
 > In the above example, the value of `c` is `test1`. In consecutive tests, increment the value of `c` to `test2`, `test3`, and so on.
 
 **Step 2: Install the app**  
-[Enable debug mode](doc:integrate-android-sdk#enabling-debug-mode) and install the app on a registered test device.
+[Enable debug mode](doc:integrate-android-sdk#enabling-debug-mode) and install the app on a [registered test device](https://support.appsflyer.com/hc/en-us/articles/207031996-Registering-test-devices-).
 
 **Step 3: Execute test**  
 Proceed to [inspect conversion data](#inspect-conversion-data).
@@ -105,10 +106,11 @@ A 200 response containing the install's conversion data (truncated for readabili
 > 
 > It might take up to 30 minutes for the install to appear in the dashboard.
 
-Troubleshooting the Android SDK integration
+## Troubleshooting the Android SDK integration
+
 -------------------------------------------
 
-#### Install always attributed to organic
+### Install always attributed to organic
 
 **Scenario**  
 You are testing attribution using attribution links. You've implemented the SDK conversion listener but the log always shows that the install is organic. In addition, no non-organic install is recorded in the dashboard.
@@ -120,7 +122,7 @@ You are testing attribution using attribution links. You've implemented the SDK 
 3. Make sure that the device you are testing on is registered.
 4. A non-proper channel is defined in the manifest
 
-#### Install not detected or attributed
+### Install not detected or attributed
 
 **Scenario**  
 You are testing install attribution but the log doesn't show any data about the install such as type, first launch, etc.
@@ -130,7 +132,7 @@ You are testing install attribution but the log doesn't show any data about the 
 1. Make sure that the `start` and `init` methods are called in the `Application` class.
 2. Make sure that the device you are testing on is registered.
 
-#### I'm getting a 404 on install or event recording
+### I'm getting a 404 on install or event recording
 
 **Scenario**  
 You are testing in-app events to see that they are attributed to the correct media source. However, the log shows response 404 for both the install and when you send in-app events. Neither the install nor the in-app events appear in the dashboard.
@@ -138,7 +140,7 @@ You are testing in-app events to see that they are attributed to the correct med
 **Possible reasons**  
 A 404 response indicates that the app ID is incorrect. Make sure that the app ID in the `applicationId` parameter in the `build.gradle` file is the same as the one in your dashboard.
 
-#### Revenue is not recorded properly
+### Revenue is not recorded properly
 
 **Scenario**  
 You are testing in-app events with revenue. The events appear in the dashboard but revenue is not recorded
@@ -146,7 +148,7 @@ You are testing in-app events with revenue. The events appear in the dashboard b
 **Possible reasons**  
 The revenue parameter is not formatted correctly. Do NOT format the revenue value in any way. It should not contain comma separators, currency signs, or text. A revenue event should be similar to 1234.56, for example.
 
-#### The log shows "AppsFlyer's SDK cannot send any event without providing devkey" when I test in-app events
+### The log shows "AppsFlyer's SDK cannot send any event without providing devkey" when I test in-app events
 
 **Scenario**  
 You are trying to see in-app events in the log. When you trigger events the log only shows "AppsFlyer's SDK cannot send any event without providing DevKey".
@@ -154,7 +156,7 @@ You are trying to see in-app events in the log. When you trigger events the log 
 **Possible reasons**  
 You call the `start` method without passing the dev key as a parameter. Pass the dev key to the method.
 
-#### The log shows "not sending data yet, waiting for dev key" in the log when I test in-app events
+### The log shows "not sending data yet, waiting for dev key" in the log when I test in-app events
 
 **Scenario**  
 You are trying to test in-app events in the log. When you trigger events the log only shows "Not sending data yet, waiting for dev key".
@@ -162,7 +164,7 @@ You are trying to test in-app events in the log. When you trigger events the log
 **Possible reasons**  
 You call the `init` and you pass the dev key as an empty string. Pass the dev key to the method.
 
-#### I get response 400 when I test in-app events
+### I get response 400 when I test in-app events
 
 **Scenario**  
 You are trying to test in-app events. When you trigger events you see an error 400 in the logs.
@@ -170,7 +172,7 @@ You are trying to test in-app events. When you trigger events you see an error 4
 **Possible reasons**  
 This might indicate an issue with the dev key. Check that the dev key is the correct one. Also, make sure that the dev key contains only alphanumeric characters.
 
-#### The log shows "warning: Google play services is missing"
+### The log shows "warning: Google play services is missing"
 
 **Scenario**  
 The logcat shows the warning message "WARNING: Google Play Services is missing".
@@ -185,7 +187,7 @@ implementation 'com.google.android.gms:play-services-base:15.0.1'
 implementation 'com.google.android.gms:play-services-ads:15.0.1'
 ```
 
-#### I get response 403 on install or event recording
+### I get response 403 on install or event recording
 
 **Scenario**  
 You are trying to test installs and other conversion events in the log. When you trigger these events, you see response 403 (forbidden) in the logs.
@@ -193,7 +195,8 @@ You are trying to test installs and other conversion events in the log. When you
 **Possible reasons**  
 This might be because you have the Zero package, which does not include attribution data; only data on clicks and impressions. To start receiving attribution data, learn more about the [different AppsFlyer packages](https://www.appsflyer.com/pricing/), and update as needed. You can also contact our customer engagement team at [hello@appsflyer.com](mailto:hello@appsflyer.com) if you have questions about our packages.
 
-Creating an Android debug app
+## Creating an Android debug app
+
 -----------------------------
 
 <span class="annotation-optional">Optional</span>  
