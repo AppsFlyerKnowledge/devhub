@@ -138,7 +138,7 @@ In the event that an error occurs when recording the in-app event, an error code
 | :--------- | :----------------------------------------------------------- |
 | `10`       | "Event timeout. Check 'minTimeBetweenSessions' param"        |
 | `11`       | "Skipping event because 'isStopTracking' enabled"            |
-| `40`       | Network error: Error description comes from Android          |
+| `40`       | Network error: Error description comes from iOS          |
 | `41`       | "No dev key"                                                 |
 | `50`       | "Status code failure" + actual response code from the server |
 
