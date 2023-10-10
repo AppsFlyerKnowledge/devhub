@@ -253,9 +253,9 @@ AppsFlyerLib.shared().customerUserID = "my user id"
 
 
 
-### Set the CUID before calling start
+### Associate the CUID with the install event
 
-It is preferable to set the [`customerUserId`](https://dev.appsflyer.com/hc/docs/ios-sdk-reference-appsflyerlib#customeruserid) before calling the [`start`](https://dev.appsflyer.com/hc/docs/ios-sdk-reference-appsflyerlib#start) method. This is because [`start`](https://dev.appsflyer.com/hc/docs/ios-sdk-reference-appsflyerlib#start) sends the install event to AppsFlyer. If the CUID is set after calling [`start`](https://dev.appsflyer.com/hc/docs/ios-sdk-reference-appsflyerlib#start), it will not be associated with the install event.
+If it’s important for you to associate the install event with the CUID, you should set  to set the [`customerUserId`](https://dev.appsflyer.com/hc/docs/ios-sdk-reference-appsflyerlib#customeruserid) before calling the [`start`](https://dev.appsflyer.com/hc/docs/ios-sdk-reference-appsflyerlib#start) method. This is because [`start`](https://dev.appsflyer.com/hc/docs/ios-sdk-reference-appsflyerlib#start) sends the install event to AppsFlyer. If the CUID is set after calling [`start`](https://dev.appsflyer.com/hc/docs/ios-sdk-reference-appsflyerlib#start), it will not be associated with the install event.
 
 ```objectivec
 - (void)applicationDidBecomeActive:(UIApplication *)application {
