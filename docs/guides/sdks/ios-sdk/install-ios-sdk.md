@@ -177,9 +177,10 @@ Drag the `AppsFlyerLib.framework` folder and drop it into your Xcode project. Ma
 
 The SDK automatically adds and uses the following native frameworks:
 
-- `AdSupport` framework: This framework is required to collect the IDFA from devices. Without IDFA you cannot attribute installs to Meta ads, Twitter, Google Ads, and other networks
-- `iAd` framework: Measure performance of Apple Search Ads in your app
-- `AdServices` framework (`V6.1.3+`): Measure the performance of Apple Search Ads in your app
+- `AdSupport` framework: This framework is required to collect the IDFA from devices. Without IDFA you cannot attribute installs to Meta ads, Twitter, Google Ads, and other networks.
+- `AdServices` framework (`V6.1.3+`): Measure the performance of Apple Search Ads in your app.
+- `iAd` framework: (Deprecated) Measure the performance of Apple Search Ads in your app. **Note:** The `iAd` framework has not been in use since `V6.10.1` and completely removed from the code base from `V6.13.0`.
+
 
 ## Strict mode SDK
 
