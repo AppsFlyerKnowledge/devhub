@@ -1070,7 +1070,7 @@ components:
       description: |
         Use to filter by a specific agency
 
-        Note: that if you use both the agency filter and media source filters, the media source filters don’t apply for non-transparent agencies. This means that for non-transparent agencies, all data is included; not just data from the filtered media sources
+        Note: If you use both the agency filter and media source filters, the media source filters don’t apply for non-transparent agencies. This means that for non-transparent agencies, all data is included, not just the data from the filtered media sources
       schema:
         type: array
         items:
