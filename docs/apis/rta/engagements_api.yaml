@@ -4,18 +4,12 @@ info:
   version: "1.0"
 servers:
 - url: https://engagements.appsflyer.com/v1.0/s2s
-security:
-- HeaderApiKeyAuth: []
-- QueryParamApiKeyAuth: []
 paths:
   /click/app/{platform}/{app_id}:
     get:
       tags:
       - Click Engagement
       summary: Click Engagement
-      security:
-      - HeaderApiKeyAuth: []
-      - QueryParamApiKeyAuth: []
       parameters:
         - $ref: '#/components/parameters/AppId'
         - $ref: '#/components/parameters/Platform'
@@ -66,8 +60,6 @@ paths:
       tags:
       - Click Engagement
       summary: Click Engagement
-      security:
-      - HeaderApiKeyAuth: []
       parameters:
         - $ref: '#/components/parameters/AppId'
         - $ref: '#/components/parameters/Platform'
@@ -94,9 +86,6 @@ paths:
       tags:
       - Impression Engagement
       summary: Impression Engagement
-      security:
-      - HeaderApiKeyAuth: []
-      - QueryParamApiKeyAuth: []
       parameters:
         - $ref: '#/components/parameters/AppId'
         - $ref: '#/components/parameters/Platform'
@@ -147,8 +136,6 @@ paths:
       tags:
       - Impression Engagement
       summary: Impression Engagement
-      security:
-      - HeaderApiKeyAuth: []
       parameters:
         - $ref: '#/components/parameters/AppId'
         - $ref: '#/components/parameters/Platform'
@@ -171,17 +158,6 @@ paths:
           $ref: '#/components/responses/GatewayTimeout'
 
 components:
-  securitySchemes:
-    HeaderApiKeyAuth:
-      type: apiKey
-      description: API key passed as a header field
-      name: authorization
-      in: header
-    QueryParamApiKeyAuth:
-      type: apiKey
-      description: API key passed as a query parameter
-      name: authorization
-      in: query
   parameters:
     AppId:
       name: app_id
