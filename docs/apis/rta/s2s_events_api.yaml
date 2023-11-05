@@ -52,8 +52,7 @@ paths:
             schema:
               oneOf:
                 - $ref: '#/components/schemas/AndroidIds'
-                - $ref: '#/components/schemas/IdfaId'
-                - $ref: '#/components/schemas/IdfvId'
+                - $ref: '#/components/schemas/IosIds'
       responses:
         200:
           description: |
@@ -474,14 +473,18 @@ components:
 
     ErrorResponse:
       type: string
-    IdfvId:
-      title: iOS IDFV
+    IosIds:
+      title: iOS Ids
       type: object
       required:
         - appsflyer_id
         - eventName
         - eventValue
       properties:
+        idfa:
+          type: string
+          example: 9876F1SS-2983-3855-27RR-2R626772VFNB
+          description: Where available populate with the device IDFA
         idfv:
           type: string
           example: 95C9BD22-4A4C-41C8-9548-ED07C5C8C145
@@ -832,10 +835,7 @@ components:
         - eventName
         - eventValue
       properties:
-        idfa:
-          type: string
-          example: 9876F1SS-2983-3855-27RR-2R626772VFNB
-          description: Where available populate with the device IDFA
+        
         appsflyer_id:
           type: string
           pattern: \d{13}-\d{7}
