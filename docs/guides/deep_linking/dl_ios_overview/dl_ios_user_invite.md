@@ -102,6 +102,15 @@ To enable users to invite their friends to your app, you need a way to generate 
 
 5. Enable users to share generated links. For example, copy it to their clipboard.
 
+### Set the shortlink ID
+
+<span class="annotation-optional">Optional</span>  
+The shortlink ID can be determined by the developer, by adding the paramter `af_custom_shortlink` to the `LinkGenerator` instance.
+
+```swift
+generator.addParameterValue(<value>, forKey:"af_custom_shortlink")
+```
+
 ### Log invite link creation events
 
 <span class="annotation-optional">Optional</span>  

@@ -102,6 +102,15 @@ To enable users to invite their friends to your app, you need a way to generate 
    linkGenerator.generateLink(getApplicationContext(), listener);
    ```
 
+### Set the shortlink ID
+
+<span class="annotation-optional">Optional</span>  
+The shortlink ID can be determined by the developer, by adding the paramter `af_custom_shortlink` to the `LinkGenerator` instance.
+
+```java
+linkGenerator.addParameter("af_custom_shortlink", <value>);
+```
+
 ### Log invite link creation events
 
 <span class="annotation-optional">Optional</span>  
