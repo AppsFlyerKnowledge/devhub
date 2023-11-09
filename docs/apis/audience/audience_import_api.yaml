@@ -107,7 +107,7 @@ paths:
                   summary: "Cannot remove"
                   value:
                     message: "X or more of devices to remove contain more than one identifier per device"
-        '403':
+        403:
           description: Forbidden
           content: 
             application/json:
@@ -118,6 +118,17 @@ paths:
                     summary: Unauthorized request
                     value:
                       message: "Forbidden"
+        429:
+          description: Too many requests
+          content: 
+            application/json:
+                schema:
+                  $ref: '#/components/schemas/error_response'
+                examples:
+                  TooManyRequests:
+                    summary: Too many requests
+                    value:
+                      message: "Too many requests"
   
 components:
   securitySchemes:
