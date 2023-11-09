@@ -7,6 +7,12 @@ hidden: false
 createdAt: "2023-01-22T09:32:49.242Z"
 updatedAt: "2023-01-23T11:59:44.291Z"
 ---
+
+> ⚠️ **Important notice**
+> 
+> As of Nov. 8th, 2023, AppsFlyer Smart Banner web SDK v1, is deprecated. From this date onwards websites using the Smart Banner web SDK v1 can no longer show Smart Banners.
+> Please upgrade to Smart Banner v2 by following the instructions in this article. 
+
 ## Overview
 
 Upgrading your SDK to a new version can be a simple process, but it is important to understand the changes that have been made. In this tutorial, we will go over the steps to upgrade your current SDK to the new version, and how to adjust your code to accommodate the changes.
