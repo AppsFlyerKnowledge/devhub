@@ -19,12 +19,16 @@ paths:
         description: |
           - To add devices: `add`
           - To remove devices: `remove`
+          - To update devices: `overwrite`
+          > ⚠️ **Warning**
+          > Using the `overwrite` action incorrectly can result in unintentional data loss
         schema:
           type: string
           enum:
             - ""
             - add
             - remove
+            - overwrite
         required: true
 
       requestBody:
