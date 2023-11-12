@@ -298,7 +298,7 @@ Enabling ATT support in the SDK handles IDFA collection on devices with iOS `14.
 > Call `waitForATTUserAuthorization` only if you intend to call `requestTrackingAuthorization` somewhere in your app.
 
 **Step 1: Set up `waitForATTUserAuthorization`**  
-When [Initializing the SDK](#initializing-the-ios-sdk), **before calling** [`start`](doc:ios-sdk-reference-appsflyerlib#start) In `didFinishLaunchingWithOptions`, call [`waitForATTUserAuthorization`](doc:ios-sdk-reference-appsflyerlib#waitforattuserauthorization):
+When [Initializing the SDK](#initializing-the-ios-sdk), **before calling** [`start`](doc:ios-sdk-reference-appsflyerlib#start) In `applicationDidBecomeActive`, call [`waitForATTUserAuthorization`](doc:ios-sdk-reference-appsflyerlib#waitforattuserauthorization):
 
 ```objectivec
 [[AppsFlyerLib shared] waitForATTUserAuthorizationWithTimeoutInterval:60];
