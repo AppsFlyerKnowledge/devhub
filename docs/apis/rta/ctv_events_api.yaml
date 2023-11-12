@@ -599,6 +599,6 @@ components:
                 `custom` format is GUID
             value:
               type: string
-              pattern: ^[A-Za-z0-9\-]+$
+              pattern: ^[A-Za-z0-9\-_]+$
 x-id:
 - af-wh-ott
