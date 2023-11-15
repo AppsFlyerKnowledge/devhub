@@ -19,11 +19,60 @@ Integrating the SDK consists of:
 Make sure you've [installed the SDK](doc:sdk-installation).
 
 ## SDK integration guides
-[block:html]
-{
-  "html": "<div class=\"button-container\">\n  <a class=\"button android\" href=\"https://dev.appsflyer.com/hc/docs/integrate-android-sdk\">Android SDK</a>\n  <a class=\"button ios\" href=\"https://dev.appsflyer.com/hc/docs/integrate-ios-sdk\">iOS SDK</a>\n</div>\n\n<style>\n  .button-container {\n  \tdisplay: flex;\n  }\n  .button {\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    width: 150px;\n\t  border-radius: 6px;\n    padding: 8px;\n    margin-right: 4px;\n\t}\n  \n  .button:before {\n  \tmargin-right: 4px;\n  }\n  .button.android {\n    border: solid 2px #3DDC84;\n  }\n  .ios {\n  \tborder-radius: 6px;\n    padding: 8px;\n    border: solid 2px #7D7D7D;\n  }\n  .ios:before {\n        content: url(\"https://files.readme.io/19fdc72-apple-icon.svg\");\n  }\n\n  .android:before {\n        content: url(\"https://files.readme.io/d7dc5a3-android-icon.svg\");\n  }\n</style>"
+<div class="button-container">
+  <a class="button android" href="https://dev.appsflyer.com/hc/docs/integrate-android-sdk">Android SDK</a>
+  <a class="button ios" href="https://dev.appsflyer.com/hc/docs/integrate-ios-sdk">iOS SDK</a>
+  <a class="button unity" href="https://dev.appsflyer.com/hc/docs/basicintegration">Unity plugin</a>
+  <a class="button reactnative" href="https://dev.appsflyer.com/hc/docs/react-native-plugin">React Native plugin</a>
+</div>
+
+<style>
+  .button-container {
+  	display: flex;
+  }
+  .button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 200px;
+	  border-radius: 6px;
+    padding: 8px;
+    margin-right: 4px;
+	}
+  .button:before {  
+  	margin-right: 4px;  
+  }
+  .button.android {  
+    border: solid 2px #3DDC84;  
+  }
+  .button.reactnative {  
+    border: solid 2px #FF8C00;  
+  }
+  .button.ios {  
+  	border-radius: 6px;  
+    padding: 8px;  
+    border: solid 2px #7D7D7D;  
+  }
+   .button.unity {  
+    border: solid 2px #3DDC84;  
+    border-color: var(--project-primary-color);  
+  }
+  .ios:before {  
+        content: url("<https://files.readme.io/19fdc72-apple-icon.svg")>;  
+  }
+  .android:before {  
+        content: url("<https://files.readme.io/d7dc5a3-android-icon.svg")>;  
+  }
+.unity:before {  
+    content: url("<https://files.readme.io/59acdf6-unity-icon.svg")>;  
 }
-[/block]
+.reactnative:before {  
+   content: url("<https://files.readme.io/3e1288d-reactnative-icon.svg")>;  
+}
+.flutter:before {  
+    content: url("<https://files.readme.io/1f70175-flutter-icon.svg")>;  
+}  
+</style>
 ## Debug mode
 <div class="button-container">
   <a class="button android" href="https://dev.appsflyer.com/hc/docs/integrate-android-sdk#enabling-debug-mode">Android SDK</a>
