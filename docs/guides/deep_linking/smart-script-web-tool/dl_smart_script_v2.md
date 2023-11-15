@@ -328,4 +328,11 @@ You can find here [an example](https://appsflyersdk.github.io/appsflyer-onelink-
 > 
 > Available from version 2.7.0.
 
-This [example](https://appsflyersdk.github.io/appsflyer-onelink-smart-script/examples/webreferrer.html?utm_source=my_source&utm_channel=my_channel) demonstrates how to copy the HTTP `document.referrer` to a key defined by `webReferrer`in the outgoing URL. The referrer is saved in the first page of the website  the user lands in, and may be used in any consecutive page in this domain which runs Smart Script with this argument.
+You can set Smart Script to copy the HTTP `document.referrer` to either a custom outgoing URL parameter or predefined outgoing URL parameters. If you want to see web referrer values in dashboards or in raw data reports, we suggest using one of the following **predefined** outgoing URL parameters:
+
+- `af_channel` - Parameter is available in dashboards and raw data
+- `af_sub1-5` - The parameter is available in raw data under the **af_sub1-5** columns and in the **original URL** column.
+
+If you want to set a custom parameter, Smart Script has to copy the   `document.referrer` property value and set it as the value of the parameter. In this [example](https://appsflyersdk.github.io/appsflyer-onelink-smart-script/examples/webreferrer.html?utm_source=my_source&utm_channel=my_channel),  Smart Script copies the `document.referrer` value to a custom outgoing URL parameter key defined by `webReferrer`. The selected custom key in the example is `this_referrer`.
+
+For more information, see [Web referrer mapping](https://support.appsflyer.com/hc/en-us/articles/4413588932241-OneLink-Smart-Script-V2-setup#web-referrer-mapping).
