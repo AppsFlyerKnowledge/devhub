@@ -18,8 +18,12 @@ The Smart Banner SDK authenticates using the unique **Web key**, which you can g
 
 ### Smart banners only
 
-1. Replace the _YOUR_WEB_KEY_ placeholder in the script with your **Web key**. The web key is created when you create a new [Website workplace](https://support.appsflyer.com/hc/en-us/articles/360000764837#1-website-setup).
-2. Paste the following code snippet in the `head` tag on your website. Make sure to paste it near the top of the `head` tag.
+You can either copy the smart banner script from AppsFlyer or from below.
+
+1. Copy the script code snippet in **one** of the following ways:
+
+   - Copy the script from the [smart banner’s Website workplace](https://support.appsflyer.com/hc/en-us/articles/360000764837-Smart-Banners-mobile-web-to-app-#1-website-workplace-setup) in AppsFlyer. Your web key is already included in the script.
+   - Copy the script from the the code snippet below and replace YOUR_WEB_KEY placeholder in the script with your **Web key**. The web key is created when you create a new [Website workplace](https://support.appsflyer.com/hc/en-us/articles/360000764837-Smart-Banners-mobile-web-to-app-#1-website-workplace-setup).
 
 ```js
 <script>
@@ -33,7 +37,7 @@ AF('banners', 'showBanner');
 </script>
 ```
 
-
+2. Paste the code snippet in the `head` tag on your website. Make sure to paste it near the top of the `head` tag.
 
 > ℹ️ **Note**
 > 
