@@ -472,8 +472,8 @@ Predefined event parameter constants follow a `AFInAppEventParameterName.PARAMET
 | `"af_long"`                        | <div id="af_long">`LONG`</div>                                                    | `String`                                     |
 | `"af_customer_user_id"`            | <div id="af_customer_user_id">`CUSTOMER_USER_ID`</div>                            | `String`                                     |
 | `"af_validated"`                   | <div id="af_validated">`VALIDATED`</div>                                          | `boolean`                                    |
-| `"af_revenue"`                     | <div id="af_revenue">`REVENUE`</div>                                              | `int`                                        |
-| `"af_projected_revenue"`           | <div id="af_projected_revenue">`PROJECTED_REVENUE`</div>                          | `int`                                        |
+| `"af_revenue"`                     | <div id="af_revenue">`REVENUE`</div>                                              | `float`                                        |
+| `"af_projected_revenue"`           | <div id="af_projected_revenue">`PROJECTED_REVENUE`</div>                          | `float`                                        |
 | `"af_receipt_id"`                  | <div id="af_receipt_id">`RECEIPT_ID`</div>                                        | `String`                                     |
 | `"af_tutorial_id"`                 | <div id="af_tutorial_id">`TUTORIAL_ID`</div>                                      | `String`                                     |
 | `"af_virtual_currency_name"`       | <div id="af_virtual_currency_name">`VIRTUAL_CURRENCY_NAME`</div>                  | `String`                                     |
