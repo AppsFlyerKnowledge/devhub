@@ -987,6 +987,8 @@ Sets the currency for in-app purchases. The currency code should be a 3 characte
 
 ### setCustomerIdAndLogSession
 
+> ⚠️ Before calling this method, the method [`waitForCustomerUserId`](#waitforcustomeruserid) must be called
+
 **Method signature**
 
 ```java
