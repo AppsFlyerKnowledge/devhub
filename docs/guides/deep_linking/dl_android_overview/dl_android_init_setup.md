@@ -23,9 +23,7 @@ The two methods and instructions for implementation are described in detail in t
 ## Procedures for Android App Links
 Android App Links work with Android V6 and above. [Learn more](https://support.appsflyer.com/hc/en-us/articles/115005314223).
 
-### Generating a SHA256 fingerprint
-
-**To generate the SHA256 fingerprint:**
+### Generating a SHA256 fingerprint while in development
 
 1. Locate your [app's keystore](https://developer.android.com/training/articles/keystore).
 If the app is in still in development, locate the `debug.keystore`
@@ -74,9 +72,17 @@ SubjectKeyIdentifier [
 
 4. Send the SHA256 back to the marketer. 
 
-### Adding App Link intent-filter to main activity
+### Generating a SHA256 fingerprint while in production
 
-**To add the intent-filter to the main activity:**
+**The SHA256 fingerprint is generated in **
+
+1. In *Google Play console* Find the public SHA256 fingerprint in **Setup -> App signing** (see image below)
+
+![Google Play SHA256 cert!](https://files.readme.io/8574437-Screenshot_2023-11-27_at_11.30.43.png "Google Play SHA256 cert")
+
+2. Send the SHA256 back to the marketer. 
+
+### Adding App Link intent-filter to main activity
 
 1. Get the auto-generated intent-filter code from the [marketer](https://support.appsflyer.com/hc/en-us/articles/207032246#add-redirection-logic-for-existing-app-users). The intent-filter code is used in the AndroidManifest.XML. 
 2. Open the app's `AndroidManifest.xml` file.
