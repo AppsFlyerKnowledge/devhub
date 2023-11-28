@@ -282,7 +282,13 @@ func applicationDidBecomeActive(_ application: UIApplication) {
 }
 ```
 
+## Log sessions
 
+The SDK sends an `af_app_opened` message whenever the app is opened or brought to the foreground, providing that `start` is called in the `didBecomeActive` lifecycle event method.  Before the message is sent, the SDK makes sure that the time passed since sending the last message is not smaller than a predefined interval.
+
+### Setting the time interval between app launches
+
+Set [`minTimeBetweenSessions`](https://dev.appsflyer.com/hc/docs/ios-sdk-reference-appsflyerlib#mintimebetweensessions) to the minimal time interval that must lapse between two `af_app_opened` messages. The default interval is 5 seconds. 
 
 ## iOS 14 support
 
