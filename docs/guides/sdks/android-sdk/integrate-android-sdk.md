@@ -245,6 +245,18 @@ public class AFApplication extends Application {
 
 If you started the SDK from an `Activity` (see: [`Deferring SDK start`](https://dev.appsflyer.com/hc/docs/integrate-android-sdk#deferring-sdk-start)) class and you want the CUID to be associated with the install event, set the CUID before[`start`](https://dev.appsflyer.com/hc/docs/android-sdk-reference-appsflyerlib#start).
 
+## Log sessions
+
+The SDK sends an `af_app_opened` message whenever the app is opened or brought to the foreground.  Before the message is sent, the SDK makes sure that the time passed since sending the last message is not smaller than a predefined interval.
+
+### Setting the time interval between app launches
+
+Call [`setMinTimeBetweenSessions`](https://dev.appsflyer.com/hc/docs/android-sdk-reference-appsflyerlib#setmintimebetweensessions) to set the minimal time interval that must lapse between two `af_app_opened` messages. The default interval is 5 seconds.
+
+### Logging sessions manually
+
+You can log sessions manually by calling [`logSession`](https://dev.appsflyer.com/hc/docs/android-sdk-reference-appsflyerlib#logsession).
+
 ## Enabling debug mode
 
 <span class="annotation-optional">Optional</span>  
