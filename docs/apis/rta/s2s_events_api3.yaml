@@ -1,6 +1,6 @@
 openapi: 3.0.1
 info:
-  title:  "[Legacy] Server-to-server events API (for mobile)"
+  title:  Server-to-server events API (for mobile)
   version: "1.0"
   description: |
     The AppsFlyer platform attributes and records mobile app events sent by the AppsFlyer SDK and by APIs. Use the S2S API to report events that take place outside the app; for example, a user renews their subscription using your web interface. S2S events, once recorded, are available across the platform, including dashboards, raw data, and analytics. 
@@ -9,7 +9,7 @@ info:
     - Values sent in the S2S message
     - Some AppsFlyer install attribution values like, install time and media source. 
 servers:
-- url: https://api2.appsflyer.com/
+- url: https://api3.appsflyer.com/
   description: Production server
 security:
 - ApiKeyAuth: []
@@ -19,6 +19,7 @@ paths:
       tags:
       - Inapp Events
       summary: Send Event
+      operationId: s2s-events-api3-post
       description: |
         Use this API to send mobile events that occur outside the app from your servers to AppsFlyer.
         > ⚠️ 
@@ -128,7 +129,7 @@ components:
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
-      description: "To get the authentication key, in AppsFlyer dashboard go to: App Settings > Dev Key"
+      description: "Learn [here](https://support.appsflyer.com/hc/en-us/articles/360004562377) how to obtain the authentication S2S key"
       name: authentication
       in: header
   schemas:
