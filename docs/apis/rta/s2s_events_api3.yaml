@@ -92,7 +92,7 @@ paths:
           description: |
             |Message|How to handle|
             |--- |--- |--- |
-            |Unauthorized|When the key provided in the authentication header is not the `<dev_key>` for this app|
+            |Unauthorized|When the key provided in the authentication header is not the `<S2S_key>` for this app|
           content:
             application/json:
               schema:
