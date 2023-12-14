@@ -1474,6 +1474,9 @@ AppsFlyerLib.getInstance().setSharingFilterForPartners("partner1_int", "partner2
 AppsFlyerLib.getInstance().setSharingFilterForPartners("all") // All partners
 AppsFlyerLib.getInstance().setSharingFilterForPartners("") // Reset list (default)
 ```
+**Exceptions**:
+- For Twitter, use `twitter` (and not `twitter_int`)
+
 
 
 
