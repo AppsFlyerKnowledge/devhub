@@ -8,6 +8,7 @@ info:
 
     - Values sent in the S2S message
     - Some AppsFlyer install attribution values like, install time and media source. 
+
 servers:
 - url: https://api3.appsflyer.com/
   description: Production server
@@ -25,6 +26,9 @@ paths:
         > ⚠️ 
         > **JSON payload limitation** JSON payload size: up to 1KB
         
+        > ⚠️ 
+        > This API requires **TLS v1.2** or higher
+
         > 📘 
         > **Encode URLs** - [Encode (percent) code reserved characters](https://tools.ietf.org/html/rfc3986#section-2.1) before forming the method URL. 
 
