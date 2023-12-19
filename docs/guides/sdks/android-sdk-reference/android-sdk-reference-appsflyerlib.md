@@ -813,6 +813,9 @@ Measure and get data from push-notification campaigns. Call this method inside t
 
 ### setAdditionalData
 
+> 📘
+> Calling for setAddiotionalData before first launch will have the additional data included in installs, sessions, as well as in-app events.
+
 **Method signature**
 
 ```java
