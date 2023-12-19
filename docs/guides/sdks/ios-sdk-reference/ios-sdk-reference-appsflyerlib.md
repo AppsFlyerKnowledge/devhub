@@ -128,6 +128,9 @@ AppsFlyerLib.shared().currencyCode = "USD"
 
 ### customData
 
+> 📘
+> Setting `customData` before first launch will have the additional data included in installs, sessions, as well as in-app events.
+
 **Property declaration**
 
 ```objc
