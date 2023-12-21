@@ -12,11 +12,12 @@ updatedAt: "2023-04-19T09:55:10.205Z"
 Extended deferred deep linking allows deep linking for new users in certain scenarios:
 
 - When UDL returns `NOT_FOUND` even though a relevant install occurred.
+  Main example for such a scenario:
+  - Time between click and install exceeds the UDL lookback window (15 minutes).
 - When UDL returns `FOUND` but the deep linking data is missing parameters, which are not `deep_link_value` and `deep_link_sub1-10`.  
   Main examples for such scenarios:
   - Clicking a link in a Self Reporting Network (SRN), like Meta ads or Twitter.
   - Clicking a link that doesn't contain `deep_link_value` or `deep_link_sub1-10` used for deep-linking, for example, old links created before `deep_link_value` existed that are still in use.
-  - Time between click and install exceeds the UDL lookback window (15 minutes).
 
 To allow deferred deep linking when UDL returns `NOT_FOUND`, `onConversionDataSuccess` callback should check whether it should handle the deferred deep linking.  
 `onConversionDataSuccess` is part of the Get Conversion Data(GCD) API. Its main purpose is to [gather conversion data inside the device](https://dev.appsflyer.com/hc/docs/conversion-data).  

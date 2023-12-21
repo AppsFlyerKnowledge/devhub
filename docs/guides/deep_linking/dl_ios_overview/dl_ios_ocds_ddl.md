@@ -12,6 +12,8 @@ updatedAt: "2023-04-19T09:54:41.906Z"
 Extended deferred deep linking allows deep linking for new users in certain scenarios:
 
 - When UDL returns `NOT_FOUND` even though a relevant install occurred.
+  Main example for such a scenario:
+  - Time between click and install exceeds the UDL lookback window (15 minutes).
 - When UDL returns `FOUND` but the deep linking data is missing parameters, which are not `deep_link_value` and `deep_link_sub1-10`.  
   Main examples for such scenarios:
   - Clicking a link in a Self Reporting Network (SRN), like Meta ads or Twitter.
