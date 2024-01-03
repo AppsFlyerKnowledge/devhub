@@ -631,10 +631,14 @@ paths:
                   description: "The token value should be a string with a maximum of 600 characters, 
                                containing only the characters a-z, A-Z, 0-9, and the special characters [ \t-_.]."
                 token_name:
-                  type: string
-                  nullable: true
+                  oneOf:
+                    - type: string
+                      enum:
+                        - Authorization
+                    - type: string
+                      pattern: '^X-[a-zA-Z0-9\-_]*$'
                   maxLength: 30
-                  pattern: '^X-[a-zA-Z0-9\-_]*$|^Authorization$|^$'
+                  nullable: true
                   description: "The token name must be either 'Authorization' or a string starting with 'X-', 
                                consisting of a maximum of 30 characters including only the 
                                characters a-z, A-Z, 0-9, '-' and '_'. If the token name is empty or null, 
@@ -666,6 +670,7 @@ paths:
                 properties:
                   request_id:
                     type: string
+                    example: 8a3f4fa6-a91c-11ec-b909-0242ac120002
                   message:
                     type: string
                     example: "Your token has been set successfully"
@@ -725,7 +730,7 @@ paths:
                 Missing Asset Event Type:
                   value:
                     code: MissingAsset
-                    message: The specified message type ({event-type} isn't part of your subscripton. Contact AppsFlyer support or your AppsFlyer account executive.
+                    message: The specified message type ({event-type} isn't part of your subscription. Contact AppsFlyer support or your AppsFlyer account executive.
                     request_id: 8a3f4fa6-a91c-11ec-b909-0242ac120002
                 Missing Asset Push API:
                   value:
@@ -839,7 +844,7 @@ paths:
                 properties:
                   request_id:
                     type: string
-                    example: "123123"
+                    example: "8a3f4fa6-a91c-11ec-b909-0242ac120002"
         401:
           $ref: '#/components/responses/AuthenticationFailed'
         402:
@@ -898,7 +903,7 @@ paths:
                 Account problem:
                   value:
                     code: AccountProblem
-                    message: An account problem ocurred. Please contact your AppsFlyer account executive.
+                    message: An account problem occurred. Please contact your AppsFlyer account executive.
                     request_id: 8a3f4fa6-a91c-11ec-b909-0242ac120002
                 App ID not found:
                   value:
@@ -1008,7 +1013,9 @@ components:
             schema:
               $ref: '#/components/schemas/Error' 
             example: {
-              message: "The API version listed in the URL doesn't exist. Check the API documentation"
+              code: InvalidVersion,
+              message: "The API version listed in the URL doesn't exist. Check the API documentation",
+              request_id: 8a3f4fa6-a91c-11ec-b909-0242ac120002
             }
     VersionNoLongerValid:
       description: The API version listed in the URL is no longer valid
