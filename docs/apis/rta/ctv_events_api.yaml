@@ -307,13 +307,7 @@ paths:
                 event_parameters:
                   type: object
                   properties:
-                    af_duration_seconds:
-                      type: number
-                      format: integer
                     af_revenue:
-                      type: number
-                      format: double
-                    af_price:
                       type: number
                       format: double
                     af_currency:
@@ -494,7 +488,6 @@ paths:
                   description: A JSON object which can contain multiple event parameters. Learn more [here](https://support.appsflyer.com/hc/en-us/articles/4410481112081-Rich-in-app-events-Event-structure)
                   example:
                     af_revenue: 1.99
-                    af_price: 2.456
                     af_currency: MYR
                 event_custom_parameters:
                   type: string
@@ -502,6 +495,8 @@ paths:
                     parameters.
                   format: json
                   maxLength: 2048
+                  example: '{"test_param": "test_data", "af_price":6.66, "player_level": 55, "af_duration_seconds": 100}'
+
         required: true
       responses:
         202:
