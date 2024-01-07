@@ -55,7 +55,7 @@ Configuring mobile apps to register approved domains takes place inside Xcode. I
 ![xcode-associated-domains!](https://files.readme.io/ed37397-xcode-associated-domains.png "xcode-associated-domains")
 
 > 📘
-> To associate a domain with your app, you need to have the associated domain file on your domain and the appropriate entitlement in your app. Once the OneLink is created, AppsFlyer hosts the `apple-app-site-association file`.
+> To associate a domain with your app, you need to have the associated domain file on your domain and the appropriate entitlement in your app. Once the [redirection logic for existing app users is added](https://support.appsflyer.com/hc/en-us/articles/207032246-OneLink-templates#add-redirection-logic-for-existing-app-users) to the OneLink template configuration, AppsFlyer hosts the apple-app-site-association file.
 > When a user installs your app, the system attempts to download the associated domain file and verify the domains in your `Associated Domains Entitlement`.
 
 ### Universal Link limitations

@@ -601,6 +601,320 @@ paths:
           $ref: '#/components/responses/VersionDoesntExist'
         410:
           $ref: '#/components/responses/VersionNoLongerValid'
+
+  /tokens/app/{app_id}:
+    put:
+      tags:
+        - Authentication Token
+      summary: Set Push API authentication token
+      parameters:
+        - name: app_id
+          in: path
+          description: Application ID
+          example: "id121244"
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: Body for validate URL
+        content:
+          application/json:
+            schema:
+              required:
+                - token
+              type: object
+              properties:
+                token:
+                  type: string
+                  maxLength: 600
+                  pattern: '^[ 	\-_.a-zA-Z0-9]*$'
+                  description: "The token value should be a string with a maximum of 600 characters, 
+                               containing only the characters a-z, A-Z, 0-9, and the special characters [ \t-_.]."
+                token_name:
+                  oneOf:
+                    - type: string
+                      enum:
+                        - Authorization
+                    - type: string
+                      pattern: '^X-[a-zA-Z0-9\-_]*$'
+                  maxLength: 30
+                  nullable: true
+                  description: "The token name must be either 'Authorization' or a string starting with 'X-', 
+                               consisting of a maximum of 30 characters including only the 
+                               characters a-z, A-Z, 0-9, '-' and '_'. If the token name is empty or null, 
+                               it will default to the last received token name, or 'Authorization' if there is none."
+      responses:
+        200:
+          description: The token has been set successfully
+          headers:
+            deprecated:
+              description: is the api version deprecated?
+              schema:
+                type: boolean
+            deprecationDate:
+              description: deprecation date
+              schema:
+                type: string
+            sunsetDate:
+              description: sunset date
+              schema:
+                type: string
+            deprecationMessage:
+              description: deprecation message
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  request_id:
+                    type: string
+                    example: 8a3f4fa6-a91c-11ec-b909-0242ac120002
+                  message:
+                    type: string
+                    example: "Your token has been set successfully"
+        400:
+          description: JSON parsing error
+          headers:
+            deprecated:
+              description: is the api version deprecated
+              schema:
+                type: boolean
+            deprecationDate:
+              description: deprecation date
+              schema:
+                type: string
+            sunsetDate:
+              description: sunset date
+              schema:
+                type: string
+            deprecationMessage:
+              description: deprecation message
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: JSONParsingError
+                message: An error occurred while parsing the JSON body. Check the body and try again..
+                requestId: 8a3f4fa6-a91c-11ec-b909-0242ac120002
+        401:
+          $ref: '#/components/responses/AuthenticationFailed'
+        402:
+          description: Push API isn't part of your subscription.
+          headers:
+            deprecated:
+              description: is the api version deprecated
+              schema:
+                type: boolean
+            deprecationDate:
+              description: deprecation date
+              schema:
+                type: string
+            sunsetDate:
+              description: sunset date
+              schema:
+                type: string
+            deprecationMessage:
+              description: deprecation message
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                Missing Asset Event Type:
+                  value:
+                    code: MissingAsset
+                    message: The specified message type ({event-type} isn't part of your subscription. Contact AppsFlyer support or your AppsFlyer account executive.
+                    request_id: 8a3f4fa6-a91c-11ec-b909-0242ac120002
+                Missing Asset Push API:
+                  value:
+                    code: MissingAsset
+                    message: Push API isn't part of your subscription. Contact AppsFlyer support or your AppsFlyer account executive
+                    request_id: 8a3f4fa6-a91c-11ec-b909-0242ac120002
+        403:
+          description: Account problem occurred
+          headers:
+            deprecated:
+              description: is the api version deprecated
+              schema:
+                type: boolean
+            deprecationDate:
+              description: deprecation date
+              schema:
+                type: string
+            sunsetDate:
+              description: sunset date
+              schema:
+                type: string
+            deprecationMessage:
+              description: deprecation message
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                Account problem:
+                  value:
+                    code: AccountProblem
+                    message: An account problem occurred. Please contact your AppsFlyer account executive.
+                    request_id: 8a3f4fa6-a91c-11ec-b909-0242ac120002
+                App ID not found:
+                  value:
+                    code: UnknownAppid
+                    message: The app ID specified wasn't found. Check that the app ID is identical to that in AppsFlyer in your account.
+                    request_id: 8a3f4fa6-a91c-11ec-b909-0242ac120002
+        404:
+          $ref: '#/components/responses/VersionDoesntExist'
+        410:
+          $ref: '#/components/responses/VersionNoLongerValid'
+        422:
+          description: Schema Error
+          headers:
+            deprecated:
+              description: is the api version deprecated
+              schema:
+                type: boolean
+            deprecationDate:
+              description: deprecation date
+              schema:
+                type: string
+            sunsetDate:
+              description: sunset date
+              schema:
+                type: string
+            deprecationMessage:
+              description: deprecation message
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                Invalid JSON format:
+                  value:
+                    code: SchemaError
+                    message: Invalid JSON format or no JSON found. Verify the content and resubmit.
+                    request_id: 8a3f4fa6-a91c-11ec-b909-0242ac120002
+    delete:
+      tags:
+        - Authentication Token
+      summary: Delete Push API authentication token
+      parameters:
+        - name: app_id
+          in: path
+          description: Application ID
+          example: "id121244"
+          required: true
+          schema:
+            type: string
+
+      responses:
+        200:
+          description: The token has been deleted successfully
+          headers:
+            deprecated:
+              description: is the api version deprecated?
+              schema:
+                type: boolean
+            deprecationDate:
+              description: deprecation date
+              schema:
+                type: string
+            sunsetDate:
+              description: sunset date
+              schema:
+                type: string
+            deprecationMessage:
+              description: deprecation message
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  request_id:
+                    type: string
+                    example: "8a3f4fa6-a91c-11ec-b909-0242ac120002"
+        401:
+          $ref: '#/components/responses/AuthenticationFailed'
+        402:
+          description: Push API isn't part of your subscription.
+          headers:
+            deprecated:
+              description: is the api version deprecated
+              schema:
+                type: boolean
+            deprecationDate:
+              description: deprecation date
+              schema:
+                type: string
+            sunsetDate:
+              description: sunset date
+              schema:
+                type: string
+            deprecationMessage:
+              description: deprecation message
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                Missing Asset Push API:
+                  value:
+                    code: MissingAsset
+                    message: Push API isn't part of your subscription. Contact AppsFlyer support or your AppsFlyer account executive
+                    request_id: 8a3f4fa6-a91c-11ec-b909-0242ac120002
+        403:
+          description: Account problem occurred
+          headers:
+            deprecated:
+              description: is the api version deprecated
+              schema:
+                type: boolean
+            deprecationDate:
+              description: deprecation date
+              schema:
+                type: string
+            sunsetDate:
+              description: sunset date
+              schema:
+                type: string
+            deprecationMessage:
+              description: deprecation message
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                Account problem:
+                  value:
+                    code: AccountProblem
+                    message: An account problem occurred. Please contact your AppsFlyer account executive.
+                    request_id: 8a3f4fa6-a91c-11ec-b909-0242ac120002
+                App ID not found:
+                  value:
+                    code: UnknownAppid
+                    message: The app ID specified wasn't found. Check that the app ID is identical to that in AppsFlyer in your account.
+                    request_id: 8a3f4fa6-a91c-11ec-b909-0242ac120002
+        404:
+          $ref: '#/components/responses/VersionDoesntExist'
+        410:
+          $ref: '#/components/responses/VersionNoLongerValid'
+
 components:
   responses:  
     Success:
@@ -699,7 +1013,9 @@ components:
             schema:
               $ref: '#/components/schemas/Error' 
             example: {
-              message: "The API version listed in the URL doesn't exist. Check the API documentation"
+              code: InvalidVersion,
+              message: "The API version listed in the URL doesn't exist. Check the API documentation",
+              request_id: 8a3f4fa6-a91c-11ec-b909-0242ac120002
             }
     VersionNoLongerValid:
       description: The API version listed in the URL is no longer valid
