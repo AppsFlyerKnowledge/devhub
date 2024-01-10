@@ -1,5 +1,5 @@
 ---
-title: "Purchase Connector"
+title: "Purchase connector"
 slug: "purchase-connector-ios"
 category: 5f9705393c689a065c409b23
 parentDoc: 5fa043dd3b65b20045e35597
@@ -9,13 +9,13 @@ order: 9
 
 ## Prerequisites
 
-- StoreKit SDK v1.
-- iOS version 9 and higher.
-- iOS AppsFlyer SDK **6.8.0** and higher.
+- StoreKit SDK v1
+- iOS version 9 and higher
+- iOS AppsFlyer SDK **6.8.0** and higher
 
-** ⚠️IMPORTNANT NOTE: Please check Purchase Connector and AppsFlyerFramework version compatability table and use corresponding versions to avoid unexpected behaviour **
+** ⚠️Important note: ** See the following table for purchase connector and AppsFlyer SDK version compatability and use the correct version to avoid unexpected behavior.
 
-|  PurchaseConnector  | AppsFlyerSDK |
+|  Purchase connector  | AppsFlyer SDK |
 | :------: | :--------: |
 | 6.8.0    | 6.8.0 - 6.9.2 |
 | 6.8.1    | 6.8.0 - 6.9.2 |
@@ -26,7 +26,7 @@ order: 9
 
 ## Install via Cocoapods
 
-Add to your Podfile and run `pod install`:
+Add the following to your Podfile and run `pod install`:
 
 ```
 pod 'PurchaseConnector'
@@ -34,30 +34,35 @@ pod 'PurchaseConnector'
 
 ## Install via Carthage 
 
-Go to the `Carthage` folder in the root of the repository. Open `purchase-connector-dynamic.json` or `purchase-connector-static.json`, click raw, copy and paste the URL of the file to your `Cartfile`:
+1. Go to the `Carthage` folder in the root of the repository. 
+2. Open `purchase-connector-dynamic.json` or `purchase-connector-static.json`.
+3. Click **ra**.
+4. Copy and paste one of the following file URLs to your `Cartfile`:
 
 ```
 binary "https://raw.githubusercontent.com/AppsFlyerSDK/appsflyer-apple-purchase-connector/main/Carthage/purchase-connector-dynamic.json" == BIINARY_VERSION
 binary "https://raw.githubusercontent.com/AppsFlyerSDK/AppsFlyerFramework/master/Carthage/appsflyer-ios.json" ~> 6.10.0
 ```
 
-Then open project folder in the terminal and use command `carthage update --use-xcframeworks`, then, drag and drop PurchaseConnector.xcframework binary and AppsFlyerLib.framework (from Carthage/Build/iOS folder).
+5. Open the project folder in the terminal and use the command `carthage update --use-xcframeworks`.
+6. Drag and drop PurchaseConnector.xcframework binary and AppsFlyerLib.framework (from Carthage/Build/iOS folder).
 
-More reference on Carthage binary artifacts integration [here](https://github.com/Carthage/Carthage/blob/master/Documentation/Artifacts.md).
+[Learn more about Carthage binary artifacts integration](https://github.com/Carthage/Carthage/blob/master/Documentation/Artifacts.md).
 
 ## Install via SPM
 
-Please, follow standard SPM dependency manager instructions.
+Follow standard SPM dependency manager instructions.
 
-> *Note: This repository contains statically linked `PurchaseConnector.xcframework`. If you want to use dynamic .xcframework, please integrate it for SPM from this repository:
+> **Note**: 
+> - This repository contains statically linked `PurchaseConnector.xcframework`. If you want to use dynamic .xcframework, integrate it for SPM from ththe following repository:
 https://github.com/AppsFlyerSDK/PurchaseConnector-Dynamic*
-> *Note: as PurchaseConnector has a dependency on [AppsFlyerLib framework](https://github.com/AppsFlyerSDK/AppsFlyerFramework), please, make sure to integrate it as well for Carthage and SPM.*
+> - PurchaseConnector has a dependency on [AppsFlyerLib framework](https://github.com/AppsFlyerSDK/AppsFlyerFramework), so make sure to integrate it as well for Carthage and SPM.
 
-## Basic Integration
+## Basic integration
 
-> *Note: before the implementation of the Purchase connector, please make sure to set up AppsFlyer `appId` and `devKey`*
+> **Note**: Before implemening the purchase connector, make sure to set up AppsFlyer `appId` and `devKey`.
 
-### Set up Purchase Connector
+### Set up purchase connector
 
 ```swift
 // Import the library
@@ -90,9 +95,9 @@ https://github.com/AppsFlyerSDK/PurchaseConnector-Dynamic*
     [[PurchaseConnector shared] setPurchaseRevenueDataSource:self];
 ```
 
-### Log Auto-Renewable Subscriptions and In-App Purchases
+### Log auto-renewable subscriptions and in-app purchases
 
-Enables automatic logging of In-App purchases and Auto-renewable subscriptions.
+Enables automatic logging of auto-renewable subscriptions and in-app purchases.
 
 ```swift
 PurchaseConnector.shared().autoLogPurchaseRevenue = [.autoRenewableSubscriptions, .inAppPurchases]
@@ -101,12 +106,12 @@ PurchaseConnector.shared().autoLogPurchaseRevenue = [.autoRenewableSubscriptions
 [[PurchaseConnector shared] setAutoLogPurchaseRevenue:AFSDKAutoLogPurchaseRevenueOptionsRenewable | AFSDKAutoLogPurchaseRevenueOptionsInAppPurchases];
 ```
 
-> *Note: if `autoLogPurchaseRevenue` has not been set, it is disabled by default. The value is an option set, so you can choose what kind of user purchases you want to observe.*
+> **Note**: If `autoLogPurchaseRevenue` hasn't been set, it is disabled by default. The value is an option set, so you can choose what kind of user purchases you want to observe.
 
-### Conform to Purchase Connector Data Source and Delegate protocols
+### Conform to purchase connector data source and delegate protocols
 
-- In order to receive purchase validation event callbacks, you should conform to and implement `PurchaseRevenueDelegate`(Swift) or `AppsFlyerPurchaseRevenueDelegate`(Objc-C) protocol.
-- To be able to add your custom parameters to the purchase event, that Connector sends, please conform to  and implement `PurchaseRevenueDataSource`(Swift) or `AppsFlyerPurchaseRevenueDataSource`(Obj-C) protocol.
+- To receive purchase validation event callbacks, you should conform to and implement `PurchaseRevenueDelegate`(Swift) or `AppsFlyerPurchaseRevenueDelegate`(Objc-C) protocol.
+- To be able to add your custom parameters to the purchase events that the purchase connector sends, conform to  and implement `PurchaseRevenueDataSource`(Swift) or `AppsFlyerPurchaseRevenueDataSource`(Obj-C) protocol.
 
 ```swift
 extension AppDelegate: PurchaseRevenueDataSource, PurchaseRevenueDelegate {
@@ -148,10 +153,10 @@ extension AppDelegate: PurchaseRevenueDataSource, PurchaseRevenueDelegate {
 @end
 ```
 
-### Start Observing Transactions
+### Start observing transactions
 
-`startObservingTransactions` should be called to start observing transactions.
- > *Note: This should be called right after the AppsFlyer iOS SDK's start method..*
+To observe transcations, you need to call `startObservingTransactions`.
+ > **Note**: Call this right after the AppsFlyer iOS SDK start method.
 
 ```swift
     PurchaseConnector.shared().startObservingTransactions()
@@ -160,7 +165,7 @@ extension AppDelegate: PurchaseRevenueDataSource, PurchaseRevenueDelegate {
     [[PurchaseConnector shared] startObservingTransactions];
 ```
 
-### Stop Observing Transactions
+### Stop observing transactions
 
 To stop observing transactions, you need to call `stopObservingTransactions`.
 
@@ -171,11 +176,11 @@ To stop observing transactions, you need to call `stopObservingTransactions`.
     [[PurchaseConnector shared] stopObservingTransactions];
 ```
 
-> *Note: if you called `stopObservingTransactions` API, you should set `autoLogPurchaseRevenue` value before you call `startObservingTransactions` next time.*
+> **Note**: If you called `stopObservingTransactions` API, set the `autoLogPurchaseRevenue` value before you call `startObservingTransactions` next time.
 
-## Testing the implementation in Sandbox
+## Test the implementation in Sandbox
 
-In order to test purchases in Xcode environment on a real device with TestFlight sandbox account, you need to set `isSandbox` to true.
+To test purchases in an Xcode environment on a real device with a TestFlight sandbox account, set `isSandbox` to `true`.
 
 ```swift
     PurchaseConnector.shared().isSandbox = true
@@ -184,11 +189,11 @@ In order to test purchases in Xcode environment on a real device with TestFlight
     [[PurchaseConnector shared] setIsSandbox:YES];
 ```
 
-> *IMPORTANT NOTE: Before releasing your app to production please be sure to remove `isSandbox` or set it to `false`. If the production purchase event will be sent in sandbox mode, your event will not be validated properly! *
+> **Important note**: Before releasing your app to production, be sure to remove `isSandbox` or set it to `false`. If the production purchase events are sent in sandbox mode, your events will not be validated properly.
 
-## Full Code Examples
+## Full code examples
 
-### Swift Example 
+### Swift example 
 
 ```swift
 import AppsFlyerLib
@@ -229,7 +234,7 @@ extension AppDelegate: PurchaseRevenueDataSource, PurchaseRevenueDelegate {
 }
 ```
 
-### Objective-C Example
+### Objective-C example
 
 ```objective-c
 #import "AppDelegate.h"
