@@ -155,7 +155,7 @@ extension AppDelegate: PurchaseRevenueDataSource, PurchaseRevenueDelegate {
 
 ### Start observing transactions
 
-To observe transcations, you need to call `startObservingTransactions`.
+To observe transactions, you need to call `startObservingTransactions`.
  > **Note**: Call this right after the AppsFlyer iOS SDK start method.
 
 ```swift
