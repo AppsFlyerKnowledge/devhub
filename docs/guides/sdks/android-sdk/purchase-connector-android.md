@@ -1,5 +1,5 @@
 ---
-title: "Purchase Connector"
+title: "Purchase connector"
 slug: "purchase-connector-android"
 category: 5f9705393c689a065c409b23
 parentDoc: 5fa0443749be540011850e51
@@ -9,24 +9,23 @@ order: 8
 
 ## Prerequistes
 
-- Android AppsFlyer SDK **6.12.2** and above
+- AppsFlyer Android SDK **6.12.2** and above
 
-## ⚠️ Important Note ⚠️️
+## ⚠️ Important note ⚠️️
 
-Purchase Connector v2.0.0 can only be used with SDK v6.12.2 (and above), as this is the setup that supports Billing Library v5.2.x.
-Using Purchase Connector v2.0.0 with an older SDK version will cause the server to reject the Purchase requests.
+The purchase connector v2.0.0 can only be used with SDK v6.12.2 (and above), as this is the setup that supports Billing Library v5.2.x.
+Using the purchase connector v2.0.0 with an older SDK version will cause the server to reject the purchase requests.
 
-## Adding The Connector To Your Project
+## Adding the connector to your project
 
-1. Add to your build.gradle file:
+1. Add the following to your build.gradle file, where `play_billing_version` is 5.2.x:
 
 ```groovy
 implementation 'com.appsflyer:purchase-connector:2.0.0'
 implementation 'com.android.billingclient:billing:$play_billing_version'
 ```
 
-   Where `play_billing_version` is 5.2.x.
-2.  If you are using ProGuard, add following keep rules to your `proguard-rules.pro` file:
+2. If you are using ProGuard, add following keep rules to your `proguard-rules.pro` file:
 
 ```groovy
 -keep class com.appsflyer.** { *; }
@@ -34,11 +33,11 @@ implementation 'com.android.billingclient:billing:$play_billing_version'
 -keep class kotlin.collections.**{ *; }
 ```
 
-## Basic Integration
+## Basic integration
 
-### Create PurchaseClient Instance
+### Create PurchaseClient instance
 
-Create an instance of this Connector to configure (in the following steps) for observing and validating transactions in your app.
+Create an instance of this connector to observe and validate transactions in your app.
 **Make sure to save a reference to the built object. If the object is not saved, it could lead to unexpected behavior and memory leaks.**
 
 ```java
@@ -54,13 +53,13 @@ val builder = PurchaseClient.Builder(this, Store.GOOGLE)
 val afPurchaseClient = builder.build()
 ```
 
-### Start Observing Transactions
+### Start observing transactions
 
 Start the SDK instance to observe transactions. </br>
 
-> **⚠️ Please Note**
-> This should be called right after calling the Android SDK's [`start`](https://dev.appsflyer.com/hc/docs/integrate-android-sdk#starting-the-android-sdk) method.
-> Calling `startObservingTransactions` activates a listener that automatically observes new billing transactions. This includes new and existing subscriptions and new in app purchases.
+> **⚠️ Note**
+> This should be called right after calling the Android SDK [`start`](https://dev.appsflyer.com/hc/docs/integrate-android-sdk#starting-the-android-sdk) method.
+> Calling `startObservingTransactions` activates a listener that automatically observes new billing transactions. This includes new and existing subscriptions and new in-app purchases.
 > The best practice is to activate the listener as early as possible, preferably in the `Application` class.
 
 ```java
@@ -73,13 +72,13 @@ afPurchaseClient.startObservingTransactions()
 ```
 
 
-### Stop Observing Transactions
+### Stop observing transactions
 
 Stop the SDK instance from observing transactions. </br>
-**⚠️ Please Note**
-> This should be called if you would like to stop the Connector from listening to billing transactions. This removes the listener and stops observing new transactions. 
-> An example for using this API is if the app wishes to stop sending data to AppsFlyer due to changes in the user's consent (opt-out from data sharing). Otherwise, there is no reason to call this method.
-> If you do decide to use it, it should be called right before calling the Android SDK's [`stop`](https://dev.appsflyer.com/hc/docs/android-sdk-reference-appsflyerlib#stop) API
+**⚠️ Note**
+> This should be called if you want to stop the connector from listening to billing transactions. This removes the listener and stops the observation of new transactions. 
+> Use this API when, for example, you want the app to stop sending data to AppsFlyer due to changes in user consent (opt-out from data sharing). Otherwise, there is no reason to call this method.
+> If you decide to use this API, it should be called right before calling the Android SDK [`stop`](https://dev.appsflyer.com/hc/docs/android-sdk-reference-appsflyerlib#stop) API.
 
 ```java
 // start
@@ -90,11 +89,11 @@ afPurchaseClient.stopObservingTransactions();
 afPurchaseClient.stopObservingTransactions()
 ```
 
-### Log Subscriptions
+### Log subscriptions
 
-Enables automatic logging of subscription events. </br>
-Set true to enable, false to disable.</br>
-If this API is not used,  by default, the connector will not record Subscriptions.</br>
+Enables the automatic logging of subscription events. </br>
+Set `true` to enable, `false` to disable.</br>
+If this API isn't used, then by default, the connector doesn't record subscriptions.</br>
 
 ```java
 builder.logSubscriptions(true);
@@ -103,11 +102,11 @@ builder.logSubscriptions(true);
 builder.logSubscriptions(true)
 ```
 
-### Log In App Purchases
+### Log in-app purchases
 
-Enables automatic logging of In-App purchase events</br>
-Set true to enable, false to disable.</br>
-If this API is not used,  by default, the connector will not record In App Purchases.</br>
+Enables the automatic logging of in-app purchase events</br>
+Set `true` to enable, `false` to disable.</br>
+If this API isn't used, then by default, the connector doesn't record in-app purchases.</br>
 
 ```java
 builder.autoLogInApps(true);
@@ -116,11 +115,11 @@ builder.autoLogInApps(true);
 builder.autoLogInApps(true)
 ```
 
-## Register Purchase Event Data Source
+## Register purchase event data source
 
-Purchase Event Data source listener. Invoked before sending data to AppsFlyer servers to let the developer add extra parameters to the payload.
+The purchase event data source listener is invoked before sending data to AppsFlyer servers, to let the developer add extra parameters to the payload.
 
-### Subscription Purchase Event Data Source
+### Subscription purchase event data source
 
 ```java
 builder.setSubscriptionPurchaseEventDataSource(new PurchaseClient.SubscriptionPurchaseEventDataSource() {
@@ -156,7 +155,7 @@ builder.setSubscriptionPurchaseEventDataSource {
 }
 ```
 
-### In Apps Purchase Event Data Source
+### In-apps purchase event data source
 
 ```java
 builder.setInAppPurchaseEventDataSource(new PurchaseClient.InAppPurchaseEventDataSource() {
@@ -196,16 +195,16 @@ builder.setInAppPurchaseEventDataSource {
 }
 ```
 
-## Register Validation Results Listeners
+## Register validation result listeners
 
-You can register listeners to get the validation results once getting a response from AppsFlyer servers to let you know if the purchase was validated successfully.
+You can register listeners to get the validation results after getting a response from AppsFlyer servers to know if the purchase was validated successfully.
 
 | Listener Method               | Description  |
 |-------------------------------|--------------|
 | `onResponse(result: Result?)` | Invoked when we got 200 OK response from the server (INVALID purchase is considered to be successful response and will be returned to this callback) |
 |`onFailure(result: String, error: Throwable?)`|Invoked when we got some network exception or non 200/OK response from the server.|
 
-### Subscription Validation Result Listener
+### Subscription validation result listener
 
 ```java
 builder.setSubscriptionValidationResultListener(new PurchaseClient.SubscriptionPurchaseValidationResultListener() {
@@ -260,7 +259,7 @@ builder.setSubscriptionValidationResultListener(object :
 })
 ```
 
-### In Apps Validation Result Listener
+### In-app purchase validation result listener
 
 ```java
 builder.setInAppValidationResultListener(new PurchaseClient.InAppPurchaseValidationResultListener() {
@@ -315,10 +314,10 @@ builder.setInAppValidationResultListener(object :
 })
 ```
 
-## Testing The Integration
+## Test the integration
 
-You can select which environment will be used for validation **production** or **sandbox** (production by default). The sandbox environment should be used while testing your [Google Play Billing Library integration](https://developer.android.com/google/play/billing/test).
-To set the environment to sandbox, call the following builder method with `true` value. Make sure to set the environment to production before uploading your app to the plat store (call the method with `false` or completely remove this call).
+You can select which environment will be used for validation, either **production** or **sandbox** (production is the default). The sandbox environment should be used while testing your [Google Play Billing Library integration](https://developer.android.com/google/play/billing/test).
+To set the environment to sandbox, call the following builder method with `true` as the value. Make sure to set the environment to production before uploading your app to the platform store, either by calling this method with `false` as the value or completely removing this call.
 
 ```java
 // sandbox environment
@@ -335,7 +334,7 @@ builder.setSandbox(false)
 
 ```
 
-## Full Code Example
+## Full code example
 
 ```java
 @Override
