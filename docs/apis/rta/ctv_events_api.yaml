@@ -485,14 +485,12 @@ paths:
                       - ZMW
                       - ZWL
                       - BYR
-                  description: A JSON object which can contain multiple event parameters. Learn more [here](https://support.appsflyer.com/hc/en-us/articles/4410481112081-Rich-in-app-events-Event-structure)
                   example:
                     af_revenue: 1.99
                     af_currency: MYR
                 event_custom_parameters:
+                  description: A JSON object which can contain multiple parameters. Learn more [here](https://support.appsflyer.com/hc/en-us/articles/4410481112081-Rich-in-app-events-Event-structure)
                   type: string
-                  description: A JSON object which can contain multiple custom event
-                    parameters.
                   format: json
                   maxLength: 2048
                   example: '{"test_param": "test_data", "af_price":6.66, "player_level": 55, "af_duration_seconds": 100}'
