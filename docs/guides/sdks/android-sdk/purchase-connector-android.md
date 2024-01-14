@@ -4,7 +4,7 @@ slug: "purchase-connector-android"
 category: 5f9705393c689a065c409b23
 parentDoc: 5fa0443749be540011850e51
 hidden: false
-order: 8
+order: 10
 ---
 
 ## Prerequistes

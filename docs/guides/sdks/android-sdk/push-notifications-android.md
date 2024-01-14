@@ -6,7 +6,7 @@ parentDoc: 5fa0443749be540011850e51
 hidden: false
 createdAt: "2022-04-24T11:55:17.726Z"
 updatedAt: "2022-08-17T12:18:19.822Z"
-order: 6
+order: 7
 ---
 ## Overview
 The following guide covers the configuration of the Android SDK for processing incoming push notifications and sending extracted attribution data to AppsFlyer.

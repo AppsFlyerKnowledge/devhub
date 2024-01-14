@@ -7,7 +7,7 @@ excerpt: "Learn how to preserve user privacy in the Android SDK."
 hidden: false
 createdAt: "2024-01-07T19:00:15.000Z"
 updatedAt: "2024-01-07T19:00:15.000Z"
-order: 11
+order: 12
 ---
 
 # Preserve user privacy

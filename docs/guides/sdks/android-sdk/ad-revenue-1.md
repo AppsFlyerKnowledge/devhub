@@ -5,7 +5,7 @@ category: 5f9705393c689a065c409b23
 parentDoc: 5fa0443749be540011850e51
 excerpt: "Impression-level ad revenue reporting by SDK"
 hidden: false
-order: 7
+order: 8
 ---
 **At a glance**: The AppsFlyer ad revenue SDK connector enables the ad networks to report ad revenue using impression-level granularity.
 

@@ -7,7 +7,7 @@ excerpt: "Learn how to initialize and start the Android SDK."
 hidden: false
 createdAt: "2020-11-02T17:46:42.932Z"
 updatedAt: "2023-05-02T12:44:20.646Z"
-order: 2
+order: 3
 ---
 
 ## Before you begin

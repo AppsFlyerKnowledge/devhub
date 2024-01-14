@@ -6,7 +6,7 @@ parentDoc: 5fa0443749be540011850e51
 hidden: false
 createdAt: "2022-03-16T10:04:32.183Z"
 updatedAt: "2022-05-05T12:59:21.488Z"
-order: 8
+order: 9
 ---
 ## Overview
 Set up uninstall measurement in Android apps using AppsFlyer SDK and Firebase Cloud Messaging.
