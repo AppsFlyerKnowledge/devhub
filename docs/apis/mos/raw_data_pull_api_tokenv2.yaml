@@ -29,15 +29,14 @@ paths:
         - $ref: '#/components/parameters/MaximumRows'
         - $ref: '#/components/parameters/FromInstallTime'
         - $ref: '#/components/parameters/ToInstallTime'
-        - $ref: '#/components/parameters/Agency'
         - in: query
           name: additional_fields
           explode: false
           schema:
             type: array
             items:
-              enum: ["blocked_reason_rule","store_reinstall","impressions","contributor3_match_type","custom_dimension","conversion_type","gp_click_time","match_type","mediation_network","oaid","deeplink_url","blocked_reason","blocked_sub_reason","gp_broadcast_referrer","gp_install_begin","campaign_type","custom_data","rejected_reason","device_download_time","keyword_match_type","contributor1_match_type","contributor2_match_type","device_model","monetization_network","segment","is_lat","gp_referrer","blocked_reason_value","store_product_page","device_category","app_type","rejected_reason_value","ad_unit","keyword_id","placement","network_account_id","install_app_store","amazon_aid","att"]
-            default: ["blocked_reason_rule","store_reinstall","impressions","contributor3_match_type","custom_dimension","conversion_type","gp_click_time","match_type","mediation_network","oaid","deeplink_url","blocked_reason","blocked_sub_reason","gp_broadcast_referrer","gp_install_begin","campaign_type","custom_data","rejected_reason","device_download_time","keyword_match_type","contributor1_match_type","contributor2_match_type","device_model","monetization_network","segment","is_lat","gp_referrer","blocked_reason_value","store_product_page","device_category","app_type","rejected_reason_value","ad_unit","keyword_id","placement","network_account_id","install_app_store","amazon_aid","att"]
+              enum: ["blocked_reason_rule","store_reinstall","impressions","contributor3_match_type","custom_dimension","conversion_type","gp_click_time","match_type","mediation_network","oaid","deeplink_url","blocked_reason","blocked_sub_reason","gp_broadcast_referrer","gp_install_begin","campaign_type","custom_data","rejected_reason","device_download_time","keyword_match_type","contributor1_match_type","contributor2_match_type","device_model","monetization_network","segment","is_lat","gp_referrer","blocked_reason_value","store_product_page","device_category","app_type","rejected_reason_value","ad_unit","keyword_id","placement","network_account_id","install_app_store","amazon_aid","att","engagement_type","contributor1_engagement_type","contributor2_engagement_type","contributor3_engagement_type"]
+            default: ["blocked_reason_rule","store_reinstall","impressions","contributor3_match_type","custom_dimension","conversion_type","gp_click_time","match_type","mediation_network","oaid","deeplink_url","blocked_reason","blocked_sub_reason","gp_broadcast_referrer","gp_install_begin","campaign_type","custom_data","rejected_reason","device_download_time","keyword_match_type","contributor1_match_type","contributor2_match_type","device_model","monetization_network","segment","is_lat","gp_referrer","blocked_reason_value","store_product_page","device_category","app_type","rejected_reason_value","ad_unit","keyword_id","placement","network_account_id","install_app_store","amazon_aid","att","engagement_type","contributor1_engagement_type","contributor2_engagement_type","contributor3_engagement_type"]
       responses:
         200:
           $ref: '#/components/responses/Success'
@@ -68,15 +67,14 @@ paths:
         - $ref: '#/components/parameters/MaximumRows'
         - $ref: '#/components/parameters/FromInstallTime'
         - $ref: '#/components/parameters/ToInstallTime'
-        - $ref: '#/components/parameters/Agency'
         - in: query
           name: additional_fields
           explode: false
           schema:
             type: array
             items:
-              enum: ["blocked_reason_rule","store_reinstall","impressions","contributor3_match_type","custom_dimension","conversion_type","gp_click_time","match_type","mediation_network","oaid","deeplink_url","blocked_reason","blocked_sub_reason","gp_broadcast_referrer","gp_install_begin","campaign_type","custom_data","rejected_reason","device_download_time","keyword_match_type","contributor1_match_type","contributor2_match_type","device_model","monetization_network","segment","is_lat","gp_referrer","blocked_reason_value","store_product_page","device_category","app_type","rejected_reason_value","ad_unit","keyword_id","placement","network_account_id","install_app_store","amazon_aid","att"]
-            default: ["blocked_reason_rule","store_reinstall","impressions","contributor3_match_type","custom_dimension","conversion_type","gp_click_time","match_type","mediation_network","oaid","deeplink_url","blocked_reason","blocked_sub_reason","gp_broadcast_referrer","gp_install_begin","campaign_type","custom_data","rejected_reason","device_download_time","keyword_match_type","contributor1_match_type","contributor2_match_type","device_model","monetization_network","segment","is_lat","gp_referrer","blocked_reason_value","store_product_page","device_category","app_type","rejected_reason_value","ad_unit","keyword_id","placement","network_account_id","install_app_store","amazon_aid","att"]
+              enum: ["blocked_reason_rule","store_reinstall","impressions","contributor3_match_type","custom_dimension","conversion_type","gp_click_time","match_type","mediation_network","oaid","deeplink_url","blocked_reason","blocked_sub_reason","gp_broadcast_referrer","gp_install_begin","campaign_type","custom_data","rejected_reason","device_download_time","keyword_match_type","contributor1_match_type","contributor2_match_type","device_model","monetization_network","segment","is_lat","gp_referrer","blocked_reason_value","store_product_page","device_category","app_type","rejected_reason_value","ad_unit","keyword_id","placement","network_account_id","install_app_store","amazon_aid","att","engagement_type"]
+            default: ["blocked_reason_rule","store_reinstall","impressions","contributor3_match_type","custom_dimension","conversion_type","gp_click_time","match_type","mediation_network","oaid","deeplink_url","blocked_reason","blocked_sub_reason","gp_broadcast_referrer","gp_install_begin","campaign_type","custom_data","rejected_reason","device_download_time","keyword_match_type","contributor1_match_type","contributor2_match_type","device_model","monetization_network","segment","is_lat","gp_referrer","blocked_reason_value","store_product_page","device_category","app_type","rejected_reason_value","ad_unit","keyword_id","placement","network_account_id","install_app_store","amazon_aid","att","engagement_type"]
 
       responses:
         200:
@@ -107,15 +105,13 @@ paths:
         - $ref: '#/components/parameters/MaximumRows'
         - $ref: '#/components/parameters/FromInstallTime'
         - $ref: '#/components/parameters/ToInstallTime'
-        - $ref: '#/components/parameters/Agency'
         - in: query
           name: additional_fields
-          explode: false
           schema:
             type: array
             items:
-              enum: ["blocked_reason_rule","store_reinstall","impressions","contributor3_match_type","gp_click_time","match_type","mediation_network","oaid","deeplink_url","blocked_reason","blocked_sub_reason","gp_broadcast_referrer","gp_install_begin","custom_data","rejected_reason","device_download_time","keyword_match_type","contributor1_match_type","contributor2_match_type","device_model","monetization_network","segment","is_lat","gp_referrer","blocked_reason_value","device_category","rejected_reason_value","ad_unit","keyword_id","placement","network_account_id","install_app_store","amazon_aid"]
-            default: ["blocked_reason_rule","store_reinstall","impressions","contributor3_match_type","gp_click_time","match_type","mediation_network","oaid","deeplink_url","blocked_reason","blocked_sub_reason","gp_broadcast_referrer","gp_install_begin","custom_data","rejected_reason","device_download_time","keyword_match_type","contributor1_match_type","contributor2_match_type","device_model","monetization_network","segment","is_lat","gp_referrer","blocked_reason_value","device_category","rejected_reason_value","ad_unit","keyword_id","placement","network_account_id","install_app_store","amazon_aid"]
+              enum: ["blocked_reason_rule","store_reinstall","impressions","contributor3_match_type","gp_click_time","match_type","mediation_network","oaid","deeplink_url","blocked_reason","blocked_sub_reason","gp_broadcast_referrer","gp_install_begin","custom_data","rejected_reason","device_download_time","keyword_match_type","contributor1_match_type","contributor2_match_type","device_model","monetization_network","segment","is_lat","gp_referrer","blocked_reason_value","device_category","rejected_reason_value","ad_unit","keyword_id","placement","network_account_id","install_app_store","amazon_aid","engagement_type"]
+            default: ["blocked_reason_rule","store_reinstall","impressions","contributor3_match_type","gp_click_time","match_type","mediation_network","oaid","deeplink_url","blocked_reason","blocked_sub_reason","gp_broadcast_referrer","gp_install_begin","custom_data","rejected_reason","device_download_time","keyword_match_type","contributor1_match_type","contributor2_match_type","device_model","monetization_network","segment","is_lat","gp_referrer","blocked_reason_value","device_category","rejected_reason_value","ad_unit","keyword_id","placement","network_account_id","install_app_store","amazon_aid","engagement_type"]
 
       responses:
         200:
@@ -146,15 +142,13 @@ paths:
         - $ref: '#/components/parameters/MaximumRows'
         - $ref: '#/components/parameters/FromInstallTime'
         - $ref: '#/components/parameters/ToInstallTime'
-        - $ref: '#/components/parameters/Agency'
         - in: query
           name: additional_fields
-          explode: false
           schema:
             type: array
             items:
-              enum: ["blocked_reason_rule","store_reinstall","impressions","contributor3_match_type","custom_dimension","conversion_type","gp_click_time","match_type","mediation_network","oaid","deeplink_url","blocked_reason","blocked_sub_reason","gp_broadcast_referrer","gp_install_begin","campaign_type","custom_data","rejected_reason","device_download_time","keyword_match_type","contributor1_match_type","contributor2_match_type","device_model","monetization_network","segment","is_lat","gp_referrer","blocked_reason_value","store_product_page","device_category","app_type","rejected_reason_value","ad_unit","keyword_id","placement","network_account_id","install_app_store","amazon_aid","att"]
-            default: ["blocked_reason_rule","store_reinstall","impressions","contributor3_match_type","custom_dimension","conversion_type","gp_click_time","match_type","mediation_network","oaid","deeplink_url","blocked_reason","blocked_sub_reason","gp_broadcast_referrer","gp_install_begin","campaign_type","custom_data","rejected_reason","device_download_time","keyword_match_type","contributor1_match_type","contributor2_match_type","device_model","monetization_network","segment","is_lat","gp_referrer","blocked_reason_value","store_product_page","device_category","app_type","rejected_reason_value","ad_unit","keyword_id","placement","network_account_id","install_app_store","amazon_aid","att"]
+              enum: ["blocked_reason_rule","store_reinstall","impressions","contributor3_match_type","custom_dimension","conversion_type","gp_click_time","match_type","mediation_network","oaid","deeplink_url","blocked_reason","blocked_sub_reason","gp_broadcast_referrer","gp_install_begin","campaign_type","custom_data","rejected_reason","device_download_time","keyword_match_type","contributor1_match_type","contributor2_match_type","device_model","monetization_network","segment","is_lat","gp_referrer","blocked_reason_value","store_product_page","device_category","app_type","rejected_reason_value","ad_unit","keyword_id","placement","network_account_id","install_app_store","amazon_aid","att","engagement_type","contributor1_engagement_type","contributor2_engagement_type","contributor3_engagement_type"]
+            default: ["blocked_reason_rule","store_reinstall","impressions","contributor3_match_type","custom_dimension","conversion_type","gp_click_time","match_type","mediation_network","oaid","deeplink_url","blocked_reason","blocked_sub_reason","gp_broadcast_referrer","gp_install_begin","campaign_type","custom_data","rejected_reason","device_download_time","keyword_match_type","contributor1_match_type","contributor2_match_type","device_model","monetization_network","segment","is_lat","gp_referrer","blocked_reason_value","store_product_page","device_category","app_type","rejected_reason_value","ad_unit","keyword_id","placement","network_account_id","install_app_store","amazon_aid","att","engagement_type","contributor1_engagement_type","contributor2_engagement_type","contributor3_engagement_type"]
       responses:
         200:
           $ref: '#/components/responses/Success'
@@ -185,15 +179,14 @@ paths:
         - $ref: '#/components/parameters/MaximumRows'
         - $ref: '#/components/parameters/FromInstallTime'
         - $ref: '#/components/parameters/ToInstallTime'
-        - $ref: '#/components/parameters/Agency'
         - in: query
           name: additional_fields
           explode: false
           schema:
             type: array
             items:
-              enum: ["blocked_reason_rule","store_reinstall","impressions","contributor3_match_type","custom_dimension","conversion_type","gp_click_time","match_type","mediation_network","oaid","deeplink_url","blocked_reason","blocked_sub_reason","gp_broadcast_referrer","gp_install_begin","campaign_type","custom_data","rejected_reason","device_download_time","keyword_match_type","contributor1_match_type","contributor2_match_type","device_model","monetization_network","segment","is_lat","gp_referrer","blocked_reason_value","device_category","app_type","rejected_reason_value","ad_unit","keyword_id","placement","network_account_id","install_app_store","amazon_aid","att"] 
-            default: ["blocked_reason_rule","store_reinstall","impressions","contributor3_match_type","custom_dimension","conversion_type","gp_click_time","match_type","mediation_network","oaid","deeplink_url","blocked_reason","blocked_sub_reason","gp_broadcast_referrer","gp_install_begin","campaign_type","custom_data","rejected_reason","device_download_time","keyword_match_type","contributor1_match_type","contributor2_match_type","device_model","monetization_network","segment","is_lat","gp_referrer","blocked_reason_value","device_category","app_type","rejected_reason_value","ad_unit","keyword_id","placement","network_account_id","install_app_store","amazon_aid","att"] 
+              enum: ["blocked_reason_rule","store_reinstall","impressions","contributor3_match_type","custom_dimension","conversion_type","gp_click_time","match_type","mediation_network","oaid","deeplink_url","blocked_reason","blocked_sub_reason","gp_broadcast_referrer","gp_install_begin","campaign_type","custom_data","rejected_reason","device_download_time","keyword_match_type","contributor1_match_type","contributor2_match_type","device_model","monetization_network","segment","is_lat","gp_referrer","blocked_reason_value","device_category","app_type","rejected_reason_value","ad_unit","keyword_id","placement","network_account_id","install_app_store","amazon_aid","att","engagement_type","contributor1_engagement_type","contributor2_engagement_type","contributor3_engagement_type"]
+            default: ["blocked_reason_rule","store_reinstall","impressions","contributor3_match_type","custom_dimension","conversion_type","gp_click_time","match_type","mediation_network","oaid","deeplink_url","blocked_reason","blocked_sub_reason","gp_broadcast_referrer","gp_install_begin","campaign_type","custom_data","rejected_reason","device_download_time","keyword_match_type","contributor1_match_type","contributor2_match_type","device_model","monetization_network","segment","is_lat","gp_referrer","blocked_reason_value","device_category","app_type","rejected_reason_value","ad_unit","keyword_id","placement","network_account_id","install_app_store","amazon_aid","att","engagement_type","contributor1_engagement_type","contributor2_engagement_type","contributor3_engagement_type"]
       responses:
         200:
           $ref: '#/components/responses/Success'
@@ -224,15 +217,14 @@ paths:
         - $ref: '#/components/parameters/MaximumRows'
         - $ref: '#/components/parameters/FromInstallTime'
         - $ref: '#/components/parameters/ToInstallTime'
-        - $ref: '#/components/parameters/Agency'
         - in: query
           name: additional_fields
           explode: false
           schema:
             type: array
             items:
-              enum: ["blocked_reason_rule","store_reinstall","impressions","contributor3_match_type","custom_dimension","conversion_type","gp_click_time","match_type","mediation_network","oaid","deeplink_url","blocked_reason","blocked_sub_reason","gp_broadcast_referrer","gp_install_begin","campaign_type","custom_data","rejected_reason","device_download_time","keyword_match_type","contributor1_match_type","contributor2_match_type","device_model","monetization_network","segment","gp_referrer","blocked_reason_value","device_category","app_type","rejected_reason_value","ad_unit","keyword_id","placement","network_account_id","install_app_store","amazon_aid","att"] 
-            default: ["blocked_reason_rule","store_reinstall","impressions","contributor3_match_type","custom_dimension","conversion_type","gp_click_time","match_type","mediation_network","oaid","deeplink_url","blocked_reason","blocked_sub_reason","gp_broadcast_referrer","gp_install_begin","campaign_type","custom_data","rejected_reason","device_download_time","keyword_match_type","contributor1_match_type","contributor2_match_type","device_model","monetization_network","segment","gp_referrer","blocked_reason_value","device_category","app_type","rejected_reason_value","ad_unit","keyword_id","placement","network_account_id","install_app_store","amazon_aid","att"] 
+              enum: ["blocked_reason_rule","store_reinstall","impressions","contributor3_match_type","custom_dimension","conversion_type","gp_click_time","match_type","mediation_network","oaid","deeplink_url","blocked_reason","blocked_sub_reason","gp_broadcast_referrer","gp_install_begin","campaign_type","custom_data","rejected_reason","device_download_time","keyword_match_type","contributor1_match_type","contributor2_match_type","device_model","monetization_network","segment","gp_referrer","blocked_reason_value","device_category","app_type","rejected_reason_value","ad_unit","keyword_id","placement","network_account_id","install_app_store","amazon_aid","att","engagement_type"]
+            default: ["blocked_reason_rule","store_reinstall","impressions","contributor3_match_type","custom_dimension","conversion_type","gp_click_time","match_type","mediation_network","oaid","deeplink_url","blocked_reason","blocked_sub_reason","gp_broadcast_referrer","gp_install_begin","campaign_type","custom_data","rejected_reason","device_download_time","keyword_match_type","contributor1_match_type","contributor2_match_type","device_model","monetization_network","segment","gp_referrer","blocked_reason_value","device_category","app_type","rejected_reason_value","ad_unit","keyword_id","placement","network_account_id","install_app_store","amazon_aid","att","engagement_type"]
       responses:
         200:
           $ref: '#/components/responses/Success'
@@ -262,15 +254,13 @@ paths:
         - $ref: '#/components/parameters/MaximumRows'
         - $ref: '#/components/parameters/FromInstallTime'
         - $ref: '#/components/parameters/ToInstallTime'
-        - $ref: '#/components/parameters/Agency'
         - in: query
           name: additional_fields
-          explode: false
           schema:
             type: array
             items:
-              enum: ["blocked_reason_rule","store_reinstall","impressions","contributor3_match_type","gp_click_time","match_type","mediation_network","oaid","deeplink_url","blocked_reason","blocked_sub_reason","gp_broadcast_referrer","gp_install_begin","custom_data","rejected_reason","device_download_time","keyword_match_type","contributor1_match_type","contributor2_match_type","device_model","monetization_network","segment","is_lat","gp_referrer","blocked_reason_value","device_category","rejected_reason_value","ad_unit","keyword_id","placement","network_account_id","install_app_store","amazon_aid"] 
-            default: ["blocked_reason_rule","store_reinstall","impressions","contributor3_match_type","gp_click_time","match_type","mediation_network","oaid","deeplink_url","blocked_reason","blocked_sub_reason","gp_broadcast_referrer","gp_install_begin","custom_data","rejected_reason","device_download_time","keyword_match_type","contributor1_match_type","contributor2_match_type","device_model","monetization_network","segment","is_lat","gp_referrer","blocked_reason_value","device_category","rejected_reason_value","ad_unit","keyword_id","placement","network_account_id","install_app_store","amazon_aid"] 
+              enum: ["blocked_reason_rule","store_reinstall","impressions","contributor3_match_type","gp_click_time","match_type","mediation_network","oaid","deeplink_url","blocked_reason","blocked_sub_reason","gp_broadcast_referrer","gp_install_begin","custom_data","rejected_reason","device_download_time","keyword_match_type","contributor1_match_type","contributor2_match_type","device_model","monetization_network","segment","is_lat","gp_referrer","blocked_reason_value","device_category","rejected_reason_value","ad_unit","keyword_id","placement","network_account_id","install_app_store","amazon_aid","engagement_type"]
+            default: ["blocked_reason_rule","store_reinstall","impressions","contributor3_match_type","gp_click_time","match_type","mediation_network","oaid","deeplink_url","blocked_reason","blocked_sub_reason","gp_broadcast_referrer","gp_install_begin","custom_data","rejected_reason","device_download_time","keyword_match_type","contributor1_match_type","contributor2_match_type","device_model","monetization_network","segment","is_lat","gp_referrer","blocked_reason_value","device_category","rejected_reason_value","ad_unit","keyword_id","placement","network_account_id","install_app_store","amazon_aid","engagement_type"]
       responses:
         200:
           $ref: '#/components/responses/Success'
@@ -300,15 +290,13 @@ paths:
         - $ref: '#/components/parameters/MaximumRows'
         - $ref: '#/components/parameters/FromInstallTime'
         - $ref: '#/components/parameters/ToInstallTime'
-        - $ref: '#/components/parameters/Agency'
         - in: query
           name: additional_fields
-          explode: false
           schema:
             type: array
             items:
-              enum: ["blocked_reason_rule","store_reinstall","impressions","contributor3_match_type","custom_dimension","conversion_type","gp_click_time","match_type","mediation_network","oaid","deeplink_url","blocked_reason","blocked_sub_reason","gp_broadcast_referrer","gp_install_begin","campaign_type","custom_data","rejected_reason","device_download_time","keyword_match_type","contributor1_match_type","contributor2_match_type","device_model","monetization_network","segment","is_lat","gp_referrer","blocked_reason_value","device_category","app_type","rejected_reason_value","ad_unit","keyword_id","placement","network_account_id","install_app_store","amazon_aid","att"] 
-            default: ["blocked_reason_rule","store_reinstall","impressions","contributor3_match_type","custom_dimension","conversion_type","gp_click_time","match_type","mediation_network","oaid","deeplink_url","blocked_reason","blocked_sub_reason","gp_broadcast_referrer","gp_install_begin","campaign_type","custom_data","rejected_reason","device_download_time","keyword_match_type","contributor1_match_type","contributor2_match_type","device_model","monetization_network","segment","is_lat","gp_referrer","blocked_reason_value","device_category","app_type","rejected_reason_value","ad_unit","keyword_id","placement","network_account_id","install_app_store","amazon_aid","att"] 
+              enum: ["blocked_reason_rule","store_reinstall","impressions","contributor3_match_type","custom_dimension","conversion_type","gp_click_time","match_type","mediation_network","oaid","deeplink_url","blocked_reason","blocked_sub_reason","gp_broadcast_referrer","gp_install_begin","campaign_type","custom_data","rejected_reason","device_download_time","keyword_match_type","contributor1_match_type","contributor2_match_type","device_model","monetization_network","segment","is_lat","gp_referrer","blocked_reason_value","device_category","app_type","rejected_reason_value","ad_unit","keyword_id","placement","network_account_id","install_app_store","amazon_aid","att","engagement_type","contributor1_engagement_type","contributor2_engagement_type","contributor3_engagement_type"]
+            default: ["blocked_reason_rule","store_reinstall","impressions","contributor3_match_type","custom_dimension","conversion_type","gp_click_time","match_type","mediation_network","oaid","deeplink_url","blocked_reason","blocked_sub_reason","gp_broadcast_referrer","gp_install_begin","campaign_type","custom_data","rejected_reason","device_download_time","keyword_match_type","contributor1_match_type","contributor2_match_type","device_model","monetization_network","segment","is_lat","gp_referrer","blocked_reason_value","device_category","app_type","rejected_reason_value","ad_unit","keyword_id","placement","network_account_id","install_app_store","amazon_aid","att","engagement_type","contributor1_engagement_type","contributor2_engagement_type","contributor3_engagement_type"]
       responses:
         200:
           $ref: '#/components/responses/Success'
@@ -344,8 +332,8 @@ paths:
           schema:
             type: array
             items:
-              enum: [ "blocked_reason_rule","store_reinstall","impressions","contributor3_match_type","custom_dimension","conversion_type","gp_click_time","match_type","mediation_network","oaid","deeplink_url","blocked_reason","blocked_sub_reason","gp_broadcast_referrer","gp_install_begin","campaign_type","custom_data","rejected_reason","device_download_time","keyword_match_type","contributor1_match_type","contributor2_match_type","device_model","monetization_network","segment","is_lat","gp_referrer","blocked_reason_value","store_product_page","device_category","app_type","rejected_reason_value","ad_unit","keyword_id","placement","network_account_id","install_app_store","amazon_aid","att" ]
-            default: [ "blocked_reason_rule","store_reinstall","impressions","contributor3_match_type","custom_dimension","conversion_type","gp_click_time","match_type","mediation_network","oaid","deeplink_url","blocked_reason","blocked_sub_reason","gp_broadcast_referrer","gp_install_begin","campaign_type","custom_data","rejected_reason","device_download_time","keyword_match_type","contributor1_match_type","contributor2_match_type","device_model","monetization_network","segment","is_lat","gp_referrer","blocked_reason_value","store_product_page","device_category","app_type","rejected_reason_value","ad_unit","keyword_id","placement","network_account_id","install_app_store","amazon_aid","att" ]
+              enum: [ "blocked_reason_rule","store_reinstall","impressions","contributor3_match_type","custom_dimension","conversion_type","gp_click_time","match_type","mediation_network","oaid","deeplink_url","blocked_reason","blocked_sub_reason","gp_broadcast_referrer","gp_install_begin","campaign_type","custom_data","rejected_reason","device_download_time","keyword_match_type","contributor1_match_type","contributor2_match_type","device_model","monetization_network","segment","is_lat","gp_referrer","blocked_reason_value","store_product_page","device_category","app_type","rejected_reason_value","ad_unit","keyword_id","placement","network_account_id","install_app_store","amazon_aid","att","engagement_type","contributor1_engagement_type","contributor2_engagement_type","contributor3_engagement_type"]
+            default: [ "blocked_reason_rule","store_reinstall","impressions","contributor3_match_type","custom_dimension","conversion_type","gp_click_time","match_type","mediation_network","oaid","deeplink_url","blocked_reason","blocked_sub_reason","gp_broadcast_referrer","gp_install_begin","campaign_type","custom_data","rejected_reason","device_download_time","keyword_match_type","contributor1_match_type","contributor2_match_type","device_model","monetization_network","segment","is_lat","gp_referrer","blocked_reason_value","store_product_page","device_category","app_type","rejected_reason_value","ad_unit","keyword_id","placement","network_account_id","install_app_store","amazon_aid","att","engagement_type","contributor1_engagement_type","contributor2_engagement_type","contributor3_engagement_type"]
       responses:
         200:
           $ref: '#/components/responses/Success'
@@ -380,8 +368,8 @@ paths:
           schema:
             type: array
             items:
-              enum: [ "blocked_reason_rule","store_reinstall","impressions","contributor3_match_type","custom_dimension","conversion_type","gp_click_time","match_type","mediation_network","oaid","deeplink_url","blocked_reason","blocked_sub_reason","gp_broadcast_referrer","gp_install_begin","campaign_type","custom_data","rejected_reason","device_download_time","keyword_match_type","contributor1_match_type","contributor2_match_type","device_model","monetization_network","segment","is_lat","gp_referrer","blocked_reason_value","store_product_page","device_category","app_type","rejected_reason_value","ad_unit","keyword_id","placement","network_account_id","install_app_store","amazon_aid","att" ]
-            default: [ "blocked_reason_rule","store_reinstall","impressions","contributor3_match_type","custom_dimension","conversion_type","gp_click_time","match_type","mediation_network","oaid","deeplink_url","blocked_reason","blocked_sub_reason","gp_broadcast_referrer","gp_install_begin","campaign_type","custom_data","rejected_reason","device_download_time","keyword_match_type","contributor1_match_type","contributor2_match_type","device_model","monetization_network","segment","is_lat","gp_referrer","blocked_reason_value","store_product_page","device_category","app_type","rejected_reason_value","ad_unit","keyword_id","placement","network_account_id","install_app_store","amazon_aid","att" ]
+              enum: [ "blocked_reason_rule","store_reinstall","impressions","contributor3_match_type","custom_dimension","conversion_type","gp_click_time","match_type","mediation_network","oaid","deeplink_url","blocked_reason","blocked_sub_reason","gp_broadcast_referrer","gp_install_begin","campaign_type","custom_data","rejected_reason","device_download_time","keyword_match_type","contributor1_match_type","contributor2_match_type","device_model","monetization_network","segment","is_lat","gp_referrer","blocked_reason_value","store_product_page","device_category","app_type","rejected_reason_value","ad_unit","keyword_id","placement","network_account_id","install_app_store","amazon_aid","att","engagement_type"]
+            default: [ "blocked_reason_rule","store_reinstall","impressions","contributor3_match_type","custom_dimension","conversion_type","gp_click_time","match_type","mediation_network","oaid","deeplink_url","blocked_reason","blocked_sub_reason","gp_broadcast_referrer","gp_install_begin","campaign_type","custom_data","rejected_reason","device_download_time","keyword_match_type","contributor1_match_type","contributor2_match_type","device_model","monetization_network","segment","is_lat","gp_referrer","blocked_reason_value","store_product_page","device_category","app_type","rejected_reason_value","ad_unit","keyword_id","placement","network_account_id","install_app_store","amazon_aid","att","engagement_type"]
 
       responses:
         200:
@@ -413,7 +401,6 @@ paths:
         - $ref: '#/components/parameters/MaximumRows'
         - $ref: '#/components/parameters/FromInstallTime'
         - $ref: '#/components/parameters/ToInstallTime'
-        - $ref: '#/components/parameters/Agency'
         - in: query
           name: additional_fields
           explode: false
@@ -451,7 +438,6 @@ paths:
         - $ref: '#/components/parameters/MaximumRows'
         - $ref: '#/components/parameters/FromInstallTime'
         - $ref: '#/components/parameters/ToInstallTime'
-        - $ref: '#/components/parameters/Agency'
         - in: query
           name: additional_fields
           explode: false
@@ -525,15 +511,14 @@ paths:
         - $ref: '#/components/parameters/MaximumRows'
         - $ref: '#/components/parameters/FromInstallTime'
         - $ref: '#/components/parameters/ToInstallTime'
-        - $ref: '#/components/parameters/Agency'
         - in: query
           name: additional_fields
           explode: false
           schema:
             type: array
             items:
-              enum: ["blocked_reason_rule","store_reinstall","impressions","contributor3_match_type","gp_click_time","match_type","mediation_network","oaid","deeplink_url","blocked_reason","blocked_sub_reason","gp_broadcast_referrer","gp_install_begin","custom_data","rejected_reason","device_download_time","keyword_match_type","contributor1_match_type","contributor2_match_type","device_model","monetization_network","segment","is_lat","gp_referrer","blocked_reason_value","store_product_page","device_category","app_type","rejected_reason_value","ad_unit","keyword_id","placement","network_account_id","install_app_store","amazon_aid","att"]
-            default: ["blocked_reason_rule","store_reinstall","impressions","contributor3_match_type","gp_click_time","match_type","mediation_network","oaid","deeplink_url","blocked_reason","blocked_sub_reason","gp_broadcast_referrer","gp_install_begin","custom_data","rejected_reason","device_download_time","keyword_match_type","contributor1_match_type","contributor2_match_type","device_model","monetization_network","segment","is_lat","gp_referrer","blocked_reason_value","store_product_page","device_category","app_type","rejected_reason_value","ad_unit","keyword_id","placement","network_account_id","install_app_store","amazon_aid","att"]
+              enum: ["blocked_reason_rule","store_reinstall","impressions","contributor3_match_type","gp_click_time","match_type","mediation_network","oaid","deeplink_url","blocked_reason","blocked_sub_reason","gp_broadcast_referrer","gp_install_begin","custom_data","rejected_reason","device_download_time","keyword_match_type","contributor1_match_type","contributor2_match_type","device_model","monetization_network","segment","is_lat","gp_referrer","blocked_reason_value","store_product_page","device_category","app_type","rejected_reason_value","ad_unit","keyword_id","placement","network_account_id","install_app_store","amazon_aid","att","engagement_type","contributor1_engagement_type","contributor2_engagement_type","contributor3_engagement_type"]
+            default: ["blocked_reason_rule","store_reinstall","impressions","contributor3_match_type","gp_click_time","match_type","mediation_network","oaid","deeplink_url","blocked_reason","blocked_sub_reason","gp_broadcast_referrer","gp_install_begin","custom_data","rejected_reason","device_download_time","keyword_match_type","contributor1_match_type","contributor2_match_type","device_model","monetization_network","segment","is_lat","gp_referrer","blocked_reason_value","store_product_page","device_category","app_type","rejected_reason_value","ad_unit","keyword_id","placement","network_account_id","install_app_store","amazon_aid","att","engagement_type","contributor1_engagement_type","contributor2_engagement_type","contributor3_engagement_type"]
       responses:
         200:
           $ref: '#/components/responses/Success'
@@ -563,15 +548,14 @@ paths:
         - $ref: '#/components/parameters/MaximumRows'
         - $ref: '#/components/parameters/FromInstallTime'
         - $ref: '#/components/parameters/ToInstallTime'
-        - $ref: '#/components/parameters/Agency'
         - in: query
           name: additional_fields
           explode: false
           schema:
             type: array
             items:
-              enum: ["contributor3_match_type","detection_date","gp_click_time","match_type","gp_broadcast_referrer","gp_install_begin","custom_data","fraud_reason","rejected_reason","device_download_time","keyword_match_type","contributor1_match_type","contributor2_match_type","device_model","fraud_reasons","fraud_sub_reason","gp_referrer","install_time_tz","device_category","rejected_reason_value","network_account_id","install_app_store","amazon_aid","att"]
-            default: ["contributor3_match_type","detection_date","gp_click_time","match_type","gp_broadcast_referrer","gp_install_begin","custom_data","fraud_reason","rejected_reason","device_download_time","keyword_match_type","contributor1_match_type","contributor2_match_type","device_model","fraud_reasons","fraud_sub_reason","gp_referrer","install_time_tz","device_category","rejected_reason_value","network_account_id","install_app_store","amazon_aid","att"]
+              enum: ["contributor3_match_type","detection_date","gp_click_time","match_type","gp_broadcast_referrer","gp_install_begin","custom_data","fraud_reason","rejected_reason","device_download_time","keyword_match_type","contributor1_match_type","contributor2_match_type","device_model","fraud_reasons","fraud_sub_reason","gp_referrer","install_time_tz","device_category","rejected_reason_value","network_account_id","install_app_store","amazon_aid","att","engagement_type"]
+            default: ["contributor3_match_type","detection_date","gp_click_time","match_type","gp_broadcast_referrer","gp_install_begin","custom_data","fraud_reason","rejected_reason","device_download_time","keyword_match_type","contributor1_match_type","contributor2_match_type","device_model","fraud_reasons","fraud_sub_reason","gp_referrer","install_time_tz","device_category","rejected_reason_value","network_account_id","install_app_store","amazon_aid","att","engagement_type"]
       responses:
         200:
           $ref: '#/components/responses/Success'
@@ -602,15 +586,14 @@ paths:
         - $ref: '#/components/parameters/MaximumRows'
         - $ref: '#/components/parameters/FromInstallTime'
         - $ref: '#/components/parameters/ToInstallTime'
-        - $ref: '#/components/parameters/Agency'
         - in: query
           name: additional_fields
           explode: false
           schema:
             type: array
             items:
-              enum: ["blocked_reason_rule","store_reinstall","impressions","contributor3_match_type","custom_dimension","conversion_type","gp_click_time","match_type","mediation_network","oaid","deeplink_url","blocked_reason","blocked_sub_reason","gp_broadcast_referrer","gp_install_begin","campaign_type","custom_data","rejected_reason","device_download_time","keyword_match_type","contributor1_match_type","contributor2_match_type","device_model","monetization_network","segment","is_lat","gp_referrer","blocked_reason_value","store_product_page","device_category","app_type","rejected_reason_value","ad_unit","keyword_id","placement","is_organic","network_account_id","install_app_store","amazon_aid","att"]
-            default: ["blocked_reason_rule","store_reinstall","impressions","contributor3_match_type","custom_dimension","conversion_type","gp_click_time","match_type","mediation_network","oaid","deeplink_url","blocked_reason","blocked_sub_reason","gp_broadcast_referrer","gp_install_begin","campaign_type","custom_data","rejected_reason","device_download_time","keyword_match_type","contributor1_match_type","contributor2_match_type","device_model","monetization_network","segment","is_lat","gp_referrer","blocked_reason_value","store_product_page","device_category","app_type","rejected_reason_value","ad_unit","keyword_id","placement","is_organic","network_account_id","install_app_store","amazon_aid","att"]
+              enum: ["blocked_reason_rule","store_reinstall","impressions","contributor3_match_type","custom_dimension","conversion_type","gp_click_time","match_type","mediation_network","oaid","deeplink_url","blocked_reason","blocked_sub_reason","gp_broadcast_referrer","gp_install_begin","campaign_type","custom_data","rejected_reason","device_download_time","keyword_match_type","contributor1_match_type","contributor2_match_type","device_model","monetization_network","segment","is_lat","gp_referrer","blocked_reason_value","store_product_page","device_category","app_type","rejected_reason_value","ad_unit","keyword_id","placement","is_organic","network_account_id","install_app_store","amazon_aid","att","engagement_type"]
+            default: ["blocked_reason_rule","store_reinstall","impressions","contributor3_match_type","custom_dimension","conversion_type","gp_click_time","match_type","mediation_network","oaid","deeplink_url","blocked_reason","blocked_sub_reason","gp_broadcast_referrer","gp_install_begin","campaign_type","custom_data","rejected_reason","device_download_time","keyword_match_type","contributor1_match_type","contributor2_match_type","device_model","monetization_network","segment","is_lat","gp_referrer","blocked_reason_value","store_product_page","device_category","app_type","rejected_reason_value","ad_unit","keyword_id","placement","is_organic","network_account_id","install_app_store","amazon_aid","att","engagement_type"]
       responses:
         200:
           $ref: '#/components/responses/Success'
@@ -641,7 +624,6 @@ paths:
         - $ref: '#/components/parameters/MaximumRows'
         - $ref: '#/components/parameters/FromInstallTime'
         - $ref: '#/components/parameters/ToInstallTime'
-        - $ref: '#/components/parameters/Agency'
         - in: query
           name: additional_fields
           explode: false
@@ -679,15 +661,14 @@ paths:
         - $ref: '#/components/parameters/MaximumRows'
         - $ref: '#/components/parameters/FromInstallTime'
         - $ref: '#/components/parameters/ToInstallTime'
-        - $ref: '#/components/parameters/Agency'
         - in: query
           name: additional_fields
           explode: false
           schema:
             type: array
             items:
-              enum: ["blocked_reason_rule","store_reinstall","impressions","contributor3_match_type","gp_click_time","match_type","mediation_network","oaid","deeplink_url","blocked_reason","blocked_sub_reason","gp_broadcast_referrer","gp_install_begin","custom_data","rejected_reason","device_download_time","keyword_match_type","contributor1_match_type","contributor2_match_type","device_model","monetization_network","segment","is_lat","gp_referrer","blocked_reason_value","store_product_page","device_category","rejected_reason_value","ad_unit","keyword_id","placement","network_account_id","install_app_store","amazon_aid"]
-            default: ["blocked_reason_rule","store_reinstall","impressions","contributor3_match_type","gp_click_time","match_type","mediation_network","oaid","deeplink_url","blocked_reason","blocked_sub_reason","gp_broadcast_referrer","gp_install_begin","custom_data","rejected_reason","device_download_time","keyword_match_type","contributor1_match_type","contributor2_match_type","device_model","monetization_network","segment","is_lat","gp_referrer","blocked_reason_value","store_product_page","device_category","rejected_reason_value","ad_unit","keyword_id","placement","network_account_id","install_app_store","amazon_aid"]
+              enum: ["blocked_reason_rule","store_reinstall","impressions","contributor3_match_type","gp_click_time","match_type","mediation_network","oaid","deeplink_url","blocked_reason","blocked_sub_reason","gp_broadcast_referrer","gp_install_begin","custom_data","rejected_reason","device_download_time","keyword_match_type","contributor1_match_type","contributor2_match_type","device_model","monetization_network","segment","is_lat","gp_referrer","blocked_reason_value","store_product_page","device_category","rejected_reason_value","ad_unit","keyword_id","placement","network_account_id","install_app_store","amazon_aid","engagement_type"]
+            default: ["blocked_reason_rule","store_reinstall","impressions","contributor3_match_type","gp_click_time","match_type","mediation_network","oaid","deeplink_url","blocked_reason","blocked_sub_reason","gp_broadcast_referrer","gp_install_begin","custom_data","rejected_reason","device_download_time","keyword_match_type","contributor1_match_type","contributor2_match_type","device_model","monetization_network","segment","is_lat","gp_referrer","blocked_reason_value","store_product_page","device_category","rejected_reason_value","ad_unit","keyword_id","placement","network_account_id","install_app_store","amazon_aid","engagement_type"]
       responses:
         200:
           $ref: '#/components/responses/Success'
@@ -717,7 +698,6 @@ paths:
         - $ref: '#/components/parameters/MaximumRows'
         - $ref: '#/components/parameters/FromInstallTime'
         - $ref: '#/components/parameters/ToInstallTime'
-        - $ref: '#/components/parameters/Agency'
         - in: query
           name: additional_fields
           explode: false
@@ -756,15 +736,14 @@ paths:
         - $ref: '#/components/parameters/MaximumRows'
         - $ref: '#/components/parameters/FromInstallTime'
         - $ref: '#/components/parameters/ToInstallTime'
-        - $ref: '#/components/parameters/Agency'
         - in: query
           name: additional_fields
           explode: false
           schema:
             type: array
             items:
-              enum: ["blocked_reason_rule","store_reinstall","attributed_touch_hour","impressions","contributor3_match_type","install_hour","event_hour","gp_click_time","match_type","mediation_network","oaid","deeplink_url","blocked_reason","postback_retry","blocked_sub_reason","gp_broadcast_referrer","gp_install_begin","custom_data","rejected_reason","device_download_time","keyword_match_type","contributor1_match_type","contributor2_match_type","device_model","monetization_network","segment","is_lat","gp_referrer","blocked_reason_value","store_product_page","device_category","rejected_reason_value","ad_unit","keyword_id","placement","network_account_id","install_app_store","amazon_aid","att"]
-            default: ["blocked_reason_rule","store_reinstall","attributed_touch_hour","impressions","contributor3_match_type","install_hour","event_hour","gp_click_time","match_type","mediation_network","oaid","deeplink_url","blocked_reason","postback_retry","blocked_sub_reason","gp_broadcast_referrer","gp_install_begin","custom_data","rejected_reason","device_download_time","keyword_match_type","contributor1_match_type","contributor2_match_type","device_model","monetization_network","segment","is_lat","gp_referrer","blocked_reason_value","store_product_page","device_category","rejected_reason_value","ad_unit","keyword_id","placement","network_account_id","install_app_store","amazon_aid","att"]
+              enum: ["blocked_reason_rule","store_reinstall","attributed_touch_hour","impressions","contributor3_match_type","install_hour","event_hour","gp_click_time","match_type","mediation_network","oaid","deeplink_url","blocked_reason","postback_retry","blocked_sub_reason","gp_broadcast_referrer","gp_install_begin","custom_data","rejected_reason","device_download_time","keyword_match_type","contributor1_match_type","contributor2_match_type","device_model","monetization_network","segment","is_lat","gp_referrer","blocked_reason_value","store_product_page","device_category","rejected_reason_value","ad_unit","keyword_id","placement","network_account_id","install_app_store","amazon_aid","att","engagement_type","contributor1_engagement_type","contributor2_engagement_type","contributor3_engagement_type"]
+            default: ["blocked_reason_rule","store_reinstall","attributed_touch_hour","impressions","contributor3_match_type","install_hour","event_hour","gp_click_time","match_type","mediation_network","oaid","deeplink_url","blocked_reason","postback_retry","blocked_sub_reason","gp_broadcast_referrer","gp_install_begin","custom_data","rejected_reason","device_download_time","keyword_match_type","contributor1_match_type","contributor2_match_type","device_model","monetization_network","segment","is_lat","gp_referrer","blocked_reason_value","store_product_page","device_category","rejected_reason_value","ad_unit","keyword_id","placement","network_account_id","install_app_store","amazon_aid","att","engagement_type","contributor1_engagement_type","contributor2_engagement_type","contributor3_engagement_type"]
       responses:
         200:
           $ref: '#/components/responses/Success'
@@ -795,15 +774,14 @@ paths:
         - $ref: '#/components/parameters/MaximumRows'
         - $ref: '#/components/parameters/FromInstallTime'
         - $ref: '#/components/parameters/ToInstallTime'
-        - $ref: '#/components/parameters/Agency'
         - in: query
           name: additional_fields
           explode: false
           schema:
             type: array
             items:
-              enum: ["blocked_reason_rule","store_reinstall","attributed_touch_hour","impressions","contributor3_match_type","install_hour","event_hour","gp_click_time","match_type","mediation_network","oaid","deeplink_url","blocked_reason","postback_retry","blocked_sub_reason","gp_broadcast_referrer","gp_install_begin","custom_data","rejected_reason","device_download_time","keyword_match_type","contributor1_match_type","contributor2_match_type","device_model","monetization_network","segment","is_lat","gp_referrer","blocked_reason_value","store_product_page","device_category","rejected_reason_value","ad_unit","keyword_id","placement","network_account_id","install_app_store","amazon_aid","att"]
-            default: ["blocked_reason_rule","store_reinstall","attributed_touch_hour","impressions","contributor3_match_type","install_hour","event_hour","gp_click_time","match_type","mediation_network","oaid","deeplink_url","blocked_reason","postback_retry","blocked_sub_reason","gp_broadcast_referrer","gp_install_begin","custom_data","rejected_reason","device_download_time","keyword_match_type","contributor1_match_type","contributor2_match_type","device_model","monetization_network","segment","is_lat","gp_referrer","blocked_reason_value","store_product_page","device_category","rejected_reason_value","ad_unit","keyword_id","placement","network_account_id","install_app_store","amazon_aid","att"]
+              enum: ["blocked_reason_rule","store_reinstall","attributed_touch_hour","impressions","contributor3_match_type","install_hour","event_hour","gp_click_time","match_type","mediation_network","oaid","deeplink_url","blocked_reason","postback_retry","blocked_sub_reason","gp_broadcast_referrer","gp_install_begin","custom_data","rejected_reason","device_download_time","keyword_match_type","contributor1_match_type","contributor2_match_type","device_model","monetization_network","segment","is_lat","gp_referrer","blocked_reason_value","store_product_page","device_category","rejected_reason_value","ad_unit","keyword_id","placement","network_account_id","install_app_store","amazon_aid","att","engagement_type"]
+            default: ["blocked_reason_rule","store_reinstall","attributed_touch_hour","impressions","contributor3_match_type","install_hour","event_hour","gp_click_time","match_type","mediation_network","oaid","deeplink_url","blocked_reason","postback_retry","blocked_sub_reason","gp_broadcast_referrer","gp_install_begin","custom_data","rejected_reason","device_download_time","keyword_match_type","contributor1_match_type","contributor2_match_type","device_model","monetization_network","segment","is_lat","gp_referrer","blocked_reason_value","store_product_page","device_category","rejected_reason_value","ad_unit","keyword_id","placement","network_account_id","install_app_store","amazon_aid","att","engagement_type"]
       responses:
         200:
           $ref: '#/components/responses/Success'
@@ -834,15 +812,14 @@ paths:
         - $ref: '#/components/parameters/MaximumRows'
         - $ref: '#/components/parameters/FromInstallTime'
         - $ref: '#/components/parameters/ToInstallTime'
-        - $ref: '#/components/parameters/Agency'
         - in: query
           name: additional_fields
           explode: false
           schema:
             type: array
             items:
-              enum: ["blocked_reason_rule","store_reinstall","attributed_touch_hour","impressions","contributor3_match_type","install_hour","event_hour","gp_click_time","match_type","mediation_network","oaid","deeplink_url","blocked_reason","postback_retry","blocked_sub_reason","gp_broadcast_referrer","gp_install_begin","custom_data","rejected_reason","device_download_time","keyword_match_type","contributor1_match_type","contributor2_match_type","device_model","monetization_network","segment","is_lat","gp_referrer","blocked_reason_value","store_product_page","device_category","rejected_reason_value","ad_unit","keyword_id","placement","network_account_id","install_app_store","amazon_aid","att"]
-            default: ["blocked_reason_rule","store_reinstall","attributed_touch_hour","impressions","contributor3_match_type","install_hour","event_hour","gp_click_time","match_type","mediation_network","oaid","deeplink_url","blocked_reason","postback_retry","blocked_sub_reason","gp_broadcast_referrer","gp_install_begin","custom_data","rejected_reason","device_download_time","keyword_match_type","contributor1_match_type","contributor2_match_type","device_model","monetization_network","segment","is_lat","gp_referrer","blocked_reason_value","store_product_page","device_category","rejected_reason_value","ad_unit","keyword_id","placement","network_account_id","install_app_store","amazon_aid","att"]
+              enum: ["blocked_reason_rule","store_reinstall","attributed_touch_hour","impressions","contributor3_match_type","install_hour","event_hour","gp_click_time","match_type","mediation_network","oaid","deeplink_url","blocked_reason","postback_retry","blocked_sub_reason","gp_broadcast_referrer","gp_install_begin","custom_data","rejected_reason","device_download_time","keyword_match_type","contributor1_match_type","contributor2_match_type","device_model","monetization_network","segment","is_lat","gp_referrer","blocked_reason_value","store_product_page","device_category","rejected_reason_value","ad_unit","keyword_id","placement","network_account_id","install_app_store","amazon_aid","att","engagement_type"]
+            default: ["blocked_reason_rule","store_reinstall","attributed_touch_hour","impressions","contributor3_match_type","install_hour","event_hour","gp_click_time","match_type","mediation_network","oaid","deeplink_url","blocked_reason","postback_retry","blocked_sub_reason","gp_broadcast_referrer","gp_install_begin","custom_data","rejected_reason","device_download_time","keyword_match_type","contributor1_match_type","contributor2_match_type","device_model","monetization_network","segment","is_lat","gp_referrer","blocked_reason_value","store_product_page","device_category","rejected_reason_value","ad_unit","keyword_id","placement","network_account_id","install_app_store","amazon_aid","att","engagement_type"]
       responses:
         200:
           $ref: '#/components/responses/Success'
@@ -872,7 +849,6 @@ paths:
         - $ref: '#/components/parameters/MaximumRows'
         - $ref: '#/components/parameters/FromInstallTime'
         - $ref: '#/components/parameters/ToInstallTime'
-        - $ref: '#/components/parameters/Agency'
         - in: query
           name: additional_fields
           explode: false
@@ -1064,30 +1040,6 @@ components:
       schema:
         type: string
         format: date
-    Agency:
-      in: query
-      name: agency
-      description: |
-        Use to filter by a specific agency
-
-        Note: If you use both the agency filter and media source filters, the media source filters don’t apply for non-transparent agencies. This means that for non-transparent agencies, all data is included, not just the data from the filtered media sources
-      schema:
-        type: array
-        items:
-          type: string
-      examples:
-        SingleAgency:
-          summary: filter by single agency
-          value:
-            "agency=transparent_agency"
-        MediaSourceAndAgency:
-          summary: filter by media_source & agency
-          value:
-            "media_source=media-source-name&agency=transparent_agency"
-        MultipleAgencies:
-          summary: filter by multiple agencies
-          value:
-            "agency=transparent_agency&agency=non_transparent_agency"
   responses:
     Success:
       content:
