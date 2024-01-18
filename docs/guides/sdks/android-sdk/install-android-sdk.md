@@ -197,3 +197,7 @@ Check that you have the required files by opening your APK in Android Studio:
 ![](https://files.readme.io/9969b81-image_with_dash.png "image_with_dash.png")
 
 If those files are missing, the SDK can't make network requests to our server, and you need to contact your CSM or support.
+
+### Boot Complete
+
+If your app listens for `LOCKED_BOOT_COMPLETED`, make sure that all interactions with the SDK are initiated from the launcher activity. This precaution prevents the SDK from crashing when attempting to access `SharedPreferences` on a device that is still locked.
