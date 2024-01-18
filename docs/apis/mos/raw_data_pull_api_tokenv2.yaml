@@ -29,6 +29,7 @@ paths:
         - $ref: '#/components/parameters/MaximumRows'
         - $ref: '#/components/parameters/FromInstallTime'
         - $ref: '#/components/parameters/ToInstallTime'
+        - $ref: '#/components/parameters/Agency'
         - in: query
           name: additional_fields
           explode: false
@@ -67,6 +68,7 @@ paths:
         - $ref: '#/components/parameters/MaximumRows'
         - $ref: '#/components/parameters/FromInstallTime'
         - $ref: '#/components/parameters/ToInstallTime'
+        - $ref: '#/components/parameters/Agency'
         - in: query
           name: additional_fields
           explode: false
@@ -105,8 +107,10 @@ paths:
         - $ref: '#/components/parameters/MaximumRows'
         - $ref: '#/components/parameters/FromInstallTime'
         - $ref: '#/components/parameters/ToInstallTime'
+        - $ref: '#/components/parameters/Agency'
         - in: query
           name: additional_fields
+          explode: false
           schema:
             type: array
             items:
@@ -142,8 +146,10 @@ paths:
         - $ref: '#/components/parameters/MaximumRows'
         - $ref: '#/components/parameters/FromInstallTime'
         - $ref: '#/components/parameters/ToInstallTime'
+        - $ref: '#/components/parameters/Agency'
         - in: query
           name: additional_fields
+          explode: false
           schema:
             type: array
             items:
@@ -179,6 +185,7 @@ paths:
         - $ref: '#/components/parameters/MaximumRows'
         - $ref: '#/components/parameters/FromInstallTime'
         - $ref: '#/components/parameters/ToInstallTime'
+        - $ref: '#/components/parameters/Agency'
         - in: query
           name: additional_fields
           explode: false
@@ -217,6 +224,7 @@ paths:
         - $ref: '#/components/parameters/MaximumRows'
         - $ref: '#/components/parameters/FromInstallTime'
         - $ref: '#/components/parameters/ToInstallTime'
+        - $ref: '#/components/parameters/Agency'
         - in: query
           name: additional_fields
           explode: false
@@ -254,8 +262,10 @@ paths:
         - $ref: '#/components/parameters/MaximumRows'
         - $ref: '#/components/parameters/FromInstallTime'
         - $ref: '#/components/parameters/ToInstallTime'
+        - $ref: '#/components/parameters/Agency'
         - in: query
           name: additional_fields
+          explode: false
           schema:
             type: array
             items:
@@ -290,8 +300,10 @@ paths:
         - $ref: '#/components/parameters/MaximumRows'
         - $ref: '#/components/parameters/FromInstallTime'
         - $ref: '#/components/parameters/ToInstallTime'
+        - $ref: '#/components/parameters/Agency'
         - in: query
           name: additional_fields
+          explode: false
           schema:
             type: array
             items:
@@ -401,6 +413,7 @@ paths:
         - $ref: '#/components/parameters/MaximumRows'
         - $ref: '#/components/parameters/FromInstallTime'
         - $ref: '#/components/parameters/ToInstallTime'
+        - $ref: '#/components/parameters/Agency'
         - in: query
           name: additional_fields
           explode: false
@@ -438,6 +451,7 @@ paths:
         - $ref: '#/components/parameters/MaximumRows'
         - $ref: '#/components/parameters/FromInstallTime'
         - $ref: '#/components/parameters/ToInstallTime'
+        - $ref: '#/components/parameters/Agency'
         - in: query
           name: additional_fields
           explode: false
@@ -511,6 +525,7 @@ paths:
         - $ref: '#/components/parameters/MaximumRows'
         - $ref: '#/components/parameters/FromInstallTime'
         - $ref: '#/components/parameters/ToInstallTime'
+        - $ref: '#/components/parameters/Agency'
         - in: query
           name: additional_fields
           explode: false
@@ -548,6 +563,7 @@ paths:
         - $ref: '#/components/parameters/MaximumRows'
         - $ref: '#/components/parameters/FromInstallTime'
         - $ref: '#/components/parameters/ToInstallTime'
+        - $ref: '#/components/parameters/Agency'
         - in: query
           name: additional_fields
           explode: false
@@ -586,6 +602,7 @@ paths:
         - $ref: '#/components/parameters/MaximumRows'
         - $ref: '#/components/parameters/FromInstallTime'
         - $ref: '#/components/parameters/ToInstallTime'
+        - $ref: '#/components/parameters/Agency'
         - in: query
           name: additional_fields
           explode: false
@@ -624,6 +641,7 @@ paths:
         - $ref: '#/components/parameters/MaximumRows'
         - $ref: '#/components/parameters/FromInstallTime'
         - $ref: '#/components/parameters/ToInstallTime'
+        - $ref: '#/components/parameters/Agency'
         - in: query
           name: additional_fields
           explode: false
@@ -661,6 +679,7 @@ paths:
         - $ref: '#/components/parameters/MaximumRows'
         - $ref: '#/components/parameters/FromInstallTime'
         - $ref: '#/components/parameters/ToInstallTime'
+        - $ref: '#/components/parameters/Agency'
         - in: query
           name: additional_fields
           explode: false
@@ -698,6 +717,7 @@ paths:
         - $ref: '#/components/parameters/MaximumRows'
         - $ref: '#/components/parameters/FromInstallTime'
         - $ref: '#/components/parameters/ToInstallTime'
+        - $ref: '#/components/parameters/Agency'
         - in: query
           name: additional_fields
           explode: false
@@ -736,6 +756,7 @@ paths:
         - $ref: '#/components/parameters/MaximumRows'
         - $ref: '#/components/parameters/FromInstallTime'
         - $ref: '#/components/parameters/ToInstallTime'
+        - $ref: '#/components/parameters/Agency'
         - in: query
           name: additional_fields
           explode: false
@@ -774,6 +795,7 @@ paths:
         - $ref: '#/components/parameters/MaximumRows'
         - $ref: '#/components/parameters/FromInstallTime'
         - $ref: '#/components/parameters/ToInstallTime'
+        - $ref: '#/components/parameters/Agency'
         - in: query
           name: additional_fields
           explode: false
@@ -812,6 +834,7 @@ paths:
         - $ref: '#/components/parameters/MaximumRows'
         - $ref: '#/components/parameters/FromInstallTime'
         - $ref: '#/components/parameters/ToInstallTime'
+        - $ref: '#/components/parameters/Agency'
         - in: query
           name: additional_fields
           explode: false
@@ -849,6 +872,7 @@ paths:
         - $ref: '#/components/parameters/MaximumRows'
         - $ref: '#/components/parameters/FromInstallTime'
         - $ref: '#/components/parameters/ToInstallTime'
+        - $ref: '#/components/parameters/Agency'
         - in: query
           name: additional_fields
           explode: false
@@ -1040,6 +1064,29 @@ components:
       schema:
         type: string
         format: date
+    Agency:
+      in: query
+      name: agency
+      description: |
+        Use to filter by a specific agency
+        Note: If you use both the agency filter and media source filters, the media source filters don’t apply for non-transparent agencies. This means that for non-transparent agencies, all data is included, not just the data from the filtered media sources
+      schema:
+        type: array
+        items:
+          type: string
+      examples:
+        SingleAgency:
+          summary: filter by single agency
+          value:
+            "agency=transparent_agency"
+        MediaSourceAndAgency:
+          summary: filter by media_source & agency
+          value:
+            "media_source=media-source-name&agency=transparent_agency"
+        MultipleAgencies:
+          summary: filter by multiple agencies
+          value:
+            "agency=transparent_agency&agency=non_transparent_agency"
   responses:
     Success:
       content:
