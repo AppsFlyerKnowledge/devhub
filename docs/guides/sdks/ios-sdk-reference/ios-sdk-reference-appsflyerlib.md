@@ -817,7 +817,7 @@ To log location for geo-fencing. Does the same as code below.
 - (void)performOnAppAttributionWithURL:(NSURL * _Nullable)URL;
 ```
 ```swift
-performOnAppAttributionWithURL(with:URL?)
+performOnAppAttribution(with:URL?)
 ```
 
 **Description**  
