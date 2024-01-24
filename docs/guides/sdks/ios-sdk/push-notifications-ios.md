@@ -8,7 +8,7 @@ metadata:
   description: "Learn how to configure push notification measurement in the AppsFlyer iOS SDK."
 createdAt: "2021-06-15T13:14:54.732Z"
 updatedAt: "2023-04-18T11:44:28.141Z"
-order: 6
+order: 7
 ---
 ## Overview
 

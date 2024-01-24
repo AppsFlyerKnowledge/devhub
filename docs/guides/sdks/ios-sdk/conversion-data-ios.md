@@ -6,7 +6,7 @@ parentDoc: 5fa043dd3b65b20045e35597
 hidden: false
 createdAt: "2021-05-10T10:40:55.129Z"
 updatedAt: "2022-07-18T17:35:39.716Z"
-order: 5
+order: 6
 ---
 In this guide you will learn how to get [conversion data](doc:conversion-data) using the iOS SDK, as well as [usage examples](https://dev.appsflyer.com/hc/docs/conversion-data-android#accessing-attribution-data).
 

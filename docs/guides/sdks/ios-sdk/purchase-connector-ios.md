@@ -4,7 +4,7 @@ slug: "purchase-connector-ios"
 category: 5f9705393c689a065c409b23
 parentDoc: 5fa043dd3b65b20045e35597
 hidden: false
-order: 9
+order: 10
 ---
 
 ## Prerequisites

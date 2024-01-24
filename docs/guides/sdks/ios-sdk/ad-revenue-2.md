@@ -6,7 +6,7 @@ parentDoc: 5fa043dd3b65b20045e35597
 hidden: false
 createdAt: "2022-01-12T08:36:36.927Z"
 updatedAt: "2022-02-21T10:40:53.749Z"
-order: 8
+order: 9
 ---
 **At a glance**: The AppsFlyer ad revenue SDK connector enables the ad networks to report ad revenue using impression-level granularity.
 [block:api-header]

@@ -7,7 +7,7 @@ excerpt: "Learn how to preserve user privacy in the iOS SDK."
 hidden: false
 createdAt: "2024-01-07T19:00:15.000Z"
 updatedAt: "2024-01-07T19:00:15.000Z"
-order: 10
+order: 11
 ---
 ## Getting Started on Privacy Preservation
 

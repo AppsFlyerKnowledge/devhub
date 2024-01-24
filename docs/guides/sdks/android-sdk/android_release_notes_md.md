@@ -11,16 +11,16 @@ order: 1
 
 ## Version 6.12.5
 
-### New Features
+#### New Features
 
 - Added "original_link" parameter to DeepLinking callback in ESP resolving flow. 
 This parameter contains the original URL that was embedded into the email, and that clicking on it opened the app.
 
-### Changed Features
+#### Changed Features
 
 - Added the ability to invoke getSDKVersion() API before initializing the SDK.
 
-### Bug Fixes
+#### Bug Fixes
 
 - Fix warnings appeared in Strict Mode related to the usage of WindowManager from a non visual context.
 
