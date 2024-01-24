@@ -28,22 +28,27 @@ paths:
                 type: object
                 properties:
                   modes:
+                    description: A list of signature versions, and their mode
                     type: array
                     items:
                       type: object
                       properties:
                         signature_version:
+                          description: The signature-version 
                           type: string
                           enum:
                             - v1
                             - v2
                         mode:
+                          description: |
+                            The mode of the signature version. Indicating whether the system is expecting signatures with this version and enforcing verification or not.
                           type: string
                           enum:
                             - enabled
                             - disabled
                             - report-only
                   active-key-ids:
+                    description: A list of active-keys and their expiration
                     type: array
                     items:
                       type: object
@@ -53,7 +58,8 @@ paths:
                         expiration:
                           type: number
                           format: integer
-                  devices:
+                  excluded-apps:
+                    description: A list of app-ids to be excluded from click signature verification
                     type: array
                     items:
                       type: string
@@ -61,6 +67,8 @@ paths:
                     type: object
                     properties:
                       status:
+                        description: 
+                          when the circuit-breaker is enabled, the system will automatically set the mode from enabled to report-only in case there is a very high rate of clicks with invalid signature, indicating a possible mis-configuration on the ad-network side.
                         type: string
                         enum:
                           - enabled
@@ -92,6 +100,7 @@ paths:
 
       parameters:
         - name: signature_version
+          description: The version of the signature
           in: path
           schema:
             type: string
@@ -109,6 +118,7 @@ paths:
               type: object
               properties:
                 mode:
+                  description: The mode for the click signing verification of a given signature version
                   type: string
                   enum:
                     - enabled
@@ -303,7 +313,7 @@ paths:
       operationId: click-signing-report-get
 
       parameters:
-        - name: signature_version
+        - name: signature-version
           in: query
           schema:
             type: string
@@ -330,6 +340,7 @@ paths:
         200:
           description: |
             A CSV with the following columns:
+
             | Column | Description |
             | --- | --- |
             | time | an hour in the format: yyyy-MM-ddTHH (example: 2024-01-17T07) |
@@ -342,6 +353,7 @@ paths:
             | invalid_signature | the number of clicks with an invalid signature |
             | no_active_secrets | the number of clicks received during a period of time when there were no active secrets configured to validate the sugnature |
             | missing_mandatory_params | the number of clicks with a signature which is missing a mandatory param |
+
           content:
             text/csv:
               schema:
@@ -391,13 +403,15 @@ paths:
               type: object
               properties:
                 url:
+                  description: A click url with a signature to be tested
                   type: string
                 signature_version:
-                    type: string
-                    enum:
-                      - v1
-                      - v2
-                    default: v2
+                  description: The version of the signature to be tested on the given url 
+                  type: string
+                  enum:
+                    - v1
+                    - v2
+                  default: v2
                       
         required: true
       responses:
@@ -471,10 +485,13 @@ paths:
                 type: object
                 properties:
                   secret-key-id:
+                    description: An ID for the secret key
                     type: string
                   secret-key:
+                      description: The secret key for the click signature
                       type: string
                   expiration:
+                    description: Epoch time in milliseconds
                     type: number
                     format: integer
 
