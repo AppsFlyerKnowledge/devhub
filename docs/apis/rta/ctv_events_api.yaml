@@ -5,8 +5,8 @@ info:
 servers:
   - url: https://events.appsflyer.com/v1.0/s2s/
     description: Production server
-  # - url: https://sandbox-events.appsflyer.com/v1.0/s2s/
-    # description: Sandbox server
+  - url: https://sandbox-events.appsflyer.com/v1.0/s2s/
+    description: Sandbox server
 security:
   - ApiKeyAuth: []
 paths:
