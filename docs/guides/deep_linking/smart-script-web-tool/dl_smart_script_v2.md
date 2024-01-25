@@ -262,13 +262,14 @@ See [example](https://appsflyersdk.github.io/appsflyer-onelink-smart-script/exam
 
 See [example](https://appsflyersdk.github.io/appsflyer-onelink-smart-script/examples/forced_default_values.html?inmedia_found=plain_media_source) of the conversion of an incoming URL to an outgoing OneLink URL, using the default value even when an incoming media_source value is found.
 
-### Google click ID passthrough to af_sub
+### Google click ID passthrough
 
-See [example](https://appsflyersdk.github.io/appsflyer-onelink-smart-script/examples/google_clickid.html?inmedia=email&gclid=1a2b3c&keyword=sale%2Bboat) of the conversion of an incoming URL to an outgoing OneLink URL that passes the Google click ID to af_sub4. **Note**: When a GCLID is found, the script looks for the incoming parameter keyword, and puts the keyword value in the outgoing URL as the value of af_keywords.
+See [example](https://appsflyersdk.github.io/appsflyer-onelink-smart-script/examples/google_clickid.html?inmedia=email&gclid=1a2b3c&keyword=sale%2Bboat) of the conversion of an incoming URL to an outgoing OneLink URL that passes the Google click ID to `af_sub4` and `gclid`.
+**Note**: When a GCLID is found, the script looks for the incoming parameter keyword, and puts the keyword value in the outgoing URL as the value of af_keywords.
 
-### Facebook click ID passthrough to af_sub
+### Facebook click ID passthrough
 
-See [example](https://appsflyersdk.github.io/appsflyer-onelink-smart-script/examples/facebook_clickid.html?inmedia=email&fbclid=7hjy89) of the conversion of an incoming URL to an outgoing OneLink URL that passes the Facebook click ID to af_sub2. 
+See [example](https://appsflyersdk.github.io/appsflyer-onelink-smart-script/examples/facebook_clickid.html?inmedia=email&fbclid=7hjy89) of the conversion of an incoming URL to an outgoing OneLink URL that passes the Facebook click ID to `af_sub2` and `fbclid`.
 
 ### Set attribution and OneLink parameters
 
