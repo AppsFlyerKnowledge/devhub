@@ -1,0 +1,128 @@
+openapi: 3.0.1
+info:
+  title: Manage bulk users
+  version: 1.0.0
+servers:
+  - url: https://hq1.appsflyer.com/api/user-management/v1.0
+security:
+  - bearerAuth: []
+
+paths:
+  /users:
+    post:
+      summary: Create bulk users
+      tags: 
+        - Create bulk users
+      operationId: create-bulk-users-post
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: object
+                required:
+                  - email
+                  - username
+                  - role
+                  - allow_access_to_all_future_apps
+                properties:
+                  email:
+                    type: string
+                    format: email
+                    description: Email address of the user
+                  username:
+                    type: string
+                    description: Username of the user
+                  department:
+                    type: string
+                    description: Department of the user
+                  role:
+                    type: string
+                    description: Role of the user
+                  allow_access_to_all_future_apps:
+                    type: boolean
+                    description: Indicates whether to allow access to all future apps
+                  app_ids:
+                    type: array
+                    items:
+                      type: string
+                    description: Array of app IDs
+                  geos:
+                    type: array
+                    items:
+                      type: string
+                    description: Array of geographical locations
+                  media_sources:
+                    type: array
+                    items:
+                      type: string
+                    description: Array of media sources
+      responses:
+        "200":
+          description: Users created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        user_id:
+                          type: string
+                          description: ID of the created user
+                        username:
+                          type: string
+                          description: Username of the created user
+                        pending:
+                          type: boolean
+                          description: Indicates if the user is pending
+                        role:
+                          type: string
+                          items:
+                            type: string
+                          description: Array of roles assigned to the user
+        "400":
+          description: Bad request - Invalid input or exceeded limit
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: Error message for a bad request
+        "401":
+          description: Unauthorized - Missing or insufficient permissions
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: Error message for unauthorized access
+        "422":
+          description: Unprocessable Entity - Invalid input data
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: Error message for an unprocessable entity
+
+components: 
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: "Authorization HTTP header containing API V2 token (bearer token) is required.\n\n
+        The admin [gets the V2 token in the dashboard](https://support.appsflyer.com/hc/en-us/articles/360004562377)"
+
