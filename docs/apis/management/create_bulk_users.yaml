@@ -1,6 +1,6 @@
 openapi: 3.0.1
 info:
-  title: Manage bulk users
+  title: User management
   version: 1.0.0
 servers:
   - url: https://hq1.appsflyer.com/api/user-management/v1.0
@@ -10,9 +10,9 @@ security:
 paths:
   /users:
     post:
-      summary: Create bulk users
+      summary: Create users in bulk
       tags: 
-        - Create bulk users
+        - Managing users in bulk
       operationId: create-bulk-users-post
       requestBody:
         required: true
