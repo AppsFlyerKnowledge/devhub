@@ -1,0 +1,778 @@
+openapi: 3.0.1
+info:
+  title: InCost API
+  description: |
+    InCost API, part of AppsFlyer ROI360, lets ad network partners programmatically send advertising cost data to AppsFlyer. Doing so provides advertisers with aggregate cost data from all their ad networks in one place.
+
+  version: 1.0.0
+servers:
+  - url: https://hq1.appsflyer.com/api/
+security:
+  - bearerAuth: []
+
+paths:
+  /incost-uploader/v1/data/app/{app_id}:
+    post:
+      tags:
+        - "InCost uploader"
+      summary: "Upload cost data"
+      operationId: incost-uploader-post
+      parameters:
+      - name: app_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: |
+          the app identifier as found in the AppsFlyer dashboard. Insert it exactly as it appears in the dashboard.
+          Ensure to prefix iOS apps with **id**.
+        example: id123456789
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              minItems: 1
+              items:
+                $ref: '#/components/schemas/InCostData'
+                
+        required: true
+      responses:
+        200:
+          description: |
+            InCost upload successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  job_id:
+                    type: string
+        404:
+          description: Not found
+          content: 
+            application/json:
+                schema:
+                  type: string
+                examples:
+                  Not found:
+                    summary: Not found
+                    description: Invalid json
+                    value: "not-found"
+        415:
+          description: Media source not found
+          content: 
+            application/json:
+                schema:
+                  $ref: '#/components/schemas/Error'
+                examples:
+                  MediaSourceNotFound:
+                    summary: Media source not found
+                    value:
+                      error: 
+                        af_error_code: "ic213"
+                        error_message: "media_source was not found. Verify and resubmit."
+        422:
+          description: Incorrect JSON format
+          content: 
+            application/json:
+                schema:
+                  $ref: '#/components/schemas/Error'
+                examples:
+                  IncorrectJSONFormat:
+                    summary: Incorrect JSON format
+                    value:
+                      error: 
+                        af_error_code: "ic416"
+                        error_message: "Incorrect JSON format. Verify and resubmit."
+                      
+        
+  /incost-jobstatus/v1/data/app/{app_id}/job/{job_id}:
+    get:
+      tags:
+        - "InCost job status"
+      summary: "Get job status"
+      operationId: incost-jobstatus-get
+      parameters:
+      - name: app_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: |
+          the app identifier as found in the AppsFlyer dashboard. Insert it exactly as it appears in the dashboard.
+          Ensure to prefix iOS apps with **id**.
+        example: id123456789
+      - name: job_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: |
+          The job identifier returned by the send cost data call. 
+                
+      responses:
+        200:
+          description: |
+            This response signals that the request arrived and processed, but it doesn't necessarily means the request was accepted as a success.
+            Check `status` and the existence of the field `error`
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  app_id:
+                    type: string
+                  status:
+                    type: string
+                  uploaded_request_url:
+                    type: string
+                  error:
+                    $ref: '#/components/schemas/Error' 
+                  date_from:
+                    type: string
+                  date_to:
+                    type: string
+                  matched_records_percentage:
+                    type: string
+                  agency:
+                    type: string
+              examples:
+                Success:
+                  value:  
+                    "date_from": "2023-12-07"
+                    "date_to": "2023-12-07"
+                    "matched_records_percentage": "0.00"
+                    "app_id": "id888123456"
+                    "agency": ""
+                    "status": "Applied"
+                    "Uploaded_request_url": "https://af-eu-west-1-prod-xpend-incost.s3.eu-west-1.amazonaws.com/-1693396491/MjAyMy……….json?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20231225T174454Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7199&X-Amz-Credential=AKIAS25E……………...&X-Amz-Signature=07ce……………….."
+                Error:
+                  value:
+                    "app_id": "id888123456"
+                    "status": "Validation error"
+                    "Uploaded_request_url": "https://af-eu-west-1-prod-xpend-incost.s3.eu-west-1.amazonaws.com/-1693396491/MjAy…………………..json?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20231225T174204Z&X-Amz-SignedHeaders=host&X-Amz-Expires=7199&X-Amz-Credential=AKI………………&X-Amz-Signature=f2………………"
+                    "error": 
+                      "af_error_code": "ic232"
+                      "error_message": "Request included data older than 3 months. Only 3 months back are allowed."
+        401:
+          description: Job ID doesn't match app ID
+          content: 
+            application/json:
+                schema:
+                  $ref: '#/components/schemas/Error'
+                examples:
+                  JobIdNotMatchAppId:
+                    summary: Job ID doesn't match app ID
+                    value:
+                      error: 
+                        af_error_code: "ic415"
+                        error_message: "Job ID does not match to the app ID sent in the request. Change the job ID or app ID and try again."
+        404:
+          description: Not found
+          content: 
+            application/json:
+                schema:
+                  type: string
+                examples:
+                  Not found:
+                    summary: Not found
+                    description: Invalid json
+                    value: "not-found"
+        422:
+          description: Job ID not found
+          content: 
+            application/json:
+                schema:
+                  $ref: '#/components/schemas/Error'
+                examples:
+                  JobIdNotFound:
+                    summary: Job ID not found
+                    value:
+                      error: 
+                        af_error_code: "ic224"
+                        error_message: "General error occurred. Retry invoking the API in 10 minutes." 
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: |
+        To call the API, get the API V2 authorization token from your AppsFlyer admin. They can retrieve it from the AppsFlyer platform (HQ)
+  responses:  
+    Success:
+      description: Valid request
+      content: 
+        application/json:
+            schema:
+              type: object
+              properties: 
+                message:
+                  type: string
+                request_id:
+                  type: string 
+              example:
+                message: "Successfully processed 1 integration update"
+                request_id: "f1c0af47-bb7a-4e25-a261-d94d07689bb8" 
+  schemas:
+    Error:
+      properties:
+        error:
+          type: object
+          properties:
+            af_error_code:
+              type: string
+            error_message:
+              type: string
+    InCostData:
+      type: object
+      required:
+        - date
+        - app_id
+        - media_source
+        - campaign_id
+        - campaign_name
+        - currency
+        - spend
+      properties:
+        date:
+          type: string
+          description: |
+            - Spend data
+            - format: YYYY-MM-DD
+          pattern: ^(20)\d{2}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$
+          example:
+            "2019-12-30"
+        app_id:
+          type: string
+          maxLength: 250
+          description: |
+            - The app ID as it appears in the AppsFlyer platform
+            - Format: String up to 250 characters  
+          example: id123456789
+        media_source:
+          type: string
+          maxLength: 50
+          description: |  
+            - Network name (ID) displaying the ad associated with your ad network partner account in AppsFlyer
+            - Format: String 50 characters
+          example: network_int
+        af_prt:
+          type: string
+          maxLength: 50
+          description: |
+            - Required for agency attribution and cost data.
+            - Agency name as it displays on the attribution link and is associated with the agency account in AppsFlyer.
+            - Format: String 50 characters
+          example: agencya
+        campaign_id:
+          type: string
+          maxLength: 24
+          description: |
+            - Must be identical to the af_c_id param sent on the attribution link
+            - Empty string not permitted
+            - Format: String 24 characters
+        campaign_name:
+          type: string
+          maxLength: 100
+          description: |
+            - Format: String 100 characters
+          example: "my_campagin123"
+        adset_id:
+          type: string
+          maxLength: 24
+          description: |
+            - Required if you send adset_name 
+            - Must be identical to the af_adset_id param sent on the attribution link
+            - If your cost reporting does not support adset_id, never send it
+            - Format: String 24 characters
+          example: 123A
+        adset_name:
+          type: string
+          maxLength: 100
+          description: |
+            - If you send this field, you must also send adset_id
+            - Format: String 100 characters
+          example: my_adset_name
+        ad_id:
+          type: string
+          maxLength: 24
+          description: |
+            - Required if you send ad_name.
+            - This field must be identical to the af_ad_id param sent on the attribution link
+            - If your cost reporting does not support adset_id, never send it
+            - Format: String 24 characters
+          example: 123AB
+        site_id:
+          type: string
+          maxLength: 24
+          description: |
+            - Unique ID that identifies the publisher that displays the ad.
+            - Format: String 24 characters
+        ad_name:
+          type: string
+          maxLength: 100
+          description: |
+            - If you send this field, you must also send `ad_id`.
+            - Format: String 100 characters
+          example: Ad-name
+        geo:
+          type: string
+          minItems: 0
+          description: |
+            - The country you recorded as associated with the cost
+            - Where possible, this should represent the country where the ad was displayed
+            - Format: ISO 3166 2 character country code
+          enum:
+            - AF
+            - AX
+            - AL
+            - DZ
+            - AS
+            - AD
+            - AO
+            - AI
+            - AQ
+            - AG
+            - AR
+            - AM
+            - AW
+            - AU
+            - AT
+            - AZ
+            - BS
+            - BH
+            - BD
+            - BB
+            - BY
+            - BE
+            - BZ
+            - BJ
+            - BM
+            - BT
+            - BO
+            - BA
+            - BW
+            - BV
+            - BR
+            - IO
+            - BN
+            - BG
+            - BF
+            - BI
+            - KH
+            - CM
+            - CA
+            - CV
+            - KY
+            - CF
+            - TD
+            - CL
+            - CN
+            - CX
+            - CC
+            - CO
+            - KM
+            - CG
+            - CD
+            - CK
+            - CR
+            - CI
+            - HR
+            - CU
+            - CY
+            - CZ
+            - DK
+            - DJ
+            - DM
+            - DO
+            - EC
+            - EG
+            - SV
+            - GQ
+            - ER
+            - EE
+            - ET
+            - FK
+            - FO
+            - FJ
+            - FI
+            - FR
+            - GF
+            - PF
+            - TF
+            - GA
+            - GM
+            - GE
+            - DE
+            - GH
+            - GI
+            - GR
+            - GL
+            - GD
+            - GP
+            - GU
+            - GT
+            - GG
+            - GN
+            - GW
+            - GY
+            - HT
+            - HM
+            - VA
+            - HN
+            - HK
+            - HU
+            - IS
+            - IN
+            - ID
+            - IR
+            - IQ
+            - IE
+            - IM
+            - IL
+            - IT
+            - JM
+            - JP
+            - JE
+            - JO
+            - KZ
+            - KE
+            - KI
+            - KR
+            - KP
+            - KW
+            - KG
+            - LA
+            - LV
+            - LB
+            - LS
+            - LR
+            - LY
+            - LI
+            - LT
+            - LU
+            - MO
+            - MK
+            - MG
+            - MW
+            - MY
+            - MV
+            - ML
+            - MT
+            - MH
+            - MQ
+            - MR
+            - MU
+            - YT
+            - MX
+            - FM
+            - MD
+            - MC
+            - MN
+            - ME
+            - MS
+            - MA
+            - MZ
+            - MM
+            - NA
+            - NR
+            - NP
+            - NL
+            - AN
+            - NC
+            - NZ
+            - NI
+            - NE
+            - NG
+            - NU
+            - NF
+            - MP
+            - NO
+            - OM
+            - PK
+            - PW
+            - PS
+            - PA
+            - PG
+            - PY
+            - PE
+            - PH
+            - PN
+            - PL
+            - PT
+            - PR
+            - QA
+            - RE
+            - RO
+            - RU
+            - RW
+            - BL
+            - SH
+            - KN
+            - LC
+            - MF
+            - PM
+            - VC
+            - WS
+            - SM
+            - ST
+            - SA
+            - SN
+            - RS
+            - SC
+            - SL
+            - SG
+            - SK
+            - SI
+            - SB
+            - SO
+            - ZA
+            - GS
+            - ES
+            - LK
+            - SD
+            - SR
+            - SJ
+            - SZ
+            - SE
+            - CH
+            - SY
+            - TW
+            - TJ
+            - TZ
+            - TH
+            - TL
+            - TG
+            - TK
+            - TO
+            - TT
+            - TN
+            - TR
+            - TM
+            - TC
+            - TV
+            - UG
+            - UA
+            - AE
+            - GB
+            - US
+            - UM
+            - UY
+            - UZ
+            - VU
+            - VE
+            - VN
+            - VG
+            - VI
+            - WF
+            - EH
+            - YE
+            - ZM
+            - ZW
+        currency:
+          type: string
+          minItems: 0
+          description: |
+            - Spend currency type
+            - Format: ISO 4217 3-character currency code
+          enum:
+            - USD
+            - AED
+            - AFN
+            - ALL
+            - AMD
+            - ANG
+            - AOA
+            - ARS
+            - AUD
+            - AWG
+            - AZN
+            - BAM
+            - BBD
+            - BDT
+            - BGN
+            - BHD
+            - BIF
+            - BMD
+            - BND
+            - BOB
+            - BRL
+            - BSD
+            - BTC
+            - BTN
+            - BWP
+            - BYN
+            - BZD
+            - CAD
+            - CDF
+            - CHF
+            - CLF
+            - CLP
+            - CNH
+            - CNY
+            - COP
+            - CRC
+            - CUC
+            - CUP
+            - CVE
+            - CZK
+            - DJF
+            - DKK
+            - DOP
+            - DZD
+            - EGP
+            - ERN
+            - ETB
+            - EUR
+            - FJD
+            - FKP
+            - GBP
+            - GEL
+            - GGP
+            - GHS
+            - GIP
+            - GMD
+            - GNF
+            - GTQ
+            - GYD
+            - HKD
+            - HNL
+            - HRK
+            - HTG
+            - HUF
+            - IDR
+            - ILS
+            - IMP
+            - INR
+            - IQD
+            - IRR
+            - ISK
+            - JEP
+            - JMD
+            - JOD
+            - JPY
+            - KES
+            - KGS
+            - KHR
+            - KMF
+            - KPW
+            - KRW
+            - KWD
+            - KYD
+            - KZT
+            - LAK
+            - LBP
+            - LKR
+            - LRD
+            - LSL
+            - LYD
+            - MAD
+            - MDL
+            - MGA
+            - MKD
+            - MMK
+            - MNT
+            - MOP
+            - MRO
+            - MRU
+            - MUR
+            - MVR
+            - MWK
+            - MXN
+            - MYR
+            - MZN
+            - NAD
+            - NGN
+            - NIO
+            - NOK
+            - NPR
+            - NZD
+            - OMR
+            - PAB
+            - PEN
+            - PGK
+            - PHP
+            - PKR
+            - PLN
+            - PYG
+            - QAR
+            - RON
+            - RSD
+            - RUB
+            - RWF
+            - SAR
+            - SBD
+            - SCR
+            - SDG
+            - SEK
+            - SGD
+            - SHP
+            - SLL
+            - SOS
+            - SRD
+            - SSP
+            - STD
+            - STN
+            - SVC
+            - SYP
+            - SZL
+            - THB
+            - TJS
+            - TMT
+            - TND
+            - TOP
+            - TRY
+            - TTD
+            - TWD
+            - TZS
+            - UAH
+            - UGX
+            - UYU
+            - UZS
+            - VEF
+            - VES
+            - VND
+            - VUV
+            - WST
+            - XAF
+            - XAG
+            - XAU
+            - XCD
+            - XDR
+            - XOF
+            - XPD
+            - XPF
+            - XPT
+            - YER
+            - ZAR
+            - ZMW
+            - ZWL
+            - BYR
+        spend:
+          type: integer
+          format: double
+          pattern: ^\d+(\.\d{1,5})?$
+          description: |
+            - Spend amount using the specified currency 
+            - Five digits allowed after the decimal point
+            - The value 0 (zero) is permitted
+            - Negative values are NOT permitted
+            - Don't send , delimiters
+            - Don't send values in quotation marks. 
+            - Format: Decimal number
+        channel:
+          type: string
+          maxLength: 20
+          description: |
+            - Must be identical to the `af_channel` param sent on the attribution link.
+            - Format: String 20 characters
+          example: my_channel 
+        keywords:
+          type: string
+          maxLength: 100
+          description: |
+            - Format: String 100 characters
+          example: "abc app"
