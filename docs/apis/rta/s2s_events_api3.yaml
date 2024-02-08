@@ -1195,36 +1195,38 @@ components:
     TCFConsent:
       type: object
       properties:
-        policy_version:
-          type: integer
-          description: Version number of the policy
-        gdpr_applies:
-          type: integer
-          enum: [-1, 0, 1]
-          description: Binary value indicating if GDPR applies
-        cmp_sdk_id:
-          type: integer
-          description: Identifier for the Consent Management Provider SDK
-        cmp_sdk_version:
-          type: integer
-          description: Version number of the CMP SDK
-        tcstring:
-          type: string
-          description: Transparency and Consent String provided by the CMP
+        tcf:
+          type: object
+          properties:
+            policy_version:
+              type: integer
+              description: Version number of the policy
+            gdpr_applies:
+              type: integer
+              enum: [-1, 0, 1]
+              description: Binary value indicating if GDPR applies
+            cmp_sdk_id:
+              type: integer
+              description: Identifier for the Consent Management Provider SDK
+            cmp_sdk_version:
+              type: integer
+              description: Version number of the CMP SDK
+            tcstring:
+              type: string
+              description: Transparency and Consent String provided by the CMP
 
     ManualConsent:
       type: object
       properties:
-        gdpr_applies:
-          type: boolean
-          description: Indicates if GDPR applies
-        ad_user_data_enabled:
-          type: boolean
-          description: Indicates if the user data for ads is enabled
-        ad_personalization_enabled:
-          type: boolean
-          description: Indicates if ad personalization is enabled
-      required:
-        - gdpr_applies
-        - ad_user_data_enabled
-        - ad_personalization_enabled
+        manual:
+          type: object
+          properties:
+            gdpr_applies:
+              type: boolean
+              description: Indicates if GDPR applies
+            ad_user_data_enabled:
+              type: boolean
+              description: Indicates if the user data for ads is enabled
+            ad_personalization_enabled:
+              type: boolean
+              description: Indicates if ad personalization is enabled
