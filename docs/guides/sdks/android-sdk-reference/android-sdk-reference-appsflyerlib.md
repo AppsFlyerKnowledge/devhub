@@ -966,6 +966,25 @@ Opt-in/opt-out of OAID collection. By default, the SDK tries to collect OAID.
 **Returns**  
 `void`.
 
+### setConsentData
+
+**Method signature**
+
+```java
+AppsFlyerLib.getInstance().setConsentData(AppsFlyerConsent afConsent)
+```
+
+**Description**
+
+Transfers consent data to the SDK.
+
+**Input arguments**
+
+| Type | Name | Description |
+| --- | --- | --- |
+| [AppsFlyerConsent](https://dev.appsflyer.com/hc/docs/android-sdk-reference-appsflyerconsent) | afConsent | An object containing user consent data |
+|  |  |  |
+
 ### setCurrencyCode
 
 **Method signature**

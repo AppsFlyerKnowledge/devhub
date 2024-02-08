@@ -855,6 +855,27 @@ Register uninstall - you should register for remote notification and provide App
 **Returns**  
 `void`.
 
+### setConsentData
+
+**Method signature**
+
+```swift
+.setConsentData(afConsent: AppsFlyerConsent)
+```
+```objectivec
+- (void)setConsentData:(AppsFlyerConsent) afConsent
+```
+
+**Description**
+
+Transfers consent data to the SDK. 
+
+**Input arguments**
+
+| Type                   | Name      | Description                            |
+| ---------------------- | --------- | -------------------------------------- |
+| [AppsFlyerConsent](https://dev.appsflyer.com/hc/docs/ios-sdk-reference-appsflyerconsent) | afConsent | An object containing user consent data |
+
 ### setCurrentDeviceLanguage
 
 **Method signature**
