@@ -471,6 +471,7 @@ paths:
       parameters:
         - name: ttl-hours
           in: query
+          description: "Default value: 36"
           schema:
             type: number
             format: integer
