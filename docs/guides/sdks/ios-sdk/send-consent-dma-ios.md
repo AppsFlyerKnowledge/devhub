@@ -83,7 +83,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate , AppsFlyerLibDelegate {
 }
 ```
 
-## Use SDK API to transfer consent data
+## Manually collect consent data
 
 If your app does not use a CMP compatible with TCF v2.2, use the SDK API detailed below to provide the consent data directly to the SDK.
 
@@ -130,4 +130,19 @@ AppsFlyerLib.shared().setConsentData(nonGdprUser)
 // If the user is not subject to GDPR:
 AppsFlyerConsent *consentNonGDPR = [[AppsFlyerConsent alloc] initNonGDPRUser];
 [[AppsFlyerLib shared] setConsentData:consentNonGDPR];
+```
+
+## How to verify consent data sent?
+
+The consent data collected either using a CMP or manually is passed in conversion and launch requests sent by the SDK.
+You can verify the consent data is sent by [enabling SDK debug logs](integrate-ios-sdk.md#enabling-debug-mode) and locating `consent_data` in outgoing request.
+
+### Logs snippet example
+
+```
+<~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~~+~>
+<~+~   SEND Start:   https://pgnjrq-launches.appsflyersdk.com/api/v6.13/iosevent?app_id=112223344&buildnumber=6.13.0.147
+<~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~~+~>
+
+{ ... "consent_data":{"tcf":{"cmp_sdk_id":-1,"policy_version":-1,"tcstring":"","gdpr_applies":-1,"cmp_sdk_version":-1},"manual":{"gdpr_applies":false}} ... }
 ```

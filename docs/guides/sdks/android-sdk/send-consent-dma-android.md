@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
   }
 ```
 
-## Use SDK API to send user consent data
+## Manually collect consent data
 
 If your app does not use a CMP compatible with TCF v2.2, utilize the SDK API detailed below to provide the consent data directly to the SDK.
 
@@ -145,4 +145,15 @@ AppsFlyerLib.getInstance().setConsentData(nonGdprUser)
 
 // Start the AppsFlyer SDK
 AppsFlyerLib.getInstance().start(this);
+```
+
+## How to verify consent data sent?
+
+The consent data collected either using a CMP or manually is passed in conversion and launch requests sent by the SDK.
+You can verify the consent data is sent by [enabling SDK debug logs](integrate-android-sdk.md#enabling-debug-mode) and locating `consent_data` in outgoing request.
+
+### Logs snippet example
+
+```
+LAUNCH-10: preparing data: { ... {"consent_data":{"tcf":{"policy_version":4,"cmp_sdk_id":300,"cmp_sdk_version":2,"gdpr_applies":1,"tcstring":"XXXXXXXX"}}} ... }
 ```
