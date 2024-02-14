@@ -147,7 +147,7 @@ AppsFlyerLib.getInstance().setConsentData(nonGdprUser)
 AppsFlyerLib.getInstance().start(this);
 ```
 
-## Testing DMA compliance
+## Verify consent data is sent
 
 To test whether your SDK sends DMA consent data with each event, perform the following steps:
 

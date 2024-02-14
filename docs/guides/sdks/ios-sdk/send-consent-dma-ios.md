@@ -132,7 +132,7 @@ AppsFlyerConsent *consentNonGDPR = [[AppsFlyerConsent alloc] initNonGDPRUser];
 [[AppsFlyerLib shared] setConsentData:consentNonGDPR];
 ```
 
-## Testing DMA compliance
+## Verify consent data is sent
 
 To test whether your SDK sends DMA consent data with each event, perform the following steps:
 
