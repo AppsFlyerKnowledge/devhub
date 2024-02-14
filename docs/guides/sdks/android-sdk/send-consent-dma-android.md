@@ -154,8 +154,14 @@ To test whether your SDK sends DMA consent data with each event, perform the fol
 1. [Enable the SDK debug mode](https://dev.appsflyer.com/hc/docs/integrate-android-sdk#enabling-debug-mode).
 2. Search for `consent_data` in the log of the outgoing request.
 
-### Logs snippet example
+### Logs snippet example for CMP flow
 
 ```
 LAUNCH-10: preparing data: { ... {"consent_data":{"tcf":{"policy_version":4,"cmp_sdk_id":300,"cmp_sdk_version":2,"gdpr_applies":1,"tcstring":"XXXXXXXX"}}} ... }
+```
+
+### Logs snippet example for manual flow
+
+```
+LAUNCH-10: preparing data: { ... {"consent_data":{"manual":{"gdpr_applies":true,"ad_user_data_enabled":true,"ad_personalization_enabled":true}}} ... }
 ```

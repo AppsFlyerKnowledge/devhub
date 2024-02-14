@@ -139,12 +139,22 @@ To test whether your SDK sends DMA consent data with each event, perform the fol
 1. [Enable the SDK debug mode](https://dev.appsflyer.com/hc/docs/integrate-ios-sdk#enabling-debug-mode).
 2. Search for `consent_data` in the log of the outgoing request.
 
-### Logs snippet example
+### Logs snippet example for CMP flow
 
 ```
 <~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~~+~>
 <~+~   SEND Start:   https://pgnjrq-launches.appsflyersdk.com/api/v6.13/iosevent?app_id=112223344&buildnumber=6.13.0.147
 <~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~~+~>
 
-{ ... "consent_data":{"tcf":{"cmp_sdk_id":-1,"policy_version":-1,"tcstring":"","gdpr_applies":-1,"cmp_sdk_version":-1},"manual":{"gdpr_applies":false}} ... }
+{ ... "consent_data":{"tcf":{"cmp_sdk_id":-1,"policy_version":-1,"tcstring":"","gdpr_applies":-1,"cmp_sdk_version":-1}} ... }
+```
+
+### Logs snippet example for manual flow
+
+```
+<~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~~+~>
+<~+~   SEND Start:   https://pgnjrq-launches.appsflyersdk.com/api/v6.13/iosevent?app_id=112223344&buildnumber=6.13.0.147
+<~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~~+~>
+
+{ ... "consent_data":{"manual":{"gdpr_applies":true,"ad_user_data_enabled":true,"ad_personalization_enabled":true}} ... }
 ```
