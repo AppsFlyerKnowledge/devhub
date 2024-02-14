@@ -147,10 +147,12 @@ AppsFlyerLib.getInstance().setConsentData(nonGdprUser)
 AppsFlyerLib.getInstance().start(this);
 ```
 
-## How to verify consent data sent?
+## Testing DMA compliance
 
-The consent data collected either using a CMP or manually is passed in conversion and launch requests sent by the SDK.
-You can verify the consent data is sent by [enabling SDK debug logs](integrate-android-sdk.md#enabling-debug-mode) and locating `consent_data` in outgoing request.
+To test whether your SDK sends DMA consent data with each event, perform the following steps:
+
+1. [Enable the SDK debug mode](https://dev.appsflyer.com/hc/docs/integrate-android-sdk#enabling-debug-mode).
+2. Search for `consent_data` in the log of the outgoing request.
 
 ### Logs snippet example
 
