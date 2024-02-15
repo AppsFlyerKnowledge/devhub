@@ -191,7 +191,6 @@ In some cases the application might require consent from the user in order to co
 [/block]
 
 In order to support deferred deep linking once the network consent is given we recommend:
-- [Deferring] (https://dev.appsflyer.com/hc/docs/integrate-ios-sdk#starting-the-ios-sdk) the SDK `start` once the consent is given.
 - Implement [eDDL](./dl_ios_ocds_ddl) to allow UDL to handle the deferred deep linking
 
 ## Testing deferred deep linking

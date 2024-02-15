@@ -470,6 +470,8 @@ components:
             Populate this field as follows: 
             - `true`: if the user agreed to share the advertiser ID. 
             - `false`: if the user enabled Limited Ad Tracking (LAT). 
+        consent_data:
+          $ref: '#/components/schemas/ConsentData'
 
     ErrorResponse:
       type: string
@@ -827,6 +829,8 @@ components:
             Populate this field as follows: 
             - `true`: if the user agreed to share the advertiser ID. 
             - `false`: if the user enabled Limited Ad Tracking (LAT).
+        consent_data:
+          $ref: '#/components/schemas/ConsentData'
     IdfaId:
       title: iOS IDFA
       type: object
@@ -1174,8 +1178,49 @@ components:
             Populate this field as follows: 
             - `true`: if the user agreed to share the advertiser ID. 
             - `false`: if the user enabled Limited Ad Tracking (LAT).
-    
 
+    ConsentData:
+      type: object
+      oneOf:
+        - $ref: '#/components/schemas/TCFConsent'
+        - $ref: '#/components/schemas/ManualConsent'
 
+    TCFConsent:
+      type: object
+      properties:
+        tcf:
+          type: object
+          properties:
+            policy_version:
+              type: integer
+              description: Version number of the policy
+            gdpr_applies:
+              type: integer
+              enum: [-1, 0, 1]
+              description: Binary value indicating if GDPR applies
+            cmp_sdk_id:
+              type: integer
+              description: Identifier for the Consent Management Provider SDK
+            cmp_sdk_version:
+              type: integer
+              description: Version number of the CMP SDK
+            tcstring:
+              type: string
+              description: Transparency and Consent String provided by the CMP
 
-
+    ManualConsent:
+      type: object
+      properties:
+        manual:
+          type: object
+          properties:
+            gdpr_applies:
+              type: boolean
+              description: Indicates if GDPR applies
+            ad_user_data_enabled:
+              type: boolean
+              description: Indicates if the user data for ads is enabled
+            ad_personalization_enabled:
+              type: boolean
+              description: Indicates if ad personalization is enabled
+        
