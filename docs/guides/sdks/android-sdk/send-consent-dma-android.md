@@ -127,7 +127,7 @@ AppsFlyerLib.getInstance().start(this);
 If GDPR doesn’t apply to the user perform the following:
 
 1. Create an `AppsFlyerConsent` object using the `forNonGDPRUser()`method. This method doesn’t accept any parameters.
-2. Call `setConsentata()` with the `AppsFlyerConsent` object
+2. Call `setConsentData()` with the `AppsFlyerConsent` object
 3. Call `start()`.  
 
 ```java
