@@ -10,6 +10,14 @@ order: 1
 
 **New! Starting with v6.12.3 we are adding developer release notes to SDK releases! For previous versions, see [here](https://support.appsflyer.com/hc/en-us/articles/115001224823-AppsFlyer-iOS-SDK-release-notes) **
 
+## Version 6.13.0
+
+#### New Features
+
+- Added the ability to collect consent data from the user, that is required by Google for DMA compliance.
+The complete guide for sending user consent through the SDK can be found [here](https://dev.appsflyer.com/hc/docs/ios-send-consent-for-dma-compliance).
+
+
 ## Version 6.12.3
 
 #### New Features
