@@ -1,0 +1,591 @@
+openapi: 3.0.1
+info:
+  title: Click Signing API
+  version: 1.0.0
+servers:
+- url: https://hq1.appsflyer.com/api/p360-click-signing/v2.0
+security:
+  - bearerAuth: [] 
+paths:
+  /config:
+    get:
+      tags:
+      - Get config
+      summary: Get click signing config
+      operationId: click-signing-config-get
+
+      responses:
+        200:
+          description: Config returned successfully
+          content:
+            application/json:
+              schema:
+                required:
+                  - modes
+                  - active-key-ids
+                  - excluded-apps
+                  - circuit-breaker-config
+                type: object
+                properties:
+                  modes:
+                    description: A list of signature versions, and their mode
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        signature_version:
+                          description: The signature-version 
+                          type: string
+                          enum:
+                            - v1
+                            - v2
+                        mode:
+                          description: |
+                            The mode of the signature version. Indicating whether the system is expecting signatures with this version and enforcing verification or not.
+                          type: string
+                          enum:
+                            - enabled
+                            - disabled
+                            - report-only
+                  active-key-ids:
+                    description: A list of active-keys and their expiration
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        secret-key-id:
+                          type: string
+                        expiration:
+                          type: number
+                          format: integer
+                  excluded-apps:
+                    description: A list of app-ids to be excluded from click signature verification
+                    type: array
+                    items:
+                      type: string
+                  circuit-breaker-config:
+                    type: object
+                    properties:
+                      status:
+                        description: 
+                          when the circuit-breaker is enabled, the system will automatically set the mode from enabled to report-only in case there is a very high rate of clicks with invalid signature, indicating a possible mis-configuration on the ad-network side.
+                        type: string
+                        enum:
+                          - enabled
+                          - disabled
+        400:
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_response'
+        401:
+          description: Forbidden
+          content: 
+            application/json:
+                schema:
+                  $ref: '#/components/schemas/error_response'
+        404:
+          description: Resource not found
+          content: 
+            application/json:
+                schema:
+                  $ref: '#/components/schemas/error_response'
+  /config/signatures/{signature_version}:
+    put:
+      tags:
+      - Update config
+      summary: Update click signing config
+      operationId: click-signing-config-update-put
+
+      parameters:
+        - name: signature_version
+          description: The version of the signature
+          in: path
+          schema:
+            type: string
+            enum:
+              - v1
+              - v2
+          required: true
+
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+              - mode
+              type: object
+              properties:
+                mode:
+                  description: The mode for the click signing verification of a given signature version
+                  type: string
+                  enum:
+                    - enabled
+                    - disabled
+                    - report-only
+                      
+        required: true
+      responses:
+        200:
+          description: Click signing config updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/success_response'
+              example: 
+                message: "The request was successful"
+        400:
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_response'
+              examples:
+                Invalid mode:
+                  summary: "Invalid mode"
+                  value:
+                    messege: "Invalid mode"
+                Invalid signature version:
+                  summary: "Invalid signature version"
+                  value:
+                    message: "Invalid signature version"
+                Failed enable click signing: 
+                  summary: "Failed enable click signing" 
+                  value:
+                    message: "Failed to enable click signing. Please generate secrets before enabling" 
+        401:
+          description: Forbidden
+          content: 
+            application/json:
+                schema:
+                  $ref: '#/components/schemas/error_response'
+        404:
+          description: Resource not found
+          content: 
+            application/json:
+                schema:
+                  $ref: '#/components/schemas/error_response'
+
+  /config/circuit-breaker:
+    put:
+      tags:
+      - Circuit breaker
+      summary: Circuit breaker
+      operationId: click-signing-config-circuit-breaker-put
+
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+              - status
+              type: object
+              properties:
+                status:
+                  type: string
+                  enum:
+                    - enabled
+                    - disabled
+                      
+        required: true
+      responses:
+        200:
+          description: circuit breaker updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/success_response'
+              example: 
+                message: "The request was successful"
+        400:
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_response'
+              examples:
+                Invalid status:
+                  summary: "Invalid status"
+                  value:
+                    messege: "Invalid status for a circuit-breaker. Valid values: enabled, disabled"
+        401:
+          description: Forbidden
+          content: 
+            application/json:
+                schema:
+                  $ref: '#/components/schemas/error_response'
+                
+        404:
+          description: Resource not found
+          content: 
+            application/json:
+                schema:
+                  $ref: '#/components/schemas/error_response'
+  
+  /config/excluded-apps/{app-id}:
+    post:
+      tags:
+      - Add excluded app
+      summary: Add excluded app
+      operationId: click-signing-config-excluded-apps-add
+
+      parameters:
+        - name: app-id
+          in: path
+          schema:
+            type: string
+          required: true
+
+      responses:
+        200:
+          description: App excluded successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/success_response'
+              example: 
+                message: "The request was successful"
+        400:
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_response'
+        401:
+          description: Forbidden
+          content: 
+            application/json:
+                schema:
+                  $ref: '#/components/schemas/error_response'
+        404:
+          description: Resource not found
+          content: 
+            application/json:
+                schema:
+                  $ref: '#/components/schemas/error_response' 
+    delete:
+      tags:
+      - Remove excluded app
+      summary: Remove excluded app
+      operationId: click-signing-config-excluded-apps-delete
+
+      parameters:
+        - name: app-id
+          in: path
+          schema:
+            type: string
+          required: true
+
+      responses:
+        200:
+          description: App excluded successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/success_response'
+              example: 
+                message: "The request was successful"
+        400:
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_response'
+        401:
+          description: Forbidden
+          content: 
+            application/json:
+                schema:
+                  $ref: '#/components/schemas/error_response'
+        404:
+          description: Resource not found
+          content: 
+            application/json:
+                schema:
+                  $ref: '#/components/schemas/error_response'
+  
+  /report:
+    get:
+      tags:
+      - Report
+      summary: Report
+      operationId: click-signing-report-get
+
+      parameters:
+        - name: signature-version
+          in: query
+          schema:
+            type: string
+            enum:
+              - v1
+              - v2
+          required: true
+        - name: start-date
+          in: query
+          description: start time for the report in the format yyyy-mm-ddThh
+          schema:
+            type: string
+            pattern: ^(19|20)\d{2}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])T(0\d|1\d|2[0-3])$
+          required: true
+        - name: end-date
+          in: query
+          description: end time for the report in the format yyyy-mm-ddThh
+          schema:
+            type: string
+            pattern: ^(19|20)\d{2}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])T(0\d|1\d|2[0-3])$
+          required: true
+                      
+      responses:
+        200:
+          description: |
+            A CSV with the following columns:
+
+            | Column | Description |
+            | --- | --- |
+            | time | an hour in the format: yyyy-MM-ddTHH (example: 2024-01-17T07) |
+            | app_id | the app_id from the click |
+            | partner | the agency (af_prt) from the click |
+            | total_clicks | the number of total clicks received during this hour |
+            | valid_clicks | the number of valid clicks |
+            | missing_signature | the number of clicks with no signature |
+            | expired_clicks | the number of expired clicks |
+            | invalid_signature | the number of clicks with an invalid signature |
+            | no_active_secrets | the number of clicks received during a period of time when there were no active secrets configured to validate the sugnature |
+            | missing_mandatory_params | the number of clicks with a signature which is missing a mandatory param |
+
+          content:
+            text/csv:
+              schema:
+                type: string
+        400:
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_response'
+              examples:
+                Invalid parameter:
+                  summary: "Invalid parameter"
+                  value:
+                    messege: One or more of the required parameters appear in a wrong format
+                Invalid signature version:
+                  summary: "Invalid signature version"
+                  value:
+                    message: "Invalid signature-version param. must be v1 or v2"
+        401:
+          description: Forbidden
+          content: 
+            application/json:
+                schema:
+                  $ref: '#/components/schemas/error_response'
+        404:
+          description: Resource not found
+          content: 
+            application/json:
+                schema:
+                  $ref: '#/components/schemas/error_response'
+
+  /test:
+    post:
+      tags:
+      - Test
+      summary: Test
+      operationId: click-signing-test-post
+
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+              - url
+              - signature_version
+              type: object
+              properties:
+                url:
+                  description: A click url with a signature to be tested
+                  type: string
+                signature_version:
+                  description: The version of the signature to be tested on the given url 
+                  type: string
+                  enum:
+                    - v1
+                    - v2
+                  default: v2
+                      
+        required: true
+      responses:
+        200:
+          description: Test report returned successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  test-status:
+                    type: string
+                    enum:
+                      - passed
+                      - failed
+                  message:
+                    type: string
+                    description: |
+                      In case of failed test - the reason for the test failure. 
+                    enum:
+                      - no_active_secrets
+                      - missing_signature
+                      - click_expired
+                      - invalid_signature
+                      - no_active_secrets_v2
+                      - missing_signature_v2
+                      - click_expired_v2
+                      - invalid_signature_v2
+                      - missing_mandatory_param_v2
+
+        400:
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_response'
+        401:
+          description: Forbidden
+          content: 
+            application/json:
+                schema:
+                  $ref: '#/components/schemas/error_response'
+        404:
+          description: Resource not found
+          content: 
+            application/json:
+                schema:
+                  $ref: '#/components/schemas/error_response'
+
+  /secret:
+    post:
+      tags:
+      - Generate secret key
+      summary: Generate secret key
+      operationId: click-signing-secret-post
+
+      parameters:
+        - name: ttl-hours
+          in: query
+          description: "Default value: 36"
+          schema:
+            type: number
+            format: integer
+          required: false
+
+      responses:
+        200:
+          description: Secret key generated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  secret-key-id:
+                    description: An ID for the secret key
+                    type: string
+                  secret-key:
+                      description: The secret key for the click signature
+                      type: string
+                  expiration:
+                    description: Epoch time in milliseconds
+                    type: number
+                    format: integer
+
+        400:
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_response'
+              examples:
+                Invalid ttl:
+                  summary: "Invalid ttl"
+                  value:
+                    messege: "Invalid ttl value, must be a number between 1 to 1440"              
+        401:
+          description: Forbidden
+          content: 
+            application/json:
+                schema:
+                  $ref: '#/components/schemas/error_response'
+        404:
+          description: Resource not found
+          content: 
+            application/json:
+                schema:
+                  $ref: '#/components/schemas/error_response'
+        429:
+          description: Too many active keys
+          content: 
+            application/json:
+                schema:
+                  $ref: '#/components/schemas/error_response'
+
+  /secret/{secret-key-id}:
+    delete:
+      tags:
+      - Revoke secret key
+      summary: Revoke secret key
+      operationId: click-signing-secret-delete
+
+      parameters:
+        - name: secret-key-id
+          in: path
+          schema:
+            type: string
+          required: true
+                      
+      responses:
+        200:
+          description: Revoked secret key successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/success_response'
+              example: 
+                message: "The request was successful"
+        400:
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_response'
+        401:
+          description: Forbidden
+          content: 
+            application/json:
+                schema:
+                  $ref: '#/components/schemas/error_response'
+        404:
+          description: Resource not found
+          content: 
+            application/json:
+                schema:
+                  $ref: '#/components/schemas/error_response'
+components:
+  securitySchemes:
+    bearerAuth:            
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Token required for authorization. Please refer to [this link](https://support.appsflyer.com/hc/en-us/articles/360004562377) for instructions on how to obtain the token.
+
+  schemas:
+    error_response:
+      required:
+      - message
+      properties:
+        message:
+          type: string
+    success_response:
+      required:
+      - message
+      properties:
+        message:
+          type: string
+    
