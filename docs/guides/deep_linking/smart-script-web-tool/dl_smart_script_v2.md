@@ -337,3 +337,9 @@ You can set Smart Script to copy the HTTP `document.referrer` to either a cust
 If you want to set a custom parameter, Smart Script has to copy the   `document.referrer` property value and set it as the value of the parameter. In this [example](https://appsflyersdk.github.io/appsflyer-onelink-smart-script/examples/webreferrer.html?utm_source=my_source&utm_channel=my_channel),  Smart Script copies the `document.referrer` value to a custom outgoing URL parameter key defined by `webReferrer`. The selected custom key in the example is `this_referrer`.
 
 For more information, see [Web referrer mapping](https://support.appsflyer.com/hc/en-us/articles/4413588932241-OneLink-Smart-Script-V2-setup#web-referrer-mapping).
+
+### Utilizing Local Storage to Set Parameters for Deep Linking
+
+You can choose to save any data from the website to local storage, and then configure Smart Script to retrieve this data and assign it to an outgoing URL parameter. For example, you can leverage website information to dynamically populate the `deep_link_value` parameter, enabling the deep linking of users directly to the app's relevant content.
+
+In [this example](https://appsflyersdk.github.io/appsflyer-onelink-smart-script/examples/key_from_local_storage.html?inmedia22=email22), you can see how the outgoing URL `deep_link_value` is populated by a value copied from the website's local storage. The copied value in this example is the product ID arriving from the website data.
