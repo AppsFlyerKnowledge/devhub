@@ -342,4 +342,4 @@ For more information, see [Web referrer mapping](https://support.appsflyer.com/
 
 You can choose to save any data from the website to local storage, and then configure Smart Script to retrieve this data and assign it to an outgoing URL parameter. For example, you can leverage website information to dynamically populate the `deep_link_value` parameter, enabling the deep linking of users directly to the app's relevant content.
 
-In [this example](https://appsflyersdk.github.io/appsflyer-onelink-smart-script/examples/key_from_local_storage.html?inmedia22=email22), you can see how the outgoing URL `deep_link_value` is populated by a value copied from the website's local storage. The copied value in this example is the product ID arriving from the website data.
+In [this example](https://appsflyersdk.github.io/appsflyer-onelink-smart-script/examples/key_from_local_storage.html?incmp11=gogo11&inmedia22=email22), you can see how the outgoing URL `deep_link_value` is populated by a value copied from the website's local storage. The copied value in this example is the product ID arriving from the website data.
