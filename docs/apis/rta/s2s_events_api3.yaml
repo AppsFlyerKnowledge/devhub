@@ -1194,6 +1194,13 @@ components:
 
     TCFConsent:
       type: object
+      description: |
+        You can find instructions how to collect the TCF information from the device storage [here](https://github.com/InteractiveAdvertisingBureau/GDPR-Transparency-and-Consent-Framework/blob/master/TCFv2/IAB%20Tech%20Lab%20-%20CMP%20API%20v2.md#in-app-details), based on this mapping:
+        IABTCF_PolicyVesrion → policy_version
+        IABTCF_gdprApplies → gdpr_applies
+        IABTCF_CmpSdkID → cmp_sdk_id
+        IABTCF_CmpSdkVersion → cmp_sdk_version
+        IABTCF_TCString → tcstring
       properties:
         tcf:
           type: object
