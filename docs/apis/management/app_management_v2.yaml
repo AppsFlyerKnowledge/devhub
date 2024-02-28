@@ -4,32 +4,18 @@ info:
   description: API for managing an app on your AppsFlyer account
   version: 2.0.0
 servers:
-  - url: https://TBA.TBA.TBA.COM
-    description: TBA 
+  - url: https://hq1.appsflyer.com/app/api/app/v2.0
 security:
   - bearerAuth: []
 
 paths:
-  /api/app/v2.0/apps/{app_id}/{platform}:
+  /apps/:
     post:
       tags: 
         - App management
       summary: 'Add app'
       description: 'Public API for adding an app to your AppsFlyer account'
       operationId: app-mng-v2-post
-      parameters:
-        - name: 'app_id'
-          in: 'path'
-          description: 'App id to delete (case-sensitive)'
-          required: true
-          schema:
-            $ref: '#/components/schemas/app_id'
-        - name: 'platform'
-          in: 'path'
-          description: 'Platform app to delete'
-          required: true
-          schema:
-            $ref: '#/components/schemas/platform'
       requestBody:
         description: 'Use these examples as a template for your request body:'
         content:
@@ -38,7 +24,7 @@ paths:
               oneOf:
                 - $ref: '#/components/schemas/available-app'
                 - $ref: '#/components/schemas/pending-app'
-                - $ref: '#/components/schemas/3rd-party-store-app'
+                - $ref: '#/components/schemas/out-of-store-app'
             examples:
               Available Android app:
                 value:
@@ -89,9 +75,9 @@ paths:
                   currency: 'USD'
                   app_id: 'a1b2c3d4e5f6'
                   app_name: 'Optional custom app name'
-              3rd-party store Android app:
+              Out-of-store Android app:
                 value:
-                  status: '3rd_party_store'
+                  status: 'out_of_store'
                   platform: 'android'
                   time_zone: 'UTC'
                   currency: 'USD'
@@ -115,60 +101,42 @@ paths:
                 $ref: '#/components/schemas/StandardApiResponse'
               examples:
                 Invalid app id length:
-                  value: 
-                    {
-                      message: "The app ID that was entered exceeded the 100-character limit.",
-                      error: {
-                        status: 400,
-                        code: VALIDATION_FAILED,
-                        message: The app ID that was entered exceeded the 100-character limit.,
-                        resource: app
-                      }
-                    }
+                  value:  
+                    message: The app ID that was entered exceeded the 100-character limit.
+                    error: 
+                      status: 400
+                      code: VALIDATION_FAILED
+                      message: The app ID that was entered exceeded the 100-character limit.
+                      resource: app
                 Invalid app id format:
-                  value: 
-                    {
-                      message: "Invalid app ID. The app ID doesn’t follow the required format.",
+                  value: { message: "Invalid app ID. The app ID doesn’t follow the required format.",
                       error: {
                         status: 400,
                         code: VALIDATION_FAILED,
                         Message: Invalid app ID. The app ID doesn’t follow the required format.,
-                        resource: app
-                      }
-                    }
+                        resource: app,}}
                 Invalid app status:
-                  value: 
-                    {
-                      message: "Invalid app status.",
+                  value: { message: "Invalid app status.",
                       error: {
                         status: 400,
                         code: VALIDATION_FAILED,
                         Message: Invalid app status.,
-                        resource: app
-                      }
-                    }
+                        resource: app,}}
                 Invalid app name:
-                  value: 
-                    {
-                      message: "Invalid app name.",
+                  value: { message: "Invalid app name.",
                       error: {
                         status: 400,
                         code: VALIDATION_FAILED,
                         Message: Invalid app name.,
-                        resource: app
-                      }
-                    }
+                        resource: app,}}
                 Invalid app URL:
-                  value: 
-                    {
-                      message: "Invalid app URL.",
+                  value: { message: "Invalid app URL.",
                       error: {
                         status: 400,
                         code: VALIDATION_FAILED,
                         Message: Invalid app URL.,
-                        resource: app
-                      }
-                    }
+                        resource: app,}}
+
         '401':
           description: Unauthorized - Authentication error
           content:
@@ -177,16 +145,12 @@ paths:
                 $ref: '#/components/schemas/StandardApiResponse'
               examples:
                 Authentication failed:
-                  value:
-                    {
-                      message: "Authentication failed. Please ensure the provided token is correct and try again. If the issue persists, contact your CSM.",
+                  value: { message: "Authentication failed. Please ensure the provided token is correct and try again. If the issue persists, contact your CSM.",
                       error: {
                         "status": 401,
                         "code": "AUTHENTICATION_FAILED",
                         "message": "Authentication failed. Please ensure the provided token is correct and try again. If the issue persists, contact your CSM.",
-                        "resource": "app"
-                      }
-                    }
+                        "resource": "app",}}
         '403':
           description: Forbidden - You are not authorized to perform this action
           content:
@@ -195,16 +159,12 @@ paths:
                 $ref: '#/components/schemas/StandardApiResponse'
               examples:
                 Forbidden - unauthorized user action:
-                  value:
-                    {
-                      message: "Forbidden. You are not authorized to perform this action. Please verify you have the correct role, and required permissions to perform this action. If this issue persists please contact your CSM.",
+                  value: { message: "Forbidden. You are not authorized to perform this action. Please verify you have the correct role, and required permissions to perform this action. If this issue persists please contact your CSM.",
                       error: {
                         status: 403,
                         code: "FORBIDDEN_UNAUTHORIZED_USER_ACTION",
                         message: "Forbidden. You are not authorized to perform this action. Please verify you have the correct role, and required permissions to perform this action. If this issue persists please contact your CSM.",
-                        resource: "app"
-                      }
-                  }
+                        resource: "app",}}
         '404':
           description: Not found - Something went wrong please try again
         '422':
@@ -215,51 +175,36 @@ paths:
                 $ref: '#/components/schemas/StandardApiResponse'
               examples:
                 API token verification failed:
-                  value: 
-                    {
-                      message: We were unable to verify your api access token. Please ensure the provided token is correct and try again. If the issue persists, contact your CSM.,
+                  value: { message: "We were unable to verify your api access token. Please ensure the provided token is correct and try again. If the issue persists, contact your CSM.",
                       error: {
                         status: 422,
                         code: API_TOKEN_VERIFICATION_FAILED,
                         message: We were unable to verify your api access token. Please ensure the provided token is correct and try again. If the issue persists, contact your CSM.,
-                        resource: app
-                      }
-                    }
+                        resource: app}}
                 App already in account:
-                  value: 
-                    {
-                      message: "The app you are trying to add already exists in your account.",
+                  value: { message: "The app you are trying to add already exists in your account.",
                       error: {
                         status: 422,
                         code: APP_ALREADY_IN_ACCOUNT_ERROR,
                         Message: The app you are trying to add already exists in your account.,
-                        resource: app
-                      }
-                    }
+                        resource: app}}
                 General security error:
-                  value: 
-                    {
-                      message: "For Security reasons this app could not be added. Please contact AppsFlyer's support team.",
+                  value: { message: "For Security reasons this app could not be added. Please contact AppsFlyer's support team.",
                       error: {
                         status: 422,
                         code: GENERAL_SECURITY_ERROR,
                         Message: For Security reasons this app could not be added. Please contact AppsFlyer's support team.,
-                        resource: app
-                      }
-                    }
+                        resource: app}}
                 Add app failed:
-                  value: 
-                    {
-                      message: "For Security reasons this app could not be added. Please contact AppsFlyer's support team.",
+                  value: { message: "For Security reasons this app could not be added. Please contact AppsFlyer's support team.",
                       error: {
                         status: 422,
                         code:  ADD_APP_FAILED_ERROR,
                         Message: We were unable to create the app. Please try again and if the issue persists, contact your CSM.,
-                        resource: app
-                      }
-                    }
+                        resource: app}}
         '429':
           description: Too many requests - Exceeded rate limitation
+  /apps/{app_id}/{platform}:
     put:
       tags: 
         - App management
@@ -301,115 +246,75 @@ paths:
                 $ref: '#/components/schemas/StandardApiResponse'
               examples:
                 InvalidMinTimeBetweenSessions:
-                  value: 
-                    {
-                      message: "Invalid value. The value must be a whole number, expressed in seconds, representing either 1-59 minutes or 1-24 hours.",
+                  value: { message: "Invalid value. The value must be a whole number, expressed in seconds, representing either 1-59 minutes or 1-24 hours.",
                       error: {
                         "status": 400,
                         "code": "VALIDATION_FAILED",
                         "message": "Invalid value. The value must be a whole number, expressed in seconds, representing either 1-59 minutes or 1-24 hours.",
-                        "resource": "app"
-                      }
-                    }
+                        "resource": "app",}}
                 InvalidReAttributionWindow:
-                  value:
-                    {
-                      message: "Invalid value. The value must be a whole number, expressed in days representing either 1-23 months (each month considered as 30 days) or 730 days.",
+                  value: { message: "Invalid value. The value must be a whole number, expressed in days representing either 1-23 months (each month considered as 30 days) or 730 days.",
                       error: {
                       "status": 400,
                       "code": "VALIDATION_FAILED",
                       "message": "Invalid value. The value must be a whole number, expressed in days representing either 1-23 months (each month considered as 30 days) or 730 days.",
-                      "resource": "app"
-                      }
-                    }
+                      "resource": "app",}}
                 InvalidMinTimeBetweenReEngagements:
-                  value:
-                    {
-                      message: "Invalid value. The value must be a whole number, expressed in seconds, representing either 1-23 hours or 1-30 days",
+                  value: { message: "Invalid value. The value must be a whole number, expressed in seconds, representing either 1-23 hours or 1-30 days",
                       error: {
                         "status": 400,
                         "code": "VALIDATION_FAILED",
                         "message": "Invalid value. The value must be a whole number, expressed in seconds, representing either 1-23 hours or 1-30 days",
-                        "resource": "app"
-                      }
-                    }
+                        "resource": "app",}}
                 MissingRequiredValueReEngagementAttribution:
-                  value:
-                    {
-                      message: "Required at \"reEngagementAttribution.isEnabled\"",
+                  value: { message: "Required at \"reEngagementAttribution.isEnabled\"",
                       error: {
                       "status": 400,
                       "code": "VALIDATION_FAILED",
                       "message": "Required at \"reEngagementAttribution.isEnabled\"",
-                      "resource": "app"
-                    }
-                    }
+                      "resource": "app",}}
                 InvalidPropertyEnableAggregatedAdvancedPrivacy:
-                  value:
-                    {
-                      message: "Unrecognized key(s) in object: 'enableAggregatedAdvancedPrivacy'",
+                  value: { message: "Unrecognized key(s) in object: 'enableAggregatedAdvancedPrivacy'",
                       error: {
                       "status": 400,
                       "code": "VALIDATION_FAILED",
                       "message": "Unrecognized key(s) in object: 'enableAggregatedAdvancedPrivacy'",
-                      "resource": "app"
-                      } 
-                    }
+                      "resource": "app",}}
                 InvalidPropertyEnableReinstallDetection:
-                  value:
-                    {
-                      message: "Unrecognized key(s) in object: enableReinstallDetection",
+                  value: { message: "Unrecognized key(s) in object: enableReinstallDetection",
                       error: {
                       "status": 400,
                       "code": "VALIDATION_FAILED",
                       "message": "Unrecognized key(s) in object: enableReinstallDetection",
-                      "resource": "app"
-                    }
-                    }
+                      "resource": "app",}}
                 InvalidPropertyEnableSeoAppAttribution:
-                  value:
-                    {
-                      message:  "Unrecognized key(s) in object: enableSeoAppAttribution",
+                  value: { message:  "Unrecognized key(s) in object: enableSeoAppAttribution",
                       error: {
                       "status": 400,
                       "code": "VALIDATION_FAILED",
                       "message": "Unrecognized key(s) in object: enableSeoAppAttribution",
-                      "resource": "app"
-                      }
-                    }
+                      "resource": "app",}}
                 InvalidPropertyX:
-                  value:
-                    {
-                      message: "Unrecognized key(s) in object: X",
+                  value: { message: "Unrecognized key(s) in object: X",
                       error: {
                       "status": 400,
                       "code": "VALIDATION_FAILED",
                       "message": "Unrecognized key(s) in object: X",
-                      "resource": "app"
-                      }
-                    }
+                      "resource": "app",}}
                 InvalidPlatformUrlParam:
-                  value:
-                    {
-                      message:  "Invalid enum value. Expected 'android' | 'ios' | 'windowsphone', received 'androidd' at \"platform\"",
+                  value: { message:  "Invalid enum value. Expected 'android' | 'ios' | 'windowsphone', received 'androidd' at \"platform\"",
                       error: {
                       "status": 400,
                       "code": "VALIDATION_FAILED",
                       "message": "Invalid enum value. Expected 'android' | 'ios' | 'windowsphone', received 'androidd' at \"platform\"",
-                      "resource": "app"
-                    }
-                    }
+                      "resource": "app",}}
                 InvalidPropertyType:
-                  value:
-                    {
-                      message: "Expected typeA, received typeB at \"X\"",
+                  value: { message: "Expected typeA, received typeB at \"X\"",
                       error: {
                       "status": 400,
                       "code": "VALIDATION_FAILED",
                       "message": "Expected typeA, received typeB at \"X\"",
-                      "resource": "app"
-                      }
-                    }
+                      "resource": "app",}}
         '401':
           description: Unauthorized - Authentication error
           content:
@@ -418,16 +323,12 @@ paths:
                 $ref: '#/components/schemas/StandardApiResponse'
               examples:
                 Authentication failed:
-                  value:
-                    {
-                      message: "Authentication failed. Please ensure the provided token is correct and try again. If the issue persists, contact your CSM.",
+                  value: { message: "Authentication failed. Please ensure the provided token is correct and try again. If the issue persists, contact your CSM.",
                       error: {
                         "status": 401,
                         "code": "AUTHENTICATION_FAILED",
                         "message": "Authentication failed. Please ensure the provided token is correct and try again. If the issue persists, contact your CSM.",
-                        "resource": "app"
-                      }
-                    }
+                        "resource": "app", }}
         '403':
           description: Forbidden - You are not authorized to perform this action
           content:
@@ -436,16 +337,12 @@ paths:
                 $ref: '#/components/schemas/StandardApiResponse'
               examples:
                 Forbidden - unauthorized user action:
-                  value:
-                    {
-                      message: "Forbidden. You are not authorized to perform this action. Please verify you have the correct role, and required permissions to perform this action. If this issue persists please contact your CSM.",
+                  value: { message: "Forbidden. You are not authorized to perform this action. Please verify you have the correct role, and required permissions to perform this action. If this issue persists please contact your CSM.",
                       error: {
                         status: 403,
                         code: "FORBIDDEN_UNAUTHORIZED_USER_ACTION",
                         message: "Forbidden. You are not authorized to perform this action. Please verify you have the correct role, and required permissions to perform this action. If this issue persists please contact your CSM.",
-                        resource: "app"
-                      }
-                  }
+                        resource: "app",}}
         '404':
           description: Not found - Something went wrong please try again
           content:
@@ -454,16 +351,12 @@ paths:
                 $ref: '#/components/schemas/StandardApiResponse'
               examples:
                 AppNotFound:
-                  value:
-                    {
-                      message: "The app wasn’t found. Possible reasons: The app doesn't exist in your account, the app ID was misspelled, or the wrong platform was entered. Please try again with the correct details. If the issue persists, contact your CSM or hello@appsflyer.com",
+                  value: { message: "The app wasn’t found. Possible reasons: The app doesn't exist in your account, the app ID was misspelled, or the wrong platform was entered. Please try again with the correct details. If the issue persists, contact your CSM or hello@appsflyer.com",
                       error: {
                         "status": 404,
                         "code": "APP_ENTITY_NOT_FOUND",
                         "message": "The app wasn’t found. Possible reasons: The app doesn't exist in your account, the app ID was misspelled, or the wrong platform was entered. Please try again with the correct details. If the issue persists, contact your CSM or hello@appsflyer.com",
-                        "resource": "app"
-                      }
-                    }
+                        "resource": "app",}}
         '422':
           description: We were unable to complete your request
           content:
@@ -472,38 +365,26 @@ paths:
                 $ref: '#/components/schemas/StandardApiResponse'
               examples:
                 API token verification failed:
-                  value: 
-                    {
-                      message: We were unable to verify your api access token. Please ensure the provided token is correct and try again. If the issue persists, contact your CSM.,
+                  value: { message: We were unable to verify your api access token. Please ensure the provided token is correct and try again. If the issue persists, contact your CSM.,
                       error: {
                         status: 422,
                         code: API_TOKEN_VERIFICATION_FAILED,
                         message: We were unable to verify your api access token. Please ensure the provided token is correct and try again. If the issue persists, contact your CSM.,
-                        resource: app
-                      }
-                    }
+                        resource: app}}
                 AppVerificationFailed:
-                  value:
-                    {
-                      message: "We were unable to verify the provided app entity. The app doesn't exist in your account, the app ID was misspelled, or the wrong platform was entered. Please try again with the correct details. If the issue persists, contact your CSM or hello@appsflyer.com",
+                  value: { message: "We were unable to verify the provided app entity. The app doesn't exist in your account, the app ID was misspelled, or the wrong platform was entered. Please try again with the correct details. If the issue persists, contact your CSM or hello@appsflyer.com",
                       error: {
                       "status": 422,
                       "code": "APP_VERIFICATION_FAILED",
                       "message": "We were unable to verify the provided app entity. The app doesn't exist in your account, the app ID was misspelled, or the wrong platform was entered. Please try again with the correct details. If the issue persists, contact your CSM or hello@appsflyer.com",
-                      "resource": "app"
-                      }
-                    }
+                      "resource": "app",}}
                 FailedToUpdateApp:
-                  value:
-                    {
-                      message: "We were unable to update the app. Please try again and if the issue persists, contact your CSM.",
+                  value: { message: "We were unable to update the app. Please try again and if the issue persists, contact your CSM.",
                       error: {
                       "status": 422,
                       "code": "UPDATE_APP_FAILED",
                       "message": "We were unable to update the app. Please try again and if the issue persists, contact your CSM.",
-                      "resource": "app"
-                     }
-                    }
+                      "resource": "app",}} 
         '429':
           description: Too many requests - Exceeded rate limitation
           content:
@@ -528,7 +409,7 @@ paths:
           description: 'Platform app to delete'
           required: true
           schema:
-            $ref: '#/components/schemas/platform'
+            $ref: '#/components/schemas/deletePlatform'
       responses:
         '200':
           description: app deleted successfully
@@ -544,17 +425,13 @@ paths:
                 $ref: '#/components/schemas/StandardApiResponse'
               examples:
                 Invalid platform:
-                  value: 
-                    {
-                      message: "Invalid value. The value must be a whole number, expressed in seconds, representing either 1-59 minutes or 1-24 hours.",
+                  value: { message: "Invalid value. The value must be a whole number, expressed in seconds, representing either 1-59 minutes or 1-24 hours.",
                       error: {
                         status: 400,
                         code: VALIDATION_FAILED,
                         message: "The platform name was either misspelled or isn't in the list of supported app platforms. The supported platforms are: 'android', 'ios', 'windowsphone' 'roku','smartcast','tizen', 'webos', 'playstation', 'vidaa', 'steam', 'quest', 'battlenet', 'web', 'switch', 'xbox', 'epic', 'nativepc', 'chatgpt' . For more information please refer to the attached documentation link.",
                         resource: app,
-                        documentation: 'https://support.appsflyer.com/hc/en-us/articles/207377436-Adding-an-app-to-AppsFlyer#enter-app-details'
-                        }
-                    }
+                        documentation: 'https://support.appsflyer.com/hc/en-us/articles/207377436-Adding-an-app-to-AppsFlyer#enter-app-details',}}
         '401':
           description: Unauthorized - Authentication error
           content:
@@ -563,16 +440,12 @@ paths:
                 $ref: '#/components/schemas/StandardApiResponse'
               examples:
                 Authentication failed:
-                  value:
-                    {
-                      message: "Authentication failed. Please ensure the provided token is correct and try again. If the issue persists, contact your CSM.",
+                  value: { message: "Authentication failed. Please ensure the provided token is correct and try again. If the issue persists, contact your CSM.",
                       error: {
                         "status": 401,
                         "code": "AUTHENTICATION_FAILED",
                         "message": "Authentication failed. Please ensure the provided token is correct and try again. If the issue persists, contact your CSM.",
-                        "resource": "app"
-                      }
-                    }
+                        "resource": "app",}}
         '403':
           description: Forbidden - You are not authorized to perform this action
           content:
@@ -581,16 +454,12 @@ paths:
                 $ref: '#/components/schemas/StandardApiResponse'
               examples:
                 Forbidden - unauthorized user action:
-                  value:
-                    {
-                      message: "Forbidden. You are not authorized to perform this action. Please verify you have the correct role, and required permissions to perform this action. If this issue persists please contact your CSM.",
+                  value: { message: "Forbidden. You are not authorized to perform this action. Please verify you have the correct role, and required permissions to perform this action. If this issue persists please contact your CSM.",
                       error: {
                         status: 403,
                         code: "FORBIDDEN_UNAUTHORIZED_USER_ACTION",
                         message: "Forbidden. You are not authorized to perform this action. Please verify you have the correct role, and required permissions to perform this action. If this issue persists please contact your CSM.",
-                        resource: "app"
-                      }
-                  }
+                        resource: "app", }}
         '404':
           description: Not found - Something went wrong please try again
           content:
@@ -599,16 +468,12 @@ paths:
                 $ref: '#/components/schemas/StandardApiResponse'
               examples:
                 AppNotFound:
-                  value:
-                    {
-                      message: "The app wasn’t found. Possible reasons: The app doesn't exist in your account, the app ID was misspelled, or the wrong platform was entered. Please try again with the correct details. If the issue persists, contact your CSM or hello@appsflyer.com",
+                  value: { message: "The app wasn’t found. Possible reasons: The app doesn't exist in your account, the app ID was misspelled, or the wrong platform was entered. Please try again with the correct details. If the issue persists, contact your CSM or hello@appsflyer.com",
                       error: {
                         "status": 404,
                         "code": "APP_ENTITY_NOT_FOUND",
                         "message": "The app wasn’t found. Possible reasons: The app doesn't exist in your account, the app ID was misspelled, or the wrong platform was entered. Please try again with the correct details. If the issue persists, contact your CSM or hello@appsflyer.com",
-                        "resource": "app"
-                      }
-                    }
+                        "resource": "app"}}
         '422':
           description: We were unable to complete your request
           content:
@@ -617,38 +482,27 @@ paths:
                 $ref: '#/components/schemas/StandardApiResponse'
               examples:
                 API token verification failed:
-                  value: 
-                    {
-                      message: We were unable to verify your api access token. Please ensure the provided token is correct and try again. If the issue persists, contact your CSM.,
+                  value: { message: We were unable to verify your api access token. Please ensure the provided token is correct and try again. If the issue persists, contact your CSM.,
                       error: {
                         status: 422,
                         code: API_TOKEN_VERIFICATION_FAILED,
                         message: We were unable to verify your api access token. Please ensure the provided token is correct and try again. If the issue persists, contact your CSM.,
-                        resource: app
-                      }
-                    }
+                        resource: app}}
                 Bundled web app deletion error:
-                  value:
-                    {
-                    message: A web app can't be deleted if it's part of a bundle. Please refer to the attached documentation link for more information.,
+                  value: { message: A web app can't be deleted if it's part of a bundle. Please refer to the attached documentation link for more information.,
                     error: {
                       status: 422,
                       code: BUNDLED_WEB_APP,
                       message: A web app can't be deleted if it's part of a bundle. Please refer to the attached documentation link for more information.,
                       resource: app,
-                      documentation: https://support.appsflyer.com/hc/en-us/articles/360000646498#how-do-i-add-or-remove-delete-apps-from-a-bundle
-                    }
-                  }
+                      documentation: https://support.appsflyer.com/hc/en-us/articles/360000646498#how-do-i-add-or-remove-delete-apps-from-a-bundle,}}
                 Delete app failed:
-                  value: {
-                    message: We were unable to delete the app. Please try again and if the issue persists, contact your CSM.,
+                  value: { message: We were unable to delete the app. Please try again and if the issue persists, contact your CSM.,
                     error: {
                       status: 422,
                       code: DELETE_APP_FAILED_ERROR,
                       message: We were unable to delete the app. Please try again and if the issue persists, contact your CSM.,
-                      resource: app
-                      }
-                  }
+                      resource: app}}
         '429':
           description: Too many requests - Exceeded rate limitation
 
@@ -713,8 +567,8 @@ components:
         app_id:
           allOf:
             - $ref: '#/components/schemas/app_id'
-    3rd-party-store-app:
-      title: '3rd-party store'
+    out-of-store-app:
+      title: 'Out-of-store app'
       required:
         - platform
         - status
@@ -755,33 +609,53 @@ components:
         - 'android'
         - 'ios'
         - 'windowsphone'
+    deletePlatform:
+      type: 'string'
+      description: |
+        App platform: Android, iOS, or Windows Phone
+      enum:
+        - ""
+        - android
+        - ios
+        - windowsphone
+        - roku
+        - smartcast
+        - tizen
+        - webos
+        - playstation
+        - vidaa
+        - steam
+        - quest
+        - battlenet
+        - web
+        - switch
+        - xbox
+        - epic
+        - nativepc
+        - chatgpt
     status:
       type: 'string'
       description: |
-        **App status—**
-
         **Available:** The app is currently available in one of the proprietary app stores: iOS App Store, Google Play, Windows Phone Store.
 
         **Pending:** The app is not yet published or is pending approval from the store.
 
         - When a pending app goes live, AppsFlyer automatically updates its status in your account, so there is no need to update it manually.
 
-        **3rd-party store:** The app is in an Android app store other than Google Play.
+        **out_of_store:** The app is in an Android app store other than Google Play.
 
           - This option is relevant only for Android apps.
           - If the app is available in more than one Android app store, be sure to consider and discuss with your marketing team the options for setting up [multi-store Android attribution](https://support.appsflyer.com/hc/en-us/articles/207447023).
       enum:
         - 'available'
         - 'pending'
-        - '3rd_party_store'
+        - 'out_of_store'
     app_id:
       type: 'string'
       description: |
-        **App ID—**
+        Required only when status is ***pending*** or ***out_of_store***
 
-        Required only when status is ***pending*** or ***3rd_party_store***
-
-        Example values—
+        Example values
 
         - **Android:** *com.publisher.name* (Android package name, case-sensitive)
         - **iOS:** *123456789* (App ID assigned by the App Store, without the prefix *id*)
@@ -789,12 +663,10 @@ components:
     app_name:
       type: 'string'
       description: |
-        **App Name —**
-
         **A custom name for the app**
 
         - For ***available*** status, If not added to the request the extracted store name will be used.
-        - For ***pending*** or ***3rd_party_store***, If not added to the request, The ***app_id*** will be used by default.
+        - For ***pending*** or ***out_of_store***, If not added to the request, The ***app_id*** will be used by default.
         - The **app_name** length must not exceed 100 characters, And should not contain XSS tags.
 
     app_url:
@@ -804,15 +676,15 @@ components:
 
         Required only when status is ***available.***
 
-        Example values—
+        Example values
 
-        - **Android:** *https://play.google.com/store/apps/details?id=com.publisher.name* (Google Play Store URL). When status of Android app is ***3rd_party_store,*** supplying a URL is optional (for example, *http://www.somelink.com*)
+        - **Android:** *https://play.google.com/store/apps/details?id=com.publisher.name* (Google Play Store URL). When status of Android app is ***out_of_store,*** supplying a URL is optional (for example, *http://www.somelink.com*)
         - **iOS:** *https://apps.apple.com/**us**/app/app-name/id123456789* (iOS App Store URL). Must include the 2-letter country code of the store. An app added to the App Store prior to June 14, 2019, may contain itunes.apple.com in its URL(instead of apps.apple.com)
         - **Windows Phone:** *https://microsoft.com/en-us/store/apps/app-name/a1b2c3d4e5f6* (Windows Phone Store URL)
     channel_name:
       type: 'string'
       pattern: '^[A-Za-z]+$'
-      description: 'Required only when the status is "3rd_party_store"'
+      description: 'Required only when the status is "out_of_store"'
       example: 'Amazon'
     UpdateAppRequest:
       type: object
