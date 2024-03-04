@@ -2,7 +2,7 @@
 title: "Error messages"
 slug: "app-management-v2-errors"
 category: 65d1df96a2f25300104f9fe1
-hidden: true
+hidden: false
 order: 1
 ---
 
