@@ -23,7 +23,7 @@ The following API parameters are needed in the request body for adding an app:
 | app_name | string | Yes | A string of up to 100 characters |
 | currency | string | Yes | The list of values appears in the [Add app API](https://dev.appsflyer.com/hc/reference/app-mng-v2-post) |
 | time_zone | string | Yes | The list of values appears in the [Add app API](https://dev.appsflyer.com/hc/reference/app-mng-v2-post) |
-| kidsPrivacy | boolean | Yes | Indicate whether or not your app is directed toward children or a mixed audience (both children and adults) [Add App Audience Guide](https://support.appsflyer.com/hc/en-us/articles/207377436-Adding-an-app-to-AppsFlyer#define-app-audience). Possible values: ‘true’, ‘false’. |
+| kidsPrivacy | boolean | Yes | Indicate whether or not your app is directed toward children or a mixed audience (both children and adults) [See more about defining the app audience](https://support.appsflyer.com/hc/en-us/articles/207377436-Adding-an-app-to-AppsFlyer#define-app-audience). Possible values: ‘true’, ‘false’. |
 
 ### Android status in the store
 
