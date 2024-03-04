@@ -1,0 +1,1632 @@
+openapi: 3.0.1
+info:
+  title: App management API V2.0
+  description: API for managing an app on your AppsFlyer account
+  version: 2.0.0
+servers:
+  - url: https://hq1.appsflyer.com/app/api/app/v2.0
+security:
+  - bearerAuth: []
+
+paths:
+  /apps/:
+    post:
+      tags: 
+        - App management
+      summary: 'Add app'
+      description: 'Public API for adding an app to your AppsFlyer account'
+      operationId: app-mng-v2-post
+      requestBody:
+        description: 'Use these examples as a template for your request body:'
+        content:
+          application/json:
+            schema:
+              oneOf:
+                - $ref: '#/components/schemas/available-app'
+                - $ref: '#/components/schemas/pending-app'
+                - $ref: '#/components/schemas/out-of-store-app'
+            examples:
+              Available Android app:
+                value:
+                  status: 'available'
+                  platform: 'android'
+                  time_zone: 'UTC'
+                  currency: 'USD'
+                  app_name: 'Optional custom app name'
+                  app_url: 'https://play.google.com/store/apps/details?id=com.publisher.name'
+              Available iOS app:
+                value:
+                  status: 'available'
+                  platform: 'ios'
+                  time_zone: 'UTC'
+                  currency: 'USD'
+                  app_name: 'Optional custom app name'
+                  app_url: 'https://apps.apple.com/us/app/app-name/id123456789'
+              Available Windows phone app:
+                value:
+                  status: 'available'
+                  platform: 'windows_phone'
+                  time_zone: 'UTC'
+                  currency: 'USD'
+                  app_name: 'Optional custom app name'
+                  app_url: 'https://microsoft.com/en-us/store/apps/app-name/a1b2c3d4e5f6'
+              Pending iOS app:
+                value:
+                  status: 'pending'
+                  platform: 'ios'
+                  time_zone: 'UTC'
+                  currency: 'USD'
+                  app_id: '123456789'
+                  app_name: 'Optional custom app name'
+                  country: 'United States'
+              Pending Android app:
+                value:
+                  status: 'pending'
+                  platform: 'android'
+                  time_zone: 'UTC'
+                  currency: 'USD'
+                  app_id: 'com.some.appid'
+                  app_name: 'Optional custom app name'
+              Pending Windows Phone app:
+                value:
+                  status: 'pending'
+                  platform: 'windows_phone'
+                  time_zone: 'UTC'
+                  currency: 'USD'
+                  app_id: 'a1b2c3d4e5f6'
+                  app_name: 'Optional custom app name'
+              Out-of-store Android app:
+                value:
+                  status: 'out_of_store'
+                  platform: 'android'
+                  time_zone: 'UTC'
+                  currency: 'USD'
+                  app_id: 'com.some.appid'
+                  app_name: 'Optional custom app name'
+                  channel_name: 'Amazon'
+                  app_url: 'http://www.optionalAppLocation.com'
+        required: true
+      responses:
+        '200':
+          description: app added successfully
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/StandardApiResponse'
+        '400':
+          description: Invalid or missing input params or request body
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StandardApiResponse'
+              examples:
+                Invalid app id length:
+                  value:  
+                    message: The app ID that was entered exceeded the 100-character limit.
+                    error: 
+                      status: 400
+                      code: VALIDATION_FAILED
+                      message: The app ID that was entered exceeded the 100-character limit.
+                      resource: app
+                Invalid app id format:
+                  value:  
+                      message: Invalid app ID. The app ID doesn’t follow the required format.,
+                      error: 
+                        status: 400
+                        code: VALIDATION_FAILED,
+                        Message: Invalid app ID. The app ID doesn’t follow the required format.
+                        resource: app
+                Invalid app status:
+                  value: 
+                      message: Invalid app status.
+                      error: 
+                        status: 400
+                        code: VALIDATION_FAILED
+                        Message: Invalid app status.
+                        resource: app
+                Invalid app name:
+                  value: 
+                      message: Invalid app name.
+                      error: 
+                        status: 400
+                        code: VALIDATION_FAILED
+                        Message: Invalid app name.
+                        resource: app
+                Invalid app URL:
+                  value: 
+                      message: Invalid app URL.
+                      error: 
+                        status: 400
+                        code: VALIDATION_FAILED
+                        Message: Invalid app URL.
+                        resource: app
+
+        '401':
+          description: Unauthorized - Authentication error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StandardApiResponse'
+              examples:
+                Authentication failed:
+                  value: 
+                      message: Authentication failed. Please ensure the provided token is correct and try again. If the issue persists, contact your CSM.
+                      error: 
+                        status: 401
+                        code: AUTHENTICATION_FAILED
+                        message: Authentication failed. Please ensure the provided token is correct and try again. If the issue persists, contact your CSM.,
+                        resource: app
+        '403':
+          description: Forbidden - You are not authorized to perform this action
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StandardApiResponse'
+              examples:
+                Forbidden - unauthorized user action:
+                  value: 
+                      message: Forbidden. You are not authorized to perform this action. Please verify you have the correct role, and required permissions to perform this action. If this issue persists please contact your CSM.
+                      error: 
+                        status: 403
+                        code: FORBIDDEN_UNAUTHORIZED_USER_ACTION
+                        message: Forbidden. You are not authorized to perform this action. Please verify you have the correct role, and required permissions to perform this action. If this issue persists please contact your CSM.
+                        resource: app
+        '404':
+          description: Not found - Something went wrong please try again
+        '422':
+          description: We were unable to complete your request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StandardApiResponse'
+              examples:
+                API token verification failed:
+                  value: 
+                      message: We were unable to verify your api access token. Please ensure the provided token is correct and try again. If the issue persists, contact your CSM.
+                      error: 
+                        status: 422
+                        code: API_TOKEN_VERIFICATION_FAILED
+                        message: We were unable to verify your api access token. Please ensure the provided token is correct and try again. If the issue persists, contact your CSM.
+                        resource: app
+                App already in account:
+                  value: 
+                      message: The app you are trying to add already exists in your account.
+                      error: 
+                        status: 422
+                        code: APP_ALREADY_IN_ACCOUNT_ERROR
+                        Message: The app you are trying to add already exists in your account.
+                        resource: app
+                General security error:
+                  value: 
+                      message: For Security reasons this app could not be added. Please contact AppsFlyer's support team.
+                      error: 
+                        status: 422
+                        code: GENERAL_SECURITY_ERROR
+                        Message: For Security reasons this app could not be added. Please contact AppsFlyer's support team.
+                        resource: app
+                Add app failed:
+                  value: 
+                      message: For Security reasons this app could not be added. Please contact AppsFlyer's support team.
+                      error: 
+                        status: 422
+                        code:  ADD_APP_FAILED_ERROR
+                        Message: We were unable to create the app. Please try again and if the issue persists, contact your CSM.
+                        resource: app
+        '429':
+          description: Too many requests - Exceeded rate limitation
+  /apps/{app_id}/{platform}:
+    put:
+      tags: 
+        - App management
+      summary: 'Update app'
+      description: 'Public API for updating an app on your AppsFlyer account'
+      operationId: app-mng-v2-put
+      parameters:
+        - name: 'app_id'
+          in: 'path'
+          description: 'App id to update (case-sensitive)'
+          required: true
+          schema:
+            allOf:
+              - $ref: '#/components/schemas/app_id'
+        - name: 'platform'
+          in: 'path'
+          description: 'Platform app to update'
+          required: true
+          schema:
+            $ref: '#/components/schemas/platform'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateAppRequest'
+      responses:
+        '200':
+          description: app updated successfully
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/StandardApiResponse'
+        '400':
+          description: Invalid or missing input params or request body
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StandardApiResponse'
+              examples:
+                InvalidMinTimeBetweenSessions:
+                  value: 
+                      message: Invalid value. The value must be a whole number, expressed in seconds, representing either 1-59 minutes or 1-24 hours.
+                      error: 
+                        status: 400
+                        code: VALIDATION_FAILED
+                        message: Invalid value. The value must be a whole number, expressed in seconds, representing either 1-59 minutes or 1-24 hours.
+                        resource: app
+                InvalidReAttributionWindow:
+                  value: 
+                      message: Invalid value. The value must be a whole number, expressed in days representing either 1-23 months (each month considered as 30 days) or 730 days.
+                      error: 
+                        status: 400
+                        code: VALIDATION_FAILED
+                        message: Invalid value. The value must be a whole number, expressed in days representing either 1-23 months (each month considered as 30 days) or 730 days.
+                        resource: app
+                InvalidMinTimeBetweenReEngagements:
+                  value: 
+                      message: Invalid value. The value must be a whole number, expressed in seconds, representing either 1-23 hours or 1-30 days
+                      error: 
+                        status: 400
+                        code: VALIDATION_FAILED
+                        message: Invalid value. The value must be a whole number, expressed in seconds, representing either 1-23 hours or 1-30 days
+                        resource: app
+                MissingRequiredValueReEngagementAttribution:
+                  value: 
+                      message: Required at \"reEngagementAttribution.isEnabled\"
+                      error: 
+                        status: 400
+                        code: VALIDATION_FAILED
+                        message: Required at \"reEngagementAttribution.isEnabled\"
+                        resource: app
+                InvalidPropertyEnableAggregatedAdvancedPrivacy:
+                  value: 
+                      message: 'Unrecognized key(s) in object: enableAggregatedAdvancedPrivacy'
+                      error: 
+                        status: 400
+                        code: VALIDATION_FAILED
+                        message: 'Unrecognized key(s) in object: enableAggregatedAdvancedPrivacy'
+                        resource: app
+                InvalidPropertyEnableReinstallDetection:
+                  value: 
+                      message: "Unrecognized key(s) in object: enableReinstallDetection"
+                      error: 
+                        status: 400
+                        code: VALIDATION_FAILED
+                        message: 'Unrecognized key(s) in object: enableReinstallDetection'
+                        resource: app
+                InvalidPropertyEnableSeoAppAttribution:
+                  value: 
+                      message: 'Unrecognized key(s) in object: enableSeoAppAttribution'
+                      error: 
+                        status: 400
+                        code: VALIDATION_FAILED
+                        message: 'Unrecognized key(s) in object: enableSeoAppAttribution'
+                        resource: app
+                InvalidPropertyX:
+                  value: 
+                      message: 'Unrecognized key(s) in object: X'
+                      error: 
+                        status: 400
+                        code: VALIDATION_FAILED
+                        message: 'Unrecognized key(s) in object: X'
+                        resource: app
+                InvalidPlatformUrlParam:
+                  value: 
+                      message: Invalid enum value. Expected 'android' | 'ios' | 'windowsphone', received 'androidd' at \"platform\"
+                      error: 
+                        status: 400
+                        code: VALIDATION_FAILED
+                        message: Invalid enum value. Expected 'android' | 'ios' | 'windowsphone', received 'androidd' at \"platform\"
+                        resource: app
+                InvalidPropertyType:
+                  value: 
+                    message: Expected typeA, received typeB at \"X\"
+                    error: 
+                      status: 400
+                      code: VALIDATION_FAILED
+                      message: Expected typeA, received typeB at \"X\"
+                      resource: app
+        '401':
+          description: Unauthorized - Authentication error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StandardApiResponse'
+              examples:
+                Authentication failed:
+                  value: 
+                    message: Authentication failed. Please ensure the provided token is correct and try again. If the issue persists, contact your CSM.
+                    error: 
+                      status: 401
+                      code: AUTHENTICATION_FAILED
+                      message: Authentication failed. Please ensure the provided token is correct and try again. If the issue persists, contact your CSM.
+                      resource: app
+        '403':
+          description: Forbidden - You are not authorized to perform this action
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StandardApiResponse'
+              examples:
+                Forbidden - unauthorized user action:
+                  value: 
+                    message: Forbidden. You are not authorized to perform this action. Please verify you have the correct role, and required permissions to perform this action. If this issue persists please contact your CSM.
+                    error: 
+                        status: 403
+                        code: FORBIDDEN_UNAUTHORIZED_USER_ACTION
+                        message: Forbidden. You are not authorized to perform this action. Please verify you have the correct role, and required permissions to perform this action. If this issue persists please contact your CSM.
+                        resource: app
+        '404':
+          description: Not found - Something went wrong please try again
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StandardApiResponse'
+              examples:
+                AppNotFound:
+                  value: 
+                    message: 'The app wasn’t found. Possible reasons: The app doesn’t exist in your account, the app ID was misspelled, or the wrong platform was entered. Please try again with the correct details. If the issue persists, contact your CSM or hello@appsflyer.com'
+                    error: 
+                      status: 404
+                      code: APP_ENTITY_NOT_FOUND
+                      message: 'The app wasn’t found. Possible reasons: The app doesn’t exist in your account, the app ID was misspelled, or the wrong platform was entered. Please try again with the correct details. If the issue persists, contact your CSM or hello@appsflyer.com'
+                      resource: app
+        '422':
+          description: We were unable to complete your request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StandardApiResponse'
+              examples:
+                API token verification failed:
+                  value: 
+                    message: We were unable to verify your api access token. Please ensure the provided token is correct and try again. If the issue persists, contact your CSM.
+                    error: 
+                      status: 422
+                      code: API_TOKEN_VERIFICATION_FAILED
+                      message: We were unable to verify your api access token. Please ensure the provided token is correct and try again. If the issue persists, contact your CSM.
+                      resource: app
+                AppVerificationFailed:
+                  value: 
+                    message: We were unable to verify the provided app entity. The app doesn't exist in your account, the app ID was misspelled, or the wrong platform was entered. Please try again with the correct details. If the issue persists, contact your CSM or hello@appsflyer.com"
+                    error: 
+                      status: 422
+                      code: APP_VERIFICATION_FAILED
+                      message: We were unable to verify the provided app entity. The app doesn't exist in your account, the app ID was misspelled, or the wrong platform was entered. Please try again with the correct details. If the issue persists, contact your CSM or hello@appsflyer.com
+                      resource: app
+                FailedToUpdateApp:
+                  value: 
+                    message: We were unable to update the app. Please try again and if the issue persists, contact your CSM.
+                    error: 
+                      status: 422
+                      code: UPDATE_APP_FAILED
+                      message: We were unable to update the app. Please try again and if the issue persists, contact your CSM.
+                      resource: app
+
+        '429':
+          description: Too many requests - Exceeded rate limitation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StandardApiResponse'
+    delete:
+      tags:
+        - 'App management'
+      summary: 'Delete app'
+      operationId: app-mng-v2-delete
+      description: 'Public API for deleting an app from your AppsFlyer account'
+      parameters:
+        - name: 'app_id'
+          in: 'path'
+          description: 'App id to delete (case-sensitive)'
+          required: true
+          schema:
+            $ref: '#/components/schemas/app_id'
+        - name: 'platform'
+          in: 'path'
+          description: 'Platform app to delete'
+          required: true
+          schema:
+            $ref: '#/components/schemas/deletePlatform'
+      responses:
+        '200':
+          description: app deleted successfully
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/StandardApiResponse'
+        '400':
+          description: Missing / Invaild input params or request body
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StandardApiResponse'
+              examples:
+                Invalid platform:
+                  value: 
+                    message: "The platform name was either misspelled or isn't in the list of supported app platforms. The supported platforms are: 'android', 'ios', 'windowsphone' 'roku','smartcast','tizen', 'webos', 'playstation', 'vidaa', 'steam', 'quest', 'battlenet', 'web', 'switch', 'xbox', 'epic', 'nativepc', 'chatgpt' . For more information please refer to the attached documentation link."
+                    error: 
+                      status: 400
+                      code: VALIDATION_FAILED
+                      message: "The platform name was either misspelled or isn't in the list of supported app platforms. The supported platforms are: 'android', 'ios', 'windowsphone' 'roku','smartcast','tizen', 'webos', 'playstation', 'vidaa', 'steam', 'quest', 'battlenet', 'web', 'switch', 'xbox', 'epic', 'nativepc', 'chatgpt' . For more information please refer to the attached documentation link."
+                      resource: app,
+                      documentation: 'https://support.appsflyer.com/hc/en-us/articles/207377436-Adding-an-app-to-AppsFlyer#enter-app-details'
+        '401':
+          description: Unauthorized - Authentication error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StandardApiResponse'
+              examples:
+                Authentication failed:
+                  value: 
+                    message: Authentication failed. Please ensure the provided token is correct and try again. If the issue persists, contact your CSM.
+                    error: 
+                      status: 401
+                      code: AUTHENTICATION_FAILED
+                      message: Authentication failed. Please ensure the provided token is correct and try again. If the issue persists, contact your CSM.
+                      resource: app
+        '403':
+          description: Forbidden - You are not authorized to perform this action
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StandardApiResponse'
+              examples:
+                Forbidden - unauthorized user action:
+                  value: 
+                    message: Forbidden. You are not authorized to perform this action. Please verify you have the correct role, and required permissions to perform this action. If this issue persists please contact your CSM.
+                    error: 
+                      status: 403
+                      code: FORBIDDEN_UNAUTHORIZED_USER_ACTION
+                      message: Forbidden. You are not authorized to perform this action. Please verify you have the correct role, and required permissions to perform this action. If this issue persists please contact your CSM.
+                      resource: app
+        '404':
+          description: Not found - Something went wrong please try again
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StandardApiResponse'
+              examples:
+                AppNotFound:
+                  value: 
+                    message: "The app wasn’t found. Possible reasons: The app doesn't exist in your account, the app ID was misspelled, or the wrong platform was entered. Please try again with the correct details. If the issue persists, contact your CSM or hello@appsflyer.com"
+                    error: 
+                      status: 404
+                      code": APP_ENTITY_NOT_FOUND
+                      message: "The app wasn’t found. Possible reasons: The app doesn't exist in your account, the app ID was misspelled, or the wrong platform was entered. Please try again with the correct details. If the issue persists, contact your CSM or hello@appsflyer.com"
+                      resource": app
+        '422':
+          description: We were unable to complete your request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StandardApiResponse'
+              examples:
+                API token verification failed:
+                  value: 
+                      message: We were unable to verify your api access token. Please ensure the provided token is correct and try again. If the issue persists, contact your CSM.
+                      error: 
+                        status: 422
+                        code: API_TOKEN_VERIFICATION_FAILED
+                        message: We were unable to verify your api access token. Please ensure the provided token is correct and try again. If the issue persists, contact your CSM.
+                        resource: app
+                Bundled web app deletion error:
+                  value: 
+                    message: A web app can't be deleted if it's part of a bundle. Please refer to the attached documentation link for more information.
+                    error: 
+                      status: 422
+                      code: BUNDLED_WEB_APP
+                      message: A web app can't be deleted if it's part of a bundle. Please refer to the attached documentation link for more information.
+                      resource: app
+                      documentation: https://support.appsflyer.com/hc/en-us/articles/360000646498#how-do-i-add-or-remove-delete-apps-from-a-bundle
+                Delete app failed:
+                  value: 
+                    message: We were unable to delete the app. Please try again and if the issue persists, contact your CSM.
+                    error: 
+                      status: 422
+                      code: DELETE_APP_FAILED_ERROR
+                      message: We were unable to delete the app. Please try again and if the issue persists, contact your CSM.
+                      resource: app
+        '429':
+          description: Too many requests - Exceeded rate limitation
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    available-app:
+      title: 'Available'
+      required:
+        - platform
+        - status
+        - currency
+        - app_url
+        - time_zone
+        - kidsPrivacy
+      type: 'object'
+      properties:
+        platform:
+          $ref: '#/components/schemas/platform'
+        app_name:
+          $ref: '#/components/schemas/app_name'
+        status:
+          $ref: '#/components/schemas/status'
+        time_zone:
+          $ref: '#/components/schemas/time_zone'
+        currency:
+          $ref: '#/components/schemas/currency'
+        app_url:
+          allOf:
+            - $ref: '#/components/schemas/app_url'
+        kidsPrivacy:
+          $ref: '#/components/schemas/kidsPrivacy'
+    pending-app:
+      title: 'Pending'
+      required:
+        - platform
+        - status
+        - currency
+        - app_id
+        - time_zone
+        - kidsPrivacy
+      type: 'object'
+      properties:
+        platform:
+          $ref: '#/components/schemas/platform'
+        app_name:
+          $ref: '#/components/schemas/app_name'
+        status:
+          $ref: '#/components/schemas/status'
+        time_zone:
+          $ref: '#/components/schemas/time_zone'
+        currency:
+          $ref: '#/components/schemas/currency'
+        country:
+          $ref: '#/components/schemas/country'
+        kidsPrivacy:
+          $ref: '#/components/schemas/kidsPrivacy'
+        app_id:
+          allOf:
+            - $ref: '#/components/schemas/app_id'
+    out-of-store-app:
+      title: 'Out-of-store app'
+      required:
+        - platform
+        - status
+        - currency
+        - app_id
+        - channel_name
+        - time_zone
+        - kidsPrivacy
+      type: 'object'
+      properties:
+        platform:
+          $ref: '#/components/schemas/platform'
+        app_name:
+          $ref: '#/components/schemas/app_name'
+        status:
+          $ref: '#/components/schemas/status'
+        time_zone:
+          $ref: '#/components/schemas/time_zone'
+        currency:
+          $ref: '#/components/schemas/currency'
+        kidsPrivacy:
+          $ref: '#/components/schemas/kidsPrivacy'
+        app_id:
+          allOf:
+            - $ref: '#/components/schemas/app_id'
+        app_url:
+          allOf:
+            - $ref: '#/components/schemas/app_url'
+          description: 'Its optional to supply an app location URL - http://www.somelink.com'
+        channel_name:
+          allOf:
+            - $ref: '#/components/schemas/channel_name'
+    platform:
+      type: 'string'
+      description: |
+        App platform: Android, iOS, or Windows Phone
+      enum:
+        - 'android'
+        - 'ios'
+        - 'windowsphone'
+    deletePlatform:
+      type: 'string'
+      description: |
+        App platform: Android, iOS, or Windows Phone
+      enum:
+        - ""
+        - android
+        - ios
+        - windowsphone
+        - roku
+        - smartcast
+        - tizen
+        - webos
+        - playstation
+        - vidaa
+        - steam
+        - quest
+        - battlenet
+        - web
+        - switch
+        - xbox
+        - epic
+        - nativepc
+        - chatgpt
+    status:
+      type: 'string'
+      description: |
+        **Available:** The app is currently available in one of the proprietary app stores: iOS App Store, Google Play, Windows Phone Store.
+
+        **Pending:** The app is not yet published or is pending approval from the store.
+
+        - When a pending app goes live, AppsFlyer automatically updates its status in your account, so there is no need to update it manually.
+
+        **out_of_store:** The app is in an Android app store other than Google Play.
+
+          - This option is relevant only for Android apps.
+          - If the app is available in more than one Android app store, be sure to consider and discuss with your marketing team the options for setting up [multi-store Android attribution](https://support.appsflyer.com/hc/en-us/articles/207447023).
+      enum:
+        - 'available'
+        - 'pending'
+        - 'out_of_store'
+    app_id:
+      type: 'string'
+      description: |
+        Required only when status is ***pending*** or ***out_of_store***
+
+        Example values
+
+        - **Android:** *com.publisher.name* (Android package name, case-sensitive)
+        - **iOS:** *123456789* (App ID assigned by the App Store, without the prefix *id*)
+        - **Windows Phone:** *a1b2c3d4e5f6* (App ID assigned by the Windows Phone Store)
+    app_name:
+      type: 'string'
+      description: |
+        **A custom name for the app**
+
+        - For ***available*** status, If not added to the request the extracted store name will be used.
+        - For ***pending*** or ***out_of_store***, If not added to the request, The ***app_id*** will be used by default.
+        - The **app_name** length must not exceed 100 characters, And should not contain XSS tags.
+
+    app_url:
+      type: 'string'
+      description: |
+        **The URL of the app in the app store**
+
+        Required only when status is ***available.***
+
+        Example values
+
+        - **Android:** *https://play.google.com/store/apps/details?id=com.publisher.name* (Google Play Store URL). When status of Android app is ***out_of_store,*** supplying a URL is optional (for example, *http://www.somelink.com*)
+        - **iOS:** *https://apps.apple.com/**us**/app/app-name/id123456789* (iOS App Store URL). Must include the 2-letter country code of the store. An app added to the App Store prior to June 14, 2019, may contain itunes.apple.com in its URL(instead of apps.apple.com)
+        - **Windows Phone:** *https://microsoft.com/en-us/store/apps/app-name/a1b2c3d4e5f6* (Windows Phone Store URL)
+    channel_name:
+      type: 'string'
+      pattern: '^[A-Za-z]+$'
+      description: 'Required only when the status is "out_of_store"'
+      example: 'Amazon'
+    UpdateAppRequest:
+      type: object
+      properties:
+        enableProbabilisticViewThroughAttribution:
+          type: boolean
+          description: Enables or disables the probabilistic View-through Attribution (VTA) feature
+        enableIpMasking:
+          type: boolean
+          description: Enables or disables the IP Masking feature
+        minTimeBetweenSessions:
+          type: number
+          description: Minimum time between sessions, expressed in seconds. The accepted values are either whole minutes ranging from 1 to 59 minutes (60 to 3540 seconds), or whole hours ranging from 1 to 24 hours (3600 to 86,400 seconds)
+        reAttributionWindow:
+          type: number
+          description: Number of days after the first install that reinstalls aren't attributed as new installs, expressed in days. The accepted values are whole months ranging from 1 to 23 month (30 to 690 days), and 730 days.
+        reEngagementAttribution:
+          type: object
+          properties:
+            isEnabled:
+              type: boolean
+              description: Enables or disables the Retargeting Attribution feature
+            minTimeBetweenReEngagements:
+              type: number
+              description: Minimum time between re-engagement conversions, expressed in seconds. The accepted values are either whole hours ranging from 0 to 23 hours (0 to 82,800 seconds), or whole days ranging from 1 to 30 days (86,400 to 2,592,000 seconds)
+        enableSeoAppAttribution:
+          type: boolean
+          description: Enables or disables the organic search attribution feature. Available for IOS and Android apps only
+        enableAggregatedAdvancedPrivacy:
+          type: boolean
+          description: Enables or disables the Aggregated Advanced Privacy (AAP) feature only for IOS apps 
+        enableReinstallDetection:
+          type: boolean
+          description: Detects reinstalls without depending on advertising IDs only for IOS apps
+    StandardApiError:
+      type: object
+      properties:
+        status:
+          type: number
+        message:
+          type: string
+        code:
+          type: string
+        resource:
+          type: string
+        documentation:
+          type: string
+    StandardApiResponse:
+      type: object
+      properties:
+        data:
+          type: object
+        message:
+          type: string
+        error:
+          $ref: '#/components/schemas/StandardApiError'
+    time_zone:
+      type: string
+      description: 'The preferable time-zone'
+      enum:
+        - UTC
+        - Andorra - Andorra
+        - United Arab Emirates - Dubai
+        - Afghanistan - Kabul
+        - Antigua & Barbuda - Port of Spain
+        - Anguilla - Port of Spain
+        - Albania - Tirane
+        - Armenia - Yerevan
+        - Angola - Lagos
+        - Antarctica - Casey
+        - Antarctica - Davis
+        - Antarctica - DumontDUrville
+        - Antarctica - Mawson
+        - Antarctica - Palmer
+        - Antarctica - Rothera
+        - Antarctica - Syowa
+        - Antarctica - Troll
+        - Antarctica - Vostok
+        - Antarctica - Auckland
+        - Argentina - Buenos Aires
+        - Argentina - Cordoba
+        - Argentina - Salta
+        - Argentina - Jujuy
+        - Argentina - Tucuman
+        - Argentina - Catamarca
+        - Argentina - La Rioja
+        - Argentina - San Juan
+        - Argentina - Mendoza
+        - Argentina - San Luis
+        - Argentina - Rio Gallegos
+        - Argentina - Ushuaia
+        - Samoa (American) - Pago Pago
+        - Austria - Vienna
+        - Australia - Lord Howe
+        - Australia - Macquarie
+        - Australia - Hobart
+        - Australia - Currie
+        - Australia - Melbourne
+        - Australia - Sydney
+        - Australia - Broken Hill
+        - Australia - Brisbane
+        - Australia - Lindeman
+        - Australia - Adelaide
+        - Australia - Darwin
+        - Australia - Perth
+        - Australia - Eucla
+        - Aruba - Curacao
+        - Åland Islands - Helsinki
+        - Azerbaijan - Baku
+        - Bosnia & Herzegovina - Belgrade
+        - Barbados - Barbados
+        - Bangladesh - Dhaka
+        - Belgium - Brussels
+        - Burkina Faso - Abidjan
+        - Bulgaria - Sofia
+        - Bahrain - Qatar
+        - Burundi - Maputo
+        - Benin - Lagos
+        - St Barthelemy - Port of Spain
+        - Bermuda - Bermuda
+        - Brunei - Brunei
+        - Bolivia - La Paz
+        - Caribbean NL - Curacao
+        - Brazil - Noronha
+        - Brazil - Belem
+        - Brazil - Fortaleza
+        - Brazil - Recife
+        - Brazil - Araguaina
+        - Brazil - Maceio
+        - Brazil - Bahia
+        - Brazil - Sao Paulo
+        - Brazil - Campo Grande
+        - Brazil - Cuiaba
+        - Brazil - Santarem
+        - Brazil - Porto Velho
+        - Brazil - Boa Vista
+        - Brazil - Manaus
+        - Brazil - Eirunepe
+        - Brazil - Rio Branco
+        - Bahamas - Nassau
+        - Bhutan - Thimphu
+        - Botswana - Maputo
+        - Belarus - Minsk
+        - Belize - Belize
+        - Canada - St Johns
+        - Canada - Halifax
+        - Canada - Glace Bay
+        - Canada - Moncton
+        - Canada - Goose Bay
+        - Canada - Blanc-Sablon
+        - Canada - Toronto
+        - Canada - Nipigon
+        - Canada - Thunder Bay
+        - Canada - Iqaluit
+        - Canada - Pangnirtung
+        - Canada - Atikokan
+        - Canada - Winnipeg
+        - Canada - Rainy River
+        - Canada - Resolute
+        - Canada - Rankin Inlet
+        - Canada - Regina
+        - Canada - Swift Current
+        - Canada - Edmonton
+        - Canada - Cambridge Bay
+        - Canada - Yellowknife
+        - Canada - Inuvik
+        - Canada - Creston
+        - Canada - Dawson Creek
+        - Canada - Fort Nelson
+        - Canada - Vancouver
+        - Canada - Whitehorse
+        - Canada - Dawson
+        - Cocos (Keeling) Islands - Cocos
+        - Congo (Dem. Rep.) - Maputo
+        - Congo (Dem. Rep.) - Lagos
+        - Central African Rep. - Lagos
+        - Congo (Rep.) - Lagos
+        - Switzerland - Zurich
+        - Côte d'Ivoire - Abidjan
+        - Cook Islands - Rarotonga
+        - Chile - Santiago
+        - Chile - Easter
+        - Cameroon - Lagos
+        - China - Shanghai
+        - China - Urumqi
+        - Colombia - Bogota
+        - Costa Rica - Costa Rica
+        - Cuba - Havana
+        - Cape Verde - Cape Verde
+        - Curacao - Curacao
+        - Christmas Island - Christmas
+        - Cyprus - Nicosia
+        - Czech Republic - Prague
+        - Germany - Zurich
+        - Germany - Berlin
+        - Djibouti - Nairobi
+        - Denmark - Copenhagen
+        - Dominica - Port of Spain
+        - Dominican Republic - Santo Domingo
+        - Algeria - Algiers
+        - Ecuador - Guayaquil
+        - Ecuador - Galapagos
+        - Estonia - Tallinn
+        - Egypt - Cairo
+        - Western Sahara - El Aaiun
+        - Eritrea - Nairobi
+        - Spain - Madrid
+        - Spain - Ceuta
+        - Spain - Canary
+        - Ethiopia - Nairobi
+        - Finland - Helsinki
+        - Fiji - Fiji
+        - Falkland Islands - Stanley
+        - Micronesia - Chuuk
+        - Micronesia - Pohnpei
+        - Micronesia - Kosrae
+        - Faroe Islands - Faroe
+        - France - Paris
+        - Gabon - Lagos
+        - Britain (UK) - London
+        - Grenada - Port of Spain
+        - Georgia - Tbilisi
+        - French Guiana - Cayenne
+        - Guernsey - London
+        - Ghana - Accra
+        - Gibraltar - Gibraltar
+        - Greenland - Godthab
+        - Greenland - Danmarkshavn
+        - Greenland - Scoresbysund
+        - Greenland - Thule
+        - Gambia - Abidjan
+        - Guinea - Abidjan
+        - Guadeloupe - Port of Spain
+        - Equatorial Guinea - Lagos
+        - Greece - Athens
+        - South Georgia & the South Sandwich Islands - South Georgia
+        - Guatemala - Guatemala
+        - Guam - Guam
+        - Guinea-Bissau - Bissau
+        - Guyana - Guyana
+        - Hong Kong - Hong Kong
+        - Honduras - Tegucigalpa
+        - Croatia - Belgrade
+        - Haiti - Port-au-Prince
+        - Hungary - Budapest
+        - Indonesia - Jakarta
+        - Indonesia - Pontianak
+        - Indonesia - Makassar
+        - Indonesia - Jayapura
+        - Ireland - Dublin
+        - Israel - Jerusalem
+        - Isle of Man - London
+        - India - Kolkata
+        - British Indian Ocean Territory - Chagos
+        - Iraq - Baghdad
+        - Iran - Tehran
+        - Iceland - Reykjavik
+        - Italy - Rome
+        - Jersey - London
+        - Jamaica - Jamaica
+        - Jordan - Amman
+        - Japan - Tokyo
+        - Kenya - Nairobi
+        - Kyrgyzstan - Bishkek
+        - Cambodia - Bangkok
+        - Kiribati - Tarawa
+        - Kiribati - Enderbury
+        - Kiribati - Kiritimati
+        - Comoros - Nairobi
+        - St Kitts & Nevis - Port of Spain
+        - Korea (North) - Pyongyang
+        - Korea (South) - Seoul
+        - Kuwait - Riyadh
+        - Cayman Islands - Panama
+        - Kazakhstan - Almaty
+        - Kazakhstan - Qyzylorda
+        - Kazakhstan - Aqtobe
+        - Kazakhstan - Aqtau
+        - Kazakhstan - Oral
+        - Laos - Bangkok
+        - Lebanon - Beirut
+        - St Lucia - Port of Spain
+        - Liechtenstein - Zurich
+        - Sri Lanka - Colombo
+        - Liberia - Monrovia
+        - Lesotho - Johannesburg
+        - Lithuania - Vilnius
+        - Luxembourg - Luxembourg
+        - Latvia - Riga
+        - Libya - Tripoli
+        - Morocco - Casablanca
+        - Monaco - Monaco
+        - Moldova - Chisinau
+        - Montenegro - Belgrade
+        - St Martin (French) - Port of Spain
+        - Madagascar - Nairobi
+        - Marshall Islands - Majuro
+        - Marshall Islands - Kwajalein
+        - Macedonia - Belgrade
+        - Mali - Abidjan
+        - Myanmar (Burma) - Rangoon
+        - Mongolia - Ulaanbaatar
+        - Mongolia - Hovd
+        - Mongolia - Choibalsan
+        - Macau - Macau
+        - Northern Mariana Islands - Guam
+        - Martinique - Martinique
+        - Mauritania - Abidjan
+        - Montserrat - Port of Spain
+        - Malta - Malta
+        - Mauritius - Mauritius
+        - Maldives - Maldives
+        - Malawi - Maputo
+        - Mexico - Mexico City
+        - Mexico - Cancun
+        - Mexico - Merida
+        - Mexico - Monterrey
+        - Mexico - Matamoros
+        - Mexico - Mazatlan
+        - Mexico - Chihuahua
+        - Mexico - Ojinaga
+        - Mexico - Hermosillo
+        - Mexico - Tijuana
+        - Mexico - Bahia Banderas
+        - Malaysia - Kuala Lumpur
+        - Malaysia - Kuching
+        - Mozambique - Maputo
+        - Namibia - Windhoek
+        - New Caledonia - Noumea
+        - Niger - Lagos
+        - Norfolk Island - Norfolk
+        - Nigeria - Lagos
+        - Nicaragua - Managua
+        - Netherlands - Amsterdam
+        - Norway - Oslo
+        - Nepal - Kathmandu
+        - Nauru - Nauru
+        - Niue - Niue
+        - New Zealand - Auckland
+        - New Zealand - Chatham
+        - Oman - Dubai
+        - Panama - Panama
+        - Peru - Lima
+        - French Polynesia - Tahiti
+        - French Polynesia - Marquesas
+        - French Polynesia - Gambier
+        - Papua New Guinea - Port Moresby
+        - Papua New Guinea - Bougainville
+        - Philippines - Manila
+        - Pakistan - Karachi
+        - Poland - Warsaw
+        - St Pierre & Miquelon - Miquelon
+        - Pitcairn - Pitcairn
+        - Puerto Rico - Puerto Rico
+        - Palestine - Gaza
+        - Palestine - Hebron
+        - Portugal - Lisbon
+        - Portugal - Madeira
+        - Portugal - Azores
+        - Palau - Palau
+        - Paraguay - Asuncion
+        - Qatar - Qatar
+        - Réunion - Reunion
+        - Romania - Bucharest
+        - Serbia - Belgrade
+        - Russia - Kaliningrad
+        - Russia - Moscow
+        - Russia - Simferopol
+        - Russia - Volgograd
+        - Russia - Kirov
+        - Russia - Astrakhan
+        - Russia - Samara
+        - Russia - Ulyanovsk
+        - Russia - Yekaterinburg
+        - Russia - Omsk
+        - Russia - Novosibirsk
+        - Russia - Barnaul
+        - Russia - Tomsk
+        - Russia - Novokuznetsk
+        - Russia - Krasnoyarsk
+        - Russia - Irkutsk
+        - Russia - Chita
+        - Russia - Yakutsk
+        - Russia - Khandyga
+        - Russia - Vladivostok
+        - Russia - Ust-Nera
+        - Russia - Magadan
+        - Russia - Sakhalin
+        - Russia - Srednekolymsk
+        - Russia - Kamchatka
+        - Russia - Anadyr
+        - Rwanda - Maputo
+        - Saudi Arabia - Riyadh
+        - Solomon Islands - Guadalcanal
+        - Seychelles - Mahe
+        - Sudan - Khartoum
+        - Sweden - Stockholm
+        - Singapore - Singapore
+        - St Helena - Abidjan
+        - Slovenia - Belgrade
+        - Svalbard & Jan Mayen - Oslo
+        - Slovakia - Prague
+        - Sierra Leone - Abidjan
+        - San Marino - Rome
+        - Senegal - Abidjan
+        - Somalia - Nairobi
+        - Suriname - Paramaribo
+        - South Sudan - Khartoum
+        - Sao Tome & Principe - Abidjan
+        - El Salvador - El Salvador
+        - St Maarten (Dutch) - Curacao
+        - Syria - Damascus
+        - Swaziland - Johannesburg
+        - Turks & Caicos Is - Grand Turk
+        - Chad - Ndjamena
+        - French Southern & Antarctic Lands - Reunion
+        - French Southern & Antarctic Lands - Kerguelen
+        - Togo - Abidjan
+        - Thailand - Bangkok
+        - Tajikistan - Dushanbe
+        - Tokelau - Fakaofo
+        - East Timor - Dili
+        - Turkmenistan - Ashgabat
+        - Tunisia - Tunis
+        - Tonga - Tongatapu
+        - Turkey - Istanbul
+        - Trinidad & Tobago - Port of Spain
+        - Tuvalu - Funafuti
+        - Taiwan - Taipei
+        - Tanzania - Nairobi
+        - Ukraine - Kiev
+        - Ukraine - Uzhgorod
+        - Ukraine - Zaporozhye
+        - Uganda - Nairobi
+        - US minor outlying islands - Pago Pago
+        - US minor outlying islands - Wake
+        - US minor outlying islands - Honolulu
+        - United States - New York
+        - United States - Detroit
+        - United States - Louisville
+        - United States - Monticello
+        - United States - Indianapolis
+        - United States - Vincennes
+        - United States - Winamac
+        - United States - Marengo
+        - United States - Petersburg
+        - United States - Vevay
+        - United States - Chicago
+        - United States - Tell City
+        - United States - Knox
+        - United States - Menominee
+        - United States - Center
+        - United States - New Salem
+        - United States - Beulah
+        - United States - Denver
+        - United States - Boise
+        - United States - Phoenix
+        - United States - Los Angeles
+        - United States - Anchorage
+        - United States - Juneau
+        - United States - Sitka
+        - United States - Metlakatla
+        - United States - Yakutat
+        - United States - Nome
+        - United States - Adak
+        - United States - Honolulu
+        - Uruguay - Montevideo
+        - Uzbekistan - Samarkand
+        - Uzbekistan - Tashkent
+        - Vatican City - Rome
+        - St Vincent - Port of Spain
+        - Venezuela - Caracas
+        - Virgin Islands (UK) - Port of Spain
+        - Virgin Islands (US) - Port of Spain
+        - Vietnam - Bangkok
+        - Vietnam - Ho Chi Minh
+        - Vanuatu - Efate
+        - Wallis & Futuna - Wallis
+        - Samoa (western) - Apia
+        - Yemen - Riyadh
+        - Mayotte - Nairobi
+        - South Africa - Johannesburg
+        - Zambia - Maputo
+        - Zimbabwe - Maputo
+    kidsPrivacy:
+      type: boolean
+      description: 'Indicates whether your app is directed towards children, either exclusively or as part of a mixed audience.'
+    currency:
+      type: string
+      description: 'The preferable currency'
+      enum:
+        - USD
+        - NZD
+        - SGD
+        - IMP
+        - ANG
+        - MNT
+        - BIF
+        - BBD
+        - HUF
+        - ERN
+        - AZN
+        - AOA
+        - PYG
+        - MYR
+        - GYD
+        - VUV
+        - SLL
+        - FKP
+        - DJF
+        - GNF
+        - LVL
+        - MMK
+        - MRO
+        - RSD
+        - CLF
+        - XDR
+        - ZAR
+        - TND
+        - PHP
+        - KGS
+        - XPD
+        - RON
+        - RUB
+        - KMF
+        - SCR
+        - GIP
+        - TRY
+        - JEP
+        - UYU
+        - XCD
+        - FJD
+        - GHS
+        - MVR
+        - AWG
+        - UGX
+        - TOP
+        - CVE
+        - MKD
+        - COP
+        - CUC
+        - GTQ
+        - KZT
+        - MXN
+        - MGA
+        - AUD
+        - BDT
+        - ISK
+        - KRW
+        - DZD
+        - GGP
+        - OMR
+        - ZMW
+        - MOP
+        - CUP
+        - JPY
+        - SHP
+        - LSL
+        - ETB
+        - BWP
+        - MAD
+        - AED
+        - NGN
+        - BRL
+        - GEL
+        - IDR
+        - EUR
+        - GBP
+        - WST
+        - XAF
+        - SZL
+        - XOF
+        - SEK
+        - UZS
+        - KES
+        - KYD
+        - ILS
+        - KWD
+        - NPR
+        - BZD
+        - QAR
+        - UAH
+        - BTN
+        - HTG
+        - DKK
+        - VND
+        - SBD
+        - JMD
+        - IQD
+        - LBP
+        - XPT
+        - HRK
+        - HKD
+        - JOD
+        - PAB
+        - CDF
+        - VEF
+        - XAU
+        - BAM
+        - CNY
+        - SOS
+        - XPF
+        - GMD
+        - DOP
+        - XAG
+        - KPW
+        - BOB
+        - BHD
+        - BYN
+        - BYR
+        - LRD
+        - BGN
+        - AMD
+        - CZK
+        - CAD
+        - LAK
+        - EEK
+        - MTL
+        - PLN
+        - LKR
+        - BTC
+        - MWK
+        - LTL
+        - ZMK
+        - PGK
+        - YER
+        - PEN
+        - KHR
+        - RWF
+        - BSD
+        - AFN
+        - ZWL
+        - LYD
+        - TMT
+        - HNL
+        - TWD
+        - IRR
+        - MUR
+        - THB
+        - ALL
+        - TJS
+        - SDG
+        - BMD
+        - CRC
+        - NOK
+        - SRD
+        - MZN
+        - CLP
+        - STD
+        - SYP
+        - TZS
+        - EGP
+        - ARS
+        - MDL
+        - INR
+        - SAR
+        - PKR
+        - TTD
+        - NIO
+        - BND
+        - NAD
+        - SVC
+        - CHF
+    country:
+      type: string
+      description: 'The App Store country, Required Only for  iOS apps with "pending" status'
+      enum:
+        - Afghanistan
+        - Åland Islands
+        - Albania
+        - Algeria
+        - American Samoa
+        - AndorrA
+        - Angola
+        - Anguilla
+        - Antarctica
+        - Antigua and Barbuda
+        - Argentina
+        - Armenia
+        - Aruba
+        - Australia
+        - Austria
+        - Azerbaijan
+        - Bahamas
+        - Bahrain
+        - Bangladesh
+        - Barbados
+        - Belarus
+        - Belgium
+        - Belize
+        - Benin
+        - Bermuda
+        - Bhutan
+        - Bolivia
+        - Bosnia and Herzegovina
+        - Botswana
+        - Bouvet Island
+        - Brazil
+        - British Indian Ocean Territory
+        - Brunei Darussalam
+        - Bulgaria
+        - Burkina Faso
+        - Burundi
+        - Cambodia
+        - Cameroon
+        - Canada
+        - Cape Verde
+        - Cayman Islands
+        - Central African Republic
+        - Chad
+        - Chile
+        - China
+        - Christmas Island
+        - Cocos (Keeling) Islands
+        - Colombia
+        - Comoros
+        - Congo
+        - Congo, The Democratic Republic of the
+        - Cook Islands
+        - Costa Rica
+        - Cote D"Ivoire
+        - Croatia
+        - Cuba
+        - Cyprus
+        - Czech Republic
+        - Denmark
+        - Djibouti
+        - Dominica
+        - Dominican Republic
+        - Ecuador
+        - Egypt
+        - El Salvador
+        - Equatorial Guinea
+        - Eritrea
+        - Estonia
+        - Ethiopia
+        - Falkland Islands (Malvinas)
+        - Faroe Islands
+        - Fiji
+        - Finland
+        - France
+        - French Guiana
+        - French Polynesia
+        - French Southern Territories
+        - Gabon
+        - Gambia
+        - Georgia
+        - Germany
+        - Ghana
+        - Gibraltar
+        - Greece
+        - Greenland
+        - Grenada
+        - Guadeloupe
+        - Guam
+        - Guatemala
+        - Guernsey
+        - Guinea
+        - Guinea-Bissau
+        - Guyana
+        - Haiti
+        - Heard Island and Mcdonald Islands
+        - Holy See (Vatican City State)
+        - Honduras
+        - Hong Kong
+        - Hungary
+        - Iceland
+        - India
+        - Indonesia
+        - Iran, Islamic Republic Of
+        - Iraq
+        - Ireland
+        - Isle of Man
+        - Israel
+        - Italy
+        - Jamaica
+        - Japan
+        - Jersey
+        - Jordan
+        - Kazakhstan
+        - Kenya
+        - Kiribati
+        - Korea, Democratic People"S Republic of
+        - Korea, Republic of
+        - Kuwait
+        - Kyrgyzstan
+        - Lao People"S Democratic Republic
+        - Latvia
+        - Lebanon
+        - Lesotho
+        - Liberia
+        - Libyan Arab Jamahiriya
+        - Liechtenstein
+        - Lithuania
+        - Luxembourg
+        - Macao
+        - Macedonia, The Former Yugoslav Republic of
+        - Madagascar
+        - Malawi
+        - Malaysia
+        - Maldives
+        - Mali
+        - Malta
+        - Marshall Islands
+        - Martinique
+        - Mauritania
+        - Mauritius
+        - Mayotte
+        - Mexico
+        - Micronesia, Federated States of
+        - Moldova, Republic of
+        - Monaco
+        - Mongolia
+        - Montserrat
+        - Morocco
+        - Mozambique
+        - Myanmar
+        - Namibia
+        - Nauru
+        - Nepal
+        - Netherlands
+        - Netherlands Antilles
+        - New Caledonia
+        - New Zealand
+        - Nicaragua
+        - Niger
+        - Nigeria
+        - Niue
+        - Norfolk Island
+        - Northern Mariana Islands
+        - Norway
+        - Oman
+        - Pakistan
+        - Palau
+        - Palestinian Territory, Occupied
+        - Panama
+        - Papua New Guinea
+        - Paraguay
+        - Peru
+        - Philippines
+        - Pitcairn
+        - Poland
+        - Portugal
+        - Puerto Rico
+        - Qatar
+        - Reunion
+        - Romania
+        - Russian Federation
+        - RWANDA
+        - Saint Helena
+        - Saint Kitts and Nevis
+        - Saint Lucia
+        - Saint Pierre and Miquelon
+        - Saint Vincent and the Grenadines
+        - Samoa
+        - San Marino
+        - Sao Tome and Principe
+        - Saudi Arabia
+        - Senegal
+        - Serbia
+        - Montenegro
+        - Seychelles
+        - Sierra Leone
+        - Singapore
+        - Slovakia
+        - Slovenia
+        - Solomon Islands
+        - Somalia
+        - South Africa
+        - South Georgia and the South Sandwich Islands
+        - Spain
+        - Sri Lanka
+        - Sudan
+        - Suriname
+        - Svalbard and Jan Mayen
+        - Swaziland
+        - Sweden
+        - Switzerland
+        - Syrian Arab Republic
+        - Taiwan, Province of China
+        - Tajikistan
+        - Tanzania, United Republic of
+        - Thailand
+        - Timor-Leste
+        - Togo
+        - Tokelau
+        - Tonga
+        - Trinidad and Tobago
+        - Tunisia
+        - Turkey
+        - Turkmenistan
+        - Turks and Caicos Islands
+        - Tuvalu
+        - Uganda
+        - Ukraine
+        - United Arab Emirates
+        - United Kingdom
+        - United States
+        - United States Minor Outlying Islands
+        - Uruguay
+        - Uzbekistan
+        - Vanuatu
+        - Venezuela
+        - Viet Nam
+        - Virgin Islands, British
+        - Virgin Islands, U.S.
+        - Wallis and Futuna
+        - Western Sahara
+        - Yemen
+        - Zambia
+        - Zimbabwe
