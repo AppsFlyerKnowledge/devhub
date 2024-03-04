@@ -20,4 +20,4 @@ jobs:
       - name: Run `openapi` command 🚀
         uses: readmeio/rdme@v8
         with:
-          rdme: openapi ./management/app_management_v2.yaml --key=${{ secrets.README_API_KEY }} --id=65d1df96a2f25300104f9fdf
+          rdme: openapi ./docs/apis/management/app_management_v2.yaml --key=${{ secrets.README_API_KEY }} --id=65d1df96a2f25300104f9fdf
