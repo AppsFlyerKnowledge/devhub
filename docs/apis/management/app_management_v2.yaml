@@ -4,7 +4,7 @@ info:
   description: API for managing an app on your AppsFlyer account
   version: 2.0.0
 servers:
-  - url: https://hq1.appsflyer.com/app/api/app/v2.0
+  - url: https://hq1.appsflyer.com/api/app/v2.0
 security:
   - bearerAuth: []
 
@@ -182,11 +182,11 @@ paths:
               examples:
                 API token verification failed:
                   value: 
-                      message: We were unable to verify your api access token. Please ensure the provided token is correct and try again. If the issue persists, contact your CSM.
+                      message: The API access token that was entered either doesn’t exist in the account or was misspelled. Please try again with the correct token. If the issue persists, contact your CSM or hello@appsflyer.com.
                       error: 
                         status: 422
                         code: API_TOKEN_VERIFICATION_FAILED
-                        message: We were unable to verify your api access token. Please ensure the provided token is correct and try again. If the issue persists, contact your CSM.
+                        message: The API access token that was entered either doesn’t exist in the account or was misspelled. Please try again with the correct token. If the issue persists, contact your CSM or hello@appsflyer.com.
                         resource: app
                 App already in account:
                   value: 

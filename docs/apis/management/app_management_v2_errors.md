@@ -49,6 +49,6 @@ order: 1
 
 | Error | Description |
 | --- | --- |
-| Unauthentication: API access token | The API access token that was entered either doesn’t exist in the account or was misspelled. Please try again with the correct token. If the issue persists, contact your CSM or hello@appsflyer.com. |
+| API token verification failed | The API access token that was entered either doesn’t exist in the account or was misspelled. Please try again with the correct token. If the issue persists, contact your CSM or hello@appsflyer.com. |
 | Authentication failure | The API access token that was entered either doesn’t exist in the account or was misspelled. Please try again with the correct token. If the issue persists, contact your CSM or hello@appsflyer.com. |
 | Permissions | There was a problem with permissions for this account that prevented the request from being completed. |
