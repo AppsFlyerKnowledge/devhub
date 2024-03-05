@@ -4,7 +4,7 @@ info:
   description: API for managing an app on your AppsFlyer account
   version: 2.0.0
 servers:
-  - url: https://hq1.appsflyer.com/app/api/app/v2.0
+  - url: https://hq1.appsflyer.com/api/app/v2.0
 security:
   - bearerAuth: []
 
