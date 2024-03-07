@@ -146,7 +146,7 @@ To test whether your SDK sends DMA consent data with each event, perform the fol
 <~+~   SEND Start:   https://pgnjrq-launches.appsflyersdk.com/api/v6.13/iosevent?app_id=112223344&buildnumber=6.13.0.147
 <~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~+~~+~>
 
-{ ... "consent_data":{"tcf":{"cmp_sdk_id":-1,"policy_version":-1,"tcstring":"","gdpr_applies":-1,"cmp_sdk_version":-1}} ... }
+{ ... "consent_data":{"tcf":{"cmp_sdk_version":1503,"tcstring":"XXXXXXX","cmp_sdk_id":31,"gdpr_applies":1,"policy_version":4}} ... }
 ```
 
 ### Logs snippet example for manual flow
