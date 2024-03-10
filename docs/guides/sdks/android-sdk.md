@@ -51,7 +51,7 @@ Core capabilities
 SDK compatibility
 -----------------
 
-- Starting Android V4.0
+- Starting Android V4.4
 - Non-mobile Android-based platforms, such as Smart TVs (including Amazon Fire TV). [See CTV overview](https://support.appsflyer.com/hc/en-us/articles/4404083608849)
 - [Out-of-store-markets](https://support.appsflyer.com/hc/en-us/articles/207447023)  for Android apps, such as Amazon and Baidu.
 <style>
