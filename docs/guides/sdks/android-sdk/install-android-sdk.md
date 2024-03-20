@@ -118,6 +118,7 @@ If you are using ProGuard and you encounter a warning regarding our `AFKeystoreW
 
 ```groovy
 -keep class com.appsflyer.** { *; }
+-keep class kotlin.jvm.internal.** { *; }
 ```
 
 ## Adding store referrer libraries
