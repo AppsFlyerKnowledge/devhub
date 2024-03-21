@@ -15,7 +15,7 @@ Examples for such user events:
 3. Consenting to usage terms
 
 ## Implementation
-In order to sync easily and safely between the user event and the deferred deep linking flow, it is recommended to [initiate](https://dev.appsflyer.com/hc/docs/integrate-android-sdk#initializing-the-android-sdk) and [start](https://dev.appsflyer.com/hc/docs/integrate-android-sdk#deferring-sdk-start) the SDK in the `activity context` where the user event is performed. For example, the view which implements the login process. This is different from the normal flow, where the SDK and initiated and started in the `application context`. 
+In order to sync easily and safely between the user event and the deferred deep linking flow, it is recommended to [initiate](https://dev.appsflyer.com/hc/docs/integrate-android-sdk#initializing-the-android-sdk) and [start](https://dev.appsflyer.com/hc/docs/integrate-android-sdk#deferring-sdk-start) the SDK in the `activity context` where the user event is performed. For example, the view which implements the login process. This is different from the normal flow, where the SDK is initiated and started in the `application context`. 
 The callbacks which are used in the [Extended Deferred Deep Linking](dl_android_ocds_ddl) flow should also be called in the `activity context`.
 It is the developer's responsibility to save the deferred deep linking and direct deep linking data, route the user to the required destination only after the event is performed.
 
