@@ -142,6 +142,48 @@ dependencies {
 -keep public class com.android.installreferrer.** { *; }
 ```
 
+### Meta Install Referrer
+
+Meta install referrer allows AppsFlyer to receive ad campaign metadata from a device’s local storage.
+
+#### Meta Install Referrer basic flow
+
+The basic flow of the Meta install referrer mechanism is as follows:
+
+1. Once the SDK initializes, it uses the app's Facebook App ID to make a request to the Meta Content Provider API, retrieving the stored metadata from the Facebook app.
+2. AppsFlyer SDK sends the install event, along with the attribution data, to the AppsFlyer servers.
+
+#### **Prerequisites**
+
+To support the Meta install referrer, the following is required:
+
+- **SDK**: Integrate with Android SDK version 6.12.6 or higher.
+- **Facebook App Version**: Users must have version 428.x.x or above installed on their device.
+- **Instagram App Version**: Users must have version 296.x.x or above installed on their device.
+
+#### Configure Meta Install Referrer Support
+
+To enable Meta install referrer support make the Facebook App ID available to the SDK by adding it to the `AndroidManifest.xml`.  This can be done either when integrating the Facebook SDK with the app or when integrating the AppsFlyer SDK with the app.
+
+##### With Facebook SDK integrated
+
+Refer to [Facebook’s official guide](https://developers.facebook.com/docs/android/getting-started#client-token) to learn how to add the Facebook App ID to `AndroidManifest.xml`. The SDK will read the Facebook App ID from the `meta-data` tag. 
+
+##### Without Facebook SDK integration
+
+Include the following tag in `AndroidManifest.xml` 
+
+```xml
+<meta-data android:name="com.appsflyer.FacebookApplicationId" android:value="@string/facebook_application_id" />
+```
+
+Include in your `strings.xml` file:
+
+```xml
+<string name="facebook_application_id" translatable="false"><YOUR_FACEBOOK_APP_ID></string>
+```
+
+
 ### Huawei Install Referrer
 
 Huawei Referrer is supported in SDK v6.14.0 and above.
