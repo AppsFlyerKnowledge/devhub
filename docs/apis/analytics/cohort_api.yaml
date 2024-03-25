@@ -217,7 +217,7 @@ components:
               expose:
                 type: string 
             example: {
-              error: "Invalid value: daya for key: granularity. Expected one of: hour, week, month, day",
+              error: "Invalid value: days for key: granularity. Expected one of: hour, week, month, day",
               expose: false
             }
     RateLimitError:
