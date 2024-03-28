@@ -11,6 +11,19 @@ order: 1
 **New! Starting with v6.12.3 we are adding developer release notes to SDK releases! For previous versions, see [here](https://support.appsflyer.com/hc/en-us/articles/115001224823-AppsFlyer-iOS-SDK-release-notes) **
 
 
+## Version 6.13.2
+
+#### Bug Fixes
+
+- Fixed an issue that prevented the release of apps using SPM with XCode 15.3.
+The issue was related to building the release for archive and validation with AppsStore Connect.
+More details about the issue can be found [here](https://github.com/AppsFlyerSDK/AppsFlyerFramework/issues/263).
+
+The fix was published in a dedicated repository - 
+https://github.com/AppsFlyerSDK/AppsFlyerFramework-Static
+Please make sure to use that repository if you are integrating the SDK with SPM using XCode 15.3.
+
+
 ## Version 6.13.1
 
 #### Bug Fixes
