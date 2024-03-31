@@ -253,7 +253,7 @@ AppsFlyerLib.shared().customerUserID = "my user id"
 
 > 📘 Note
 > 
-> Since the Customer User ID must be set with every app launch, ensure it is set within the `applicationDidBecomeActive` lifecycle method.
+> The Customer User ID must be set with every app launch.
 
 ### Associate the CUID with the install event
 
