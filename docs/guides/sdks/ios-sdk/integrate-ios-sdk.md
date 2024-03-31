@@ -251,7 +251,9 @@ To set the CUID:
 AppsFlyerLib.shared().customerUserID = "my user id"
 ```
 
-
+> 📘 Note
+> 
+> The Customer User ID must be set with every app launch.
 
 ### Associate the CUID with the install event
 
