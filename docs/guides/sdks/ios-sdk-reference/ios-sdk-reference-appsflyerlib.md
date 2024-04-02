@@ -237,6 +237,7 @@ You can disable this behavior by setting the following property to `YES`.
 ```
 
 **Description**
+Disables AdServices framework-based attribution for Apple Search Ads.
 
 | Type   | Name                         |
 | :----- | :--------------------------- |
@@ -251,7 +252,7 @@ You can disable this behavior by setting the following property to `YES`.
 ```
 
 **Description**  
-Opt-out of Apple Search Ads attributions.
+ Disables the collection of data from the iAd Framework. This API has no effect in v6.12.3 and above, where the iAd Framework is no longer in use.
 
 | Type   | Name                |
 | :----- | :------------------ |
