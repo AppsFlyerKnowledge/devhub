@@ -11,6 +11,18 @@ order: 1
 **New! Starting with v6.12.3 we are adding developer release notes to SDK releases! For previous versions, see [here](https://support.appsflyer.com/hc/en-us/articles/115001224823-AppsFlyer-iOS-SDK-release-notes) **
 
 
+## Version 6.14.0
+
+#### New Features
+
+- Added AppsFlyer SDK's Privacy Manifest. More information about it can be found [here](https://support.appsflyer.com/hc/en-us/articles/21677433322641-Privacy-Manifest).
+
+- Added XCFramework Signature. The SDK's XCFramework is signed with Apple's certificate authority.
+The signature can be validated using XCode 15.
+Upon successful verification, the Signature in XCode's File Inspector should look like this: ![SDK Signature](https://files.readme.io/3852aae-af_sdk_signature.png).
+More information about SDK signing can be found [here](https://developer.apple.com/documentation/xcode/verifying-the-origin-of-your-xcframeworks).
+
+
 ## Version 6.13.2
 
 #### Bug Fixes
