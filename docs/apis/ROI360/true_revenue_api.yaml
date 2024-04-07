@@ -193,12 +193,14 @@ paths:
           enum: [csv, json]
           default: json
         description: "The output format of the tax catalog data. Defaults to 'json'."
+        example: json
       - in: query
         name: tax_name
         required: false
         schema:
           type: string
         description: "Filter catalog by the name appearing in the customer invoice that describes the specific type of tax, such as sales, VAT, GST."
+        example: Sales
       - in: query
         name: tax_rate
         required: false
@@ -208,6 +210,7 @@ paths:
           minimum: 0
           maximum: 100
         description: "Filter catalog by the percentage rate of the tax, specified up to 4 decimal places."
+        example: 7.25
       - in: query
         name: country
         required: false
@@ -466,12 +469,14 @@ paths:
         schema:
           type: string
         description: "Filter catalog by the ISO 3166-2 subdivision code within the specified country."
+        example: US-CA
       - in: query
         name: postal_code
         required: false
         schema:
           type: string
         description: "Filter catalog by postal code to identify area-specific tax rates."
+        example: "L4J8E3"
       - in: query
         name: tax_exclusive
         required: false
