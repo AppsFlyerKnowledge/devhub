@@ -28,7 +28,7 @@ More information about SDK signing can be found [here](https://developer.apple.c
 #### Bug Fixes
 
 - Fixed an issue that prevented the release of apps using SPM with XCode 15.3.
-The issue was related to building the release for archive and validation with AppsStore Connect.
+The issue was related to building the release for archive and validation with App Store Connect.
 More details about the issue can be found [here](https://github.com/AppsFlyerSDK/AppsFlyerFramework/issues/263).
 
 The fix was published in a dedicated repository - 
