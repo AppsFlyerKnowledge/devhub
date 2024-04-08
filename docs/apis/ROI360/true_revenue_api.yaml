@@ -209,6 +209,7 @@ paths:
           format: double
           minimum: 0
           maximum: 100
+          pattern: '^\d+(.\d{1,4})?$'
         description: "Filter catalog by the percentage rate of the tax, specified up to 4 decimal places."
         example: 7.25
       - in: query
