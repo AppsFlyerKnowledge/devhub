@@ -922,7 +922,7 @@ components:
       required: true
       schema: 
         type: string
-        format: date
+        pattern: ^\d{4}-\d{2}-\d{2}( \d{2}:\d{2}(:\d{2})?)?$
     ToDate:
       in: query
       name: to
@@ -943,7 +943,7 @@ components:
       required: true
       schema: 
         type: string
-        format: date
+        pattern: ^\d{4}-\d{2}-\d{2}( \d{2}:\d{2}(:\d{2})?)?$
     MediaSource:
       description: | 
         Use to filter by a specific media source
@@ -1043,7 +1043,7 @@ components:
             "2022-04-22 21:45:23"
       schema:
         type: string
-        format: date
+        pattern: ^\d{4}-\d{2}-\d{2}( \d{2}:\d{2}(:\d{2})?)?$
     ToInstallTime:
       in: query
       name: to_install_time
@@ -1063,7 +1063,7 @@ components:
             "2022-04-22 21:45:23"
       schema:
         type: string
-        format: date
+        pattern: ^\d{4}-\d{2}-\d{2}( \d{2}:\d{2}(:\d{2})?)?$
     Agency:
       in: query
       name: agency
