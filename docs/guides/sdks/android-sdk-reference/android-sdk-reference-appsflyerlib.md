@@ -228,6 +228,27 @@ Enable the AppsFlyer SDK to collect the last known location. Requires `ACCESS_CO
 **Returns**  
 `void`
 
+### enableTCFDataCollection
+
+**Method signature**
+
+```java
+AppsFlyerLib enableTCFDataCollection (boolean flag)
+```
+
+**Description**
+
+Enables the collection of Transparency and Consent Framework (TCF) data from `SharedPreferences`. The data was placed in `SharedPreferences` by the device TCF v2.2 compatible Consent Management Platform (CMP).
+
+**Input arguments**
+
+| Type | Name | Description |
+| --- | --- | --- |
+| boolean | flag | A boolean value to enable (`true`) or disable (`false`) the collection of TCF data. The SDK collects TCF data when the flag is set to `true`. |
+
+**Returns**
+`void`
+
 ### getAppsFlyerUID
 
 **Method signature**

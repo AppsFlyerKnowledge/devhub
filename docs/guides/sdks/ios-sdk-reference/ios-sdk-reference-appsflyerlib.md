@@ -641,6 +641,28 @@ Enable the collection of Facebook Deferred AppLinks.
 **Returns**  
 `void`.
 
+### enableTCFDataCollection
+
+**Method signature**
+```objc
+- (void)enableTCFDataCollection:(BOOL)flag;
+```
+```swift
+func enableTCFDataCollection(_ flag: Bool)
+```
+
+**Description** 
+Enables the collection of Transparency and Consent Framework (TCF) data from `NSUserDefaults`. The data was placed in `UserDefaults` by the device's TCF v2.2 compatible Consent Management Platform (CMP).
+
+**Input arguments**
+
+| Type                                 | Name  | Description                                                                   |
+|--------------------------------------|-------|-------------------------------------------------------------------------------|
+| `Bool` | flag  | A Boolean value to enable or disable the collection of TCF data. |
+
+**Returns**  
+`void`.
+
 ### getAppsFlyerUID
 
 **Method signature**
