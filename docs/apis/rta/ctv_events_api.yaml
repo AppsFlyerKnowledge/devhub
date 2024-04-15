@@ -92,6 +92,8 @@ paths:
                   pattern: ^[A-Za-z0-9.\-]+$
                   description: The release or version number of the app
                   example: 1.0.5
+                sharing_filter:
+                  $ref: '#/components/schemas/SharingFilter'
         required: true
       responses:
         202:
@@ -191,6 +193,8 @@ paths:
                   pattern: ^[0-9.\-]+$
                   description: The release or version number of the app
                   example: 1.0.5
+                sharing_filter:
+                  $ref: '#/components/schemas/SharingFilter'
         required: true
       responses:
         202:
@@ -488,6 +492,8 @@ paths:
                   format: json
                   maxLength: 2048
                   example: '{"test_param": "test_data", "af_price":6.66, "player_level": 55, "af_duration_seconds": 100}'
+                sharing_filter:
+                  $ref: '#/components/schemas/SharingFilter'
 
         required: true
       responses:
@@ -587,5 +593,38 @@ components:
             value:
               type: string
               pattern: ^[A-Za-z0-9\-_]+$
-x-id:
-- af-wh-ott
+    SharingFilter:
+      description: |
+        The sharing filter blocks the sharing of events via postbacks/API with integrated partners and other third-party integrations.
+        Use the filter to fulfill regulatory requirements like GDPR and CCPA, to comply with user opt-out mechanisms, and for other business logic reasons. 
+
+        The `sharing_filter` has the following options:
+
+        - `all`: All partners are blocked. Don't share the event with anyone. Example: "sharing_filter": "all"
+        - List of partner ids in an array. 
+
+        **Note:** 
+          To find out the required partner IDs:
+          1. Run the [Get active integrations API](https://dev.appsflyer.com/hc/reference/get_v1-integrations) for a list of all active integrations
+          2. Use the `media_source_name` values from the [API response](https://dev.appsflyer.com/hc/reference/get_v1-integrations) as input values to the method `partners` array. 
+      type: array
+      items:
+        type: string
+        minLength: 1
+      minItems: 1
+      oneOf:
+      - type: array
+        items:
+          type: string
+          minLength: 1
+        minItems: 1
+        title: list partners blocked
+      - type: array
+        items:
+          type: string
+          enum:
+            - all
+        minItems: 1
+        maxItems: 1
+        title: all partners blocked
+
