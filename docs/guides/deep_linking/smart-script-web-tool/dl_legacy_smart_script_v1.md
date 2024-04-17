@@ -314,14 +314,14 @@ https://appsflyersdk.github.io/appsflyer-onelink-smart-script/v1/examples/set_af
 {
   "codes": [
     {
-      "code": "onelinkGenerator.setCustomParameter(\"partner_name\", \"af_prt\", \"defaultPartner\");\nonelinkGenerator.setCustomParameter(\"incoming_site_id\", \"af_siteid\", \"defaultSiteID\");",
+      "code": "onelinkGenerator.setCustomParameter(\"incoming_site_id\", \"af_siteid\", \"defaultSiteID\");",
       "language": "javascript"
     }
   ]
 }
 [/block]
 **Outgoing URL**: 
-https://engmntqa.onelink.me/LtRd/?pid=email&c=gogo&af_js_web=true&af_prt=bigagency&af_siteid=defaultSiteID
+https://engmntqa.onelink.me/LtRd/?pid=email&c=gogo&af_js_web=true&af_siteid=defaultSiteID
 
 ### Skip clicks from Twitter or Facebook
 
