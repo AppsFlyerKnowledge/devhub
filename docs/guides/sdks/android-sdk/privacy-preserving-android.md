@@ -41,7 +41,6 @@ appsflyer.start(getApplicationContext(), null, new AppsFlyerRequestListener() {
 ## Prevent sharing data with third parties
 
 If you want to prevent sharing install and in-app event information with third parties such as SRNs and ad networks, use the `setSharingFilterForPartners` method before calling `start`. Partners that are excluded with this method will not receive data through postbacks, APIs, raw data reports, or any other means.  
-mention attribution impact
 
 **Note:** You can call [`setSharingFilterForPartners`](https://dev.appsflyer.com/hc/docs/android-sdk-reference-appsflyerlib#setsharingfilterforpartners) again if the user changes the app sharing settings (adding or removing partners) later in the session.  
 For a code example please refer to [`setSharingFilterForPartners`](https://dev.appsflyer.com/hc/docs/android-sdk-reference-appsflyerlib#setsharingfilterforpartners).
