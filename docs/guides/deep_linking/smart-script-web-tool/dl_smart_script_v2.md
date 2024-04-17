@@ -277,7 +277,7 @@ See [example](https://appsflyersdk.github.io/appsflyer-onelink-smart-script/exam
 
 ### Set additional custom parameters
 
-See [example](https://appsflyersdk.github.io/appsflyer-onelink-smart-script/examples/onelink_custom_parameters.html?inmedia=email&dp_dest=apples&pageid=2g4f&productid=shirt12&partner=bigagency) of the conversion of an incoming URL to an outgoing OneLink URL with additional custom parameters (including the af_prt parameter for agencies). 
+See [example](https://appsflyersdk.github.io/appsflyer-onelink-smart-script/examples/onelink_custom_parameters.html?inmedia=email&dp_dest=apples&pageid=2g4f&productid=shirt12&partner=bigagency) of the conversion of an incoming URL to an outgoing OneLink URL with additional custom parameters.
 
 ### Referrer skip list
 
