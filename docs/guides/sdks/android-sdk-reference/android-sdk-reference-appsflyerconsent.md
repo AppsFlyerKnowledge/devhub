@@ -22,14 +22,14 @@ public AppsFlyerConsent forGDPRUser(Boolean hasConsentForDataUsage, Boolean hasC
 ```
 
 **Description**  
-Acquires user consent for data usage and ad personalization. Call the function when GDPR is applicable to the user.  
+Acquires user consent for data usage and ad personalization. Call the function when DMA is applicable to the user.  
 
 **Input arguments**
 
 | Type    | Name                            | Description                                                                   |
 | ------- | ------------------------------- | ----------------------------------------------------------------------------- |
-| Boolean | hasConsentForDataUsage          | Indicates whether the user consented to share. their data usage               |
-| Boolean | hasConsentForAdsPersonalization | Indicates whether the user consented to share their data for ad optimization. |
+| Boolean | hasConsentForDataUsage          | Indicates whether the user give consent to send their user data to Google. |
+| Boolean | hasConsentForAdsPersonalization | Indicates whether the user consented to use their data for personalized advertising. |
 
 **Returns**
 
@@ -52,7 +52,7 @@ public AppsFlyerConsent forNonGDPRUser()
 ```
 
 **Description**  
-Return an empty AppsFlyerConsent object without any consent data. Call the method when GDPR is not applicable to the user. 
+Return an empty AppsFlyerConsent object without any consent data. Call the method when DMA is not applicable to the user. 
 
 **Returns**
 
