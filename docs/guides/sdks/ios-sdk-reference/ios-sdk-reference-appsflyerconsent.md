@@ -19,13 +19,13 @@ updatedAt: "2024-02-08T19:00:15.000Z"
 
 | Type    | Name                                  | Description                                                                   |
 | ------- | ------------------------------------- | ----------------------------------------------------------------------------- |
-| Boolean | forGDPRUserWithHasConsentForDataUsage | Indicates whether the user consented to share for advertising purposes.       |
-| Boolean | hasConsentForAdsPersonalization       | Indicates whether the user consented to share their data for ad optimization. |
+| Boolean | forGDPRUserWithHasConsentForDataUsage | Indicates whether the user give consent to send their user data to Google. |
+| Boolean | hasConsentForAdsPersonalization       | Indicates whether the user consented to use their data for personalized advertising. |
 
 **Usage examples**
 
 ```swift
-// If the user is subject to GDPR - collect the consent data
+// If the user is subject to DMA - collect the consent data
 // or retrieve it from the storage
 
 // Set the consent data to the SDK:
@@ -42,7 +42,7 @@ None
 **Usage examples**
 
 ```swift
-// If the user is not subject to GDPR:
+// If the user is not subject to DMA:
 var nonGdprUser = AppsFlyerConsent(nonGDPRUser: ()) 
 AppsFlyerLib.shared().setConsentData(nonGdprUser)
 ```
