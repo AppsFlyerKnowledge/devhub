@@ -15,7 +15,10 @@ order: 8
 
 Ad revenue is reported to AppsFlyer by either aggregate granularity (via API) or impression-level granularity (via SDK). Impression-level data via SDK has better data freshness and earlier availability in AppsFlyer.
 
-This document details how to send impression-level ad revenue provided by partners in the app to AppsFlyer. 
+This document details how to send impression-level ad revenue provided by partners in the app to AppsFlyer.
+> 📘 **Note**
+>
+> The marketer also needs to configure the integration for each mediation partner in AppsFlyer, either impression-level (via SDK) or impression-level (via SDK) with device-level (via S2S API). [Learn more](https://support.appsflyer.com/hc/en-us/articles/217490046#connect-to-ad-revenue-integrated-partners)
 
 ### Reporting ad revenue using the SDK
 
