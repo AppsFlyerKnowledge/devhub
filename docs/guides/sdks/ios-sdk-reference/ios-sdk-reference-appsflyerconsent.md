@@ -9,7 +9,7 @@ updatedAt: "2024-02-08T19:00:15.000Z"
 ---
 ## Overview
 
-`AppsFlyerConsent` encapsulates the properties for acquiring consent data required by the Digital Marketing Act (DMA) under the GDPR regulation.
+`AppsFlyerConsent` encapsulates the properties for acquiring consent data required by the Digital Marketing Act (DMA).
 
 ## Initializers
 
