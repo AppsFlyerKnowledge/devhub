@@ -183,6 +183,30 @@ Include in your `strings.xml` file:
 <string name="facebook_application_id" translatable="false"><YOUR_FACEBOOK_APP_ID></string>
 ```
 
+### Huawei Install Referrer
+
+Huawei Referrer is supported in SDK v6.14.0 and above.
+Due to changes in the Huawei AppGallery store, previous versions of the AppsFlyer SDK are not able to fetch the referrer from the store.
+
+Add the following repository to your Project's `build.gradle`:
+
+```groovy Groovy 
+repositories {
+    //...
+    maven { url 'https://developer.huawei.com/repo/' }
+}
+```
+
+Add the following dependency in the app's `build.gradle`:
+
+```groovy Groovy 
+dependencies {
+    // ...
+    implementation 'com.huawei.hms:componentverifysdk:13.3.1.301'
+}
+
+```
+
 
 ### Xiaomi GetApps store referrer
 <span class="annotation-added">V6.9.0</span>
@@ -204,7 +228,7 @@ dependencies {
 {
   "type": "info",
   "title": "Note",
-  "body": "Huawei and Samsung store referrers are supported out-of-the-box starting SDK `V6.1.1` and do not require any additional integration."
+  "body": "Samsung store referrer is supported out-of-the-box starting SDK `V6.1.1` and does not require any additional integration."
 }
 [/block]
 Known issues
