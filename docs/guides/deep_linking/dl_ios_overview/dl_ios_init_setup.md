@@ -37,7 +37,7 @@ The marketer will use it in the AppsFlyer dashboard to register the app.
 
 **To support associated domains in your app**:
 
-Follow [the iOS instructions for associated domains](https://developer.apple.com/documentation/safariservices/supporting_associated_domains_in_your_app). 
+Follow the iOS instructions [to add the associated domains entitlement to your app](https://developer.apple.com/documentation/xcode/supporting-associated-domains#Add-the-associated-domains-entitlement-to-your-app).
 
 ### Configuring mobile apps to register approved domains
 Configuring mobile apps to register approved domains takes place inside Xcode. It requires the OneLink subdomain that your marketer generates.
