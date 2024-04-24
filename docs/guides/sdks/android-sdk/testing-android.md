@@ -83,7 +83,7 @@ Go to [the conversion data test API](https://dev.appsflyer.com/hc/reference/gcd-
 
 1. `app-id`: Your app ID
 2. `device_id`: paste the value of `uid` from step 1.
-3. `devkey` - Application's devkey. Learn [here](https://support.appsflyer.com/hc/en-us/articles/207032126#integration-2-integrating-the-sdk) how to get it.
+3. `devkey` - Application's devkey. Learn [here](https://support.appsflyer.com/hc/en-us/articles/207032066-Basic-SDK-integration-guide#retrieve-the-dev-key) how to get it.
 
 Then, click **Try it!** to execute the test.
 
