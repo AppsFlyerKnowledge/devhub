@@ -11,7 +11,7 @@ paths:
   /users:
     post:
       summary: Create users in bulk
-      tags: 
+      tags:
         - Managing users in bulk
       operationId: create-bulk-users-post
       requestBody:
@@ -116,8 +116,118 @@ paths:
                   message:
                     type: string
                     description: Error message for an unprocessable entity
-
-components: 
+    get:
+      summary: Get users
+      description: Retrieve users data for the specified account.
+      security:
+        - bearerAuth: []
+      tags:
+        - Users
+      responses:
+        "200":
+          description: Successful response containing the list of users.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  users:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        username:
+                          type: string
+                          description: The username of the user.
+                        email:
+                          type: string
+                          description: The email of the user.
+                        role:
+                          type: string
+                          description: The role of the user.
+                        apps:
+                          type: string
+                          description: The apps associated with the user.
+                        media_sources:
+                          type: string
+                          description: The media sources associated with the user.
+                        geos:
+                          type: string
+                          description: The geos associated with the user.
+                        last_login:
+                          type: string
+                          description: The last login timestamp of the user.
+        "400":
+          description: Bad request - Invalid input or exceeded limit
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: Error message for a bad request
+        "401":
+          description: Unauthorized - Missing or insufficient permissions
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: Error message for unauthorized access
+    delete:
+      summary: Delete users
+      description: Delete multiple users for the specified account.
+      security:
+        - bearerAuth: []
+      tags:
+        - Users
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: string
+                format: email
+                description: Email address of the user to delete
+      responses:
+        "204":
+          description: Users deleted successfully
+        "400":
+          description: Bad request - Invalid input format
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: Error message for a bad request
+        "401":
+          description: Unauthorized - Missing or insufficient permissions
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: Error message for unauthorized access
+        "422":
+          description: Unprocessable Entity - Invalid input data
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: Error message for an unprocessable entity
+components:
   securitySchemes:
     bearerAuth:
       type: http
