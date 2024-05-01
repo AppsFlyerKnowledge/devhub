@@ -13,7 +13,7 @@ paths:
       summary: Create bulk users
       tags:
         - Managing users in bulk
-      operationId: create-bulk-users-post
+      operationId: bulk-users-post
       requestBody:
         required: true
         content:
@@ -121,7 +121,7 @@ paths:
       description: Retrieve users data for the specified account.
       tags:
         - Managing users in bulk
-      operationId: get-bulk-users
+      operationId: bulk-users-get
       responses:
         "200":
           description: Successful response containing the list of users.
@@ -182,7 +182,7 @@ paths:
       description: Delete multiple users for the specified account.
       tags:
         - Managing users in bulk
-      operationId: delete-bulk-users
+      operationId: bulk-users-delete
       parameters:
         - in: path
           name: userIds
@@ -190,6 +190,7 @@ paths:
           required: true
           schema:
             type: string
+            example: 'user1@company.com,user2@company.com'
       responses:
         "204":
           description: Users deleted successfully
