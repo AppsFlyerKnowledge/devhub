@@ -10,7 +10,7 @@ security:
 paths:
   /users:
     post:
-      summary: Create users in bulk
+      summary: Create bulk users
       tags:
         - Managing users in bulk
       operationId: create-bulk-users-post
@@ -119,10 +119,9 @@ paths:
     get:
       summary: Get users
       description: Retrieve users data for the specified account.
-      security:
-        - bearerAuth: []
       tags:
-        - Users
+        - Managing users in bulk
+      operationId: get-bulk-users
       responses:
         "200":
           description: Successful response containing the list of users.
@@ -177,23 +176,20 @@ paths:
                   message:
                     type: string
                     description: Error message for unauthorized access
+  /users/{userIds}:
     delete:
       summary: Delete users
       description: Delete multiple users for the specified account.
-      security:
-        - bearerAuth: []
       tags:
-        - Users
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: array
-              items:
-                type: string
-                format: email
-                description: Email address of the user to delete
+        - Managing users in bulk
+      operationId: delete-bulk-users
+      parameters:
+        - in: path
+          name: userIds
+          description: Comma-separated list of user IDs to delete
+          required: true
+          schema:
+            type: string
       responses:
         "204":
           description: Users deleted successfully
@@ -231,6 +227,7 @@ components:
   securitySchemes:
     bearerAuth:
       type: http
+      in: header
       scheme: bearer
       bearerFormat: JWT
       description: "Authorization HTTP header containing API V2 token (bearer token) is required.\n\n
