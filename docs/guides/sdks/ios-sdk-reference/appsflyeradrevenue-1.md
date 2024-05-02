@@ -91,7 +91,6 @@ let adRevenueParams:[AnyHashable: Any] = [
             kAppsFlyerAdRevenueAdUnit : "02134568",     //Add ! here
             kAppsFlyerAdRevenueAdType : "Banner",  //Add ! here
             kAppsFlyerAdRevenuePlacement : "place",
-            kAppsFlyerAdRevenueECPMPayload : "encrypt",
             "foo" : "testcustom",
             "bar" : "testcustom2"
         ]
