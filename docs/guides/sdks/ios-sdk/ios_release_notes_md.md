@@ -7,8 +7,31 @@ hidden: false
 order: 1
 ---
 
+## Version 6.14.3
 
-**New! Starting with v6.12.3 we are adding developer release notes to SDK releases! For previous versions, see [here](https://support.appsflyer.com/hc/en-us/articles/115001224823-AppsFlyer-iOS-SDK-release-notes) **
+#### Changed Features
+
+- Updated podspec to fix the bundling of the Privacy Manifest in CocoaPods.
+
+
+## Version 6.14.2
+
+#### Changed Features
+
+- Re-added the MinimumOSVersion 100 for SPM builds for AppsFlyerLib-Static and AppsFlyerLib-Strict.
+
+
+## Version 6.14.1
+
+#### New Features
+
+- Added a new `validateAndLogInAppPurchase` API to provide in-app purchase validation and reporting of the purchase to AppsFlyer. 
+This API is initially released as closed beta and requires activation before use. 
+After the official release, the new API will replace the legacy [validateAndLogInAppPurchase](https://dev.appsflyer.com/hc/docs/ios-sdk-reference-appsflyerlib#validateandlogloginapppurchase) API.
+
+#### Changed Features
+
+- Updated the Minimum Deployment version of the SDK to 12, in accordance with the App Store Connect requirements for building apps with XCode15 described [here](https://developer.apple.com/news/?id=fxu2qp7b). As part of this change we also attempted to remove the workaround introduced v6.13.2, that set the MinimumOSVersion to 100.
 
 
 ## Version 6.14.0
@@ -69,3 +92,7 @@ This parameter contains the original URL that was embedded into the email, and t
 - Removed any reference to the iAd framework from the SDK. 
 Following Apple's announcement about the termination of iAd framework on iOS, we removed any reference to it from the AppsFlyer SDK. The SDK will continue to use the AdServices framework for Apple Search Ads attribution.
 For more information about the iAd framework removal from iOS, See "About the iAd attribution framework" [here](https://searchads.apple.com/help/reporting/0028-apple-ads-attribution-api)
+
+
+
+For previous versions, see [here](https://support.appsflyer.com/hc/en-us/articles/115001224823-AppsFlyer-iOS-SDK-release-notes)
