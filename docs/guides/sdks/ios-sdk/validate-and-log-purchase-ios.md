@@ -14,34 +14,34 @@ The `validateAndLogInAppPurchase` method is part of [the receipt validation flow
 
 > 📘Note
 > 
-> The function `validateAndLogInAppPurchase` can be replaced by the fully automatic purchase SDK connector (a premium service). To learn how to integrate the connector, see on Github [iOS purchase SDK connector](https://github.com/AppsFlyerSDK/appsflyer-ios-purchase-connector).
+> The function `validateAndLogInAppPurchase` can be replaced by the fully automatic purchase SDK connector (a premium service). To learn how to integrate the connector, see on Github [iOS purchase SDK connector](https://github.com/AppsFlyerSDK/appsflyer-apple-purchase-connector).
 
 The method is currently implemented in two versions.
 
 - [validateAndLogInAppPurchase - BETA](#implement-validateandloginapppurchase-beta) supported from SDK v.6.14.1
-- [validateAndLogInAppPurchase - Legacy](#legacy-validateandloginapppurchase) 
+- [validateAndLogInAppPurchase - Legacy](#validateandloginapppurchase-legacy) 
 
-### Implement validateAndLogInAppPurchase (BETA)
+## Implement validateAndLogInAppPurchase (BETA)
 
-The method (currently in BETA) sends the purchase details to AppsFlyer for validation. After AppsFlyer validates the purchase with the App Store, the method returns the response to a completion handler block.
+The [validateAndLogInAppPurchase](https://dev.appsflyer.com/hc/docs/ios-sdk-reference-appsflyerlib#validateandloginapppurchase) method (currently in BETA) sends the purchase details to AppsFlyer for validation. After AppsFlyer validates the purchase with the App Store, the method returns the response to a completion handler block.
 
 **To implement the method, perform the following steps:**
 
-1. Query the Play Store for the [Purchase](https://developer.android.com/reference/com/android/billingclient/api/Purchase) object of the in-app purchase event. 
-2. Initialize an `AFSDKPurchaseDetails` [Link to function reference] instance and set it with the purchase type, token, product ID, price, and currency details retrieved from the Purchase object.
+1. Query the App Store for the object of the in-app purchase event. 
+2. Initialize an [AFSDKPurchaseDetails](https://dev.appsflyer.com/hc/docs/ios-sdk-reference-appsflyerlib#afsdkpurchasedetails) instance and set it with the purchase type, token, product ID, price, and currency details retrieved from the Purchase object.
 3. If you want to add additional details to the purchase in-app event, populate a dictionary with key-value pairs.
 4. Invoke `validateAndLogInAppPurchase` with the following arguments:
    - The `AFSDKPurchaseDetails` object you created in step 2.
    - The dictionary with the additional details you created in step 3.
 5. Add your logic for handling the failure, success, or error responses to a completion handler block in the function body.
 
-If the validation is successful, an [`af_purchase`](https://dev.appsflyer.com/hc/docs/in-app-events-android#af_purchase) event is logged with the values provided to `validateAndLogInAppPurchase`.
+If the validation is successful, an [`af_purchase`](https://dev.appsflyer.com/hc/docs/in-app-events-ios#af_purchase) event is logged with the values provided to `validateAndLogInAppPurchase`.
 
 > 📘Note
 > 
-> `validateAndLogInAppPurchase` generates an [`af_purchase`](https://dev.appsflyer.com/hc/docs/in-app-events-android#af_purchase) in-app event upon successful validation. Sending this event yourself will cause duplicate event reporting.
+> `validateAndLogInAppPurchase` generates an `af_purchase` in-app event upon successful validation. Sending this event yourself will cause duplicate event reporting.
 
-## Code example
+### Code example
 
 ```swift
 func sampleCodeValidateAndLog(){
@@ -85,27 +85,6 @@ func sampleCodeValidateAndLog(){
 }
 ```
 
-### Response Examples
-
-The completion handler block in `validateAndLogInAppPurchase` receives validation responses from AppsFlyer in JSON format. Here are two examples:
-
-**One time purchase validated successfully**
-
-```json
-{
-  "result": true,
-  "status": "success",
-  "product_id": "my-product-id",
-  "price": "1.99",
-  "currency": "USD",
-  "transaction_id": "12345-transaction-id",
-  "additional_parameters": {
-    "firstExtraEventValue": "something",
-    "secondExtraEventValue": "nice"
-  }
-}
-```
-
 **Subscription purchase that failed validation**
 
 ```json
@@ -126,90 +105,18 @@ The completion handler block in `validateAndLogInAppPurchase` receives validatio
   }
 }
 ```
-## [Legacy] validateAndLogInAppPurchase
+## validateAndLogInAppPurchase (LEGACY)
 
 ### Purchase validation using validateAndLogInAppPurchase
 
-`validateAndLoginInAppPurchase` takes these arguments:
+[`validateAndLoginInAppPurchase`](https://dev.appsflyer.com/hc/docs/ios-sdk-reference-appsflyerlib#validateandloginapppurchase-legacy) takes these arguments:
 
 ```objectivec
 - (void) validateAndLogInAppPurchase:(NSString *) productIdentifier,
                   price:(NSString *) price
                   currency:(NSString *) currency
                   transactionId:(NSString *) tranactionId
-                  additionalParameter
-## [New] validateAndLogInAppPurchase
-
-The method validates a purchase event with the store and if the validation is successful, the SDK sends an [`af_purchase`](https://dev.appsflyer.com/hc/docs/in-app-events-ios#af_purchase) event to AppsFlyer.  
-
-**Method signature**
-
-```objectivec
-typedef void (^AFSDKValidateAndLogCompletion)(AFSDKValidateAndLogResult * _Nullable result);
-- (void)validateAndLogInAppPurchase:(AFSDKPurchaseDetails *)details
-                   extraEventValues:(NSDictionary * _Nullable)extraEventValues
-                  completionHandler:(AFSDKValidateAndLogCompletion)completionHandler NS_AVAILABLE(10_7, 7_0);
-```
-
-**Input parameters**
-
-| Name | Type | Description |
-| --- | --- | --- |
-| `details`* | ['AFSDKPurchaseDetails'](#afsdkpurchasedetails)* | An object that encapsulates all data related to the purchase provided to the validateAndLogInAppPurchase method. |
-| `extraEventValues` | NSDictionary * _Nullable | An optional dictionary containing additional parameters to log with the purchase event. |
-| `completionHandler`* | `AFSDKValidateAndLogCompletion` | A completion handler block that is called with the result of the purchase validation and logging.  |
-
-**Note**
-
-> 📘Note
-> 
-> 
-> The `validateAndLogInAppPurchase` method triggers an `af_purchase` in-app event upon successful validation. Manually sending this event may result in duplicate event reporting.
-> 
-
-### AFSDKPurchaseDetails
-
-An object that encapsulates all data related to the purchase provided to the `validateAndLogInAppPurchase` method.
-
-```objectivec
-@interface AFSDKPurchaseDetails : NSObject
-
-- (nonnull instancetype)init NS_UNAVAILABLE;
-+ (nonnull instancetype)new NS_UNAVAILABLE;
-
-@property (strong, nullable, nonatomic) NSString *productId;
-@property (strong, nullable, nonatomic) NSString *price;
-@property (strong, nullable, nonatomic) NSString *currency;
-@property (strong, nullable, nonatomic) NSString *transactionId;
-
-- (instancetype _Nonnull )initWithProductId:(NSString *_Nullable)productId
-                                      price:(NSString *_Nullable)price
-                                   currency:(NSString *_Nullable)currency
-                              transactionId:(NSString *_Nullable)transactionId;
-
-```
-
-**AFSDKPurchaseDetails Parameters**
-
-| Name | Type | Description |
-| --- | --- | --- |
-| `productId` | String | The product identifier for the purchase.  |
-| `price` | String | The price of the product.  |
-| `currency` | String | The currency used for the billing operation. |
-| `transactionId` | String | A specific identifier for the transaction.  |
-
-### Testing purchase validation in Sandbox mode
-
-To test purchase validation using a sandboxed environment, add the following code:
-
-`[AppsFlyerLib shared].useReceiptValidationSandbox = YES;`
-
-> 📘Note
-> 
-> 
-> This code must be removed from your production builds.
-
-s:(NSDictionary *) params
+                  additionalParameters:(NSDictionary *) params
                   success:(void (^)(NSDictionary *response)) successBlock
                   failure:(void (^)(NSError *error, id reponse)) failedBlock;
 ```
@@ -227,7 +134,7 @@ Upon successful validation, a `NSDictionary` is returned with the receipt valida
 
 > 📘 Note
 > 
-> Calling [`validateAndLogInAppPurchase`](doc:ios-sdk-reference-appsflyerlib#validateandlog) generates an [`af_purchase`](https://dev.appsflyer.com/hc/docs/in-app-events-ios#af_purchase) in-app event upon successful validation. Sending this event yourself creates duplicate event reporting.
+> Calling `validateAndLogInAppPurchase` generates an [`af_purchase`](https://dev.appsflyer.com/hc/docs/in-app-events-ios#af_purchase) in-app event upon successful validation. Sending this event yourself creates duplicate event reporting.
 
 ### Example: Validate in-app purchase
 
