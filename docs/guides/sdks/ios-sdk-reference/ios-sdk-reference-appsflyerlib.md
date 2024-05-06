@@ -1171,7 +1171,51 @@ Start the SDK with a [completion handler](<>).
 **Returns**  
 `void`.
 
-### validateAndLogLogInAppPurchase
+### validateAndLogInAppPurchase
+(Supported from SDK v.6.14.1)
+
+**Method signature**
+
+```objectivec
+typedef void (^AFSDKValidateAndLogCompletion)(AFSDKValidateAndLogResult * _Nullable result);
+- (void)validateAndLogInAppPurchase:(AFSDKPurchaseDetails *)details
+                   extraEventValues:(NSDictionary * _Nullable)extraEventValues
+                  completionHandler:(AFSDKValidateAndLogCompletion)completionHandler NS_AVAILABLE(10_7, 7_0);
+```
+
+**Description**
+
+The method validates a purchase event with the store and if the validation is successful, the SDK sends an [`af_purchase`](https://dev.appsflyer.com/hc/docs/in-app-events-ios#af_purchase) event to AppsFlyer.  
+
+See detailed instructions in [Validate and log in-app purchase](#validateandloginapppurchase).
+
+**Input parameters**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| `details`* | ['AFSDKPurchaseDetails'](#afsdkpurchasedetails)* | An object that encapsulates all data related to the purchase provided to the validateAndLogInAppPurchase method. |
+| `extraEventValues` | NSDictionary * _Nullable | An optional dictionary containing additional parameters to log with the purchase event. |
+| `completionHandler`* | `AFSDKValidateAndLogCompletion` | A completion handler block that is called with the result of the purchase validation and logging.  |
+
+**Returns**  
+`void`.
+
+#### AFSDKPurchaseDetails
+
+An object that encapsulates all data related to the purchase provided to the `validateAndLogInAppPurchase` method.
+
+**AFSDKPurchaseDetails parameters**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| `productId` | String | The product identifier for the purchase.  |
+| `price` | String | The price of the product.  |
+| `currency` | String | The currency used for the billing operation. |
+| `transactionId` | String | A specific identifier for the transaction.  |
+
+
+### validateAndLogInAppPurchase (LEGACY)
+(Supported until SDK v.6.14.0)
 
 **Method signature**
 

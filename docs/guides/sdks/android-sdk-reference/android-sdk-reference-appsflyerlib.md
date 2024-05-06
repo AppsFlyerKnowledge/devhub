@@ -759,7 +759,7 @@ AppsFlyerLib.getInstance().registerConversionListener(getApplicationContext(), c
 
 Here's an [example implementation](doc:conversion-data-android#organic-vs-non-organic-conversions) of `AppsFlyerConversionListener`.
 
-### registerValidatorListener
+### registerValidatorListener (LEGACY)
 
 **Method signature**
 
@@ -1737,9 +1737,59 @@ AppsFlyerlib.getInstance().updateServerUninstallToken(getApplicationContext(), <
 AppsFlyerlib.getInstance().updateServerUninstallToken(getApplicationContext(), <TOKEN>);
 ```
 
-
-
 ### validateAndLogInAppPurchase
+(Supported from SDK v.6.14.0)
+
+**Method signature**
+
+```java
+public abstract void validateAndLogInAppPurchase(@NonNull AFPurchaseDetails purchaseDetails,
+                                                 @Nullable Map<String, String> additionalParameters,
+                                                 @Nullable AppsFlyerInAppPurchaseValidationCallback validationCallback);
+```
+
+**Description**
+The method validates a purchase event with the store and if the validation is successful, the SDK sends an [`af_purchase`](https://dev.appsflyer.com/hc/docs/in-app-events-android#af_purchase) event to AppsFlyer. 
+
+See detailed instructions in [Validate and log in-app purchase](#validateandloginapppurchase).
+
+**Input arguments**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| `purchaseDetails` * |[`AFPurchaseDetails`](#afpurchasedetails) | An object that encapsulates all data related to the purchase provided to the validateAndLogInAppPurchase method. |
+| `additionalParameters` | Map<String, String> | Additional parameters to log with the purchase. |
+| `validationCallback` * | [`AppsFlyerInAppPurchaseValidationCallback`](#appsflyerinapppurchasevalidationcallback)` | A callback for delivering validation results. |
+
+**Returns**
+void
+
+#### AFPurchaseDetails
+
+An object that encapsulates all data related to the purchase provided to the validateAndLogInAppPurchase method.
+
+```kotlin
+data class AFPurchaseDetails(
+    val purchaseType: AFPurchaseType,
+    val purchaseToken: String,
+    val productId: String,
+    val price: String,
+    val currency: String
+)
+```
+
+**AFPurchaseDetails parameters**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| `purchaseType` | `AFPurchaseType` | Field to distinguish between one-time purchases and subscriptions. The field can accept either subscription or one-time-purchase. |
+| `purchaseToken` | String | Token that uniquely identifies a purchase for a given item and user pair. Part of the Billing Library's [`Purchase class`](https://developer.android.com/reference/com/android/billingclient/api/Purchase). To retrieve the token call the [`getPurchaseToken` API](https://developer.android.com/reference/com/android/billingclient/api/Purchase#getPurchaseToken()) |
+| `productId` | String | ID of the product item that has been purchased. Also part of the Billing Library's [`Purchase class`](https://developer.android.com/reference/com/android/billingclient/api/Purchase). |
+| `price` | String | The full price of the one-time purchase or the subscription. Also part of the Billing Library's [`Purchase class`](https://developer.android.com/reference/com/android/billingclient/api/Purchase). |
+| `currency` | String | Currency used to make the purchase.  |
+
+### validateAndLogInAppPurchase (LEGACY)
+(Supported until SDK v.6.13.1)
 
 **Method signature**
 
