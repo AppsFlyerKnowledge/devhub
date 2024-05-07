@@ -207,3 +207,8 @@ none
 ```js
 AF('banners', 'hideBanner');
 ```
+## Traits and Limitations
+
+| Trait | Remarks |
+| --- | --- |
+| Single page application (SPA) | Smart Banners are by default only displayed once, even if users navigate between pages.<br> To display banners when users navigate between pages, you need to manually call hideBanner and showBanner for every navigation that doesn't reload the page and trigger the Smart Banners default logic. |
