@@ -228,7 +228,6 @@ components:
   securitySchemes:
     bearerAuth:
       type: http
-      in: header
       scheme: bearer
       bearerFormat: JWT
       description: "Authorization HTTP header containing API V2 token (bearer token) is required.\n\n
