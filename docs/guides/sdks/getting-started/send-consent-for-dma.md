@@ -12,6 +12,10 @@ As part of the EU [Digital Marketing Act](https://commission.europa.eu/strategy-
 
 To comply with the legislation, Google requires AppsFlyer customers to include specific consent fields when sending events originating from EU end-users to Google. The AppsFlyer SDK (v6.13.0+) can collect and send the necessary consent data with each event to meet this requirement.
 
+> 📘 Note
+> 
+> All EU countries are subject to GDPR and DMA, with the exception of the UK. The UK complies with GDPR but is not subject to the DMA.
+
 See guides for the following platforms:
 <style>
   .button-container {
