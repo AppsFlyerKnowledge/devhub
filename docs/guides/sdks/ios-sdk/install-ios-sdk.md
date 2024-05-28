@@ -158,7 +158,7 @@ Enter the AppsFlyer SDK GitHub repository. You can select one of the following:
 ### Manual install
 
 **Step 1: Download static framework**  
-[Download the iOS SDK as a static framework](https://s3-eu-west-1.amazonaws.com/download.appsflyer.com/ios/AppsFlyerLib.framework.zip).
+[Download the iOS SDK as a static framework](https://github.com/AppsFlyerSDK/AppsFlyerFramework/releases).
 
 To verify the integrity of the SDK static framework download, click [here](https://support.appsflyer.com/hc/en-us/articles/115001224823#ios-sdk-checksums).
 
