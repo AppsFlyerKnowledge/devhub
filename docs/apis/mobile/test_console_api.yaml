@@ -1,0 +1,328 @@
+openapi: 3.0.1
+info:
+  title:  Test Console API
+  version: "1.0"
+servers:
+- url:  https://hq1.appsflyer.com/api/test-console/v1.0/app
+  description: Production server
+security:
+- Bearer-Authentication: []
+paths:
+  /{app-id}/events:
+    get:
+      tags:
+      - Events
+      summary: Retrieve events
+      operationId: test-console-api-get
+      parameters:
+        - $ref: '#/components/parameters/AppId'
+        - $ref: '#/components/parameters/DeviceId'
+        - $ref: '#/components/parameters/StartTime'
+        - $ref: '#/components/parameters/EndTime'
+      responses:
+        200:
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  app_id:
+                    type: string
+                  device_id:
+                    type: string
+                  max_results:
+                    type: integer
+                  total:
+                    type: integer
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      required:
+                        - sdk_timestamp
+                        - event_type
+                        - appsflyer_id
+                      properties:
+                        sdk_timestamp:
+                          type: string
+                          description: UTC timestamp in ISO 8601 format. Cannot be null.
+                        event_type:
+                          type: string
+                          description: Type of event - "Session" / "In-App". Cannot be null.
+                        appsflyer_id:
+                          type: string
+                          description: Unique installation id. Created for every new install of the app. Cannot be null.
+                        sdk_version:
+                          type: string
+                          description: Version of the SDK used by the app. Can be null.
+                          nullable: true
+                        app_version:
+                          type: string
+                          description: App version. Can be null.
+                          nullable: true
+                        event_name:
+                          type: string
+                          description: In-App event name. Null if event type is "Session".
+                          nullable: true
+                        event_value:
+                          type: string
+                          description: In-App event value. Null if event type is "Session".
+                          nullable: true
+                        customer_user_id:
+                          type: string
+                          description: Customer User ID that was set by the app. Will be null if not provided by the app.
+                          nullable: true
+                        idfa:
+                          type: string
+                          description: IDFA of the device. Null if not collected (and always null in Android).
+                          nullable: true
+                        idfv:
+                          type: string
+                          description: IDFV of the device. Null if not collected (and always null in Android).
+                          nullable: true
+                        gaid:
+                          type: string
+                          description: Android Advertising ID. Always null in iOS.
+                          nullable: true
+                        android_id:
+                          type: string
+                          description: android_id of the device. Null if not collected (and always null in iOS).
+                          nullable: true
+                        imei:
+                          type: string
+                          description: IMEI of the device. Null if not collected (and always null in iOS).
+                          nullable: true
+                        oaid:
+                          type: string
+                          description: OAID of the device. Null if not collected (and always null in iOS).
+                          nullable: true
+                        amazon_aid:
+                          type: string
+                          description: Amazon Advertising ID of the device. Null if not collected (and always null in iOS).
+                          nullable: true
+                  response_time:
+                    type: string
+        400:
+          description: Bad request
+          $ref: '#/components/responses/BadRequest'
+        401:
+          description: Unauthorized
+          $ref: '#/components/responses/Unauthorized'
+        403:
+          description: Forbidden
+          $ref: '#/components/responses/Forbidden'
+        404:
+          description: Not found
+          $ref: '#/components/responses/NotFound'
+        409:
+          description: Conflict
+          $ref: '#/components/responses/Conflict'
+        500:
+          description: Internal Server Error
+          $ref: '#/components/responses/InternalError'
+  /{app-id}/devices:
+    post:
+      summary: "Add device"
+      tags:
+        - "Allowed devices"
+      operationId: test-console-api-post
+      parameters:
+        - $ref: '#/components/parameters/AppId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - device_id
+                - device_id_type
+                - device_name
+              properties:
+                device_id:
+                  type: string
+                  description: The id of the device that is being registered for the test.
+                  example: '09ad6f30-a39c-4c6c-8862-636eabd54709'
+                  pattern: '^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$'
+                device_id_type:
+                  type: string
+                  description: The type of device ID being registered.
+                  enum:
+                    - IDFA
+                    - IDFV
+                    - AID
+                    - OAID
+                    - IMEI
+                    - ANDROID ID
+                    - FIRE AID
+                  example: 'IDFA'
+                device_name:
+                  type: string
+                  description: The name that should be associated with the device.
+                  example: 'My Device'
+      
+      responses:
+        400:
+          description: Bad request
+          $ref: '#/components/responses/BadRequest'
+        401:
+          description: Unauthorized
+          $ref: '#/components/responses/Unauthorized'
+        403:
+          description: Forbidden
+          $ref: '#/components/responses/Forbidden'
+        404:
+          description: Not found
+          $ref: '#/components/responses/NotFound'
+        409:
+          description: Conflict
+          $ref: '#/components/responses/Conflict'
+        500:
+          description: Internal Server Error
+          $ref: '#/components/responses/InternalError'
+  /{app-id}/devices/{device-id}:
+    delete:
+      summary: "Delete device"
+      tags:
+        - "Allowed devices"
+      operationId: test-console-api-delete
+      parameters:
+        - $ref: '#/components/parameters/AppId'
+        - name: device-id
+          in: path
+          required: true
+          description: The id of the device that is being removed.
+          schema:
+            type: string
+            example: '09ad6f30-a45c-4c6c-8862-636eabd54709'
+            pattern: '^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$'
+            
+      responses:
+        400:
+          description: Bad request
+          $ref: '#/components/responses/BadRequest'
+        401:
+          description: Unauthorized
+          $ref: '#/components/responses/Unauthorized'
+        403:
+          description: Forbidden
+          $ref: '#/components/responses/Forbidden'
+        404:
+          description: Not found
+          $ref: '#/components/responses/NotFound'
+        409:
+          description: Conflict
+          $ref: '#/components/responses/Conflict'
+        500:
+          description: Internal Server Error
+          $ref: '#/components/responses/InternalError'
+
+
+components:
+  securitySchemes:
+    Bearer-Authentication:
+      type: http
+      scheme: bearer
+      description: "Authorization HTTP header containing API V2 token (bearer token) is required.\n\n
+        The admin [gets the V2 token in the dashboard](https://support.appsflyer.com/hc/en-us/articles/360004562377)"
+  parameters:
+    AppId:
+      name: app-id
+      in: path
+      required: true
+      schema:
+        type: string
+        description: |
+          App ID of the app for which you are posting.
+          Android - Package Name, iOS - App Store ID
+        example: com.example.testapp
+    DeviceId:
+      name: device_id
+      in: query
+      required: true
+      schema:
+        type: string
+        description: The Device ID of the device that was registered for the test
+        pattern: '^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$'
+      example: "09ad6f30-a39c-4c6c-8862-636eabd54709"
+    StartTime:
+      name: start_time
+      in: query
+      required: true
+      schema:
+        type: string
+        description: Date and Time in UTC ISO 8601 format. The start time must be within the last 2 hours
+      example: "2023-07-12T09:02:26Z" 
+    EndTime:
+      name: end_time
+      in: query
+      required: false
+      schema:
+        type: string
+        description: Date and Time in UTC ISO 8601 format 
+      example: "2023-07-12T09:02:26Z"
+  
+  responses:
+    BadRequest:
+      description: The request has invalid parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error: "cannot parse body"
+
+    Unauthorized:
+      description: Authentication credentials were missing or incorrect
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error: "authentication error" 
+
+    Forbidden:
+      description: The request is understood, but it has been refused or access is not allowed
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error: "forbidden"
+    
+    NotFound:
+      description: App ID wasn't found in the account
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse' 
+          example:
+            error: "app_id not found"
+    
+    Conflict:
+      description: Device limit reached (devices API only)
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse' 
+          example:
+            error: "device limit reached"
+
+    InternalError:
+      description: A generic error message, given when an unexpected condition was encountered and no more specific message is suitable
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+
+  schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+
+    
+
+  
