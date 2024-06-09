@@ -46,20 +46,20 @@ paths:
                       properties:
                         sdk_timestamp:
                           type: string
-                          description: UTC timestamp in ISO 8601 format. Cannot be null.
+                          description: UTC timestamp in ISO 8601 format. Non-nullable.
                         event_type:
                           type: string
-                          description: Type of event - "Session" / "In-App". Cannot be null.
+                          description: Type of event - "Session" / "In-App". Non-nullable.
                         appsflyer_id:
                           type: string
-                          description: Unique installation id. Created for every new install of the app. Cannot be null.
+                          description: Unique installation ID. Created for every new app install. Non-nullable.
                         sdk_version:
                           type: string
-                          description: Version of the SDK used by the app. Can be null.
+                          description: The SDK version used by the app. Nullable.
                           nullable: true
                         app_version:
                           type: string
-                          description: App version. Can be null.
+                          description: App version. Nullable.
                           nullable: true
                         event_name:
                           type: string
@@ -71,35 +71,35 @@ paths:
                           nullable: true
                         customer_user_id:
                           type: string
-                          description: Customer User ID that was set by the app. Will be null if not provided by the app.
+                          description: Customer User ID. Assigned by the app. Defaults to null if the app does not provide a value.
                           nullable: true
                         idfa:
                           type: string
-                          description: IDFA of the device. Null if not collected (and always null in Android).
+                          description: The device IDFA. Set to null when not collected. Always null on Android devices.
                           nullable: true
                         idfv:
                           type: string
-                          description: IDFV of the device. Null if not collected (and always null in Android).
+                          description: Device IDFV. Set to null when not collected. Always null on Android devices.
                           nullable: true
                         gaid:
                           type: string
-                          description: Android Advertising ID. Always null in iOS.
+                          description: Android Advertising ID. Always null on iOS.
                           nullable: true
                         android_id:
                           type: string
-                          description: android_id of the device. Null if not collected (and always null in iOS).
+                          description: The device android_id. Set to null when not collected. Always null on iOS devices.
                           nullable: true
                         imei:
                           type: string
-                          description: IMEI of the device. Null if not collected (and always null in iOS).
+                          description: The device IMEI. Set to null when not collected. Always null on iOS devices.
                           nullable: true
                         oaid:
                           type: string
-                          description: OAID of the device. Null if not collected (and always null in iOS).
+                          description: The device OAID. Set to null when not collected. Always null on iOS devices.
                           nullable: true
                         amazon_aid:
                           type: string
-                          description: Amazon Advertising ID of the device. Null if not collected (and always null in iOS).
+                          description: The device Amazon Advertising ID. Set to null when not collected. Always null on iOS devices.
                           nullable: true
                   response_time:
                     type: string
@@ -142,12 +142,12 @@ paths:
               properties:
                 device_id:
                   type: string
-                  description: The id of the device that is being registered for the test.
+                  description: The identifier of the device being registered for the test.
                   example: '09ad6f30-a39c-4c6c-8862-636eabd54709'
                   pattern: '^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$'
                 device_id_type:
                   type: string
-                  description: The type of device ID being registered.
+                  description: The type of device ID being registered for the test.
                   enum:
                     - IDFA
                     - IDFV
@@ -159,7 +159,7 @@ paths:
                   example: 'IDFA'
                 device_name:
                   type: string
-                  description: The name that should be associated with the device.
+                  description: The name to associate with the device.
                   example: 'My Device'
       
       responses:
@@ -192,7 +192,7 @@ paths:
         - name: device-id
           in: path
           required: true
-          description: The id of the device that is being removed.
+          description: The id of the device being removed.
           schema:
             type: string
             example: '09ad6f30-a45c-4c6c-8862-636eabd54709'
@@ -225,7 +225,7 @@ components:
       type: http
       scheme: bearer
       description: "Authorization HTTP header containing API V2 token (bearer token) is required.\n\n
-        The admin [gets the V2 token in the dashboard](https://support.appsflyer.com/hc/en-us/articles/360004562377)"
+        [An admin can retrieve the V2 token from AppsFlyer](https://support.appsflyer.com/hc/en-us/articles/360004562377)"
   parameters:
     AppId:
       name: app-id
@@ -233,9 +233,7 @@ components:
       required: true
       schema:
         type: string
-        description: |
-          App ID of the app for which you are posting.
-          Android - Package Name, iOS - App Store ID
+        description: The App ID of the app being tested. Use the 'Package Name' for Android apps and the 'App Store ID' for iOS apps.
         example: com.example.testapp
     DeviceId:
       name: device_id
@@ -243,7 +241,7 @@ components:
       required: true
       schema:
         type: string
-        description: The Device ID of the device that was registered for the test
+        description: The ID of the device registered for testing
         pattern: '^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$'
       example: "09ad6f30-a39c-4c6c-8862-636eabd54709"
     StartTime:
@@ -252,7 +250,7 @@ components:
       required: true
       schema:
         type: string
-        description: Date and Time in UTC ISO 8601 format. The start time must be within the last 2 hours
+        description: The Date and Time in UTC ISO 8601 format. The start time must be within the past 2 hours
       example: "2023-07-12T09:02:26Z" 
     EndTime:
       name: end_time
@@ -283,7 +281,7 @@ components:
             error: "authentication error" 
 
     Forbidden:
-      description: The request is understood, but it has been refused or access is not allowed
+      description: Request acknowledged but denied. Access is not permitted.
       content:
         application/json:
           schema:
@@ -292,7 +290,7 @@ components:
             error: "forbidden"
     
     NotFound:
-      description: App ID wasn't found in the account
+      description: The specified App ID does not exist within the account.
       content:
         application/json:
           schema:
@@ -301,7 +299,7 @@ components:
             error: "app_id not found"
     
     Conflict:
-      description: Device limit reached (devices API only)
+      description: You have added the maximum number of devices allowed by the Devices API.
       content:
         application/json:
           schema:
@@ -310,7 +308,7 @@ components:
             error: "device limit reached"
 
     InternalError:
-      description: A generic error message, given when an unexpected condition was encountered and no more specific message is suitable
+      description: A generic error message displayed when an unexpected condition occurs and no specific error message applies.
       content:
         application/json:
           schema:
