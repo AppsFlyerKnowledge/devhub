@@ -6,74 +6,118 @@ hidden: false
 order: 0
 ---
 
-**At a glance**
-The dedicated API allows account admins to manage apps within their accounts supporting the main features available in the UI. This includes adding updating and deleting apps. The API also incorporates the same error verification mechanisms. Please note that we currently allow adding and updating mobile apps only while deletion is possible for all platforms.
+**At a glance:**
 
-## Add app API parameters
+Account admins can efficiently execute various bulk actions through a dedicated API. This includes adding and deleting users, as well as retrieving user permission details. The API supports the main user management features found in the UI and includes the same error verifications.
 
-### Default schema
+## API parameters for adding users in bulk
 
-The following API parameters are needed in the schema for adding an app:
+The following table details all API parameters and properties for adding new users in bulk. See schema examples below the table.
 
-| API Parameter | Type | Mandatory | Remarks |
+> Note
+>
+> - If any of the mandatory parameters aren't entered in the API call or they're written incorrectly, the associated user isn't added. An [error message](notion://www.notion.so/appsflyerrnd/markdown-3ba0de41bbbd4f258fde67e10a718afe#error-messages) is sent through the API.
+> - There's a maximum limit of **20 user additions per API call**.
+> - There's a maximum **daily limit** of **20 API calls per account**.
+  
+| API parameter | Type | Mandatory | Remarks |
 | --- | --- | --- | --- |
-| platform | string | Yes | Possible values: `android’ `ios’ `windowsphone’ |
-| status | string | Yes | Possible values: `available’ `pending’ `out_of_store’ |
-| app_name | string | Yes | A string of up to 100 characters |
-| currency | string | Yes | Possible values: https://docs.google.com/document/d/1W6H5WX3WZCyMYuEgHqSorU0WF6UuTQbuxF6AISxw7gc/edit#bookmark=id.eu5iuk3ovj9a |
-| time_zone | string | Yes | Possible values: https://docs.google.com/document/d/1W6H5WX3WZCyMYuEgHqSorU0WF6UuTQbuxF6AISxw7gc/edit#bookmark=id.qg694lhhkeet |
+| username | String | ✓ | The username can include letters, numbers, spaces, and the following characters:. - _ ` [ ] ( ) | @ : , + & |
+| email | String | ✓ | Enter a valid email address. |
+| department | String | — |  |
+| role | String | ✓ | admin and security roles must have unrestricted access to apps, media sources, and geos. |
+| app_ids | Array: • Empty [] • Specific apps | — | • When empty, the user has no app access • If not included in the schema, the default is access to all apps. |
+| allow_access_to_all_future_apps | Boolean: true or false | ✓ | When choosing true, the  app_ids mustn't be limited. |
+| media_sources | Array:• Empty [] • Specific media sources | — | When empty or if not included in the schema, the default is access to all media sources. |
+| geos | Array: • Empty [] • Specific geos | — | When empty or if not included in the schema, the default is access to all geos. |
 
-## Android status in the store
+### Schema example: full user access
 
-Additional schema parameters for the app status in Google Play and when published out of store.
+This schema grants user access to all apps (including future apps), and to all media sources and geos:
 
-| Status | API Parameter | Type | Mandatory | Remarks |
-| --- | --- | --- | --- | --- |
-| Available in store | app_url | string | Yes | A well-formatted URL |
-| Pending approval/not published | app_id | string | Yes | Link to app id required semantics per platform |
-| Published out of store | app_id | string | Yes | Link to app id required semantics per platform |
-|  | app_url | string | No | A well-formatted URL |
-|  | channel_name | string | Yes | a string that consists only of one or more uppercase or lowercase letters |
+```
+"email": "my_company@my_company.com ",
+"username": "Demi Smith",
+"department": "MC Marketing",
+"role": "marketing",
+"allow_access_to_all_future_apps": true,
+"media_sources": [],
+"geos": []
+```
 
-## iOS status in the App Store
+### Schema example: limited user access
 
-Additional schema parameters for the app status in the store.
+This schema limits user access to apps (no future apps), media sources, and geos, according to those specified in the array:
 
-| Status | API Parameter | Type | Mandatory | Remarks |
-| --- | --- | --- | --- | --- |
-| Available in store | app_url | string | Yes | A well-formatted URL |
-| Pending approval/not published | country | string | Yes | Possible values: https://docs.google.com/document/d/1W6H5WX3WZCyMYuEgHqSorU0WF6UuTQbuxF6AISxw7gc/edit#bookmark=id.5mm5oap13kxj |
-|  | app_id | string | Yes | Link to app id required semantics per platform |
+```
+"email": "my_company@my_company.com ",
+"username": "Demi Smith",
+"department": "MC Marketing",
+"role": "marketing",
+"allow_access_to_all_future_apps": false,
+"app_ids": ["my_app1", "my_app2"],
+"media_sources": ["amplitude", "airship"],
+"geos": ["angola", "aruba"]
+```
 
-## Update app API parameters
+## Error messages
 
-The following API parameters which are part of the URL are needed in the schema for updating an app:
+In some cases, users can't be added. The table below describes the reasons for such cases and explanations about the error messages.
 
-| API Parameter | Type | Mandatory | Remarks |
-| --- | --- | --- | --- |
-| appId | string | Yes | A valid AppsFlyer app ID |
-| platform | string | Yes | Possible values: `android’ `ios’ `windowsphone’ |
+| Error message | Description |
+| --- | --- |
+| Invalid email address. | The format of the email address isn't correct. |
+| This user already exists in this account. | You're trying to add a user to an account in which they already exist. |
+| Errors about adding users to multiple accounts |  |
+| This user can't be added because their status is "pending" in another account. | You can't add a user to an account if in another account it's in a "pending" status. |
+| A user from an advertiser account can't be added to agency or partner accounts. | Users from advertiser accounts can't be added to agency or partner accounts. |
+| A user from an agency or a partner account can't be added to an advertiser account. | Users from agency or partner accounts can't be added to advertiser accounts. |
+| This user is in another account that doesn't currently support users in multiple accounts. | Not all accounts support multiple users. You're trying to add a user from such an account. |
+| This account doesn't currently support adding users in multiple accounts.. | Not all accounts support multiple users. You're trying to add a user to such an account. |
+| This user can't be added because they're in an account that uses SSO. | Accounts with SSO authentication don't support multiple users. You're trying to add a user from such an account. |
+| This user can't be added because this account uses SSO. | Accounts with SSO authentication don't support multiple users. You're trying to add a user to such an account. |
+| This user can't be added because they're in an account that uses 2FA. | Accounts with 2FA authentication don't support multiple users. You're trying to add a user from such an account. |
+| This user can't be added because this account uses 2FA. | Accounts with 2FA authentication don't support multiple users. You're trying to add a user to such an account. |
+| Mistakes in the API parameters |  |
+| Invalid characters were used in the username. | The username can include letters, numbers, spaces, and the following characters only: .-_`[]()|@:,+& |
+| The username exceeded the 100-character limit. | The username can contain up to 100 characters. |
+| The role was either misspelled or doesn’t exist. | The role that was entered either doesn't exist in the list of roles in your account, or it was misspelled. |
+| One or more app IDs were either misspelled or don’t exist in your account. | You've entered one or more app IDs that either don't exist in your account or they were misspelled. |
+| "Allow access to all future apps" can be "true" only when there is access to all app IDs. | To enable users access to all future apps, you must grant them access to all apps in the account. |
+| One or more media sources were either misspelled or don’t exist. | You've entered one or more media sources that either don't exist in the Partner Marketplace or were misspelled. |
+| One or more geos were either misspelled or don’t exist. | You've entered one or more geo that either isn't in the platform or was misspelled. |
+| Admin and Security roles must have unrestricted access to apps, media sources, and geos. These fields must be empty. | Admin and Security roles must have unrestricted access to all apps, all media sources, and all geos. You were trying to add this role with restrictions on the above. |
+| Invalid field scheme. | One of the fields in the scheme doesn't follow the required format. See scheme examples. |
+| Other issues |  |
+| Something went wrong. Your request couldn’t be completed. | There was a technical issue that prevented the request from being completed. |
+| There was a problem with permissions for this account. | There was an issue with the account that prevented the request from being completed. |
+| Exceeded the limit of adding 20 users in a single API call. | An API call can contain up to 20 user additions. |
 
-The following API parameters are needed in the schema for the request body:
+## GET users API
 
-| API Parameter | Type | Mandatory | Remarks |
-| --- | --- | --- | --- |
-| enableAggregatedAdvancedPrivacy | boolean | No | Enable or disable the Aggregated Advanced Privacy iOS feature for maintaining user privacy. Possible Values: `true’ (enabled) or `false’ (disabled) |
-| minTimeBetweenSessions | number | No | Determine the minimum time between sessions for which sessions are counted. Possible Values: Values should be rendered in seconds reflecting minutes or hours. The duration can span from 1 minute to 24 hours. Suitable values range between 60 (representing 1 minute) to 86400 (representing 24 hours). |
-| reAttributionWindow | number | No | The number of days after the first install that reinstalls aren’t attributed as new installs. Possible Values: Values should be rendered in days reflecting months. The duration can span from 1 to 24 months. Suitable values range between 30 (representing 1 month) to 730 (representing 24 months). |
-| enableProbabilisticViewThroughAttribution | boolean | No | Enable or disable the probabilistic View-through Attribution (VTA) feature for using probabilistic modeling to attribute conversions to ad impressions that were viewed. Possible values: ’true; (enabled) or `false’ (disabled). |
-| enableSeoAppAttribution | boolean | No | Enable or disable the organic search attribution feature for attributing re-engagements to various organic search engines. Possible values: `true’ (enabled) or `false’ (disabled). |
-| enableIpMasking | boolean | No | Enable or disable the IP Masking feature for anonymizing end-user device IP addresses in raw data reports and in postbacks sent to partners (for events per app). Possible values: `true’ (enabled) or `false’ (disabled). |
-| enableReinstallDetection | boolean | No | For iOS only: Detect reinstalls without depending on advertising IDs. Determining whether an install was a reinstall or a new install enables deduplicating reinstalls from your NOIs. Possible values: `true’ (enabled) or `false’ (disabled). |
-| reEngagementAttribution | object | No | This property configures the Retargeting Attribution feature. When enabled (reEngagementAttribution.isEnabled is set as true) AppsFlyer tracks and attributes re-engagement events to the appropriate source providing valuable insights on user retention and re-engagement campaigns. |
-| reEngagementAttribution.isEnabled | boolean | Yes | Enable or disable the Retargeting Attribution feature to record re-engagements of users engaging with a retargeting campaign. Possible values: `true’ (enabled) or `false’ (disabled). |
-| reEngagementAttribution.minTimeBetweenReEngagements | number | No | Set the minimum time after a re-engagement conversion occurs so that additional re-engagement events won’t be attributed. This is used to avoid over-counting of conversions. Possible Values: Please provide this input in seconds. Valid values range from 3600 (representing 1 hour) to 2592000 (representing 30 days). |
+Use the Get API to retrieve data on user roles and permissions in bulk.
+**Response example:**
+“users”: [
+{
+“username”: “Dan Smith”,
+“email”: “dan.smith@mycompany.com”,
+“role”: “admin”,
+“apps”: “All & future”,
+“media_sources”: “All”,
+“geos”: “All”,
+“last_login”: “Apr 15, 2024”
+}
+]
 
-## Delete app API parameters
+## API parameters for deleting users in bulk
 
-The following URL parameters are needed in the schema for deleting an app:
+Use the DELETE API to delete users in bulk. Include in the URL path a list of user emails to delete, separated by commas.
+**Error messages:**
 
-| API Parameter | Type | Mandatory | Remarks |
-| --- | --- | --- | --- |
-| appId | string | Yes | A valid AppsFlyer app ID |
-| platform | string | Yes | Possible values: https://docs.google.com/document/d/1W6H5WX3WZCyMYuEgHqSorU0WF6UuTQbuxF6AISxw7gc/edit#bookmark=id.uredi0417lsz.
+| Error message | Description |
+| --- | --- |
+| Invalid email address | The format of the email address isn’t correct. |
+| The email doesn’t exist | The email address was either misspelled or doesn’t exist in the account. |
+| Invalid input | Your request didn’t include any email addresses. |
+| Can’t delete account owner | An account owner can’t be deleted. You can refer to the documentation about https://support.appsflyer.com/hc/en-us/articles/4409128270481-User-management#changing-the-account-owner. |
+| Can’t delete your own user | Users cannot delete themselves |

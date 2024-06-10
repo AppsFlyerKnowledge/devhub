@@ -1,7 +1,7 @@
 ---
 title: "Supported formats"
-slug: "bulk-users-management-formats"
-category: 65b6092bf5a65400575b99ec
+slug: "app-management-v2-formats"
+category: 65d1df96a2f25300104f9fe1
 hidden: false
 order: 2
 ---
