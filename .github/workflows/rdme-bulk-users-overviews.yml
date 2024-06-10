@@ -17,7 +17,18 @@ jobs:
       - name: Check out repo 📚
         uses: actions/checkout@v3
 
-      - name: Run `docs` command 🚀
+      - name: Run `docs` overview command 🚀
         uses: readmeio/rdme@v8
         with:
-          rdme: docs ./docs/apis/management/create_bulk_users_overview.md --key=${{ secrets.README_API_KEY }} --version=0.1
+          rdme: docs ./docs/apis/management/bulk_users_management_overview.md --key=${{ secrets.README_API_KEY }} --version=0.1
+      
+      - name: Run `docs` errors command 🚀
+        uses: readmeio/rdme@v8
+        with:
+          rdme: docs ./docs/apis/management/bulk_users_management_errors.md --key=${{ secrets.README_API_KEY }} --version=0.1
+
+      - name: Run `docs` formats command 🚀
+        uses: readmeio/rdme@v8
+        with:
+          rdme: docs ./docs/apis/management/bulk_users_management_formats.md --key=${{ secrets.README_API_KEY }} --version=0.1
+
