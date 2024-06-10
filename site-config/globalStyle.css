@@ -32,13 +32,12 @@
   /* Style for product labels in API reference
   */
   /* Font Styles for Label 1 */
-   .changedTitle {
-       font-size: 16px;
-       color: black !important;
-       margin-bottom: -15px;
-       // background-color: black;
-       border-bottom: 1px solid #EEEEEE;
-  }
+    .changedTitle {
+      font-size: 14px !important;
+      color: black !important;
+      margin-bottom: -15px;
+      border-bottom: 2px solid #c5c5c5;
+    }
   
   .hiddenLabel {
        display: none !important;
