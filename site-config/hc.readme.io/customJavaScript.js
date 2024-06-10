@@ -8,6 +8,56 @@ $(window).on("pageLoad", function (e, state) {
       if (e.target.classList.contains("landing-page__item-link"))
         e.target.style.color = "#434446";
     }); */
+  
+  // change label for API Ref Categories
+  [...document.querySelectorAll("h2")]
+   .filter(a => a.textContent.trim() == "OneLink")
+   .forEach(a => a.classList.add("changedTitle"));
+  
+  [...document.querySelectorAll("h2")]
+   .filter(a => a.textContent.includes(["Raw data report"]))
+   .forEach(a => a.classList.add("changedTitle"));
+  
+  [...document.querySelectorAll("h2")]
+   .filter(a => a.textContent.includes(["Measurements"]))
+   .forEach(a => a.classList.add("changedTitle"));
+  
+  [...document.querySelectorAll("h2")]
+   .filter(a => a.textContent.trim() == "SKAN")
+   .forEach(a => a.classList.add("changedTitle"));
+  
+  [...document.querySelectorAll("h2")]
+   .filter(a => a.textContent.includes(["ROI"]))
+   .forEach(a => a.classList.add("changedTitle"));
+  
+  [...document.querySelectorAll("h2")]
+   .filter(a => a.textContent.includes(["Mobile"]))
+   .forEach(a => a.classList.add("changedTitle"));
+  
+  [...document.querySelectorAll("h2")]
+   .filter(a => a.textContent.includes(["Analytics"]))
+   .forEach(a => a.classList.add("changedTitle"));
+  
+  [...document.querySelectorAll("h2")]
+   .filter(a => a.textContent.includes(["Marketplace"]))
+   .forEach(a => a.classList.add("changedTitle"));
+  
+  [...document.querySelectorAll("h2")]
+   .filter(a => a.textContent.includes(["Audiences"]))
+   .forEach(a => a.classList.add("changedTitle"));
+  
+  [...document.querySelectorAll("h2")]
+   .filter(a => a.textContent.includes(["Management"]))
+   .forEach(a => a.classList.add("changedTitle"));
+  
+  [...document.querySelectorAll("h2")]
+   .filter(a => a.textContent.trim() == "Misc")
+   .forEach(a => a.classList.add("changedTitle"));
+  
+  [...document.querySelectorAll(".rm-Sidebar-list")]
+   .filter(a => a.textContent.includes("HiddenTitle"))
+   .forEach(a => a.classList.add("hiddenLabel"));
+
 
   /* Dynamic styling */
 
