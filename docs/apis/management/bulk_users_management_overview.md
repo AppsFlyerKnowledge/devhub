@@ -1,21 +1,21 @@
 ---
 title: "Overview"
-slug: "create-bulk-users-overview"
+slug: "bulk-users-management-overview"
 category: 65b6092bf5a65400575b99ec
 hidden: false
 order: 0
 ---
 
-**At a glance:** 
+**At a glance:**
 
-Account admins can add multiple users to their accounts in bulk using a dedicated API. The API supports the main user management features in the UI, covers all fields for adding users, and includes the same error verifications.
+Account admins can efficiently execute various bulk actions through a dedicated API. This includes adding and deleting users, as well as retrieving user permission details. The API supports the main user management features found in the UI and includes the same error verifications.
 
 ## API parameters for adding users in bulk
 
 The following table details all API parameters and properties for adding new users in bulk. See schema examples below the table.
 
 > Note
-> 
+>
 > - If any of the mandatory parameters aren't entered in the API call or they're written incorrectly, the associated user isn't added. An [error message](notion://www.notion.so/appsflyerrnd/markdown-3ba0de41bbbd4f258fde67e10a718afe#error-messages) is sent through the API.
 > - There's a maximum limit of **20 user additions per API call**.
 > - There's a maximum **daily limit** of **20 API calls per account**.
@@ -92,3 +92,32 @@ In some cases, users can't be added. The table below describes the reasons for s
 | Something went wrong. Your request couldn’t be completed. | There was a technical issue that prevented the request from being completed. |
 | There was a problem with permissions for this account. | There was an issue with the account that prevented the request from being completed. |
 | Exceeded the limit of adding 20 users in a single API call. | An API call can contain up to 20 user additions. |
+
+## GET users API
+
+Use the Get API to retrieve data on user roles and permissions in bulk.
+**Response example:**
+“users”: [
+{
+“username”: “Dan Smith”,
+“email”: “dan.smith@mycompany.com”,
+“role”: “admin”,
+“apps”: “All & future”,
+“media_sources”: “All”,
+“geos”: “All”,
+“last_login”: “Apr 15, 2024”
+}
+]
+
+## API parameters for deleting users in bulk
+
+Use the DELETE API to delete users in bulk. Include in the URL path a list of user emails to delete, separated by commas.
+**Error messages:**
+
+| Error message | Description |
+| --- | --- |
+| Invalid email address | The format of the email address isn’t correct. |
+| The email doesn’t exist | The email address was either misspelled or doesn’t exist in the account. |
+| Invalid input | Your request didn’t include any email addresses. |
+| Can’t delete account owner | An account owner can’t be deleted. You can refer to the documentation about https://support.appsflyer.com/hc/en-us/articles/4409128270481-User-management#changing-the-account-owner. |
+| Can’t delete your own user | Users cannot delete themselves |
