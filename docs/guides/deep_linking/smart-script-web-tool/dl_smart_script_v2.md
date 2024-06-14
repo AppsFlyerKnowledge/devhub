@@ -265,11 +265,13 @@ See [example](https://appsflyersdk.github.io/appsflyer-onelink-smart-script/exam
 ### Google click ID passthrough
 
 See [example](https://appsflyersdk.github.io/appsflyer-onelink-smart-script/examples/google_clickid.html?inmedia=email&gclid=1a2b3c&keyword=sale%2Bboat) of the conversion of an incoming URL to an outgoing OneLink URL that passes the Google click ID to `af_sub4` and `gclid`.
-**Note**: When a GCLID is found, the script looks for the incoming parameter keyword, and puts the keyword value in the outgoing URL as the value of af_keywords.
+Smart Script automatically maps GCLID to the outgoing URL. Since the GCLID parameter is required for reporting events to Google, you cannot override or disable this auto-mapping or prevent GCLID from appearing in the outgoing URL.
+
 
 ### Facebook click ID passthrough
 
 See [example](https://appsflyersdk.github.io/appsflyer-onelink-smart-script/examples/facebook_clickid.html?inmedia=email&fbclid=7hjy89) of the conversion of an incoming URL to an outgoing OneLink URL that passes the Facebook click ID to `af_sub2` and `fbclid`.
+Smart Script automatically maps FBCLID to the outgoing URL. Since the FBCLID parameter is required for reporting events to Google, you cannot override or disable this auto-mapping or prevent FBCLID from appearing in the outgoing URL.
 
 ### Set attribution and OneLink parameters
 
