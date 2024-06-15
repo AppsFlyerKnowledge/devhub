@@ -368,10 +368,9 @@ Call `requestTrackingAuthorization` where you wish to display the prompt:
 
 > 📘 Note
 > 
-> - You need to import the `AppTrackingTransparency` framework to call [`requestTrackingAuthorization`](doc:https://developer.apple.com/documentation/apptrackingtransparency/attrackingmanager/3547037-requesttrackingauthorization).
+> - You need to import the `AppTrackingTransparency` framework to call [`requestTrackingAuthorization`](https://developer.apple.com/documentation/apptrackingtransparency/attrackingmanager/requesttrackingauthorization(completionhandler:)).
 > - According to [Apple documentation](https://developer.apple.com/documentation/apptrackingtransparency/attrackingmanager/3547037-requesttrackingauthorization): 
 >   - `requestTrackingAuthorization` is invoked **only** if the app is in the `UIApplicationStateActive` state.
->   -
 >   - `requestTrackingAuthorization` **can't** be invoked from App Extensions.
 
 ### Customizing the ATT consent dialog
