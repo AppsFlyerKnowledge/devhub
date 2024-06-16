@@ -181,7 +181,8 @@ In order to support deferred deep linking once the network consent is given we r
 
 ## Testing deferred deep linking
 
-### Before you begin
+### Prerequisites
+
 - Complete UDL [integration](#implementation).
 - [Register your testing device](https://support.appsflyer.com/hc/en-us/articles/207031996).
 - [Enable debug mode](https://dev.appsflyer.com/hc/docs/integrate-ios-sdk#enabling-debug-mode) in the app. 
@@ -232,7 +233,7 @@ You can use an existing OneLink link or ask your marketer to create a new one fo
 
 ## Testing deep linking (Universal Links)
 
-### Before you begin
+### Prerequisites
 - Complete UDL [integration](#implementation).
 - [Register your testing device](https://support.appsflyer.com/hc/en-us/articles/207031996).
 - [Enable debug mode](https://dev.appsflyer.com/hc/docs/integrate-ios-sdk#enabling-debug-mode) in the app. 
