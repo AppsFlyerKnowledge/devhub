@@ -36,15 +36,14 @@ The flow works as follows:
 [`DeepLinkResult`]: https://dev.appsflyer.com/hc/docs/deeplinkresult
 [`DeepLink`]: https://dev.appsflyer.com/hc/docs/deeplink
 
-## Prerequisites
+## Planning
 
 * UDL requires AppsFlyer Android SDK V6.1+.
-
-## Planning
 
 When setting up OneLinks, the marketer uses parameters to create the links, and the developer customizes the behavior of the app based on the values received. It's the developer's responsibility to make sure the parameters are handled correctly in the app, for both in-app routing, and personalizing data in the link.
 
 **To plan the OneLink:**
+
 1. Get from the marketer the desired behavior and personal experience a user gets when they click the URL.
 2. Based on the desired behavior, plan the `deep_link_value` and other parameters that are needed to give the user the desired personal experience.
    * The `deep_link_value` is set by the marketer in the URL and used by the developer to redirect the user to a specific place inside the app. For example, if you have a fruit store and want to direct users to apples, the value of `deep_link_value` can be `apples`.

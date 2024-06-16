@@ -36,10 +36,10 @@ The flow works as follows:
 [`DeepLinkResult`]: https://dev.appsflyer.com/hc/docs/deeplinkresult-1
 [`DeepLink`]: https://dev.appsflyer.com/hc/docs/deeplink-1
 
-## Prerequisites
+## Planning
+
 * UDL requires AppsFlyer iOS SDK V6.1+.
 
-## Planning
 When setting up OneLink, the marketer uses parameters to create the links, and the developer customizes the behavior of the app based on the values received. It is the developer's responsibility to make sure the parameters are handled correctly in the app, for both in-app routing, and personalizing data in the link.
 
 **To plan the OneLink:**
