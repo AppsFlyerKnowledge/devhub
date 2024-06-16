@@ -50,6 +50,14 @@ When setting up OneLink, the marketer uses parameters to create the links, and t
     * The `deep_link_sub1-10`  parameters can also be added to the URL to help personalize the user experience. For example, to give a 10% discount, the value of `deep_link_sub1` can be `10`.
 
 ## Implementation
+
+[block:html]
+{
+  "html": "<style>\n  .containerBox {\n    right: 0;\n    display: flex;\n    justify-content: flex-start;\n    border-radius: 10px;\n    border: 1px solid #d8d8d8;\n    padding: 20px 10px;\n    padding-right: 50px;\n    padding-top: 10px;\n  }\n .djButton {\n    padding: 8px 16px;\n    border-radius: 4px;\n    text-decoration: none;\n    color: white;\n    font-weight: 600;\n   \tcursor: pointer;\n    border: none;\n    background-color: rgb(3, 109, 235) !important;\n  }\n  \n  .djButton:hover {\n  \tbackground-color: #0360ce !important;\n    transition: 0.3s;\n  }\n</style>\n\n<div class=\"containerBox\">\n  <img src=\"https://dj.dev.appsflyer.com/images/DJ_illustratration.svg\" style=\"width: 180px; margin: 0 0; margin-right: 20px\">\n  <div>\n    <h1 style=\"margin-top: 20px\">\n      Let's save you some time  >>\n    </h1>   \n      <h3>\n        Set Deep Linking with our SDK integration wizard\n    </h3>\n      <button onclick=\"window.open('https://dj.dev.appsflyer.com/?sourceos=ios&utm_source=devhub&utm_medium=dl_ios_unified_deep_linking');\" target=\"_blank\" class=\"djButton\">\n      Let's go\n      </button>\n  </div>\n</div>\n"
+}
+[/block]
+
+
 Implement the UDL API logic based on the chosen parameters and values.
 1. Assign the `AppDelegate` using `self` to [`AppsFlyerLib.shared().deepLinkDelegate`](https://dev.appsflyer.com/hc/docs/appsflyerlib-1#deeplinkdelegate).
 2. Implement application function to allow:
