@@ -13,22 +13,8 @@ updatedAt: "2023-02-02T09:10:57.367Z"
 >
 > For new users, the UDL method only returns parameters relevant to deferred deep linking: `deep_link_value` and `deep_link_sub1-10`. If you try to get any other parameters (`media_source`, `campaign`, `af_sub1-5`, etc.), they return null.
 
-
-Step-by-step example
---------------------------------
-[block:tutorial-tile]
-{
-  "title": "Unified Deep Linking (UDL) API in iOS",
-  "emoji": "🍏",
-  "backgroundColor": "#cef2d1",
-  "slug": "unified-deep-linking-udl-api-in-ios",
-  "_id": "60a3e81226e6060010cea750",
-  "id": "60a3e81226e6060010cea750",
-  "link": "https://dev.appsflyer.com/v0.1/recipes/unified-deep-linking-udl-api-in-ios",
-  "align": "default"
-}
-[/block]
 ## Flow
+
 ![iOS UDL flow!](https://files.readme.io/b1079fb-6577_Unified_Deep_Link_flow_iOS.png "iOS UDL flow")
 
 The flow works as follows:

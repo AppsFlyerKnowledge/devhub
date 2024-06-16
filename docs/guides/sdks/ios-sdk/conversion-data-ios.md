@@ -18,19 +18,6 @@ Getting conversion data requires you first [integrate the SDK](doc:integrate-ios
 Getting conversion data in iOS SDK
 ----------------------------------
 
-
-[block:tutorial-tile]
-{
-  "backgroundColor": "#01f476",
-  "emoji": "👟",
-  "id": "615d904dc6b5e20016df6293",
-  "link": "https://dev.appsflyer.com/v0.1/recipes/get-conversion-data-in-ios",
-  "slug": "get-conversion-data-in-ios",
-  "title": "Get Conversion Data in iOS"
-}
-[/block]
-
-
 ```objectivec
 #import "AppDelegate.h"
 #import <AppsFlyerLib/AppsFlyerLib.h>

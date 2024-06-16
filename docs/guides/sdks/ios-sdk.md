@@ -14,20 +14,7 @@ hidden: false
   "image": "https://embed-ssl.wistia.com/deliveries/479ad78a31932db5e727279e79bbdfe9.jpg?image_crop_resized=960x540"
 }
 [/block]
-Step-by-step example
---------------------------------
-[block:tutorial-tile]
-{
-  "title": "Starting the SDK in iOS",
-  "emoji": "🏆",
-  "backgroundColor": "#def7e8",
-  "slug": "starting-the-sdk-in-ios",
-  "_id": "60a415e196cfff0073c81954",
-  "id": "60a415e196cfff0073c81954",
-  "link": "https://dev.appsflyer.com/v0.1/recipes/starting-the-sdk-in-ios",
-  "align": "default"
-}
-[/block]
+
 iOS SDK Implementation Flow
 --------------------------------
 1. <a href="https://dev.appsflyer.com/hc/docs/install-ios-sdk">SDK installation</a>

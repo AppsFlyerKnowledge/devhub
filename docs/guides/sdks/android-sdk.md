@@ -14,26 +14,12 @@ hidden: false
   "image": "https://embed-ssl.wistia.com/deliveries/7566f6c2d82b5da634c1411a8ea231c1.jpg?image_crop_resized=960x540"
 }
 [/block]
-Step-by-step example
---------------------------------
-[block:tutorial-tile]
-{
-  "title": "Starting the SDK in Android",
-  "emoji": "🥇",
-  "backgroundColor": "#0197f4",
-  "slug": "starting-the-sdk-in-android",
-  "_id": "609928242e7f38004f7f2c90",
-  "id": "609928242e7f38004f7f2c90",
-  "link": "https://dev.appsflyer.com/v0.1/recipes/starting-the-sdk-in-android",
-  "align": "default"
-}
-[/block]
+
 Android SDK Implementation Flow
 --------------------------------
 1. <a href="https://dev.appsflyer.com/hc/docs/install-android-sdk">SDK installation</a>
 2. <a href="https://dev.appsflyer.com/hc/docs/integrate-android-sdk">SDK integration</a>
 3. <a href="https://dev.appsflyer.com/hc/docs/testing-android">Integration testing</a>
-
 
 Core capabilities
 -----------------

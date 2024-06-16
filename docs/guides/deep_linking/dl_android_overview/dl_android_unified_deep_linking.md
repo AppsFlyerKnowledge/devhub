@@ -13,22 +13,8 @@ updatedAt: "2023-02-02T09:10:27.354Z"
 >
 > For new users, the UDL method only returns parameters relevant to deferred deep linking: `deep_link_value` and `deep_link_sub1-10`. If you try to get any other parameters (`media_source`, `campaign`, `af_sub1-5`, etc.), they return null.
 
-
-Step-by-step example
---------------------------------
-[block:tutorial-tile]
-{
-  "title": "Unified Deep Linking (UDL) API in Android",
-  "emoji": "🤖",
-  "backgroundColor": "#5fd3a7",
-  "slug": "unified-deep-linking-udl-api-in-android",
-  "_id": "6092865c4590b4006d31cc24",
-  "id": "6092865c4590b4006d31cc24",
-  "link": "https://dev.appsflyer.com/v0.1/recipes/unified-deep-linking-udl-api-in-android",
-  "align": "default"
-}
-[/block]
 ## Flow
+
 ![Android UDL flow!](https://files.readme.io/7309a5f-6577_Unified_Deep_Link_Android.png "Android UDL flow")
 
 The flow works as follows:

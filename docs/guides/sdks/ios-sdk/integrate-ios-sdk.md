@@ -19,21 +19,6 @@ order: 3
 
 ## Initializing the iOS SDK
 
-
-[block:tutorial-tile]
-{
-  "backgroundColor": "#def7e8",
-  "emoji": "🏆",
-  "id": "60a415e196cfff0073c81954",
-  "link": "https://dev.appsflyer.com/v0.1/recipes/starting-the-sdk-in-ios",
-  "slug": "starting-the-sdk-in-ios",
-  "title": "Starting the SDK in iOS"
-}
-[/block]
-
-
-
-
 **Step 1: Import dependencies**  
 Import `AppsFlyerLib`:
 

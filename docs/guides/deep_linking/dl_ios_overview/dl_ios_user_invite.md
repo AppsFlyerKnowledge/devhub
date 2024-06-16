@@ -15,7 +15,6 @@ For an introduction, see [user invite](doc:user-invite-attribution).
 
 Want to see a full example? check out the recipe:
 
-
 [block:tutorial-tile]
 {
   "title": "Get Conversion Data in Android",

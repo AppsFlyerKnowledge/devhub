@@ -20,19 +20,6 @@ order: 3
 
 ## Initializing the Android SDK
 
-
-[block:tutorial-tile]
-{
-  "backgroundColor": "#018FF4",
-  "emoji": "🐣",
-  "id": "615d66bdd3797c004251ba3e",
-  "link": "https://dev.appsflyer.com/v0.1/recipes/get-conversion-data-in-android",
-  "slug": "get-conversion-data-in-android",
-  "title": "Get Conversion Data in Android"
-}
-[/block]
-
-
 It's recommended to initialize the SDK in the [global Application class/subclass]. That is to ensure the SDK can start in any scenario (for example, deep linking).
 
 **Step 1: Import AppsFlyerLib**  
