@@ -606,7 +606,7 @@ paths:
     put:
       tags:
         - Authentication Token
-      summary: Set Push API authentication token
+      summary: Set Push API Authentication Token
       parameters:
         - name: app_id
           in: path
@@ -626,9 +626,9 @@ paths:
               properties:
                 token:
                   type: string
-                  maxLength: 600
+                  maxLength: 2000
                   pattern: '^[ 	\-_.a-zA-Z0-9]*$'
-                  description: "The token value should be a string with a maximum of 600 characters, 
+                  description: "The token value should be a string with a maximum of 2,000 characters, 
                                containing only the characters a-z, A-Z, 0-9, and the special characters [ \t-_.]."
                 token_name:
                   oneOf:
@@ -807,7 +807,7 @@ paths:
     delete:
       tags:
         - Authentication Token
-      summary: Delete Push API authentication token
+      summary: Delete Push API Authentication Token
       parameters:
         - name: app_id
           in: path
