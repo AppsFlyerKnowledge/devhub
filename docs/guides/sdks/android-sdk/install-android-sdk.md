@@ -170,7 +170,7 @@ If you’re targeting **Android 12** and above, and you have your own backup rul
 </data-extraction-rules>
 
 ```
-### Merge backup rules Android 11 and below
+### Merge backup rules in Android 11 and below
 
 If you’re also targeting **Android 11** and lower, and you have your own backup rules specified (`android:fullBackupContent="@xml/my_rules"`), in addition to the instructions above, please merge your backup rules with the AppsFlyer rules manually by adding the following rule:
 
