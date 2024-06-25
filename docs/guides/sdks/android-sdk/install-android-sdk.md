@@ -124,6 +124,64 @@ If you are using ProGuard and you encounter a warning regarding our `AFKeystoreW
 -keep class com.appsflyer.** { *; }
 -keep class kotlin.jvm.internal.** { *; }
 ```
+## Backup rules
+
+The SDK's AndroidManifest.xml includes rules to opt out of backing up the Shared Preferences data. This is done to avoid retaining the same counters and AppsFlyer ID during reinstallation, thereby preventing the accurate detection of new installs or re-installs.
+
+To merge the SDK backup rules with your app backup rules and to prevent conflicts, perform the following instructions for each use case. 
+
+### Fix confilict with fullBackupContent=”true”
+
+If you add `android:fullBackupContent="true"` in the `AndroidManifest.xml`, you might get the following error:
+
+```
+Manifest merger failed : Attribute application@fullBackupContent value=(true)
+```
+
+To fix this error, add `tools:replace="android:fullBackupContent"` in the `<application>` tag in the `AndroidManifest.xml` file.
+
+### Fix conflict with allowBackup=”false”
+
+If you add `android:allowBackup="false"` in the `AndroidManifest.xml`, you might get the following error:
+
+```
+Error:
+	Attribute application@allowBackup value=(false) from AndroidManifest.xml:
+	is also present at [com.appsflyer:af-android-sdk:6.14.0] AndroidManifest.xml: value=(true).
+	Suggestion: add 'tools:replace="android:allowBackup"' to <application> element at AndroidManifest.xml to override.
+
+```
+
+To fix this error, add `tools:replace="android:allowBackup”` in the `<application>` tag in the `AndroidManifest.xml` file.
+
+
+### Merge backup rules in Android 12 and above
+
+If you’re targeting **Android 12** and above, and you have your own backup rules specified (`android:dataExtractionRules="@xml/my_rules"`), in addition to the instructions above, please merge your back rules with the AppsFlyer rules manually by adding the following rule:
+
+```xml AndroidManfiest.xml
+<data-extraction-rules>
+    <cloud-backup>
+        <exclude domain="sharedpref" path="appsflyer-data"/>
+    </cloud-backup>
+    <device-transfer>
+        <exclude domain="sharedpref" path="appsflyer-data"/>
+    </device-transfer>
+</data-extraction-rules>
+
+```
+### Merge backup rules Android 11 and below
+
+If you’re also targeting **Android 11** and lower, and you have your own backup rules specified (`android:fullBackupContent="@xml/my_rules"`), in addition to the instructions above, please merge your backup rules with the AppsFlyer rules manually by adding the following rule:
+
+```xml AndroidManfiest.xml
+<full-backup-content>
+    ...//your custom rules
+    <exclude domain="sharedpref" path="appsflyer-data"/>
+</full-backup-content>
+
+```
+
 
 ## Adding store referrer libraries
 The AppsFlyer SDK supports several store referrer libraries. Using a store referrer improves attribution accuracy. 
@@ -235,27 +293,9 @@ dependencies {
   "body": "Samsung store referrer is supported out-of-the-box starting SDK `V6.1.1` and does not require any additional integration."
 }
 [/block]
+
 Known issues
 ------------
-
-### Backup rules
-
-If you add `android:fullBackupContent="true"` inside the <application> tag in the `AndroidManifest.xml`, you might get the following error:
-
-```
-Manifest merger failed : Attribute application@fullBackupContent value=(true)
-```
-
-To fix this error, add tools:replace="android:fullBackupContent" in the `<application>` tag in the `AndroidManifest.xml` file.
-
-If you have your own backup rules specified (`android:fullBackupContent="@xml/my_rules"`), in addition to the instructions above, please merge them with AppsFlyer rules manually by adding the following rule:
-
-```
-<full-backup-content>
-    ...//your custom rules
-    <exclude domain="sharedpref" path="appsflyer-data"/>
-</full-backup-content>
-```
 
 ### Missing resource files
 
