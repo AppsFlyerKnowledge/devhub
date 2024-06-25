@@ -130,9 +130,9 @@ The SDK's AndroidManifest.xml includes rules to opt out of backing up the Shared
 
 To merge the SDK backup rules with your app backup rules and to prevent conflicts, perform the following instructions for each use case. 
 
-### fullBackupContent=”true”
+### Fix confilict with fullBackupContent=”true”
 
-If you add `android:fullBackupContent="true"` inside the tag in the `AndroidManifest.xml`, you might get the following error:
+If you add `android:fullBackupContent="true"` in the `AndroidManifest.xml`, you might get the following error:
 
 ```
 Manifest merger failed : Attribute application@fullBackupContent value=(true)
@@ -140,9 +140,9 @@ Manifest merger failed : Attribute application@fullBackupContent value=(true)
 
 To fix this error, add `tools:replace="android:fullBackupContent"` in the `<application>` tag in the `AndroidManifest.xml` file.
 
-### allowBackup=”false”
+### Fix conflict with allowBackup=”false”
 
-If you add `android:allowBackup="false"`inside the tag in the `AndroidManifest.xml`, you might get the following error:
+If you add `android:allowBackup="false"` in the `AndroidManifest.xml`, you might get the following error:
 
 ```
 Error:
@@ -154,19 +154,8 @@ Error:
 
 To fix this error, add `tools:replace="android:allowBackup”` in the `<application>` tag in the `AndroidManifest.xml` file.
 
-### fullBackupContent="@xml/my_rules"
 
-If you’re also targeting **Android 11** and lower, and you have your own backup rules specified (`android:fullBackupContent="@xml/my_rules"`), in addition to the instructions above, please merge your backup rules with the AppsFlyer rules manually by adding the following rule:
-
-```xml AndroidManfiest.xml
-<full-backup-content>
-    ...//your custom rules
-    <exclude domain="sharedpref" path="appsflyer-data"/>
-</full-backup-content>
-
-```
-
-### dataExtractionRules="@xml/my_rules"
+### Merge backup rules in Android 12 and above
 
 If you’re targeting **Android 12** and above, and you have your own backup rules specified (`android:dataExtractionRules="@xml/my_rules"`), in addition to the instructions above, please merge your back rules with the AppsFlyer rules manually by adding the following rule:
 
@@ -181,6 +170,18 @@ If you’re targeting **Android 12** and above, and you have your own backup rul
 </data-extraction-rules>
 
 ```
+### Merge backup rules Android 11 and below
+
+If you’re also targeting **Android 11** and lower, and you have your own backup rules specified (`android:fullBackupContent="@xml/my_rules"`), in addition to the instructions above, please merge your backup rules with the AppsFlyer rules manually by adding the following rule:
+
+```xml AndroidManfiest.xml
+<full-backup-content>
+    ...//your custom rules
+    <exclude domain="sharedpref" path="appsflyer-data"/>
+</full-backup-content>
+
+```
+
 
 ## Adding store referrer libraries
 The AppsFlyer SDK supports several store referrer libraries. Using a store referrer improves attribution accuracy. 
