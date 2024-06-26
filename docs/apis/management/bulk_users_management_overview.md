@@ -10,7 +10,7 @@ order: 0
 
 Account admins can efficiently execute various bulk actions through a dedicated API. This includes adding and deleting users, as well as retrieving user permission details. The API supports the main user management features found in the UI and includes the same error verifications.
 
-## API parameters for adding users in bulk
+## Add users in bulk
 
 The following table details all API parameters and properties for adding new users in bulk. See schema examples below the table.
 
@@ -60,7 +60,7 @@ This schema limits user access to apps (no future apps), media sources, and geos
 "geos": ["angola", "aruba"]
 ```
 
-## Error messages
+### Error messages
 
 In some cases, users can't be added. The table below describes the reasons for such cases and explanations about the error messages.
 
@@ -93,7 +93,7 @@ In some cases, users can't be added. The table below describes the reasons for s
 | There was a problem with permissions for this account. | There was an issue with the account that prevented the request from being completed. |
 | Exceeded the limit of adding 20 users in a single API call. | An API call can contain up to 20 user additions. |
 
-## GET users API
+## Get users API
 
 Use the Get API to retrieve data on user roles and permissions in bulk.
 **Response example:**
@@ -109,7 +109,7 @@ Use the Get API to retrieve data on user roles and permissions in bulk.
 }
 ]
 
-## API parameters for deleting users in bulk
+## Delete users in bulk
 
 Use the DELETE API to delete users in bulk. Include in the URL path a list of user emails to delete, separated by commas.
 **Error messages:**
