@@ -140,6 +140,17 @@ Manifest merger failed : Attribute application@fullBackupContent value=(true)
 
 To fix this error, add `tools:replace="android:fullBackupContent"` in the `<application>` tag in the `AndroidManifest.xml` file.
 
+### Fix conflict with dataExtractionRule=”true”
+
+If you add `android:dataExtractionRules="true"` in the `AndroidManifest.xml`, you might get the following error:
+
+```
+Manifest merger failed : Attribute application@dataExtractionRules value=(true)
+
+```
+
+To fix this error, add `tools:replace="android:dataExtractionRules"` in the `<application>` tag in the `AndroidManifest.xml` file.
+
 ### Fix conflict with allowBackup=”false”
 
 If you add `android:allowBackup="false"` in the `AndroidManifest.xml`, you might get the following error:
