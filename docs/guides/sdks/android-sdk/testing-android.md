@@ -188,8 +188,8 @@ The app is missing the Google Play Services dependencies. This might prevent the
 Add the following dependencies to the app-level `build.gradle` file:
 
 ```groovy
-implementation 'com.google.android.gms:play-services-base:15.0.1'
-implementation 'com.google.android.gms:play-services-ads:15.0.1'
+implementation 'com.google.android.gms:play-services-base:<current-version>'
+implementation 'com.google.android.gms:play-services-ads-identifier:<current-version>'
 ```
 
 ### I get response 403 on install or event recording
