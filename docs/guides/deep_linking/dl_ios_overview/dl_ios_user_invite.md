@@ -38,7 +38,7 @@ To implement user invite attribution, complete the following steps:
 
 1. [Set up invite link generation](#set-up-invite-link-generation) to generate invite links.
 2. <span class="annotation-optional">Optional</span> [Log the invite link creation](#log-invite-link-creation-events).
-3. Set up [Unified Deeplinking](doc:unified-deep-linking-udl-1) (UDL)
+3. Set up [Unified Deeplinking](doc:dl_ios_unified_deep_linking) (UDL)
 4. <span class="annotation-optional">Optional</span> [Retrieve referrer data from user invite links](#set-up-udl-for-user-invite-attribution).
 5. <span class="annotation-optional">Optional</span> Set up [referrer rewards](#reward-referrers).
 
