@@ -54,7 +54,8 @@ components:
 
   requestBodies: 
      CommonBody:
-      description: "common body for impression and click"
+      description: |
+          >  **Important** Make sure the body parameters are not URL encoded.
       required: true
       content:
         application/json:
