@@ -105,6 +105,34 @@ func sampleCodeValidateAndLog(){
   }
 }
 ```
+## Testing purchase validation in Sandbox mode
+
+To test purchase validation using a sandboxed environment, add the following code:
+
+```objectivec
+[AppsFlyerLib shared].useReceiptValidationSandbox = YES;
+```
+```swift
+AppsFlyerLib.shared().useReceiptValidationSandbox = true
+```
+
+> 📘 Note
+> 
+> This code must be removed from your production builds.
+
+Validating an in-app purchase automatically generates and sends an in-app purchase event to AppsFlyer. Its `eventValues` will look something like this:
+
+```json
+{
+   "some_parameter": "some_value", // from additional_event_values
+   "af_currency": "USD", // from currency
+   "af_content_id" :"test_id", // from purchase
+   "af_revenue": "10", // from revenue
+   "af_quantity": "1", // from purchase
+   "af_validated": true // flag that AF verified the purchase
+}
+```
+
 ## validateAndLogInAppPurchase (LEGACY)
 
 ### Purchase validation using validateAndLogInAppPurchase
@@ -179,32 +207,4 @@ AppsFlyerLib.shared().validateAndLogInAppPurchase (
       return
     }     
     })
-```
-
-#### Testing purchase validation in Sandbox mode
-
-To test purchase validation using a sandboxed environment, add the following code:
-
-```objectivec
-[AppsFlyerLib shared].useReceiptValidationSandbox = YES;
-```
-```swift
-AppsFlyerLib.shared().useReceiptValidationSandbox = true
-```
-
-> 📘 Note
-> 
-> This code must be removed from your production builds.
-
-Validating an in-app purchase automatically generates and sends an in-app purchase event to AppsFlyer. Its `eventValues` will look something like this:
-
-```json
-{
-   "some_parameter": "some_value", // from additional_event_values
-   "af_currency": "USD", // from currency
-   "af_content_id" :"test_id", // from purchase
-   "af_revenue": "10", // from revenue
-   "af_quantity": "1", // from purchase
-   "af_validated": true // flag that AF verified the purchase
-}
 ```
