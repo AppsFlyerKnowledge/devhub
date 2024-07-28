@@ -16,9 +16,13 @@ The SDK offers two alternative methods for gathering consent data:
 
 - **Through a Consent Management Platform (CMP)**: If the app uses a CMP that complies with the [Transparency and Consent Framework (TCF) v2.2 protocol](https://iabeurope.eu/tcf-supporting-resources/), the SDK can automatically retrieve the consent details.  
 
-  OR
+**OR**
 
 - **Through a dedicated SDK API**: Developers can pass Google's required consent data directly to the SDK using a specific API designed for this purpose.
+
+> 📘 Note
+> 
+> AppsFlyer recommends using only one of the above methods per specific event sent. If both methods are sent for the same event, AppsFlyer will prioritize the consent data sent via the dedicated SDK API.
 
 ## Use CMP to collect consent data
 
