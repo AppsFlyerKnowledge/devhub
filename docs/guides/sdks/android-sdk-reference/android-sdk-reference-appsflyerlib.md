@@ -456,8 +456,6 @@ See [initializing the SDK](doc:integrate-android-sdk#initializing-the-android-sd
 boolean isPreInstalledApp(Context context)
 ```
 
-
-
 **Description**  
 Boolean indicator for preinstall by Manufacturer.
 
@@ -480,8 +478,6 @@ Boolean indicator for preinstall by Manufacturer.
 boolean isStopped()
 ```
 
-
-
 **Description**  
 Check if the SDK was stopped.
 
@@ -495,6 +491,74 @@ This function takes no parameters.
 | `boolean ` | `true` if stopped, `false` otherwise. |
 
 **Usage example**
+
+### logAdRevenue
+(Supported from SDK v.6.15.0)
+
+**Method signature**
+
+```objectivec
+-(void)logAdRevenue:(AFAdRevenueData *)adRevenueData additionalParameters:(NSDictionary * **_Nullable**)additionalParameters;
+```
+**Description**
+
+The method sends an ad revenue event to AppsFlyer. See more information in [Ad revenue](doc:ad-revenue-2).
+
+
+**Input parameters**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| `adRevenueData`* | [`AFAdRevenueData*`](#afadrevenuedata) | An object that encapsulates all the mandatory parameters of the adRevenue event. The object is passed to the logAdRevenue method. |
+| `additionalParameters` | NSDictionary * _Nullable | An optional dictionary containing additional parameters to log with the adRevenue event. |
+
+**Returns**
+
+`void`.
+
+#### AFAdRevenueData
+
+An object that encapsulates all mandatory `adRevenue` data received from the mediation network.
+
+**Definition**
+
+```objectivec
+AFAdRevenueData {
+	(NSString * **_Nonnull**)monetizationNetwork
+	(AppsFlyerAdRevenueMediationNetworkType)mediationNetwork
+	(NSString * **_Nonnull**)currencyIso4217Code
+	(NSNumber * **_Nonnull**)eventRevenue
+}
+```
+
+**AFAdRevenueData parameters**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| monetizationNetwork | NSString | The monetization network name. |
+| mediationNetwork | [`AppsFlyerAdRevenueMediationNetworkType`](#appsflyeradrevenuemediationnetworktype) | The mediation network enum. |
+| currencyIso4217Code | NSString | The ad revenue event currency. currencyIso4217Code should be ISO 4217 currency code as String |
+| eventRevenue | NSNumber | The ad revenue event amount. |
+
+#### AppsFlyerAdRevenueMediationNetworkType
+
+| Name | Type | Comments |
+| --- | --- | --- |
+| ironsource | String |  |
+| applovinmax | String |  |
+| googleadmob | String |  |
+| fyber | String |  |
+| appodeal | String |  |
+| admost | String |  |
+| topon | String |  |
+| tradplus | String |  |
+| yandex | String |  |
+| chartboost | String |  |
+| unity | String |  |
+| customMediation | String | The mediation solution is not on the list of supported mediation partners. |
+| directMonetizationNetwork | String | The app integrates directly with monetization networks without mediation. |
+
+
 
 ### logEvent
 
