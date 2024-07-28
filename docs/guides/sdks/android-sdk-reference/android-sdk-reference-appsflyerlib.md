@@ -539,10 +539,10 @@ data class AFAdRevenueData(
 
 | Name | Type | Description |
 | --- | --- | --- |
-| monetizationNetwork | String | The monetization network name. |
-| mediationNetwork | [`MediationNetwork`](#mediationnetwork) | The mediation network enum. |
-| currencyIso4217Code | String | The ad revenue event currency. currencyIso4217Code should be ISO 4217 currency code as String |
-| revenue | Double | The ad revenue event amount. |
+| `monetizationNetwork` | String | The monetization network name. |
+| `mediationNetwork` | [`MediationNetwork`](#mediationnetwork) | The mediation network enum. |
+| `currencyIso4217Code` | String | The ad revenue event currency is a String validated against currencyIso4217Code |
+| `revenue` | Double | The ad revenue event amount. |
 
 #### MediationNetwork
 

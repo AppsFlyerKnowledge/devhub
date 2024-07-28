@@ -800,10 +800,10 @@ AFAdRevenueData {
 
 | Name | Type | Description |
 | --- | --- | --- |
-| monetizationNetwork | NSString | The monetization network name. |
-| mediationNetwork | [`AppsFlyerAdRevenueMediationNetworkType`](#appsflyeradrevenuemediationnetworktype) | The mediation network enum. |
-| currencyIso4217Code | NSString | The ad revenue event currency. currencyIso4217Code should be ISO 4217 currency code as String |
-| eventRevenue | NSNumber | The ad revenue event amount. |
+| `monetizationNetwork` | NSString | The monetization network name. |
+| `mediationNetwork` | [AppsFlyerAdRevenueMediationNetworkType](#appsflyeradrevenuemediationnetworktype) | The mediation network enum. |
+| `currencyIso4217Code` | NSString | The ad revenue event currency is a String validated against currencyIso4217Code |
+| `eventRevenue` | NSNumber | The ad revenue event amount. |
 
 #### AppsFlyerAdRevenueMediationNetworkType
 
