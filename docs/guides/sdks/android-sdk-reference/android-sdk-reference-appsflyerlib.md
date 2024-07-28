@@ -849,7 +849,8 @@ Register a validation listener for the `validateAndLogInAppPurchase` API.
 
 **Usage example**
 
-### sendAdRevenue
+### sendAdRevenue (LEGACY)
+(Supported until SDK v.6.14.2 For versions including and above v.6.15.0 use [`logAdRevenue`](#logadrevenue))
 
 **Method signature**
 
