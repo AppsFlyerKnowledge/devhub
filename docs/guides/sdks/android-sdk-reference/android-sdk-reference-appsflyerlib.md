@@ -494,7 +494,8 @@ This function takes no parameters.
 
 
 ### logAdRevenue
-(Supported from SDK v.6.15.0)
+
+<span class="annotation-added">Added in v6.15.0</span>
 **Method signature**
 
 ```java
@@ -852,7 +853,9 @@ Register a validation listener for the `validateAndLogInAppPurchase` API.
 **Usage example**
 
 ### sendAdRevenue (LEGACY)
-(Supported until SDK v.6.14.2 For versions including and above v.6.15.0 use [`logAdRevenue`](#logadrevenue))
+<span class="annotation-deprecated">Deprecated in v6.15.0</span>  
+
+(Supported until SDK v.6.14.2 For versions including and above v6.15.0 use [`logAdRevenue`](#logadrevenue))
 
 **Method signature**
 

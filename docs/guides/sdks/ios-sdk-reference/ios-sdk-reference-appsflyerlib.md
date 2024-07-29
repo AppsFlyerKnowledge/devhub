@@ -758,7 +758,7 @@ Enable AppsFlyer to handle a push notification.
 `void`.
 
 ### logAdRevenue
-(Supported from SDK v.6.15.0)
+<span class="annotation-added">Added in v6.15.0</span>
 
 **Method signature**
 
@@ -774,7 +774,7 @@ The method sends an ad revenue event to AppsFlyer. See more information in [Ad
 
 | Name | Type | Description |
 | --- | --- | --- |
-| `adRevenueData`* | [`AFAdRevenueData*`](#afadrevenuedata) | An object that encapsulates all the mandatory parameters of the adRevenue event. The object is passed to the logAdRevenue method. |
+| `adRevenueData` | [`AFAdRevenueData*`](#afadrevenuedata) | An object that encapsulates all the mandatory parameters of the adRevenue event. The object is passed to the logAdRevenue method. |
 | `additionalParameters` | NSDictionary * _Nullable | An optional dictionary containing additional parameters to log with the adRevenue event. |
 
 **Returns**
@@ -800,10 +800,10 @@ AFAdRevenueData {
 
 | Name | Type | Description |
 | --- | --- | --- |
-| `monetizationNetwork` | NSString | The monetization network name. |
+| `monetizationNetwork` | String | The monetization network name. |
 | `mediationNetwork` | [AppsFlyerAdRevenueMediationNetworkType](#appsflyeradrevenuemediationnetworktype) | The mediation network enum. |
-| `currencyIso4217Code` | NSString | The ad revenue event currency is a String validated against currencyIso4217Code |
-| `eventRevenue` | NSNumber | The ad revenue event amount. |
+| `currencyIso4217Code` | String | The ad revenue event currency is a String validated against currencyIso4217Code |
+| `eventRevenue` | Double | The ad revenue event amount. |
 
 #### AppsFlyerAdRevenueMediationNetworkType
 
