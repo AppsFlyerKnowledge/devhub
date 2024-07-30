@@ -7,29 +7,56 @@ excerpt: "Impression-level ad revenue reporting by SDK"
 hidden: false
 order: 8
 ---
-**At a glance**: The AppsFlyer ad revenue SDK connector enables the ad networks to report ad revenue using impression-level granularity.
+The app sends impression revenue data to the AppsFlyer SDK. The SDK then generates an ad revenue event, `af_ad_revenue`, and sends it to AppsFlyer. These impression events are collected and processed in AppsFlyer, and the revenue is attributed to the original UA source. To learn more about ad revenue see [here](https://support.appsflyer.com/hc/en-us/articles/217490046#connect-to-ad-revenue-integrated-partners).
 
-## Overview
+Depending on your SDK version there are two ways for the SDK to generate an ad revenue event.
 
-**Ad revenue reporting options**
+- For SDK 6.15.0 and above see [`here`](#log-ad-revenue-for-sdk-6150-and-above).
+- For SDK 6.14.2 and below see [`here`](#legacy-log-ad-revenue-for-sdk-6142-and-below).
 
-Ad revenue is reported to AppsFlyer by either aggregate granularity (via API) or impression-level granularity (via SDK). Impression-level data via SDK has better data freshness and earlier availability in AppsFlyer.
+## Log ad revenue (for SDK 6.15.0 and above)
 
-This document details how to send impression-level ad revenue provided by partners in the app to AppsFlyer.
-> 📘 **Note**
->
-> The marketer also needs to configure the integration for each mediation partner in AppsFlyer, either impression-level (via SDK) or impression-level (via SDK) with device-level (via S2S API). [Learn more](https://support.appsflyer.com/hc/en-us/articles/217490046#connect-to-ad-revenue-integrated-partners)
+When an impression with revenue occurs invoke the [`logAdRenvue`](doc:android-sdk-reference-appsflyerlib#logadrevenue) method with the revenue details of the impression.  
 
-### Reporting ad revenue using the SDK
+**To implement the method, perform the following steps:**
 
-**SDK principles of operation**
+1. Create an instance of [`AFAdRevenueData`](doc:android-sdk-reference-appsflyerlib#afadrevenuedata) with the revenue details of the impression to be logged.  
+2. If you want to add additional details to the ad revenue event, populate a dictionary with key-value pairs.
+3. Invoke the  `logAdRenvue` method with the following arguments:
+    - The `AFAdRevenueData` object you created in step 1.
+    - The dictionary with the additional details you created in step 2.
 
-The ad revenue SDK connector sends impression revenue data to the AppsFlyer SDK. An ad revenue event, af_ad_revenue, is generated and sent to the platform. These impression events are collected and processed in AppsFlyer, and the revenue is attributed to the original UA source.
+Code Example
 
-## Integration
+```java
+import com.appsflyer.AFAdRevenueData;
+import com.appsflyer.MediationNetwork;
+import com.appsflyer.AppsFlyerLib;
+import java.util.HashMap;
+import java.util.Map;
+
+AppsFlyerLib appsflyer = AppsFlyerLib.getInstance();
+
+// Create an instance of AFAdRevenueData
+AFAdRevenueData adRevenueData = new AFAdRevenueData(
+        "AdMob", // monetizationNetwork
+        MediationNetwork.GOOGLE_ADMOB, // mediationNetwork
+        "USD",   // currencyIso4217Code - a String verified against the currencies ISO)
+        123.45   // revenue
+ );
+
+Map<String, Object> additionalParameters = new HashMap<>();
+additionalParameters.put("int_example", 10);
+additionalParameters.put("string_example", "Tyler");
+additionalParameters.put("double_example", 123.45);
+
+appsflyer.logAdRevenue(adRevenueData, additionalParameters);
+```
+
+## [LEGACY] Log ad revenue (for SDK 6.14.2 and below)
 
 To integrate the Android ad revenue SDK connector, you need to import, initialize, and trigger the SDK.
-
+ 
 ### Import the Android ad revenue SDK
 
 1. Add the following code to Module-level /**app/build.gradle** before dependencies:
