@@ -124,7 +124,7 @@ func onAppOpenAttributionFailure(_ error: Error) {
 > ❗️ Important
 > 
 > Deferred deep linking using the legacy method of onConversionDataSuccess may not work for iOS 14.5+, since it requires attribution data that may not be available due to privacy protection.  
-> We recommend using [unified deep linking (UDL)](https://dev.appsflyer.com/hc/docs/dl_ios_unified_deep_linking). UDL conforms to the iOS 14.5+ privacy standards and only returns parameters relevant to deep linking and deferred deep linking: `deep_link_value` and `deep_link_sub1`. Attribution parameters (such as `media_source`, `campaign`, `af_sub1-5`, etc.), return `null` and can’t be used for deep linking purposes.  
+> We recommend using [unified deep linking (UDL)](https://dev.appsflyer.com/hc/docs/dl_ios_unified_deep_linking). UDL conforms to the iOS 14.5+ privacy standards and only returns parameters relevant to deep linking and deferred deep linking: `deep_link_value` and `deep_link_sub1-10`. Attribution parameters (such as `media_source`, `campaign`, `af_sub1-5`, etc.), return `null` and can’t be used for deep linking purposes.  
 > [Learn more](https://content.appsflyer.com/ios-14-hub/deep-linking-deferred-deep-linking/)
 
 ### Overview
