@@ -27,24 +27,24 @@ When an impression with revenue occurs invoke the [`logAdRenvue`](doc:ios-sdk-re
     - The `AFAdRevenueData` object you created in step 1.
     - The dictionary with the additional details you created in step 2.
 
-Code Example
+### Code Example
 
 ```swift
 import AppsFlyerLib
 
 
 let my_adRevenueData = AFAdRevenueData(monetizationNetwork: "ironsource",
-                                            mediationNetwork: MediationNetworkType.googleAdMob,
-                                            currencyIso4217Code: "USD",
-                                            eventRevenue: 123.45)
+                        mediationNetwork: MediationNetworkType.googleAdMob,
+                        currencyIso4217Code: "USD",
+                        eventRevenue: 123.45)
         
-        var my_additionalParameters: [String: Any] = [:]
-        my_additionalParameters[kAppsFlyerAdRevenueCountry] = 10
-        my_additionalParameters[kAppsFlyerAdRevenueAdType] = "Banner"
-        my_additionalParameters[kAppsFlyerAdRevenueAdUnit] = "89b8c0159a50ebd1"
-        my_additionalParameters[kAppsFlyerAdRevenuePlacement] = "place"
-        
-        AppsFlyerLib.shared().logAdRevenue(my_adRevenueData, additionalParameters: my_additionalParameters)
+var my_additionalParameters: [String: Any] = [:]
+my_additionalParameters[kAppsFlyerAdRevenueCountry] = 10
+my_additionalParameters[kAppsFlyerAdRevenueAdType] = "Banner"
+my_additionalParameters[kAppsFlyerAdRevenueAdUnit] = "89b8c0159a50ebd1"
+my_additionalParameters[kAppsFlyerAdRevenuePlacement] = "place"
+
+AppsFlyerLib.shared().logAdRevenue(my_adRevenueData, additionalParameters: my_additionalParameters)
 ```
 ## [LEGACY] Log ad revenue (for SDK 6.14.6 and below)
 

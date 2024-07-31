@@ -26,7 +26,7 @@ When an impression with revenue occurs invoke the [`logAdRenvue`](doc:android-sd
     - The `AFAdRevenueData` object you created in step 1.
     - The `Map` instance with the additional details you created in step 2.
 
-Code Example
+### Code Example
 
 ```java
 import com.appsflyer.AFAdRevenueData;
@@ -45,13 +45,13 @@ AFAdRevenueData adRevenueData = new AFAdRevenueData(
           123.45           // revenue
   );
 
-  Map<String, Object> additionalParameters = new HashMap<>();
-  additionalParameters.put(AdRevenueScheme.COUNTRY, "US");
-  additionalParameters.put(AdRevenueScheme.AD_UNIT, "89b8c0159a50ebd1");
-  additionalParameters.put(AdRevenueScheme.AD_TYPE, "Banner");
-  additionalParameters.put(AdRevenueScheme.PLACEMENT, "place");
+Map<String, Object> additionalParameters = new HashMap<>();
+additionalParameters.put(AdRevenueScheme.COUNTRY, "US");
+additionalParameters.put(AdRevenueScheme.AD_UNIT, "89b8c0159a50ebd1");
+additionalParameters.put(AdRevenueScheme.AD_TYPE, "Banner");
+additionalParameters.put(AdRevenueScheme.PLACEMENT, "place");
 
-  appsflyer.logAdRevenue(adRevenueData, additionalParameters);
+appsflyer.logAdRevenue(adRevenueData, additionalParameters);
 ```
 > 📘 Note 
 >  This information is relevant only for apps that use ads from AdMob. The AdMob iLTV SDK reports impression revenue in micro-units. To display the correct ad revenue amount in USD in AppsFlyer, divide the amount extracted from the iLTV event handler by 1 million before sending it to AppsFlyer.

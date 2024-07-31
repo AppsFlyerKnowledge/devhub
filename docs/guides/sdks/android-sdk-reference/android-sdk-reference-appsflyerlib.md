@@ -855,7 +855,7 @@ Register a validation listener for the `validateAndLogInAppPurchase` API.
 ### sendAdRevenue (LEGACY)
 <span class="annotation-deprecated">Deprecated in v6.15.0</span>  
 
-(Supported until SDK v.6.14.2 For versions including and above v6.15.0 use [`logAdRevenue`](#logadrevenue))
+(Supported until SDK v6.14.2 For versions including and above v6.15.0 use [`logAdRevenue`](#logadrevenue))
 
 **Method signature**
 
@@ -1808,7 +1808,8 @@ AppsFlyerlib.getInstance().updateServerUninstallToken(getApplicationContext(), <
 ```
 
 ### validateAndLogInAppPurchase
-(Supported from SDK v.6.14.0)
+
+<span class="annotation-added">Added in v6.14.0</span>
 
 **Method signature**
 
@@ -1859,7 +1860,7 @@ data class AFPurchaseDetails(
 | `currency` | String | Currency used to make the purchase.  |
 
 ### validateAndLogInAppPurchase (LEGACY)
-(Supported until SDK v.6.13.1)
+<span class="annotation-deprecated">Deprecated in v6.4</span>  
 
 **Method signature**
 
