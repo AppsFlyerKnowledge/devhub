@@ -456,8 +456,6 @@ See [initializing the SDK](doc:integrate-android-sdk#initializing-the-android-sd
 boolean isPreInstalledApp(Context context)
 ```
 
-
-
 **Description**  
 Boolean indicator for preinstall by Manufacturer.
 
@@ -480,8 +478,6 @@ Boolean indicator for preinstall by Manufacturer.
 boolean isStopped()
 ```
 
-
-
 **Description**  
 Check if the SDK was stopped.
 
@@ -495,6 +491,77 @@ This function takes no parameters.
 | `boolean ` | `true` if stopped, `false` otherwise. |
 
 **Usage example**
+
+
+### logAdRevenue
+
+<span class="annotation-added">Added in v6.15.0</span>
+**Method signature**
+
+```java
+
+public abstract void logAdRevenue(
+            @NonNull AFAdRevenueData adRevenueData, 
+            @Nullable Map<String, Object> additionalParameters
+    );
+```
+
+**Description**
+
+The method sends an ad revenue event to AppsFlyer. See more information in [Ad revenue](doc:ad-revenue-1).
+
+**Input parameters**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| `adRevenueData` | [`AFAdRevenueData`](#afadrevenuedata) | An object that encapsulates all the mandatory parameters of the adRevenue event. The object is passed to the logAdRevenue method. |
+| `additionalParameters` | Map<String, Object> | An optional dictionary containing additional parameters to log with the adRevenue event. |
+
+**Returns**
+
+`void`.
+
+#### AFAdRevenueData
+
+An object that encapsulates all mandatory `adRevenue` data received from the mediation network.
+
+**Definition**
+
+```kotlin
+data class AFAdRevenueData(
+    val monetizationNetwork: String,
+    val mediationNetwork: MediationNetwork,
+    val currencyIso4217Code: String,
+    val revenue: Double
+)
+```
+
+**AFAdRevenueData parameters**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| `monetizationNetwork` | String | The monetization network name. |
+| `mediationNetwork` | [`MediationNetwork`](#mediationnetwork) | The mediation network enum. |
+| `currencyIso4217Code` | String | The ad revenue event currency is a String validated against currencyIso4217Code |
+| `revenue` | Double | The ad revenue event amount. |
+
+#### MediationNetwork
+
+| Name | Type | Comments |
+| --- | --- | --- |
+| ironsource | String |  |
+| applovinmax | String |  |
+| googleadmob | String |  |
+| fyber | String |  |
+| appodeal | String |  |
+| admost | String |  |
+| topon | String |  |
+| tradplus | String |  |
+| yandex | String |  |
+| chartboost | String |  |
+| unity | String |  |
+| customMediation | String | The mediation solution is not on the list of supported mediation partners. |
+| directMonetizationNetwork | String | The app integrates directly with monetization networks without mediation. |
 
 ### logEvent
 
@@ -785,7 +852,10 @@ Register a validation listener for the `validateAndLogInAppPurchase` API.
 
 **Usage example**
 
-### sendAdRevenue
+### sendAdRevenue (LEGACY)
+<span class="annotation-deprecated">Deprecated in v6.15.0</span>  
+
+(Supported until SDK v6.14.2 For versions including and above v6.15.0 use [`logAdRevenue`](#logadrevenue))
 
 **Method signature**
 
@@ -1738,7 +1808,8 @@ AppsFlyerlib.getInstance().updateServerUninstallToken(getApplicationContext(), <
 ```
 
 ### validateAndLogInAppPurchase
-(Supported from SDK v.6.14.0)
+
+<span class="annotation-added">Added in v6.14.0</span>
 
 **Method signature**
 
@@ -1789,7 +1860,7 @@ data class AFPurchaseDetails(
 | `currency` | String | Currency used to make the purchase.  |
 
 ### validateAndLogInAppPurchase (LEGACY)
-(Supported until SDK v.6.13.1)
+<span class="annotation-deprecated">Deprecated in v6.4</span>  
 
 **Method signature**
 

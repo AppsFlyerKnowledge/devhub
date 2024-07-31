@@ -757,6 +757,72 @@ Enable AppsFlyer to handle a push notification.
 **Returns**  
 `void`.
 
+### logAdRevenue
+<span class="annotation-added">Added in v6.15.0</span>
+
+**Method signature**
+
+```objectivec
+-(void)logAdRevenue:(AFAdRevenueData *)adRevenueData additionalParameters:(NSDictionary * **_Nullable**)additionalParameters;
+```
+**Description**
+
+The method sends an ad revenue event to AppsFlyer. See more information in [Ad revenue](doc:ad-revenue-2).
+
+
+**Input parameters**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| `adRevenueData` | [`AFAdRevenueData*`](#afadrevenuedata) | An object that encapsulates all the mandatory parameters of the adRevenue event. The object is passed to the logAdRevenue method. |
+| `additionalParameters` | NSDictionary * _Nullable | An optional dictionary containing additional parameters to log with the adRevenue event. |
+
+**Returns**
+
+`void`.
+
+#### AFAdRevenueData
+
+An object that encapsulates all mandatory `adRevenue` data received from the mediation network.
+
+**Definition**
+
+```objectivec
+AFAdRevenueData {
+	(NSString * **_Nonnull**)monetizationNetwork
+	(AppsFlyerAdRevenueMediationNetworkType)mediationNetwork
+	(NSString * **_Nonnull**)currencyIso4217Code
+	(NSNumber * **_Nonnull**)eventRevenue
+}
+```
+
+**AFAdRevenueData parameters**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| `monetizationNetwork` | String | The monetization network name. |
+| `mediationNetwork` | [AppsFlyerAdRevenueMediationNetworkType](#appsflyeradrevenuemediationnetworktype) | The mediation network enum. |
+| `currencyIso4217Code` | String | The ad revenue event currency is a String validated against currencyIso4217Code |
+| `eventRevenue` | Double | The ad revenue event amount. |
+
+#### AppsFlyerAdRevenueMediationNetworkType
+
+| Name | Type | Comments |
+| --- | --- | --- |
+| ironsource | String |  |
+| applovinmax | String |  |
+| googleadmob | String |  |
+| fyber | String |  |
+| appodeal | String |  |
+| admost | String |  |
+| topon | String |  |
+| tradplus | String |  |
+| yandex | String |  |
+| chartboost | String |  |
+| unity | String |  |
+| customMediation | String | The mediation solution is not on the list of supported mediation partners. |
+| directMonetizationNetwork | String | The app integrates directly with monetization networks without mediation. |
+
 ### logEvent
 
 **Method signature**

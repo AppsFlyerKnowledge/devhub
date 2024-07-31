@@ -8,33 +8,46 @@ createdAt: "2022-01-12T08:36:36.927Z"
 updatedAt: "2022-02-21T10:40:53.749Z"
 order: 9
 ---
-**At a glance**: The AppsFlyer ad revenue SDK connector enables the ad networks to report ad revenue using impression-level granularity.
-[block:api-header]
-{
-  "title": "Overview"
-}
-[/block]
-**Ad revenue reporting options**
+The app sends impression revenue data to the AppsFlyer SDK. The SDK then sends it to AppsFlyer. These impression data is collected and processed in AppsFlyer, and the revenue is attributed to the original UA source. To learn more about ad revenue see [here](https://support.appsflyer.com/hc/en-us/articles/217490046#connect-to-ad-revenue-integrated-partners).
 
-Ad revenue is reported to AppsFlyer by either aggregate granularity (via API) or impression-level granularity (via SDK). Impression-level data via SDK:
-- Has better data freshness and earlier availability in AppsFlyer.
-- Supports SKAN. 
+Depending on your SDK version there are two ways for the SDK to generate an ad revenue event.
 
-This document details how to send impression-level ad revenue provided by partners in the app to AppsFlyer. 
-> 📘 **Note**
->
-> The marketer also needs to configure the integration for each mediation partner in AppsFlyer, either impression-level (via SDK) or impression-level (via SDK) with device-level (via S2S API). [Learn more](https://support.appsflyer.com/hc/en-us/articles/217490046#connect-to-ad-revenue-integrated-partners)
+- For SDK 6.15.0 and above see [`here`](#log-ad-revenue-for-sdk-6150-and-above).
+- For SDK 6.14.6 and below see [`here`](#log-ad-revenue-for-sdk-6146-and-below).
 
-### Reporting ad revenue using the SDK
+## Log ad revenue (for SDK 6.15.0 and above)
 
-**SDK principles of operation**
+When an impression with revenue occurs invoke the [`logAdRenvue`](doc:ios-sdk-reference-appsflyerlib#logadrevenue) method with the revenue details of the impression.  
 
-The ad revenue SDK connector sends impression revenue data to the AppsFlyer SDK. An ad revenue event, af_ad_revenue, is generated and sent to the platform. These impression events are collected and processed in AppsFlyer, and the revenue is attributed to the original UA source.
-[block:api-header]
-{
-  "title": "Integration"
-}
-[/block]
+**To implement the method, perform the following steps:**
+
+1. Create an instance of [`AFAdRevenueData`](doc:ios-sdk-reference-appsflyerlib#afadrevenuedata) with the revenue details of the impression to be logged.  
+2. If you want to add additional details to the ad revenue event, populate a dictionary with key-value pairs.
+3. Invoke the  `logAdRenvue` method with the following arguments:
+    - The `AFAdRevenueData` object you created in step 1.
+    - The dictionary with the additional details you created in step 2.
+
+### Code Example
+
+```swift
+import AppsFlyerLib
+
+
+let my_adRevenueData = AFAdRevenueData(monetizationNetwork: "ironsource",
+                        mediationNetwork: MediationNetworkType.googleAdMob,
+                        currencyIso4217Code: "USD",
+                        eventRevenue: 123.45)
+        
+var my_additionalParameters: [String: Any] = [:]
+my_additionalParameters[kAppsFlyerAdRevenueCountry] = 10
+my_additionalParameters[kAppsFlyerAdRevenueAdType] = "Banner"
+my_additionalParameters[kAppsFlyerAdRevenueAdUnit] = "89b8c0159a50ebd1"
+my_additionalParameters[kAppsFlyerAdRevenuePlacement] = "place"
+
+AppsFlyerLib.shared().logAdRevenue(my_adRevenueData, additionalParameters: my_additionalParameters)
+```
+## [LEGACY] Log ad revenue (for SDK 6.14.6 and below)
+
 To integrate the iOS ad revenue SDK connector, you need to import, initialize, and trigger the SDK.
 
 ### Import the iOS ad revenue SDK
