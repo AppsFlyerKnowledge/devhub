@@ -7,12 +7,12 @@ excerpt: "Impression-level ad revenue reporting by SDK"
 hidden: false
 order: 8
 ---
-The app sends impression revenue data to the AppsFlyer SDK. The SDK then generates an ad revenue event, `af_ad_revenue`, and sends it to AppsFlyer. These impression events are collected and processed in AppsFlyer, and the revenue is attributed to the original UA source. To learn more about ad revenue see [here](https://support.appsflyer.com/hc/en-us/articles/217490046#connect-to-ad-revenue-integrated-partners).
+The app sends impression revenue data to the AppsFlyer SDK. The SDK then sends it to AppsFlyer. These impression data is collected and processed in AppsFlyer, and the revenue is attributed to the original UA source. To learn more about ad revenue see [here](https://support.appsflyer.com/hc/en-us/articles/217490046#connect-to-ad-revenue-integrated-partners).
 
-Depending on your SDK version there are two ways for the SDK to generate an ad revenue event.
+Depending on your SDK version, there are two ways for the SDK to generate an ad revenue event.
 
-- For SDK 6.15.0 and above see [`here`](#log-ad-revenue-for-sdk-6150-and-above).
-- For SDK 6.14.2 and below see [`here`](#legacy-log-ad-revenue-for-sdk-6142-and-below).
+- [For SDK 6.15.0 and above](#log-ad-revenue-for-sdk-6150-and-above). Version 6.15.0 of the SDK removes the need for using a connector for sending Ad Revenue data to AppsFlyer.
+- [For SDK 6.14.2 and below](#legacy-log-ad-revenue-for-sdk-6142-and-below).
 
 ## Log ad revenue (for SDK 6.15.0 and above)
 
@@ -20,11 +20,11 @@ When an impression with revenue occurs invoke the [`logAdRenvue`](doc:android-sd
 
 **To implement the method, perform the following steps:**
 
-1. Create an instance of [`AFAdRevenueData`](doc:android-sdk-reference-appsflyerlib#afadrevenuedata) with the revenue details of the impression to be logged.  
-2. If you want to add additional details to the ad revenue event, populate a dictionary with key-value pairs.
+1. Create an instance of [`AFAdRevenueData`](doc:android-sdk-reference-appsflyerlib#afadrevenuedata) with the revenue details of the impression to be logged.Version 6.15.0 of the SDK removes the need for using a connector for sending Ad Revenue data to AppsFlyer.
+2. If you want to add additional details to the ad revenue event, populate a `Map` instance with key-value pairs.
 3. Invoke the  `logAdRenvue` method with the following arguments:
     - The `AFAdRevenueData` object you created in step 1.
-    - The dictionary with the additional details you created in step 2.
+    - The `Map` instance with the additional details you created in step 2.
 
 Code Example
 
@@ -39,24 +39,27 @@ AppsFlyerLib appsflyer = AppsFlyerLib.getInstance();
 
 // Create an instance of AFAdRevenueData
 AFAdRevenueData adRevenueData = new AFAdRevenueData(
-        "AdMob", // monetizationNetwork
-        MediationNetwork.GOOGLE_ADMOB, // mediationNetwork
-        "USD",   // currencyIso4217Code - a String verified against the currencies ISO)
-        123.45   // revenue
- );
+          "ironsource",       // monetizationNetwork
+          MediationNetwork.GOOGLE_ADMOB, // mediationNetwork
+          "USD",           // currencyIso4217Code
+          123.45           // revenue
+  );
 
-Map<String, Object> additionalParameters = new HashMap<>();
-additionalParameters.put("int_example", 10);
-additionalParameters.put("string_example", "Tyler");
-additionalParameters.put("double_example", 123.45);
+  Map<String, Object> additionalParameters = new HashMap<>();
+  additionalParameters.put(AdRevenueScheme.COUNTRY, "US");
+  additionalParameters.put(AdRevenueScheme.AD_UNIT, "89b8c0159a50ebd1");
+  additionalParameters.put(AdRevenueScheme.AD_TYPE, "Banner");
+  additionalParameters.put(AdRevenueScheme.PLACEMENT, "place");
 
-appsflyer.logAdRevenue(adRevenueData, additionalParameters);
+  appsflyer.logAdRevenue(adRevenueData, additionalParameters);
 ```
+> 📘 Note 
+>  This information is relevant only for apps that use ads from AdMob. The AdMob iLTV SDK reports impression revenue in micro-units. To display the correct ad revenue amount in USD in AppsFlyer, divide the amount extracted from the iLTV event handler by 1 million before sending it to AppsFlyer.
 
 ## [LEGACY] Log ad revenue (for SDK 6.14.2 and below)
 
-To integrate the Android ad revenue SDK connector, you need to import, initialize, and trigger the SDK.
- 
+For SDK v6.14.2 and below - the AdRevenue Connector should be used along side the AppsFlyer SDK to send Ad Revenue data to AppsFlyer. 
+
 ### Import the Android ad revenue SDK
 
 1. Add the following code to Module-level /**app/build.gradle** before dependencies:

@@ -8,7 +8,7 @@ createdAt: "2022-01-12T08:36:36.927Z"
 updatedAt: "2022-02-21T10:40:53.749Z"
 order: 9
 ---
-The app sends impression revenue data to the AppsFlyer SDK. The SDK then generates an ad revenue event, `af_ad_revenue`, and sends it to AppsFlyer. These impression events are collected and processed in AppsFlyer, and the revenue is attributed to the original UA source. To learn more about ad revenue see [here](https://support.appsflyer.com/hc/en-us/articles/217490046#connect-to-ad-revenue-integrated-partners)
+The app sends impression revenue data to the AppsFlyer SDK. The SDK then sends it to AppsFlyer. These impression data is collected and processed in AppsFlyer, and the revenue is attributed to the original UA source. To learn more about ad revenue see [here](https://support.appsflyer.com/hc/en-us/articles/217490046#connect-to-ad-revenue-integrated-partners).
 
 Depending on your SDK version there are two ways for the SDK to generate an ad revenue event.
 
@@ -30,7 +30,21 @@ When an impression with revenue occurs invoke the [`logAdRenvue`](doc:ios-sdk-re
 Code Example
 
 ```swift
+import AppsFlyerLib
 
+
+let my_adRevenueData = AFAdRevenueData(monetizationNetwork: "ironsource",
+                                            mediationNetwork: MediationNetworkType.googleAdMob,
+                                            currencyIso4217Code: "USD",
+                                            eventRevenue: 123.45)
+        
+        var my_additionalParameters: [String: Any] = [:]
+        my_additionalParameters[kAppsFlyerAdRevenueCountry] = 10
+        my_additionalParameters[kAppsFlyerAdRevenueAdType] = "Banner"
+        my_additionalParameters[kAppsFlyerAdRevenueAdUnit] = "89b8c0159a50ebd1"
+        my_additionalParameters[kAppsFlyerAdRevenuePlacement] = "place"
+        
+        AppsFlyerLib.shared().logAdRevenue(my_adRevenueData, additionalParameters: my_additionalParameters)
 ```
 ## [LEGACY] Log ad revenue (for SDK 6.14.6 and below)
 
