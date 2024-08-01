@@ -1,5 +1,5 @@
 ---
-title: "AppsFlyerAdRevenue"
+title: "AppsFlyerAdRevenue [LEGACY]"
 slug: "appsflyeradrevenue"
 category: 5f9705393c689a065c409b23
 parentDoc: 60ca3f03ceb11a00db127bd8
