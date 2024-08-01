@@ -10,16 +10,15 @@ order: 9
 ---
 The app sends impression revenue data to the AppsFlyer SDK. The SDK then sends it to AppsFlyer. These impression data is collected and processed in AppsFlyer, and the revenue is attributed to the original UA source. To learn more about ad revenue see [here](https://support.appsflyer.com/hc/en-us/articles/217490046#connect-to-ad-revenue-integrated-partners).
 
-Depending on your SDK version there are two ways for the SDK to generate an ad revenue event.
-
-- For SDK 6.15.0 and above see [`here`](#log-ad-revenue-for-sdk-6150-and-above).
-- For SDK 6.14.6 and below see [`here`](#log-ad-revenue-for-sdk-6146-and-below).
+There are two ways for the SDK to generate an ad revenue event, depending on your SDK version. Use the correct method for your SDK version:
+- [SDK 6.15.0 and above](#log-ad-revenue-for-sdk-6150-and-above). Uses the ad revenue SDK API.
+- [SDK 6.14.2 and below](#log-ad-revenue-for-sdk-6146-and-below). Uses the ad revenue SDK connector.
 
 ## Log ad revenue (for SDK 6.15.0 and above)
 
 When an impression with revenue occurs invoke the [`logAdRenvue`](doc:ios-sdk-reference-appsflyerlib#logadrevenue) method with the revenue details of the impression.  
 
-**To implement the method, perform the following steps:**
+**To implement the method:**
 
 1. Create an instance of [`AFAdRevenueData`](doc:ios-sdk-reference-appsflyerlib#afadrevenuedata) with the revenue details of the impression to be logged.  
 2. If you want to add additional details to the ad revenue event, populate a dictionary with key-value pairs.
