@@ -54,7 +54,7 @@ additionalParameters.put(AdRevenueScheme.PLACEMENT, "place");
 appsflyer.logAdRevenue(adRevenueData, additionalParameters);
 ```
 > 📘 Note 
->  This information is relevant only for apps that use ads from AdMob. The AdMob iLTV SDK reports impression revenue in micro-units. To display the correct ad revenue amount in USD in AppsFlyer, divide the amount extracted from the iLTV event handler by 1 million before sending it to AppsFlyer.
+>  The AdMob iLTV SDK reports impression revenue in micro-units. To display the correct ad revenue amount in USD in AppsFlyer, divide the amount extracted from the iLTV event handler by 1 million before sending it to AppsFlyer.
 
 ## [LEGACY] Log ad revenue (for SDK 6.14.2 and below)
 

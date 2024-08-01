@@ -168,7 +168,7 @@ To fix this error, add `tools:replace="android:allowBackup”` in the `<applica
 
 ### Merge backup rules in Android 12 and above
 
-If you’re targeting **Android 12** and above, and you have your own backup rules specified (`android:dataExtractionRules="@xml/my_rules"`), in addition to the instructions above, please merge your back rules with the AppsFlyer rules manually by adding the following rule:
+If you’re targeting **Android 12** and above, and you have your own backup rules specified (`android:dataExtractionRules="@xml/my_rules"`), in addition to the instructions above, please merge your backup rules with the AppsFlyer rules manually by adding the following rule:
 
 ```xml AndroidManfiest.xml
 <data-extraction-rules>
