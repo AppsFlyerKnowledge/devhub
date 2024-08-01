@@ -1,5 +1,5 @@
 ---
-title: "AppsFlyerAdRevenue"
+title: "AppsFlyerAdRevenue [LEGACY]"
 slug: "appsflyeradrevenue-1"
 category: 5f9705393c689a065c409b23
 parentDoc: 60ca3e14e22f76007884b6fc
@@ -7,6 +7,9 @@ hidden: false
 createdAt: "2022-01-12T08:43:38.960Z"
 updatedAt: "2023-02-09T14:41:10.064Z"
 ---
+<span class="annotation-deprecated">Deprecated in v6.15.0</span>  
+(Supported until SDK v6.14.6 For versions including and above v6.15.0 use [`logAdRevenue`](doc:ios-sdk-reference-appsflyerlib#logadrevenue))
+
 [block:api-header]
 {
   "title": "Overview"
