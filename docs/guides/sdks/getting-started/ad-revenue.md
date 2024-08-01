@@ -12,7 +12,7 @@ Ad revenue from partners can be reported to AppsFlyer with impression-level gran
 - Has better data freshness and earlier availability in AppsFlyer.
 - Supports SKAN. 
 
-The ad revenue SDK connector sends impression revenue data to the AppsFlyer SDK. An ad revenue event, af_ad_revenue, is generated and sent to the platform. These impression events are collected and processed in AppsFlyer, and the revenue is attributed to the original UA source.
+The AppsFlyer SDK sends impression revenue data to AppsFlyer. The impression revenue data is collected and processed in AppsFlyer, and the revenue is attributed to the original UA source.
 
 AppsFlyer ad revenue SDK connector instructions for various platforms:
 [block:html]
