@@ -7,6 +7,10 @@ hidden: false
 createdAt: "2022-01-12T08:42:56.136Z"
 updatedAt: "2023-02-09T14:37:08.648Z"
 ---
+<span class="annotation-deprecated">Deprecated in v6.15.0</span>  
+
+(Supported until SDK v6.14.2 For versions including and above v6.15.0 use [`logAdRevenue`](doc:android-sdk-reference-appsflyerlib#logadrevenue))
+
 [block:api-header]
 {
   "title": "Overview"
