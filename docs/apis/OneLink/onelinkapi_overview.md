@@ -8,16 +8,13 @@ order: 0
 
 ## Prerequisites
 
-Authentication token. Learn [how to obtain the API token](https://support.appsflyer.com/hc/en-us/articles/360004562377-Managing-API-and-Server-to-server-S2S-tokens).  
-<br><br>
+Authentication token. Learn [how to obtain the API token](https://support.appsflyer.com/hc/en-us/articles/360004562377-Managing-API-and-Server-to-server-S2S-tokens).
+
+<br>
 
 ## Create OneLink attribution link
 
-<br>
-
-### Endpoint
-
-<br>
+### HTTP request
 
 ```http
 POST https://onelink.appsflyer.com/shortlink/v1/{onelink-id}&id={id}
@@ -25,120 +22,95 @@ POST https://onelink.appsflyer.com/shortlink/v1/{onelink-id}&id={id}
 
 ### Path parameters
 
-<br>
-
-| Parameter     | Data Type | Description           | Example |
+| Parameter     | Type | Description           | Example |
 | ------------- | --------- | --------------------- | ------- |
-| `onelink-id*` | string    | The link template ID. | `A1b3`  |
+| `onelink-id` | string    | Required. The link template ID. | `A1b3`  |
 
 ### Query parameters
 
-<br>
-
-| Parameter | Data Type | Description                                                                                             | Example           |
+| Parameter | Type | Description                                                                                             | Example           |
 | --------- | --------- | ------------------------------------------------------------------------------------------------------- | ----------------- |
 | `id`      | string    | The ID of the created short link. When the ID is not provided in the request, a random ID is generated. | `my_shortlink_id` |
 
 ### Body parameters
 
-<br>
-
 | Name           | Type   | Description                                                                                                                                                                                                                                                                 | Example                                                 |
 | -------------- | ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------- |
 | `brand_domain` | string | Only use this param and request it in the payload if: <br>1) The Branded Links feature is enabled in your account.<br>2) The branded link is configured in your account. <br><br>If these conditions are not met, do not use this parameter, as the API call will not work. | [`mybranded.com`](http://mybranded.com/)                |
 | `ttl`          | string | Time to Live for the full attribution link. The default is 31 days. The value can be specified in days (default), minutes, or hours (for example, 10m, 20h, 14d).                                                                                                           | `25d`                                                   |
-| `data*`        | JSON   | JSON format of the query parameters following the AppsFlyer macros for attribution links. <br><br>**Note**: The media source (`pid`) parameter is mandatory.                                                                                                                | `'{"pid": "my_media_source_SMS", "c": "my_campaign" }'` |
-
-<br><br>
-
-## Get OneLink attribution link
+| `data`        | JSON   | Required. JSON format of the query parameters following the AppsFlyer macros for attribution links. <br><br>**Note**: The media source (`pid`) parameter is mandatory.                                                                                                                | `'{"pid": "my_media_source_SMS", "c": "my_campaign" }'` |
 
 <br>
 
-### Endpoint
+## Get OneLink attribution link
+
+### HTTP request
 
 ```http
 GET https://onelink.appsflyer.com/shortlink/v1/{onelink-id}&id={id}
 ```
 
-<br>
-
 ### Path parameters
 
-| Parameter     | Data Type | Description           | Example |
+| Parameter     | Type | Description           | Example |
 | ------------- | --------- | --------------------- | ------- |
-| `onelink-id*` | string    | The link template ID. | `A1b3`  |
+| `onelink-id` | string    | Required. The link template ID. | `A1b3`  |
 
-<br>
+### Query parameters
 
-| Parameter | Data Type | Description                                                                                                                                                       | Example           |
+| Parameter | Type | Description                                                                                                                                                       | Example           |
 | --------- | --------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------- |
 | `id`      | string    | The ID of the short OneLink query params. For example, for the following OneLink attribution link: myapp.onelink.me/abc123/qwer9876, the shortlink-id is qwer9876 | `my_shortlink_id` |
 
-<br><br>
+<br>
 
 ## Update OneLink attribution link
 
-<br>
-
-### Endpoint
+### HTTP request
 
 ```http
 PUT https://onelink.appsflyer.com/shortlink/v1/{onelink-id}&id={id}
 ```
-
-<br>
-
 ### Path parameters
 
-| Parameter     | Data Type | Description           | Example |
+| Parameter     | Type | Description           | Example |
 | ------------- | --------- | --------------------- | ------- |
-| `onelink-id*` | string    | The link template ID. | `A1b3`  |
+| `onelink-id` | string    | Required. The link template ID. | `A1b3`  |
 
-<br>
+### Query parameters
 
 | Parameter | Data Type | Description                                                                                                                                          | Example           |
 | --------- | --------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------- |
-| `id*`     | string    | The ID of the short OneLink. For example, for the following OneLink attribution link: myapp.onelink.me/abc123/qwer9876, the shortlink-id is qwer9876 | `my_shortlink_id` |
+| `id`     | string    | Required. The ID of the short OneLink. For example, for the following OneLink attribution link: myapp.onelink.me/abc123/qwer9876, the shortlink-id is qwer9876 | `my_shortlink_id` |
 
-<br>
+### Body parameters
 
 | Name           | Type   | Description                                                                                                                                                                                                                                                                 | Example                                  |
 | -------------- | ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------- |
 | `brand_domain` | string | Only use this param and request it in the payload if: <br>1) The Branded Links feature is enabled in your account.<br>2) The branded link is configured in your account. <br><br>If these conditions are not met, do not use this parameter, as the API call will not work. | [`mybranded.com`](http://mybranded.com/) |
 | `ttl`          | string | Time to Live for the full attribution link. The default is 31 days. The value can be specified in days (default),                                                                                                                                                           |                                          |
 
-<br><br>
+<br>
 
 ## Delete OneLink attribution link
 
-<br>
-
-### Endpoint
+### HTTP request
 
 ```http
 DELETE https://onelink.appsflyer.com/shortlink/v1/{onelink-id}&id={id}
 ```
 
-<br>
-
 ### Path parameters
 
-| Parameter     | Data Type | Description           | Example |
+| Parameter     | Type | Description           | Example |
 | ------------- | --------- | --------------------- | ------- |
-| `onelink-id*` | string    | The link template ID. | `A1b3`  |
-
-<br>
+| `onelink-id` | string    | Required. The link template ID. | `A1b3`  |
 
 ### Query parameters
 
-| Parameter | Data Type | Description                                                                                                                                              | Example           |
+| Parameter | Type | Description                                                                                                                                              | Example           |
 | --------- | --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------- |
-| `id*`     | string    | The ID of the short OneLink to be deleted. For example, for the following OneLink attribution link: myapp.onelink.me/abc123/qwer9876, the ID is qwer9876 | `my_shortlink_id` |
-
-<br><br>
-
-<br>
+| `id`     | string    | Required. The ID of the short OneLink to be deleted. For example, for the following OneLink attribution link: myapp.onelink.me/abc123/qwer9876, the ID is qwer9876 | `my_shortlink_id` |
 
 ## API Limitations
 
