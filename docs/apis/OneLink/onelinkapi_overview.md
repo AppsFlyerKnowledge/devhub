@@ -8,7 +8,7 @@ order: 0
 
 ## Prerequisites
 
-Authentication token. Learn [how to obtain the API token](https://support.appsflyer.com/hc/en-us/articles/360004562377-Managing-API-and-Server-to-server-S2S-tokens).
+Authentication token. Learn [how to obtain the API token](https://support.appsflyer.com/hc/en-us/articles/360001250345-OneLink-API#setup).
 
 <br>
 
