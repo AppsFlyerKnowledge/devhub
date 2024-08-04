@@ -2,13 +2,14 @@
 title: "Overview"
 slug: "onelinkapi_overview"
 category: 624693c6fa631302dde62cf5
+parentDoc: 624693c7fa631302dde62cf7
 hidden: false
 order: 0
 ---
 
 ## Prerequisites
 
-Authentication token. Learn [how to obtain the API token](https://support.appsflyer.com/hc/en-us/articles/360001250345-OneLink-API#setup).
+Authenticati:on token. Learn [how to obtain the API token](https://support.appsflyer.com/hc/en-us/articles/360001250345-OneLink-API#setup).
 
 <br>
 

@@ -21,3 +21,8 @@ jobs:
         uses: readmeio/rdme@v8
         with:
           rdme: openapi ./docs/apis/OneLink/onelinkapi.yml --key=${{ secrets.README_API_KEY }} --id=624693c6fa631302dde62cf4
+      
+      - name: Run `docs` command 🚀
+        uses: readmeio/rdme@v8
+        with:
+          rdme: docs ./docs/apis/OneLink/onelinkapi_overview.md --key=${{ secrets.README_API_KEY }}
