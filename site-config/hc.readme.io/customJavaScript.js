@@ -54,6 +54,10 @@ $(window).on("pageLoad", function (e, state) {
    .filter(a => a.textContent.trim() == "Misc")
    .forEach(a => a.classList.add("changedTitle"));
   
+  [...document.querySelectorAll("h2")]
+   .filter(a => a.textContent.trim() == "ONELINK")
+   .forEach(a => a.classList.add("changedTitle"));
+  
   [...document.querySelectorAll(".rm-Sidebar-list")]
    .filter(a => a.textContent.includes("HiddenTitle"))
    .forEach(a => a.classList.add("hiddenLabel"));
