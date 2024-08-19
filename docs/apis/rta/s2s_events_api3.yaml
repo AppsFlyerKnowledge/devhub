@@ -47,9 +47,11 @@ paths:
       requestBody:
         description: |
           > ⚠️ What if I can't send a device identifier?
-          >  You may be unable to send the identifier for a reason out of your control, for example, because the user has limited ad tracking (LAT) or uses iOS 14, and did not give ATT consent. 
-          > Not sending an advertising ID/device identifier can result in: 
-          >  **Postback issues**: The media source will receive the postback but without a device identifier; consequently the media source can't associate it with a user. 
+          >  You may be unable to send the device identifier with the S2S event. 
+          >  In such cases, AppsFlyer will attempt to enrich the event postback with the device ID from the user's install.
+          >  However, when the SDK sends install events without device identifiers, for example, when ATT (App Tracking Transparency) has not been implemented, the postback will not include the device ID.
+          >  Not sending an advertising ID/device identifier can result in: 
+          >  **Postback issues**: The media source will receive the postback but without a device identifier. As a result the media source can't associate the postback with a specific user. 
           >  **Audiences segmentation** and rule failure. Audiences rulesets require [identifiers](https://support.appsflyer.com/hc/en-us/articles/115002689186#useridentifier-advanced-setting). It’s always best practice to send a device ID or customer user ID according to the ID type your ruleset uses, for every S2S event. 
         required: true
         content:
