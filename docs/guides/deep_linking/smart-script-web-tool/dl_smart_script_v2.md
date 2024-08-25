@@ -264,7 +264,7 @@ See [example](https://appsflyersdk.github.io/appsflyer-onelink-smart-script/exam
 
 ### GBRAID and WBRAID
 
-See [example](https://appsflyersdk.github.io/appsflyer-onelink-smart-script/examples/google_gbraid.html?inmedia=email&gbraid=1a2b3c) of the conversion of an incoming URL to an outgoing OneLink URL, passing the `gbraid` parameter. The example applies also to `wbraid` .
+See [example](https://appsflyersdk.github.io/appsflyer-onelink-smart-script/examples/google_gbraid.html?inmedia=email&gbraid=1a2b3c) of the conversion of an incoming URL to an outgoing OneLink URL, passing the `gbraid` parameter and [another example](https://appsflyersdk.github.io/appsflyer-onelink-smart-script/examples/google_wbraid.html?inmedia=email&wbraid=7hjy89) for passing the `wbraid` parameter. 
 
 ### Google click ID passthrough
 
