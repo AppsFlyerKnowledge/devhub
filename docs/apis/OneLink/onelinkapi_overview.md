@@ -88,7 +88,7 @@ PUT https://onelink.appsflyer.com/shortlink/v1/{onelink-id}&id={id}
 
 | Name           | Type   | Description                                                                                                                                                                                                                                                                 | Example                                  |
 | -------------- | ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------- |
-| `brand_domain` | string | Only use this param and request it in the payload if: <br>1) The Branded Links feature is enabled in your account.<br>2) The branded link is configured in your account. <br><br>If these conditions are not met, do not use this parameter, as the API call will not work. | [`mybranded.com`](http://mybranded.com/) |
+| `brand_domain` | string | Only use this param and request it in the payload if: <br>1) The Branded Links feature is enabled in your account.<br>2) The branded link is configured in your account. <br><br>If these conditions are not met, do not use this parameter, as the API call will not work. | mybranded.com |
 | `ttl`          | string | Time to Live for the full attribution link. The default is 31 days. The value can be specified in days (default),                                                                                                                                                           |                                          |
 
 <br>
