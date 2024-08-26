@@ -262,6 +262,10 @@ See [example](https://appsflyersdk.github.io/appsflyer-onelink-smart-script/exam
 
 See [example](https://appsflyersdk.github.io/appsflyer-onelink-smart-script/examples/forced_default_values.html?inmedia_found=plain_media_source) of the conversion of an incoming URL to an outgoing OneLink URL, using the default value even when an incoming media_source value is found.
 
+### GBRAID and WBRAID
+
+See [example](https://appsflyersdk.github.io/appsflyer-onelink-smart-script/examples/google_gbraid.html?inmedia=email&gbraid=1a2b3c) of the conversion of an incoming URL to an outgoing OneLink URL, passing the `gbraid` parameter and [another example](https://appsflyersdk.github.io/appsflyer-onelink-smart-script/examples/google_wbraid.html?inmedia=email&wbraid=7hjy89) for passing the `wbraid` parameter. 
+
 ### Google click ID passthrough
 
 See [example](https://appsflyersdk.github.io/appsflyer-onelink-smart-script/examples/google_clickid.html?inmedia=email&gclid=1a2b3c&keyword=sale%2Bboat) of the conversion of an incoming URL to an outgoing OneLink URL that passes the Google click ID to `af_sub4` and `gclid`.
