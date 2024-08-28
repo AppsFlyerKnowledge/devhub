@@ -7,6 +7,26 @@ hidden: false
 createdAt: "2022-11-30T12:20:34.448Z"
 updatedAt: "2023-01-19T15:14:19.232Z"
 ---
+
+Overview
+--------
+
+Implement and attribute user invite links for when existing users refer others to your app.  
+For an introduction, see [user invite](https://dev.appsflyer.com/hc/docs/dl_user_invite).
+
+Want to see a full example? check out the recipe:
+
+[block:tutorial-tile]
+{
+  "backgroundColor": "#018FF4",
+  "emoji": "🦉",
+  "id": "61ad0cf7fe61e2002352c544",
+  "link": "https://dev.appsflyer.com/v0.1/recipes/onelink-user-invite-in-android-1",
+  "slug": "onelink-user-invite-in-android-1",
+  "title": "OneLink user invite in Android"
+}
+[/block]
+
 Implement user invites
 ----------------------
 

@@ -11,20 +11,18 @@ Overview
 --------
 
 Implement and attribute user invite links for when existing users refer others to your app.  
-For an introduction, see [user invite](doc:user-invite-attribution).
+For an introduction, see [user invite](https://dev.appsflyer.com/hc/docs/dl_user_invite).
 
 Want to see a full example? check out the recipe:
 
 [block:tutorial-tile]
 {
-  "title": "Get Conversion Data in Android",
-  "id": "615d66bdd3797c004251ba3e",
-  "slug": "get-conversion-data-in-android",
-  "backgroundColor": "#018FF4",
-  "emoji": "🐣",
-  "link": "https://dev.appsflyer.com/v0.1/recipes/get-conversion-data-in-android",
-  "align": "default",
-  "_id": "615d66bdd3797c004251ba3e"
+  "backgroundColor": "#01f44a",
+  "emoji": "✍️",
+  "id": "61b66080b17b13005ba40a18",
+  "link": "https://dev.appsflyer.com/v0.1/recipes/onelink-user-invite-in-ios-1",
+  "slug": "onelink-user-invite-in-ios-1",
+  "title": "OneLink user invite in iOS"
 }
 [/block]
 
