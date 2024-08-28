@@ -206,7 +206,7 @@ You can use an existing OneLink link or ask your marketer to create a new one fo
  
 - Use only the domain and OneLink template of your link. For example: `https://onelink-basic-app.onelink.me/H5hv`.
 - Add OneLink parameters `deep_link_value` and `deep_link_sub1-10` as expected by your application. The parameters should be added as query parameters.
-  - Example: `https://onelink-basic-app.onelink.me/H5hv?deep_link_value=apples&deep_link_sub1=23` 
+  - Example: `https://onelink-basic-app.onelink.me/H5hv?pid=my_media_source&deep_link_value=apples&deep_link_sub1=23` 
 
 ### Perform the test
 1. Click the link on your device.
