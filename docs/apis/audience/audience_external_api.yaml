@@ -334,7 +334,6 @@ paths:
                   value:
                     error_code: 1006
                     message: "There are no partners connected, upload is not possible"
-              
   /connections:
     get:
       tags:
@@ -355,7 +354,6 @@ paths:
                     properties: 
                       connections:
                         $ref: '#/components/schemas/integrations_response'
-      
   /split_syncs:
     get:
       tags:
@@ -376,6 +374,70 @@ paths:
                     properties: 
                       connections:
                         $ref: '#/components/schemas/integrations_response'
+  /active-audiences:
+    get:
+      tags:
+      - Active audiences
+      operationId: audience-external-active-audiences
+      summary: Get active audiences for account
+      responses:
+        200:
+          description: ""
+          content:
+            application/json:
+              schema:
+                required:
+                - message
+                type: object
+                properties:
+                  message:
+                    type: object
+                    properties: 
+                      results:
+                        $ref: '#/components/schemas/active_audiences_response'
+        400:
+          description: "Bad request"
+          content:  
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error_response'
+  /pause:
+    post:
+      tags:
+      - Pauses audience
+      operationId: audience-external-pause
+      summary: Pause audience
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+              - audience_ids
+              type: object
+              properties:
+                audience_ids:
+                  type: array
+                  items:
+                    type: string
+      responses:
+          200:
+            description: Paused audiences successfully
+            content:
+              application/json:
+                schema:
+                  required:
+                  - message
+                  properties:
+                    message:
+                      type: string
+                example: 
+                  message: "Successfully paused the audiences"
+          400:
+            description: Bad request
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/error_response'
 components:
   securitySchemes:
     bearerAuth:            
@@ -482,5 +544,20 @@ components:
     integration_name:
       type: string
       example: 'Integration 123'
+    active_audiences_response:
+      type: array
+      items:
+        required:
+        - audience_id
+        - name
+        - updating_user
+        type: object
+        properties:
+          audience_id:
+            type: string
+          name:
+            type: string
+          updating_user:
+            type: string
 x-id:
 - reitit.swagger/default
