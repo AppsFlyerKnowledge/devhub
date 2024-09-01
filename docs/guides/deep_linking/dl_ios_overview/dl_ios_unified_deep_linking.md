@@ -86,6 +86,10 @@ UDL handles deep linking for existing users. It's recommended that you add suppo
 
 ```swift
 func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+  // Replace 'appleAppID' and 'appsFlyerDevKey' with your Apple App ID (eg 69999999, without id prefix) and DevKey
+  // The App ID and the DevKey must be set prior to the calling of the deepLinkDelegate
+  AppsFlyerLib.shared().appleAppID = appleAppID  
+  AppsFlyerLib.shared().appsFlyerDevKey = appsFlyerDevKey
   ...
   AppsFlyerLib.shared().deepLinkDelegate = self
   ...
