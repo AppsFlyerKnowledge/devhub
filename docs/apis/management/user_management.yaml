@@ -272,9 +272,9 @@ paths:
                                     access_level:
                                       type: string
                                       enum:
-                                        - Managed
-                                        - Read
-                                        - No access
+                                        - blocked
+                                        - read
+                                        - all
                         users:
                           type: array
                           items:
