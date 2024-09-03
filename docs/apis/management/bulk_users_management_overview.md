@@ -8,21 +8,42 @@ order: 0
 
 **At a glance:**
 
-Account admins can efficiently execute various bulk actions through a dedicated API. This includes adding and deleting users, as well as retrieving user permission details. The API supports the main user management features found in the UI and includes the same error verifications.
+Account admins can efficiently execute various bulk actions through a dedicated API.
 
-## Add users in bulk
+- **For roles:** This includes retrieving details about roles and their associated attributes.
+- **For user management:** This includes adding and deleting users, as well as retrieving user permission details. The API supports the main user management features found in the UI and includes the same error verifications.
+
+> Note
+> 
+> 
+> The maximum **daily limit** for **API calls per account is 100**. This includes the “Get roles”, “Add users”, “Get users”, and “Delete users” APIs **combined**.
+> 
+
+## Roles
+
+Retrieve a list of current roles within your account using a dedicated Get Roles API. The list includes the following details, corresponding to the information displayed on the platform on the **User Management** > **Roles** page:
+
+- Role names
+- User count per role
+- User names associated with each role
+- Permission sets for each role
+
+## Users
+
+Add (create), get, and deleted users in bulk via the API. 
+
+### Add users in bulk
 
 The following table details all API parameters and properties for adding new users in bulk. See schema examples below the table.
 
 > Note
->
-> - If any of the mandatory parameters aren't entered in the API call or they're written incorrectly, the associated user isn't added. An [error message](notion://www.notion.so/appsflyerrnd/markdown-3ba0de41bbbd4f258fde67e10a718afe#error-messages) is sent through the API.
-> - There's a maximum limit of **20 user additions per API call**.
-> - There's a maximum **daily limit** of **20 API calls per account**.
-  
-| API parameter | Type | Mandatory | Remarks |
+> 
+> - If any of the mandatory parameters aren't entered in the API call or they're written incorrectly, the associated user isn't added. An [error message](https://dev.appsflyer.com/hc/reference/bulk-users-management-overview) is sent through the API.
+> - The maximum limit of **user additions per API call** is **20**.
+
+| **API parameter** | **Type** | **Mandatory** | **Remarks** |
 | --- | --- | --- | --- |
-| username | String | ✓ | The username can include letters, numbers, spaces, and the following characters:. - _ ` [ ] ( ) | @ : , + & |
+| username | String | ✓ | The username can include letters, numbers, spaces, and the following characters:. - _ ` [ ] ( ) |
 | email | String | ✓ | Enter a valid email address. |
 | department | String | — |  |
 | role | String | ✓ | admin and security roles must have unrestricted access to apps, media sources, and geos. |
@@ -31,7 +52,7 @@ The following table details all API parameters and properties for adding new use
 | media_sources | Array:• Empty [] • Specific media sources | — | When empty or if not included in the schema, the default is access to all media sources. |
 | geos | Array: • Empty [] • Specific geos | — | When empty or if not included in the schema, the default is access to all geos. |
 
-### Schema example: full user access
+**Schema example: full user access**
 
 This schema grants user access to all apps (including future apps), and to all media sources and geos:
 
@@ -43,9 +64,10 @@ This schema grants user access to all apps (including future apps), and to all m
 "allow_access_to_all_future_apps": true,
 "media_sources": [],
 "geos": []
+
 ```
 
-### Schema example: limited user access
+**Schema example: limited user access**
 
 This schema limits user access to apps (no future apps), media sources, and geos, according to those specified in the array:
 
@@ -58,13 +80,14 @@ This schema limits user access to apps (no future apps), media sources, and geos
 "app_ids": ["my_app1", "my_app2"],
 "media_sources": ["amplitude", "airship"],
 "geos": ["angola", "aruba"]
+
 ```
 
-### Error messages
+**Error messages**
 
 In some cases, users can't be added. The table below describes the reasons for such cases and explanations about the error messages.
 
-| Error message | Description |
+| **Error message** | **Description** |
 | --- | --- |
 | Invalid email address. | The format of the email address isn't correct. |
 | This user already exists in this account. | You're trying to add a user to an account in which they already exist. |
@@ -79,7 +102,7 @@ In some cases, users can't be added. The table below describes the reasons for s
 | This user can't be added because they're in an account that uses 2FA. | Accounts with 2FA authentication don't support multiple users. You're trying to add a user from such an account. |
 | This user can't be added because this account uses 2FA. | Accounts with 2FA authentication don't support multiple users. You're trying to add a user to such an account. |
 | Mistakes in the API parameters |  |
-| Invalid characters were used in the username. | The username can include letters, numbers, spaces, and the following characters only: .-_`[]()|@:,+& |
+| Invalid characters were used in the username. | The username can include letters, numbers, spaces, and the following characters only: .-_` |
 | The username exceeded the 100-character limit. | The username can contain up to 100 characters. |
 | The role was either misspelled or doesn’t exist. | The role that was entered either doesn't exist in the list of roles in your account, or it was misspelled. |
 | One or more app IDs were either misspelled or don’t exist in your account. | You've entered one or more app IDs that either don't exist in your account or they were misspelled. |
@@ -93,31 +116,44 @@ In some cases, users can't be added. The table below describes the reasons for s
 | There was a problem with permissions for this account. | There was an issue with the account that prevented the request from being completed. |
 | Exceeded the limit of adding 20 users in a single API call. | An API call can contain up to 20 user additions. |
 
-## Get users API
+### Get users API
 
 Use the Get API to retrieve data on user roles and permissions in bulk.
+
 **Response example:**
+
 “users”: [
+
 {
+
 “username”: “Dan Smith”,
+
 “email”: “dan.smith@mycompany.com”,
+
 “role”: “admin”,
+
 “apps”: “All & future”,
+
 “media_sources”: “All”,
+
 “geos”: “All”,
+
 “last_login”: “Apr 15, 2024”
+
 }
+
 ]
 
-## Delete users in bulk
+### Delete users in bulk
 
 Use the DELETE API to delete users in bulk. Include in the URL path a list of user emails to delete, separated by commas.
+
 **Error messages:**
 
-| Error message | Description |
+| **Error message** | **Description** |
 | --- | --- |
 | Invalid email address | The format of the email address isn’t correct. |
 | The email doesn’t exist | The email address was either misspelled or doesn’t exist in the account. |
 | Invalid input | Your request didn’t include any email addresses. |
-| Can’t delete account owner | An account owner can’t be deleted. You can refer to the documentation about https://support.appsflyer.com/hc/en-us/articles/4409128270481-User-management#changing-the-account-owner. |
+| Can’t delete account owner | An account owner can’t be deleted. You can refer to the documentation about [https://support.appsflyer.com/hc/en-us/articles/4409128270481-User-management#changing-the-account-owner](https://support.appsflyer.com/hc/en-us/articles/4409128270481-User-management#changing-the-account-owner). |
 | Can’t delete your own user | Users cannot delete themselves |
