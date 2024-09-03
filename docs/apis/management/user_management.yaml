@@ -87,7 +87,7 @@ paths:
                             type: string
                           description: Array of roles assigned to the user
         "400":
-          description: Bad request - Invalid input or exceeded limit
+          description: Bad request - exceeded limit
           content:
             application/json:
               schema:
@@ -224,6 +224,88 @@ paths:
                   message:
                     type: string
                     description: Error message for an unprocessable entity
+  /roles:
+    get:
+      summary: Get roles
+      description: Retrieve roles data for account with list of users for each role
+      tags:
+        - Managing roles
+      responses:
+        "200":
+          description: Successful response containing the list of roles with capabilities
+            and users for each role
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  roles:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                          description: The display name of the role
+                        type:
+                          type: string
+                          enum:
+                            - predefined
+                            - custom
+                          description: Describes whether the role is custom or pre-defined
+                        capabilities:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              section:
+                                type: string
+                                description: The name of a section of capabilities
+                              capabilities:
+                                type: array
+                                items:
+                                  type: object
+                                  properties:
+                                    name:
+                                      type: string
+                                      description: The name of the capability
+                                    access_level:
+                                      type: string
+                                      enum:
+                                        - blocked
+                                        - read
+                                        - all
+                        users:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              email:
+                                type: string
+                                description: The email of a user that has this role
+                              name:
+                                type: string
+                                description: The name of a user that has this role
+        "400":
+          description: Bad request - exceeded limit
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: Error message for a bad request
+        "401":
+          description: Unauthorized - Missing or insufficient permissions
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: Error message for unauthorized access
 components:
   securitySchemes:
     bearerAuth:
@@ -232,4 +314,3 @@ components:
       bearerFormat: JWT
       description: "Authorization HTTP header containing API V2 token (bearer token) is required.\n\n
         The admin [gets the V2 token in the dashboard](https://support.appsflyer.com/hc/en-us/articles/360004562377)"
-
