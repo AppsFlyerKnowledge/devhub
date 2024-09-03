@@ -19,18 +19,39 @@ Account admins can efficiently execute various bulk actions through a dedicated 
 > The maximum **daily limit** for **API calls per account is 100**. This includes the “Get roles”, “Add users”, “Get users”, and “Delete users” APIs **combined**.
 > 
 
-## Roles
 
-Retrieve a list of current roles within your account using a dedicated Get Roles API. The list includes the following details, corresponding to the information displayed on the platform on the **User Management** > **Roles** page:
-
-- Role names
-- User count per role
-- User names associated with each role
-- Permission sets for each role
 
 ## Users
 
 Add (create), get, and deleted users in bulk via the API. 
+
+### Get users
+
+Use the Get API to retrieve data on user roles and permissions in bulk.
+
+**Response example:**
+
+“users”: [
+
+{
+
+“username”: “Dan Smith”,
+
+“email”: “dan.smith@mycompany.com”,
+
+“role”: “admin”,
+
+“apps”: “All & future”,
+
+“media_sources”: “All”,
+
+“geos”: “All”,
+
+“last_login”: “Apr 15, 2024”
+
+}
+
+]
 
 ### Add users in bulk
 
@@ -116,33 +137,7 @@ In some cases, users can't be added. The table below describes the reasons for s
 | There was a problem with permissions for this account. | There was an issue with the account that prevented the request from being completed. |
 | Exceeded the limit of adding 20 users in a single API call. | An API call can contain up to 20 user additions. |
 
-### Get users API
 
-Use the Get API to retrieve data on user roles and permissions in bulk.
-
-**Response example:**
-
-“users”: [
-
-{
-
-“username”: “Dan Smith”,
-
-“email”: “dan.smith@mycompany.com”,
-
-“role”: “admin”,
-
-“apps”: “All & future”,
-
-“media_sources”: “All”,
-
-“geos”: “All”,
-
-“last_login”: “Apr 15, 2024”
-
-}
-
-]
 
 ### Delete users in bulk
 
@@ -157,3 +152,14 @@ Use the DELETE API to delete users in bulk. Include in the URL path a list of us
 | Invalid input | Your request didn’t include any email addresses. |
 | Can’t delete account owner | An account owner can’t be deleted. You can refer to the documentation about [https://support.appsflyer.com/hc/en-us/articles/4409128270481-User-management#changing-the-account-owner](https://support.appsflyer.com/hc/en-us/articles/4409128270481-User-management#changing-the-account-owner). |
 | Can’t delete your own user | Users cannot delete themselves |
+
+## Roles
+
+### Get roles
+
+Retrieve a list of current roles within your account using a dedicated Get Roles API. The list includes the following details, corresponding to the information displayed on the platform on the **User Management** > **Roles** page:
+
+- Role names
+- User count per role
+- User names associated with each role
+- Permission sets for each role
