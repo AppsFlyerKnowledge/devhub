@@ -112,7 +112,7 @@ components:
                     - cost
                     - event_name
                     - revenue
-                    - ROAS
+                    - roas
                     - roi
                     - sessions 
                     - uninstalls
