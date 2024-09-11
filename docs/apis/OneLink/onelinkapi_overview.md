@@ -9,7 +9,7 @@ order: 0
 
 ## Prerequisites
 
-Authenticati:on token. Learn [how to obtain the API token](https://support.appsflyer.com/hc/en-us/articles/360001250345-OneLink-API#setup).
+Authenticati:on token. Learn [how to obtain the API token](https://support.appsflyer.com/hc/en-us/articles/360004562377-Managing-AppsFlyer-tokens#retrieving-api-tokens).
 
 <br>
 
