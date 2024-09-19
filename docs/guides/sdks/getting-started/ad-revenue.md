@@ -14,6 +14,10 @@ Ad revenue from partners can be reported to AppsFlyer with impression-level gran
 
 The AppsFlyer SDK sends impression revenue data to AppsFlyer. The impression revenue data is collected and processed in AppsFlyer, and the revenue is attributed to the original UA source.
 
+> 📘 Note
+> 
+> If your Ad Revenue implementation predates SDK v6.15.0, and you want to upgrade, update your ad revenue code as specified in the guides below. Failing to do so will result in the Ad Revenue functionality not working correctly.
+
 AppsFlyer ad revenue instructions for various platforms:
 [block:html]
 {
