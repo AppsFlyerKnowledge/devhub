@@ -7,6 +7,59 @@ hidden: false
 order: 1
 ---
 
+
+## Version 6.15.1
+
+#### Technical Update
+
+- Updated the targetSDKVersion of the SDK to 34
+- Updated Gradle version to v8.7
+- Updated Java version to 17
+
+
+## Version 6.15.0
+
+This version introduces important dependency updates that impact the Purchase Connector and the AdRevenue Connector for Android.
+
+- Apps that use the AdRevenue Connector and update to SDK v6.15.0 (and above) must remove the AdRevenue Connector and migrate to the SDK API. For more details, see [here](https://dev.appsflyer.com/hc/docs/ad-revenue-1).
+
+- Apps that use the Purchase Connector and update to SDK v6.15.0 (and above) must use Purchase Connector v2.1.0 (and above)
+
+
+#### New Features
+
+- Added the logAdRevenue method to send ad revenue data to AppsFlyer. 
+Note: Starting with this version, the AdRevenue Connector should no longer be used. 
+For more details, see [here](https://dev.appsflyer.com/hc/docs/ad-revenue-1).
+
+
+#### Changed Features
+
+- Updated the SDK backup rules in accordance with changes in Android 12 (dataExtractionRules). 
+For more information, see [here](https://dev.appsflyer.com/hc/docs/install-android-sdk#merge-backup-rules-in-android-12-and-above)
+
+
+#### Bug Fixes
+
+- Fixed an issue with Purchase Connector not detecting all purchases made by the app.
+This version is compatible with Purchase Connector v2.1.0.
+
+
+## Version 6.14.2
+
+#### Bug Fixes
+
+- Fixed an issue with fetching Meta Install Referrer on apps built with Unity.
+  This fix was integrated into Unity Plugin v6.14.4.
+
+
+## Version 6.14.1
+
+#### SDK Maintenance
+
+- Internal improvements for how the SDK uses threads to execute server requests.
+
+
 ## Version 6.14.0
 
 #### New Features
