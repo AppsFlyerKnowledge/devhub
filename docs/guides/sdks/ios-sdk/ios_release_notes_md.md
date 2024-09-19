@@ -7,6 +7,63 @@ hidden: false
 order: 1
 ---
 
+## Version 6.15.2
+
+#### Bug Fixes
+
+- Fixed an issue with caching of Purchase Connector requests that failed to be sent.
+
+
+
+## Version 6.15.1
+
+#### Bug Fixes
+
+- Fixed an issue in Reinstall Detection for apps that use the Keychain Sharing among a collection of apps. 
+
+
+
+## Version 6.15.0
+
+This version introduces important dependency updates that impact the Purchase Connector and the AdRevenue Connector for Android. 
+
+- Apps that use the AdRevenue Connector and update to SDK v6.15.0 (and above) must remove the AdRevenue Connector and migrate to the SDK API. 
+For more details, see [here](https://dev.appsflyer.com/hc/docs/ad-revenue-1).
+
+- Apps that use the Purchase Connector and update to SDK v6.15.0 (and above) must use Purchase Connector v6.15.2 (and above)
+
+
+#### New Features
+
+- Added the logAdRevenue method to send ad revenue data to AppsFlyer. 
+Note: Starting with this version, the AdRevenue Connector should no longer be used. 
+For more details, see [here](https://dev.appsflyer.com/hc/docs/ad-revenue-1).
+
+
+
+## Version 6.14.6
+
+#### Bug Fixes
+
+- Fixed an issue where the SDK was making redundant calls to the getConversionData API (GCD) when starting a new session; this does not impact measurement.
+
+
+
+## Version 6.14.5
+
+#### Bug Fixes
+
+- Fixed an issue where the SDK would send the manual consent data that had been set by the app, even if the code for sending the manual consent was removed.
+
+
+
+## Version 6.14.4
+
+#### Changed Features
+
+- Added a dedicated Privacy Manifest to Strict SDK, where the IDFA is not collected.
+
+
 ## Version 6.14.3
 
 #### Changed Features
