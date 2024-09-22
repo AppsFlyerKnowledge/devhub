@@ -1106,6 +1106,7 @@ Lets you configure which partners should the SDK exclude from data-sharing.
 [/block]
 
 **Note:** 
+Make sure to use the exact partner ID (PID). Failing to do so may result in privacy-preservation breaches.
 To find out the required partner IDs:
 1. Run the [Get active integrations API](https://dev.appsflyer.com/hc/reference/get_v1-integrations) for a list of all active integrations
 2. Use the `media_source_name` values from the [API response](https://dev.appsflyer.com/hc/reference/get_v1-integrations) as input values to the method `partners` array. 
