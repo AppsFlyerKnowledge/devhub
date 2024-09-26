@@ -223,9 +223,6 @@ paths:
             example: a1b2e3h5
           required: true
       requestBody:
-        description: |
-          ⚠️ **Important notice**
-          In order to ensure that the parameters currently set in the shortlink are retained, you MUST pass them again in this request body. Any parameters not included in this request body will be removed from the shortlink.
         content:
           application/json:
             schema:
