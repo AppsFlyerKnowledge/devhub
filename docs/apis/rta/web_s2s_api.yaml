@@ -1,0 +1,485 @@
+openapi: 3.0.0
+info:
+  title: Set Customer User ID API
+  version: "1.0.0"
+servers:
+  - url: https://webs2s.appsflyer.com/v1
+paths:
+  /{bundleId}/setcuid:
+    post:
+      summary: Associate Customer User ID with AF User ID
+      description: |
+        On associating a CUID with a visitor to your website. For example, any time you match the web `afUserId` with your customer user ID. Doing so enables PBA to match data from various sources. 
+        This is similar to [`setCustomerUserId`](https://support.appsflyer.com/hc/en-us/articles/360001610038-PBA-web-SDK-integration-guide#identifying-users-using-customer-user-id-cuid) on the website.
+      operationId: web-s2s-api-setcuid-post
+      tags:
+        - User Management
+      parameters:
+        - in: path
+          name: bundleId
+          required: true
+          schema:
+            type: string
+          description: The bundle ID for which the user ID(s) is to be set.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+                $ref: '#/components/schemas/SetCuIdBody'
+      responses:
+        '200':
+          description: User information updated successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: Status of the operation.
+                    example: "Success"
+                  message:
+                    type: string
+                    description: Detailed message about the operation, specifying which ID was set.
+                    example: "Customer user ID or AF user ID was set successfully for the specified bundle ID."
+        '400':
+          description: Bad request. One or both identifiers are incorrect, not provided, or the request body is otherwise malformed.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+                example:
+                  error: "SetCUID event cannot be parsed without both user ids - customerUserId and afUserID"
+                  message: "Bad Request"
+                  status: 400
+        '401':
+          description: Authorization information is missing or invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: The specified bundle ID was not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /{bundleId}/event:
+    post:
+      summary: Send Event
+      description: Sets a custom user ID or an AppsFlyer user ID for the specified bundle, at least one identifier is required.
+      operationId: web-s2s-api-event-post
+      tags:
+        - User Management
+      parameters:
+        - in: path
+          name: bundleId
+          required: true
+          schema:
+            type: string
+          description: The bundle ID for which the user ID(s) is to be set.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              oneOf:
+                - $ref: '#/components/schemas/OnlyCuIdEventBody'
+                - $ref: '#/components/schemas/OnlyAfUserIdEventBody'
+                - $ref: '#/components/schemas/CuIdAndAfuserIdEventBody'
+      responses:
+        '200':
+          description: User information updated successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: Status of the operation.
+                    example: "OK"
+                  message:
+                    type: string
+                    description: Detailed message about the operation, specifying which ID was set.
+                    example: "Customer user ID or AF user ID was set successfully for the specified bundle ID."
+        '400':
+          description: Bad request. One or both identifiers are incorrect, not provided, or the request body is otherwise malformed.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+                example:
+                  error: "SetCUID event cannot be parsed without both user ids - customerUserId and afUserID"
+                  message: "Bad Request"
+                  status: 400
+        '401':
+          description: Authorization information is missing or invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: The specified bundle ID was not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    OnlyCuIdEventBody:
+      title: Only Customer ID
+      allOf:
+        - $ref: '#/components/schemas/OnlyCuId' 
+        - $ref: '#/components/schemas/CommonEventBody' 
+    OnlyAfUserIdEventBody:
+      title: Only AF user ID
+      allOf:
+        - $ref: '#/components/schemas/OnlyAfUserId'  
+        - $ref: '#/components/schemas/CommonEventBody' 
+    CuIdAndAfuserIdEventBody:
+      title: Both AF user ID and Customer ID
+      allOf:
+        - $ref: '#/components/schemas/CuIdAndAfuserId'
+        - $ref: '#/components/schemas/CommonEventBody' 
+    OnlyCuId:
+      type: object
+      required:
+        - customerUserId
+      properties:
+        customerUserId:
+          $ref: '#/components/schemas/CustomerUserId'
+    OnlyAfUserId:
+      type: object
+      required:
+        - afUserId
+      properties:
+        afUserId:
+          $ref: '#/components/schemas/AfUserId'  
+    CuIdAndAfuserId:
+      type: object
+      required:
+        - customerUserId
+        - afUserId
+      properties:
+        customerUserId:
+          $ref: '#/components/schemas/CustomerUserId'
+        afUserId:
+          $ref: '#/components/schemas/AfUserId'  
+    SetCuIdBody:
+      type: object
+      required:
+        - customerUserId
+        - afUserId
+        - webDevKey
+      properties:
+        customerUserId:
+          $ref: '#/components/schemas/CustomerUserId'
+        afUserId:
+          $ref: '#/components/schemas/AfUserId'
+        webDevKey:
+          $ref: '#/components/schemas/WebDevKey' 
+    AfUserId:
+      type: string
+      description: |
+        The unique user ID assigned by the Web SDK to every user that visits your website. You will need to pass the cookie value to your backend servers.
+
+        - Cookie details:
+          - Name: afUserId
+          - Value: set `afUserId` to this value
+          - Domain: website-domain
+        - Populates raw data field: `af_web_id`
+      example: "9999999-f848-4963-a091-568f0bf9a361"
+    CustomerUserId:
+      type: string
+      description: |
+        [Customer user ID (CUID)](https://support.appsflyer.com/hc/en-us/articles/207032016-Customer-user-ID-field-) is a unique identifier set by you.
+
+        - Use the identical identifier for events reported by any means to AppsFlyer. Meaning the same identifier is used in the Web SDK, mobile SDK, and S2S APIs.
+        - [Web SDK customer user ID](https://support.appsflyer.com/hc/en-us/articles/360001610038-Web-SDK-integration-guide#setting-customer-user-id-after-signup)
+        - Populates raw data field: `customer_user_id`
+      example: "1234567890abcdef"
+    WebDevKey:
+      type: string
+      description: |
+        Populate using the [web dev key](https://support.appsflyer.com/hc/en-us/articles/360006997298#getting-the-web-dev-key) available on the Dashboard.
+
+        **To get the Web Dev Key**:
+
+        1. In AppsFlyer, go to the **My Apps** tab
+        2. Click **View brand bundles**
+        3. Copy the required **Web Dev Key** 
+      example: "99999999-9999-9999-9999-999999999999"
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+        message:  
+          type: string
+        status:
+          type: integer
+    CommonEventBody:
+      type: object
+      required:
+        - webDevKey
+        - eventType
+        - eventName
+      properties:
+        webDevKey:
+          $ref: '#/components/schemas/WebDevKey'
+        eventType:
+          type: string
+          enum:
+            - EVENT
+          description: |
+            Event attribute identifier for internal use by AppsFlyer. Always set to EVENT.
+          example: "EVENT"
+        eventName:
+          type: string
+          description: |
+            - We use this parameter to differentiate conversion and non-conversion events using the [event conversion list](https://support.appsflyer.com/hc/en-us/articles/360000646498-PBA-brand-bundles-and-settings#web-event-settings) set by the marketer in PBA settings. 
+            - Ensure that you populate it with values consistent to the marketer's conversion logic.
+            - Populates raw data field: `event_name`
+          example: "my_web_event"
+        timestamp:
+          type: integer
+          format: int64
+          description: |
+            - If no timestamp is sent, the time is set using the server time. 
+            - **Events arriving late are timestamped using the current server time**. Late means arrival after midnight UTC on the day following the event. For example, an event occurring on Monday must be processed before midnight UTC Tuesday. 
+            - Events having a timestamp in the future (relative to the current server time) are timestamped with the server time.
+            - Populates raw data field: `event_time`
+          example: 1234567890123
+        eventValue:
+          type: string
+          format: json
+          description: |
+            Map of event parameters describing the event. Use this parameter to send rich in-app events like product SKU, line item price.
+            - **Note about revenue!** You can populate this parameter with revenue details. In addition, you must populate `eventRevenue`, and `eventRevenueCurrency`.
+            - Limitation: 1000 characters. Do not exceed this; it will be truncated. 
+            - Populates raw data field: `event_value`
+          example: '{"Purchase": {"sku" : "ABC123", "color": "blue", "unit_price":3.99,"currency": "USD"}}'
+          additionalProperties:
+            type: object
+        eventRevenueCurrency:
+          $ref: '#/components/schemas/Currency'
+        eventRevenue:
+          type: number
+          format: double
+          description: |
+            Revenue (monetary value) assigned to an event.
+            **Note!** If revenue is reported in eventValue, report it also in eventRevenue and populate eventRevenueCurrency. 
+
+            - Negative values permitted. For example, a refund.
+            - Populates raw data field: `event_revenue`
+          example: 1234.56
+        referrer:
+          type: string
+          example: "https://www.google.com/"
+          description: |
+            HTTP referrer
+            - Populates raw data field: `http_referrer` 
+        UserAgent:
+          type: string
+          description: |
+            Populates raw data field: `user_agent`
+          example: "Chrome/80.0.3987"
+        ip:
+          type: string
+          format: ipv4
+          description: |
+            User IP address
+            Where possible send the value of this field. It assists in determining the geo-location of the user.
+            Populates raw data field: ip
+          example: "192.0.2.1"
+    Currency:
+      description: |
+        Populates raw data field: `event_revenue_currency`
+      example: "EUR"
+      type: string
+      enum:
+      - NZD
+      - SGD
+      - ANG
+      - MNT
+      - BIF
+      - BBD
+      - HUF
+      - ERN
+      - AZN
+      - BYN
+      - AOA
+      - PYG
+      - MYR
+      - GYD
+      - VUV
+      - SLL
+      - FKP
+      - DJF
+      - GNF
+      - MMK
+      - RSD
+      - CLF
+      - XDR
+      - ZAR
+      - TND
+      - PHP
+      - KGS
+      - XPD
+      - RON
+      - RUB
+      - KMF
+      - CHW
+      - SCR
+      - GIP
+      - XBC
+      - MXV
+      - XXX
+      - TRY
+      - UYU
+      - XCD
+      - FJD
+      - GHS
+      - MVR
+      - AWG
+      - UGX
+      - TOP
+      - CVE
+      - MKD
+      - COP
+      - CUC
+      - GTQ
+      - KZT
+      - MXN
+      - MGA
+      - AUD
+      - BDT
+      - ISK
+      - KRW
+      - DZD
+      - OMR
+      - ZMW
+      - MOP
+      - CUP
+      - JPY
+      - SHP
+      - VES
+      - LSL
+      - ETB
+      - BWP
+      - MAD
+      - AED
+      - NGN
+      - BRL
+      - XTS
+      - GEL
+      - IDR
+      - EUR
+      - GBP
+      - WST
+      - UYI
+      - XAF
+      - SZL
+      - XOF
+      - SEK
+      - UZS
+      - KES
+      - KYD
+      - ILS
+      - KWD
+      - NPR
+      - MRU
+      - BZD
+      - QAR
+      - UAH
+      - XSU
+      - BTN
+      - HTG
+      - DKK
+      - USN
+      - VND
+      - SBD
+      - SSP
+      - STN
+      - JMD
+      - IQD
+      - LBP
+      - XPT
+      - HRK
+      - HKD
+      - JOD
+      - PAB
+      - CDF
+      - XAU
+      - BAM
+      - CNY
+      - SOS
+      - XPF
+      - GMD
+      - DOP
+      - XAG
+      - KPW
+      - BOB
+      - BHD
+      - LRD
+      - BGN
+      - AMD
+      - CZK
+      - CAD
+      - LAK
+      - PLN
+      - LKR
+      - XUA
+      - UYW
+      - MWK
+      - PGK
+      - YER
+      - PEN
+      - KHR
+      - RWF
+      - BSD
+      - XBA
+      - AFN
+      - ZWL
+      - LYD
+      - TMT
+      - HNL
+      - TWD
+      - XBB
+      - IRR
+      - MUR
+      - BOV
+      - THB
+      - ALL
+      - XBD
+      - TJS
+      - SDG
+      - BMD
+      - CRC
+      - USD
+      - NOK
+      - SRD
+      - MZN
+      - CLP
+      - SYP
+      - TZS
+      - EGP
+      - COU
+      - ARS
+      - MDL
+      - INR
+      - CHE
+      - SAR
+      - PKR
+      - TTD
+      - NIO
+      - BND
+      - NAD
+      - SVC
+      - CHF
+
+
+
+ 
