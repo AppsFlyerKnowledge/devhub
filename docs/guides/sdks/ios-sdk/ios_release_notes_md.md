@@ -7,6 +7,16 @@ hidden: false
 order: 1
 ---
 
+## Version 6.15.3
+
+#### Technical Update:
+
+- Set the MacOS deployment target to 10.13
+
+- Remove redundant calls to ATTTrackingManger's trackingAuthorizationStatus API when fetching the IDFA, after the app called waitForATTUserAuthorization.
+
+
+
 ## Version 6.15.2
 
 #### Bug Fixes
