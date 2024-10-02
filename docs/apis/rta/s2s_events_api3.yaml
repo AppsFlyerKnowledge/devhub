@@ -466,6 +466,10 @@ components:
 
             > 📘 Note 🍏
             > Starting July 1, 2021, for iOS apps,  if you don't send this parameter we regard the data as having come from a device running iOS 14.5.
+        ua:
+          type: string
+          description: The device user-agent
+          example: "Mozilla/5.0 (Linux; Android 13; SM-G781B Build/TP1A.220624.014; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/129.0.6668.70 Mobile Safari/537.36 GoogleApp/15.38.49.28.arm64"
         aie:
           type: boolean
           description: |
@@ -825,6 +829,10 @@ components:
 
             > 📘 Note 🍏
             > Starting July 1, 2021, for iOS apps,  if you don't send this parameter we regard the data as having come from a device running iOS 14.5.
+        ua:
+          type: string
+          description: The device user-agent
+          example: "Mozilla/5.0 (iPhone; CPU iPhone OS 13_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1"
         aie:
           type: boolean
           description: |
