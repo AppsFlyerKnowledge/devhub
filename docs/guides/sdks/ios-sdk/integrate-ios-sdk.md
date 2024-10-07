@@ -9,7 +9,7 @@ createdAt: "2020-11-02T17:48:20.793Z"
 updatedAt: "2023-05-02T12:31:52.710Z"
 order: 3
 ---
-## Before you begin
+## Recommended
 
 [block:html]
 {
