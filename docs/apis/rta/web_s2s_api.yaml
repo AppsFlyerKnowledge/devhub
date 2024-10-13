@@ -1,6 +1,6 @@
 openapi: 3.0.0
 info:
-  title: Set Customer User ID API
+  title: WEB Server-TO-Server API 
   version: "1.0.0"
 servers:
   - url: https://webs2s.appsflyer.com/v1
@@ -13,7 +13,7 @@ paths:
         This is similar to [`setCustomerUserId`](https://support.appsflyer.com/hc/en-us/articles/360001610038-PBA-web-SDK-integration-guide#identifying-users-using-customer-user-id-cuid) on the website.
       operationId: web-s2s-api-setcuid-post
       tags:
-        - User Management
+        - Events management
       parameters:
         - in: path
           name: bundleId
@@ -71,7 +71,7 @@ paths:
       description: Sets a custom user ID or an AppsFlyer user ID for the specified bundle, at least one identifier is required.
       operationId: web-s2s-api-event-post
       tags:
-        - User Management
+        - Events management
       parameters:
         - in: path
           name: bundleId
