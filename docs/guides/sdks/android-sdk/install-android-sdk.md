@@ -280,6 +280,12 @@ dependencies {
 
 ```
 
+If you are using ProGuard, add the following keep rules to your `proguard-rules.pro` file:
+
+```groovy
+-keep class com.huawei.hms.**{*;}
+```
+
 
 ### Xiaomi GetApps store referrer
 <span class="annotation-added">V6.9.0</span>
