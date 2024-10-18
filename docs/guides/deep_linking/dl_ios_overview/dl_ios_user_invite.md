@@ -132,7 +132,7 @@ AppsFlyerShareInviteHelper.logInvite(<CHANNEL>, parameters: [
 <span class="annotation-optional">Optional</span>  
 **To set up UDL for user invite attribution:**
 
-1. Set up [Unified Deep Linking](doc:unified-deep-linking-udl-1) (UDL). 
+1. Set up [Unified Deep Linking](doc:dl_ios_unified_deep_linking) (UDL). 
 
 2. In `DeepLinkDelegate.didResolveDeepLink`, retrieve the deep linking parameters created during the link generation step. In this example, the following properties are retrieved:
 
