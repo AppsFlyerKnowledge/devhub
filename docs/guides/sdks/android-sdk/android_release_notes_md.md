@@ -17,7 +17,7 @@ order: 1
 
 #### Changed Features
 
-- Internal updates for url structure used by Privacy Sandbox Attribution API.
+- Internal updates for the url structure used by Privacy Sandbox Attribution API.
 
 
 ## Version 6.15.1
