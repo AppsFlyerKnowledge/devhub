@@ -8,6 +8,18 @@ order: 1
 ---
 
 
+## Version 6.15.2
+
+#### Bug Fixes
+
+- Fixed OutOfMemoryError related to usage of ThreadPoolExecutor
+
+
+#### Changed Features
+
+- Internal updates for the url structure used by Privacy Sandbox Attribution API.
+
+
 ## Version 6.15.1
 
 #### Technical Update
