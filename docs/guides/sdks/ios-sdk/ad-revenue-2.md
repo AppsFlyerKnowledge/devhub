@@ -18,6 +18,11 @@ There are two ways for the SDK to generate an ad revenue event, depending on you
 
 When an impression with revenue occurs invoke the [`logAdRevenue`](doc:ios-sdk-reference-appsflyerlib#logadrevenue) method with the revenue details of the impression.  
 
+📘 Note
+> 
+> If you are using the AdRevenue connector, please remove it before switching to the new `logAdRevenue` method. Failing to do so may cause unexpected behavior.
+
+
 **To implement the method:**
 
 1. Create an instance of [`AFAdRevenueData`](doc:ios-sdk-reference-appsflyerlib#afadrevenuedata) with the revenue details of the impression to be logged.  
