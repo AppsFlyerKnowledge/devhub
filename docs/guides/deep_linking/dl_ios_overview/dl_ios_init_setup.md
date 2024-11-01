@@ -18,7 +18,7 @@ The two methods and instructions for implementation are described in detail in t
 | Method | Description | iOS Versions | Procedure |
 | --- | --- | --- | --- |
 |**Universal Links**|Directly opens the mobile app at the default activity. Universal Links take the format of regular web links (e.g. https://yourbrand.onelink.me or https://www.yourbrand.com)|iOS 9 and above|<ol><li>[Get the app bundle ID and prefix ID.](#getting-the-app-bundle-id-and-prefix-id)</li><li> [Enable associated domains.](#enabling-associated-domains)</li></ol>|
-|**URI Scheme**|Directly opens the app based on the activity path specified in the URI scheme.|[iOS all versions](https://support.appsflyer.com/hc/en-us/articles/115002366466)|<ol><li>[Decide on a URI scheme with the marketer.](#deciding-on-a-uri-scheme)</li><li> [Enable associated domains.](#adding-uri-scheme)</li><li>[Testing](#testing-the-uri-scheme)</li></ol>
+|**URI Scheme**|Directly opens the app based on the activity path specified in the URI scheme.|[iOS all versions](https://support.appsflyer.com/hc/en-us/articles/115002366466)|<ol><li>[Decide on a URI scheme with the marketer.](#deciding-on-a-uri-scheme)</li><li> [Adding URI scheme.](#adding-uri-scheme)</li><li>[Testing](#testing-the-uri-scheme)</li></ol>
 
 ## Procedures for iOS Universal Links
 
