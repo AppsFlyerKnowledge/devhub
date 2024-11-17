@@ -110,6 +110,10 @@ You are trying to test installs and other conversion events in the log. When you
 **Possible reasons**  
 This might be because you have the Zero package, which does not include attribution data; only data on clicks and impressions. To start receiving attribution data, learn more about the [different AppsFlyer packages](https://www.appsflyer.com/pricing/), and update as needed. You can also contact our customer engagement team at [hello@appsflyer.com](mailto:hello@appsflyer.com) if you have questions about our packages.
 
+#### My SDK connection to AppsFlyer is secured by TLS 1.0 or 1.1 
+
+To ensure that the connection to AppsFlyer is secured by TLS 1.2 or 1.3 and not by lower TLS versions use the `appsflyersdk.com` endpoint without a prefix. Specifically call the [setHost](https://dev.appsflyer.com/hc/docs/android-sdk-reference-appsflyerlib#sethost) function in the following way: `setHost("","[appsflyersdk.com](http://appsflyersdk.com/)")`
+
 ## Creating an Android debug app
 
 -----------------------------
