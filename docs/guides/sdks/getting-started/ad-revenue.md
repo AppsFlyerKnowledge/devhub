@@ -66,4 +66,5 @@ AppsFlyer ad revenue instructions for various platforms:
   <a class="button android" href="https://dev.appsflyer.com/hc/docs/ad-revenue-1">Android SDK</a>
   <a class="button ios" href="https://dev.appsflyer.com/hc/docs/ad-revenue-2">iOS SDK</a>
   <a class="button unity" href="https://dev.appsflyer.com/hc/docs/ad-revenue-unity">Unity SDK</a>
+    <a class="button reactnative" href="https://dev.appsflyer.com/hc/docs/rn_api#logadrevenue-from-v6151">React Native SDK</a>
 </div>
