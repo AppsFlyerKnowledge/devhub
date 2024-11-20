@@ -102,7 +102,23 @@ If there already is an intent-filter for the Android App Link in the main activi
         android:scheme="https" />
 </intent-filter>
 ```
-
+> 📘 **Adding web redirections**
+>
+> If you want to redirect users to web destinations besides your app and have created templates for those destinations, use the `pathPrefix` attribute to specify the template name, as shown in the following example:
+>
+>```xml XML
+><intent-filter android:autoVerify="true">
+>		...		
+>    <data 
+>        android:scheme="https"
+>        android:host="www.example.com" 
+>        android:pathPrefix="/H5hv" />
+>    <data 
+>        android:scheme="https"
+>        android:host="www.example.com" 
+>        android:pathPrefix="/H2jv" />
+></intent-filter>
+>```
 > ℹ️
 >
 > When `android:autoVerify="true"` is present on any of your intent filters, installing your app on devices with Android 6 and higher causes the system to attempt to verify all hosts associated with the URLs in any of your app's intent filters. 
@@ -111,7 +127,7 @@ If there already is an intent-filter for the Android App Link in the main activi
 
 Github link: [XML](https://github.com/AppsFlyerSDK/appsflyer-onelink-android-sample-apps/blob/5b202b983b33d62bd5d80102ab27f17e2b1cb25f/java/basic_app/app/src/main/AndroidManifest.xml#L39-L49)
 
-4. Tell the marketer that the App Link configuration is completed.
+1. Tell the marketer that the App Link configuration is completed.
 When the marketer tests the link, it should direct the user to the app's main page.
 
 ## Procedures for URI Scheme
