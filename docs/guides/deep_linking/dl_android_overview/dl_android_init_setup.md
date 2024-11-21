@@ -104,7 +104,7 @@ If there already is an intent-filter for the Android App Link in the main activi
 ```
 > 📘 **Adding web redirections**
 >
-> If you want to redirect users to web destinations besides your app and have created templates for those destinations, use the `pathPrefix` attribute to specify the template name, as shown in the following example:
+> You can specify which templates open your app by adding them to the pathPrefix element, as shown in the example below: 
 >
 >```xml XML
 ><intent-filter android:autoVerify="true">
