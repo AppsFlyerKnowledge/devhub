@@ -35,9 +35,9 @@ To enable uninstall measurement, a `.p12` certificate is required.
 ![](https://files.readme.io/8f9c3e3-2-c.png "2-c.png")
 
 **Step 2: Select App ID**  
-**2.1.** Locate your Apple App ID in [Apple Developer Members Center](https://developer.apple.com/account/overview.action), or create one.
+**2.1.** If your Apple App ID is already registered, locate it in [Apple Developer Members Center](https://developer.apple.com/account/overview.action) and skip to step 2.8.
 
-To create an App ID, in the Apple Developer Members Center, Go to **Identifiers** and click **+**.
+If you need to create a new Apple App ID, in the Apple **Developer Members Center**, Go to **Identifiers** and click **+**.
 
 [block:image]
 {
@@ -57,15 +57,23 @@ To create an App ID, in the Apple Developer Members Center, Go to **Identifiers*
 
 
 
-**2.2** Choose **App IDs** and click **continue**
+**2.2.** Choose **App IDs** and click **continue**
 
 ![](https://files.readme.io/b6e8a6b-Screenshot_2023-04-16_at_10.19.00.png)
 
-**2.3** Choose **App** and click **continue**
+**2.3.** Choose **App** and click **continue**
 
 ![](https://files.readme.io/261e5e0-Screenshot_2023-04-16_at_10.19.07.png)
 
-**2.4.** In the Register an App ID view, Under **Capabilities**, check **Push Notifications** and click **Configure** (**Edit** if it was previously configured). If the Configure/Edit button is not available, you might not have the required permissions.
+**2.4.** Under **Register an App ID**, in the **Description** field, provide the description for your app.
+
+**2.5.** In the **Bundle ID** field, enter the app Bundle ID.
+
+**2.6.** Click **Continue**.
+
+**2.7.** Under **Edit your App ID Configuration**, select **Push Notifications** and click **Configure** to continue with the setting. Once your done skip to **Step 3: Upload CSR** below.
+
+**2.8.** In the **Register an App ID view**, under **Capabilities**, check **Push Notifications** and click **Configure** (**Edit** if it was previously configured). If the Configure/Edit button is not available, you might not have the required permissions.
 
 ![](https://files.readme.io/bbdd1b8-1-c-1.png "1-c-1.png")
 
