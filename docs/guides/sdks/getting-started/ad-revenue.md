@@ -19,52 +19,81 @@ The AppsFlyer SDK sends impression revenue data to AppsFlyer. The impression rev
 > If your Ad Revenue implementation predates SDK v6.15.0, and you want to upgrade, update your ad revenue code as specified in the guides below. Failing to do so will result in the Ad Revenue functionality not working correctly.
 
 AppsFlyer ad revenue instructions for various platforms:
-
 <style>
   .button-container {
-  	display: flex;
+    display: flex;
+    max-width:800px;
+
   }
   .button {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 200px;
-	  border-radius: 6px;
+    min-width: 200px;
+    border-radius: 6px;
     padding: 8px;
     margin-right: 4px;
-	}
+   }
   .button:before {  
   	margin-right: 4px;  
   }
-  .button.android {  
+  .button {  
+    border-radius: 6px;  
+    padding: 8px;  
+    border: solid 2px #434446;  
+  }
+  /**  .button.android {  
     border: solid 2px #3DDC84;  
   }
   .button.reactnative {  
     border: solid 2px #FF8C00;  
   }
   .button.ios {  
-  	border-radius: 6px;  
+    border-radius: 6px;  
     padding: 8px;  
     border: solid 2px #7D7D7D;  
   }
    .button.unity {  
     border: solid 2px #3DDC84;  
     border-color: var(--project-primary-color);  
-  }
+  }**/
   .ios:before {  
-        content: url("<https://files.readme.io/19fdc72-apple-icon.svg")>;  
+        content: url("https://files.readme.io/19fdc72-apple-icon.svg");  
   }
   .android:before {  
-        content: url("<https://files.readme.io/d7dc5a3-android-icon.svg")>;  
+        content: url("https://files.readme.io/d7dc5a3-android-icon.svg");  
   }
-.unity:before {  
-    content: url("<https://files.readme.io/59acdf6-unity-icon.svg")>;  
-}
-  
+ .unity:before {  
+    content: url("https://files.readme.io/59acdf6-unity-icon.svg");  
+ }
+ .flutter:before {  
+    content: url("https://files.readme.io/1f70175-flutter-icon.svg");  
+ }
+ .cordova:before {  
+    content: url("https://files.readme.io/5f757d6-apache_cordova-icon.svg");  
+ }
+ .capacitor:before {  
+    content: url("https://files.readme.io/ad0d405-capacitor-icon.svg");  
+ }
+ .reactnative:before {  
+    content: url("https://files.readme.io/3e1288d-reactnative-icon.svg");  
+ }
+ a[href*=http]:not([href*="dev.appsflyer.com"]):not(.landing-page__social):after 
+ {
+    display:none !important;
+
+ }
+ 
 </style>
 <div class="button-container">
   <a class="button android" href="https://dev.appsflyer.com/hc/docs/ad-revenue-1">Android SDK</a>
   <a class="button ios" href="https://dev.appsflyer.com/hc/docs/ad-revenue-2">iOS SDK</a>
   <a class="button unity" href="https://dev.appsflyer.com/hc/docs/ad-revenue-unity">Unity SDK</a>
-    <a class="button reactnative" href="https://dev.appsflyer.com/hc/docs/rn_api#logadrevenue-from-v6151">React Native SDK</a>
+  <a class="button reactnative" href="https://dev.appsflyer.com/hc/docs/rn_api#logadrevenue-from-v6151">React Native SDK</a>
+</div>
+<div class="button-container">
+  <a target="_blank" class="button flutter" href="https://github.com/AppsFlyerSDK/appsflyer-flutter-plugin/blob/master/doc/API.md#-void-logadrevenueadrevenuedata-adrevenuedata">Flutter</a>
+  <a target="_blank" class="button cordova" href="https://github.com/AppsFlyerSDK/appsflyer-cordova-plugin/blob/master/docs/API.md#logAdRevenue">Cordova</a>
+  <a target="_blank" class="button capacitor" href="https://github.com/AppsFlyerSDK/appsflyer-capacitor-plugin/blob/main/docs/API.md#logadrevenue">Capacitor</a>
+  <a target="_blank" class="button cocos2dx" href="https://github.com/AppsFlyerSDK/appsflyer-cocos2dx-plugin?tab=readme-ov-file#logAdrevenue">Cocos2dx</a>
 </div>
