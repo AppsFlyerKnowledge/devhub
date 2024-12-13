@@ -97,6 +97,8 @@ If there already is an intent-filter for the Android App Link in the main activi
 
     <category android:name="android.intent.category.DEFAULT" />
     <category android:name="android.intent.category.BROWSABLE" />
+    
+    <!-- Replace "onlink-basic-app" with your own domain -->
     <data
         android:host="onelink-basic-app.onelink.me"
         android:scheme="https" />
