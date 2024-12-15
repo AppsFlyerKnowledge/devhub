@@ -128,7 +128,7 @@ You can use an existing OneLink link or ask your marketer to create a new one fo
 - Use only the domain and OneLink template of your link, for example: `https://onelink-basic-app.onelink.me/H5hv`.
 - Add OneLink custom parameters other than `deep_link_value` and `deep_link_sub1-10`, as expected by your application. 
 - The parameters should be added as _query parameters_.
-  - Example: `https://onelink-basic-app.onelink.me/H5hv?deep_link_value=apples&deep_link_sub1=23`  
+  - Example: `https://onelink-basic-app.onelink.me/H5hv?my_inapp_dest=apples&my_inapp_value=23`  
 
 ### Perform the test
 
