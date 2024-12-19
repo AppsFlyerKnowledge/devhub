@@ -7,6 +7,26 @@ hidden: false
 order: 1
 ---
 
+## Version 6.16.0
+
+#### New Features
+
+- Added support for Samsung Preload attribution. More information about this can be found [here](https://support.appsflyer.com/hc/en-us/articles/4543811207313-AppsFlyer-preload-referrer-attribution#samsung-preload-referrer)
+
+- Added support for Revenue measurement in the Privacy Sandbox Attribution API (closed beta)
+
+
+#### Changed Features
+
+- Updated the version of Dexguard to v9.8.12 to resolve some stability issues and enhance security.
+
+
+#### Bug Fixes
+
+- Fixed a crash related to ClassNotFoundException for classes that are obfuscated with DexGuard.
+
+
+
 
 ## Version 6.15.2
 
