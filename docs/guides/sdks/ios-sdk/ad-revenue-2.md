@@ -43,7 +43,7 @@ let my_adRevenueData = AFAdRevenueData(monetizationNetwork: "ironsource",
                         eventRevenue: 123.45)
         
 var my_additionalParameters: [String: Any] = [:]
-my_additionalParameters[kAppsFlyerAdRevenueCountry] = 10
+my_additionalParameters[kAppsFlyerAdRevenueCountry] = "US"
 my_additionalParameters[kAppsFlyerAdRevenueAdType] = "Banner"
 my_additionalParameters[kAppsFlyerAdRevenueAdUnit] = "89b8c0159a50ebd1"
 my_additionalParameters[kAppsFlyerAdRevenuePlacement] = "place"
@@ -91,7 +91,7 @@ To integrate the iOS ad revenue SDK connector, you need to import, initialize, a
 
 ```swift
 let adRevenueParams:[AnyHashable: Any] = [
-                    kAppsFlyerAdRevenueCountry : "us",
+                    kAppsFlyerAdRevenueCountry : "US",
                     kAppsFlyerAdRevenueAdUnit : "02134568",
                     kAppsFlyerAdRevenueAdType : "Banner",
                     kAppsFlyerAdRevenuePlacement : "place",
