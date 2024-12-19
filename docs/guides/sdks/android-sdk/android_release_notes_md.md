@@ -11,7 +11,7 @@ order: 1
 
 #### New Features
 
-- Added support for Samaung Preload attribution. More information about this can be found [here](https://support.appsflyer.com/hc/en-us/articles/4543811207313-AppsFlyer-preload-referrer-attribution#samsung-preload-referrer)
+- Added support for Samsung Preload attribution. More information about this can be found [here](https://support.appsflyer.com/hc/en-us/articles/4543811207313-AppsFlyer-preload-referrer-attribution#samsung-preload-referrer)
 
 - Added support for Revenue measurement in the Privacy Sandbox Attribution API (closed beta)
 
