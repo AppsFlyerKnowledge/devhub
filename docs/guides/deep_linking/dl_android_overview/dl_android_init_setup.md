@@ -116,6 +116,26 @@ Github link: [XML](https://github.com/AppsFlyerSDK/appsflyer-onelink-android-sam
 4. Tell the marketer that the App Link configuration is completed.
 When the marketer tests the link, it should direct the user to the app's main page.
 
+> 📘 **Specifying which templates open your app**
+>
+> You can specify which templates open your app by adding them to the `pathPrefix` element, as shown in the example below: 
+>
+>```xml XML
+><intent-filter android:autoVerify="true">
+>		...		
+>    <data 
+>        android:scheme="https"
+>        android:host="onelink-basic-app.onelink.me" 
+>        android:pathPrefix="/H5hv" />
+>    <data 
+>        android:scheme="https"
+>        android:host="onelink-basic-app.onelink.me" 
+>        android:pathPrefix="/H2jv" />
+></intent-filter>
+>```
+
+
+
 ## Procedures for URI Scheme
 
 A URI scheme is a URL that leads users directly to the mobile app. 
