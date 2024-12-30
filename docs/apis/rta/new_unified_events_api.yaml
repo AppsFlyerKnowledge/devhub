@@ -24,8 +24,6 @@ paths:
             schema:
               required:
               - device_ids
-              - event_name
-              - ip
               type: object
               properties:
                 device_ids:
@@ -63,6 +61,7 @@ paths:
                     - type: string
                       title: Predefined event names
                       enum:
+                      - ""
                       - af_level_achieved
                       - af_add_payment_info
                       - af_add_to_cart
@@ -94,189 +93,7 @@ paths:
                       title: Custom event names
                       description: A custom event name
                 event_parameters:
-                  type: object
-                  properties:
-                    af_revenue:
-                      type: number
-                      format: double
-                    af_currency:
-                      type: string
-                      enum:
-                      - USD
-                      - AED
-                      - AFN
-                      - ALL
-                      - AMD
-                      - ANG
-                      - AOA
-                      - ARS
-                      - AUD
-                      - AWG
-                      - AZN
-                      - BAM
-                      - BBD
-                      - BDT
-                      - BGN
-                      - BHD
-                      - BIF
-                      - BMD
-                      - BND
-                      - BOB
-                      - BRL
-                      - BSD
-                      - BTC
-                      - BTN
-                      - BWP
-                      - BYN
-                      - BZD
-                      - CAD
-                      - CDF
-                      - CHF
-                      - CLF
-                      - CLP
-                      - CNH
-                      - CNY
-                      - COP
-                      - CRC
-                      - CUC
-                      - CUP
-                      - CVE
-                      - CZK
-                      - DJF
-                      - DKK
-                      - DOP
-                      - DZD
-                      - EGP
-                      - ERN
-                      - ETB
-                      - EUR
-                      - FJD
-                      - FKP
-                      - GBP
-                      - GEL
-                      - GGP
-                      - GHS
-                      - GIP
-                      - GMD
-                      - GNF
-                      - GTQ
-                      - GYD
-                      - HKD
-                      - HNL
-                      - HRK
-                      - HTG
-                      - HUF
-                      - IDR
-                      - ILS
-                      - IMP
-                      - INR
-                      - IQD
-                      - IRR
-                      - ISK
-                      - JEP
-                      - JMD
-                      - JOD
-                      - JPY
-                      - KES
-                      - KGS
-                      - KHR
-                      - KMF
-                      - KPW
-                      - KRW
-                      - KWD
-                      - KYD
-                      - KZT
-                      - LAK
-                      - LBP
-                      - LKR
-                      - LRD
-                      - LSL
-                      - LYD
-                      - MAD
-                      - MDL
-                      - MGA
-                      - MKD
-                      - MMK
-                      - MNT
-                      - MOP
-                      - MRO
-                      - MRU
-                      - MUR
-                      - MVR
-                      - MWK
-                      - MXN
-                      - MYR
-                      - MZN
-                      - NAD
-                      - NGN
-                      - NIO
-                      - NOK
-                      - NPR
-                      - NZD
-                      - OMR
-                      - PAB
-                      - PEN
-                      - PGK
-                      - PHP
-                      - PKR
-                      - PLN
-                      - PYG
-                      - QAR
-                      - RON
-                      - RSD
-                      - RUB
-                      - RWF
-                      - SAR
-                      - SBD
-                      - SCR
-                      - SDG
-                      - SEK
-                      - SGD
-                      - SHP
-                      - SLL
-                      - SOS
-                      - SRD
-                      - SSP
-                      - STD
-                      - STN
-                      - SVC
-                      - SYP
-                      - SZL
-                      - THB
-                      - TJS
-                      - TMT
-                      - TND
-                      - TOP
-                      - TRY
-                      - TTD
-                      - TWD
-                      - TZS
-                      - UAH
-                      - UGX
-                      - UYU
-                      - UZS
-                      - VEF
-                      - VES
-                      - VND
-                      - VUV
-                      - WST
-                      - XAF
-                      - XAG
-                      - XAU
-                      - XCD
-                      - XDR
-                      - XOF
-                      - XPD
-                      - XPF
-                      - XPT
-                      - YER
-                      - ZAR
-                      - ZMW
-                      - ZWL
-                      - BYR
-                  example:
-                    af_revenue: 1.99
-                    af_currency: MYR
+                  $ref: "#/components/schemas/EventParameters"
                 event_custom_parameters:
                   description: A JSON object which can contain multiple parameters. Learn more [here](https://support.appsflyer.com/hc/en-us/articles/4410481112081-Rich-in-app-events-Event-structure)
                   type: string
@@ -300,7 +117,7 @@ paths:
                   description: Event timestamp in Unix time milliseconds (UTC)
                   format: int64
                   example: 1625576172928
-                bundleIdentifier:
+                bundle_identifier:
                   type: string
                   example: com.myapp
                   description: |
@@ -331,11 +148,10 @@ paths:
                   description: Limit Ad Tracking flag. Use this flag to mark whether
                     or not the user has advertiser ID
                   example: true
-                
-                
-                
                 sharing_filter:
                   $ref: '#/components/schemas/SharingFilter'
+                consent_data:
+                  $ref: '#/components/schemas/ConsentData'
 
         required: true
       responses:
@@ -390,6 +206,7 @@ components:
       required: true
       description: |
         The CTV platform of the measured app
+
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
@@ -403,6 +220,7 @@ components:
         The result is: `715b133d5a327b77beb898688a3ad438da0f78071cd3df70e8ec5ecf60751972`
       name: authorization
       in: header
+
   schemas:
     DeviceIds:
       oneOf:
@@ -504,4 +322,330 @@ components:
         minItems: 1
         maxItems: 1
         title: all partners blocked
+    EventParameters:
+      type: object
+      properties:
+        af_content:
+          type: array
+          items:
+            type: string
+          description: List of content items
+        af_achievement_id:
+          type: string
+          description: ID of the achievement
+        af_level:
+          type: string
+          description: Level achieved
+        af_score:
+          type: string
+          description: Score achieved
+        af_success:
+          type: string
+          description: Success status
+        af_price:
+          type: number
+          format: float
+          description: Price or cost of an event
+        af_content_type:
+          type: string
+          description: Content type
+        af_content_id:
+          type: string
+          description: ID of the content
+        af_content_list:
+          type: array
+          items:
+            type: string
+          description: List of content IDs
+        af_currency:
+          type: string
+          description: Currency code
+        af_quantity:
+          type: integer
+          description: Quantity of items
+        af_registration_method:
+          type: string
+          description: Registration method
+        af_payment_info_available:
+          type: string
+          description: Indicates if payment info is available
+        af_max_rating_value:
+          type: string
+          description: Maximum rating value
+        af_rating_value:
+          type: string
+          description: Rating value
+        af_search_string:
+          type: string
+          description: Search string used
+        af_date_a:
+          type: string
+          description: Date A
+        af_date_b:
+          type: string
+          description: Date B
+        af_destination_a:
+          type: string
+          description: Destination A
+        af_destination_b:
+          type: string
+          description: Destination B
+        af_description:
+          type: string
+          description: Description of the event
+        af_class:
+          type: string
+          description: Class of the event
+        af_event_start:
+          type: string
+          description: Event start time
+        af_event_end:
+          type: string
+          description: Event end time
+        af_lat:
+          type: string
+          description: Latitude of the location
+        af_long:
+          type: string
+          description: Longitude of the location
+        af_customer_user_id:
+          type: string
+          description: Customer user ID
+        af_validated:
+          type: boolean
+          description: Indicates if the event was validated
+        af_revenue:
+          type: number
+          format: float
+          description: Revenue generated
+        af_projected_revenue:
+          type: number
+          format: float
+          description: Projected revenue
+        af_receipt_id:
+          type: string
+          description: Receipt ID
+        af_tutorial_id:
+          type: string
+          description: Tutorial ID
+        af_virtual_currency_name:
+          type: string
+          description: Virtual currency name
+        af_deep_link:
+          type: string
+          description: Deep link URL
+        af_old_version:
+          type: string
+          description: Old version of the app
+        af_new_version:
+          type: string
+          description: New version of the app
+        af_review_text:
+          type: string
+          description: Review text
+        af_coupon_code:
+          type: string
+          description: Coupon code
+        af_order_id:
+          type: string
+          description: Order ID
+        af_param_1:
+          type: string
+          description: Parameter 1
+        af_param_2:
+          type: string
+          description: Parameter 2
+        af_param_3:
+          type: string
+          description: Parameter 3
+        af_param_4:
+          type: string
+          description: Parameter 4
+        af_param_5:
+          type: string
+          description: Parameter 5
+        af_param_6:
+          type: string
+          description: Parameter 6
+        af_param_7:
+          type: string
+          description: Parameter 7
+        af_param_8:
+          type: string
+          description: Parameter 8
+        af_param_9:
+          type: string
+          description: Parameter 9
+        af_param_10:
+          type: string
+          description: Parameter 10
+        af_departing_departure_date:
+          type: string
+          description: Departing departure date
+        af_returning_departure_date:
+          type: string
+          description: Returning departure date
+        af_destination_list:
+          type: array
+          items:
+            type: string
+          description: List of destinations
+        af_city:
+          type: string
+          description: City
+        af_region:
+          type: string
+          description: Region
+        af_country:
+          type: string
+          description: Country
+        af_departing_arrival_date:
+          type: string
+          description: Departing arrival date
+        af_returning_arrival_date:
+          type: string
+          description: Returning arrival date
+        af_suggested_destinations:
+          type: array
+          items:
+            type: string
+          description: List of suggested destinations
+        af_travel_start:
+          type: string
+          description: Travel start date
+        af_travel_end:
+          type: string
+          description: Travel end date
+        af_num_adults:
+          type: string
+          description: Number of adults
+        af_num_children:
+          type: string
+          description: Number of children
+        af_num_infants:
+          type: string
+          description: Number of infants
+        af_suggested_hotels:
+          type: array
+          items:
+            type: string
+          description: List of suggested hotels
+        af_user_score:
+          type: string
+          description: User score
+        af_hotel_score:
+          type: string
+          description: Hotel score
+        af_purchase_currency:
+          type: string
+          description: Purchase currency
+        af_preferred_neighborhoods:
+          type: array
+          items:
+            type: string
+          description: Preferred neighborhoods
+        af_preferred_num_stops:
+          type: string
+          description: Preferred number of stops
+        af_adrev_ad_type:
+          type: string
+          description: Ad revenue ad type
+        af_adrev_network_name:
+          type: string
+          description: Ad revenue network name
+        af_adrev_placement_id:
+          type: string
+          description: Ad revenue placement ID
+        af_adrev_ad_size:
+          type: string
+          description: Ad revenue ad size
+        af_adrev_mediated_network_name:
+          type: string
+          description: Ad revenue mediated network name
+        af_preferred_price_range:
+          type: object
+          properties:
+            min:
+              type: string
+            max:
+              type: integer
+          description: Preferred price range
+        af_preferred_star_ratings:
+          type: object
+          properties:
+            min:
+              type: string
+            max:
+              type: integer
+          description: Preferred star ratings
+      additionalProperties: false
+      description: Object containing any combination of event parameters
+    ConsentData:
+      type: object
+      properties:
+        consent_data:
+          oneOf:
+            - $ref: '#/components/schemas/TCF'
+            - $ref: '#/components/schemas/Manual'
+      required:
+        - consent_data
+    TCF:
+      title: TCF
+      type: object
+      properties:
+        tcf:
+          type: object
+          properties:
+            policy_version:
+              type: integer
+              example: 4
+            cmp_sdk_id:
+              type: integer
+              example: 300
+            cmp_sdk_version:
+              type: integer
+              example: 2
+            gdpr_applies:
+              type: integer
+              enum: [0, 1]
+              description: Indicates whether GDPR applies (0 for no, 1 for yes)
+            tcstring:
+              type: string
+              example: "XXXXXXXX"
+          # required:
+          #   - policy_version
+          #   - cmp_sdk_id
+          #   - cmp_sdk_version
+          #   - gdpr_applies
+          #   - tcstring
+    Manual:
+      title: Manual
+      type: object
+      properties:
+        manual:
+          type: object
+          properties:
+            gdpr_applies:
+              type: string
+              enum:
+                - ""
+                - true
+                - false
+            ad_user_data_enabled:
+              type: string
+              enum:
+                - ""
+                - true
+                - false
+            ad_personalization_enabled:
+              type: string
+              enum:
+                - ""
+                - true
+                - false
+          required:
+            - gdpr_applies
+            - ad_user_data_enabled
+            - ad_personalization_enabled
+      
 
