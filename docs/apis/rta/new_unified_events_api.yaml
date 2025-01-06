@@ -13,6 +13,7 @@ paths:
       tags:
       - Measure in-app events
       summary: Measure in-app events
+      operationId: unified-v2-events-api
       description: |
         > ⚠️ Work In Progress
       parameters:
