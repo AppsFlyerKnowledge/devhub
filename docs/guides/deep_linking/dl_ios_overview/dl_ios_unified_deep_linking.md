@@ -267,6 +267,7 @@ fileprivate func walkToSceneWithParams(deepLinkObj: DeepLink) {
 ```
 
 ⇲ Github links: [Swift](https://github.com/AppsFlyerSDK/appsflyer-onelink-ios-sample-apps/blob/a96399329a369b30263ea4f8cc4558029ea603b3/swift/basic_app/basic_app/AppDelegate.swift#L126)
+⇲ Github links: [Objective-C](https://github.com/AppsFlyerSDK/appsflyer-onelink-ios-sample-apps/blob/e8c2d63969a89989680032b8c3e00c361f26658e/obj-c/obj-c/AppDelegate.m#L102)
 
 ### Deferred Deep Linking after network consent
 
