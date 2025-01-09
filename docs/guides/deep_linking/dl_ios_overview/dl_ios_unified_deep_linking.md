@@ -166,6 +166,105 @@ fileprivate func walkToSceneWithParams(deepLinkObj: DeepLink) {
     }
 }
 ```
+```objectivec
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    // Set isDebug to true to see AppsFlyer debug logs
+    [AppsFlyerLib shared].isDebug = YES;
+    
+    // Replace 'appsFlyerDevKey', `appleAppID` with your DevKey, Apple App ID
+    [AppsFlyerLib shared].appsFlyerDevKey = appsFlyerDevKey;
+    [AppsFlyerLib shared].appleAppID = appleAppID;
+    
+    [AppsFlyerLib shared].deepLinkDelegate = self;
+    
+    return YES;
+}
+
+- (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray * _Nullable))restorationHandler {
+    [[AppsFlyerLib shared] continueUserActivity:userActivity restorationHandler:nil];
+    return YES;
+}
+
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {
+    [[AppsFlyerLib shared] handleOpenUrl:url options:options];
+    return YES;
+}
+
+#pragma mark - DeepLinkDelegate
+
+- (void)didResolveDeepLink:(AppsFlyerDeepLinkResult *)result {
+    NSString *fruitNameStr;
+   NSLog(@"[AFSDK] Deep link lowkehy");
+    switch (result.status) {
+        case AFSDKDeepLinkResultStatusNotFound:
+            NSLog(@"[AFSDK] Deep link not found");
+            return;
+        case AFSDKDeepLinkResultStatusFailure:
+            NSLog(@"Error %@", result.error);
+            return;
+        case AFSDKDeepLinkResultStatusFound:
+            NSLog(@"[AFSDK] Deep link found");
+            break;
+    }
+    
+    AppsFlyerDeepLink *deepLinkObj = result.deepLink;
+    
+    if ([deepLinkObj.clickEvent.allKeys containsObject:@"deep_link_sub2"]) {
+        NSString *referrerId = deepLinkObj.clickEvent[@"deep_link_sub2"];
+        NSLog(@"[AFSDK] AppsFlyer: Referrer ID: %@", referrerId);
+    } else {
+        NSLog(@"[AFSDK] Could not extract referrerId");
+    }
+    
+    NSString *deepLinkStr = [deepLinkObj toString];
+    NSLog(@"[AFSDK] DeepLink data is: %@", deepLinkStr);
+    
+    if (deepLinkObj.isDeferred) {
+        NSLog(@"[AFSDK] This is a deferred deep link");
+        if (self.deferredDeepLinkProcessedFlag) {
+            NSLog(@"Deferred deep link was already processed by GCD. This iteration can be skipped.");
+            self.deferredDeepLinkProcessedFlag = NO;
+            return;
+        }
+    } else {
+        NSLog(@"[AFSDK] This is a direct deep link");
+    }
+    
+    fruitNameStr = deepLinkObj.deeplinkValue;
+    
+    // If deep_link_value doesn't exist
+    if (!fruitNameStr || [fruitNameStr isEqualToString:@""]) {
+        // Check if fruit_name exists
+        id fruitNameValue = deepLinkObj.clickEvent[@"fruit_name"];
+        if ([fruitNameValue isKindOfClass:[NSString class]]) {
+            fruitNameStr = (NSString *)fruitNameValue;
+        } else {
+            NSLog(@"[AFSDK] Could not extract deep_link_value or fruit_name from deep link object with unified deep linking");
+            return;
+        }
+    }
+    
+    // This marks to GCD that UDL already processed this deep link.
+    // It is marked to both DL and DDL, but GCD is relevant only for DDL
+    self.deferredDeepLinkProcessedFlag = YES;
+    
+    [self walkToSceneWithParams:fruitNameStr deepLinkData:deepLinkObj.clickEvent];
+}
+
+- (void)walkToSceneWithParams:(NSString *)fruitName deepLinkData:(NSDictionary *)deepLinkData {
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    [[UIApplication sharedApplication].windows.firstObject.rootViewController dismissViewControllerAnimated:YES completion:nil];
+    
+    NSString *destVC = [fruitName stringByAppendingString:@"_vc"];
+    DLViewController *newVC = [storyboard instantiateViewControllerWithIdentifier:destVC];
+    
+    NSLog(@"[AFSDK] AppsFlyer routing to section: %@", destVC);
+    newVC.deepLinkData = deepLinkData;
+    
+    [[UIApplication sharedApplication].windows.firstObject.rootViewController presentViewController:newVC animated:YES completion:nil];
+}
+
+```
 
 ⇲ Github links: [Swift](https://github.com/AppsFlyerSDK/appsflyer-onelink-ios-sample-apps/blob/a96399329a369b30263ea4f8cc4558029ea603b3/swift/basic_app/basic_app/AppDelegate.swift#L126)
 
