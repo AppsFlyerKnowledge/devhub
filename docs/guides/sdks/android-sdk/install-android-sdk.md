@@ -58,7 +58,7 @@ dependencies {
 
 [block:html]
 {
-  "html": "<details><summary></summary>\n<div class=\"af__accordion\">\n  <ol>\n    <li>In <strong>Android Studio</strong>, switch the folder structure from <strong>Android</strong> to <strong>Project</strong>:\n      <img src=\"https://files.readme.io/4954a02-android-to-project.gif\"/></li>\n    <li><a href=\"https://s3-eu-west-1.amazonaws.com/download.appsflyer.com/Android/AF-Android-SDK.jar\">Download the latest Android SDK</a> and paste it in your Android project, under <strong>app &gt; libs</strong>.</li>\n    <li>Right-click the <code class=\"rdmd-code lang-\">jar</code> you pasted and select <strong>Add As Library</strong>. When prompted, click <strong>Refactor</strong>. <p>If prompted to commit to git, click <strong>OK</strong></p>.\n  <img src=\"https://files.readme.io/70420f4-add-jar-manually.gif\"/></li>\n  </ol>\n</div>\n</details>"
+  "html": "<details><summary></summary>\n<div class=\"af__accordion\">\n  <ol>\n    <li>In <strong>Android Studio</strong>, switch the folder structure from <strong>Android</strong> to <strong>Project</strong>:\n      <img src=\"https://files.readme.io/4954a02-android-to-project.gif\"/></li>\n    <li><a href=\"https://mvnrepository.com/artifact/com.appsflyer/af-android-sdk\">Download the latest Android SDK</a> and paste it in your Android project, under <strong>app &gt; libs</strong>.</li>\n    <li>Right-click the <code class=\"rdmd-code lang-\">aar</code> you pasted and select <strong>Add As Library</strong>. When prompted, click <strong>Refactor</strong>. <p>If prompted to commit to git, click <strong>OK</strong></p></li></ol></div>\n</details>"
 }
 [/block]
 
