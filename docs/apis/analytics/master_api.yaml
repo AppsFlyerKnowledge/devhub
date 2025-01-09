@@ -621,21 +621,21 @@ components:
         event\_counter\_[event_name]
         event_name must be lower case
       type: string
-      pattern: ^event_counter_[\\S]+$
+      pattern: "^event_counter_[\\w]+$"
     LTV_users:
       title: Number of unique users per event
       description: |
         unique\_users\_[event_name]
         event_name must be lower case
       type: string
-      pattern: "^unique_users_[\\S]+$"
+      pattern: "^unique_users_[\\w]+$"
     LTV_sales_in_usd:
       title: Revenue in USD per event
       description: |
         sales\_in\_usd\_[event_name]
         event_name must be lower case
       type: string
-      pattern: "^unique_users_[\\S]+$"
+      pattern: "^unique_users_[\\w]+$"
     Retention_day_x:
       title: Number of retained users at day X
       description: |
@@ -663,20 +663,20 @@ components:
       description: |
         activity\_event\_counter\_[event_name]
       type: string
-      pattern: "^activity_event_counter_[\\S]+$"
+      pattern: "^activity_event_counter_[\\w]+$"
     Activity_sales_in_usd:
       title: Revenue reported as part of the reported events
       description: |
         activity\_sales\_in\_usd\_[event_name]
       type: string
-      pattern: "^activity_sales_in_usd_[\\S]+$"
+      pattern: "^activity_sales_in_usd_[\\w]+$"
     Activity_average_unique_users:
       title: Average unique users performing a given event
       description: |
         activity\_average\_unique\_users\_[event_name]
         event_name must be lower case
       type: string
-      pattern: "^activity_average_unique_users_[\\S]+$"
+      pattern: "^activity_average_unique_users_[\\w]+$"
     Cohort_total_sessions_per_user:
       title: Cohort - Cumulative sessions per user
       description: |
