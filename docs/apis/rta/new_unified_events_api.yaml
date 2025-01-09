@@ -93,14 +93,14 @@ paths:
                     - type: string
                       title: Custom event names
                       description: A custom event name
-                event_parameters:
-                  $ref: "#/components/schemas/EventParameters"
-                event_custom_parameters:
-                  description: A JSON object which can contain multiple parameters. Learn more [here](https://support.appsflyer.com/hc/en-us/articles/4410481112081-Rich-in-app-events-Event-structure)
-                  type: string
-                  format: json
-                  maxLength: 2048
-                  example: '{"test_param": "test_data", "af_price":6.66, "player_level": 55, "af_duration_seconds": 100}'
+                event_currency:
+                  $ref: '#/components/schemas/EventCurrency' 
+                event_revenue:
+                  type: number
+                  format: float
+                  description: Revenue generated
+                event_value:
+                  $ref: "#/components/schemas/EventValue"
                 app_version:
                   maxLength: 24
                   minLength: 1
@@ -323,9 +323,16 @@ components:
         minItems: 1
         maxItems: 1
         title: all partners blocked
-    EventParameters:
+    EventValue:
       type: object
       properties:
+        custom_parameters:
+          description: A JSON object which can contain multiple parameters. Learn more [here](https://support.appsflyer.com/hc/en-us/articles/4410481112081-Rich-in-app-events-Event-structure)
+          type: object
+          additionalProperties:
+            type: string
+          maxLength: 2048
+          example: '{"test_param": "test_data", "af_price":6.66, "player_level": 55, "af_duration_seconds": 100}'
         af_content:
           type: array
           items:
@@ -358,9 +365,6 @@ components:
           items:
             type: string
           description: List of content IDs
-        af_currency:
-          type: string
-          description: Currency code
         af_quantity:
           type: integer
           description: Quantity of items
@@ -415,10 +419,6 @@ components:
         af_validated:
           type: boolean
           description: Indicates if the event was validated
-        af_revenue:
-          type: number
-          format: float
-          description: Revenue generated
         af_projected_revenue:
           type: number
           format: float
@@ -590,6 +590,182 @@ components:
             - $ref: '#/components/schemas/Manual'
       required:
         - consent_data
+    EventCurrency:
+      description: Event currency
+      enum:
+        - ""
+        - USD
+        - AED
+        - AFN
+        - ALL
+        - AMD
+        - ANG
+        - AOA
+        - ARS
+        - AUD
+        - AWG
+        - AZN
+        - BAM
+        - BBD
+        - BDT
+        - BGN
+        - BHD
+        - BIF
+        - BMD
+        - BND
+        - BOB
+        - BRL
+        - BSD
+        - BTC
+        - BTN
+        - BWP
+        - BYN
+        - BZD
+        - CAD
+        - CDF
+        - CHF
+        - CLF
+        - CLP
+        - CNH
+        - CNY
+        - COP
+        - CRC
+        - CUC
+        - CUP
+        - CVE
+        - CZK
+        - DJF
+        - DKK
+        - DOP
+        - DZD
+        - EGP
+        - ERN
+        - ETB
+        - EUR
+        - FJD
+        - FKP
+        - GBP
+        - GEL
+        - GGP
+        - GHS
+        - GIP
+        - GMD
+        - GNF
+        - GTQ
+        - GYD
+        - HKD
+        - HNL
+        - HRK
+        - HTG
+        - HUF
+        - IDR
+        - ILS
+        - IMP
+        - INR
+        - IQD
+        - IRR
+        - ISK
+        - JEP
+        - JMD
+        - JOD
+        - JPY
+        - KES
+        - KGS
+        - KHR
+        - KMF
+        - KPW
+        - KRW
+        - KWD
+        - KYD
+        - KZT
+        - LAK
+        - LBP
+        - LKR
+        - LRD
+        - LSL
+        - LYD
+        - MAD
+        - MDL
+        - MGA
+        - MKD
+        - MMK
+        - MNT
+        - MOP
+        - MRO
+        - MRU
+        - MUR
+        - MVR
+        - MWK
+        - MXN
+        - MYR
+        - MZN
+        - NAD
+        - NGN
+        - NIO
+        - NOK
+        - NPR
+        - NZD
+        - OMR
+        - PAB
+        - PEN
+        - PGK
+        - PHP
+        - PKR
+        - PLN
+        - PYG
+        - QAR
+        - RON
+        - RSD
+        - RUB
+        - RWF
+        - SAR
+        - SBD
+        - SCR
+        - SDG
+        - SEK
+        - SGD
+        - SHP
+        - SLL
+        - SOS
+        - SRD
+        - SSP
+        - STD
+        - STN
+        - SVC
+        - SYP
+        - SZL
+        - THB
+        - TJS
+        - TMT
+        - TND
+        - TOP
+        - TRY
+        - TTD
+        - TWD
+        - TZS
+        - UAH
+        - UGX
+        - UYU
+        - UZS
+        - VEF
+        - VES
+        - VND
+        - VUV
+        - WST
+        - XAF
+        - XAG
+        - XAU
+        - XCD
+        - XDR
+        - XOF
+        - XPD
+        - XPF
+        - XPT
+        - YER
+        - ZAR
+        - ZMW
+        - ZWL
+        - BYR
     TCF:
       title: TCF
       type: object
@@ -613,12 +789,6 @@ components:
             tcstring:
               type: string
               example: "XXXXXXXX"
-          # required:
-          #   - policy_version
-          #   - cmp_sdk_id
-          #   - cmp_sdk_version
-          #   - gdpr_applies
-          #   - tcstring
     Manual:
       title: Manual
       type: object
