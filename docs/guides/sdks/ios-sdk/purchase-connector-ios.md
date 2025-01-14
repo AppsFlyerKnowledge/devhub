@@ -79,7 +79,7 @@ https://github.com/AppsFlyerSDK/PurchaseConnector-Dynamic*
     PurchaseConnector.shared().purchaseRevenueDelegate = self
     PurchaseConnector.shared().purchaseRevenueDataSource = self
 ```
-```objective-c
+```objectivec
 // Import the library
     #import "AppDelegate.h"
     #import <AppsFlyerLib/AppsFLyerLib.h>
@@ -102,7 +102,7 @@ Enables automatic logging of auto-renewable subscriptions and in-app purchases.
 ```swift
 PurchaseConnector.shared().autoLogPurchaseRevenue = [.autoRenewableSubscriptions, .inAppPurchases]
 ```
-```objective-c
+```objectivec
 [[PurchaseConnector shared] setAutoLogPurchaseRevenue:AFSDKAutoLogPurchaseRevenueOptionsRenewable | AFSDKAutoLogPurchaseRevenueOptionsInAppPurchases];
 ```
 
@@ -128,7 +128,7 @@ extension AppDelegate: PurchaseRevenueDataSource, PurchaseRevenueDelegate {
     }
 }
 ```
-```objective-c
+```objectivec
 @interface AppDelegate () <AppsFlyerPurchaseRevenueDelegate, AppsFlyerPurchaseRevenueDataSource>
 @end
 
@@ -161,7 +161,7 @@ To observe transactions, you need to call `startObservingTransactions`.
 ```swift
     PurchaseConnector.shared().startObservingTransactions()
 ```
-```objective-c
+```objectivec
     [[PurchaseConnector shared] startObservingTransactions];
 ```
 
@@ -172,7 +172,7 @@ To stop observing transactions, you need to call `stopObservingTransactions`.
 ```swift
     PurchaseConnector.shared().stopObservingTransactions()
 ```
-```objective-c
+```objectivec
     [[PurchaseConnector shared] stopObservingTransactions];
 ```
 
@@ -185,15 +185,13 @@ To test purchases in an Xcode environment on a real device with a TestFlight san
 ```swift
     PurchaseConnector.shared().isSandbox = true
 ```
-```objective-c
+```objectivec
     [[PurchaseConnector shared] setIsSandbox:YES];
 ```
 
 > **Important note**: Before releasing your app to production, be sure to remove `isSandbox` or set it to `false`. If the production purchase events are sent in sandbox mode, your events will not be validated properly.
 
 ## Full code examples
-
-### Swift example 
 
 ```swift
 import AppsFlyerLib
@@ -233,10 +231,7 @@ extension AppDelegate: PurchaseRevenueDataSource, PurchaseRevenueDelegate {
     }
 }
 ```
-
-### Objective-C example
-
-```objective-c
+```objectivec
 #import "AppDelegate.h"
 #import <PurchaseConnector/PurchaseConnector.h>
 #import <AppsFlyerLib/AppsFLyerLib.h>
