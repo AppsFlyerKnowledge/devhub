@@ -162,6 +162,10 @@ If there are multiple events in the cache, they are sent to the server one after
 
 ## Logging revenue
 
+> 📘 Note
+>
+> For events with **revenue**, including in-app purchases, subscriptions, and ad revenue events, AppsFlyer customers with an ROI360 subscription should avoid using the `AFEventParameterRevenue`(`af_revenue`) parameter in their in-app events. Doing so can result in duplicate revenue being reported. Instead, they should utilize the [purchase connector](https://dev.appsflyer.com/hc/docs/purchase-connector-ios) and the [ad revenue SDK API](https://dev.appsflyer.com/hc/docs/ad-revenue-2).
+
 [`af_revenue`](#af_revenue) is the only event parameter that AppsFlyer counts as real revenue in the dashboard and reports.  
 You can send revenue with any in-app event. Use the [`AFEventParameterRevenue`](#af_revenue) constant to include revenue in the in-app event. You can populate it with any numeric value, positive or negative.
 

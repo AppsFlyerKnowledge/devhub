@@ -54,11 +54,18 @@ Custom event names should follow these rules:
  * Be up to 100 characters long. 
  * Non-English characters are supported.
 
+
+
+
 ### Valid custom event parameters
 Custom event parameters:
  * Must not exceed 1000 characters; if longer, it might be truncated
  * Pricing and revenue: use only digits and decimals, for example, 5 or 5.2
  * Pricing and revenue values can have up to 5 digits after the period, for example, 5.12345
+
+> 📘 Note
+>
+> For events with **revenue**, including in-app purchases, subscriptions, and ad revenue events, AppsFlyer customers with an ROI360 subscription should avoid using the `af_revenue` parameter in their in-app events. Doing so can result in duplicate revenue being reported. Instead, they should utilize the [purchase connector](https://dev.appsflyer.com/hc/docs/purchase-connector) and the [ad revenue SDK API](https://dev.appsflyer.com/hc/docs/ad-revenue).
 
 ## Understanding event structure definitions
 Ideally, the marketer should provide you with clear event structure definitions, based on the instructions in [Defining In-app events](https://support.appsflyer.com/hc/en-us/articles/115005544169-Rich-in-app-events-guide#introduction-defining-an-inapp-event). For example, a definition of an `af_content_view` event for an eCommerce app would look something like this:
