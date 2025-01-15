@@ -45,6 +45,7 @@ implementation 'com.android.billingclient:billing:$play_billing_version'
 -keep class com.appsflyer.** { *; }
 -keep class kotlin.jvm.internal.Intrinsics{ *; }
 -keep class kotlin.collections.**{ *; }
+-keep class kotlin.Result$Companion { *; }
 ```
 
 ## Basic integration
