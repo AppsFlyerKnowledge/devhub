@@ -13,7 +13,7 @@ order: 9
 > 📘 Note
 >
 > - Using the purchase connector requires an ROI360 subscription.
-> - If you use this in-app purchase and subscription revenue measurement solution, you shouldn’t send [in-app events](https://dev.appsflyer.com/hc/docs/in-app-events-sdk) with revenue or execute `validateAndLogInAppPurchase` ([Android](https://dev.appsflyer.com/hc/docs/validate-and-log-purchase-android) [iOS](https://dev.appsflyer.com/hc/docs/validate-and-log-purchase-ios)), as doing so results in duplicate revenue being reported.
+> - If you use this in-app purchase and subscription revenue measurement solution, you shouldn’t send [in-app purchase events](https://dev.appsflyer.com/hc/docs/in-app-events-sdk) with revenue or execute `validateAndLogInAppPurchase` ([Android](https://dev.appsflyer.com/hc/docs/validate-and-log-purchase-android) [iOS](https://dev.appsflyer.com/hc/docs/validate-and-log-purchase-ios)), as doing so results in duplicate revenue being reported.
 > - Before implementing the purchase connector, the ROI360 in-app purchase and subscription revenue measurement needs to be integrated with Google Play and the App Store. [See instructions (steps 1 and 2)](https://support.appsflyer.com/hc/en-us/articles/7459048170769) 
 
 ## Overview
