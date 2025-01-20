@@ -7,6 +7,19 @@ hidden: false
 order: 1
 ---
 
+## Version 6.16.0
+
+#### New Features
+
+- Added support for Apple's StoreKit 2 APIs for Subscription and In-App Purchase reporting with the Purchase Connector. This feature is currently in closed beta. 
+
+Notes: 
+
+1. This version is compatible with Purchase Connector v6.16.0. If you are using the Purhcase Connector and you would like to use this SDK version, please update the Purchase Connector to v6.16.0 as well.
+
+2. Storekit v1 is still supported with this release.
+
+
 ## Version 6.15.3
 
 #### Technical Update:
