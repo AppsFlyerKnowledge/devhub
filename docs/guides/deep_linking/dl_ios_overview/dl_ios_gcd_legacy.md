@@ -39,10 +39,10 @@ To implement the `onAppOpenAttribution` method and set up the parameter behavior
 
 #### Procedure checklist
 
-1. [Deciding app behavior and `deep_link_value`](https://dev.appsflyer.com/hc/docs/ios-legacy-apis#deciding-app-behavior) (and other parameter names and values) - with the marketer
-2. [Planning method input, i.e. `deep_link_value`](https://dev.appsflyer.com/hc/docs/ios-legacy-apis#planning-method-input) (and other parameter names and values) - with the marketer
-3. [Implementing the `onAppOpenAttribution()` logic](https://dev.appsflyer.com/hc/docs/ios-legacy-apis#implementing-onappopenattribution-logic)
-4. [Implementing the `onAttributionFailure()` logic](https://dev.appsflyer.com/hc/docs/ios-legacy-apis#implementing-onattributionfailure-logic)
+1. [Deciding app behavior and `deep_link_value`](#deciding-app-behavior) (and other parameter names and values) - with the marketer
+2. [Planning method input, i.e. `deep_link_value`](#planning-method-input) (and other parameter names and values) - with the marketer
+3. [Implementing the `onAppOpenAttribution()` logic](#implementing-onappopenattribution-logic)
+4. [Implementing the `onAttributionFailure()` logic](#implementing-onattributionfailure-logic)
 
 #### Deciding app behavior
 
