@@ -91,51 +91,53 @@ class AppDelegate: UIResponder, UIApplicationDelegate , AppsFlyerLibDelegate {
 
 If your app does not use a CMP compatible with TCF v2.2, use the SDK API detailed below to provide the consent data directly to the SDK.
 
+To manually collect consent data, perform the following:
+
 1. Initialize the SDK in `didFinishLaunchingWithOptions` as described [here](https://dev.appsflyer.com/hc/docs/integrate-ios-sdk#initializing-the-ios-sdk).
-2. In the`applicationDidBecomeActive` lifecycle method determine whether the GDPR applies or not to the user. 
+2. In the`applicationDidBecomeActive` lifecycle method determine whether the GDPR applies or not to the user.
+3. Determine whether the consent data is already stored for this session.
+    - If there is no consent data stored, show the consent dialog to capture the user consent decision.
+    - If there is consent data stored - continue to the next step.
+4. To transfer the consent data to the SDK create an object called [`AppsFlyerConsent`](https://dev.appsflyer.com/hc/docs/ios-send-consent-for-dma-compliance)  with the following parameters:
+    - `isUserSubjectToGDPR` - Indicates whether GDPR applies to the user.
+    - `hasConsentForDataUsage` - Indicates whether the user has consented to use their data for advertising purposes.
+    - `hasConsentForAdsPersonalization` - Indicates whether the user has consented to use their data for personalized advertising.
+    - `hasConsentForAdStorage` - indicates whether the user has consented to store or access information on a device.
 
-### When GDPR applies to the user
-
-If GDPR applies to the user, perform the following: 
-
-1. Given that GDPR is applicable to the user, determine whether the consent data is already stored for this session.
-   1. If there is no consent data stored, show the consent dialog to capture the user consent decision. 
-   2. If there is consent data stored continue to the next step.
-2. To transfer the consent data to the SDK create an `AppsFlyerConsent` object with the following parameters:
-   - `forGDPRUserWithHasConsentForDataUsage` - Indicates whether the user has consented to use their data for advertising purposes.
-   - `hasConsentForAdsPersonalization` - Indicates whether the user has consented to use their data for personalized advertising.
-3. Call `setConsentData()`with the `AppsFlyerConsent` object. 
-4. Call `start()`.  
+> 📘 Note
+>   
+> The SDK will omit any parameters from the event that are not provided by the app.
+  
+1. Call [`setConsentData()`](https://dev.appsflyer.com/hc/docs/ios-sdk-reference-appsflyerlib#setconsentdata) with the [`AppsFlyerConsent`](https://dev.appsflyer.com/hc/docs/ios-send-consent-for-dma-compliance) object.
+2. Call `start()`.
 
 ```swift
-// If the user is subject to GDPR - collect the consent data
+// Set the consent data to the SDK:
+// Collect the consent data
 // or retrieve it from the storage
 ...
-// Set the consent data to the SDK:
-var gdprConsent = AppsFlyerConsent(forGDPRUserWithHasConsentForDataUsage: << true / false >>, hasConsentForAdsPersonalization: << true / false >>) 
-AppsFlyerLib.shared().setConsentData(gdprConsent)
-// Start the AppsFlyer SDK
-```
+//  Example for a user subject to GDPR
+var gdprUser = AppsFlyerConsent(
+	isUserSubjectToGDPR: true, 
+	hasConsentForDataUsage: false, 
+	hasConsentForAdsPersonalization: true, 
+	hasConsentForAdStorage: false
+)
+AppsFlyerLib.shared().setConsentData(gdprUser)
 
-### When GDPR does not apply to the user
-
-If GDPR doesn’t apply to the user perform the following:
-
-1. Create an `AppsFlyerConsent` object using the `nonGDPRUser()` initializer. This initializer doesn’t accept any parameters.
-2. Pass the empty `AppsFlyerConsent` object to `setConsentData()`. 
-3. Call `start()`. 
-
-```swift
-// If the user is not subject to GDPR:
-var nonGdprUser = AppsFlyerConsent(nonGDPRUser: ()) 
+//  Example for a user not subject to GDPR        
+var nonGdprUser = AppsFlyerConsent(
+	isUserSubjectToGDPR: false, 
+	hasConsentForDataUsage: false, 
+	hasConsentForAdsPersonalization: false, 
+	hasConsentForAdStorage: false
+)
 AppsFlyerLib.shared().setConsentData(nonGdprUser)
-```
-```objectivec
-// If the user is not subject to GDPR:
-AppsFlyerConsent *consentNonGDPR = [[AppsFlyerConsent alloc] initNonGDPRUser];
-[[AppsFlyerLib shared] setConsentData:consentNonGDPR];
-```
 
+// Start the SDK
+AppsFlyerLib.shared().start()
+
+```
 ## Verify consent data is sent
 
 To test whether your SDK sends DMA consent data with each event, perform the following steps:

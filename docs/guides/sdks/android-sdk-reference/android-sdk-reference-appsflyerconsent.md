@@ -11,9 +11,45 @@ updatedAt: "2024-02-08T19:00:15.000Z"
 
 `AppsFlyerConsent` encapsulates the methods for acquiring consent data required by the Digital Marketing Act (DMA).
 
+### Constructor
+
+```java
+public AppsFlyerConsent(
+    Boolean isUserSubjectToGDPR,
+    Boolean hasConsentForDataUsage,
+    Boolean hasConsentForAdsPersonalization,
+    Boolean hasConsentForAdStorage
+)
+```
+
+### Parameters
+
+| Parameter | Type | Description |
+| --- | --- | --- |
+| `isUserSubjectToGDPR` | Boolean | Indicates whether GDPR applies to the user. |
+| `hasConsentForDataUsage` | Boolean | Indicates whether the user has consented to use their data for advertising purposes. |
+| `hasConsentForAdsPersonalization` | Boolean | Indicates whether the user has consented to use their data for personalized advertising purposes. |
+| `hasConsentForAdStorage` | Boolean | Indicates whether the user has consented to store or access information on a device. |
+
+### Usage example
+
+```java
+// Example for a user NOT subject to GDPR
+AppsFlyerConsent nonGdprUser = new AppsFlyerConsent(false, false, false, false);
+AppsFlyerLib.getInstance().setConsentData(nonGdprUser);
+
+//  Example for a user subject to GDPR
+AppsFlyerConsent gdprUser = new AppsFlyerConsent(true, true, true, false);
+AppsFlyerLib.getInstance().setConsentData(gdprUser);
+```
+
+
 ## Methods
 
 ### forGDPRUser
+
+<span class="annotation-deprecated">Deprecated since V6.16.1</span>  
+
 
 **Method signature**
 
@@ -44,6 +80,9 @@ AppsFlyerConsent gdprUserConsent = AppsFlyerConsent.forGDPRUser(hasConsentForDat
 ```
 
 ### forNonGDPRUser
+
+<span class="annotation-deprecated">Deprecated since V6.3.2</span>  
+
 
 **Method signature**
 
