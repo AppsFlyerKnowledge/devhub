@@ -91,14 +91,13 @@ To manually collect consent data, perform the following:
     - `isUserSubjectToGDPR` - Indicates whether GDPR applies to the user.
     - `hasConsentForDataUsage` - Indicates whether the user has consented to use their data for advertising purposes.
     - `hasConsentForAdsPersonalization` - Indicates whether the user has consented to use their data for personalized advertising purposes.
-    - `hasConsentForAdStorage` - indicates whether the user has consented to store or access information on a device.
-  
+    - `hasConsentForAdStorage` - indicates whether the user has consented to store or access information on a device.   
+5. Call [`setConsentData()`](https://dev.appsflyer.com/hc/docs/android-sdk-reference-appsflyerlib#setconsentdata) with the [`AppsFlyerConsent`](https://dev.appsflyer.com/hc/docs/android-sdk-reference-appsflyerconsent) object. 
 
 > 📘 Note
 >   
-> The SDK will omit any parameters from the event that are not provided by the app.
-    
-5. Call [`setConsentData()`](https://dev.appsflyer.com/hc/docs/android-sdk-reference-appsflyerlib#setconsentdata) with the [`AppsFlyerConsent`](https://dev.appsflyer.com/hc/docs/android-sdk-reference-appsflyerconsent) object. 
+> SDK registers only parameters which are explicitly passed to the  [`setConsentData()`](https://dev.appsflyer.com/hc/docs/android-sdk-reference-appsflyerlib#setconsentdata) method via the [`AppsFlyerConsent`](https://dev.appsflyer.com/hc/docs/android-sdk-reference-appsflyerconsent) object.
+  
 6. Call `start()`.
 
 ```java
