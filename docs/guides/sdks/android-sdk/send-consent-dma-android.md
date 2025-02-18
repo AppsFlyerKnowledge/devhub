@@ -80,72 +80,38 @@ public class MainActivity extends AppCompatActivity {
 
 ## Manually collect consent data
 
-If your app does not use a CMP compatible with TCF v2.2, utilize the SDK API detailed below to provide the consent data directly to the SDK.
+To manually collect consent data, perform the following:
 
-1. [Initialize the SDK](https://dev.appsflyer.com/hc/docs/android-sdk-reference-appsflyerlib#init) from the Application class. 
-2. In the `Activity` class, determine whether the GDPR applies or not to the user. 
+1. [Initialize the SDK](https://dev.appsflyer.com/hc/docs/android-sdk-reference-appsflyerlib#init) from the Application class.
+2. In the `Activity` class, determine whether the GDPR applies or not to the user.
+3. Determine whether the consent data is already stored for this session.
+    - If there is no consent data stored, show the consent dialog to capture the user consent decision.
+    - If there is consent data stored continue to the next step.
+4. To transfer the consent data to the SDK, create an object called [`AppsFlyerConsent`](https://dev.appsflyer.com/hc/docs/android-sdk-reference-appsflyerconsent)  with the following optional parameters:
+    - `isUserSubjectToGDPR` - Indicates whether GDPR applies to the user.
+    - `hasConsentForDataUsage` - Indicates whether the user has consented to use their data for advertising purposes.
+    - `hasConsentForAdsPersonalization` - Indicates whether the user has consented to use their data for personalized advertising purposes.
+    - `hasConsentForAdStorage` - indicates whether the user has consented to store or access information on a device.   
+5. Call [`setConsentData()`](https://dev.appsflyer.com/hc/docs/android-sdk-reference-appsflyerlib#setconsentdata) with the [`AppsFlyerConsent`](https://dev.appsflyer.com/hc/docs/android-sdk-reference-appsflyerconsent) object. 
 
-### When GDPR applies to the user
-
-If GDPR applies to the user, perform the following: 
-
-1. Given that GDPR is applicable to the user, determine whether the consent data is already stored for this session.
-   1. If there is no consent data stored, show the consent dialog to capture the user consent decision. 
-   2. If there is consent data stored continue to the next step. 
-2. To transfer the consent data to the SDK create an object called `AppsFlyerConsent` using the `forGDPRUser()` method with the following parameters:
-   - `hasConsentForDataUsage` - Indicates whether the user has consented to use their data for advertising purposes.
-   - `hasConsentForAdsPersonalization` - Indicates whether the user has consented to use their data for personalized advertising purposes.
-3. Call `setConsentData()` with the `AppsFlyerConsent` object.
-4. Call `start()`.   
+> 📘 Note
+>   
+> SDK registers only parameters which are explicitly passed to the  [`setConsentData()`](https://dev.appsflyer.com/hc/docs/android-sdk-reference-appsflyerlib#setconsentdata) method via the [`AppsFlyerConsent`](https://dev.appsflyer.com/hc/docs/android-sdk-reference-appsflyerconsent) object.
+  
+6. Call `start()`.
 
 ```java
-// If the user is subject to GDPR - collect the consent data
-// or retrieve it from the storage
-...
-
 // Set the consent data to the SDK:
-boolean hasConsentForDataUsage = << true / false >> ; // Based on actual user consent
-boolean hasConsentForAdsPersonalization = << true / false >>; // Based on actual user consent
-AppsFlyerConsent gdprUserConsent = AppsFlyerConsent.forGDPRUser(hasConsentForDataUsage, hasConsentForAdsPersonalization); 
-AppsFlyerLib.getInstance().setConsentData(gdprUserConsent);
-
-// Start the AppsFlyer SDK
-AppsFlyerLib.getInstance().start(this);
-```
-```kotlin
-// If the user is subject to GDPR - collect the consent data
+// Collect the consent data
 // or retrieve it from the storage
 ...
+// Example for a user NOT subject to GDPR
+AppsFlyerConsent nonGdprUser = new AppsFlyerConsent(false, false, false, false);
+AppsFlyerLib.getInstance().setConsentData( nonGdprUser);
 
-// Set the consent data to the SDK based on actual user consent:
-val gdprUserConsent = AppsFlyerConsent.forGDPRUser(hasConsentForDataUsage = << true / false >>, // Based on actual user consent
-hasConsentForAdsPersonalization = << true / false >>) // 
-AppsFlyerLib.getInstance().setConsentData(gdprUserConsent)
-
-// Start the AppsFlyer SDK
-AppsFlyerLib.getInstance().start(this);
-```
-
-### When GDPR does not apply to the user
-
-If GDPR doesn’t apply to the user perform the following:
-
-1. Create an `AppsFlyerConsent` object using the `forNonGDPRUser()`method. This method doesn’t accept any parameters.
-2. Call `setConsentData()` with the `AppsFlyerConsent` object
-3. Call `start()`.  
-
-```java
-// If the user is not subject to GDPR:
-AppsFlyerConsent nonGdprUser = AppsFlyerConsent.forNonGDPRUser(); 
-AppsFlyerLib.getInstance().setConsentData(nonGdprUser);
-
-// Start the AppsFlyer SDK
-AppsFlyerLib.getInstance().start(this);
-```
-```kotlin
-// If the user is not subject to GDPR:
-val nonGdprUser = AppsFlyerConsent.forNonGDPRUser() 
-AppsFlyerLib.getInstance().setConsentData(nonGdprUser)
+// Example for a user subject to GDPR
+AppsFlyerConsent gdprUser = new AppsFlyerConsent(true, true, true, false);
+AppsFlyerLib.getInstance().setConsentData( gdprUser);
 
 // Start the AppsFlyer SDK
 AppsFlyerLib.getInstance().start(this);
