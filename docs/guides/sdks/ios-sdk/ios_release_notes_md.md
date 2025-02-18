@@ -7,6 +7,25 @@ hidden: false
 order: 1
 ---
 
+
+## Version 6.16.1
+
+#### Changed Features
+
+- Updated the API for sending DMA Consent data manually to AppsFlyer. 
+The change includes:
+  - New constructor for generating the AppsFlyerConsent object. All of the parameters of the constructor are optional.
+  - The new constructor contains a new flag parameter - "ad_storage" to indicate whether the user grants permission to store and access information on the device.
+ See developer guide [here](https://dev.appsflyer.com/hc/docs/ios-send-consent-for-dma-compliance#manually-collect-consent-data).
+
+
+## Version 6.16.0
+
+#### New Features
+
+- Added support for Apple’s StoreKit 2 APIs for Subscription and In-App Purchase reporting through the Purchase Connector. This feature is currently in closed beta.
+
+
 ## Version 6.15.3
 
 #### Technical Update:
