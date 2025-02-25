@@ -123,7 +123,7 @@ When the marketer tests the link, it should direct the user to the app's main pa
 >```xml XML
 ><intent-filter android:autoVerify="true">
 >		...		
->    <!-- Replace "onlink-basic-app" with your OneLink domain -->
+>    <!-- Replace "onelink-basic-app" with your OneLink domain -->
 >    <data 
 >        android:scheme="https"
 >        android:host="onelink-basic-app.onelink.me" 
