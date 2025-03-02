@@ -7,6 +7,13 @@ hidden: false
 order: 1
 ---
 
+## Version 6.16.2
+
+#### Bug Fixes
+
+- Fixed an issue with building the SDK for apps that use R8 and AGP version lower than 8.2.0. 
+
+
 ## Version 6.16.1
 
 #### Changed Features
