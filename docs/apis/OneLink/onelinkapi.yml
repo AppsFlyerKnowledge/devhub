@@ -5,7 +5,7 @@ info:
 servers:
   - url: 'https://onelink.appsflyer.com/shortlink/v1/'
 security:
-  - ApiKeyAuth: []
+  - bearerAuth: [] 
 paths:
   /{onelink-id}:
     post:
@@ -374,11 +374,9 @@ paths:
       deprecated: false
 
 components: 
-  securitySchemes:
-    ApiKeyAuth:        
-      type: apiKey
-      in: header       
-      name: authorization
-      description: |
-        OneLink REST API token for authentication.
-        [Get the API token in the Dashboard](https://support.appsflyer.com/hc/en-us/articles/360001250345-OneLink-API)
+   securitySchemes:
+    bearerAuth:            
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Token required for authorization. Please refer to [this link](https://support.appsflyer.com/hc/en-us/articles/360004562377) for instructions on how to obtain the token.
