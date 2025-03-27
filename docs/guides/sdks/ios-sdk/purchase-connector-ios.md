@@ -160,6 +160,51 @@ extension AppDelegate: PurchaseRevenueDataSource, PurchaseRevenueDelegate {
 
 @end
 ```
+The `didReceivePurchaseRevenueValidationInfo` function receives validation response for each transaction from AppsFlyer in real-time and processes the results.
+
+**Validation response parameters**
+
+The response contains two parameters:
+
+- `validationInfo`: Boolean value indicating whether the purchase was successfully validated (`true` or `false`).
+- `error`: Provides error information if the validation fails. The error object includes::
+    - `status`: Specifies the error code from AppsFlyer or the App Store (e.g., `21003`).
+    - `is_retryable`: A legacy key that always returns `false`.
+    - `store_status`: (**New)** - Provides a specific status code from Apple's validation response (e.g., `4040010`).
+
+> 📘 Note
+> 
+> The `store_status` parameter is available only if your app has been updated to use Apple’s new validation API.
+> 
+> - For **existing apps**, `store_status` becomes available after you provide your App Store Connect In-App Purchase key in the AppsFlyer platform.
+> - For **new apps**, `store_status` is included by default.
+
+**Example:**
+
+```jsx
+{
+	"status": 21003,
+	"is_retryable": false,
+	"store_status": 4040010
+}
+```
+
+The following table specifies the different status codes:
+
+**Note**: The **Description** and **App Store Error code** values are not exposed in the validation error response
+
+| **status** | **store_status** | **App Store Error Code** | **Description** |
+| --- | --- | --- | --- |
+| 21003 | 4000002 | [InvalidAppIdentifierError](https://developer.apple.com/documentation/appstoreserverapi/invalidappidentifiererror) | Invalid request app identifier. |
+| 21003 | 4040003 | [AppNotFoundError](https://developer.apple.com/documentation/appstoreserverapi/appnotfounderror) | App not found. |
+| 21003 | 4040004 | [AppNotFoundRetryableError](https://developer.apple.com/documentation/appstoreserverapi/appnotfoundretryableerror) | App not found. Please try again. |
+| 21003 | 4040010 | [TransactionIdNotFoundError](https://developer.apple.com/documentation/appstoreserverapi/transactionidnotfounderror) | Transaction ID not found. |
+| 21009 | 5000000 | [GeneralInternalError](https://developer.apple.com/documentation/appstoreserverapi/generalinternalerror) | An unknown error occurred. |
+| 21009 | 5000001 | [GeneralInternalRetryableError](https://developer.apple.com/documentation/appstoreserverapi/generalinternalretryableerror) | An unknown error occurred. Please try again. |
+| 21010 | 4040001 | [AccountNotFoundError](https://developer.apple.com/documentation/appstoreserverapi/accountnotfounderror) | Account not found. |
+| 21010 | 4040002 | [AccountNotFoundRetryableError](https://developer.apple.com/documentation/appstoreserverapi/accountnotfoundretryableerror) | Account not found. Please try again. |
+| 10001 | 4000006 | [InvalidTransactionIdError](https://developer.apple.com/documentation/appstoreserverapi/invalidtransactioniderror) | Invalid transaction ID. |
+| 20003 | - | - | Authentication credentials are invalid. |
 
 ### Start observing transactions
 
