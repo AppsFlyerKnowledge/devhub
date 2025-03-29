@@ -1,5 +1,5 @@
 ---
-title: "Branch migration"
+title: "Android Branch migration"
 slug: "branch-migration-android"
 category: 5f9705393c689a065c409b23
 parentDoc: 5fa0443749be540011850e51
@@ -10,7 +10,7 @@ order: 90
 
 # Overview
 
-To ensure a smooth handoff of data from Branch to AppsFlyer, your app should collect attribution data from Branch and pass it to AppsFlyer during the first session. In case of direct deep linking (Android App Links or URI scheme) the app should also collect the deep linkind data and pass it to AppsFlyer. `Migration Helper`, which is a new module in AppsFlyer SDK suite facilitates passing the data to AppsFlyer.
+To ensure a smooth handoff of data from Branch to AppsFlyer, your app should collect attribution data from Branch and pass it to AppsFlyer during the first session. In addition, in case of direct deep linking (Android App Links or URI scheme) the app should collect the deep linkind data and pass it to AppsFlyer. `Migration Helper`, which is a new module in AppsFlyer SDK suite facilitates passing the data to AppsFlyer.
 
 # Data flow
 
@@ -26,7 +26,6 @@ When the application is installed *organically* (without clicking a Branch.io li
 1. Wait 3 seconds from the return of Branch.io callback `onInitFinished()`.
 2. Call from Branch.io SDK the method `getLastAttributedTouchData()`
 3. Inside the `getLastAttributedTouchData()` callback, call AppsFlyer SDK's  `AppsFlyerMigrationHelper.setAttributionData()` and then `start()`.
-calling `start` from AppsFlyer SDK. 
 
 ## Direct deep linking
 
@@ -49,7 +48,7 @@ In `application` context:
 
 
 In `MainActivity.java`:
-- `onStart()` registers the callback `onInitFinished`, which handles session init and deep link resolution. `onInitFinished also holds conditional logic whcih forwards **Branch deep link data** to AppsFlyer on re-engagement.
+- `onStart()` registers the callback `onInitFinished`, which handles session init and deep link resolution. `onInitFinished` also holds conditional logic whcih forwards **Branch deep link data** to AppsFlyer on re-engagement.
 - `collectLatdAndStartAppsFlyer()` ensures AppsFlyer only starts after attribution data is collected from Branch and passed to AppsFlyer.
 - `collectLatdFromBranch()` fetches LATD from Branch.
 
