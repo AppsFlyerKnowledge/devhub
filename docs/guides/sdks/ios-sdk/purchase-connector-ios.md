@@ -166,7 +166,7 @@ The `didReceivePurchaseRevenueValidationInfo` function receives validation respo
 
 The response contains two parameters:
 
-- `validationInfo`: Boolean value indicating whether the purchase was successfully validated (`true` or `false`).
+- `validationInfo`:  Value indicating whether the purchase was successfully validated (`true` or `false`).
 - `error`: Provides error information if the validation fails. The error object includes::
     - `status`: Specifies the error code from AppsFlyer or the App Store (e.g., `21003`).
     - `is_retryable`: A legacy key that always returns `false`.
@@ -178,16 +178,6 @@ The response contains two parameters:
 > 
 > - For **existing apps**, `store_status` becomes available after you provide your App Store Connect In-App Purchase key in the AppsFlyer platform.
 > - For **new apps**, `store_status` is included by default.
-
-**Example:**
-
-```jsx
-{
-	"status": 21003,
-	"is_retryable": false,
-	"store_status": 4040010
-}
-```
 
 The following table specifies the different status codes:
 
