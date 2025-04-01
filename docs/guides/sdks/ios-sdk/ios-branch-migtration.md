@@ -82,7 +82,6 @@ In `func application(_ application: UIApplication, continue userActivity: NSUser
 ### Handling Deep Links on Re-engagement
 
 The app handles **re-engagement via deep links** (when the app is reopened through a Branch link).
-The Branch SDK method is used hhh
 
 ```swift
     // Access and use deep link data here (nav to page, display content, etc.)
