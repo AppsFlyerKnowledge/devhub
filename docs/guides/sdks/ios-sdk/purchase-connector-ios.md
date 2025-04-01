@@ -162,7 +162,7 @@ extension AppDelegate: PurchaseRevenueDataSource, PurchaseRevenueDelegate {
 ```
 The `didReceivePurchaseRevenueValidationInfo` function receives validation response for each transaction from AppsFlyer in real-time and processes the results.
 
-**Validation response parameters**
+#### Validation response parameters
 
 The response contains two parameters:
 
