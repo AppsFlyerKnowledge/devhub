@@ -166,7 +166,7 @@ The `didReceivePurchaseRevenueValidationInfo` function receives validation respo
 
 The response contains two parameters:
 
-- `validationInfo`:  Value indicating whether the purchase was successfully validated (`true` or `false`).
+- `validationInfo`:  Value indicating whether the purchase was successfully validated.
 - `error`: Provides error information if the validation fails. The error object includes::
     - `status`: Specifies the error code from AppsFlyer or the App Store (e.g., `21003`).
     - `is_retryable`: A legacy key that always returns `false`.
