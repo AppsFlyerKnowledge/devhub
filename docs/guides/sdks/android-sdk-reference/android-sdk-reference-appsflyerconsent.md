@@ -81,7 +81,7 @@ AppsFlyerConsent gdprUserConsent = AppsFlyerConsent.forGDPRUser(hasConsentForDat
 
 ### forNonGDPRUser
 
-<span class="annotation-deprecated">Deprecated since V6.3.2</span>  
+<span class="annotation-deprecated">Deprecated since V6.16.1</span>  
 
 
 **Method signature**
