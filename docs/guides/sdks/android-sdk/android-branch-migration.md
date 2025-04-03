@@ -16,38 +16,31 @@ This guide explains how to activate the Branch Migration Navigator on Android us
 
 To ensure a smooth handoff of the navigator, your app should collect attribution data from Branch and pass it to the AppsFlyerMigrationHelper during the first session. In addition, in case of direct deep linking (Android App Links or URI scheme) the app should collect the deep linking data and pass it as well.
 
-# Data flow
+# Code flow concept
 
-Before implementing the flow it is important to understand the rational behind it. 
-The code described in the snippets below is a reference for implementing the follow flow. Any other implementation is accepted, as long as you follow this rational.
+Before implementing the flow it is important to understand the rational behind it. Any other implementation is accepted, as long as you follow this rational.
 
-## Application install (deferred deep linking or organic)
-
-When the application is installed *organically* (without clicking a Branch.io link), or with *deferred deep linking* (by clicking on a Branch.io), take the following steps:
-1. Wait 3 seconds from the return of Branch.io callback `onInitFinished()`.
-2. Call from Branch.io SDK the method `getLastAttributedTouchData()`
-3. Inside the `getLastAttributedTouchData()` callback, call AppsFlyer SDK's  `AppsFlyerMigrationHelper.setAttributionData()` and then `start()`.
-
-## Direct deep linking
-
-In case of direct deep linking (Android App Links or URI scheme) call AppsFlyer SDK's `AppsFlyerMigrationHelper.setDeepLinkingData()` and then `start()`. 
-
-## Application launch without deep linking
-
-When the application is launched without clicking on a Branch.io link, no special action should be taken other than calling `start` from AppsFlyer SDK. 
+| **Scenario**                  | **Suggested Indication**                                                        | **Action**                                                                                         | **Branch Method (Click Data Retrieval)**                               | **AppsFlyer Method**                                                   |
+|-------------------------------|---------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------|------------------------------------------------------------------------|------------------------------------------------------------------------|
+| **Organic App Open**          | `branchUniversalObject` is `null`                                                | No Branch data to retrieve; proceed to start AppsFlyer SDK                                         | N/A                                                                    | N/A                                  |
+| **Branch Deferred Deep Link** | `branchUniversalObject` is not `null` and `+is_first_session` is `true`          | Introduce a 3-second delay, then retrieve and pass install-attributed click data to AppsFlyer      | `Branch.getInstance().getLastAttributedTouchData()`                    | `AppsFlyerMigrationHelper.setAttributionData()`                        |
+| **Branch Direct Deep Link**   | `branchUniversalObject` is not `null` and `+is_first_session` is `false`         | Retrieve and pass direct deep link click data to AppsFlyer                                         | `Branch.getInstance().getLatestReferringParams()` or `branchUniversalObject.getContentMetadata().convertToJson()` | `AppsFlyerMigrationHelper.setDeepLinkingData()`                        |
 
 # SDK and migration module initiazation
 
-## Where is it implemented?
+- **Initialize Both SDKs Globally**:
+  - In the `application` context, initialize both the Branch and AppsFlyer SDKs globally.
 
-In `application` context:
-- Both SDKs are **initialized once globally**.
-- The **AppsFlyer SDK is not started here** — it's only initialized. This is important because you delay the actual `start()` call until Branch provides attribution or deep link data.
-- This allows the app to **control when AppsFlyer starts** based on LATD availability (from Branch).
+> ⚠️ Important
+> 
+> Do not run AppsFlyer SDK `start` immediately after the `init`.
+> Read below when to start AppsFlyer SDK
+
+- **Control the Start of the AppsFlyer SDK**:
+  - Invoke the `start` method of the AppsFlyer SDK **only after** passing the deep link data from Branch to AppsFlyer. This approach allows the app to manage the SDK's initiation, ensuring all necessary data from Branch is available beforehand.
+  - In all scenarios—including when a `BranchError` occurs or when `branchUniversalObject` is `null` (indicating an organic app open)—it is essential to call `AppsFlyerLib.getInstance().start()` to initiate the AppsFlyer SDK, ensuring it functions correctly across all app launch scenarios.
 
 # Migration module flow
-
-## Where is it implemented?
 
 All the migration module flow is implemented in the Branch callback `onInitFinished`.  
 Branch recommends `onInitFinished` implemeneted in `onStart` of your `MainActivity`. `MainActivity` refers to the applications where you chose to implement Branch `onInitFinished`.
@@ -95,32 +88,11 @@ In this case:
 ```java
 
 public class MainActivity extends AppCompatActivity {
-    @Override
-    protected void onNewIntent(Intent intent) {
-        super.onNewIntent(intent);
-        setIntent(intent);
-        if (intent != null && intent.hasExtra("branch_force_new_session") && intent.getBooleanExtra("branch_force_new_session",false)) {
-            Branch.sessionBuilder(this).withCallback(new Branch.BranchReferralInitListener() {
-                @Override
-                public void onInitFinished(JSONObject referringParams, BranchError error) {
-                    if (error != null) {
-                        Log.i("BranchSDK_Tester", "onNewIntent onInitFinished: error found!");
-                        Log.e("BranchSDK_Tester", error.getMessage());
-                    } else if (referringParams != null) {
-                        Log.i("BranchSDK_Tester", "@@@@ onNewIntent onInitFinished: referringParams not null");
-                        Log.i("BranchSDK_Tester", referringParams.toString());
-                    }
-                }
-            }).reInit();
-        }
-    }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-    }
-
+    // ...
+    // onNewIntent() and onCreate() not affected
+    // ...
+    
     @Override
     protected void onStart() {
         super.onStart();
