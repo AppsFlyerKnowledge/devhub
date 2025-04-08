@@ -103,7 +103,8 @@ To manually collect consent data, perform the following:
     - `hasConsentForDataUsage` - Indicates whether the user has consented to use their data for advertising purposes.
     - `hasConsentForAdsPersonalization` - Indicates whether the user has consented to use their data for personalized advertising.
     - `hasConsentForAdStorage` - indicates whether the user has consented to store or access information on a device.
-5. Call [`setConsentData()`](https://dev.appsflyer.com/hc/docs/ios-sdk-reference-appsflyerlib#setconsentdata) with the [`AppsFlyerConsent`](https://dev.appsflyer.com/hc/docs/ios-send-consent-for-dma-compliance).
+5. If the GDPR does not apply to the user `isUserSubjectToGDPR` is `false` and the rest of the parameters must be `null`. See example below. 
+6. Call [`setConsentData()`](https://dev.appsflyer.com/hc/docs/ios-sdk-reference-appsflyerlib#setconsentdata) with the [`AppsFlyerConsent`](https://dev.appsflyer.com/hc/docs/ios-send-consent-for-dma-compliance).
 
 > 📘 Note
 >   
@@ -128,9 +129,9 @@ AppsFlyerLib.shared().setConsentData(gdprUser)
 //  Example for a user not subject to GDPR        
 var nonGdprUser = AppsFlyerConsent(
 	isUserSubjectToGDPR: false, 
-	hasConsentForDataUsage: false, 
-	hasConsentForAdsPersonalization: false, 
-	hasConsentForAdStorage: false
+	hasConsentForDataUsage: null, 
+	hasConsentForAdsPersonalization: null, 
+	hasConsentForAdStorage: null
 )
 AppsFlyerLib.shared().setConsentData(nonGdprUser)
 

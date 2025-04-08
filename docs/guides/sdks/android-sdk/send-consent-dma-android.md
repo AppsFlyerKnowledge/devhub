@@ -92,7 +92,8 @@ To manually collect consent data, perform the following:
     - `hasConsentForDataUsage` - Indicates whether the user has consented to use their data for advertising purposes.
     - `hasConsentForAdsPersonalization` - Indicates whether the user has consented to use their data for personalized advertising purposes.
     - `hasConsentForAdStorage` - indicates whether the user has consented to store or access information on a device.   
-5. Call [`setConsentData()`](https://dev.appsflyer.com/hc/docs/android-sdk-reference-appsflyerlib#setconsentdata) with the [`AppsFlyerConsent`](https://dev.appsflyer.com/hc/docs/android-sdk-reference-appsflyerconsent) object. 
+5. If the GDPR does not apply to the user `isUserSubjectToGDPR` is `false` and the rest of the parameters must be `null`. See example below.
+6. Call [`setConsentData()`](https://dev.appsflyer.com/hc/docs/android-sdk-reference-appsflyerlib#setconsentdata) with the [`AppsFlyerConsent`](https://dev.appsflyer.com/hc/docs/android-sdk-reference-appsflyerconsent) object. 
 
 > 📘 Note
 >   
@@ -106,7 +107,7 @@ To manually collect consent data, perform the following:
 // or retrieve it from the storage
 ...
 // Example for a user NOT subject to GDPR
-AppsFlyerConsent nonGdprUser = new AppsFlyerConsent(false, false, false, false);
+AppsFlyerConsent nonGdprUser = new AppsFlyerConsent(false, null, null, null);
 AppsFlyerLib.getInstance().setConsentData( nonGdprUser);
 
 // Example for a user subject to GDPR
