@@ -43,7 +43,7 @@ Before implementing the flow it is important to understand the rational behind i
 # Migration module flow
 
 All the migration module flow is implemented in the Branch callback `onInitFinished`.  
-Branch recommends `onInitFinished` implemeneted in `onStart` of your `MainActivity`. `MainActivity` refers to the applications where you chose to implement Branch `onInitFinished`.
+Branch recommends `onInitFinished` implemeneted in `onStart` of your `MainActivity`. `MainActivity` refers to the applications where you chose to handle deep linking.
 The following code describes the migration code in `onInitFinished`. The full reference can be found [here](#full-code-example). 
 
 ## Error check
@@ -58,12 +58,11 @@ In this case, skip the migration flow and immediately call AppsFlyer SDK `start`
 
 ## Deep linking 
 
-The migration flow is relevant when a deep linking was the trigger for the app open.
-- Deferred deep linking: when the app was installed was a click on a Branch link
-- Direct deep linking: when the app was already installed, and a branch click opened it, via Android App Links.
+The migration process becomes relevant when an app launch is triggered by a Branch click. There are two primary types of deep linking:​
+- Deferred Deep Linking: This occurs when a user clicks on a Branch link and, if the app is not already installed, is directed to install it. After installation, the user is taken directly to the intended content within the app according to link data.​
+- Direct Deep Linking: This happens when the app is already installed, and a user clicks on a Branch link (e.g., through Android App Links), which opens the app directly to the specified content, according to the link data.​
 
-If `onInitFinished` was called with a non-empty `BranchUniversalObject`, this is a deep linking flow.
-The normal deep linking flow should proceed normaly after the described migration flow.
+When the `onInitFinished` callback is invoked with a non-empty `BranchUniversalObject`, it indicates that a deep linking event has occurred. After completing the migration steps, the standard deep-linking procedures integrated with Branch should continue as usual.
 
 ## Deferred deep linking
 
