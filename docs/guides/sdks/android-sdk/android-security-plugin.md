@@ -7,38 +7,36 @@ hidden: true
 order: 99
 ---
 
-Android SDK Security Module
-
 ## Overview
-This document describes the integration step for the AppsFlyer SDK Security module.
+This document describes the integration steps for the AppsFlyer Advanced Security module.
 
 
 ## Minimum Versions
 
-Ensure your project meets the following minimum versions for compatibility with the AppsFlyer Security module:
+Ensure your project meets the following minimum versions for compatibility with the Advanced Security module:
 
 - [AppsFlyer Android SDK](https://dev.appsflyer.com/hc/docs/android-sdk): Version 6.15.2
-    * If you are using [validateAndLogInAppPurchase (Legacy)](https://dev.appsflyer.com/hc/docs/validate-and-log-purchase-android#validateandloginapppurchase-legacy) please migrate to the [newer API](https://dev.appsflyer.com/hc/docs/validate-and-log-purchase-android#implement-validateandloginapppurchase-beta) as currently the legacy API is not compatible with the Security module. 
+    * If you are using [validateAndLogInAppPurchase (Legacy)](https://dev.appsflyer.com/hc/docs/validate-and-log-purchase-android#validateandloginapppurchase-legacy) please migrate to the [newer API](https://dev.appsflyer.com/hc/docs/validate-and-log-purchase-android#implement-validateandloginapppurchase-beta) as currently the legacy API is not compatible with the module. 
 
 
 ## Before You Begin
 
- 1. Please send all the certificate hashes (SHA-256) of all the certificates with which you sign your app to AppsFlyer. <br>This includes the debug and release certificate hashes. The certificate hashes are needed to pre-build the version of the security module that your app will use.</br>
+ 1. Please send us all the certificate hashes (SHA-256) of all the certificates with which you sign your app. <br>This includes the debug and release certificate hashes. The certificate hashes are needed to pre-build the version of the security module that your app will use.</br>
 Instructions of getting the certificates can be found [here](#sha256-fingerprint). </br>
 
 2. Make sure to ask the following information from your contact person at AppsFlyer:
-	1. Maven repository name
-	2. Maven Auth token
-	3. Latest SDK Security module version that was built for your app.
+    1. Maven repository name
+    2. Maven Auth token
+    3. Latest Advanced Security module version that was built for your app.
 
 
 ## Integration
 
-Please follow the next two steps. Once completed and the dependency is downloaded successfully, the AppsFlyer native Android SDK will use the Security  module automatically. 
+Please follow the next two steps. Once completed and the dependency is downloaded successfully, the AppsFlyer Android SDK will use the module automatically.
 
 ### Step 1
 The artifacts are hosted on AppsFlyer infrastructure.
-You first need to add the your dedicated repository on AppsFlyer Maven as a repository source in your `settings.gradle` or `settings.gradle.kts` file:
+Add the your dedicated repository on AppsFlyer Maven as a repository source in your `settings.gradle` or `settings.gradle.kts` file:
 ```groovy
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
@@ -95,19 +93,19 @@ Usually `<project>/<app-module>/build.gradle` or `<project>/<app-module>/build.g
 
 ```groovy
 dependencies{
-    // replace <YOUR_APP_ID> with your App ID and <SECURITY_SDK_VERSION> with the version of the Security module   
-    implementation 'com.appsflyer.security:af-security-sdk-<YOUR_APP_ID>:<SECURITY_SDK_VERSION>'
+    // replace <YOUR_APP_ID> with your App ID and <SECURITY_MODULE_VERSION> with the version of the Security module   
+    implementation 'com.appsflyer.security:af-security-sdk-<YOUR_APP_ID>:<SECURITY_MODULE_VERSION>'
 }
 ```
 ```kotlin
 dependencies{
-    // replace <YOUR_APP_ID> with your App ID and <SECURITY_SDK_VERSION> with the version of the Security SDK   
-    implementation("com.appsflyer.security:af-security-sdk-<YOUR_APP_ID>:<SECURITY_SDK_VERSION>")
+    // replace <YOUR_APP_ID> with your App ID and <SECURITY_MODULE_VERSION> with the version of the Security module   
+    implementation("com.appsflyer.security:af-security-sdk-<YOUR_APP_ID>:<SECURITY_MODULE_VERSION>")
 }
 ```
 ## FAQ
 
-Q: How do I know what version of SDK Security module I should use? 
+Q: How do I know what version of Security module I should use? 
 A: In general, you should use the latest version available for your app, that will be provided to you during the onboarding process. If you need the full list of versions available, please ask your contact person at AppsFlyer to provide it to you. 
 
 Q: How do I get a new Security module version for my app? 
