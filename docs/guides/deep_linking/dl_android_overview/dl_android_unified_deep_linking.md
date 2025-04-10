@@ -99,7 +99,7 @@ UDL handles deep linking for existing users. In this case, it's recommended to a
 ### Code example
 
 ```java
-appsflyer.subscribForDeepLink(new DeepLinkListen
+appsflyer.subscribeForDeepLink(new DeepLinkListener
     @Override
     public void onDeepLinking(@NonNull DeepLinkResult deepLinkResult) {
         DeepLinkResult.Status dlStatus = deepLinkResult.getStatus();
