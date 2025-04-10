@@ -900,8 +900,6 @@ Measure and get data from push-notification campaigns. Call this method inside t
 **Returns**  
 `void`.
 
-**Usage example**
-
 ### setAdditionalData
 
 > 📘
