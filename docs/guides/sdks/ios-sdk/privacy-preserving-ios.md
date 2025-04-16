@@ -46,7 +46,7 @@ You can configure the SDK to instruct AppsFlyer to remove all user-identifying i
 - **Deleted:** personal identifiers (GAID, IDFA, IDFV, and CUID)
 - **Hashed:** AppsFlyer ID and IP address.
 
-To learn how to implement the method without anonymizing install events, see: [share only the install event](https://dev.appsflyer.com/hc/docs/preserve-user-privacy-2#share-only-the-install-event)
+To learn how to implement the method without anonymizing install events, see: [share only the install event](#use-start-to-share-only-the-install-event)
 
 ## Disable IDs
 
