@@ -45,7 +45,7 @@ AFAdRevenueData adRevenueData = new AFAdRevenueData(
           "ironsource",       // monetizationNetwork
           MediationNetwork.GOOGLE_ADMOB, // mediationNetwork
           "USD",           // currencyIso4217Code
-          123.45           // revenue
+          0.0015           // revenue
   );
 
 Map<String, Object> additionalParameters = new HashMap<>();

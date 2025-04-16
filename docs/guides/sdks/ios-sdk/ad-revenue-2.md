@@ -40,7 +40,7 @@ import AppsFlyerLib
 let my_adRevenueData = AFAdRevenueData(monetizationNetwork: "ironsource",
                         mediationNetwork: MediationNetworkType.googleAdMob,
                         currencyIso4217Code: "USD",
-                        eventRevenue: 123.45)
+                        eventRevenue: 0.0015)
         
 var my_additionalParameters: [String: Any] = [:]
 my_additionalParameters[kAppsFlyerAdRevenueCountry] = "US"
