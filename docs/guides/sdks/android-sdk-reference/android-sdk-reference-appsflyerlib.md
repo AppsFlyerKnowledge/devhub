@@ -181,6 +181,21 @@ example.com?pid=exampleDomain&is_retargeting=true
 
 
 
+### disableAppSetId
+<span class="annotation-added">Added in v6.17.0</span>
+
+**Method signature**
+```java
+void disableAppSetId()
+```
+**Description**
+Disable the collection of AppSet ID.
+
+**Returns**
+`void`
+
+
+
 ### enableFacebookDeferredApplinks
 
 **Method signature**
@@ -188,8 +203,6 @@ example.com?pid=exampleDomain&is_retargeting=true
 ```java
 void enableFacebookDeferredApplinks(boolean isEnabled)
 ```
-
-
 
 **Description**  
 Enable the collection of Facebook Deferred AppLinks. Requires Facebook SDK and Facebook app on target/client device.
@@ -214,8 +227,6 @@ This API must be invoked before initializing the AppsFlyer SDK in order to funct
 AppsFlyerLib enableLocationCollection(boolean flag)
 ```
 
-
-
 **Description**  
 Enable the AppsFlyer SDK to collect the last known location. Requires `ACCESS_COARSE_LOCATION` and `ACCESS_FINE_LOCATION` Manifest permissions.
 
@@ -238,7 +249,7 @@ AppsFlyerLib enableTCFDataCollection (boolean flag)
 
 **Description**
 
-Enables the collection of Transparency and Consent Framework (TCF) data from `SharedPreferences`. The data was placed in `SharedPreferences` by the device TCF v2.2 compatible Consent Management Platform (CMP).
+Enable the collection of Transparency and Consent Framework (TCF) data from `SharedPreferences`. The data was placed in `SharedPreferences` by the device TCF v2.2 compatible Consent Management Platform (CMP).
 
 **Input arguments**
 
