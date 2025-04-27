@@ -311,6 +311,20 @@ dependencies {
 }
 [/block]
 
+## Collecting AppSet ID
+
+Starting with **v6.17.0**, the SDK can automatically collect the [AppSet ID](https://developer.android.com/identity/app-set-id).  
+To enable this functionality, add the Google Play services AppSet dependency to your module-level `build.gradle` file:
+
+```groovy
+dependencies {
+    implementation 'com.google.android.gms:play-services-appset:16.1.0'
+}
+```
+
+Once added, the SDK will collect the AppSet ID if it is available on the device.  
+To disable AppSet ID collection, use the [`disableAppSetId()`](doc:android-sdk-reference-appsflyerlib#disableAppSetId).
+
 Known issues
 ------------
 
