@@ -323,7 +323,7 @@ dependencies {
 ```
 
 Once added, the SDK will collect the AppSet ID if it is available on the device.  
-To disable AppSet ID collection, use the [`disableAppSetId()`](doc:android-sdk-reference-appsflyerlib#disableAppSetId).
+To disable AppSet ID collection, use the [`disableAppSetId()`](doc:android-sdk-reference-appsflyerlib#disableappsetid).
 
 Known issues
 ------------
