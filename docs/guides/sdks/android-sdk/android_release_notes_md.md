@@ -7,6 +7,13 @@ hidden: false
 order: 1
 ---
 
+## Version 6.17.0
+
+#### New Features
+
+- Added the collection of AppSet ID from the device. In order for the SDK to collect AppSet ID, the app needs to add a dependency on the AppSet ID library. See integration instructions [here](https://dev.appsflyer.com/hc/docs/install-android-sdk#collecting-appset-id).
+
+
 ## Version 6.16.2
 
 #### Bug Fixes
