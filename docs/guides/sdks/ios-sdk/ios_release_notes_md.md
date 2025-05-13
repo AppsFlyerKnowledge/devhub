@@ -7,6 +7,13 @@ hidden: false
 order: 1
 ---
 
+## Version 6.17.0
+
+#### Technical Update
+
+- Stability and performance improvements
+
+
 ## Version 6.16.1
 
 #### Changed Features
