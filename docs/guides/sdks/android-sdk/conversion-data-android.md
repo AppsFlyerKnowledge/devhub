@@ -138,4 +138,4 @@ Deferred deep linking (Legacy method)
 When the app is opened via deferred deep linking, [`onConversionDataSuccess`](doc:android-sdk-reference-appsflyerconversionlistener#onconversiondatasuccess)'s payload returns deep linking data, as well as attribution data.
 
 - The recommended best practice is to implement deep linking with [Unified Deep Linking (UDL)](doc:unified-deep-linking-udl)
-- For existing clients and reference, here is our [legacy Android deep linking guide](doc:android-legacy-apis#deferred-deep-linking), using [`AppsFlyerConversionListener`](doc:android-sdk-reference-appsflyerconversionlistener).
+- For existing clients and reference, here is our [legacy Android deep linking guide](doc:dl_android_gcd_legacy#deferred-deep-linking), using [`AppsFlyerConversionListener`](doc:android-sdk-reference-appsflyerconversionlistener).
