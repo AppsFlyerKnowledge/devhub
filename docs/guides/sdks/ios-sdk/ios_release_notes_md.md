@@ -11,7 +11,7 @@ order: 1
 
 #### Technical Update
 
-- Stability and prefromance improvements
+- Stability and performance improvements
 
 
 ## Version 6.16.1
