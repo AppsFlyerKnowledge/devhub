@@ -82,6 +82,7 @@ To enable users to invite their friends to your app, you need a way to generate 
    - `deep_link_sub2`: Referrer identifier. Can be used to reward the referrer.
    - **Note**: If you have SDK V6.5.2 or lower, you need to encode any parameter values with special characters.
   
+  
    > 📘 Note
    > 
    > You can also include other standard AppsFlyer parameters, such as redirection parameters like `af_web_dp`, when generating OneLinks via the SDK. To learn more about the available parameters, see [About link structure and parameters](https://support.appsflyer.com/hc/en-us/articles/207447163-About-link-structure-and-parameters).
