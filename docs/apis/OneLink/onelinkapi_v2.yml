@@ -1,0 +1,553 @@
+openapi: 3.0.3
+info:
+  title: OneLink API v2.0
+  version: '1.0'
+servers:
+  - url: 'https://onelink.appsflyer.com/api/v2.0/'
+security:
+  - ApiKeyAuth: []
+paths:
+  /shortlinks/{onelink-id}/:
+    post:
+      tags: 
+      - OneLink REST API
+      summary: Create OneLink attribution link
+      description: |
+        TBA
+      operationId: onelink-v2-create-link
+      parameters:
+        - name: onelink-id
+          in: path
+          description: Get this from the person using the AppsFlyer dashboard. Taken from the OneLink template screen
+          schema:
+            type: string
+            example: A1b3
+          required: true
+
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - data
+              properties:
+                shortlink_id:
+                  type: string
+                  description: |
+                    The ID of the shortlink created. 
+                    If not passed, the ID is a random string.
+                    > ⚠️ 
+                    > If fired twice, the second call would receive a response of: 
+                    > `409 - Shortlink ID already in use`
+                  example: my_shortlink_id
+                ttl:
+                  type: string
+                  description: 'Time to Live for the full attribution link. Default is 31 days. Value can be specified in days (default), minutes or hours (for example, 10m, 20h, 14d).'
+                  example: 1h
+                brand_domain:
+                  type: string
+                  description: 'Only use this param and request it in the payload if: 1) The Branded Links feature is enabled in your account, and 2) The branded link is configured in your account. If these conditions are not met, do not use this param, as the API call will not work.'
+                  example: mybranded.com
+                data:
+                  type: string
+                  description: |
+                   JSON format of the query parameters following the AppsFlyer macros for attribution links. **Note**: The media source (pid) parameter is mandatory.
+                  format: json
+                  example: '{"pid": "my_media_source_SMS", "c": "my_campaign" }'
+      responses:
+        '200':
+          description: 'The link was created/updated successfully'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  url:
+                    type: string
+                    example: '"https://myapp.onelink.me/abc123/qwer9876"'
+              examples:
+                CustomId:
+                  summary: Example with custom shortlink_id
+                  value:
+                    url: 'https://myapp.onelink.me/A1b3/my_shortlink_id'
+        '400':
+          description: 'Bad request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                API limit reached:
+                  value: 
+                    error-type: "invalid_parameter"
+                    message: "Data sent exceeds limiParameter 'af_r' has an invalid value: 'badURL'. Reason: value should be a valid URL."
+                Payload limit:
+                  value: 
+                    error-type: "limit-exceeded"
+                    message: "Generating shortlink failed, data sent exceeds limit."
+                Creation failure:
+                  value: 
+                    error-type: "internal-error"
+                    message: "Failed to create shortlink."
+                API access blocked:
+                  value: 
+                    error-type: "invalid-source"
+                    message: "This operation is not allowed for this shortlink source-caller."
+                Unsupported TTL:
+                  value: 
+                    error-type: "unsupported-ttl"
+                    message: "TTL value is not supported. Maximum allowed TTL is 365 days."
+        '401':
+          description: 'Unauthorized'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                Unauthorized:
+                  value:
+                    error-type: "unauthorized"
+                    message: "Authentication Failed"
+        '409':
+          description: 'the provided shortlink-id already exists for this template'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                Shortlink ID already exists:
+                  value: 
+                    error-type: "shortlink_id_in_use"
+                    message: "Shortlink ID already in use"
+        '429':
+          description: 'Limit exceeded'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                Quota Exceeded:
+                  value: 
+                    error-type: "quota_exceeded"
+                    message: "Monthly Quota Exceeded."
+                Rate limit exceeded:
+                  value: 
+                    error-type: "rate_limit_exceeded"
+                    message: "Rate limit exceeded."
+      deprecated: false
+  /shortlinks/{onelink-id}/{shortlink-id}:
+    get:
+      tags: 
+      - OneLink REST API
+      summary: Get OneLink attribution link
+      operationId: get-onelink-v2-link
+      parameters:
+        - name: onelink-id
+          in: path
+          description: Get this from the person using the AppsFlyer dashboard. Taken from the OneLink template screen
+          schema:
+            type: string
+            example: A1b3
+          required: true
+        - name: shortlink-id
+          in: path
+          description: 'The ID of the short OneLink query params. For example, for the following OneLink attribution link: myapp.onelink.me/abc123/qwer9876 , the shortlink-id is qwer9876'
+          schema:
+            type: string
+            example: a1b2e3h5
+          required: true
+      responses:
+        '200':
+          description: 'Success'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  payload:
+                    type: object
+                    additionalProperties: true
+                  expiry:
+                    type: string
+                    example: '2023-10-01T12:00:00Z'
+                  ttl:
+                    type: integer
+                    example: 86400
+              examples:
+                Result:
+                  value:
+                    payload:
+                      af_web_dp: "https://perfpatients.apollo247.com/payments/consult/240918025618661624?utm_token=BearerQVBPTExPMjQ3KzkxNzQxNjMzOTUyMQ=="
+                      af_sub1: ""
+                      c: ""
+                      pid: "appointment payment"
+                      af_channel: "appointment payment"
+                      af_force_deeplink: "true"
+                      utm_mobile_number: " 917416339521"
+                    expiry: "2024-07-01T12:00:00Z"
+                    ttl: 86400
+        '400':
+          description: 'Bad request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                API access blocked:
+                  value: 
+                    error-type: "invalid-source"
+                    message: "This operation is not allowed for this shortlink source-caller."
+        '401':
+          description: 'Unauthorized'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                Unauthorized:
+                  value:
+                    error-type: "unauthorized"
+                    message: "Authentication Failed"
+        '404':
+          description: 'The link doesn’t exist'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                Link doesn’t exist:
+                  value: Not Found
+      deprecated: false
+    put:
+      tags: 
+      - OneLink REST API
+      summary: Update OneLink attribution link
+      operationId: update-onelink-v2-link
+      parameters:
+        - name: onelink-id
+          in: path
+          description: Get this from the person using the AppsFlyer dashboard. Taken from the OneLink template screen
+          schema:
+            type: string
+            example: A1b2
+          required: true
+        - name: shortlink-id
+          in: path
+          description: 'The ID of the short OneLink query params. For example, for the following OneLink attribution link: myapp.onelink.me/abc123/qwer9876 , the shortlink-id is qwer9876'
+          schema:
+            type: string
+            example: a1b2e3h5
+          required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - data
+              properties:
+                brand_domain:
+                  type: string
+                  example: newbranded.com
+                ttl:
+                  type: string
+                  description: 'Time to Live for the full attribution link. value can be specified in days (default), minutes or hours (for example, 10m, 20h, 14d).'
+                  example: 22d
+                data:
+                  type: string
+                  example: '{"pid": "my_media_source_SMS", "c": "my_campaign" }'
+                  format: json
+      responses:
+        '200':
+          description: 'The link was created/updated successfully'
+          content:
+            application/json:
+              schema:
+                type: string
+                example: '"https://myapp.onelink.me/abc123/qwer9876"'
+              examples:
+                Result:
+                  value: 'https://myapp.onelink.me/abc123/qwer9876'
+        '400':
+          description: 'Bad request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                API limit reached:
+                  value: 
+                    error-type: "invalid_parameter"
+                    message: "Data sent exceeds limiParameter 'af_r' has an invalid value: 'badURL'. Reason: value should be a valid URL."
+                Payload limit:
+                  value: 
+                    error-type: "limit-exceeded"
+                    message: "Generating shortlink failed, data sent exceeds limit."
+                Creation failure:
+                  value: 
+                    error-type: "internal-error"
+                    message: "Failed to create shortlink."
+                API access blocked:
+                  value: 
+                    error-type: "invalid-source"
+                    message: "This operation is not allowed for this shortlink source-caller."
+                Unsupported TTL:
+                  value: 
+                    error-type: "unsupported-ttl"
+                    message: "TTL value is not supported. Maximum allowed TTL is 365 days."
+        '401':
+          description: 'Unauthorized'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                Unauthorized:
+                  value:
+                    error-type: "unauthorized"
+                    message: "Authentication Failed"
+        '404':
+          description: 'The link doesn’t exist'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                The link doesn’t exist:
+                  value: Not Found
+        '429':
+          description: 'Client has reached its API limit calls'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                Monthly quota exceeded:
+                  value: Monthly quota exceeded
+                Rate limit exceeded:
+                  value: Rate limit exceeded
+      deprecated: false
+    delete:
+      tags: 
+      - OneLink REST API
+      summary: Delete OneLink attribution link
+      operationId: delete-onelink-v2-link
+      parameters:
+        - name: onelink-id
+          in: path
+          description: Get this from the person using the AppsFlyer dashboard. Taken from the OneLink template screen
+          schema:
+            type: string
+            example: A1b2
+          required: true
+        - name: shortlink-id
+          in: path
+          description: 'The ID of the short OneLink query params. For example, for the following OneLink attribution link: myapp.onelink.me/abc123/qwer9876 , the shortlink-id is qwer9876'
+          schema:
+            type: string
+            example: a1b2e3h5
+          required: true
+      responses:
+        '200':
+          description: 'The link was deleted successfully'
+          content:
+            application/json:
+              schema:
+                type: string
+                example: '"ok'
+              examples:
+                Result:
+                  value: 'ok'
+        '400':
+          description: 'Bad request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                API access blocked:
+                  value: 
+                    error-type: "invalid-source"
+                    message: "This operation is not allowed for this shortlink source-caller."
+        '401':
+          description: 'Unauthorized'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                Unauthorized:
+                  value:
+                    error-type: "unauthorized"
+                    message: "Authentication Failed"
+        '404':
+          description: 'The link doesn’t exist'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                The link doesn’t exist:
+                  value: Not Found
+        '429':
+          description: 'Client has reached its API limit calls'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                Monthly quota exceeded:
+                  value: Monthly quota exceeded
+                Rate limit exceeded:
+                  value: Rate limit exceeded
+      deprecated: false
+
+  /shortlinks/{onelink-id}/{shortlink-id}/qr:
+    get:
+      tags: 
+      - QR code
+      summary: Get QR code for OneLink attribution link
+      operationId: get-onelink-v2-link-qr
+      parameters:
+        - name: onelink-id
+          in: path
+          description: Get this from the person using the AppsFlyer dashboard. Taken from the OneLink template screen
+          schema:
+            type: string
+            example: A1b2
+          required: true
+        - name: shortlink-id
+          in: path
+          description: 'The ID of the short OneLink query params. For example, for the following OneLink attribution link: myapp.onelink.me/abc123/qwer9876 , the shortlink-id is qwer9876'
+          schema:
+            type: string
+            example: a1b2e3h5
+          required: true
+        - name: size
+          in: query
+          description: 'Size of the QR code. Default is 300x300. Specifies size (widthxheight in pixels). limit 3000'
+          schema:
+            type: string
+            example: 300x300
+        - name: format
+          in: query
+          description: 'Format of the QR code. Default is png'
+          schema:
+            type: string
+            enum:
+              - png
+              - svg
+              - jpg
+            example: svg
+      responses:
+        '200':
+          description: 'Success'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  qr:
+                    type: string
+                    example: 'image/jpeg;base64,/9j/4AAQSkZJRgABAQEAAAAAAAD/4QByRXhp'
+              examples:
+                Result:
+                  value:
+                    qr: 'image/jpeg;base64,/9j/4AAQSkZJRgABAQEAAAAAAAD/4QByRXhp'
+        '400':
+          description: 'Bad request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                API access blocked:
+                  value: 
+                    error-type: "invalid-source"
+                    message: "This operation is not allowed for this shortlink source-caller."
+                Unsupported QR format or size:
+                  value: 
+                    error-type: "invalid_parameter"
+                    message: "Invalid QR parameter."
+                QR logic failure:
+                  value: 
+                    error-type: "qr_error"
+                    message: "Unexpected error occurred while generating QR code."
+                QR request not v2:
+                  value: 
+                    error-type: "invalid_source"
+                    message: "This operation is not allowed for this shortlink source-caller."
+        '401':
+          description: 'Unauthorized'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                Unauthorized:
+                  value:
+                    error-type: "unauthorized"
+                    message: "Authentication Failed"
+        '404':
+          description: 'The link doesn’t exist'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                Link not found:
+                  value:
+                    error-type: "not_found"
+                    message: "The link does exist."
+  /shortlinks-quota/{account-id}/:
+    get:
+      tags: 
+      - Quota
+      summary: Get OneLink v2.0 link quota
+      operationId: get-onelink-v2-link-quota
+      parameters:
+        - name: account-id
+          in: path
+          description: Get this from the person using the AppsFlyer dashboard. Taken from the OneLink template screen
+          schema:
+            type: string
+            example: TBA
+          required: true
+      responses:
+        '200':
+          description: 'Success'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  remaining_api_calls:
+                    type: integer
+                    example: 120
+              examples:
+                Result:
+                  value:
+                    remaining_api_calls: 120
+
+
+
+components: 
+  securitySchemes:
+    ApiKeyAuth:        
+      type: apiKey
+      in: header       
+      name: authorization
+      description: |
+        OneLink REST API token for authentication.
+        [Get the API token in the Dashboard](https://support.appsflyer.com/hc/en-us/articles/360001250345-OneLink-API)
+  schemas:
+    Error:
+      required:
+        - error-type
+        - message
+      properties:
+        error-type:
+          type: string
+        message:
+          type: string
