@@ -563,7 +563,11 @@ components:
         app_name:
           $ref: '#/components/schemas/app_name'
         status:
-          $ref: '#/components/schemas/status'
+          type: 'string'
+          description: |
+            **Available:** The app is currently available in one of the proprietary app stores: iOS App Store, Google Play, Windows Phone Store.
+          enum:
+            - 'available'
         time_zone:
           $ref: '#/components/schemas/time_zone'
         currency:
@@ -589,7 +593,12 @@ components:
         app_name:
           $ref: '#/components/schemas/app_name'
         status:
-          $ref: '#/components/schemas/status'
+          type: 'string'
+          description: |
+            **Pending:** The app is not yet published or is pending approval from the store.
+            - When a pending app goes live, AppsFlyer automatically updates its status in your account, so there is no need to update it manually.
+          enum:
+            - 'pending'
         time_zone:
           $ref: '#/components/schemas/time_zone'
         currency:
@@ -611,6 +620,7 @@ components:
         - channel_name
         - time_zone
         - kidsPrivacy
+        - app_url
       type: 'object'
       properties:
         platform:
@@ -618,7 +628,14 @@ components:
         app_name:
           $ref: '#/components/schemas/app_name'
         status:
-          $ref: '#/components/schemas/status'
+          type: 'string'
+          description: |
+            **out_of_store:** The app is in an Android app store other than Google Play.
+
+              - This option is relevant only for Android apps.
+              - If the app is available in more than one Android app store, be sure to consider and discuss with your marketing team the options for setting up [multi-store Android attribution](https://support.appsflyer.com/hc/en-us/articles/207447023).
+          enum:
+            - 'out_of_store'
         time_zone:
           $ref: '#/components/schemas/time_zone'
         currency:
@@ -667,23 +684,6 @@ components:
         - epic
         - nativepc
         - chatgpt
-    status:
-      type: 'string'
-      description: |
-        **Available:** The app is currently available in one of the proprietary app stores: iOS App Store, Google Play, Windows Phone Store.
-
-        **Pending:** The app is not yet published or is pending approval from the store.
-
-        - When a pending app goes live, AppsFlyer automatically updates its status in your account, so there is no need to update it manually.
-
-        **out_of_store:** The app is in an Android app store other than Google Play.
-
-          - This option is relevant only for Android apps.
-          - If the app is available in more than one Android app store, be sure to consider and discuss with your marketing team the options for setting up [multi-store Android attribution](https://support.appsflyer.com/hc/en-us/articles/207447023).
-      enum:
-        - 'available'
-        - 'pending'
-        - 'out_of_store'
     app_id:
       type: 'string'
       description: |

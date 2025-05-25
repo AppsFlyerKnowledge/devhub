@@ -20,7 +20,7 @@ paths:
             set the capabilities parameter to one of the options listed:
             - `protect_360` (Report permission): Get [Protect360 raw data reports for ad networks](https://support.appsflyer.com/hc/en-us/articles/115004745523-Protect360-for-integrated-partners)  
             - `cost` (Integration): App is enabled to get cost data [via InCost API](https://support.appsflyer.com/hc/en-us/articles/360007714957) 
-          required: true
+          required: false
           schema:
             type: string
             enum:
