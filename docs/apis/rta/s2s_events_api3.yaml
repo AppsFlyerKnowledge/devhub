@@ -484,6 +484,11 @@ components:
             - `false`: if the user enabled Limited Ad Tracking (LAT). 
         consent_data:
           $ref: '#/components/schemas/ConsentData'
+        app_set_id:
+          type: string
+          format: uuid
+          pattern: '^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-4[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$'
+          example: f47ac10b-58cc-4372-a567-0e02b2c3d479
 
     ErrorResponse:
       type: string
