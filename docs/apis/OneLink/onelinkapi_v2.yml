@@ -439,7 +439,20 @@ paths:
               - png
               - svg
               - jpg
-            example: svg
+        - name: brand_domain
+          in: query
+          description: |
+            Add branded to associate the link with (must be one of the branded that associated to the templates domain)
+          schema:
+            type: string
+            example: app.example.com/apps/myapp
+        - name: margin
+          in: query
+          description: |
+            The quiet zone - white frame of the QR image.
+          schema:
+            type: boolean
+
       responses:
         '200':
           description: 'Success'
