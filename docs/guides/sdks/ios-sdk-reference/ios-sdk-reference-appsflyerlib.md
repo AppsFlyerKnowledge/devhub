@@ -1105,15 +1105,24 @@ Lets you configure which partners should the SDK exclude from data-sharing.
 }
 [/block]
 
-**Note:** 
-Make sure to use the exact partner ID (PID). Failing to do so may result in privacy-preservation breaches.
-To find out the required partner IDs:
-1. Run the [Get active integrations API](https://dev.appsflyer.com/hc/reference/get_v1-integrations) for a list of all active integrations
-2. Use the `media_source_name` values from the [API response](https://dev.appsflyer.com/hc/reference/get_v1-integrations) as input values to the method `partners` array. 
-
-**Exceptions**:
-- For Apple Search Ads use `Apple Search Ads` (and not `iossearchads_int`).
-- For Twitter, use `twitter` (and not `twitter_int`)
+> 📘 **Note**
+> 
+> Make sure to use the exact partner ID (PID). Failing to do so may result in privacy-preservation breaches.
+> 
+> To find out the required partner IDs:
+> 
+> - Run the **Get active integrations API** for a list of all active integrations.  
+>   Use the `media_source_name` values from the API response as input values to the method’s `partners` array.
+> 
+> - **If the partner is not yet active**, you can retrieve the PID from the **Partner Marketplace** in AppsFlyer HQ:  
+>   Search for the partner, and the URL for that partner will include the PID (typically in the format `*_int`).  
+>   For example, the Meta Ad Network has the URL:  
+>   `https://hq1.appsflyer.com/partner-marketplace/partner/facebook_int-ad_network`  
+>   In this case, the PID is `facebook_int`.
+>
+> **Exceptions**:
+> - For Apple Search Ads use `Apple Search Ads` (and not `iossearchads_int`).
+> - For Twitter, use `twitter` (and not `twitter_int`)
 
 **Usage example**
 
