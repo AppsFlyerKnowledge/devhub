@@ -253,16 +253,14 @@ components:
             - Populates raw data field: `event_time`
           example: 1234567890123
         eventValue:
-          type: string
-          format: json
+          type: object
+          additionalProperties:
+            type: string
           description: |
             Map of event parameters describing the event. Use this parameter to send rich in-app events like product SKU, line item price.
             - **Note about revenue!** You can populate this parameter with revenue details. In addition, you must populate `eventRevenue`, and `eventRevenueCurrency`.
             - Limitation: 1000 characters. Do not exceed this; it will be truncated. 
             - Populates raw data field: `event_value`
-          example: '{"Purchase": {"sku" : "ABC123", "color": "blue", "unit_price":3.99,"currency": "USD"}}'
-          additionalProperties:
-            type: object
         eventRevenueCurrency:
           $ref: '#/components/schemas/Currency'
         eventRevenue:
