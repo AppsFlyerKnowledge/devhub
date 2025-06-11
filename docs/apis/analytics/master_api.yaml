@@ -618,22 +618,19 @@ components:
     LTV_event_counter:
       title: Number of event occurrences
       description: |
-        event\_counter\_[event_name]
-        event_name must be lower case
+        event\_counter\_[event_name]  
       type: string
       pattern: "^event_counter_[\\w]+$"
     LTV_users:
       title: Number of unique users per event
       description: |
-        unique\_users\_[event_name]
-        event_name must be lower case
+        unique\_users\_[event_name]  
       type: string
       pattern: "^unique_users_[\\w]+$"
     LTV_sales_in_usd:
       title: Revenue in USD per event
       description: |
-        sales\_in\_usd\_[event_name]
-        event_name must be lower case
+        sales\_in\_usd\_[event_name]  
       type: string
       pattern: "^unique_users_[\\w]+$"
     Retention_day_x:
@@ -673,8 +670,7 @@ components:
     Activity_average_unique_users:
       title: Average unique users performing a given event
       description: |
-        activity\_average\_unique\_users\_[event_name]
-        event_name must be lower case
+        activity\_average\_unique\_users\_[event_name] 
       type: string
       pattern: "^activity_average_unique_users_[\\w]+$"
     Cohort_total_sessions_per_user:
