@@ -114,18 +114,6 @@ paths:
                   error: "SetCUID event cannot be parsed without both user ids - customerUserId and afUserID"
                   message: "Bad Request"
                   status: 400
-        '401':
-          description: Authorization information is missing or invalid.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-        '404':
-          description: The specified bundle ID was not found.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
 components:
   schemas:
     OnlyCuIdEventBody:
