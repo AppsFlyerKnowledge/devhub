@@ -19,7 +19,7 @@ paths:
         description: |
           - To add devices: `add`
           - To remove devices: `remove`
-          - To update devices: `overwrite`
+          - To overwrite devices: `overwrite`
           > ⚠️ **Warning**
           > Using the `overwrite` action incorrectly can result in unintentional data loss
         schema:
