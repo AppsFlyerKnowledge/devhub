@@ -1589,7 +1589,7 @@ Lets you configure how which partners should the SDK exclude from data-sharing.
 >   In this case, the PID is `facebook_int`.
 >
 > **Exceptions**:
-> - For Twitter, use `twitter` (and not `twitter_int`)
+> - For Twitter, use `twitter` or `twitter_int`
 
 **Usage example**
 

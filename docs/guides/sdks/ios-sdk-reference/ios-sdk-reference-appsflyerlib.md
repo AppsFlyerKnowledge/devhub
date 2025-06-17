@@ -1122,7 +1122,7 @@ Lets you configure which partners should the SDK exclude from data-sharing.
 >
 > **Exceptions**:
 > - For Apple Search Ads use `Apple Search Ads` (and not `iossearchads_int`).
-> - For Twitter, use `twitter` (and not `twitter_int`)
+> - For Twitter, use `twitter` or `twitter_int`
 
 **Usage example**
 
