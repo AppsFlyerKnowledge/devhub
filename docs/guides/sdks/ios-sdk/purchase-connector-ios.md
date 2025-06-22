@@ -31,6 +31,7 @@ The AppsFlyer ROI360 purchase connector is used to validate and report in-app pu
 | 6.10.1   |  6.10.1 |
 | 6.12.2   |  6.12.2 |
 | 6.12.3   |  6.12.2 |
+| 6.17.0   |  6.17.0 |
 
 ## Install via Cocoapods
 
