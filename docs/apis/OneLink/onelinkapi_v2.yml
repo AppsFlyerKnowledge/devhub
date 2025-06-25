@@ -13,7 +13,14 @@ paths:
       - OneLink REST API
       summary: Create OneLink attribution link
       description: |
-        TBA
+        | Operation   | Documentation Link                                                                 |
+        |-------------|------------------------------------------------------------------------------------|
+        | Create Link | [Create OneLink attribution link](https://dev.appsflyer.com/hc/reference/onelink-v2-create-link) |
+        | Update Link | [Update OneLink attribution link](https://dev.appsflyer.com/hc/reference/update-onelink-v2-link) |
+        | Get Link    | [Get OneLink attribution link](https://dev.appsflyer.com/hc/reference/get-onelink-v2-link)       |
+        | Delete Link | [Delete OneLink attribution link](https://dev.appsflyer.com/hc/reference/delete-onelink-v2-link) |
+        | QR code     | [Get QR code for OneLink attribution link](https://dev.appsflyer.com/hc/reference/get-onelink-v2-link-qr) |
+        | Quota       | [Quota link](https://dev.appsflyer.com/hc/reference/get-onelink-v2-link-quota) |
       operationId: onelink-v2-create-link
       parameters:
         - name: onelink-id
@@ -141,6 +148,15 @@ paths:
       tags: 
       - OneLink REST API
       summary: Get OneLink attribution link
+      description: |
+        | Operation   | Documentation Link                                                                 |
+        |-------------|------------------------------------------------------------------------------------|
+        | Create Link | [Create OneLink attribution link](https://dev.appsflyer.com/hc/reference/onelink-v2-create-link) |
+        | Update Link | [Update OneLink attribution link](https://dev.appsflyer.com/hc/reference/update-onelink-v2-link) |
+        | Get Link    | [Get OneLink attribution link](https://dev.appsflyer.com/hc/reference/get-onelink-v2-link)       |
+        | Delete Link | [Delete OneLink attribution link](https://dev.appsflyer.com/hc/reference/delete-onelink-v2-link) |
+        | QR code     | [Get QR code for OneLink attribution link](https://dev.appsflyer.com/hc/reference/get-onelink-v2-link-qr) |
+        | Quota       | [Quota link](https://dev.appsflyer.com/hc/reference/get-onelink-v2-link-quota) |
       operationId: get-onelink-v2-link
       parameters:
         - name: onelink-id
@@ -210,19 +226,28 @@ paths:
                     error-type: "unauthorized"
                     message: "Authentication Failed"
         '404':
-          description: 'The link doesn’t exist'
+          description: 'The link does not exist'
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
               examples:
-                Link doesn’t exist:
+                Link doesn't exist:
                   value: Not Found
       deprecated: false
     put:
       tags: 
       - OneLink REST API
       summary: Update OneLink attribution link
+      description: |
+        | Operation   | Documentation Link                                                                 |
+        |-------------|------------------------------------------------------------------------------------|
+        | Create Link | [Create OneLink attribution link](https://dev.appsflyer.com/hc/reference/onelink-v2-create-link) |
+        | Update Link | [Update OneLink attribution link](https://dev.appsflyer.com/hc/reference/update-onelink-v2-link) |
+        | Get Link    | [Get OneLink attribution link](https://dev.appsflyer.com/hc/reference/get-onelink-v2-link)       |
+        | Delete Link | [Delete OneLink attribution link](https://dev.appsflyer.com/hc/reference/delete-onelink-v2-link) |
+        | QR code     | [Get QR code for OneLink attribution link](https://dev.appsflyer.com/hc/reference/get-onelink-v2-link-qr) |
+        | Quota       | [Quota link](https://dev.appsflyer.com/hc/reference/get-onelink-v2-link-quota) |
       operationId: update-onelink-v2-link
       parameters:
         - name: onelink-id
@@ -308,13 +333,13 @@ paths:
                     error-type: "unauthorized"
                     message: "Authentication Failed"
         '404':
-          description: 'The link doesn’t exist'
+          description: 'The link does not exist'
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
               examples:
-                The link doesn’t exist:
+                The link does not exist:
                   value: Not Found
         '429':
           description: 'Client has reached its API limit calls'
@@ -332,6 +357,16 @@ paths:
       tags: 
       - OneLink REST API
       summary: Delete OneLink attribution link
+      description: |
+        | Operation   | Documentation Link                                                                 |
+        |-------------|------------------------------------------------------------------------------------|
+        | Create Link | [Create OneLink attribution link](https://dev.appsflyer.com/hc/reference/onelink-v2-create-link) |
+        | Update Link | [Update OneLink attribution link](https://dev.appsflyer.com/hc/reference/update-onelink-v2-link) |
+        | Get Link    | [Get OneLink attribution link](https://dev.appsflyer.com/hc/reference/get-onelink-v2-link)       |
+        | Delete Link | [Delete OneLink attribution link](https://dev.appsflyer.com/hc/reference/delete-onelink-v2-link) |
+        | QR code     | [Get QR code for OneLink attribution link](https://dev.appsflyer.com/hc/reference/get-onelink-v2-link-qr) |
+        | Quota       | [Quota link](https://dev.appsflyer.com/hc/reference/get-onelink-v2-link-quota) |
+
       operationId: delete-onelink-v2-link
       parameters:
         - name: onelink-id
@@ -382,13 +417,13 @@ paths:
                     error-type: "unauthorized"
                     message: "Authentication Failed"
         '404':
-          description: 'The link doesn’t exist'
+          description: 'The link does not exist'
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
               examples:
-                The link doesn’t exist:
+                The link does not exist:
                   value: Not Found
         '429':
           description: 'Client has reached its API limit calls'
@@ -408,6 +443,15 @@ paths:
       tags: 
       - QR code
       summary: Get QR code for OneLink attribution link
+      description: |
+        | Operation   | Documentation Link                                                                 |
+        |-------------|------------------------------------------------------------------------------------|
+        | Create Link | [Create OneLink attribution link](https://dev.appsflyer.com/hc/reference/onelink-v2-create-link) |
+        | Update Link | [Update OneLink attribution link](https://dev.appsflyer.com/hc/reference/update-onelink-v2-link) |
+        | Get Link    | [Get OneLink attribution link](https://dev.appsflyer.com/hc/reference/get-onelink-v2-link)       |
+        | Delete Link | [Delete OneLink attribution link](https://dev.appsflyer.com/hc/reference/delete-onelink-v2-link) |
+        | QR code     | [Get QR code for OneLink attribution link](https://dev.appsflyer.com/hc/reference/get-onelink-v2-link-qr) |
+        | Quota       | [Quota link](https://dev.appsflyer.com/hc/reference/get-onelink-v2-link-quota) |
       operationId: get-onelink-v2-link-qr
       parameters:
         - name: onelink-id
@@ -503,7 +547,7 @@ paths:
                     error-type: "unauthorized"
                     message: "Authentication Failed"
         '404':
-          description: 'The link doesn’t exist'
+          description: 'The link does not exist'
           content:
             application/json:
               schema:
@@ -518,6 +562,15 @@ paths:
       tags: 
       - Quota
       summary: Get OneLink v2.0 link quota
+      description: |
+        | Operation   | Documentation Link                                                                 |
+        |-------------|------------------------------------------------------------------------------------|
+        | Create Link | [Create OneLink attribution link](https://dev.appsflyer.com/hc/reference/onelink-v2-create-link) |
+        | Update Link | [Update OneLink attribution link](https://dev.appsflyer.com/hc/reference/update-onelink-v2-link) |
+        | Get Link    | [Get OneLink attribution link](https://dev.appsflyer.com/hc/reference/get-onelink-v2-link)       |
+        | Delete Link | [Delete OneLink attribution link](https://dev.appsflyer.com/hc/reference/delete-onelink-v2-link) |
+        | QR code     | [Get QR code for OneLink attribution link](https://dev.appsflyer.com/hc/reference/get-onelink-v2-link-qr) |
+        | Quota       | [Quota link](https://dev.appsflyer.com/hc/reference/get-onelink-v2-link-quota) |
       operationId: get-onelink-v2-link-quota
       parameters:
         - name: account-id
