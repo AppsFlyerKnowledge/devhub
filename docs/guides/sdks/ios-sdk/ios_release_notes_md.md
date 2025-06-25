@@ -7,6 +7,16 @@ hidden: false
 order: 1
 ---
 
+## Version 6.17.1
+
+#### New Features
+
+- Added support for [Google Integrated Conversion](https://support.google.com/google-ads/answer/16203286) (ICM) measurement.
+
+#### Bug Fixes
+
+- Fixed an issue causing an App Store login popup to appear when running the SDK in a development environment
+
 ## Version 6.17.0
 
 #### Technical Update
