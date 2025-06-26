@@ -76,9 +76,9 @@ paths:
                 data:
                   type: string
                   description: |
-                   JSON format of the query parameters following the AppsFlyer macros for attribution links. **Note**: The media source (pid) parameter is mandatory.
-                               > ⚠️ 
-                               > The following characters must be encoded if used for API-created links: `;, *, !, @, #, ?, $, ^, :, &, ~, `, =, +, ’, >, <, /`. If you don't encode these characters, the link and its functionality could potentially break. 
+                    JSON format of the query parameters following the AppsFlyer macros for attribution links. **Note**: The media source (pid) parameter is mandatory.
+                    > ⚠️ 
+                    > The following characters must be encoded if used for API-created links: `;, *, !, @, #, ?, $, ^, :, &, ~, `, =, +, ’, >, <, /`. If you don't encode these characters, the link and its functionality could potentially break. 
                   format: json
                   example: '{"pid": "my_media_source_SMS", "c": "my_campaign" }'
       responses:
