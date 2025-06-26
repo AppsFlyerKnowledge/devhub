@@ -15,11 +15,12 @@ The AppsFlyer ROI360 purchase connector is used to validate and report in-app pu
 - If you use this in-app purchase and subscription revenue measurement solution, you shouldn’t send [in-app purchase events](https://dev.appsflyer.com/hc/docs/in-app-events-ios) with revenue or execute [`validateAndLogInAppPurchase`](https://dev.appsflyer.com/hc/docs/validate-and-log-purchase-ios), as doing so results in duplicate revenue being reported.
 - Before implementing the purchase connector, the ROI360 in-app purchase and subscription revenue measurement needs to be integrated with Google Play and the App Store. [See instructions (steps 1 and 2)](https://support.appsflyer.com/hc/en-us/articles/7459048170769)
 
-## Prerequisites
-
-- StoreKit SDK v1
-- iOS version 9 and higher
-- iOS AppsFlyer SDK **6.8.0** and higher
+## <a id="plugin-build-for"> This Module is Built for
+- AppsFlyer SDK:
+- iOS AppsFlyer SDK **6.17.0** .
+- 6.8.0+: StoreKit 1 support
+- 6.16.2+: StoreKit 1 & 2 support
+- Minimum iOS Version: 12
 
 ** ⚠️Important note: ** See the following table for purchase connector and AppsFlyer SDK version compatability and use the correct version to avoid unexpected behavior.
 
@@ -66,6 +67,62 @@ Follow standard SPM dependency manager instructions.
 > - This repository contains statically linked `PurchaseConnector.xcframework`. If you want to use dynamic .xcframework, integrate it for SPM from ththe following repository:
 https://github.com/AppsFlyerSDK/PurchaseConnector-Dynamic*
 > - PurchaseConnector has a dependency on [AppsFlyerLib framework](https://github.com/AppsFlyerSDK/AppsFlyerFramework), so make sure to integrate it as well for Carthage and SPM.
+
+## <a id="storekit2-overview"> StoreKit 2 Overview (Beta)
+
+StoreKit 2, introduced by Apple, offers a modern, Swift-first API for managing in-app purchases. It simplifies tasks such as fetching product information, handling transactions, and managing subscriptions by leveraging Swift concurrency features like `async/await`. Additionally, StoreKit 2 provides enhanced tools for testing and debugging in-app purchases, improving the overall developer experience.
+
+### <a id="pc-capabilities"> New Purchase Connector Capabilities
+
+With the release of AppsFlyer SDK 6.16.2 and Purchase Connector 6.16.2, the Purchase Connector now supports both StoreKit 1 and StoreKit 2, enabling automatic capture of various transaction types, including:
+
+- Auto-Renewable Subscriptions  
+- Non-Renewing Subscriptions  
+- Non-Consumable Purchases  
+- Consumable Purchases (from iOS 18+ with appropriate configuration)
+
+Due to limitations in earlier iOS versions, consumable purchases require manual logging. This process is detailed later in this document.
+
+To specify which StoreKit version to use, utilize the `setStoreKitVersion:` method with the `AFSDKStoreKitVersion` enum:
+
+```objc
+typedef NS_ENUM(NSUInteger, AFSDKStoreKitVersion) {
+    AFSDKStoreKitVersionSK1 = 0, // StoreKit 1
+    AFSDKStoreKitVersionSK2 = 1, // StoreKit 2
+};
+```
+
+For example, to set StoreKit 2:
+
+```objc
+[[PurchaseConnector shared] setStoreKitVersion:AFSDKStoreKitVersionSK2];
+```
+
+```swift
+PurchaseConnector.shared().setStoreKitVersion(.SK2)
+```
+
+In addition, the Purchase Connector provides wrapper classes to encapsulate StoreKit 2’s `Transaction` and `Product` objects. This is necessary due to Objective-C <> Swift interoperability constraints, allowing for seamless integration with the Purchase Connector.
+
+Example:
+
+```swift
+if #available(iOS 15.0, *) {
+    let afTransaction = AFSDKTransactionSK2(transaction: transaction)
+    // Now you can use afTransaction with Purchase Connector methods
+    let originalTransaction = afTransaction.value.originalID
+    let transactionDescription = afTransaction.value.debugDescription
+
+    let afProduct = AFSDKProductSK2(product: product)
+    // Now you can use afProduct
+    let productId = afProduct.value.id
+    let productDescription = afProduct.value.description
+}
+```
+
+> **Important!**  
+> Before implementing the Purchase Connector with StoreKit 2, ensure that your App Store credentials are updated in the AppsFlyer Revenue settings.  
+> For detailed instructions, refer to our [Help Center article](https://support.appsflyer.com/hc/en-us/articles/27880822483985-Bulletin-Update-App-Store-credendials-for-iOS-ROI360-receipt-validation).
 
 ## Basic integration
 
@@ -117,28 +174,127 @@ PurchaseConnector.shared().autoLogPurchaseRevenue = [.autoRenewableSubscriptions
 
 > **Note**: If `autoLogPurchaseRevenue` hasn't been set, it is disabled by default. The value is an option set, so you can choose what kind of user purchases you want to observe.
 
-### Conform to purchase connector data source and delegate protocols
+###  Logging Consumable Transactions (StoreKit 2 Only)
 
-- To receive purchase validation event callbacks, you should conform to and implement `PurchaseRevenueDelegate`(Swift) or `AppsFlyerPurchaseRevenueDelegate`(Objc-C) protocol.
-- To be able to add your custom parameters to the purchase events that the purchase connector sends, conform to  and implement `PurchaseRevenueDataSource`(Swift) or `AppsFlyerPurchaseRevenueDataSource`(Obj-C) protocol.
+For iOS versions prior to 18, or when the `SKIncludeConsumableInAppPurchaseHistory` flag is not enabled, consumable purchases must be manually logged. This requires a verified transaction to be wrapped in an `AFSDKTransactionSK2` object before invoking the `logConsumableTransaction` API.
+
+#### Key Behavior:
+
+- **Automatic Logging:**
+  - Non-consumable products, non-renewable subscriptions, and auto-renewable subscriptions are automatically captured by the framework and do not require manual logging.
+  - Starting from iOS 18, consumable purchases will also be automatically logged if the `SKIncludeConsumableInAppPurchaseHistory` flag is set to `YES` in the Info.plist file.
+
+- **Manual Logging for Consumables:**
+  - For iOS versions 15 to 18, or when the `SKIncludeConsumableInAppPurchaseHistory` flag is not available, consumable purchases must be manually logged.
+  - This requires a verified transaction to be wrapped in an `AFSDKTransactionSK2` object before calling the `logConsumableTransaction` API.
+
+#### Code Example
 
 ```swift
-extension AppDelegate: PurchaseRevenueDataSource, PurchaseRevenueDelegate {
-    // PurchaseRevenueDelegate method implementation
-    func didReceivePurchaseRevenueValidationInfo(_ validationInfo: [AnyHashable : Any]?, error: Error?) {
-        print("PurchaseRevenueDelegate: \(validationInfo)")
-        print("PurchaseRevenueDelegate: \(error)")
-      // process validationInfo here 
-}
-    // PurchaseRevenueDataSource method implementation
-    func purchaseRevenueAdditionalParameters(for products: Set<SKProduct>, transactions: Set<SKPaymentTransaction>?) -> [AnyHashable : Any]? {
-        // Add additional parameters for SKTransactions here.
-        return ["additionalParameters":["param1":"value1", "param2":"value2"]];
+private func purchaseProductSK2(with productId: String, completion: @escaping (String) -> Void) {
+    if #available(iOS 15.0, *) {
+        Task {
+            do {
+                // Fetch the product
+                let products = try await Product.products(for: [productId])
+                guard let product = products.first else {
+                    completion("Product not found for product ID: \(productId)")
+                    return
+                }
+
+                // Attempt to purchase the product
+                let result = try await product.purchase()
+                switch result {
+                case .success(let verificationResult):
+                    switch verificationResult {
+                    case .verified(let transaction):
+                        // We only log consumable transactions manually.
+                        if transaction.productType == .consumable {
+                            let afTransaction = AFSDKTransactionSK2(transaction: transaction)
+                            PurchaseConnector.shared().logConsumableTransaction(afTransaction)
+                        }
+                        await transaction.finish()
+                        completion("Purchase successful for \(productId), and the transaction is verified!")
+                    case .unverified(let transaction, let verificationError):
+                        completion("Transaction unverified: \(transaction), error: \(verificationError)")
+                    }
+                case .pending:
+                    completion("Purchase is pending.")
+                case .userCancelled:
+                    completion("User cancelled the purchase.")
+                @unknown default:
+                    completion("Unexpected purchase result.")
+                }
+            } catch {
+                completion("Failed to purchase product: \(error.localizedDescription)")
+            }
+        }
+    } else {
+        completion("StoreKit 2 is not supported on this device.")
     }
 }
 ```
-```objectivec
-@interface AppDelegate () <AppsFlyerPurchaseRevenueDelegate, AppsFlyerPurchaseRevenueDataSource>
+
+---
+
+###  Info.plist Flag for iOS 18+
+
+To enable automatic logging of consumable purchases on iOS 18+, add the following entry to your `Info.plist`:
+
+```xml
+<key>SKIncludeConsumableInAppPurchaseHistory</key>
+<true/>
+```
+
+###  Conform to Purchase Connector Data Source and Delegate Protocols
+
+- To receive purchase validation event callbacks, conform to and implement the `PurchaseRevenueDelegate` (Swift) or `AppsFlyerPurchaseRevenueDelegate` (Objective-C) protocol.
+- **StoreKit 1**: To add custom parameters to purchase events sent by the connector, conform to and implement the `PurchaseRevenueDataSource` (Swift) or `AppsFlyerPurchaseRevenueDataSource` (Objective-C) protocol.
+- **StoreKit 2**: To add custom parameters to purchase events sent by the connector, conform to and implement the `PurchaseRevenueDataSourceStoreKit2` (Swift) or `AppsFlyerPurchaseRevenueDataSourceStoreKit2` (Objective-C) protocol.
+
+---
+
+#### Swift
+
+```swift
+extension AppDelegate: PurchaseRevenueDataSource, PurchaseRevenueDelegate, PurchaseRevenueDataSourceStoreKit2 {
+
+    @available(iOS 15.0, *)
+    func purchaseRevenueAdditionalParametersStoreKit2(
+        forProducts products: Set<AFSDKProductSK2>,
+        transactions: Set<AFSDKTransactionSK2>?
+    ) -> [String: Any]? {
+        let additionalParameters: [String: Any] = [
+            "products": products.map { ["product_id": $0.value.id] },
+            "transactions": transactions?.map { ["transaction_id": $0.value.id] } ?? []
+        ]
+        return additionalParameters.isEmpty ? nil : additionalParameters
+    }
+
+    // PurchaseRevenueDelegate method implementation
+    func didReceivePurchaseRevenueValidationInfo(_ validationInfo: [AnyHashable: Any]?, error: Error?) {
+        print("PurchaseRevenueDelegate - Validation Info: \(String(describing: validationInfo))")
+        print("PurchaseRevenueDelegate - Error: \(String(describing: error))")
+        // Process validationInfo here
+    }
+
+    // PurchaseRevenueDataSource method implementation
+    func purchaseRevenueAdditionalParameters(
+        for products: Set<SKProduct>,
+        transactions: Set<SKPaymentTransaction>?
+    ) -> [AnyHashable: Any]? {
+        // Add additional parameters for SKTransactions here
+        return ["additionalParameters": ["param1": "value1", "param2": "value2"]]
+    }
+}
+```
+
+---
+
+#### Objective-C
+
+```objective-c
+@interface AppDelegate () <AppsFlyerPurchaseRevenueDelegate, AppsFlyerPurchaseRevenueDataSource, AppsFlyerPurchaseRevenueDataSourceStoreKit2>
 @end
 
 @implementation AppDelegate
@@ -148,6 +304,29 @@ extension AppDelegate: PurchaseRevenueDataSource, PurchaseRevenueDelegate {
     [[PurchaseConnector shared] startObservingTransactions];
 }
 
+- (NSDictionary<NSString *, id> * _Nullable)purchaseRevenueAdditionalParametersStoreKit2ForProducts:(NSSet<AFSDKProductSK2 *> *)products
+                                                                                      transactions:(NSSet<AFSDKTransactionSK2 *> *)transactions API_AVAILABLE(ios(15.0)) {
+    NSMutableArray *productArray = [NSMutableArray array];
+    for (AFSDKProductSK2 *product in products) {
+        [productArray addObject:@{@"product_id": product.value.productIdentifier}];
+    }
+
+    NSMutableArray *transactionArray = [NSMutableArray array];
+    for (AFSDKTransactionSK2 *transaction in transactions) {
+        [transactionArray addObject:@{@"transaction_id": transaction.value.transactionIdentifier}];
+    }
+
+    NSMutableDictionary *additionalParameters = [NSMutableDictionary dictionary];
+    if (productArray.count > 0) {
+        additionalParameters[@"products"] = productArray;
+    }
+    if (transactionArray.count > 0) {
+        additionalParameters[@"transactions"] = transactionArray;
+    }
+
+    return additionalParameters.count > 0 ? additionalParameters : nil;
+}
+
 - (void)didReceivePurchaseRevenueValidationInfo:(NSDictionary *)validationInfo error:(NSError *)error {
     NSLog(@"Validation info: %@", validationInfo);
     NSLog(@"Error: %@", error);
@@ -155,47 +334,13 @@ extension AppDelegate: PurchaseRevenueDataSource, PurchaseRevenueDelegate {
     // Process validation info
 }
 
-- (NSDictionary *)purchaseRevenueAdditionalParametersForProducts:(NSSet<SKProduct *> *)products transactions:(NSSet<SKPaymentTransaction *> *)transactions {
-    return @{@"key1" : @"param1"};
+- (NSDictionary *)purchaseRevenueAdditionalParametersForProducts:(NSSet<SKProduct *> *)products
+                                                    transactions:(NSSet<SKPaymentTransaction *> *)transactions {
+    return @{@"additionalParameters": @{@"param1": @"value1"}};
 }
 
 @end
 ```
-The `didReceivePurchaseRevenueValidationInfo` function receives validation response for each transaction from AppsFlyer in real-time and processes the results.
-
-#### Validation response parameters
-
-The response contains two parameters:
-
-- `validationInfo`:  Value indicating whether the purchase was successfully validated.
-- `error`: Provides error information if the validation fails. The error object includes::
-    - `status`: Specifies the error code from AppsFlyer or the App Store (e.g., `21003`).
-    - `is_retryable`: A legacy key that always returns `false`.
-    - `store_status`: (**New)** - Provides a specific status code from Apple's validation response (e.g., `4040010`).
-
-> 📘 Note
-> 
-> The `store_status` parameter is available only if your app has been updated to use Apple’s new validation API.
-> 
-> - For **existing apps**, `store_status` becomes available after you provide your App Store Connect In-App Purchase key in the AppsFlyer platform.
-> - For **new apps**, `store_status` is included by default.
-
-The following table specifies the different status codes:
-
-**Note**: The **Description** and **App Store Error code** values are not exposed in the validation error response
-
-| **status** | **store_status** | **App Store Error Code** | **Description** |
-| --- | --- | --- | --- |
-| 21003 | 4000002 | [InvalidAppIdentifierError](https://developer.apple.com/documentation/appstoreserverapi/invalidappidentifiererror) | Invalid request app identifier. |
-| 21003 | 4040003 | [AppNotFoundError](https://developer.apple.com/documentation/appstoreserverapi/appnotfounderror) | App not found. |
-| 21003 | 4040004 | [AppNotFoundRetryableError](https://developer.apple.com/documentation/appstoreserverapi/appnotfoundretryableerror) | App not found. Please try again. |
-| 21003 | 4040010 | [TransactionIdNotFoundError](https://developer.apple.com/documentation/appstoreserverapi/transactionidnotfounderror) | Transaction ID not found. |
-| 21009 | 5000000 | [GeneralInternalError](https://developer.apple.com/documentation/appstoreserverapi/generalinternalerror) | An unknown error occurred. |
-| 21009 | 5000001 | [GeneralInternalRetryableError](https://developer.apple.com/documentation/appstoreserverapi/generalinternalretryableerror) | An unknown error occurred. Please try again. |
-| 21010 | 4040001 | [AccountNotFoundError](https://developer.apple.com/documentation/appstoreserverapi/accountnotfounderror) | Account not found. |
-| 21010 | 4040002 | [AccountNotFoundRetryableError](https://developer.apple.com/documentation/appstoreserverapi/accountnotfoundretryableerror) | Account not found. Please try again. |
-| 10001 | 4000006 | [InvalidTransactionIdError](https://developer.apple.com/documentation/appstoreserverapi/invalidtransactioniderror) | Invalid transaction ID. |
-| 20003 | - | - | Authentication credentials are invalid. |
 
 ### Start observing transactions
 
