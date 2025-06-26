@@ -159,7 +159,7 @@ If you add `android:allowBackup="false"` in the `AndroidManifest.xml`, you mig
 Error:
 	Attribute application@allowBackup value=(false) from AndroidManifest.xml:
 	is also present at [com.appsflyer:af-android-sdk:6.14.0] AndroidManifest.xml: value=(true).
-	Suggestion: add 'tools:replace="android:allowBackup"' to <application> element at AndroidManifest.xml to override.
+	Suggestion: add tools:replace="android:allowBackup" to <application> element at AndroidManifest.xml to override.
 
 ```
 
