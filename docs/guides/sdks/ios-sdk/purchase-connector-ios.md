@@ -15,7 +15,7 @@ The AppsFlyer ROI360 purchase connector is used to validate and report in-app pu
 - If you use this in-app purchase and subscription revenue measurement solution, you shouldn’t send [in-app purchase events](https://dev.appsflyer.com/hc/docs/in-app-events-ios) with revenue or execute [`validateAndLogInAppPurchase`](https://dev.appsflyer.com/hc/docs/validate-and-log-purchase-ios), as doing so results in duplicate revenue being reported.
 - Before implementing the purchase connector, the ROI360 in-app purchase and subscription revenue measurement needs to be integrated with Google Play and the App Store. [See instructions (steps 1 and 2)](https://support.appsflyer.com/hc/en-us/articles/7459048170769)
 
-## <a id="plugin-build-for"> This Module is Built for
+## This Module is Built for
 - AppsFlyer SDK:
 - iOS AppsFlyer SDK **6.17.0** .
 - 6.8.0+: StoreKit 1 support
@@ -68,11 +68,11 @@ Follow standard SPM dependency manager instructions.
 https://github.com/AppsFlyerSDK/PurchaseConnector-Dynamic*
 > - PurchaseConnector has a dependency on [AppsFlyerLib framework](https://github.com/AppsFlyerSDK/AppsFlyerFramework), so make sure to integrate it as well for Carthage and SPM.
 
-## <a id="storekit2-overview"> StoreKit 2 Overview (Beta)
+## StoreKit 2 Overview (Beta)
 
 StoreKit 2, introduced by Apple, offers a modern, Swift-first API for managing in-app purchases. It simplifies tasks such as fetching product information, handling transactions, and managing subscriptions by leveraging Swift concurrency features like `async/await`. Additionally, StoreKit 2 provides enhanced tools for testing and debugging in-app purchases, improving the overall developer experience.
 
-### <a id="pc-capabilities"> New Purchase Connector Capabilities
+### New Purchase Connector Capabilities
 
 With the release of AppsFlyer SDK 6.16.2 and Purchase Connector 6.16.2, the Purchase Connector now supports both StoreKit 1 and StoreKit 2, enabling automatic capture of various transaction types, including:
 
