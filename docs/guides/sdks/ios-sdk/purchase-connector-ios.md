@@ -235,7 +235,6 @@ private func purchaseProductSK2(with productId: String, completion: @escaping (S
 }
 ```
 
----
 
 ###  Info.plist Flag for iOS 18+
 
@@ -252,9 +251,7 @@ To enable automatic logging of consumable purchases on iOS 18+, add the followin
 - **StoreKit 1**: To add custom parameters to purchase events sent by the connector, conform to and implement the `PurchaseRevenueDataSource` (Swift) or `AppsFlyerPurchaseRevenueDataSource` (Objective-C) protocol.
 - **StoreKit 2**: To add custom parameters to purchase events sent by the connector, conform to and implement the `PurchaseRevenueDataSourceStoreKit2` (Swift) or `AppsFlyerPurchaseRevenueDataSourceStoreKit2` (Objective-C) protocol.
 
----
 
-#### Swift
 
 ```swift
 extension AppDelegate: PurchaseRevenueDataSource, PurchaseRevenueDelegate, PurchaseRevenueDataSourceStoreKit2 {
@@ -288,11 +285,6 @@ extension AppDelegate: PurchaseRevenueDataSource, PurchaseRevenueDelegate, Purch
     }
 }
 ```
-
----
-
-#### Objective-C
-
 ```objective-c
 @interface AppDelegate () <AppsFlyerPurchaseRevenueDelegate, AppsFlyerPurchaseRevenueDataSource, AppsFlyerPurchaseRevenueDataSourceStoreKit2>
 @end
