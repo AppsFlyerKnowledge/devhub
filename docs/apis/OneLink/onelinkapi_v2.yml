@@ -10,17 +10,20 @@ paths:
   /shortlinks/{onelink-id}/:
     post:
       tags: 
-      - OneLink REST API
-      summary: Create OneLink attribution link
+      - OneLink REST API v2.0 [Closed Beta]
+      summary: Create OneLink link - OneLink API v2.0 [Closed Beta]
       description: |
-        | Operation   | Documentation Link                                                                 |
-        |-------------|------------------------------------------------------------------------------------|
-        | Create Link | [Create OneLink attribution link](https://dev.appsflyer.com/hc/reference/onelink-v2-create-link) |
-        | Update Link | [Update OneLink attribution link](https://dev.appsflyer.com/hc/reference/update-onelink-v2-link) |
-        | Get Link    | [Get OneLink attribution link](https://dev.appsflyer.com/hc/reference/get-onelink-v2-link)       |
-        | Delete Link | [Delete OneLink attribution link](https://dev.appsflyer.com/hc/reference/delete-onelink-v2-link) |
-        | QR code     | [Get QR code for OneLink attribution link](https://dev.appsflyer.com/hc/reference/get-onelink-v2-link-qr) |
-        | Quota       | [Quota link](https://dev.appsflyer.com/hc/reference/get-onelink-v2-link-quota) |
+        **Beta documentation**
+        This documentation is for the OneLink API V2.0 closed beta only. 
+        Please use the documentation in the following links only: 
+
+        - [Overview](https://dev.appsflyer.com/hc/reference/onelinkapi_v2_overview)
+        - [Create OneLink link](https://dev.appsflyer.com/hc/reference/onelink-v2-create-link)
+        - [Update OneLink link](https://dev.appsflyer.com/hc/reference/update-onelink-v2-link)
+        - [Get OneLink link data](https://dev.appsflyer.com/hc/reference/get-onelink-v2-link)
+        - [Delete OneLink link](https://dev.appsflyer.com/hc/reference/delete-onelink-v2-link)
+        - [Get OneLink QR code](https://dev.appsflyer.com/hc/reference/get-onelink-v2-link-qr)
+        - [Get account quota](https://dev.appsflyer.com/hc/reference/get-onelink-v2-link-quota)
       operationId: onelink-v2-create-link
       parameters:
         - name: onelink-id
@@ -50,7 +53,7 @@ paths:
                   example: my_shortlink_id
                 ttl:
                   type: string
-                  description: 'Time to Live for the full attribution link. Default is 31 days. Value can be specified in days (default), minutes or hours (for example, 10m, 20h, 14d).'
+                  description: 'Time to Live for the full link. Default is 31 days. Value can be specified in days (default), minutes or hours (for example, 10m, 20h, 14d).'
                   example: 1h
                 brand_domain:
                   type: string
@@ -59,7 +62,7 @@ paths:
                 data:
                   type: string
                   description: |
-                   JSON format of the query parameters following the AppsFlyer macros for attribution links. **Note**: The media source (pid) parameter is mandatory.
+                   JSON format of the query parameters following the AppsFlyer macros for links. **Note**: The media source (pid) parameter is mandatory.
                   format: json
                   example: '{"pid": "my_media_source_SMS", "c": "my_campaign" }'
       responses:
@@ -146,17 +149,20 @@ paths:
   /shortlinks/{onelink-id}/{shortlink-id}:
     get:
       tags: 
-      - OneLink REST API
-      summary: Get OneLink attribution link
+      - OneLink REST API v2.0 [Closed Beta]
+      summary: Get OneLink link data - OneLink API v2.0 [Closed Beta]
       description: |
-        | Operation   | Documentation Link                                                                 |
-        |-------------|------------------------------------------------------------------------------------|
-        | Create Link | [Create OneLink attribution link](https://dev.appsflyer.com/hc/reference/onelink-v2-create-link) |
-        | Update Link | [Update OneLink attribution link](https://dev.appsflyer.com/hc/reference/update-onelink-v2-link) |
-        | Get Link    | [Get OneLink attribution link](https://dev.appsflyer.com/hc/reference/get-onelink-v2-link)       |
-        | Delete Link | [Delete OneLink attribution link](https://dev.appsflyer.com/hc/reference/delete-onelink-v2-link) |
-        | QR code     | [Get QR code for OneLink attribution link](https://dev.appsflyer.com/hc/reference/get-onelink-v2-link-qr) |
-        | Quota       | [Quota link](https://dev.appsflyer.com/hc/reference/get-onelink-v2-link-quota) |
+        **Beta documentation**
+        This documentation is for the OneLink API V2.0 closed beta only. 
+        Please use the documentation in the following links only: 
+
+        - [Overview](https://dev.appsflyer.com/hc/reference/onelinkapi_v2_overview)
+        - [Create OneLink link](https://dev.appsflyer.com/hc/reference/onelink-v2-create-link)
+        - [Update OneLink link](https://dev.appsflyer.com/hc/reference/update-onelink-v2-link)
+        - [Get OneLink link data](https://dev.appsflyer.com/hc/reference/get-onelink-v2-link)
+        - [Delete OneLink link](https://dev.appsflyer.com/hc/reference/delete-onelink-v2-link)
+        - [Get OneLink QR code](https://dev.appsflyer.com/hc/reference/get-onelink-v2-link-qr)
+        - [Get account quota](https://dev.appsflyer.com/hc/reference/get-onelink-v2-link-quota)
       operationId: get-onelink-v2-link
       parameters:
         - name: onelink-id
@@ -168,7 +174,7 @@ paths:
           required: true
         - name: shortlink-id
           in: path
-          description: 'The ID of the short OneLink query params. For example, for the following OneLink attribution link: myapp.onelink.me/abc123/qwer9876 , the shortlink-id is qwer9876'
+          description: 'The ID of the short OneLink query params. For example, for the following OneLink link: myapp.onelink.me/abc123/qwer9876 , the shortlink-id is qwer9876'
           schema:
             type: string
             example: a1b2e3h5
@@ -237,17 +243,20 @@ paths:
       deprecated: false
     put:
       tags: 
-      - OneLink REST API
-      summary: Update OneLink attribution link
+      - OneLink REST API v2.0 [Closed Beta]
+      summary: Update OneLink link - OneLink API v2.0 [Closed Beta]
       description: |
-        | Operation   | Documentation Link                                                                 |
-        |-------------|------------------------------------------------------------------------------------|
-        | Create Link | [Create OneLink attribution link](https://dev.appsflyer.com/hc/reference/onelink-v2-create-link) |
-        | Update Link | [Update OneLink attribution link](https://dev.appsflyer.com/hc/reference/update-onelink-v2-link) |
-        | Get Link    | [Get OneLink attribution link](https://dev.appsflyer.com/hc/reference/get-onelink-v2-link)       |
-        | Delete Link | [Delete OneLink attribution link](https://dev.appsflyer.com/hc/reference/delete-onelink-v2-link) |
-        | QR code     | [Get QR code for OneLink attribution link](https://dev.appsflyer.com/hc/reference/get-onelink-v2-link-qr) |
-        | Quota       | [Quota link](https://dev.appsflyer.com/hc/reference/get-onelink-v2-link-quota) |
+        **Beta documentation**
+        This documentation is for the OneLink API V2.0 closed beta only. 
+        Please use the documentation in the following links only: 
+
+        - [Overview](https://dev.appsflyer.com/hc/reference/onelinkapi_v2_overview)
+        - [Create OneLink link](https://dev.appsflyer.com/hc/reference/onelink-v2-create-link)
+        - [Update OneLink link](https://dev.appsflyer.com/hc/reference/update-onelink-v2-link)
+        - [Get OneLink link data](https://dev.appsflyer.com/hc/reference/get-onelink-v2-link)
+        - [Delete OneLink link](https://dev.appsflyer.com/hc/reference/delete-onelink-v2-link)
+        - [Get OneLink QR code](https://dev.appsflyer.com/hc/reference/get-onelink-v2-link-qr)
+        - [Get account quota](https://dev.appsflyer.com/hc/reference/get-onelink-v2-link-quota)
       operationId: update-onelink-v2-link
       parameters:
         - name: onelink-id
@@ -259,7 +268,7 @@ paths:
           required: true
         - name: shortlink-id
           in: path
-          description: 'The ID of the short OneLink query params. For example, for the following OneLink attribution link: myapp.onelink.me/abc123/qwer9876 , the shortlink-id is qwer9876'
+          description: 'The ID of the short OneLink query params. For example, for the following OneLink link: myapp.onelink.me/abc123/qwer9876 , the shortlink-id is qwer9876'
           schema:
             type: string
             example: a1b2e3h5
@@ -277,7 +286,7 @@ paths:
                   example: newbranded.com
                 ttl:
                   type: string
-                  description: 'Time to Live for the full attribution link. value can be specified in days (default), minutes or hours (for example, 10m, 20h, 14d).'
+                  description: 'Time to Live for the full link. value can be specified in days (default), minutes or hours (for example, 10m, 20h, 14d).'
                   example: 22d
                 data:
                   type: string
@@ -355,18 +364,20 @@ paths:
       deprecated: false
     delete:
       tags: 
-      - OneLink REST API
-      summary: Delete OneLink attribution link
+      - OneLink REST API v2.0 [Closed Beta]
+      summary: Delete OneLink link - OneLink API v2.0 [Closed Beta]
       description: |
-        | Operation   | Documentation Link                                                                 |
-        |-------------|------------------------------------------------------------------------------------|
-        | Create Link | [Create OneLink attribution link](https://dev.appsflyer.com/hc/reference/onelink-v2-create-link) |
-        | Update Link | [Update OneLink attribution link](https://dev.appsflyer.com/hc/reference/update-onelink-v2-link) |
-        | Get Link    | [Get OneLink attribution link](https://dev.appsflyer.com/hc/reference/get-onelink-v2-link)       |
-        | Delete Link | [Delete OneLink attribution link](https://dev.appsflyer.com/hc/reference/delete-onelink-v2-link) |
-        | QR code     | [Get QR code for OneLink attribution link](https://dev.appsflyer.com/hc/reference/get-onelink-v2-link-qr) |
-        | Quota       | [Quota link](https://dev.appsflyer.com/hc/reference/get-onelink-v2-link-quota) |
+        **Beta documentation**
+        This documentation is for the OneLink API V2.0 closed beta only. 
+        Please use the documentation in the following links only: 
 
+        - [Overview](https://dev.appsflyer.com/hc/reference/onelinkapi_v2_overview)
+        - [Create OneLink link](https://dev.appsflyer.com/hc/reference/onelink-v2-create-link)
+        - [Update OneLink link](https://dev.appsflyer.com/hc/reference/update-onelink-v2-link)
+        - [Get OneLink link data](https://dev.appsflyer.com/hc/reference/get-onelink-v2-link)
+        - [Delete OneLink link](https://dev.appsflyer.com/hc/reference/delete-onelink-v2-link)
+        - [Get OneLink QR code](https://dev.appsflyer.com/hc/reference/get-onelink-v2-link-qr)
+        - [Get account quota](https://dev.appsflyer.com/hc/reference/get-onelink-v2-link-quota)
       operationId: delete-onelink-v2-link
       parameters:
         - name: onelink-id
@@ -378,7 +389,7 @@ paths:
           required: true
         - name: shortlink-id
           in: path
-          description: 'The ID of the short OneLink query params. For example, for the following OneLink attribution link: myapp.onelink.me/abc123/qwer9876 , the shortlink-id is qwer9876'
+          description: 'The ID of the short OneLink query params. For example, for the following OneLink link: myapp.onelink.me/abc123/qwer9876 , the shortlink-id is qwer9876'
           schema:
             type: string
             example: a1b2e3h5
@@ -441,17 +452,24 @@ paths:
   /shortlinks/{onelink-id}/{shortlink-id}/qr:
     get:
       tags: 
-      - QR code
-      summary: Get QR code for OneLink attribution link
+      - OneLink REST API v2.0 [Closed Beta]
+      summary: Get OneLink QR code - OneLink API v2.0 [Closed Beta]
       description: |
-        | Operation   | Documentation Link                                                                 |
-        |-------------|------------------------------------------------------------------------------------|
-        | Create Link | [Create OneLink attribution link](https://dev.appsflyer.com/hc/reference/onelink-v2-create-link) |
-        | Update Link | [Update OneLink attribution link](https://dev.appsflyer.com/hc/reference/update-onelink-v2-link) |
-        | Get Link    | [Get OneLink attribution link](https://dev.appsflyer.com/hc/reference/get-onelink-v2-link)       |
-        | Delete Link | [Delete OneLink attribution link](https://dev.appsflyer.com/hc/reference/delete-onelink-v2-link) |
-        | QR code     | [Get QR code for OneLink attribution link](https://dev.appsflyer.com/hc/reference/get-onelink-v2-link-qr) |
-        | Quota       | [Quota link](https://dev.appsflyer.com/hc/reference/get-onelink-v2-link-quota) |
+        **Beta documentation**
+        This documentation is for the OneLink API V2.0 closed beta only. 
+        Please use the documentation in the following links only: 
+
+        - [Overview](https://dev.appsflyer.com/hc/reference/onelinkapi_v2_overview)
+        - [Create OneLink link](https://dev.appsflyer.com/hc/reference/onelink-v2-create-link)
+        - [Update OneLink link](https://dev.appsflyer.com/hc/reference/update-onelink-v2-link)
+        - [Get OneLink link data](https://dev.appsflyer.com/hc/reference/get-onelink-v2-link)
+        - [Delete OneLink link](https://dev.appsflyer.com/hc/reference/delete-onelink-v2-link)
+        - [Get OneLink QR code](https://dev.appsflyer.com/hc/reference/get-onelink-v2-link-qr)
+        - [Get account quota](https://dev.appsflyer.com/hc/reference/get-onelink-v2-link-quota)
+
+        > 📘 Note 
+        > 
+        > The QR code’s color and logo are automatically pulled from your OneLink template settings. To customize these design elements or restore the default, go to the OneLink Management page in the AppsFlyer dashboard.
       operationId: get-onelink-v2-link-qr
       parameters:
         - name: onelink-id
@@ -463,7 +481,7 @@ paths:
           required: true
         - name: shortlink-id
           in: path
-          description: 'The ID of the short OneLink query params. For example, for the following OneLink attribution link: myapp.onelink.me/abc123/qwer9876 , the shortlink-id is qwer9876'
+          description: 'The ID of the short OneLink query params. For example, for the following OneLink link: myapp.onelink.me/abc123/qwer9876 , the shortlink-id is qwer9876'
           schema:
             type: string
             example: a1b2e3h5
@@ -507,7 +525,8 @@ paths:
                 properties:
                   qr:
                     type: string
-                    example: 'image/jpeg;base64,/9j/4AAQSkZJRgABAQEAAAAAAAD/4QByRXhp'
+                    description: |
+                      A Base64‐encoded Data URI, ready to plug directly into an `<img src="…">` in your UI, or to decode and save as an image file for printing.
               examples:
                 Result:
                   value:
@@ -560,17 +579,20 @@ paths:
   /shortlinks-quota/{account-id}/:
     get:
       tags: 
-      - Quota
-      summary: Get OneLink v2.0 link quota
+      - OneLink REST API v2.0 [Closed Beta]
+      summary: Get account quota - OneLink API v2.0 [Closed Beta]
       description: |
-        | Operation   | Documentation Link                                                                 |
-        |-------------|------------------------------------------------------------------------------------|
-        | Create Link | [Create OneLink attribution link](https://dev.appsflyer.com/hc/reference/onelink-v2-create-link) |
-        | Update Link | [Update OneLink attribution link](https://dev.appsflyer.com/hc/reference/update-onelink-v2-link) |
-        | Get Link    | [Get OneLink attribution link](https://dev.appsflyer.com/hc/reference/get-onelink-v2-link)       |
-        | Delete Link | [Delete OneLink attribution link](https://dev.appsflyer.com/hc/reference/delete-onelink-v2-link) |
-        | QR code     | [Get QR code for OneLink attribution link](https://dev.appsflyer.com/hc/reference/get-onelink-v2-link-qr) |
-        | Quota       | [Quota link](https://dev.appsflyer.com/hc/reference/get-onelink-v2-link-quota) |
+        **Beta documentation**
+        This documentation is for the OneLink API V2.0 closed beta only. 
+        Please use the documentation in the following links only: 
+
+        - [Overview](https://dev.appsflyer.com/hc/reference/onelinkapi_v2_overview)
+        - [Create OneLink link](https://dev.appsflyer.com/hc/reference/onelink-v2-create-link)
+        - [Update OneLink link](https://dev.appsflyer.com/hc/reference/update-onelink-v2-link)
+        - [Get OneLink link data](https://dev.appsflyer.com/hc/reference/get-onelink-v2-link)
+        - [Delete OneLink link](https://dev.appsflyer.com/hc/reference/delete-onelink-v2-link)
+        - [Get OneLink QR code](https://dev.appsflyer.com/hc/reference/get-onelink-v2-link-qr)
+        - [Get account quota](https://dev.appsflyer.com/hc/reference/get-onelink-v2-link-quota)
       operationId: get-onelink-v2-link-quota
       parameters:
         - name: account-id
