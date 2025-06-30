@@ -19,7 +19,7 @@ order: 3
 
 - Before integrating, you must [Install the SDK](doc:install-ios-sdk).
 - This document contains example implementations. Make sure to replace the following: 
-  - `<YOUR_DEV_KEY>`: The AppsFlyer dev key.
+  - `<YOUR_DEV_KEY>`: [The AppsFlyer dev key](https://support.appsflyer.com/hc/en-us/articles/207032066-Basic-SDK-integration-guide#retrieve-the-dev-key).
   - `<APPLE_APP_ID>`: The Apple App ID (without the `id` prefix).
   - Additional placeholders, where needed.
 

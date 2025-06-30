@@ -20,7 +20,7 @@ order: 3
 
 - You must [install the Android SDK](doc:install-android-sdk). 
 - Ensure that in your app `build.gradle` file, `applicationId`'s value (in the `defaultConfig` block) matches the app's app ID in AppsFlyer.
-- Get the [AppsFlyer dev key](https://support.appsflyer.com/hc/en-us/articles/207032126#integration-2-integrating-the-sdk). It is required to successfully initialize the SDK.
+- Get the [AppsFlyer dev key](https://support.appsflyer.com/hc/en-us/articles/207032066-Basic-SDK-integration-guide#retrieve-the-dev-key). It is required to successfully initialize the SDK.
 
 ## Initializing the Android SDK
 
