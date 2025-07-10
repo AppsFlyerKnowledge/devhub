@@ -67,20 +67,20 @@ paths:
                   example: '{"pid": "my_media_source_SMS", "c": "my_campaign" }'
       responses:
         '200':
-          description: 'The link was created/updated successfully'
+          description: 'The link was created successfully'
           content:
             application/json:
               schema:
                 type: object
                 properties:
-                  url:
+                  shortlink_url:
                     type: string
-                    example: '"https://myapp.onelink.me/abc123/qwer9876"'
+                    example: 'https://myapp.onelink.me/abc123/qwer9876'
               examples:
                 CustomId:
                   summary: Example with custom shortlink_id
                   value:
-                    url: 'https://myapp.onelink.me/A1b3/my_shortlink_id'
+                    shortlink_url: 'https://myapp.onelink.me/A1b3/my_shortlink_id'
         '400':
           description: 'Bad request'
           content:
@@ -294,15 +294,20 @@ paths:
                   format: json
       responses:
         '200':
-          description: 'The link was created/updated successfully'
+          description: 'The link was updated successfully'
           content:
             application/json:
               schema:
-                type: string
-                example: '"https://myapp.onelink.me/abc123/qwer9876"'
+                type: object
+                properties:
+                  shortlink_url:
+                    type: string
+                    example: 'https://myapp.onelink.me/abc123/qwer9876'
               examples:
-                Result:
-                  value: 'https://myapp.onelink.me/abc123/qwer9876'
+                CustomId:
+                  summary: Example with custom shortlink_id
+                  value:
+                    shortlink_url: 'https://myapp.onelink.me/A1b3/my_shortlink_id'
         '400':
           description: 'Bad request'
           content:
