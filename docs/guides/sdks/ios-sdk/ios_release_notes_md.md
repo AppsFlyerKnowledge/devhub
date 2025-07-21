@@ -7,6 +7,14 @@ hidden: false
 order: 1
 ---
 
+## Version 6.17.2
+
+#### Changed Features
+
+- Updated the validateAndLogInAppPurchase API. In `AFPurchaseDetails`, added a mandatory parameter `AFPurchaseType`, and removed the `revenue` and `currency` parameters.
+
+- Improved handling of ASA token requests. When using waitForATTUserAuthorization, the SDK now defers the ASA token request until either the ATT consent decision is received or the timeout expires.
+
 ## Version 6.17.1
 
 #### New Features
