@@ -1863,8 +1863,6 @@ data class AFPurchaseDetails(
     val purchaseType: AFPurchaseType,
     val purchaseToken: String,
     val productId: String,
-    val price: String,
-    val currency: String
 )
 ```
 
@@ -1872,11 +1870,10 @@ data class AFPurchaseDetails(
 
 | Name | Type | Description |
 | --- | --- | --- |
-| `purchaseType` | `AFPurchaseType` | Field to distinguish between one-time purchases and subscriptions. The field can accept either subscription or one-time-purchase. |
+| `purchaseType` | `AFPurchaseType` | Mandatory field to distinguish between one-time purchases and subscriptions. The field can accept either subscription or one-time-purchase. |
 | `purchaseToken` | String | Token that uniquely identifies a purchase for a given item and user pair. Part of the Billing Library's [`Purchase class`](https://developer.android.com/reference/com/android/billingclient/api/Purchase). To retrieve the token call the [`getPurchaseToken` API](https://developer.android.com/reference/com/android/billingclient/api/Purchase#getPurchaseToken()) |
 | `productId` | String | ID of the product item that has been purchased. Also part of the Billing Library's [`Purchase class`](https://developer.android.com/reference/com/android/billingclient/api/Purchase). |
-| `price` | String | The full price of the one-time purchase or the subscription. Also part of the Billing Library's [`Purchase class`](https://developer.android.com/reference/com/android/billingclient/api/Purchase). |
-| `currency` | String | Currency used to make the purchase.  |
+
 
 ### validateAndLogInAppPurchase (LEGACY)
 <span class="annotation-deprecated">Deprecated in v6.4</span>  

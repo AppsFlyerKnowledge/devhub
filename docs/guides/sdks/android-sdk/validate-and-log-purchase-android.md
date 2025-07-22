@@ -32,7 +32,7 @@ The [validateAndLogInAppPurchase](https://dev.appsflyer.com/hc/docs/android-sdk-
 **To implement the method perform the following steps:**
 
 1. Query the Play Store for the [Purchase](https://developer.android.com/reference/com/android/billingclient/api/Purchase) object of the in-app purchase event. 
-2. Initialize an [AFPurchaseDetails](https://dev.appsflyer.com/hc/docs/android-sdk-reference-appsflyerlib#afpurchasedetails) instance and set it with the purchase type, token, product ID, price, and currency details retrieved from the Purchase object. 
+2. Initialize an [AFPurchaseDetails](https://dev.appsflyer.com/hc/docs/android-sdk-reference-appsflyerlib#afpurchasedetails) instance and set it with the purchase type, token, and product ID details retrieved from the Purchase object. 
 3. If you want to add additional details to the purchase in-app event, populate a hash map with key-value pairs. 
 4. Invoke `validateAndLogInAppPurchase` with the following:
    - The `AFPurchaseDetails` object you created in step 2.
@@ -52,9 +52,7 @@ If the validation is successful, an&nbsp;`af_purchase`&nbsp;event is logged with
 AFPurchaseDetails purchaseDetails = new AFPurchaseDetails(
     AFPurchaseType.SUBSCRIPTION, //Purchase type
     "PurchaseToken", // Purchase token
-    "myProductId", // Product ID
-    "202.34", // Price
-    "USD"); // Currency
+    "myProductId") // Product ID
 
 Map<String, String> purchaseAdditionalDetails = new HashMap<>();
 
