@@ -96,6 +96,20 @@ Subscription revenue is able to start recording subscriber life cycle changes fo
     display:none !important;
 
  }
+ .cordova:before {  
+    content: url("https://files.readme.io/5f757d6-apache_cordova-icon.svg");  
+ }
+ .capacitor:before {  
+    content: url("https://files.readme.io/ad0d405-capacitor-icon.svg");  
+ }
+ .reactnative:before {  
+    content: url("https://files.readme.io/3e1288d-reactnative-icon.svg");  
+ }
+ a[href*=http]:not([href*="dev.appsflyer.com"]):not(.landing-page__social):after 
+ {
+    display:none !important;
+
+ }
  
 </style>
 <div class="button-container">
@@ -103,4 +117,5 @@ Subscription revenue is able to start recording subscriber life cycle changes fo
   <a class="button ios" href="https://dev.appsflyer.com/hc/docs/purchase-connector-ios">iOS SDK</a>
   <a class="button unity" href="https://dev.appsflyer.com/hc/docs/purchase-connector-unity">Unity SDK</a>
   <a target="_blank" class="button flutter" href="https://github.com/AppsFlyerSDK/appsflyer-flutter-plugin/blob/feature/add_purchase_connector/doc/PurchaseConnector.md">Flutter</a>
+  <a class="button reactnative" href="https://dev.appsflyer.com/hc/docs/rn_purchaseconnector">React Native SDK</a>
 </div>
