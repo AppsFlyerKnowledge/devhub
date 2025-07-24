@@ -68,7 +68,7 @@ Follow standard SPM dependency manager instructions.
 https://github.com/AppsFlyerSDK/PurchaseConnector-Dynamic*
 > - PurchaseConnector has a dependency on [AppsFlyerLib framework](https://github.com/AppsFlyerSDK/AppsFlyerFramework), so make sure to integrate it as well for Carthage and SPM.
 
-## StoreKit 2 Overview (Beta)
+## StoreKit 2 Overview
 
 StoreKit 2, introduced by Apple, offers a modern, Swift-first API for managing in-app purchases. It simplifies tasks such as fetching product information, handling transactions, and managing subscriptions by leveraging Swift concurrency features like `async/await`. Additionally, StoreKit 2 provides enhanced tools for testing and debugging in-app purchases, improving the overall developer experience.
 
