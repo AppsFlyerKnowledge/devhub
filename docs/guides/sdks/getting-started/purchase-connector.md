@@ -113,9 +113,13 @@ Subscription revenue is able to start recording subscriber life cycle changes fo
  
 </style>
 <div class="button-container">
+<p>
   <a class="button android" href="https://dev.appsflyer.com/hc/docs/purchase-connector-android">Android SDK</a>
   <a class="button ios" href="https://dev.appsflyer.com/hc/docs/purchase-connector-ios">iOS SDK</a>
   <a class="button unity" href="https://dev.appsflyer.com/hc/docs/purchase-connector-unity">Unity SDK</a>
+</p>
+<p>
   <a target="_blank" class="button flutter" href="https://github.com/AppsFlyerSDK/appsflyer-flutter-plugin/blob/feature/add_purchase_connector/doc/PurchaseConnector.md">Flutter</a>
   <a class="button reactnative" href="https://dev.appsflyer.com/hc/docs/rn_purchaseconnector">React Native SDK</a>
+</p>
 </div>
