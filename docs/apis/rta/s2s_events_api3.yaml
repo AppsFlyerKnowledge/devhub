@@ -501,10 +501,12 @@ components:
       properties:
         idfa:
           type: string
-          example: 9876F1SS-2983-3855-27RR-2R626772VFNB
+          pattern: '^[0-9A-F]{8}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{12}$'
+          example: 9876F1AA-2983-3855-27BB-2C626772EFAB
           description: Where available populate with the device IDFA
         idfv:
           type: string
+          pattern: '^[0-9A-F]{8}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{12}$'
           example: 95C9BD22-4A4C-41C8-9548-ED07C5C8C145
           description: Where available populate with the device IDFV
         appsflyer_id:
