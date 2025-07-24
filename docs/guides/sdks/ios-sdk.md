@@ -57,6 +57,7 @@ SDK compatibility
 
 - iOS 9+ (iPhone, iPod, iPad)
 - tvOS 9+ (Apple TV)
+- MacOS 10.13 (High Sierra)
 - Complies with Apple [IPv6 DNS64/NAT64](https://developer.apple.com/library/content/documentation/NetworkingInternetWeb/Conceptual/NetworkingOverview/UnderstandingandPreparingfortheIPv6Transition/UnderstandingandPreparingfortheIPv6Transition.html#//apple_ref/doc/uid/TP40010220-CH213-SW1) networks.
 
 For more information, see [SDK compatibility](https://support.appsflyer.com/hc/en-us/articles/207032126-SDK-integration-overview#sdk-compatibility).
