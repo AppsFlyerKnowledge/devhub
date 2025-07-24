@@ -7,7 +7,7 @@ servers:
 security:
   - ApiKeyAuth: []
 paths:
-  /shortlinks/{onelink-id}/:
+  /shortlinks/{onelink-id}:
     post:
       tags: 
       - OneLink REST API v2.0 [Closed Beta]
@@ -581,7 +581,7 @@ paths:
                   value:
                     error-type: "not_found"
                     message: "The link does exist."
-  /shortlinks-quota/{account-id}/:
+  /shortlinks-quota/{account-id}:
     get:
       tags: 
       - OneLink REST API v2.0 [Closed Beta]
