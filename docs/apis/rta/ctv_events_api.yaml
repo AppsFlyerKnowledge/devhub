@@ -34,7 +34,7 @@ paths:
               properties:
                 timestamp:
                   type: integer
-                  description: Event timestamp in Unix time milliseconds (UTC)
+                  description: Event timestamp in Unix time milliseconds (UTC). If the provided timestamp is in the future or older than 96 hours, the current timestamp will be used instead.
                   format: int64
                   example: 1625576172928
                 request_id:
@@ -137,7 +137,7 @@ paths:
               properties:
                 timestamp:
                   type: integer
-                  description: Event timestamp in Unix time milliseconds (UTC)
+                  description: Event timestamp in Unix time milliseconds (UTC). If the provided timestamp is in the future or older than 96 hours, the current timestamp will be used instead.
                   format: int64
                   example: 1625576172928
                 request_id:
@@ -240,7 +240,7 @@ paths:
               properties:
                 timestamp:
                   type: integer
-                  description: Event timestamp in Unix time milliseconds (UTC)
+                  description: Event timestamp in Unix time milliseconds (UTC). If the provided timestamp is in the future or older than 96 hours, the current timestamp will be used instead.
                   format: int64
                   example: 1625576172928
                 request_id:
