@@ -149,7 +149,9 @@ components:
         advertising_id:
           type: string
           example: 9c9a82fb-d5de-4cd1-90c3-527441c11828
-          description: Where available populate with the device GAID (advertising ID)
+          description: |
+            Where available populate with the device GAID (advertising ID). 
+            Required to send postbacks to self-reporting networks (SRNs). If not provided and Advanced Privacy is not enabled, postbacks may be skipped.
         oaid:
           type: string
           example: 1fe9a970-efbb-29e0-0bdd-f5dbbf751ab5
@@ -176,6 +178,7 @@ components:
             The mobile device's IP address during the event occurrence.
             If sent, the IP address is used to populate geo fields.
             If not sent, AppsFlyer populates the geo fields using the values from the install attribution event. The IP address isn't populated.
+            Required to send event postbacks to Meta Aggregated Event Measurement (AEM).
           example: 192.0.2.1
           pattern: ^(([1-2]{0,1}[0-9]{0,1}[0-9]{1})\.([1-2]{0,1}[0-9]{0,1}[0-9]{1})\.([1-2]{0,1}[0-9]{0,1}[0-9]{1})\.([1-2]{0,1}[0-9]{0,1}[0-9]{1}))$
           maxLength: 16
@@ -508,7 +511,9 @@ components:
           type: string
           pattern: '^[0-9A-F]{8}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{12}$'
           example: 95C9BD22-4A4C-41C8-9548-ED07C5C8C145
-          description: Where available populate with the device IDFV
+          description: |
+            Where available populate with the device IDFV.
+            Required to send event postbacks to Meta Aggregated Event Measurement (AEM).
         appsflyer_id:
           type: string
           pattern: \d{13}-\d{7}
@@ -546,6 +551,7 @@ components:
             The mobile device's IP address during the event occurrence.
             If sent, the IP address is used to populate geo fields.
             If not sent, AppsFlyer populates the geo fields using the values from the install attribution event. The IP address isn't populated.
+            Required to send event postbacks to Meta Aggregated Event Measurement (AEM).
           example: 192.0.2.1
           pattern: ^(([1-2]{0,1}[0-9]{0,1}[0-9]{1})\.([1-2]{0,1}[0-9]{0,1}[0-9]{1})\.([1-2]{0,1}[0-9]{0,1}[0-9]{1})\.([1-2]{0,1}[0-9]{0,1}[0-9]{1}))$
           maxLength: 16
@@ -900,6 +906,7 @@ components:
             The mobile device's IP address during the event occurrence.
             If sent, the IP address is used to populate geo fields.
             If not sent, AppsFlyer populates the geo fields using the values from the install attribution event. The IP address isn't populated.
+            Required to send event postbacks to Meta Aggregated Event Measurement (AEM).
           example: 192.0.2.1
           pattern: ^(([1-2]{0,1}[0-9]{0,1}[0-9]{1})\.([1-2]{0,1}[0-9]{0,1}[0-9]{1})\.([1-2]{0,1}[0-9]{0,1}[0-9]{1})\.([1-2]{0,1}[0-9]{0,1}[0-9]{1}))$
           maxLength: 16
