@@ -1284,11 +1284,16 @@ An object that encapsulates all data related to the purchase provided to the `va
 
 | Name | Type | Description |
 | --- | --- | --- |
+| `purchaseType`* | [AFPurchaseType](#afpurchasetype) |The purchase type enum to distinguish between one-time purchases and subscriptions. The field can accept either subscription or one-time-purchase. |
 | `productId` | String | The product identifier for the purchase.  |
-| `price` | String | The price of the product.  |
-| `currency` | String | The currency used for the billing operation. |
 | `transactionId` | String | A specific identifier for the transaction.  |
 
+#### AFPurchaseType
+
+| Name | Type | Comments |
+| --- | --- | --- |
+| AFSDKPurchaseTypeOneTimePurchase | String |  |
+| AFSDKPurchaseTypeSubscriptionurce | String |  |
 
 ### validateAndLogInAppPurchase (LEGACY)
 (Supported until SDK v.6.14.0)

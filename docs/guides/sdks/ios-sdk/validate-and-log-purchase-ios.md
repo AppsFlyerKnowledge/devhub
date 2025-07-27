@@ -46,40 +46,29 @@ If the validation is successful, an [`af_purchase`](https://dev.appsflyer.com/hc
 ```swift
 func sampleCodeValidateAndLog(){
     let productId = "my-product-id"
-    let price = "1.99"
-    let currency = "USD"
     let transactionId = "12345-transaction-id"
-
     // Create a new instance of AFSDKPurchaseDetails with the required information
-    let purchaseDetails = AFSDKPurchaseDetails(productId: productId, price: price, currency: currency, transactionId: transactionId)
-    
-    let extraEventValues: [String: Any]? = [
-        "firstExtraEventValue": "something",
-        "secondExtraEventValue": "nice",
+    let purchaseDetails = AFSDKPurchaseDetails(
+        productId: productId, 
+        transactionId: transactionId, 
+       purchaseType: .subscription
+    )
+
+    let additionalDetails: [AnyHashable: Any] = [
+        "custom_param_1": "value1"
     ]
-    
-    AppsFlyerLib.shared().validateAndLog(inAppPurchase: purchaseDetails, extraEventValues: extraEventValues) { result in
-        // This block is executed when the logging and validation operation is complete.
-        // Process the 'result' as needed
-        switch result!.status {
-        case .success:
-            print("Purchase validation and logging succeeded.")
-            if let resultData = result?.result {
-                // Process successful result data
-                print("Validation successful data: \(resultData)")
-            }
-        case .failure:
-            print("Purchase was not validated.")
-            if let errorData = result?.errorData {
+
+    AppsFlyerLib.shared().validateAndLog(inAppPurchase: purchaseDetails,
+                                     purchaseAdditionalDetails: additionalDetails) { (response, error) in
+      // This block is executed when the logging and validation operation is complete.                              
+        if let error = error {
                 // Process failure error data
-                print("Validation failed data: \(errorData)")
-            }
-        case .error:
-            print("An error occurred during the validation and logging operation.")
-            if let error = result?.error {
-                // Process NSError
-                print("Error: \(error)")
-            }
+                print("Validation failed: \(error.localizedDescription)")
+            } else if let response = response {
+                // Process successful result data
+                print("Validation succeeded: \(response)")
+            } else {
+                print("No response received.")
         }
     }
 }
