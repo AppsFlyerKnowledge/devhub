@@ -7,6 +7,20 @@ hidden: false
 order: 1
 ---
 
+## Version 6.17.1
+
+#### New Features
+
+- Added Google Play Integrity API as a direct dependency for the SDK. 
+This is used to verify that validity of the device using Google Play's verification service. 
+Apps that are distributed outside of Google Play can exclude this dependency by following the instructions [here]()
+
+
+#### Changed Features
+
+- Updated the validateAndLogInAppPurchase API. In `AFPurchaseDetails`, added a mandatory parameter `AFPurchaseType`, and removed the `revenue` and `currency` parameters.
+
+
 ## Version 6.17.0
 
 #### New Features
