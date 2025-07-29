@@ -18,7 +18,7 @@ The `validateAndLogInAppPurchase` method is part of [the receipt validation flow
 
 The method is currently implemented in two versions.
 
-- [validateAndLogInAppPurchase - BETA](#implement-validateandloginapppurchase-beta) supported from SDK v.6.14.1
+- [validateAndLogInAppPurchase - BETA](#implement-validateandloginapppurchase-beta) supported from SDK v.6.17.1
 - [validateAndLogInAppPurchase - Legacy](#validateandloginapppurchase-legacy) 
 
 ## Implement validateAndLogInAppPurchase (BETA)
