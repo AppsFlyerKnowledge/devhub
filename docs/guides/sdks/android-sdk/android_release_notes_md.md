@@ -7,6 +7,19 @@ hidden: false
 order: 1
 ---
 
+## Version 6.17.1
+
+#### New Features
+
+- Added the Google Play Integrity API as a direct dependency of the SDK to enable device‑integrity verification through Google Play services.
+Note: If your app is distributed outside the Google Play Store, you can safely exclude this dependency by following the instructions [here](https://dev.appsflyer.com/hc/docs/install-android-sdk#google-play-integrity-api).
+
+
+#### Changed Features
+
+- Updated the validateAndLogInAppPurchase API. In `AFPurchaseDetails`, added a mandatory parameter `AFPurchaseType`, and removed the `revenue` and `currency` parameters.
+
+
 ## Version 6.17.0
 
 #### New Features
