@@ -325,6 +325,26 @@ dependencies {
 Once added, the SDK will collect the AppSet ID if it is available on the device.  
 To disable AppSet ID collection, use the [`disableAppSetId()`](doc:android-sdk-reference-appsflyerlib#disableappsetid).
 
+
+## Google Play Integrity API
+
+Starting with **v6.17.1**, the SDK has built-in integration with Google Play Integrity API. 
+This provides device‑integrity verification through Google Play. 
+You can read more about it [here](https://support.google.com/googleplay/android-developer/answer/15299193)
+
+If your app is distributed outside the Google Play Store, you can safely exclude this dependency by adding the following lines to your app's `build.gradle`:
+
+```groovy
+implementation ("com.appsflyer:af-android-sdk:HERE_SDK_VERSION") {
+    exclude group: 'com.google.android.play', module: 'integrity'
+}
+
+// For example:
+// implementation ("com.appsflyer:af-android-sdk:6.17.1") {
+//      exclude group: 'com.google.android.play', module: 'integrity'
+// }
+```
+
 Known issues
 ------------
 
