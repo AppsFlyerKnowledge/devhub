@@ -12,7 +12,7 @@ order: 1
 #### New Features
 
 - Added the Google Play Integrity API as a direct dependency of the SDK to enable device‑integrity verification through Google Play services.
-Note: If your app is distributed outside the Google Play Store, you can safely exclude this dependency by following the instructions [here]()
+Note: If your app is distributed outside the Google Play Store, you can safely exclude this dependency by following the instructions [here](https://dev.appsflyer.com/hc/docs/install-android-sdk#google-play-integrity-api).
 
 
 #### Changed Features
