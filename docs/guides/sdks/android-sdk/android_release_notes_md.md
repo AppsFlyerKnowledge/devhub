@@ -11,9 +11,8 @@ order: 1
 
 #### New Features
 
-- Added Google Play Integrity API as a direct dependency for the SDK. 
-This is used to verify that validity of the device using Google Play's verification service. 
-Apps that are distributed outside of Google Play can exclude this dependency by following the instructions [here]()
+- Added the Google Play Integrity API as a direct dependency of the SDK to enable device‑integrity verification through Google Play services.
+Note: If your app is distributed outside the Google Play Store, you can safely exclude this dependency by following the instructions [here]()
 
 
 #### Changed Features
