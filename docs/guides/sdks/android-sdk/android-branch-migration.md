@@ -16,6 +16,55 @@ This guide explains how to activate the Branch Migration Navigator on Android us
 
 To ensure a smooth handoff of the navigator, your app should collect attribution data from Branch and pass it to the AppsFlyerMigrationHelper during the first session. In addition, in case of direct deep linking (Android App Links or URI scheme) the app should collect the deep linking data and pass it as well.
 
+# Installation
+
+## Prerequisites
+
+- AppsFlyer SDK: 6.16.2+
+- Minimum iOS Version: 12
+
+## Adding the migration helper to your project via Cocoapods
+
+Add to your Podfile and run `pod install`:
+
+```
+// for statically linked dependency
+pod 'AppsFlyerMigrationHelper'
+```
+
+## Adding the connector to your project via Carthage
+
+To integrate the AppsFlyer Apple Migration Helper via Carthage:
+
+1. Go to the `Carthage` folder in the root of the repository. 
+2. Open `AppsFlyerMigrationHelper-dynamic.json`, 
+3. Click raw, 
+4. Copy and paste the URL of the file to your `Cartfile`: 
+
+    ```
+    binary "https://raw.githubusercontent.com/AppsFlyerSDK/appsflyer-apple-migration-helper/main/Carthage/AppsFlyerMigrationHelper-dynamic.json" == BIINARY_VERSION
+    ```
+
+5. Open the project folder in the terminal and use command `carthage update --use-xcframeworks`, 
+6. Drag and drop `AppsFlyerMigrationHelper.xcframework` binary (from Carthage/Build/iOS folder).
+
+More reference on Carthage binary artifacts integration [here](https://github.com/Carthage/Carthage/blob/master/Documentation/Artifacts.md).
+
+## Adding the connector to your project via SPM
+
+To integrate the AppsFlyer Apple Migration Helper via Swift Package Manager (SPM):
+1. In Xcode, go to File > Swift Packages > Add Package Dependency.
+2. Enter the repository URL:
+
+    ```
+    https://github.com/AppsFlyerSDK/appsflyer-apple-migration-helper
+    ```
+
+3. Choose the desired version or branch.
+4. Select your project’s target and click Finish.
+
+
+
 # Code flow concept
 
 Before implementing the flow it is important to understand the rational behind it. Any other implementation is accepted, as long as you follow this rational.
