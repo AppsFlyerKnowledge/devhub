@@ -28,7 +28,7 @@ The [validateAndLogInAppPurchase](https://dev.appsflyer.com/hc/docs/ios-sdk-refe
 **To implement the method, perform the following steps:**
 
 1. Query the App Store for the object of the in-app purchase event. 
-2. Initialize an [AFSDKPurchaseDetails](https://dev.appsflyer.com/hc/docs/ios-sdk-reference-appsflyerlib#afsdkpurchasedetails) instance and set it with the purchase type, token, product ID, price, and currency details retrieved from the Purchase object.
+2. Initialize an [AFSDKPurchaseDetails](https://dev.appsflyer.com/hc/docs/ios-sdk-reference-appsflyerlib#afsdkpurchasedetails) instance and set it with the purchase type, token, and product ID details retrieved from the Purchase object.
 3. If you want to add additional details to the purchase in-app event, populate a dictionary with key-value pairs.
 4. Invoke `validateAndLogInAppPurchase` with the following arguments:
    - The `AFSDKPurchaseDetails` object you created in step 2.
