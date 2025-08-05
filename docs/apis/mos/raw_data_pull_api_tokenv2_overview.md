@@ -118,7 +118,7 @@ The query parameters are identical for all raw data pull APIs
     "12-0": "`additional_fields`",
     "12-1": "array",
     "12-2": "For the list of the additional fields and their description see the [Raw data field dictionary](https://support.appsflyer.com/hc/en-us/articles/208387843-Raw-data-field-dictionary#rawdata-fields-dictionary) table.",
-    "12-3": "`[\"blocked_reason_rule\",\"store_reinstall\",\"impressions\"]`",
+    "12-3": "`[\"store_reinstall\",\"impressions\"]`",
     "13-0": "`from_detect_time`",
     "13-1": "string",
     "13-2": "**Applicable only on Post-attribution installs and in-app events reports** <br> Start date for filtering by detect time.<br>",
