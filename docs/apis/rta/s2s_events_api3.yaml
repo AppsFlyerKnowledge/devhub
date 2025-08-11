@@ -489,11 +489,18 @@ components:
         consent_data:
           $ref: '#/components/schemas/ConsentData'
         app_set_id:
-          type: string
-          format: object
-          pattern: '^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-4[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$'
-          example: { "scope" : 1, "id": "9c5b94b1-35ad-49bb-b118-8e8fc24abf80" }
-
+          type: object
+          properties:
+            scope:
+              type: integer
+              enum: [1, 2]
+              description: Is the app_set_id limited to this app only (1) or shared between other apps of the same developer (2).
+            id:
+              type: string
+              format: uuid
+              pattern: '[0-9a-fA-F] {8}-[0-9a-fA|-F]{43-4[0-9a-fA-F] {3}-[89abAB] [0-9a-fA-F]{33-[0-9a-fA-F]{12}$'
+              example: f47ac10b-58cc-4372-a567-0e02b2c3d479
+              description: Binary value indicating if GDPR applies    
     ErrorResponse:
       type: string
     IosIds:
