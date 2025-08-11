@@ -490,6 +490,7 @@ components:
           $ref: '#/components/schemas/ConsentData'
         app_set_id:
           type: object
+          description: The vendor ID shared by all apps from same vendor. 
           properties:
             scope:
               type: integer
