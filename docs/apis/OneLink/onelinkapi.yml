@@ -11,8 +11,11 @@ paths:
     post:
       tags: 
       - OneLink REST API
-      summary: Create OneLink attribution link
+      summary: Create OneLink attribution link 
       description: |
+        <span style="background-color: #00c2ff; color: #fff; font-size: 12px; font-weight: 400; padding: 4px; border-radius: 8px;">
+          Premium
+        </span>
         # Example:
         Feed Me, a grocery delivery service, 
         wants to send a personalized link via SMS to existing customers to
