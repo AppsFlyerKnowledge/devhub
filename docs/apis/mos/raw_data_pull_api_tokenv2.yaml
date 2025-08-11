@@ -550,7 +550,7 @@ paths:
       summary: Post-attribution installs
       description: | 
         Reports include installs attributed to a media source but later found to be fraudulent.
-        Data freshness: Real-time
+        Data freshness: Daily
       parameters:
         - $ref: '#/components/parameters/AppId' 
         - $ref: '#/components/parameters/FromDate'
