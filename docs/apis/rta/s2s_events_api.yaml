@@ -474,7 +474,7 @@ components:
           $ref: '#/components/schemas/ConsentData'
         app_set_id:
           type: object
-          description: The vendor ID shared by all apps from same vendor. 
+          description: The vendor ID shared by all apps from same vendor. For more information, see [Add the app set ID SDK to your app](https://developer.android.com/identity/app-set-id#add-sdk).
           properties:
             scope:
               type: integer
