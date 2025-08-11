@@ -13,9 +13,10 @@ paths:
       - OneLink REST API
       summary: Create OneLink attribution link 
       description: |
-        <span style="background-color: #00c2ff; color: #fff; font-size: 12px; font-weight: 400; padding: 4px; border-radius: 8px;">
+        <span style="background-color: #6e00ff; color: #fff; font-size: 12px; font-weight: 400; padding: 4px; border-radius: 8px;">
           Premium
         </span>
+        
         # Example:
         Feed Me, a grocery delivery service, 
         wants to send a personalized link via SMS to existing customers to
@@ -144,6 +145,10 @@ paths:
                   value: Rate limit exceeded
       deprecated: false
     get:
+      description: |
+        <span style="background-color: #6e00ff; color: #fff; font-size: 12px; font-weight: 400; padding: 4px; border-radius: 8px;">
+          Premium
+        </span>
       tags: 
       - OneLink REST API
       summary: Get OneLink attribution link
@@ -208,6 +213,10 @@ paths:
                   value: Not Found
       deprecated: false
     put:
+      description: |
+        <span style="background-color: #6e00ff; color: #fff; font-size: 12px; font-weight: 400; padding: 4px; border-radius: 8px;">
+          Premium
+        </span>
       tags: 
       - OneLink REST API
       summary: Update OneLink attribution link
@@ -304,6 +313,11 @@ paths:
                   value: Rate limit exceeded
       deprecated: false
     delete:
+    put:
+      description: |
+        <span style="background-color: #6e00ff; color: #fff; font-size: 12px; font-weight: 400; padding: 4px; border-radius: 8px;">
+          Premium
+        </span>
       tags: 
       - OneLink REST API
       summary: Delete OneLink attribution link
