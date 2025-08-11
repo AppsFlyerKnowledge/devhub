@@ -13,6 +13,9 @@ paths:
       - OneLink REST API v2.0 [Closed Beta]
       summary: Create OneLink link - OneLink API v2.0 [Closed Beta]
       description: |
+        <span style="background-color: #00c2ff; color: #fff; font-size: 12px; font-weight: 400; padding: 4px; border-radius: 8px;">
+         Premium
+        </span>
         **Beta documentation**
         This documentation is for the OneLink API V2.0 closed beta only. 
         Please use the documentation in the following links only: 
