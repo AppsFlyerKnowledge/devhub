@@ -1,0 +1,59 @@
+AppsFlyer Customer User ID (CUID) is a powerful feature that allows you to associate your internal user identifier with attribution and event data sent from the SDK or by server-to-server (S2S) requests. This is especially valuable for:
+
+- Connecting AppsFlyer data with your own user databases.
+- Enabling deterministic matching across platforms and sessions.
+- Supporting deep analysis, re-engagement, and LTV modeling.
+- Unlocking advanced cross-platform analytics and deduplication.
+
+To properly use the CUID feature, the value must be set **before the SDK sends any event to AppsFlyer**. Therefore, retrieving or generating the CUID at the right time in the app lifecycle is crucial.
+
+Below is a platform-by-platform guide for retrieving and setting the CUID across all supported SDKs. Each link below leads to the dedicated section in the respective documentation:
+
+## CUID Integration Guides by Platform
+
+- [Android](https://dev.appsflyer.com/hc/docs/integrate-android-sdk#set-the-customer-user-id)
+- [iOS](https://dev.appsflyer.com/hc/docs/integrate-ios-sdk#setting-the-customer-user-id)
+
+### Steam
+
+- [Unity Steam](https://dev.appsflyer.com/hc/docs/unity-steam#setcustomeruserid)
+- [Unreal Steam](https://dev.appsflyer.com/hc/docs/unreal-steam#setcustomeruserid)
+- [Steam C++](https://dev.appsflyer.com/hc/docs/steam-vanilla#setcustomeruserid)
+
+### Epic
+
+- [Unity Epic](https://dev.appsflyer.com/hc/docs/unity-epic#setcustomeruserid)
+- [Unreal Epic](https://dev.appsflyer.com/hc/docs/unreal-epic#setcustomeruserid)
+- [Epic C++](https://dev.appsflyer.com/hc/docs/epic-vanilla#setcustomeruserid)
+
+### Meta Quest (Oculus)
+
+- [Meta Quest 2 Unity](https://dev.appsflyer.com/hc/docs/meta-quest2-unity#setcustomeruserid)
+- [Meta Quest 2 Unreal](https://dev.appsflyer.com/hc/docs/meta-quest2-unreal#setcustomeruserid)
+
+### Native
+
+- [Native PC Unity](https://dev.appsflyer.com/hc/docs/unity-nativepc#setcustomeruserid)
+- [Native PC Unreal](https://dev.appsflyer.com/hc/docs/unreal-nativepc#setcustomeruserid)
+- [Native PC C++](https://dev.appsflyer.com/hc/docs/nativepc-vanilla#setcustomeruserid)
+
+### CTV
+
+- [Roku (BrightScript)](https://dev.appsflyer.com/hc/docs/roku-brighscript#setcustomeruserid)
+- [LG Webos](https://github.com/AppsFlyerSDK/appsflyer-html5-ctv-sdk/blob/main/docs/api.md#setCustomerUserId)
+- [Samsung Tizen](https://github.com/AppsFlyerSDK/appsflyer-html5-ctv-sdk/blob/main/docs/api.md#setCustomerUserId)
+
+### Mobile Plugins
+
+- [Unreal mobile plugin](https://github.com/AppsFlyerSDK/appsflyer-unreal-plugin/blob/master/docs/API.md#set-custom-user-id)
+- [Unity Plugin](https://dev.appsflyer.com/hc/docs/api#setcustomeruserid)
+
+### Server to Server (S2S)
+
+- [PC/Console/CTV Events](https://dev.appsflyer.com/hc/reference/pc-console-ctv-api-overview)
+- [Web](https://dev.appsflyer.com/hc/reference/web-s2s-api-setcuid-post)
+- [Mobile](https://dev.appsflyer.com/hc/reference/s2s-events-api3-post)
+
+### Additional
+
+- [Google Play Games on PC - identical to Android](https://dev.appsflyer.com/hc/docs/integrate-android-sdk#set-the-customer-user-id)
