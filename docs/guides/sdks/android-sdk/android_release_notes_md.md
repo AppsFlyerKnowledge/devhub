@@ -7,6 +7,21 @@ hidden: false
 order: 1
 ---
 
+
+## Version 6.17.3
+
+#### Technical Update
+
+- Stability and performance improvements. This update addresses several ANR issues and memory consumption issues. 
+
+
+## Version 6.17.2
+
+#### Technical Update
+
+- Updated the targetSDKVersion of the SDK to 35
+
+
 ## Version 6.17.1
 
 #### New Features
