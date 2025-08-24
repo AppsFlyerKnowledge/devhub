@@ -7,6 +7,12 @@ hidden: false
 order: 1
 ---
 
+## Version 6.17.3
+
+#### Changed Features
+
+- Updated the logic of fetching data from Google's ICM library to improve accuracy.
+
 ## Version 6.17.2
 
 #### Changed Features
