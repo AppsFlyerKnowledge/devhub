@@ -48,7 +48,7 @@ paths:
                   maxLength: 46
                   minLength: 1
                   type: string
-                  description: The device IP address - IPv4 or IPv6
+                  description: The device IP address - IPv4 only.
                   example: 35.244.183.10
                 user_agent:
                   maxLength: 256
@@ -150,7 +150,7 @@ paths:
                   maxLength: 46
                   minLength: 1
                   type: string
-                  description: The device IP Address - IPv4 or IPv6
+                  description: The device IP Address - IPv4 only.
                   example: 35.244.183.10
                 user_agent:
                   maxLength: 256
@@ -253,7 +253,7 @@ paths:
                   maxLength: 46
                   minLength: 1
                   type: string
-                  description: The device IP address - IPv4 or IPv6
+                  description: The device IP address - IPv4 only.
                   example: 35.244.183.10
                 user_agent:
                   maxLength: 256

@@ -602,8 +602,7 @@ components:
       maxLength: 256
       description: |
         The device’s IP the agent sent in its request to the partner’s server.
-        [IPv6 or IPv4]. For, IPv6,values must be the short version (according to RFC5952) and URL Encoded
-        example: "14.89.104.36" 
+        IPv4 only. 
     AfUserAgent:
       type: string
       maxLength: 256 #TODO - validate this value
