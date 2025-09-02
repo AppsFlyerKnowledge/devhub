@@ -32,7 +32,7 @@ Using the purchase connector v2.0.0 with an older SDK version will cause the ser
 
 ## Adding the connector to your project
 
-1. Add the following to your build.gradle file, where `play_billing_version`  is 5.x.x or 6.x.x:
+1. Add the following to your build.gradle file, where `play_billing_version`  is 5.x.x, 6.x.x, or 7.x.x:
 
 ```groovy
 implementation 'com.appsflyer:purchase-connector:2.0.1'
