@@ -11,7 +11,7 @@ order: 1
 
 #### Bug Fixes
 
-- Fixed an issue introduced in v6.17.3 that could cause a crash when the SDK attempts to send ICM data to AppsFlyer.
+- Fixed an issue introduced in v6.17.3 that could cause a crash when the SDK attempts to send Google's ICM data to AppsFlyer.
 
 ## Version 6.17.4
 
