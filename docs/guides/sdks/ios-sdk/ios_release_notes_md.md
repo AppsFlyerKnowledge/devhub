@@ -7,6 +7,18 @@ hidden: false
 order: 1
 ---
 
+## Version 6.17.5
+
+#### Bug Fixes
+
+- Fixed an issue introduced in v6.17.3 that could cause a crash when the SDK attempts to send ICM data to AppsFlyer.
+
+## Version 6.17.4
+
+#### Bug Fixes
+
+- Fixed an issue where in rare cases the app would crash when the SDK is initialized. 
+
 ## Version 6.17.3
 
 #### Changed Features
