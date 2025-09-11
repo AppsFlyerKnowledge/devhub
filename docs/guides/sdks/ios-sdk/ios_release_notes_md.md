@@ -60,7 +60,7 @@ order: 1
 
 #### Technical Update
 
-- Technical fix for method signature not supported in Objective C, required to make this release available in plugins.
+- Technical update to ensure Objective-C compatibility, required for plugin compilation with this version.
 
 ## Version 6.16.1
 
