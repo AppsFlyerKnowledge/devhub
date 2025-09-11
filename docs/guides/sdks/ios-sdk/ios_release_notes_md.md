@@ -56,6 +56,12 @@ order: 1
 - Stability and performance improvements
 
 
+## Version 6.16.2
+
+#### Technical Update
+
+- Technical fix for method signature not supported in Objective C, required to make this release available in plugins.
+
 ## Version 6.16.1
 
 #### Changed Features
