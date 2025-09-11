@@ -7,23 +7,29 @@ hidden: false
 order: 1
 ---
 
-## Version 6.17.5
+## Version 6.17.5 (Deprecated)
 
 #### Bug Fixes
 
 - Fixed an issue introduced in v6.17.3 that could cause a crash when the SDK attempts to send Google's ICM data to AppsFlyer.
 
-## Version 6.17.4
+#### Note: This version is deprecated and should not be used.
+
+## Version 6.17.4 (Deprecated)
 
 #### Bug Fixes
 
 - Fixed an issue where in rare cases the app would crash when the SDK is initialized. 
 
-## Version 6.17.3
+#### Note: This version is deprecated and should not be used.
+
+## Version 6.17.3 (Deprecated)
 
 #### Changed Features
 
 - Updated the logic of fetching data from Google's ICM library to improve accuracy.
+
+#### Note: This version is deprecated and should not be used.
 
 ## Version 6.17.2
 
