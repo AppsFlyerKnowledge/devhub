@@ -19,6 +19,63 @@ Ensure your project meets the following minimum versions for compatibility with 
     * If you are using [validateAndLogInAppPurchase (Legacy)](https://dev.appsflyer.com/hc/docs/validate-and-log-purchase-android#validateandloginapppurchase-legacy) please migrate to the [newer API](https://dev.appsflyer.com/hc/docs/validate-and-log-purchase-android#implement-validateandloginapppurchase-beta) as currently the legacy API is not compatible with the module. 
 
 
+## Release Notes
+All notable changes to the AF Security SDK will be documented in this file.
+
+### [1.3.4] - 2025-08-25
+
+#### Added
+- Support for 16 KB page size systems
+
+### [1.3.3] - 2025-06-19
+
+#### Fixed
+- Improved input validation to strengthen security checks and prevent null pointer exceptions
+
+### [1.3.2] - 2025-06-16
+
+#### Added
+- Enhanced security verification with improved certificate hash validation
+
+#### Changed
+- Improved event handling and security validation process
+
+
+### [1.3.1] - 2025-05-21
+
+#### Fixed
+- Resolved a stability issue in the SDK's internal data handling to improve reliability in high-concurrency scenarios.
+
+### [1.3.0] - 2025-04-30
+
+#### Added
+- Enhanced runtime protection against unauthorized access and tampering attempts.
+- Implemented advanced security checks to strengthen application integrity verification.
+- Introduced new memory protection mechanisms to safeguard sensitive operations.
+
+#### Improved
+- Optimized performance of security checks to minimize impact on application responsiveness.
+- Enhanced detection capabilities for identifying compromised environments.
+- Refined security verification process to handle edge cases more effectively.
+
+- Resolved a stability issue related to internal integrity checks to improve reliability in sensitive environments.
+
+
+### [1.2.1] - 2025-04-07
+
+#### Fixed
+
+- Resolved a stability issue related to internal integrity checks to improve reliability in sensitive environments.
+
+### [1.2.0] - 2025-03-21
+
+#### Added
+
+- Introduced a flexible code injection mechanism to support advanced deployment scenarios.
+- Implemented new runtime defenses to enhance protection against dynamic instrumentation tools.
+- Added early-stage integrity validation to detect and respond to compromised environments.
+- Optimized system-level interactions by transitioning select API calls to lower-level mechanisms for improved stealth and performance.
+
 ## Before You Begin
 
  1. Please send us all the certificate hashes (SHA-256) of all the certificates with which you sign your app. <br>This includes the debug and release certificate hashes. The certificate hashes are needed to pre-build the version of the security module that your app will use.</br>
