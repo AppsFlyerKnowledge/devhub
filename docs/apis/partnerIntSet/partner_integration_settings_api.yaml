@@ -125,6 +125,8 @@ paths:
       summary: Copy partner integration settings
       description: |
         Copy the integration settings from one app to another. Copying the parameters can be done only for apps on the same platform. To retrieve the partner's unique parameters needed for the integration, use the [GET request](https://dev.appsflyer.com/hc/reference/get_v1-partner-params-pid-platform). 
+        > 📘 Note
+        > Only parameters of event names with the `af_`` prefix can be copied.  
       requestBody:
         description: 'Use these examples as a template for your request body:'
         content:
