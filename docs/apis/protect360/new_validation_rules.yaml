@@ -1,0 +1,621 @@
+openapi: 3.0.3
+info:
+  title: Validation Rules S2S API (Draft)
+  version: 1.0.0
+  description: |
+    Server-to-Server API for managing validation rules: create, list, retrieve, update, delete, and audit logs.
+    This is a draft specification and subject to change.
+servers:
+  - url: https://hq1.appsflyer.com/api/validation-rules/v1.0/
+    description: Validation Rules API v1.0
+security:
+  - bearerAuth: []
+paths:
+  /rules:
+    post:
+      tags:
+        - Validation rules
+      summary: Create new rule
+      operationId: createRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RuleCreateRequest'
+            examples:
+              CreateBlockBySiteId:
+                summary: Block installs for specific site IDs
+                value:
+                  rule_name: "Block bad sites"
+                  action: "block"
+                  enable: true
+                  filters:
+                    media_source: "network_a"
+                    event_type: "install"
+                    app_ids: ["com.example.app1", "id1234567890"]
+                  block_dimension: "site_id"
+                  block_values: ["site_a", "site_b"]
+                  block_condition: "in"
+      responses:
+        '201':
+          description: Rule created
+          headers:
+            Location:
+              description: Absolute URL of the created rule resource
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RuleCreateResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '409':
+          description: Conflict (rule_name must be unique)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '422':
+          description: Unprocessable Entity (validation error)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '503':
+          $ref: '#/components/responses/GatewayTimeout'
+        '504':
+          $ref: '#/components/responses/ServiceUnavailable'
+    get:
+      tags:
+        - Validation rules
+      summary: List rules (lean)
+      operationId: listRules
+      responses:
+        '200':
+          description: Rules list (lean)
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RuleListItem'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '503':
+          $ref: '#/components/responses/GatewayTimeout'
+        '504':
+          $ref: '#/components/responses/ServiceUnavailable'
+  /rules/{rule_id}:
+    get:
+      tags:
+        - Validation rules
+      summary: Get rule
+      operationId: getRule
+      parameters:
+        - name: rule_id
+          in: path
+          required: true
+          description: The UUID of the rule
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Rule
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Rule'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '503':
+          $ref: '#/components/responses/GatewayTimeout'
+        '504':
+          $ref: '#/components/responses/ServiceUnavailable'
+    put:
+      tags:
+        - Validation rules
+      summary: Update a rule
+      description: Full update only. PATCH is not supported.
+      operationId: updateRule
+      parameters:
+        - name: rule_id
+          in: path
+          required: true
+          description: The UUID of the rule
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RuleUpdateRequest'
+      responses:
+        '200':
+          description: Updated rule
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Rule'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '409':
+          description: Conflict (rule_name must be unique)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '422':
+          description: Unprocessable Entity (validation error)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '503':
+          $ref: '#/components/responses/GatewayTimeout'
+        '504':
+          $ref: '#/components/responses/ServiceUnavailable'
+    delete:
+      tags:
+        - Validation rules
+      summary: Delete rule
+      operationId: deleteRule
+      parameters:
+        - name: rule_id
+          in: path
+          required: true
+          description: The UUID of the rule
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '204':
+          description: No Content
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '503':
+          $ref: '#/components/responses/GatewayTimeout'
+        '504':
+          $ref: '#/components/responses/ServiceUnavailable'
+  /rules/{rule_id}/status:
+    put:
+      tags:
+        - Validation rules
+      summary: Update rule
+      operationId: updateRuleStatus
+      parameters:
+        - name: rule_id
+          in: path
+          required: true
+          description: The UUID of the rule
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                enable:
+                  type: boolean
+                  description: true to enable, false to disable the rule
+              required:
+                - enable
+              additionalProperties: false
+      responses:
+        '200':
+          description: Updated rule with new enable state
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Rule'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '503':
+          $ref: '#/components/responses/GatewayTimeout'
+        '504':
+          $ref: '#/components/responses/ServiceUnavailable'
+  /rules/{rule_id}/audits:
+    get:
+      tags:
+        - Audits
+      summary: List audits for rule (lean)
+      operationId: listRuleAudits
+      parameters:
+        - name: rule_id
+          in: path
+          required: true
+          description: The UUID of the rule
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Audit events for the specific rule (lean)
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AuditListItem'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '503':
+          $ref: '#/components/responses/GatewayTimeout'
+        '504':
+          $ref: '#/components/responses/ServiceUnavailable'
+  /rules/audits:
+    get:
+      tags:
+        - Audits
+      summary: List audits across all rules (lean)
+      operationId: listAudits
+      responses:
+        '200':
+          description: Audit events across rules (lean)
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AuditListItem'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '503':
+          $ref: '#/components/responses/GatewayTimeout'
+        '504':
+          $ref: '#/components/responses/ServiceUnavailable'
+components:
+  responses:
+    GatewayTimeout:
+      description: Gateway Timeout. ELB (Amazon Load-balancer) service unavailable.
+      content: {}
+    ServiceUnavailable:
+      description: Service Unavailable. ELB (Amazon Load-balancer) service unavailable.
+      content: {}
+  schemas:
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+        - message
+      example:
+        message: "Some error message"
+    EventType:
+      type: string
+      description: Event type filter
+      enum: [install, inapps, reeng]
+    BlockDimension:
+      type: string
+      description: Dimension to apply the block on
+      enum: [site_id, campaign_id, adset_id, ad_id, channel, geo, campaign, lookback_days, lookback_hours, event_name]
+    BlockCondition:
+      type: string
+      enum: [in, not_in]
+    RuleListItem:
+      type: object
+      properties:
+        rule_id:
+          type: string
+          format: uuid
+        rule_name:
+          type: string
+        version:
+          type: integer
+      required:
+        - rule_id
+        - rule_name
+        - version
+      additionalProperties: false
+    Rule:
+      type: object
+      properties:
+        rule_id:
+          type: string
+          format: uuid
+          readOnly: true
+        rule_name:
+          type: string
+          description: Unique rule name
+        action:
+          type: string
+          enum: [block, drop, tag]
+        enable:
+          type: boolean
+          description: true if the rule is enabled
+          default: true
+        filters:
+          type: object
+          properties:
+            media_source:
+              type: string
+              description: Optional media source filter
+            event_type:
+              $ref: '#/components/schemas/EventType'
+            app_ids:
+              type: array
+              items:
+                type: string
+          required:
+            - app_ids
+          additionalProperties: false
+        block_dimension:
+          $ref: '#/components/schemas/BlockDimension'
+        block_values:
+          type: array
+          items:
+            type: string
+        block_condition:
+          $ref: '#/components/schemas/BlockCondition'
+        version:
+          type: integer
+          readOnly: true
+      required:
+        - rule_id
+        - rule_name
+        - action
+        - enable
+        - filters
+        - block_dimension
+        - block_values
+        - block_condition
+        - version
+      additionalProperties: false
+    RuleCreateRequest:
+      type: object
+      properties:
+        rule_name:
+          type: string
+          description: Unique rule name
+        action:
+          type: string
+          enum: [block, drop, tag]
+        enable:
+          type: boolean
+          description: true if the rule is enabled
+          default: true
+        filters:
+          type: object
+          properties:
+            media_source:
+              type: string
+              description: Optional media source filter
+            event_type:
+              $ref: '#/components/schemas/EventType'
+            app_ids:
+              type: array
+              items:
+                type: string
+          required:
+            - app_ids
+          additionalProperties: false
+        block_dimension:
+          $ref: '#/components/schemas/BlockDimension'
+        block_values:
+          type: array
+          items:
+            type: string
+        block_condition:
+          $ref: '#/components/schemas/BlockCondition'
+      required:
+        - rule_name
+        - action
+        - filters
+        - block_dimension
+        - block_values
+        - block_condition
+      additionalProperties: false
+    RuleUpdateRequest:
+      allOf:
+        - $ref: '#/components/schemas/RuleCreateRequest'
+    RuleCreateResponse:
+      type: object
+      properties:
+        rule_id:
+          type: string
+          format: uuid
+        version:
+          type: integer
+      required:
+        - rule_id
+        - version
+      additionalProperties: false
+    AuditListItem:
+      type: object
+      properties:
+        audit_id:
+          type: string
+          format: uuid
+        rule_id:
+          type: string
+          format: uuid
+        rule_name:
+          type: string
+      required:
+        - audit_id
+        - rule_id
+        - rule_name
+      additionalProperties: false
+    Audit:
+      type: object
+      properties:
+        audit_id:
+          type: string
+          format: uuid
+        rule_id:
+          type: string
+          format: uuid
+        rule_name:
+          type: string
+          description: Rule name at the time of the change
+        version:
+          type: integer
+        changed_at:
+          type: string
+          format: date-time
+        changed_by:
+          type: string
+        change_type:
+          type: string
+          enum: [created, updated, deleted]
+        before:
+          type: object
+          description: Optional full snapshot of the rule before the change
+          nullable: true
+        after:
+          type: object
+          description: Optional full snapshot of the rule after the change
+          nullable: true
+        changes:
+          type: object
+          description: Optional object describing only the changed fields
+          nullable: true
+      required:
+        - audit_id
+        - rule_id
+        - version
+        - changed_at
+        - change_type
+      additionalProperties: false
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Token required for authorization. Please refer to https://support.appsflyer.com/hc/en-us/articles/360004562377 for instructions on how to obtain the token.
