@@ -1,0 +1,224 @@
+openapi: 3.0.1
+info:
+  title: BetterBid REST API
+  version: "1.0"
+servers:
+  - url: https://better-bid.appsflyer.com/v1.0
+components:
+  securitySchemes:
+    AfHmac:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: >
+        Use the scheme: `AF-HMAC-SHA256 <hex_signature>`.
+        The signature is HMAC-SHA256 over the **canonical JSON body** using your S2S token as the key.
+  responses:
+    BadRequest:
+      description: Bad Request. The request is not valid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            Invalid_app_ids:
+              value:
+                code: "bad_request"
+                message: "Invalid app_ids"
+    Unauthorized:
+      description: Missing or invalid signature.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            Unauthorized:
+              value:
+                code: "unauthorized"
+                message: "Signature verification failed"
+    Forbidden:
+      description: Authenticated but not allowed for this media_source/app_ids.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            Forbidden:
+              value:  
+                code: "forbidden"
+                message: "Not allowed for app_ids"
+    TooManyRequests:
+      description: Rate limit exceeded.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            Rate_limited:
+              value:  
+                code: "rate_limited"
+                message: "Too many requests"
+    ServiceUnavailable:
+      description: 503 Service Unavailable.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            Service_unavailable:
+              value:  
+                code: "service_unavailable"
+                message: "Upstream temporarily unavailable"
+    GatewayTimeout:
+      description: 504 Gateway Timeout.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            Gateway_timeout:
+              value:
+                code: "gateway_timeout"
+                message: "Upstream timed out"
+  schemas:
+    DeviceIdObject:
+      title: device id
+      type: object
+      required: [type, value]
+      properties:
+        type:
+          type: string
+          description: Type of device advertising identifier.
+          enum: [idfa, gaid]
+          example: idfa
+        value:
+          type: string
+          description: >
+            The identifier value. For IDFA, use the standard 36-character UUID format.
+          example: "6D92078A-8246-4BA4-AE5B-76104861E7DC"
+    CompetitorSignal:
+      type: object
+      properties:
+        clicks_count:
+          type: integer
+          example: 5
+        impressions_count:
+          type: integer
+          example: 10
+    Response:
+      title: competitions signals response
+      type: object
+      required: [signals_per_app_id]
+      properties:
+        signals_per_app_id:
+          type: object
+          additionalProperties:
+            type: object
+            properties:
+              is_last_touch:
+                type: boolean
+                description: Indicates if **the requested media_source** did the last touch for this app_id/device_id.
+                example: true
+              competitors:
+                type: array
+                description: >
+                  Aggregated competitor activity for this app_id/device_id.
+                  Each item describes a competing media source (excluding the requested media_source).
+                items:
+                  $ref: '#/components/schemas/CompetitorSignal'
+                minItems: 0
+                example:
+                  - { clicks_count: 5, impressions_count: 10 }
+    Error:
+      type: object
+      required: [code, message]
+      properties:
+        code: { type: string }
+        message: { type: string }
+
+paths:
+  /competitions/{media_source}/query:
+    x-hidden: true
+    post:
+      tags: [Competition Signals]
+      summary: Query competition signals
+      operationId: queryCompetitionSignals
+      security:
+        - AfHmac: []
+      parameters:
+        - name: media_source
+          in: path
+          required: true
+          schema: { type: string }
+          description: Media source name making the query.
+          example: "my_media_source"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              title: Competitions signals request
+              type: object
+              required:
+                - device_id
+                - app_ids
+                - request_id
+              properties:
+                device_id:
+                  $ref: '#/components/schemas/DeviceIdObject'
+                app_ids:
+                  type: array
+                  minItems: 1
+                  items: { type: string }
+                  description: List of app IDs to query competition signals for.
+                  example: ["com.example.myapp1", "com.example.myapp2"]
+                request_id:
+                  type: string
+                  format: uuid
+                  description: Include for idempotency.
+                  example: "550e8400-e29b-41d4-a716-446655440000"
+            examples:
+              sample:
+                value:
+                  device_id: { type: "idfa", value: "6D92078A-8246-4BA4-AE5B-76104861E7DC" }
+                  app_ids: ["com.example.myapp1","com.example.myapp2"]
+                  request_id: "550e8400-e29b-41d4-a716-446655440000"
+      responses:
+        '200':
+          description: Response for a competitions signals query
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+              examples:
+                no_competitors:
+                  value:
+                    signals_per_app_id:
+                      "com.example.myapp1":
+                        is_last_touch: false
+                        competitors: []
+                many_competitors:
+                  value:
+                    signals_per_app_id:
+                      "com.example.myapp1":
+                        is_last_touch: true
+                        competitors:
+                          - { clicks_count: 5, impressions_count: 10 }
+                          - { clicks_count: 3, impressions_count: 7 }
+                      "com.example.myapp2":
+                        is_last_touch: false
+                        competitors:
+                          - { clicks_count: 2, impressions_count: 4 }
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+        '504':
+          $ref: '#/components/responses/GatewayTimeout'
+      x-codegen-request-body-name: body
