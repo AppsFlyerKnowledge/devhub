@@ -10,13 +10,24 @@ servers:
     description: Validation Rules API v1.0
 security:
   - bearerAuth: []
+tags:
+  - name: Validation Rules
+  - name: Audits
+
 paths:
   /rules:
     post:
       tags:
-        - Validation rules
-      summary: Create new rule
+        - Validation Rules
+      summary: Create rule
       operationId: createRule
+      parameters:
+        - in: header
+          name: Idempotency-Key
+          required: false
+          description: A unique key to make the create operation idempotent for at least 24 hours.
+          schema:
+            type: string
       requestBody:
         required: true
         content:
@@ -34,9 +45,11 @@ paths:
                     media_source: "network_a"
                     event_type: "install"
                     app_ids: ["com.example.app1", "id1234567890"]
-                  block_dimension: "site_id"
-                  block_values: ["site_a", "site_b"]
-                  block_condition: "in"
+                  condition:
+                    type: set
+                    block_dimension: "site_id"
+                    block_condition: "in"
+                    block_values: ["site_a", "site_b"]
       responses:
         '201':
           description: Rule created
@@ -45,78 +58,107 @@ paths:
               description: Absolute URL of the created rule resource
               schema:
                 type: string
+                format: uri
+            ETag:
+              description: Entity tag for the created rule; use with If-Match on updates
+              schema:
+                type: string
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RuleCreateResponse'
+                $ref: '#/components/schemas/Rule'
         '400':
-          description: Bad request
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
+          $ref: '#/components/responses/BadRequest'
         '401':
-          description: Unauthorized
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
+          $ref: '#/components/responses/Unauthorized'
         '403':
-          description: Forbidden
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
+          $ref: '#/components/responses/Forbidden'
         '409':
-          description: Conflict (rule_name must be unique)
+          description: Conflict (e.g., rule_name must be unique, or idempotency conflict)
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
         '422':
-          description: Unprocessable Entity (validation error)
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
+          $ref: '#/components/responses/UnprocessableEntity'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
         '503':
-          $ref: '#/components/responses/GatewayTimeout'
-        '504':
           $ref: '#/components/responses/ServiceUnavailable'
+        '504':
+          $ref: '#/components/responses/GatewayTimeout'
+
     get:
       tags:
-        - Validation rules
-      summary: List rules (lean)
+        - Validation Rules
+      summary: List rules
       operationId: listRules
+      parameters:
+        - in: query
+          name: limit
+          description: Max number of items to return (1–1000)
+          schema: { type: integer, minimum: 1, maximum: 1000, default: 100 }
+        - in: query
+          name: cursor
+          description: Opaque cursor for pagination
+          schema: { type: string, nullable: true }
+        - in: query
+          name: q
+          description: Free-text search over rule_name
+          schema: { type: string }
+        - in: query
+          name: media_source
+          schema: { type: string }
+        - in: query
+          name: app_id
+          schema: { type: string }
+        - in: query
+          name: event_type
+          schema:
+            $ref: '#/components/schemas/EventType'
+        - in: query
+          name: enable
+          schema: { type: boolean }
       responses:
         '200':
-          description: Rules list (lean)
+          description: Rules list
+          headers:
+            RateLimit-Limit:
+              schema: { type: integer }
+            RateLimit-Remaining:
+              schema: { type: integer }
+            RateLimit-Reset:
+              schema: { type: integer, description: Seconds until limit resets }
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/RuleListItem'
+                $ref: '#/components/schemas/RulesListResponse'
+              examples:
+                PagedResult:
+                  value:
+                    data:
+                      - rule_id: "f9c9f1f0-8d4d-4b7e-9c0a-2b8e6d3d3c10"
+                        rule_name: "Block bad sites"
+                        version: 3
+                      - rule_id: "c2fc0e1d-7b33-48ab-a1bb-2c1d123abcd0"
+                        rule_name: "Tag VIP in-apps"
+                        version: 1
+                    next_cursor: "eyJvZmZzZXQiOjJ9"
         '401':
-          description: Unauthorized
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
+          $ref: '#/components/responses/Unauthorized'
         '403':
-          description: Forbidden
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
+          $ref: '#/components/responses/Forbidden'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
         '503':
-          $ref: '#/components/responses/GatewayTimeout'
-        '504':
           $ref: '#/components/responses/ServiceUnavailable'
+        '504':
+          $ref: '#/components/responses/GatewayTimeout'
+
   /rules/{rule_id}:
     get:
       tags:
-        - Validation rules
+        - Validation Rules
       summary: Get rule
       operationId: getRule
       parameters:
@@ -130,37 +172,32 @@ paths:
       responses:
         '200':
           description: Rule
+          headers:
+            ETag:
+              description: Entity tag of the current rule state
+              schema: { type: string }
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Rule'
         '401':
-          description: Unauthorized
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
+          $ref: '#/components/responses/Unauthorized'
         '403':
-          description: Forbidden
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
+          $ref: '#/components/responses/Forbidden'
         '404':
-          description: Not Found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
         '503':
-          $ref: '#/components/responses/GatewayTimeout'
-        '504':
           $ref: '#/components/responses/ServiceUnavailable'
+        '504':
+          $ref: '#/components/responses/GatewayTimeout'
+
     put:
       tags:
-        - Validation rules
-      summary: Update a rule
-      description: Full update only. PATCH is not supported.
+        - Validation Rules
+      summary: Update full rule
+      description: Full update only. PATCH is not supported. Use If-Match for optimistic concurrency.
       operationId: updateRule
       parameters:
         - name: rule_id
@@ -170,6 +207,11 @@ paths:
           schema:
             type: string
             format: uuid
+        - in: header
+          name: If-Match
+          required: false
+          description: Provide the current ETag/version to prevent lost updates.
+          schema: { type: string }
       requestBody:
         required: true
         content:
@@ -179,53 +221,40 @@ paths:
       responses:
         '200':
           description: Updated rule
+          headers:
+            ETag:
+              description: New entity tag after the update
+              schema: { type: string }
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Rule'
         '400':
-          description: Bad request
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
+          $ref: '#/components/responses/BadRequest'
         '401':
-          description: Unauthorized
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
+          $ref: '#/components/responses/Unauthorized'
         '403':
-          description: Forbidden
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
+          $ref: '#/components/responses/Forbidden'
         '404':
-          description: Not Found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
+          $ref: '#/components/responses/NotFound'
         '409':
-          description: Conflict (rule_name must be unique)
+          description: Conflict (e.g., rule_name not unique, or If-Match precondition failed)
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
         '422':
-          description: Unprocessable Entity (validation error)
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
+          $ref: '#/components/responses/UnprocessableEntity'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
         '503':
-          $ref: '#/components/responses/GatewayTimeout'
-        '504':
           $ref: '#/components/responses/ServiceUnavailable'
+        '504':
+          $ref: '#/components/responses/GatewayTimeout'
+
     delete:
       tags:
-        - Validation rules
+        - Validation Rules
       summary: Delete rule
       operationId: deleteRule
       parameters:
@@ -240,32 +269,22 @@ paths:
         '204':
           description: No Content
         '401':
-          description: Unauthorized
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
+          $ref: '#/components/responses/Unauthorized'
         '403':
-          description: Forbidden
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
+          $ref: '#/components/responses/Forbidden'
         '404':
-          description: Not Found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
         '503':
-          $ref: '#/components/responses/GatewayTimeout'
-        '504':
           $ref: '#/components/responses/ServiceUnavailable'
+        '504':
+          $ref: '#/components/responses/GatewayTimeout'
+
   /rules/{rule_id}/status:
     put:
-      tags:
-        - Validation rules
-      summary: Update rule
+      tags: [Validation Rules]
+      summary: Update rule status
       operationId: updateRuleStatus
       parameters:
         - name: rule_id
@@ -281,53 +300,43 @@ paths:
           application/json:
             schema:
               type: object
+              additionalProperties: false
               properties:
                 enable:
                   type: boolean
                   description: true to enable, false to disable the rule
-              required:
-                - enable
-              additionalProperties: false
+              required: [enable]
       responses:
         '200':
-          description: Updated rule with new enable state
+          description: Updated rule with new status
+          headers:
+            ETag:
+              description: New entity tag after the update
+              schema: { type: string }
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Rule'
         '400':
-          description: Bad request
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
+          $ref: '#/components/responses/BadRequest'
         '401':
-          description: Unauthorized
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
+          $ref: '#/components/responses/Unauthorized'
         '403':
-          description: Forbidden
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
+          $ref: '#/components/responses/Forbidden'
         '404':
-          description: Not Found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
         '503':
-          $ref: '#/components/responses/GatewayTimeout'
-        '504':
           $ref: '#/components/responses/ServiceUnavailable'
+        '504':
+          $ref: '#/components/responses/GatewayTimeout'
+
   /rules/{rule_id}/audits:
     get:
       tags:
         - Audits
-      summary: List audits for rule (lean)
+      summary: List audits for a rule
       operationId: listRuleAudits
       parameters:
         - name: rule_id
@@ -337,97 +346,182 @@ paths:
           schema:
             type: string
             format: uuid
+        - in: query
+          name: limit
+          schema: { type: integer, minimum: 1, maximum: 1000, default: 100 }
+        - in: query
+          name: cursor
+          schema: { type: string, nullable: true }
+        - in: query
+          name: changed_by
+          schema: { type: string }
+        - in: query
+          name: since
+          schema: { type: string, format: date-time }
+        - in: query
+          name: until
+          schema: { type: string, format: date-time }
       responses:
         '200':
-          description: Audit events for the specific rule (lean)
+          description: Audit events for the specific rule
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/AuditListItem'
+                $ref: '#/components/schemas/AuditsListResponse'
         '401':
-          description: Unauthorized
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
+          $ref: '#/components/responses/Unauthorized'
         '403':
-          description: Forbidden
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
+          $ref: '#/components/responses/Forbidden'
         '404':
-          description: Not Found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
         '503':
-          $ref: '#/components/responses/GatewayTimeout'
-        '504':
           $ref: '#/components/responses/ServiceUnavailable'
+        '504':
+          $ref: '#/components/responses/GatewayTimeout'
+
   /rules/audits:
     get:
       tags:
         - Audits
-      summary: List audits across all rules (lean)
+      summary: List audits across all rules
       operationId: listAudits
+      parameters:
+        - in: query
+          name: limit
+          schema: { type: integer, minimum: 1, maximum: 1000, default: 100 }
+        - in: query
+          name: cursor
+          schema: { type: string, nullable: true }
+        - in: query
+          name: rule_id
+          schema: { type: string, format: uuid }
+        - in: query
+          name: changed_by
+          schema: { type: string }
+        - in: query
+          name: since
+          schema: { type: string, format: date-time }
+        - in: query
+          name: until
+          schema: { type: string, format: date-time }
       responses:
         '200':
-          description: Audit events across rules (lean)
+          description: Audit events across rules
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/AuditListItem'
+                $ref: '#/components/schemas/AuditsListResponse'
         '401':
-          description: Unauthorized
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
+          $ref: '#/components/responses/Unauthorized'
         '403':
-          description: Forbidden
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
+          $ref: '#/components/responses/Forbidden'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
         '503':
-          $ref: '#/components/responses/GatewayTimeout'
-        '504':
           $ref: '#/components/responses/ServiceUnavailable'
+        '504':
+          $ref: '#/components/responses/GatewayTimeout'
+
 components:
   responses:
-    GatewayTimeout:
-      description: Gateway Timeout. ELB (Amazon Load-balancer) service unavailable.
-      content: {}
+    BadRequest:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Forbidden:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    UnprocessableEntity:
+      description: Unprocessable Entity (validation error)
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    TooManyRequests:
+      description: Too Many Requests (rate limited)
+      headers:
+        Retry-After:
+          description: Seconds to wait before retrying
+          schema: { type: integer }
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
     ServiceUnavailable:
-      description: Service Unavailable. ELB (Amazon Load-balancer) service unavailable.
+      description: Service Unavailable (HTTP 503). Upstream or load balancer temporarily unavailable.
       content: {}
+    GatewayTimeout:
+      description: Gateway Timeout (HTTP 504). Upstream did not respond in time.
+      content: {}
+
   schemas:
     Error:
       type: object
       properties:
         message:
           type: string
-      required:
-        - message
+        code:
+          type: string
+          description: Stable machine-readable error code
+        details:
+          type: array
+          description: Field-level validation details (present on 422)
+          items:
+            type: object
+            properties:
+              field: { type: string }
+              issue: { type: string }
+      required: [message]
       example:
-        message: "Some error message"
+        message: "Validation failed"
+        code: "VALIDATION_ERROR"
+        details:
+          - field: "filters.app_ids[1]"
+            issue: "invalid format"
+
     EventType:
       type: string
       description: Event type filter
-      enum: [install, inapps, reeng]
-    BlockDimension:
+      enum: [install, in_app_event, re_engagement]
+
+    BlockDimensionSet:
       type: string
-      description: Dimension to apply the block on
-      enum: [site_id, campaign_id, adset_id, ad_id, channel, geo, campaign, lookback_days, lookback_hours, event_name]
+      description: Dimension for set membership conditions
+      enum: [site_id, campaign_id, adset_id, ad_id, channel, geo, campaign, event_name]
+
+    BlockDimensionRange:
+      type: string
+      description: Dimension for range conditions (lookback windows)
+      enum: [lookback_days, lookback_hours]
+
     BlockCondition:
       type: string
+      description: Set membership relation
       enum: [in, not_in]
+
+    RangeOperator:
+      type: string
+      enum: [gt, gte, lt, lte, between]
+
     RuleListItem:
       type: object
       properties:
@@ -438,124 +532,162 @@ components:
           type: string
         version:
           type: integer
-      required:
-        - rule_id
-        - rule_name
-        - version
+      required: [rule_id, rule_name, version]
       additionalProperties: false
+
+    RulesListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/RuleListItem'
+        next_cursor:
+          type: string
+          nullable: true
+      required: [data]
+
+    RuleFilters:
+      type: object
+      properties:
+        media_source:
+          type: string
+          description: Optional media source filter
+        event_type:
+          $ref: '#/components/schemas/EventType'
+        app_ids:
+          type: array
+          items:
+            type: string
+      required: [app_ids]
+      additionalProperties: false
+
+    RuleBase:
+      type: object
+      properties:
+        rule_id:
+          type: string
+          format: uuid
+          readOnly: true
+        rule_name:
+          type: string
+          description: Unique rule name
+        action:
+          type: string
+          enum: [block, drop, tag]
+        enable:
+          type: boolean
+          description: true if the rule is enabled
+          default: true
+        filters:
+          $ref: '#/components/schemas/RuleFilters'
+        version:
+          type: integer
+          readOnly: true
+      required: [rule_name, action, filters]
+      additionalProperties: false
+
+    RuleBlockSetCondition:
+      type: object
+      properties:
+        type:
+          type: string
+          enum: [set]
+          default: set
+        block_dimension:
+          $ref: '#/components/schemas/BlockDimensionSet'
+        block_values:
+          type: array
+          items:
+            type: string
+        block_condition:
+          $ref: '#/components/schemas/BlockCondition'
+      required: [type, block_dimension, block_values, block_condition]
+      additionalProperties: false
+
+    RuleBlockRangeCondition:
+      type: object
+      properties:
+        type:
+          type: string
+          enum: [range]
+          default: range
+        dimension:
+          $ref: '#/components/schemas/BlockDimensionRange'
+        operator:
+          $ref: '#/components/schemas/RangeOperator'
+        value:
+          oneOf:
+            - type: number
+            - type: array
+              items: { type: number }
+              minItems: 2
+              maxItems: 2
+              description: Lower and upper bounds when operator=between
+      required: [type, dimension, operator, value]
+      additionalProperties: false
+
+    RuleBlockPayload:
+      type: object
+      properties:
+        condition:
+          oneOf:
+            - $ref: '#/components/schemas/RuleBlockSetCondition'
+            - $ref: '#/components/schemas/RuleBlockRangeCondition'
+      required: [condition]
+      additionalProperties: false
+
+    RuleTagPayload:
+      type: object
+      properties:
+        tag_key: { type: string }
+        tag_value: { type: string }
+      required: [tag_key, tag_value]
+      additionalProperties: false
+
     Rule:
-      type: object
-      properties:
-        rule_id:
-          type: string
-          format: uuid
-          readOnly: true
-        rule_name:
-          type: string
-          description: Unique rule name
-        action:
-          type: string
-          enum: [block, drop, tag]
-        enable:
-          type: boolean
-          description: true if the rule is enabled
-          default: true
-        filters:
-          type: object
-          properties:
-            media_source:
-              type: string
-              description: Optional media source filter
-            event_type:
-              $ref: '#/components/schemas/EventType'
-            app_ids:
-              type: array
-              items:
-                type: string
-          required:
-            - app_ids
-          additionalProperties: false
-        block_dimension:
-          $ref: '#/components/schemas/BlockDimension'
-        block_values:
-          type: array
-          items:
-            type: string
-        block_condition:
-          $ref: '#/components/schemas/BlockCondition'
-        version:
-          type: integer
-          readOnly: true
-      required:
-        - rule_id
-        - rule_name
-        - action
-        - enable
-        - filters
-        - block_dimension
-        - block_values
-        - block_condition
-        - version
-      additionalProperties: false
+      oneOf:
+        - allOf:
+            - $ref: '#/components/schemas/RuleBase'
+            - $ref: '#/components/schemas/RuleBlockPayload'
+        - allOf:
+            - $ref: '#/components/schemas/RuleBase'
+            - $ref: '#/components/schemas/RuleTagPayload'
+      discriminator:
+        propertyName: action
+        mapping:
+          block: '#/components/schemas/Rule'
+          drop:  '#/components/schemas/Rule'
+          tag:   '#/components/schemas/Rule'
+
     RuleCreateRequest:
-      type: object
-      properties:
-        rule_name:
-          type: string
-          description: Unique rule name
-        action:
-          type: string
-          enum: [block, drop, tag]
-        enable:
-          type: boolean
-          description: true if the rule is enabled
-          default: true
-        filters:
-          type: object
-          properties:
-            media_source:
-              type: string
-              description: Optional media source filter
-            event_type:
-              $ref: '#/components/schemas/EventType'
-            app_ids:
-              type: array
-              items:
-                type: string
-          required:
-            - app_ids
-          additionalProperties: false
-        block_dimension:
-          $ref: '#/components/schemas/BlockDimension'
-        block_values:
-          type: array
-          items:
-            type: string
-        block_condition:
-          $ref: '#/components/schemas/BlockCondition'
+      description: Payload to create a rule. Structure depends on the action type.
+      oneOf:
+        - allOf:
+            - $ref: '#/components/schemas/RuleBase'
+            - $ref: '#/components/schemas/RuleBlockPayload'
+        - allOf:
+            - $ref: '#/components/schemas/RuleBase'
+            - $ref: '#/components/schemas/RuleTagPayload'
+      discriminator:
+        propertyName: action
       required:
         - rule_name
         - action
         - filters
-        - block_dimension
-        - block_values
-        - block_condition
-      additionalProperties: false
+
     RuleUpdateRequest:
-      allOf:
-        - $ref: '#/components/schemas/RuleCreateRequest'
-    RuleCreateResponse:
-      type: object
-      properties:
-        rule_id:
-          type: string
-          format: uuid
-        version:
-          type: integer
-      required:
-        - rule_id
-        - version
-      additionalProperties: false
+      description: Payload to fully replace a rule. Use If-Match to avoid lost updates.
+      oneOf:
+        - allOf:
+            - $ref: '#/components/schemas/RuleBase'
+            - $ref: '#/components/schemas/RuleBlockPayload'
+        - allOf:
+            - $ref: '#/components/schemas/RuleBase'
+            - $ref: '#/components/schemas/RuleTagPayload'
+      discriminator:
+        propertyName: action
+
     AuditListItem:
       type: object
       properties:
@@ -567,11 +699,21 @@ components:
           format: uuid
         rule_name:
           type: string
-      required:
-        - audit_id
-        - rule_id
-        - rule_name
+      required: [audit_id, rule_id, rule_name]
       additionalProperties: false
+
+    AuditsListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/AuditListItem'
+        next_cursor:
+          type: string
+          nullable: true
+      required: [data]
+
     Audit:
       type: object
       properties:
@@ -606,13 +748,9 @@ components:
           type: object
           description: Optional object describing only the changed fields
           nullable: true
-      required:
-        - audit_id
-        - rule_id
-        - version
-        - changed_at
-        - change_type
+      required: [audit_id, rule_id, version, changed_at, change_type]
       additionalProperties: false
+
   securitySchemes:
     bearerAuth:
       type: http
