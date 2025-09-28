@@ -20,6 +20,16 @@ paths:
       tags:
         - Validation Rules
       summary: Create rule
+      description: |
+        Links:
+          - [Create rule](https://dev.appsflyer.com/hc/reference/createrule)
+          - [List rules](https://dev.appsflyer.com/hc/reference/listrules)
+          - [Get rule](https://dev.appsflyer.com/hc/reference/getrule)
+          - [Update full rule](https://dev.appsflyer.com/hc/reference/updaterule)
+          - [Delete rule](https://dev.appsflyer.com/hc/reference/deleterule)
+          - [Update rule status](https://dev.appsflyer.com/hc/reference/updaterulestatus)
+          - [List audits for a rule (lean)](https://dev.appsflyer.com/hc/reference/listruleaudits)
+          - [List audits across all rules (lean)](https://dev.appsflyer.com/hc/reference/listaudits)
       operationId: createRule
       parameters:
         - in: header
@@ -92,6 +102,16 @@ paths:
       tags:
         - Validation Rules
       summary: List rules
+      description: |
+        Links:
+          - [Create rule](https://dev.appsflyer.com/hc/reference/createrule)
+          - [List rules](https://dev.appsflyer.com/hc/reference/listrules)
+          - [Get rule](https://dev.appsflyer.com/hc/reference/getrule)
+          - [Update full rule](https://dev.appsflyer.com/hc/reference/updaterule)
+          - [Delete rule](https://dev.appsflyer.com/hc/reference/deleterule)
+          - [Update rule status](https://dev.appsflyer.com/hc/reference/updaterulestatus)
+          - [List audits for a rule (lean)](https://dev.appsflyer.com/hc/reference/listruleaudits)
+          - [List audits across all rules (lean)](https://dev.appsflyer.com/hc/reference/listaudits)
       operationId: listRules
       parameters:
         - in: query
@@ -160,6 +180,16 @@ paths:
       tags:
         - Validation Rules
       summary: Get rule
+      description: |
+        Links:
+          - [Create rule](https://dev.appsflyer.com/hc/reference/createrule)
+          - [List rules](https://dev.appsflyer.com/hc/reference/listrules)
+          - [Get rule](https://dev.appsflyer.com/hc/reference/getrule)
+          - [Update full rule](https://dev.appsflyer.com/hc/reference/updaterule)
+          - [Delete rule](https://dev.appsflyer.com/hc/reference/deleterule)
+          - [Update rule status](https://dev.appsflyer.com/hc/reference/updaterulestatus)
+          - [List audits for a rule (lean)](https://dev.appsflyer.com/hc/reference/listruleaudits)
+          - [List audits across all rules (lean)](https://dev.appsflyer.com/hc/reference/listaudits)
       operationId: getRule
       parameters:
         - name: rule_id
@@ -197,7 +227,18 @@ paths:
       tags:
         - Validation Rules
       summary: Update full rule
-      description: Full update only. PATCH is not supported. Use If-Match for optimistic concurrency.
+      description: |
+        Links:
+          - [Create rule](https://dev.appsflyer.com/hc/reference/createrule)
+          - [List rules](https://dev.appsflyer.com/hc/reference/listrules)
+          - [Get rule](https://dev.appsflyer.com/hc/reference/getrule)
+          - [Update full rule](https://dev.appsflyer.com/hc/reference/updaterule)
+          - [Delete rule](https://dev.appsflyer.com/hc/reference/deleterule)
+          - [Update rule status](https://dev.appsflyer.com/hc/reference/updaterulestatus)
+          - [List audits for a rule (lean)](https://dev.appsflyer.com/hc/reference/listruleaudits)
+          - [List audits across all rules (lean)](https://dev.appsflyer.com/hc/reference/listaudits)
+        
+        Full update only. PATCH is not supported. Use If-Match for optimistic concurrency.
       operationId: updateRule
       parameters:
         - name: rule_id
@@ -256,6 +297,16 @@ paths:
       tags:
         - Validation Rules
       summary: Delete rule
+      description: |
+        Links:
+          - [Create rule](https://dev.appsflyer.com/hc/reference/createrule)
+          - [List rules](https://dev.appsflyer.com/hc/reference/listrules)
+          - [Get rule](https://dev.appsflyer.com/hc/reference/getrule)
+          - [Update full rule](https://dev.appsflyer.com/hc/reference/updaterule)
+          - [Delete rule](https://dev.appsflyer.com/hc/reference/deleterule)
+          - [Update rule status](https://dev.appsflyer.com/hc/reference/updaterulestatus)
+          - [List audits for a rule (lean)](https://dev.appsflyer.com/hc/reference/listruleaudits)
+          - [List audits across all rules (lean)](https://dev.appsflyer.com/hc/reference/listaudits)
       operationId: deleteRule
       parameters:
         - name: rule_id
@@ -285,6 +336,16 @@ paths:
     put:
       tags: [Validation Rules]
       summary: Update rule status
+      description: |
+        Links:
+          - [Create rule](https://dev.appsflyer.com/hc/reference/createrule)
+          - [List rules](https://dev.appsflyer.com/hc/reference/listrules)
+          - [Get rule](https://dev.appsflyer.com/hc/reference/getrule)
+          - [Update full rule](https://dev.appsflyer.com/hc/reference/updaterule)
+          - [Delete rule](https://dev.appsflyer.com/hc/reference/deleterule)
+          - [Update rule status](https://dev.appsflyer.com/hc/reference/updaterulestatus)
+          - [List audits for a rule (lean)](https://dev.appsflyer.com/hc/reference/listruleaudits)
+          - [List audits across all rules (lean)](https://dev.appsflyer.com/hc/reference/listaudits)
       operationId: updateRuleStatus
       parameters:
         - name: rule_id
@@ -337,6 +398,16 @@ paths:
       tags:
         - Audits
       summary: List audits for a rule
+      description: |
+        Links:
+          - [Create rule](https://dev.appsflyer.com/hc/reference/createrule)
+          - [List rules](https://dev.appsflyer.com/hc/reference/listrules)
+          - [Get rule](https://dev.appsflyer.com/hc/reference/getrule)
+          - [Update full rule](https://dev.appsflyer.com/hc/reference/updaterule)
+          - [Delete rule](https://dev.appsflyer.com/hc/reference/deleterule)
+          - [Update rule status](https://dev.appsflyer.com/hc/reference/updaterulestatus)
+          - [List audits for a rule (lean)](https://dev.appsflyer.com/hc/reference/listruleaudits)
+          - [List audits across all rules (lean)](https://dev.appsflyer.com/hc/reference/listaudits)
       operationId: listRuleAudits
       parameters:
         - name: rule_id
@@ -386,6 +457,16 @@ paths:
       tags:
         - Audits
       summary: List audits across all rules
+      description: |
+        Links:
+          - [Create rule](https://dev.appsflyer.com/hc/reference/createrule)
+          - [List rules](https://dev.appsflyer.com/hc/reference/listrules)
+          - [Get rule](https://dev.appsflyer.com/hc/reference/getrule)
+          - [Update full rule](https://dev.appsflyer.com/hc/reference/updaterule)
+          - [Delete rule](https://dev.appsflyer.com/hc/reference/deleterule)
+          - [Update rule status](https://dev.appsflyer.com/hc/reference/updaterulestatus)
+          - [List audits for a rule (lean)](https://dev.appsflyer.com/hc/reference/listruleaudits)
+          - [List audits across all rules (lean)](https://dev.appsflyer.com/hc/reference/listaudits)
       operationId: listAudits
       parameters:
         - in: query
