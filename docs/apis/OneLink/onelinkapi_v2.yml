@@ -511,8 +511,9 @@ paths:
           in: query
           description: 'Size of the QR code. Default is 300x300. Specifies size (widthxheight in pixels). limit 3000'
           schema:
-            type: string
-            example: 300x300
+            type: integer
+            maximum: 3000
+            example: 300
         - name: format
           in: query
           description: 'Format of the QR code. Default is png'
@@ -520,8 +521,8 @@ paths:
             type: string
             enum:
               - png
-              - svg
               - jpg
+              - jpeg
         - name: brand_domain
           in: query
           description: |
