@@ -150,14 +150,13 @@ paths:
       deprecated: false
   /shortlinks/{onelink-id}/{shortlink-id}:
     get:
-      description: |
-        <span style="background-color: #6e00ff; color: #fff; font-size: 12px; font-weight: 400; padding: 4px; border-radius: 8px;">
-          Premium
-        </span>
       tags: 
       - OneLink REST API v2.0 [Closed Beta]
       summary: Get OneLink link data - OneLink API v2.0 [Closed Beta]
       description: |
+        <span style="background-color: #6e00ff; color: #fff; font-size: 12px; font-weight: 400; padding: 4px; border-radius: 8px;">
+          Premium
+        </span>
         **Beta documentation**
         This documentation is for the OneLink API V2.0 closed beta only. 
         Please use the documentation in the following links only: 
@@ -248,14 +247,13 @@ paths:
                   value: Not Found
       deprecated: false
     put:
-      description: |
-        <span style="background-color: #6e00ff; color: #fff; font-size: 12px; font-weight: 400; padding: 4px; border-radius: 8px;">
-          Premium
-        </span>    
       tags: 
       - OneLink REST API v2.0 [Closed Beta]
       summary: Update OneLink link - OneLink API v2.0 [Closed Beta]
       description: |
+        <span style="background-color: #6e00ff; color: #fff; font-size: 12px; font-weight: 400; padding: 4px; border-radius: 8px;">
+          Premium
+        </span>
         **Beta documentation**
         This documentation is for the OneLink API V2.0 closed beta only. 
         Please use the documentation in the following links only: 
@@ -378,14 +376,13 @@ paths:
                   value: Rate limit exceeded
       deprecated: false
     delete:
-      description: |
-        <span style="background-color: #6e00ff; color: #fff; font-size: 12px; font-weight: 400; padding: 4px; border-radius: 8px;">
-          Premium
-        </span>
       tags: 
       - OneLink REST API v2.0 [Closed Beta]
       summary: Delete OneLink link - OneLink API v2.0 [Closed Beta]
       description: |
+        <span style="background-color: #6e00ff; color: #fff; font-size: 12px; font-weight: 400; padding: 4px; border-radius: 8px;">
+          Premium
+        </span>
         **Beta documentation**
         This documentation is for the OneLink API V2.0 closed beta only. 
         Please use the documentation in the following links only: 
