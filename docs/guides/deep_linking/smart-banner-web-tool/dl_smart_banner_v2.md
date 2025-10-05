@@ -1,12 +1,3 @@
----
-title: "Smart Banner v2"
-slug: "dl_smart_banner_v2"
-category: 6384c30e5a754e005f668a74
-parentDoc: 63ccfdc2635a53004ab874f0
-hidden: false
-createdAt: "2023-01-22T09:32:49.207Z"
-updatedAt: "2023-04-20T08:42:10.093Z"
----
 ## Overview
 
 AppsFlyer provides a Smart Banner SDK that advertisers integrate into their websites. The purpose of the SDK is to pull all the required data to dynamically display the Smart Banners. The Smart Banners SDK also automatically builds the proper attribution links, so you don't need to build them manually.
@@ -39,9 +30,10 @@ AF('banners', 'showBanner');
 
 2. Paste the code snippet in the `head` tag on your website. Make sure to paste it near the top of the `head` tag.
 
-> ℹ️ **Note**
+> 📘 Note
 > 
-> The `showBanner` method at the end of installation code can take more parameters. [Learn more](#showbanner)
+> - The `showBanner` method at the end of installation code can take more parameters. [Learn more](#showbanner).
+> - To overcome iOS 26/Safari storage limitations, declare the storage-mode flag as a global variable before SDK initialization to control how the web SDK stores data for Smart Banners. See [Set storage mode](#set-storage-mode-optional) below.
 
 ### Smart banners and People-Based Attribution
 
@@ -61,7 +53,30 @@ AF('banners', 'showBanner', { bannerZIndex: 1000, additionalParams: { p1: "v1", 
 </script>
 ```
 
+#### Set Storage Mode (Optional)
 
+Smart Banners use browser storage to handle banner state and functionality. With the release of iOS 26, Safari introduced changes that affect how browser storage behaves. To help websites maintain consistent Smart Banner behavior in these environments, you can configure the storage method with the `storage-mode` flag.
+
+- **local (default):** Uses browser `localStorage` / `sessionStorage`. This is the default mode and does not require any changes to your cookie consent or privacy setup. 
+- **cookie:** Uses first-party cookies (on your domain) to overcome iOS 26/Safari storage limitations.
+
+> ⚠️ Important
+> 
+> If you enable **cookie** mode, your website may be subject to additional cookie consent and disclosure requirements under privacy regulations (e.g., GDPR, ePrivacy). It is the website owner’s responsibility to ensure their consent management platform (CMP) and privacy policy are updated accordingly.
+
+```js
+<script>
+  // Optional: configure storage mode before SDK initialization
+  // Options: "local" (default) or "cookie"
+  window.AF_SB_STORAGE_MODE = "cookie";
+</script>
+
+<script>
+  // Smart Banners Web SDK initialization
+  // Use the snippet provided in the Installation section above
+</script>
+
+```
 
 ## Control Smart Banner font
 
@@ -83,8 +98,6 @@ For example:
 }
 ```
 
-
-
 > 🚧 
 > 
 > - The `!important` is required
@@ -103,8 +116,6 @@ AF('banners', 'showBanner', { bannerContainerQuery: String,
               bannerZIndex: Integer,              
               additionalParams: <Key, Value Dictionary>);
 ```
-
-
 
 **Description**  
 Start showing the Smart Banner according to the banner key provided in the snippet.
@@ -129,16 +140,12 @@ Start showing the Smart Banner according to the banner key provided in the snipp
 AF('banners', 'showBanner', { additionalParams: { deep_link_value: "apples", deep_link_sub1: "22", af_adset: "my_adset"}});
 ```
 
-
-
 - Set Z-index of this banner and a container Id for its placement
 
 ```js
 AF('banners', 'showBanner', { bannerContainerQuery: "#my-container-id"
                               bannerZIndex: 999});
 ```
-
-
 
 ### updateParams
 
@@ -147,8 +154,6 @@ AF('banners', 'showBanner', { bannerContainerQuery: "#my-container-id"
 ```js
 AF('banners', 'updateParams', { <Key, Value Dictionary> });
 ```
-
-
 
 **Description**  
 Programmatically add up to 10 parameters (for example, `deep_link_value`) to the OneLink URL assigned to the call-to-action (CTA) button, after the banner displays. 
@@ -180,8 +185,6 @@ Value = ```\, ;, $, >, <, ^, #, `` ```
 AF('banners', 'updateParams', { deep_link_value: "new_param", deep_link_sub4: "gg_77", af_ad: "new_ad_param"});
 ```
 
-
-
 ### hideBanner
 
 **Method signature**
@@ -189,8 +192,6 @@ AF('banners', 'updateParams', { deep_link_value: "new_param", deep_link_sub4: "g
 ```js
 AF('banners', 'hideBanner');
 ```
-
-
 
 **Description**  
 
@@ -207,8 +208,9 @@ none
 ```js
 AF('banners', 'hideBanner');
 ```
+
 ## Traits and Limitations
 
-| Trait | Remarks |
-| --- | --- |
+| Trait                         | Remarks                                                                                                                                                                                                                                                                                              |
+| ----------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Single page application (SPA) | Smart Banners are by default only displayed once, even if users navigate between pages.<br> To display banners when users navigate between pages, you need to manually call hideBanner and showBanner for every navigation that doesn't reload the page and trigger the Smart Banners default logic. |
