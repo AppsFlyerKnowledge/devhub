@@ -3,7 +3,7 @@ title: "Branch Migration Navigator on iOS"
 slug: "branch-migration-ios"
 category: 5f9705393c689a065c409b23
 parentDoc: 5fa0443749be540011850e51
-excerpt: "ctivate the Branch Migration Navigator to streamline your traffic migration journey from Branch to AppsFlyer"
+excerpt: "Activate the Branch Migration Navigator to streamline your traffic migration journey from Branch to AppsFlyer"
 hidden: true
 order: 90
 ---
