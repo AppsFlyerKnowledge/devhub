@@ -29,7 +29,7 @@ The flow works as follows:
 6. The [`onDeepLinking()`] method gets a [`DeepLinkResult`] object. 
 7. The [`DeepLinkResult`] object includes:
    * Status (Found/Not found/Error)
-   * A [`DeepLink`] object that carries the `deep_link_value` and `deep_link_sub1-10` parameters, that the developer uses to route the user to a specific in-app activity, which is the main goal of OneLink.
+   * A [`DeepLink`] object that carries the `deep_link_value` and `deep_link_sub1-10` parameters, that the developer uses to route the user to a specific in-app activity, which is the main goal of OneLink. In addition, the object contains other event parameters that can be used by the app logic. For a list of the available keys, see: [Returned parameters in UDL](#returned-parameters-in-udl).
 
 [`onDeepLinking()`]: https://dev.appsflyer.com/hc/docs/deeplinklistener#ondeeplinking
 [`DeepLinkingListener`]: https://dev.appsflyer.com/hc/docs/deeplinklistener
@@ -48,6 +48,7 @@ When setting up OneLinks, the marketer uses parameters to create the links, and 
 2. Based on the desired behavior, plan the `deep_link_value` and other parameters that are needed to give the user the desired personal experience.
    * The `deep_link_value` is set by the marketer in the URL and used by the developer to redirect the user to a specific place inside the app. For example, if you have a fruit store and want to direct users to apples, the value of `deep_link_value` can be `apples`.
    * The `deep_link_sub1-10` parameters can also be added to the URL to help personalize the user experience. For example, to give a 10% discount, the value of `deep_link_sub1` can be `10`. 
+  
 
 ## Implementation
 
@@ -63,13 +64,13 @@ Implement the UDL API logic based on the chosen parameters and values.
 1. Use the [`subscribeForDeepLink()`](https://dev.appsflyer.com/hc/docs/appsflyerlib#subscribefordeeplink) method (from `AppsFlyerLib`), before calling [start](doc:android-sdk-reference-appsflyerlib#start), to register the  [`DeepLinkListener`](https://dev.appsflyer.com/hc/docs/deeplinklistener) interface listener.
 2. Make sure you override the callback function [`onDeepLinking()`](https://dev.appsflyer.com/hc/docs/deeplinklistener#ondeeplinking). 
 `onDeepLinking() ` accepts as an argument a [`DeepLinkResult`](https://dev.appsflyer.com/hc/docs/deeplinkresult) object. 
-4. Use [`getStatus()`](https://dev.appsflyer.com/hc/docs/deeplinkresult#getstatus) to query whether the deep linking match is found.
-5. For when the status is an error, call [`getError()`](https://dev.appsflyer.com/hc/docs/deeplinkresult#geterror) and run your error flow.
-6. For when the status is found, use [`getDeepLink()`](https://dev.appsflyer.com/hc/docs/deeplinkresult#getdeeplink) to retrieve the [`DeepLink`](https://dev.appsflyer.com/hc/docs/deeplink) object. 
-The `DeepLink `object contains the deep linking information and helper functions to easily retrieve values from well-known OneLink keys, for example, [`getDeepLinkValue()`](https://dev.appsflyer.com/hc/docs/deeplink#getdeeplinkvalue).
-7. Use [`getDeepLinkValue()`](https://dev.appsflyer.com/hc/docs/deeplink#getdeeplinkvalue) to retrieve the `deep_link_value`. 
-8. Use [`getStringValue("deep_link_sub1")`](https://dev.appsflyer.com/hc/docs/deeplink#getstringvalue) to retrieve `deep_link_sub1`. Do the same for `deep_link_sub2-10` parameters, changing the string value as required.
-9. Once `deep_link_value` and `deep_link_sub1-10` are retrieved, pass them to an in-app router and use them to personalize the user experience.
+3. Use [`getStatus()`](https://dev.appsflyer.com/hc/docs/deeplinkresult#getstatus) to query whether the deep linking match is found.
+4. For when the status is an error, call [`getError()`](https://dev.appsflyer.com/hc/docs/deeplinkresult#geterror) and run your error flow.
+5. For when the status is found, use [`getDeepLink()`](https://dev.appsflyer.com/hc/docs/deeplinkresult#getdeeplink) to retrieve the [`DeepLink`](https://dev.appsflyer.com/hc/docs/deeplink) object. 
+The `DeepLink `object contains the deep linking information and helper functions to easily retrieve values from well-known OneLink keys, for example, [`getDeepLinkValue()`](https://dev.appsflyer.com/hc/docs/deeplink#getdeeplinkvalue). For a list of the available keys, see: [Returned parameters in UDL](#returned-parameters-in-udl).
+6. Use [`getDeepLinkValue()`](https://dev.appsflyer.com/hc/docs/deeplink#getdeeplinkvalue) to retrieve the `deep_link_value`. 
+7. Use [`getStringValue("deep_link_sub1")`](https://dev.appsflyer.com/hc/docs/deeplink#getstringvalue) to retrieve `deep_link_sub1`. Do the same for `deep_link_sub2-10` parameters, changing the string value as required.
+8. Once `deep_link_value` and `deep_link_sub1-10` are retrieved, pass them to an in-app router and use them to personalize the user experience.
 
 > 📘 **Note**
 >
@@ -87,6 +88,60 @@ The `DeepLink `object contains the deep linking information and helper functions
 >           setIntent(intent);
 >        }
 >```
+
+### Returned parameters in UDL
+
+Apps using Unified Deep Linking (UDL) receive different sets of parameters depending on whether the flow is **Deferred Deep Linking (DDL)** or **Direct Deep Linking (DL)**.
+
+#### Deferred deep linking (DDL)
+
+The app receives only the parameters relevant for deferred deep linking:
+
+- `deep_link_value`  
+- `deep_link_sub1`–`deep_link_sub10`  
+  Any other parameters return `null`.
+
+#### Direct deep linking (DL)
+
+**Deep linking parameters**: 
+
+- `deep_link_value`  
+- `deep_link_sub1`–`deep_link_sub10`  
+
+**And additional parameters**: 
+
+- `path`  
+- `scheme`  
+- `host`  
+- `af_c_id`  
+- `af_adset`  
+- `af_adset_id`  
+- `af_ad`  
+- `af_ad_id`  
+- `af_ad_type`  
+- `af_channel`  
+- `af_dp`  
+- `esp_name`  
+- `link`  
+
+Deeplinking parameters: 
+- `deep_link_value`  
+- `deep_link_sub1`–`deep_link_sub10`  
+And additional parameters 
+- `path`  
+- `scheme`  
+- `host`  
+- `af_c_id`  
+- `af_adset`  
+- `af_adset_id`  
+- `af_ad`  
+- `af_ad_id`  
+- `af_ad_type`  
+- `af_channel`  
+- `af_dp`  
+- `esp_name`  
+- `link`  
+
 
 ### Supporting legacy OneLink links 
 
