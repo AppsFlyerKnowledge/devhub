@@ -17,18 +17,21 @@ The AppsFlyer ROI360 purchase connector is used to validate and report in-app pu
 
 ## Prerequistes
 
-- AppsFlyer Android SDK **6.12.2** and above
+- Android AppsFlyer SDK **6.15.0** and above
 
 ## ⚠️ Important note ⚠️️
 
-Purchase Connector v2.0.0 (and above) can only be used with SDK v6.12.2 (and above), as this is the setup that supports Billing Library v5.x.x to V7.x.x.
+Some Purchase Connector versions require a specific version of the AppsFlyer SDK to operate properly.
+The following table details the compatibility between the Purchase Connector versions and the SDK versions.
 
-Using the purchase connector v2.0.0 with an older SDK version will cause the server to reject the purchase requests.
-
-| Purchase connector version   |      Supported billing library version      |  Supported AppsFlyer SDK version |
-|----------|-------------|------|
-|v2.0.0|  v5.x.x | v6.12.2 and above|
-| v2.0.1 |    v5.x.x - v7.x.x   |   v6.12.2 and above |
+| Purchase Connector Version | Supported AppsFlyer SDK Versions | Supported Billing Library Versions 
+|----------------------------|------------------------------------|----------------------------------|
+| v2.0.0                     | v6.12.2 - v6.14.3                | v5.x.x                             |
+| v2.0.1                     | v6.12.2 - v6.14.3                | v5.x.x - v7.x.x                    |
+| v2.1.0                     | v6.15.0 (and above)              | v5.x.x - v7.x.x                    |
+| v2.1.1                     | v6.15.0 (and above)              | v5.x.x - v7.x.x                    |
+| v2.1.2                     | v6.15.0 (and above)              | v5.x.x - v7.x.x                    |
+| v2.2.0                     | v6.15.0 (and above)              | v8.x.x                             |
 
 ## Adding the connector to your project
 
