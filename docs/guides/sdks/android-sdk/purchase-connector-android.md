@@ -35,10 +35,10 @@ The following table details the compatibility between the Purchase Connector ver
 
 ## Adding the connector to your project
 
-1. Add the following to your build.gradle file, where `play_billing_version`  is 5.x.x, 6.x.x, or 7.x.x:
+1. Add the following to your build.gradle file, where `play_billing_version`  is 5.x.x, 6.x.x, 7.x.x, 8.x.x:
 
 ```groovy
-implementation 'com.appsflyer:purchase-connector:2.0.1'
+implementation 'com.appsflyer:purchase-connector:2.2.0'
 implementation 'com.android.billingclient:billing:$play_billing_version'
 ```
 
