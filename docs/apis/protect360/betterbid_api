@@ -3,16 +3,15 @@ info:
   title: BetterBid REST API
   version: "1.0"
 servers:
-  - url: https://better-bid.appsflyer.com/v1.0
+  - url: https://better-bid.appsflyer.com/api/better-bid/v1.0
 components:
   securitySchemes:
     AfHmac:
       type: apiKey
       in: header
       name: Authorization
-      description: >
-        Use the scheme: `AF-HMAC-SHA256 <hex_signature>`.
-        The signature is HMAC-SHA256 over the **canonical JSON body** using your S2S token as the key.
+      description: |
+        The signature is HMAC-SHA256 over the canonical JSON body using your API token as the key.
   responses:
     BadRequest:
       description: Bad Request. The request is not valid.
@@ -58,28 +57,7 @@ components:
               value:  
                 code: "rate_limited"
                 message: "Too many requests"
-    ServiceUnavailable:
-      description: 503 Service Unavailable.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          examples:
-            Service_unavailable:
-              value:  
-                code: "service_unavailable"
-                message: "Upstream temporarily unavailable"
-    GatewayTimeout:
-      description: 504 Gateway Timeout.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          examples:
-            Gateway_timeout:
-              value:
-                code: "gateway_timeout"
-                message: "Upstream timed out"
+    
   schemas:
     DeviceIdObject:
       title: device id
@@ -217,8 +195,4 @@ paths:
           $ref: '#/components/responses/Forbidden'
         '429':
           $ref: '#/components/responses/TooManyRequests'
-        '503':
-          $ref: '#/components/responses/ServiceUnavailable'
-        '504':
-          $ref: '#/components/responses/GatewayTimeout'
       x-codegen-request-body-name: body
