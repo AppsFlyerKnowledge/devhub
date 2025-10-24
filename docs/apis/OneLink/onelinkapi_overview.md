@@ -18,7 +18,7 @@ Authenticati:on token. Learn [how to obtain the API token](https://support.appsf
 ### HTTP request
 
 ```http
-POST https://onelink.appsflyer.com/shortlink/v1/{onelink-id}&id={id}
+POST https://onelink.appsflyer.com/shortlink/v1/{onelink-id}
 ```
 
 ### Path parameters
