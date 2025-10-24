@@ -29,7 +29,7 @@ The flow works as follows:
 6. The [`didResolveDeepLink()`] method gets a [`DeepLinkResult`] object. 
 7. The [`DeepLinkResult`] object includes:
    * Status (Found/Not found/Failure)
-   * A [`DeepLink`] object that carries the `deep_link_value` and `deep_link_sub1-10` parameters that the developer uses to route the user to a specific in-app activity, which is the main goal of OneLink.
+   * A [`DeepLink`] object that carries the `deep_link_value` and `deep_link_sub1-10` parameters that the developer uses to route the user to a specific in-app activity, which is the main goal of OneLink. In addition, the object contains other event parameters that can be used by the app logic. For a list of the available keys, see: [Returned parameters in UDL](#returned-parameters-in-udl).
 
 [`didResolveDeepLink()`]: https://dev.appsflyer.com/hc/docs/deeplinkdelegate#didresolvedeeplink
 [`DeepLinkDelegate`]: https://dev.appsflyer.com/hc/docs/appsflyerlib-1#deeplinkdelegate
@@ -47,7 +47,7 @@ When setting up OneLink, the marketer uses parameters to create the links, and t
 1. Get from the marketer the desired behavior and personal experience a user gets when they click the URL.
 2. Based on the desired behavior, plan the `deep_link_value` and other parameters that are needed to give the user the desired personal experience.
    * The `deep_link_value` is set by the marketer in the URL and used by the developer to redirect the user to a specific place inside the app. For example, if you have a fruit store and want to direct users to apples, the value of `deep_link_value` can be `apples`.
-    * The `deep_link_sub1-10`  parameters can also be added to the URL to help personalize the user experience. For example, to give a 10% discount, the value of `deep_link_sub1` can be `10`.
+    * The `deep_link_sub1-10`  parameters can also be added to the URL to help personalize the user experience. For example, to give a 10% discount, the value of `deep_link_sub1` can be `10`. 
 
 ## Implementation
 
@@ -70,9 +70,44 @@ Implement the UDL API logic based on the chosen parameters and values.
 6. Use [`DeepLinkResult.status`](https://dev.appsflyer.com/hc/docs/deeplinkresult-1#status) to query whether the deep linking match is found.
 7. For when the status is an error, call [`DeepLinkResult.error`](https://dev.appsflyer.com/hc/docs/deeplinkresult-1#error) and run your error flow.
 8. For when the status is found, use [`DeepLinkResult.deepLink`](https://dev.appsflyer.com/hc/docs/deeplinkresult-1#deeplink) to retrieve the [`DeepLink`](https://dev.appsflyer.com/hc/docs/deeplink-1) object. 
-The `DeepLink` object contains the deep linking information arranged in public variables to retrieve the values from well-known OneLink keys, for example, [`DeepLink.deeplinkValue`](https://dev.appsflyer.com/hc/docs/deeplink-1#deeplinkvalue) for `deep_link_value`.
+The `DeepLink` object contains the deep linking information arranged in public variables to retrieve the values from well-known OneLink keys, for example, [`DeepLink.deeplinkValue`](https://dev.appsflyer.com/hc/docs/deeplink-1#deeplinkvalue) for `deep_link_value`. For a list of the available keys, see: [Returned parameters in UDL](#returned-parameters-in-udl).
 9. Use [`deepLinkObj.clickEvent["deep_link_sub1"]`](https://dev.appsflyer.com/hc/docs/deeplink-1#clickevent) to retrieve `deep_link_sub1`. Do the same for `deep_link_sub2-10` parameters, changing the string value as required.
 10. Once `deep_link_value` and `deep_link_sub1-10` are retrieved, pass them to an in-app router and use them to personalize the user experience.
+    
+### Returned parameters in UDL
+
+Apps using Unified Deep Linking (UDL) receive different sets of parameters depending on whether the flow is **Deferred Deep Linking (DDL)** or **Direct Deep Linking (DL)**.
+
+#### Deferred deep linking (DDL)
+
+The app receives only the parameters relevant for deferred deep linking:
+
+- `deep_link_value`  
+- `deep_link_sub1`–`deep_link_sub10`  
+  Any other parameters return `null`.
+
+#### Direct deep linking (DL)
+
+**Deep linking parameters**: 
+
+- `deep_link_value`  
+- `deep_link_sub1`–`deep_link_sub10`  
+
+**And additional parameters**: 
+
+- `path`  
+- `scheme`  
+- `host`  
+- `af_c_id`  
+- `af_adset`  
+- `af_adset_id`  
+- `af_ad`  
+- `af_ad_id`  
+- `af_ad_type`  
+- `af_channel`  
+- `af_dp`  
+- `esp_name`  
+- `link`  
 
 ### Supporting legacy OneLink links 
 
