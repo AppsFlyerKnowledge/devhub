@@ -199,7 +199,6 @@ components:
             > If you send an event without a value then send: `"eventValue":""`
             - Event values must be sent without additional symbols or formatting. 
             - For `af_revenue` a decimal point can be used. Negative values should be preceded by a `-`
-            - [Explicit TikTok For Business instructions](https://support.appsflyer.com/hc/en-us/articles/360002254918#paypurchase-2)
           example: '{ "af_revenue": "6", "af_content_type": "wallets", "af_content_id": "15854", "your_custom_attribute" :"456.123" }'
         app_version_name:
           type: string
@@ -580,7 +579,6 @@ components:
             > If you send an event without a value then send: `"eventValue":""`
             - Event values must be sent without additional symbols or formatting. 
             - For `af_revenue` a decimal point can be used. Negative values should be preceded by a `-`
-            - [Explicit TikTok For Business instructions](https://support.appsflyer.com/hc/en-us/articles/360002254918#paypurchase-2)
           example: '{ "af_revenue": "6", "af_content_type": "wallets", "af_content_id": "15854", "your_custom_attribute" :"456.123" }'
         app_version_name:
           type: string
@@ -934,7 +932,6 @@ components:
             > If you send an event without a value then send: `"eventValue":""`
             - Event values must be sent without additional symbols or formatting. 
             - For `af_revenue` a decimal point can be used. Negative values should be preceded by a `-`
-            - [Explicit TikTok For Business instructions](https://support.appsflyer.com/hc/en-us/articles/360002254918#paypurchase-2)
           example: '{ "af_revenue": "6", "af_content_type": "wallets", "af_content_id": "15854", "your_custom_attribute" :"456.123" }'
         app_version_name:
           type: string
