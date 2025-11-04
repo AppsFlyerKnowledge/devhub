@@ -3,7 +3,7 @@ info:
   title: BetterBid REST API
   version: "1.0"
 servers:
-  - url: https://better-bid.appsflyer.com/api/better-bid/v1.0
+  - url: https://betterbid.appsflyer.com/v1.0
 components:
   securitySchemes:
     AfHmac:
@@ -115,7 +115,7 @@ components:
         message: { type: string }
 
 paths:
-  /competitions/{media_source}/query:
+  /competition/{media_source}/query:
     x-hidden: true
     post:
       tags: [Competition Signals]
