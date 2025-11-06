@@ -22,6 +22,22 @@ Ensure your project meets the following minimum versions for compatibility with 
 ## Release Notes
 All notable changes to the AF Security SDK will be documented in this file.
 
+## [2.0.0] - 2025-10-15
+
+### Added
+- Enhanced data integrity verification with cryptographic hash-based message signing to ensure secure payload transmission
+- Advanced application identity validation to detect and prevent package tampering
+
+### Changed
+- Improved security monitoring with enhanced performance tracking capabilities
+- Optimized internal security checks for better efficiency
+
+### Improved
+- Strengthened application integrity validation to detect configuration mismatches
+- Enhanced error detection and reporting for security-related issues
+
+
+
 ### [1.3.4] - 2025-08-25
 
 #### Added
