@@ -29,7 +29,9 @@ The flow works as follows:
 6. The [`onDeepLinking()`] method gets a [`DeepLinkResult`] object. 
 7. The [`DeepLinkResult`] object includes:
    * Status (Found/Not found/Error)
-   * A [`DeepLink`] object that carries the `deep_link_value` and `deep_link_sub1-10` parameters, that the developer uses to route the user to a specific in-app activity, which is the main goal of OneLink.
+   * A DeepLink object that carries: 
+      - **For users with app not yet installed**: The `deep_link_value` and `deep_link_sub1-10` parameters.
+      - **For users with the app already installed**:The `deep_link_value` and `deep_link_sub1-10` parameters and all parameters contained in the `link` parameter of the OneLink attribution link.
 
 [`onDeepLinking()`]: https://dev.appsflyer.com/hc/docs/deeplinklistener#ondeeplinking
 [`DeepLinkingListener`]: https://dev.appsflyer.com/hc/docs/deeplinklistener

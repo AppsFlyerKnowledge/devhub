@@ -28,8 +28,10 @@ The flow works as follows:
 5. The UDL API calls back the [`didResolveDeepLink()`] in the [`DeepLinkDelegate`].
 6. The [`didResolveDeepLink()`] method gets a [`DeepLinkResult`] object. 
 7. The [`DeepLinkResult`] object includes:
-   * Status (Found/Not found/Failure)
-   * A [`DeepLink`] object that carries the `deep_link_value` and `deep_link_sub1-10` parameters that the developer uses to route the user to a specific in-app activity, which is the main goal of OneLink.
+   * Status (Found/Not found/Failure).
+   * A DeepLink object that carries: 
+      - **For users with app not yet installed**: The `deep_link_value` and `deep_link_sub1-10` parameters.
+      - **For users with the app already installed**:The `deep_link_value` and `deep_link_sub1-10` parameters and all parameters contained in the `link` parameter of the OneLink attribution link.
 
 [`didResolveDeepLink()`]: https://dev.appsflyer.com/hc/docs/deeplinkdelegate#didresolvedeeplink
 [`DeepLinkDelegate`]: https://dev.appsflyer.com/hc/docs/appsflyerlib-1#deeplinkdelegate
