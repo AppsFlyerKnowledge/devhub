@@ -99,7 +99,7 @@ In Xcode, go to **File** > **Add Packages**:
 Enter the AppsFlyer SDK GitHub repository. You can select one of the following:  
 <ul>
   <li><a href="https://github.com/AppsFlyerSDK/AppsFlyerFramework-Static" target="_blank">Statically Linked Library</a></li>
-  <li><a href="https://github.com/AppsFlyerSDK/AppsFlyerFramework-Dynamic" target="_blank">Dynamically Linked Library</a></li>
+  <li><a href="https://github.com/AppsFlyerSDK/AppsFlyerFramework-Dynamic" target="_blank">Dynamically Linked Library</a><strong> Note:</strong> The use of this version is not supported for apps that can run on MacOS. Instead, use the Statically Linked library version.</li>
   <li><a href="https://github.com/AppsFlyerSDK/AppsFlyerFramework-Strict" target="_blank">Strict (No IDFA Collection) Library</a></li>
 </ul>
 [block:image]
