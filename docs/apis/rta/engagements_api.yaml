@@ -590,6 +590,7 @@ components:
           - lgudid
           - fire
           - advertising_id
+          - psid
           - idfa
           - custom
         description: "Device identifier type"
