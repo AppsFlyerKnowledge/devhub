@@ -75,15 +75,15 @@ paths:
                     request_id: "f1c0af47-bb7a-4e25-a261-d94d07689bb8"
                 InvalidCommissionRateTooLow:
                   summary: Commission rate too low
-                  description: Commission rate must be greater than 0
+                  description: Commission rate must be greater than or equal to 1%
                   value:
-                    message: "Bad Request: For app_id id123456789, the input value provided for the store_commission_rate is out of range. expected value should be greater than 0"
+                    message: "Bad Request: For app_id id123456789, the input value provided for the store_commission_rate is out of range. expected value should be greater than or equal to 1"
                     request_id: "f1c0af47-bb7a-4e25-a261-d94d07689bb8"
                 InvalidCommissionRateTooHigh:
                   summary: Commission rate too high
                   description: Commission rate exceeds maximum of 30%
                   value:
-                    message: "Bad Request: For app_id id123456789, the input value provided for the store_commission_rate is out of range. expected value should be less equal to 30"
+                    message: "Bad Request: For app_id id123456789, the input value provided for the store_commission_rate is out of range. expected value should be less than or equal to 30"
                     request_id: "f1c0af47-bb7a-4e25-a261-d94d07689bb8"
                 MissingCommissionReason:
                   summary: Missing store_commission_reason
