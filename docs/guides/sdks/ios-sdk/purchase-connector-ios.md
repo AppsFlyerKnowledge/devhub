@@ -22,7 +22,9 @@ The AppsFlyer ROI360 purchase connector is used to validate and report in-app pu
 - 6.16.2+: StoreKit 1 & 2 support
 - Minimum iOS Version: 12
 
-** ⚠️Important note: ** See the following table for purchase connector and AppsFlyer SDK version compatability and use the correct version to avoid unexpected behavior.
+> ⚠️ Important
+> 
+> See the following table for purchase connector and AppsFlyer SDK version compatability and use the correct version to avoid unexpected behavior.
 
 |  Purchase connector  | AppsFlyer SDK |
 | :------: | :--------: |
@@ -33,6 +35,10 @@ The AppsFlyer ROI360 purchase connector is used to validate and report in-app pu
 | 6.12.2   |  6.12.2 |
 | 6.12.3   |  6.12.2 |
 | 6.17.0   |  6.17.0 |
+
+> 📘 Note
+> 
+> Currently, the Purchase Connector does not support macOS and tvOS. 
 
 ## Install via Cocoapods
 
@@ -63,7 +69,8 @@ binary "https://raw.githubusercontent.com/AppsFlyerSDK/AppsFlyerFramework/master
 
 Follow standard SPM dependency manager instructions.
 
-> **Note**: 
+> 📘 Note
+> 
 > - This repository contains statically linked `PurchaseConnector.xcframework`. If you want to use dynamic .xcframework, integrate it for SPM from ththe following repository:
 https://github.com/AppsFlyerSDK/PurchaseConnector-Dynamic*
 > - PurchaseConnector has a dependency on [AppsFlyerLib framework](https://github.com/AppsFlyerSDK/AppsFlyerFramework), so make sure to integrate it as well for Carthage and SPM.
