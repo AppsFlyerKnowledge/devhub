@@ -7,6 +7,14 @@ hidden: false
 order: 1
 ---
 
+## Version 6.17.4
+
+#### Technical Update
+
+- Updated the integration between the SDK and the Advanced Security Module. 
+This version is compatible with Security Module v2.0.0 and above 
+
+- Improved memory consumption by fixing a potential memory leak
 
 ## Version 6.17.3
 
@@ -183,3 +191,5 @@ This parameter contains the original URL that was embedded into the email, and t
 
 
 For previous versions, see [here](https://support.appsflyer.com/hc/en-us/articles/115001256006-AppsFlyer-Android-SDK-release-notes)
+
+
