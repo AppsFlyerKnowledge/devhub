@@ -2,7 +2,7 @@ openapi: 3.0.1
 info:
   title: ROI360 Net Revenue API (v1)
   description: |
-    ## What it does
+    ## Overview
     ROI360 automatically calculates net in-app-purchase (IAP) and subscription revenue by deducting store commissions and local taxes from the gross amount.
     
     The default settings cover standard App Store and Google Play fees and taxes. If your store commission differs (e.g. Apple Small Business Program at 15%) or you operate in a country with special tax treatment, use the Net Revenue API to override the defaults.
