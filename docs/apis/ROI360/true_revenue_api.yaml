@@ -1,12 +1,21 @@
 openapi: 3.0.1
 info:
-  title: Net Revenue API
+  title: ROI360 Net Revenue API (v1)
   description: |
-    > ⚠️
-    >  **Deprecation Notice:** The previous API prefix `/api/stores-taxes/v1.0/` is deprecated and should not be used anymore. If you are currently using the old stores-taxes prefix, please update your integration to use the net-revenue prefix instead. Both prefixes are currently supported for backward compatibility, but the stores-taxes prefix will be removed in the future.
+    ## What it does
+    ROI360 automatically calculates net in-app-purchase (IAP) and subscription revenue by deducting store commissions and local taxes from the gross amount.
     
-    When recording revenue, usually just gross revenue is recorded in AppsFlyer. However, the in-app purchase (IAP) and subscription revenue solution takes into account tax payments and store commissions to provide the net revenue for each transaction.  
+    The default settings cover standard App Store and Google Play fees and taxes. If your store commission differs (e.g. Apple Small Business Program at 15%) or you operate in a country with special tax treatment, use the Net Revenue API to override the defaults.
+    
+    ROI360 applies the following default store commissions:
+    - **IAP (one-time purchases):** 30% on both iOS and Android.
+    - **Subscriptions:** 30% on iOS during the first 12 months, dropping to 15% thereafter; 15% on Android from day one.
+    
+    Default tax rates can be found [here](https://docs.google.com/document/d/e/2PACX-1vSl3DwlK2Gt2aa5gmDzD3-K3CtnIM85oMNrqx3PCTamwCERWYU48GugNpD31BFjA2PJjZnqaXIVe2Hx/pub).
 
+    > ⚠️
+    >  **Deprecation Notice:** The API prefix `/api/stores-taxes/v1.0/` is deprecated. If you are currently using the old stores-taxes prefix, please update your integration to use the net-revenue prefix instead.
+  
   version: 1.0.0
 servers:
   - url: https://hq1.appsflyer.com/api/net-revenue/v1.0/
@@ -271,7 +280,7 @@ paths:
       tags:
         - "Store commission rates"
       summary: "Delete store commission rates for specific apps or all apps in account"
-      description: "Delete store commission rates for one or more apps. Use comma-separated app IDs or 'all' to delete all apps in the account."
+      description: "Delete custom store commission rates to restore default values for one or more apps. Use comma-separated app IDs or 'all' to delete all apps in the account."
       parameters:
         - name: app_ids
           in: path
@@ -362,6 +371,11 @@ paths:
       tags:
         - "Tax rate rules"
       summary: "Create tax rate rule"
+      description: |
+        Create custom tax rate rules for a specific app.
+        
+        > ⚠️
+        > **Note:** After you set a tax rate for a specific app + country, ROI360 stops applying default tax updates for that combination.
       parameters:
         - name: app_id
           in: path
