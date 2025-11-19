@@ -15,14 +15,21 @@ This document describes the integration steps for the AppsFlyer Advanced Securit
 
 Ensure your project meets the following minimum versions for compatibility with the Advanced Security module:
 
-- [AppsFlyer Android SDK](https://dev.appsflyer.com/hc/docs/android-sdk): Version 6.15.2
-    * If you are using [validateAndLogInAppPurchase (Legacy)](https://dev.appsflyer.com/hc/docs/validate-and-log-purchase-android#validateandloginapppurchase-legacy) please migrate to the [newer API](https://dev.appsflyer.com/hc/docs/validate-and-log-purchase-android#implement-validateandloginapppurchase-beta) as currently the legacy API is not compatible with the module. 
+### Compatibility Updates: AppsFlyer Android SDK and Security Module
+
+
+- Security Module v1.x.x (latest `1.3.4`) is compatible with [AppsFlyer Android SDK versions](https://support.appsflyer.com/hc/en-us/articles/115001256006-AppsFlyer-Android-SDK-release-notes) `6.15.2 – 6.17.3`.
+- Security Module v2.x.x (currently `2.0.0`) is compatible only with AppsFlyer Android SDK version `6.17.4` and above.
+
+Please ensure that the versions you integrate follow the compatibility ranges above to avoid build or runtime issues.
+If you plan to upgrade the SDK to `6.17.4+`, make sure to update the Security Module to v2.0.0 and above as well.
+Conversely, if you are using SDK versions below 6.17.4, please continue using Security Module v1.x.x (latest `1.3.4`).
 
 
 ## Release Notes
 All notable changes to the AF Security SDK will be documented in this file.
 
-## [2.0.0] - 2025-10-15
+### [2.0.0] - 2025-10-15
 
 ### Added
 - Enhanced data integrity verification with cryptographic hash-based message signing to ensure secure payload transmission
