@@ -7,6 +7,12 @@ hidden: false
 order: 1
 ---
 
+## Version 6.17.5 - 26/11/2025
+
+#### Technical Update
+
+- Stability improvements and fixes for potential ANRs
+
 ## Version 6.17.4
 
 #### Technical Update
