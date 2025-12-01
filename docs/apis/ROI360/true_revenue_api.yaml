@@ -1,30 +1,388 @@
 openapi: 3.0.1
 info:
-  title: True Revenue tax API
+  title: ROI360 Net Revenue API (v2.0)
   description: |
-    When recording revenue, usually just gross revenue is recorded in AppsFlyer. However, the in-app purchase (IAP) and subscription revenue solution takes into account tax payments to provide the true revenue (net revenue) for each transaction.
-
-  version: 1.0.0
+    ROI360 automatically calculates net in-app-purchase (IAP) and subscription revenue by deducting store commissions and local taxes from the gross amount.
+    
+    The default settings cover standard App Store and Google Play fees and taxes. If your store commission differs (e.g. Apple Small Business Program at 15%) or you operate in a country with special tax treatment, use the Net Revenue API to override the defaults.
+    
+    ROI360 applies the following default store commissions:
+    - **IAP (one-time purchases):** 30% on both iOS and Android.
+    - **Subscriptions:** 30% on iOS during the first 12 months, dropping to 15% thereafter; 15% on Android from day one.
+    
+    Default tax rates can be found [here](https://docs.google.com/document/d/e/2PACX-1vSl3DwlK2Gt2aa5gmDzD3-K3CtnIM85oMNrqx3PCTamwCERWYU48GugNpD31BFjA2PJjZnqaXIVe2Hx/pub).
+  
+    > ⚠️
+    >  **Deprecation Notice:** API v1.0 (`/api/stores-taxes/v1.0/`) is deprecated. Please migrate to v2.0 (`/api/net-revenue/v2.0/`).
+ 
+  version: 2.0.0
 servers:
-  - url: https://hq1.appsflyer.com/api/stores-taxes/v1.0/tax_rates/
-    description: api server - production
+  - url: https://hq1.appsflyer.com/api/net-revenue/v2.0/
+    description: v2.0 - use this for all integrations
+  - url: https://hq1.appsflyer.com/api/stores-taxes/v1.0/
+    description: v1.0 (deprecated, will be removed in a future release)
 security:
   - bearerAuth: []
 
 paths:
-  /app/{app_id}:
+  /store_commission_rates:
+    post:
+      tags:
+        - "Store commission rates"
+      summary: "Create or update store commission rates"
+      description: "Create or update store commission rates for one or more apps. Each app can have a specific commission rate based on various store programs."
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              minItems: 1
+              items:
+                $ref: '#/components/schemas/StoreCommission'
+              example:
+                - app_id: id123456789
+                  store_commission_rate: 15
+                  store_commission_reason: google_15pct_tier_first_1m
+                - app_id: id987654321
+                  store_commission_rate: 15
+                  store_commission_reason: apple_sbp
+        required: true
+      responses:
+        200:
+          $ref: '#/components/responses/Success'
+        400:
+          description: Various errors
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                InvalidJson:
+                  summary: Invalid JSON
+                  description: Request body is not valid JSON
+                  value:
+                    message: "Incorrect JSON format. Please verify and resubmit"
+                    request_id: "f1c0af47-bb7a-4e25-a261-d94d07689bb8"
+                EmptyRequest:
+                  summary: Empty request
+                  description: No store commissions provided in request
+                  value:
+                    message: "Bad Request: At least one store commission is required"
+                    request_id: "f1c0af47-bb7a-4e25-a261-d94d07689bb8"
+                MissingAppId:
+                  summary: Missing app_id
+                  description: The app_id field is missing for a store commission
+                  value:
+                    message: "Bad Request: the parameter app_id is missing"
+                    request_id: "f1c0af47-bb7a-4e25-a261-d94d07689bb8"
+                MissingCommissionRate:
+                  summary: Missing store_commission_rate
+                  description: The store_commission_rate field is missing
+                  value:
+                    message: "Bad Request: For app_id id123456789, the parameter store_commission_rate is missing"
+                    request_id: "f1c0af47-bb7a-4e25-a261-d94d07689bb8"
+                InvalidCommissionRateTooLow:
+                  summary: Commission rate too low
+                  description: Commission rate must be greater than or equal to 1%
+                  value:
+                    message: "Bad Request: For app_id id123456789, the input value provided for the store_commission_rate is out of range. expected value should be greater than or equal to 1"
+                    request_id: "f1c0af47-bb7a-4e25-a261-d94d07689bb8"
+                InvalidCommissionRateTooHigh:
+                  summary: Commission rate too high
+                  description: Commission rate exceeds maximum of 30%
+                  value:
+                    message: "Bad Request: For app_id id123456789, the input value provided for the store_commission_rate is out of range. expected value should be less than or equal to 30"
+                    request_id: "f1c0af47-bb7a-4e25-a261-d94d07689bb8"
+                MissingCommissionReason:
+                  summary: Missing store_commission_reason
+                  description: The store_commission_reason field is missing
+                  value:
+                    message: "Bad Request: For app_id id123456789, the parameter store_commission_reason is missing"
+                    request_id: "f1c0af47-bb7a-4e25-a261-d94d07689bb8"
+                InvalidCommissionReason:
+                  summary: Invalid commission reason
+                  description: Commission reason not in allowed enum values
+                  value:
+                    message: "Bad Request: For app_id id123456789, store_commission_reason must be one of [apple_sbp google_15pct_tier_first_1m google_media_experience other]"
+                    request_id: "f1c0af47-bb7a-4e25-a261-d94d07689bb8"
+                AppNotInAccount:
+                  summary: App does not belong to account
+                  description: The specified app_id does not belong to the authenticated account
+                  value:
+                    message: "Bad Request: app id123456789 does not belong to your account"
+                    request_id: "f1c0af47-bb7a-4e25-a261-d94d07689bb8"
+        '401':
+          description: Missing authorization token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                MissingAuthorizationToken:
+                  summary: Missing authorization token
+                  value:
+                    message: "Get the API V2 token from your AppsFlyer admin"
+                    request_id: "f1c0af47-bb7a-4e25-a261-d94d07689bb8"
+        '404':
+          description: Token unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                TokenUnauthorized:
+                  summary: Method not allowed
+                  value:
+                    message: "Method not allowed"
+                    request_id: "f1c0af47-bb7a-4e25-a261-d94d07689bb8"
+        '405':
+          description: Method not allowed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                MethodNotAllowed:
+                  summary: Token unauthorized
+                  value:
+                    message: "Token unauthorized"
+                    request_id: "f1c0af47-bb7a-4e25-a261-d94d07689bb8"
+        '429':
+          description: Rate limit exceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                RateLimitExceeded:
+                  summary: Rate limit exceeded
+                  value:
+                    message: "The rate limit is XXX requests per minute, please try again later"
+                    request_id: "f1c0af47-bb7a-4e25-a261-d94d07689bb8"
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                InternalError:
+                  summary: Internal server error
+                  value:
+                    message: "Internal error. please try again later."
+                    request_id: "f1c0af47-bb7a-4e25-a261-d94d07689bb8"
+
+  /store_commission_rates/app/{app_ids}:
+    get:
+      tags:
+        - "Store commission rates"
+      summary: "Get store commission rates for specific apps or all apps in account"
+      description: "Retrieve store commission rates for one or more apps. Use comma-separated app IDs or 'all' to get all apps in the account."
+      parameters:
+        - name: app_ids
+          in: path
+          required: true
+          schema:
+            type: string
+          description: "Comma-separated app IDs or 'all' to get all apps in the account"
+          example: "id123456789,id987654321"
+      responses:
+        '200':
+          description: Store commission rates returned
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/StoreCommission'
+              example:
+                - app_id: id123456789
+                  store_commission_rate: 15
+                  store_commission_reason: google_15pct_tier_first_1m
+                - app_id: id987654321
+                  store_commission_rate: 15
+                  store_commission_reason: apple_sbp
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                MissingAppIds:
+                  summary: Missing app_ids parameter
+                  description: No app_ids specified in the path parameter
+                  value:
+                    message: "Invalid request - No app_ids specified"
+                    request_id: "f1c0af47-bb7a-4e25-a261-d94d07689bb8"
+        '401':
+          description: Missing authorization token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                MissingAuthorizationToken:
+                  summary: Missing authorization token
+                  value:
+                    message: "Get the API V2 token from your AppsFlyer admin"
+                    request_id: "f1c0af47-bb7a-4e25-a261-d94d07689bb8"
+        '404':
+          description: Token unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                TokenUnauthorized:
+                  summary: Method not allowed
+                  value:
+                    message: "Method not allowed"
+                    request_id: "f1c0af47-bb7a-4e25-a261-d94d07689bb8"
+        '405':
+          description: Method not allowed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                MethodNotAllowed:
+                  summary: Token unauthorized
+                  value:
+                    message: "Token unauthorized"
+                    request_id: "f1c0af47-bb7a-4e25-a261-d94d07689bb8"
+        '429':
+          description: Rate limit exceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                RateLimitExceeded:
+                  summary: Rate limit exceeded
+                  value:
+                    message: "The rate limit is XXX requests per minute, please try again later"
+                    request_id: "f1c0af47-bb7a-4e25-a261-d94d07689bb8"
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                InternalError:
+                  summary: Internal server error
+                  value:
+                    message: "Internal error. please try again later."
+                    request_id: "f1c0af47-bb7a-4e25-a261-d94d07689bb8"
+    delete:
+      tags:
+        - "Store commission rates"
+      summary: "Delete store commission rates for specific apps or all apps in account"
+      description: "Delete custom store commission rates to restore default values for one or more apps. Use comma-separated app IDs or 'all' to delete all apps in the account."
+      parameters:
+        - name: app_ids
+          in: path
+          required: true
+          schema:
+            type: string
+          description: "Comma-separated app IDs or 'all' to delete all apps in the account"
+          example: "id123456789,id987654321"
+      responses:
+        '200':
+          $ref: '#/components/responses/Success'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                MissingAppIds:
+                  summary: Missing app_ids parameter
+                  description: No app_ids specified in the path parameter
+                  value:
+                    message: "Invalid request - No app_ids specified"
+                    request_id: "f1c0af47-bb7a-4e25-a261-d94d07689bb8"
+        '401':
+          description: Missing authorization token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                MissingAuthorizationToken:
+                  summary: Missing authorization token
+                  value:
+                    message: "Get the API V2 token from your AppsFlyer admin"
+                    request_id: "f1c0af47-bb7a-4e25-a261-d94d07689bb8"
+        '404':
+          description: Token unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                TokenUnauthorized:
+                  summary: Method not allowed
+                  value:
+                    message: "Method not allowed"
+                    request_id: "f1c0af47-bb7a-4e25-a261-d94d07689bb8"
+        '405':
+          description: Method not allowed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                MethodNotAllowed:
+                  summary: Token unauthorized
+                  value:
+                    message: "Token unauthorized"
+                    request_id: "f1c0af47-bb7a-4e25-a261-d94d07689bb8"
+        '429':
+          description: Rate limit exceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                RateLimitExceeded:
+                  summary: Rate limit exceeded
+                  value:
+                    message: "The rate limit is XXX requests per minute, please try again later"
+                    request_id: "f1c0af47-bb7a-4e25-a261-d94d07689bb8"
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                InternalError:
+                  summary: Internal server error
+                  value:
+                    message: "Internal error. please try again later."
+                    request_id: "f1c0af47-bb7a-4e25-a261-d94d07689bb8"
+
+  /tax_rates/app/{app_id}:
     post:
       tags:
         - "Tax rate rules"
       summary: "Create tax rate rule"
+      description: |
+        Create custom tax rate rules for a specific app.
+        
+        > ⚠️
+        > **Note:** After you set a tax rate for a specific app + country, ROI360 stops applying default tax updates for that combination.
       parameters:
-      - name: app_id
-        in: path
-        required: true
-        schema:
-          type: string
-        description: "App ID of the app for which you are setting the tax rate rule"
-        example: id123456789
+        - name: app_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: "App ID of the app for which you are setting the tax rate rule"
+          example: id123456789
       requestBody:
         content:
           application/json:
@@ -58,447 +416,447 @@ paths:
           $ref: '#/components/responses/Success'
         400:
           description: Various errors
-          content: 
+          content:
             application/json:
-                schema:
-                  $ref: '#/components/schemas/Error'
-                examples:
-                  InvalidJson:
-                    summary: Invalid json
-                    description: Invalid json
-                    value:
-                      message: "Incorrect JSON format. Please verify and resubmit"
-                      request_id: "f1c0af47-bb7a-4e25-a261-d94d07689bb8"
-                  MissingAppId:
-                    summary: Missing app_id
-                    description: Missing app_id
-                    value:
-                      message: "integration 0: missing mandatory field 'app_id"
-                      request_id: "f1c0af47-bb7a-4e25-a261-d94d07689bb8"
-                  InvalidCountry:
-                    summary: invalid country
-                    value:
-                      message: "Geo (country) code not identified. Please use an ISO 3166-1 alpha 2 (2 letter code)"
-                      request_id: "f1c0af47-bb7a-4e25-a261-d94d07689bb8"
-                  SubdivisioPostalNoCountry:
-                    summary: Subdivision or Postal code without country
-                    description: Subdivision or Postal code without country
-                    value:
-                      message: "Country must be defined for the returned object"
-                  TaxRateAlreadyExists:
-                   summary: Tax rate already exists
-                   description: Tax rate already exists
-                   value:
-                     message: "A tax rate is already defined for the returned object"
-                  TaxRateMissing:
-                   summary: Tax rate missing
-                   description: Tax rate missing
-                   value:
-                     message: "The parameter tax_rate is missing for the returned object"
-                     request_id: "f1c0af47-bb7a-4e25-a261-d94d07689bb8"
-                  MissingCountry:
-                    summary: Missing country
-                    description: Missing country
-                    value:
-                      message: "The parameter country is missing for the returned object"
-                      request_id: "f1c0af47-bb7a-4e25-a261-d94d07689bb8"
-                  TaxNameMissing:
-                    summary: Missing tax name
-                    description: Missing tax name
-                    value:
-                      message: "The parameter tax_name is missing for the returned object"
-                  InvalidSourceEvent:
-                   summary: invalid source_event
-                   description: invalid source_event
-                   value:
-                     message: "integration 0, appID='com.config_4.test', network='chartboosts2s_int': invalid source event suffix 'something_monetized"
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                InvalidJson:
+                  summary: Invalid json
+                  description: Invalid json
+                  value:
+                    message: "Incorrect JSON format. Please verify and resubmit"
+                    request_id: "f1c0af47-bb7a-4e25-a261-d94d07689bb8"
+                MissingAppId:
+                  summary: Missing app_id
+                  description: Missing app_id
+                  value:
+                    message: "integration 0: missing mandatory field 'app_id"
+                    request_id: "f1c0af47-bb7a-4e25-a261-d94d07689bb8"
+                InvalidCountry:
+                  summary: invalid country
+                  value:
+                    message: "Geo (country) code not identified. Please use an ISO 3166-1 alpha 2 (2 letter code)"
+                    request_id: "f1c0af47-bb7a-4e25-a261-d94d07689bb8"
+                SubdivisioPostalNoCountry:
+                  summary: Subdivision or Postal code without country
+                  description: Subdivision or Postal code without country
+                  value:
+                    message: "Country must be defined for the returned object"
+                TaxRateAlreadyExists:
+                  summary: Tax rate already exists
+                  description: Tax rate already exists
+                  value:
+                    message: "A tax rate is already defined for the returned object"
+                TaxRateMissing:
+                  summary: Tax rate missing
+                  description: Tax rate missing
+                  value:
+                    message: "The parameter tax_rate is missing for the returned object"
+                    request_id: "f1c0af47-bb7a-4e25-a261-d94d07689bb8"
+                MissingCountry:
+                  summary: Missing country
+                  description: Missing country
+                  value:
+                    message: "The parameter country is missing for the returned object"
+                    request_id: "f1c0af47-bb7a-4e25-a261-d94d07689bb8"
+                TaxNameMissing:
+                  summary: Missing tax name
+                  description: Missing tax name
+                  value:
+                    message: "The parameter tax_name is missing for the returned object"
+                InvalidSourceEvent:
+                  summary: invalid source_event
+                  description: invalid source_event
+                  value:
+                    message: "integration 0, appID='com.config_4.test', network='chartboosts2s_int': invalid source event suffix 'something_monetized"
         '401':
           description: Missing authorization token
-          content: 
+          content:
             application/json:
-                schema:
-                  $ref: '#/components/schemas/Error'
-                examples:
-                  MissingAuthorizationToken:
-                    summary: Missing authorization token
-                    value:
-                      message: "Get the API V2 token from your AppsFlyer admin"
-                      request_id: "f1c0af47-bb7a-4e25-a261-d94d07689bb8"
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                MissingAuthorizationToken:
+                  summary: Missing authorization token
+                  value:
+                    message: "Get the API V2 token from your AppsFlyer admin"
+                    request_id: "f1c0af47-bb7a-4e25-a261-d94d07689bb8"
         '404':
           description: Token unauthorized
-          content: 
+          content:
             application/json:
-                schema:
-                  $ref: '#/components/schemas/Error'
-                examples:
-                  TokenUnauthorized:
-                    summary: Method not allowed
-                    value:
-                      message: "Method not allowed"
-                      request_id: "f1c0af47-bb7a-4e25-a261-d94d07689bb8"
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                TokenUnauthorized:
+                  summary: Method not allowed
+                  value:
+                    message: "Method not allowed"
+                    request_id: "f1c0af47-bb7a-4e25-a261-d94d07689bb8"
         '405':
           description: Method not allowed
-          content: 
+          content:
             application/json:
-                schema:
-                  $ref: '#/components/schemas/Error'
-                examples:
-                  MethodNotAllowed:
-                    summary: Token unauthorized
-                    value:
-                      message: "Token unauthorized"
-                      request_id: "f1c0af47-bb7a-4e25-a261-d94d07689bb8"
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                MethodNotAllowed:
+                  summary: Token unauthorized
+                  value:
+                    message: "Token unauthorized"
+                    request_id: "f1c0af47-bb7a-4e25-a261-d94d07689bb8"
         '429':
           description: Rate limit exceeded
-          content: 
+          content:
             application/json:
-                schema:
-                  $ref: '#/components/schemas/Error' 
-                examples:
-                  InternalError:
-                    summary: Rate limit exceeded
-                    value:
-                      message: "The rate limit is XXX requests per minute, please try again later"
-                      request_id: "f1c0af47-bb7a-4e25-a261-d94d07689bb8"
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                InternalError:
+                  summary: Rate limit exceeded
+                  value:
+                    message: "The rate limit is XXX requests per minute, please try again later"
+                    request_id: "f1c0af47-bb7a-4e25-a261-d94d07689bb8"
         '500':
           description: Internal server error
-          content: 
+          content:
             application/json:
-                schema:
-                  $ref: '#/components/schemas/Error' 
-                examples:
-                  InternalError:
-                    summary: Internal Server Error
-                    value:
-                      message: "Internal error. Please try again later."
-                      request_id: "f1c0af47-bb7a-4e25-a261-d94d07689bb8"
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                InternalError:
+                  summary: Internal Server Error
+                  value:
+                    message: "Internal error. Please try again later."
+                    request_id: "f1c0af47-bb7a-4e25-a261-d94d07689bb8"
     get:
       tags:
         - "Tax rate rules"
       summary: "Get a filtered list of taxes or the entire tax catalog if no filters are provided"
       description: "Obtain tax catalog data for all available taxes or apply filters to narrow down the search based on specific tax attributes."
       parameters:
-      - name: app_id
-        in: path
-        required: true
-        schema:
-          type: string
-        description: "App ID of the app for which you are getting tax rate rule catalog"
-        example: id123456789
-      - in: query
-        name: format
-        required: false
-        schema:
-          type: string
-          enum: [csv, json]
-          default: json
-        description: "The output format of the tax catalog data. Defaults to 'json'."
-        example: json
-      - in: query
-        name: tax_name
-        required: false
-        schema:
-          type: string
-        description: "Filter catalog by the name appearing in the customer invoice that describes the specific type of tax, such as sales, VAT, GST."
-        example: Sales
-      - in: query
-        name: tax_rate
-        required: false
-        schema:
-          type: number
-          format: double
-          minimum: 0
-          maximum: 100
-          pattern: '^\d+(.\d{1,4})?$'
-        description: "Filter catalog by the percentage rate of the tax, specified up to 4 decimal places."
-        example: 7.25
-      - in: query
-        name: country
-        required: false
-        schema:
-          type: string
-          enum:
-            - AF
-            - AX
-            - AL
-            - DZ
-            - AS
-            - AD
-            - AO
-            - AI
-            - AQ
-            - AG
-            - AR
-            - AM
-            - AW
-            - AU
-            - AT
-            - AZ
-            - BS
-            - BH
-            - BD
-            - BB
-            - BY
-            - BE
-            - BZ
-            - BJ
-            - BM
-            - BT
-            - BO
-            - BA
-            - BW
-            - BV
-            - BR
-            - IO
-            - BN
-            - BG
-            - BF
-            - BI
-            - KH
-            - CM
-            - CA
-            - CV
-            - KY
-            - CF
-            - TD
-            - CL
-            - CN
-            - CX
-            - CC
-            - CO
-            - KM
-            - CG
-            - CD
-            - CK
-            - CR
-            - CI
-            - HR
-            - CU
-            - CY
-            - CZ
-            - DK
-            - DJ
-            - DM
-            - DO
-            - EC
-            - EG
-            - SV
-            - GQ
-            - ER
-            - EE
-            - ET
-            - FK
-            - FO
-            - FJ
-            - FI
-            - FR
-            - GF
-            - PF
-            - TF
-            - GA
-            - GM
-            - GE
-            - DE
-            - GH
-            - GI
-            - GR
-            - GL
-            - GD
-            - GP
-            - GU
-            - GT
-            - GG
-            - GN
-            - GW
-            - GY
-            - HT
-            - HM
-            - VA
-            - HN
-            - HK
-            - HU
-            - IS
-            - IN
-            - ID
-            - IR
-            - IQ
-            - IE
-            - IM
-            - IL
-            - IT
-            - JM
-            - JP
-            - JE
-            - JO
-            - KZ
-            - KE
-            - KI
-            - KR
-            - KP
-            - KW
-            - KG
-            - LA
-            - LV
-            - LB
-            - LS
-            - LR
-            - LY
-            - LI
-            - LT
-            - LU
-            - MO
-            - MK
-            - MG
-            - MW
-            - MY
-            - MV
-            - ML
-            - MT
-            - MH
-            - MQ
-            - MR
-            - MU
-            - YT
-            - MX
-            - FM
-            - MD
-            - MC
-            - MN
-            - ME
-            - MS
-            - MA
-            - MZ
-            - MM
-            - NA
-            - NR
-            - NP
-            - NL
-            - NC
-            - NZ
-            - NI
-            - NE
-            - NG
-            - NU
-            - NF
-            - MP
-            - NO
-            - OM
-            - PK
-            - PW
-            - PS
-            - PA
-            - PG
-            - PY
-            - PE
-            - PH
-            - PN
-            - PL
-            - PT
-            - PR
-            - QA
-            - RE
-            - RO
-            - RU
-            - RW
-            - BL
-            - SH
-            - KN
-            - LC
-            - MF
-            - PM
-            - VC
-            - WS
-            - SM
-            - ST
-            - SA
-            - SN
-            - RS
-            - SC
-            - SL
-            - SG
-            - SK
-            - SI
-            - SB
-            - SO
-            - ZA
-            - GS
-            - ES
-            - LK
-            - SD
-            - SR
-            - SJ
-            - SZ
-            - SE
-            - CH
-            - SY
-            - TW
-            - TJ
-            - TZ
-            - TH
-            - TL
-            - TG
-            - TK
-            - TO
-            - TT
-            - TN
-            - TR
-            - TM
-            - TC
-            - TV
-            - UG
-            - UA
-            - AE
-            - GB
-            - US
-            - UM
-            - UY
-            - UZ
-            - VU
-            - VE
-            - VN
-            - VG
-            - VI
-            - WF
-            - EH
-            - YE
-            - ZM
-            - ZW
-        description: "Filter catalog by the two-letter ISO country code where the tax is applied."
-      - in: query
-        name: subdivision
-        required: false
-        schema:
-          type: string
-        description: "Filter catalog by the ISO 3166-2 subdivision code within the specified country."
-        example: US-CA
-      - in: query
-        name: postal_code
-        required: false
-        schema:
-          type: string
-        description: "Filter catalog by postal code to identify area-specific tax rates."
-        example: "L4J8E3"
-      - in: query
-        name: tax_exclusive
-        required: false
-        schema:
-          type: boolean
-        description: "Filter by whether the tax is exclusive of the price. False means tax is included in the overall revenue. True means tax is in addition to the overall stated revenue. For example, in the USA or Canada, where the sticker price doesn't include sales tax."
-      - in: query
-        name: deduction_order
-        required: false
-        schema:
-          type: integer
-          enum:
-            - 0
-            - 1
-            - 2
-        description: >
-          Filter catalog by the order deductions are applied against gross revenue. 
-          The deduction_order is an enum that can be set to one of 0, 1, or 2.
-          - 0: Store commission is deducted first from the gross revenue and tax is deducted from the remaining amount.
-          - 1: Tax is deducted first from the gross revenue and store commission is deducted from the remaining amount.
-          - 2: Both tax and store commission are deducted from the total revenue.
+        - name: app_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: "App ID of the app for which you are getting tax rate rule catalog"
+          example: id123456789
+        - in: query
+          name: format
+          required: false
+          schema:
+            type: string
+            enum: [csv, json]
+            default: json
+          description: "The output format of the tax catalog data. Defaults to 'json'."
+          example: json
+        - in: query
+          name: tax_name
+          required: false
+          schema:
+            type: string
+          description: "Filter catalog by the name appearing in the customer invoice that describes the specific type of tax, such as sales, VAT, GST."
+          example: Sales
+        - in: query
+          name: tax_rate
+          required: false
+          schema:
+            type: number
+            format: double
+            minimum: 0
+            maximum: 100
+            pattern: '^\d+(.\d{1,4})?$'
+          description: "Filter catalog by the percentage rate of the tax, specified up to 4 decimal places."
+          example: 7.25
+        - in: query
+          name: country
+          required: false
+          schema:
+            type: string
+            enum:
+              - AF
+              - AX
+              - AL
+              - DZ
+              - AS
+              - AD
+              - AO
+              - AI
+              - AQ
+              - AG
+              - AR
+              - AM
+              - AW
+              - AU
+              - AT
+              - AZ
+              - BS
+              - BH
+              - BD
+              - BB
+              - BY
+              - BE
+              - BZ
+              - BJ
+              - BM
+              - BT
+              - BO
+              - BA
+              - BW
+              - BV
+              - BR
+              - IO
+              - BN
+              - BG
+              - BF
+              - BI
+              - KH
+              - CM
+              - CA
+              - CV
+              - KY
+              - CF
+              - TD
+              - CL
+              - CN
+              - CX
+              - CC
+              - CO
+              - KM
+              - CG
+              - CD
+              - CK
+              - CR
+              - CI
+              - HR
+              - CU
+              - CY
+              - CZ
+              - DK
+              - DJ
+              - DM
+              - DO
+              - EC
+              - EG
+              - SV
+              - GQ
+              - ER
+              - EE
+              - ET
+              - FK
+              - FO
+              - FJ
+              - FI
+              - FR
+              - GF
+              - PF
+              - TF
+              - GA
+              - GM
+              - GE
+              - DE
+              - GH
+              - GI
+              - GR
+              - GL
+              - GD
+              - GP
+              - GU
+              - GT
+              - GG
+              - GN
+              - GW
+              - GY
+              - HT
+              - HM
+              - VA
+              - HN
+              - HK
+              - HU
+              - IS
+              - IN
+              - ID
+              - IR
+              - IQ
+              - IE
+              - IM
+              - IL
+              - IT
+              - JM
+              - JP
+              - JE
+              - JO
+              - KZ
+              - KE
+              - KI
+              - KR
+              - KP
+              - KW
+              - KG
+              - LA
+              - LV
+              - LB
+              - LS
+              - LR
+              - LY
+              - LI
+              - LT
+              - LU
+              - MO
+              - MK
+              - MG
+              - MW
+              - MY
+              - MV
+              - ML
+              - MT
+              - MH
+              - MQ
+              - MR
+              - MU
+              - YT
+              - MX
+              - FM
+              - MD
+              - MC
+              - MN
+              - ME
+              - MS
+              - MA
+              - MZ
+              - MM
+              - NA
+              - NR
+              - NP
+              - NL
+              - NC
+              - NZ
+              - NI
+              - NE
+              - NG
+              - NU
+              - NF
+              - MP
+              - NO
+              - OM
+              - PK
+              - PW
+              - PS
+              - PA
+              - PG
+              - PY
+              - PE
+              - PH
+              - PN
+              - PL
+              - PT
+              - PR
+              - QA
+              - RE
+              - RO
+              - RU
+              - RW
+              - BL
+              - SH
+              - KN
+              - LC
+              - MF
+              - PM
+              - VC
+              - WS
+              - SM
+              - ST
+              - SA
+              - SN
+              - RS
+              - SC
+              - SL
+              - SG
+              - SK
+              - SI
+              - SB
+              - SO
+              - ZA
+              - GS
+              - ES
+              - LK
+              - SD
+              - SR
+              - SJ
+              - SZ
+              - SE
+              - CH
+              - SY
+              - TW
+              - TJ
+              - TZ
+              - TH
+              - TL
+              - TG
+              - TK
+              - TO
+              - TT
+              - TN
+              - TR
+              - TM
+              - TC
+              - TV
+              - UG
+              - UA
+              - AE
+              - GB
+              - US
+              - UM
+              - UY
+              - UZ
+              - VU
+              - VE
+              - VN
+              - VG
+              - VI
+              - WF
+              - EH
+              - YE
+              - ZM
+              - ZW
+          description: "Filter catalog by the two-letter ISO country code where the tax is applied."
+        - in: query
+          name: subdivision
+          required: false
+          schema:
+            type: string
+          description: "Filter catalog by the ISO 3166-2 subdivision code within the specified country."
+          example: US-CA
+        - in: query
+          name: postal_code
+          required: false
+          schema:
+            type: string
+          description: "Filter catalog by postal code to identify area-specific tax rates."
+          example: "L4J8E3"
+        - in: query
+          name: tax_exclusive
+          required: false
+          schema:
+            type: boolean
+          description: "Filter by whether the tax is exclusive of the price. False means tax is included in the overall revenue. True means tax is in addition to the overall stated revenue. For example, in the USA or Canada, where the sticker price doesn't include sales tax."
+        - in: query
+          name: deduction_order
+          required: false
+          schema:
+            type: integer
+            enum:
+              - 0
+              - 1
+              - 2
+          description: >
+            Filter catalog by the order deductions are applied against gross revenue. 
+            The deduction_order is an enum that can be set to one of 0, 1, or 2.
+            - 0: Store commission is deducted first from the gross revenue and tax is deducted from the remaining amount.
+            - 1: Tax is deducted first from the gross revenue and store commission is deducted from the remaining amount.
+            - 2: Both tax and store commission are deducted from the total revenue.
 
       responses:
         '200':
@@ -515,64 +873,64 @@ paths:
                       $ref: '#/components/schemas/TaxRateRule'
         '401':
           description: Missing authorization token
-          content: 
+          content:
             application/json:
-                schema:
-                  $ref: '#/components/schemas/Error'
-                examples:
-                  MissingAuthorizationToken:
-                    summary: Missing authorization token
-                    value:
-                      message: "Please contact your CSM for further information"
-                      request_id: "f1c0af47-bb7a-4e25-a261-d94d07689bb8"
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                MissingAuthorizationToken:
+                  summary: Missing authorization token
+                  value:
+                    message: "Please contact your CSM for further information"
+                    request_id: "f1c0af47-bb7a-4e25-a261-d94d07689bb8"
         '404':
           description: Token unauthorized
-          content: 
+          content:
             application/json:
-                schema:
-                  $ref: '#/components/schemas/Error'
-                examples:
-                  TokenUnauthorized:
-                    summary: Method not allowed
-                    value:
-                      message: "Method not allowed"
-                      request_id: "f1c0af47-bb7a-4e25-a261-d94d07689bb8"
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                TokenUnauthorized:
+                  summary: Method not allowed
+                  value:
+                    message: "Method not allowed"
+                    request_id: "f1c0af47-bb7a-4e25-a261-d94d07689bb8"
         '405':
           description: Method not allowed
-          content: 
+          content:
             application/json:
-                schema:
-                  $ref: '#/components/schemas/Error'
-                examples:
-                  MethodNotAllowed:
-                    summary: Token unauthorized
-                    value:
-                      message: "Token unauthorized"
-                      request_id: "f1c0af47-bb7a-4e25-a261-d94d07689bb8"
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                MethodNotAllowed:
+                  summary: Token unauthorized
+                  value:
+                    message: "Token unauthorized"
+                    request_id: "f1c0af47-bb7a-4e25-a261-d94d07689bb8"
         '429':
           description: Rate limit exceeded
-          content: 
+          content:
             application/json:
-                schema:
-                  $ref: '#/components/schemas/Error' 
-                examples:
-                  InternalError:
-                    summary: Rate limit exceeded
-                    value:
-                      message: "The rate limit is XXX requests per minute, please try again later"
-                      request_id: "f1c0af47-bb7a-4e25-a261-d94d07689bb8"
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                InternalError:
+                  summary: Rate limit exceeded
+                  value:
+                    message: "The rate limit is XXX requests per minute, please try again later"
+                    request_id: "f1c0af47-bb7a-4e25-a261-d94d07689bb8"
         '500':
           description: Internal server error
-          content: 
+          content:
             application/json:
-                schema:
-                  $ref: '#/components/schemas/Error' 
-                examples:
-                  InternalError:
-                    summary: Internal Server Error
-                    value:
-                      message: "Internal error. please try again later."
-                      request_id: "f1c0af47-bb7a-4e25-a261-d94d07689bb8"
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                InternalError:
+                  summary: Internal Server Error
+                  value:
+                    message: "Internal error. please try again later."
+                    request_id: "f1c0af47-bb7a-4e25-a261-d94d07689bb8"
 
 components:
   securitySchemes:
@@ -582,21 +940,21 @@ components:
       bearerFormat: JWT
       description: |
         To call the API, get the API V2 authorization token from your AppsFlyer admin. They can retrieve it from the AppsFlyer platform (HQ)
-  responses:  
+  responses:
     Success:
       description: Valid request
-      content: 
+      content:
         application/json:
-            schema:
-              type: object
-              properties: 
-                message:
-                  type: string
-                request_id:
-                  type: string 
-              example:
-                message: "Successfully processed 1 integration update"
-                request_id: "f1c0af47-bb7a-4e25-a261-d94d07689bb8" 
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+              request_id:
+                type: string
+            example:
+              message: "Successfully processed"
+              request_id: "f1c0af47-bb7a-4e25-a261-d94d07689bb8"
   schemas:
     Error:
       properties:
@@ -604,6 +962,40 @@ components:
           type: string
         request_id:
           type: string
+    StoreCommission:
+      type: object
+      required:
+        - app_id
+        - store_commission_rate
+        - store_commission_reason
+      properties:
+        app_id:
+          type: string
+          description: |
+            The app ID for which the store commission rate is being set
+          example: id123456789
+        store_commission_rate:
+          type: number
+          format: float
+          maximum: 30
+          minimum: 1
+          description: |
+            The store commission rate percentage. Valid range: 1% to 30%
+          example: 15
+        store_commission_reason:
+          type: string
+          enum:
+            - apple_sbp
+            - google_15pct_tier_first_1m
+            - google_media_experience
+            - other
+          description: |
+            The reason for the store commission rate:
+            - apple_sbp: Apple Small Business Program (15% commission)
+            - google_15pct_tier_first_1m: Google's 15% tier for first $1M in revenue
+            - google_media_experience: Google Play Media Experience Program
+            - other: Custom or other store commission arrangements
+          example: google_15pct_tier_first_1m
     TaxRateRule:
       type: object
       required:
