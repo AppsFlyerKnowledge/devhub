@@ -11,16 +11,16 @@ info:
     - **Subscriptions:** 30% on iOS during the first 12 months, dropping to 15% thereafter; 15% on Android from day one.
     
     Default tax rates can be found [here](https://docs.google.com/document/d/e/2PACX-1vSl3DwlK2Gt2aa5gmDzD3-K3CtnIM85oMNrqx3PCTamwCERWYU48GugNpD31BFjA2PJjZnqaXIVe2Hx/pub).
-
+  
     > ⚠️
-    >  **Deprecation Notice:** The API prefix `/api/stores-taxes/v1.0/` is deprecated. If you are currently using the old stores-taxes prefix, please update your integration to use the net-revenue prefix instead.
-
+    >  **Deprecation Notice:** API v1.0 (`/api/stores-taxes/v1.0/`) is deprecated. Please migrate to v2.0 (`/api/net-revenue/v2.0/`).
+ 
   version: 2.0.0
 servers:
   - url: https://hq1.appsflyer.com/api/net-revenue/v2.0/
-    description: V2 API - use this for all integrations
+    description: v2.0 - use this for all integrations
   - url: https://hq1.appsflyer.com/api/stores-taxes/v1.0/
-    description: DEPRECATED - V1 API, will be removed (backward compatibility only)
+    description: v1.0 (deprecated, will be removed in a future release)
 security:
   - bearerAuth: []
 
