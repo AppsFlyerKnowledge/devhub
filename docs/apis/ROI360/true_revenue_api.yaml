@@ -7,8 +7,6 @@ info:
     >
     > This legacy API remains available for backward compatibility but will be removed in a future release. New integrations should use the Net Revenue API.
     
-    ---
-    
     When recording revenue, usually just gross revenue is recorded in AppsFlyer. However, the in-app purchase (IAP) and subscription revenue solution takes into account tax payments to provide the true revenue (net revenue) for each transaction.
 
   version: 1.0.0
