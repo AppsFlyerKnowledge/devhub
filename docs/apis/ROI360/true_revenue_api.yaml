@@ -1,6 +1,6 @@
 openapi: 3.0.1
 info:
-  title: ROI360 Net Revenue API (v1)
+  title: ROI360 Net Revenue API (v2.0)
   description: |
     ROI360 automatically calculates net in-app-purchase (IAP) and subscription revenue by deducting store commissions and local taxes from the gross amount.
     
@@ -15,12 +15,12 @@ info:
     > ⚠️
     >  **Deprecation Notice:** The API prefix `/api/stores-taxes/v1.0/` is deprecated. If you are currently using the old stores-taxes prefix, please update your integration to use the net-revenue prefix instead.
 
-  version: 1.0.0
+  version: 2.0.0
 servers:
-  - url: https://hq1.appsflyer.com/api/net-revenue/v1.0/
-    description: Current API prefix - use this for all integrations
+  - url: https://hq1.appsflyer.com/api/net-revenue/v2.0/
+    description: V2 API - use this for all integrations
   - url: https://hq1.appsflyer.com/api/stores-taxes/v1.0/
-    description: DEPRECATED - old prefix, will be removed (backward compatibility only)
+    description: DEPRECATED - V1 API, will be removed (backward compatibility only)
 security:
   - bearerAuth: []
 
