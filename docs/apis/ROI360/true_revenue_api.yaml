@@ -978,9 +978,9 @@ components:
           type: number
           format: float
           maximum: 30
-          minimum: 0
+          minimum: 1
           description: |
-            The store commission rate percentage. Maximum value is 30%
+            The store commission rate percentage. Valid range: 1% to 30%
           example: 15
         store_commission_reason:
           type: string
