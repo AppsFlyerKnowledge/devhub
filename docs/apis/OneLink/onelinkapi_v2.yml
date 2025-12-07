@@ -11,7 +11,7 @@ paths:
     post:
       tags: 
       - OneLink REST API v2.0 
-      summary: Create OneLink link - OneLink API v2.0 
+      summary: Create OneLink link 
       description: |
         <p><span style="background-color: #6e00ff; color: #fff; font-size: 12px; font-weight: 400; padding: 4px; border-radius: 8px;">
           Premium
@@ -145,7 +145,7 @@ paths:
     get:
       tags: 
       - OneLink REST API v2.0 
-      summary: Get OneLink link data - OneLink API v2.0 
+      summary: Get OneLink link data 
       description: |
         <p><span style="background-color: #6e00ff; color: #fff; font-size: 12px; font-weight: 400; padding: 4px; border-radius: 8px;">
           Premium
@@ -235,7 +235,7 @@ paths:
     put:
       tags: 
       - OneLink REST API v2.0 
-      summary: Update OneLink link - OneLink API v2.0 
+      summary: Update OneLink link 
       description: |
         <p><span style="background-color: #6e00ff; color: #fff; font-size: 12px; font-weight: 400; padding: 4px; border-radius: 8px;">
           Premium
@@ -357,7 +357,7 @@ paths:
     delete:
       tags: 
       - OneLink REST API v2.0 
-      summary: Delete OneLink link - OneLink API v2.0 
+      summary: Delete OneLink link
       description: |
         <p><span style="background-color: #6e00ff; color: #fff; font-size: 12px; font-weight: 400; padding: 4px; border-radius: 8px;">
           Premium
@@ -440,7 +440,7 @@ paths:
     get:
       tags: 
       - OneLink REST API v2.0 
-      summary: Get OneLink QR code - OneLink API v2.0 
+      summary: Get OneLink QR code 
       description: |
         <span style="background-color: #6e00ff; color: #fff; font-size: 12px; font-weight: 400; padding: 4px; border-radius: 8px;">
           Premium
@@ -560,7 +560,7 @@ paths:
     get:
       tags: 
       - OneLink REST API v2.0 
-      summary: Get account quota - OneLink API v2.0 
+      summary: Get account quota
       description: |
         <span style="background-color: #6e00ff; color: #fff; font-size: 12px; font-weight: 400; padding: 4px; border-radius: 8px;">
           Premium
