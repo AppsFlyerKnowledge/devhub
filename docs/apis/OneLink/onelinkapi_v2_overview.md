@@ -7,6 +7,10 @@ hidden: true
 order: 0
 ---
 
+> 📘 Note
+> 
+> OneLink API 2.0 replaces [OneLink API v1.0](https://dev.appsflyer.com/hc/reference/onelinkapi_overview)
+
 OneLink Rest API enables programmatic creation, management, and retrieval of short links used for redirection, deep linking, and measurement across different platforms and channels. Features in v2.0 include:
 
 * Programmatic creation and management of shortlinks  
