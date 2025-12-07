@@ -6,6 +6,15 @@ parentDoc: 624693c7fa631302dde62cf7
 hidden: false
 order: 0
 ---
+**This version (OneLink API v1.0) is deprecated**<br><br>
+This version was replaced by [OneLink API v2.0](https://dev.appsflyer.com/hc/reference/onelinkapi_v2_overview).
+Support for v1.0 version is scheduled to end on June 1st 2026.
+
+The following documentation is for OneLink API v1.0.
+- [Create OneLink link v1.0](https://dev.appsflyer.com/hc/reference/create-onelink-attribution-link)<br>
+- [Update OneLink link v1.0](https://dev.appsflyer.com/hc/reference/update-onelink-attribution-link)<br>
+- [Get OneLink link data v1.0](https://dev.appsflyer.com/hc/reference/get-onelink-attribution-link)<br>
+- [Delete OneLink link v1.0](https://dev.appsflyer.com/hc/reference/delete-onelink-attribution-link)<br>
 
 ## Prerequisites
 
