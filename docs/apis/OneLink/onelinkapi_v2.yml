@@ -10,23 +10,12 @@ paths:
   /shortlinks/{onelink-id}:
     post:
       tags: 
-      - OneLink REST API v2.0 [Closed Beta]
-      summary: Create OneLink link - OneLink API v2.0 [Closed Beta]
+      - OneLink REST API v2.0 
+      summary: Create OneLink link - OneLink API v2.0 
       description: |
         <span style="background-color: #6e00ff; color: #fff; font-size: 12px; font-weight: 400; padding: 4px; border-radius: 8px;">
           Premium
         </span>
-        **Beta documentation**
-        This documentation is for the OneLink API V2.0 closed beta only. 
-        Please use the documentation in the following links only: 
-
-        - [Overview](https://dev.appsflyer.com/hc/reference/onelinkapi_v2_overview)
-        - [Create OneLink link](https://dev.appsflyer.com/hc/reference/onelink-v2-create-link)
-        - [Update OneLink link](https://dev.appsflyer.com/hc/reference/update-onelink-v2-link)
-        - [Get OneLink link data](https://dev.appsflyer.com/hc/reference/get-onelink-v2-link)
-        - [Delete OneLink link](https://dev.appsflyer.com/hc/reference/delete-onelink-v2-link)
-        - [Get OneLink QR code](https://dev.appsflyer.com/hc/reference/get-onelink-v2-link-qr)
-        - [Get account quota](https://dev.appsflyer.com/hc/reference/get-onelink-v2-link-quota)
       operationId: onelink-v2-create-link
       parameters:
         - name: onelink-id
@@ -151,23 +140,12 @@ paths:
   /shortlinks/{onelink-id}/{shortlink-id}:
     get:
       tags: 
-      - OneLink REST API v2.0 [Closed Beta]
-      summary: Get OneLink link data - OneLink API v2.0 [Closed Beta]
+      - OneLink REST API v2.0 
+      summary: Get OneLink link data - OneLink API v2.0 
       description: |
         <span style="background-color: #6e00ff; color: #fff; font-size: 12px; font-weight: 400; padding: 4px; border-radius: 8px;">
           Premium
         </span>
-        **Beta documentation**
-        This documentation is for the OneLink API V2.0 closed beta only. 
-        Please use the documentation in the following links only: 
-
-        - [Overview](https://dev.appsflyer.com/hc/reference/onelinkapi_v2_overview)
-        - [Create OneLink link](https://dev.appsflyer.com/hc/reference/onelink-v2-create-link)
-        - [Update OneLink link](https://dev.appsflyer.com/hc/reference/update-onelink-v2-link)
-        - [Get OneLink link data](https://dev.appsflyer.com/hc/reference/get-onelink-v2-link)
-        - [Delete OneLink link](https://dev.appsflyer.com/hc/reference/delete-onelink-v2-link)
-        - [Get OneLink QR code](https://dev.appsflyer.com/hc/reference/get-onelink-v2-link-qr)
-        - [Get account quota](https://dev.appsflyer.com/hc/reference/get-onelink-v2-link-quota)
       operationId: get-onelink-v2-link
       parameters:
         - name: onelink-id
@@ -248,23 +226,12 @@ paths:
       deprecated: false
     put:
       tags: 
-      - OneLink REST API v2.0 [Closed Beta]
-      summary: Update OneLink link - OneLink API v2.0 [Closed Beta]
+      - OneLink REST API v2.0 
+      summary: Update OneLink link - OneLink API v2.0 
       description: |
         <span style="background-color: #6e00ff; color: #fff; font-size: 12px; font-weight: 400; padding: 4px; border-radius: 8px;">
           Premium
         </span>
-        **Beta documentation**
-        This documentation is for the OneLink API V2.0 closed beta only. 
-        Please use the documentation in the following links only: 
-
-        - [Overview](https://dev.appsflyer.com/hc/reference/onelinkapi_v2_overview)
-        - [Create OneLink link](https://dev.appsflyer.com/hc/reference/onelink-v2-create-link)
-        - [Update OneLink link](https://dev.appsflyer.com/hc/reference/update-onelink-v2-link)
-        - [Get OneLink link data](https://dev.appsflyer.com/hc/reference/get-onelink-v2-link)
-        - [Delete OneLink link](https://dev.appsflyer.com/hc/reference/delete-onelink-v2-link)
-        - [Get OneLink QR code](https://dev.appsflyer.com/hc/reference/get-onelink-v2-link-qr)
-        - [Get account quota](https://dev.appsflyer.com/hc/reference/get-onelink-v2-link-quota)
       operationId: update-onelink-v2-link
       parameters:
         - name: onelink-id
@@ -377,23 +344,12 @@ paths:
       deprecated: false
     delete:
       tags: 
-      - OneLink REST API v2.0 [Closed Beta]
-      summary: Delete OneLink link - OneLink API v2.0 [Closed Beta]
+      - OneLink REST API v2.0 
+      summary: Delete OneLink link - OneLink API v2.0 
       description: |
         <span style="background-color: #6e00ff; color: #fff; font-size: 12px; font-weight: 400; padding: 4px; border-radius: 8px;">
           Premium
         </span>
-        **Beta documentation**
-        This documentation is for the OneLink API V2.0 closed beta only. 
-        Please use the documentation in the following links only: 
-
-        - [Overview](https://dev.appsflyer.com/hc/reference/onelinkapi_v2_overview)
-        - [Create OneLink link](https://dev.appsflyer.com/hc/reference/onelink-v2-create-link)
-        - [Update OneLink link](https://dev.appsflyer.com/hc/reference/update-onelink-v2-link)
-        - [Get OneLink link data](https://dev.appsflyer.com/hc/reference/get-onelink-v2-link)
-        - [Delete OneLink link](https://dev.appsflyer.com/hc/reference/delete-onelink-v2-link)
-        - [Get OneLink QR code](https://dev.appsflyer.com/hc/reference/get-onelink-v2-link-qr)
-        - [Get account quota](https://dev.appsflyer.com/hc/reference/get-onelink-v2-link-quota)
       operationId: delete-onelink-v2-link
       parameters:
         - name: onelink-id
@@ -467,24 +423,12 @@ paths:
   /shortlinks/{onelink-id}/{shortlink-id}/qr:
     get:
       tags: 
-      - OneLink REST API v2.0 [Closed Beta]
-      summary: Get OneLink QR code - OneLink API v2.0 [Closed Beta]
+      - OneLink REST API v2.0 
+      summary: Get OneLink QR code - OneLink API v2.0 
       description: |
         <span style="background-color: #6e00ff; color: #fff; font-size: 12px; font-weight: 400; padding: 4px; border-radius: 8px;">
           Premium
         </span>
-        **Beta documentation**
-        This documentation is for the OneLink API V2.0 closed beta only. 
-        Please use the documentation in the following links only: 
-
-        - [Overview](https://dev.appsflyer.com/hc/reference/onelinkapi_v2_overview)
-        - [Create OneLink link](https://dev.appsflyer.com/hc/reference/onelink-v2-create-link)
-        - [Update OneLink link](https://dev.appsflyer.com/hc/reference/update-onelink-v2-link)
-        - [Get OneLink link data](https://dev.appsflyer.com/hc/reference/get-onelink-v2-link)
-        - [Delete OneLink link](https://dev.appsflyer.com/hc/reference/delete-onelink-v2-link)
-        - [Get OneLink QR code](https://dev.appsflyer.com/hc/reference/get-onelink-v2-link-qr)
-        - [Get account quota](https://dev.appsflyer.com/hc/reference/get-onelink-v2-link-quota)
-
         > 📘 Note 
         > 
         > The QR code’s color and logo are automatically pulled from your OneLink template settings. To customize these design elements or restore the default, go to the OneLink Management page in the AppsFlyer dashboard.
@@ -598,23 +542,12 @@ paths:
   /shortlinks-quota/{account-id}:
     get:
       tags: 
-      - OneLink REST API v2.0 [Closed Beta]
-      summary: Get account quota - OneLink API v2.0 [Closed Beta]
+      - OneLink REST API v2.0 
+      summary: Get account quota - OneLink API v2.0 
       description: |
         <span style="background-color: #6e00ff; color: #fff; font-size: 12px; font-weight: 400; padding: 4px; border-radius: 8px;">
           Premium
         </span>
-        **Beta documentation**
-        This documentation is for the OneLink API V2.0 closed beta only. 
-        Please use the documentation in the following links only: 
-
-        - [Overview](https://dev.appsflyer.com/hc/reference/onelinkapi_v2_overview)
-        - [Create OneLink link](https://dev.appsflyer.com/hc/reference/onelink-v2-create-link)
-        - [Update OneLink link](https://dev.appsflyer.com/hc/reference/update-onelink-v2-link)
-        - [Get OneLink link data](https://dev.appsflyer.com/hc/reference/get-onelink-v2-link)
-        - [Delete OneLink link](https://dev.appsflyer.com/hc/reference/delete-onelink-v2-link)
-        - [Get OneLink QR code](https://dev.appsflyer.com/hc/reference/get-onelink-v2-link-qr)
-        - [Get account quota](https://dev.appsflyer.com/hc/reference/get-onelink-v2-link-quota)
       operationId: get-onelink-v2-link-quota
       parameters:
         - name: account-id
