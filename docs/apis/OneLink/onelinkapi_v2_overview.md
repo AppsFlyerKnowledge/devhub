@@ -1,5 +1,5 @@
 ---
-title: "OneLink API v2.0 [Closed beta] - Overview"
+title: "OneLink API v2.0 - Overview"
 slug: "onelinkapi_v2_overview"
 category: 6829800b8e61c5005284ad14
 parentDoc: 6861240b50e56f0062c68f47
@@ -13,17 +13,6 @@ OneLink Rest API enables programmatic creation, management, and retrieval of sho
 * Programmatic QR code generation  
 * Strict link validation to ensure smooth user journeys  
 * Custom expiration windows
-
-## Beta documentation
-
-This documentation is for the OneLink API V2.0 closed beta only. Please use the documentation in the following links only: 
-
-- [Create OneLink link](https://dev.appsflyer.com/hc/reference/onelink-v2-create-link)
-- [Update OneLink link](https://dev.appsflyer.com/hc/reference/update-onelink-v2-link)
-- [Get OneLink link data](https://dev.appsflyer.com/hc/reference/get-onelink-v2-link)
-- [Delete OneLink link](https://dev.appsflyer.com/hc/reference/delete-onelink-v2-link)
-- [Get OneLink QR code](https://dev.appsflyer.com/hc/reference/get-onelink-v2-link-qr)
-- [Get account quota](https://dev.appsflyer.com/hc/reference/get-onelink-v2-link-quota)
 
 **API Limitations:**
 
