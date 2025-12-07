@@ -16,6 +16,7 @@ paths:
         <p><span style="background-color: #6e00ff; color: #fff; font-size: 12px; font-weight: 400; padding: 4px; border-radius: 8px;">
           Premium
         </span></p>
+
         > 📘 Note
         > 
         > This API replaces [Create OneLink link v1.0](https://dev.appsflyer.com/hc/reference/create-onelink-attribution-link)
@@ -149,6 +150,7 @@ paths:
         <p><span style="background-color: #6e00ff; color: #fff; font-size: 12px; font-weight: 400; padding: 4px; border-radius: 8px;">
           Premium
         </span></p>
+
         > 📘 Note
         > 
         > This API replaces [Get OneLink link data v1.0](https://dev.appsflyer.com/hc/reference/get-onelink-attribution-link)
@@ -238,6 +240,7 @@ paths:
         <p><span style="background-color: #6e00ff; color: #fff; font-size: 12px; font-weight: 400; padding: 4px; border-radius: 8px;">
           Premium
         </span></p>
+
         > 📘 Note
         > 
         > This API replaces [Update OneLink link v1.0](https://dev.appsflyer.com/hc/reference/update-onelink-attribution-link)
@@ -359,10 +362,10 @@ paths:
         <p><span style="background-color: #6e00ff; color: #fff; font-size: 12px; font-weight: 400; padding: 4px; border-radius: 8px;">
           Premium
         </span></p>
-        
+
         > 📘 Note
         > 
-        > This API replaces Delete OneLink link v1.0](https://dev.appsflyer.com/hc/reference/delete-onelink-attribution-link)
+        > This API replaces [Delete OneLink link v1.0](https://dev.appsflyer.com/hc/reference/delete-onelink-attribution-link)
       operationId: delete-onelink-v2-link
       parameters:
         - name: onelink-id
@@ -442,6 +445,7 @@ paths:
         <span style="background-color: #6e00ff; color: #fff; font-size: 12px; font-weight: 400; padding: 4px; border-radius: 8px;">
           Premium
         </span>
+
         > 📘 Note 
         > 
         > The QR code’s color and logo are automatically pulled from your OneLink template settings. To customize these design elements or restore the default, go to the OneLink Management page in the AppsFlyer dashboard.
