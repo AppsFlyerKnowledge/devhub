@@ -13,32 +13,15 @@ paths:
       - OneLink REST API
       summary: Create OneLink attribution link 
       description: |
-        <span style="background-color: #6e00ff; color: #fff; font-size: 12px; font-weight: 400; padding: 4px; border-radius: 8px;">
-          Premium
-        </span>
-        
-        # Example:
-        Feed Me, a grocery delivery service, 
-        wants to send a personalized link via SMS to existing customers to
-        encourage them to download the Feed Me app and buy bananas. 
-        The developer writes a program to scan Feed Me's database that uses each line of data
-        to create OneLink custom attribution links. The following JSON displays data 
-        in the body params that are used to create a OneLink custom attribution link for a Canadian user."
-        ```
-        {
-          "af_ad": "yellow_bananas",
-          "af_adset": "my_adset",
-          "af_android_url": "https://feedme.ca/buybananas",
-          "af_channel": "my_channel",
-          "af_dp": "afbasicapp://mainactivity",
-          "af_ios_url": "https://feedme.ca/buybananas",
-          "c": "my_campaign",
-          "deep_link_value": "bananas",
-          "deep_link_sub1": 10,
-          "is_retargeting": true,
-          "pid": "my_media_source_SMS"
-        }
-        ```
+        **This version (OneLink API v1.0) is deprecated**<br><br>
+        This version was replaced by [OneLink API v2.0](https://dev.appsflyer.com/hc/reference/onelinkapi_v2_overview).<br>
+        Support for v1.0 version is scheduled to end on June 1st 2026.<br>
+        <br>
+        The following documentation is for OneLink API v1.0.<br>
+          - [Create OneLink link v1.0](https://dev.appsflyer.com/hc/reference/create-onelink-attribution-link)<br>
+          - [Update OneLink link v1.0](https://dev.appsflyer.com/hc/reference/update-onelink-attribution-link)<br>
+          - [Get OneLink link data v1.0](https://dev.appsflyer.com/hc/reference/get-onelink-attribution-link)<br>
+          - [Delete OneLink link v1.0](https://dev.appsflyer.com/hc/reference/delete-onelink-attribution-link)<br>
       operationId: create-onelink-attribution-link
       parameters:
         - name: onelink-id
@@ -146,9 +129,15 @@ paths:
       deprecated: false
     get:
       description: |
-        <span style="background-color: #6e00ff; color: #fff; font-size: 12px; font-weight: 400; padding: 4px; border-radius: 8px;">
-          Premium
-        </span>
+        **This version (OneLink API v1.0) is deprecated**<br><br>
+        This version was replaced by [OneLink API v2.0](https://dev.appsflyer.com/hc/reference/onelinkapi_v2_overview).<br>
+        Support for v1.0 version is scheduled to end on June 1st 2026.<br>
+        <br>
+        The following documentation is for OneLink API v1.0.<br>
+          - [Create OneLink link v1.0](https://dev.appsflyer.com/hc/reference/create-onelink-attribution-link)<br>
+          - [Update OneLink link v1.0](https://dev.appsflyer.com/hc/reference/update-onelink-attribution-link)<br>
+          - [Get OneLink link data v1.0](https://dev.appsflyer.com/hc/reference/get-onelink-attribution-link)<br>
+          - [Delete OneLink link v1.0](https://dev.appsflyer.com/hc/reference/delete-onelink-attribution-link)<br
       tags: 
       - OneLink REST API
       summary: Get OneLink attribution link
@@ -214,9 +203,15 @@ paths:
       deprecated: false
     put:
       description: |
-        <span style="background-color: #6e00ff; color: #fff; font-size: 12px; font-weight: 400; padding: 4px; border-radius: 8px;">
-          Premium
-        </span>
+        **This version (OneLink API v1.0) is deprecated**<br><br>
+        This version was replaced by [OneLink API v2.0](https://dev.appsflyer.com/hc/reference/onelinkapi_v2_overview).<br>
+        Support for v1.0 version is scheduled to end on June 1st 2026.<br>
+        <br>
+        The following documentation is for OneLink API v1.0.<br>
+          - [Create OneLink link v1.0](https://dev.appsflyer.com/hc/reference/create-onelink-attribution-link)<br>
+          - [Update OneLink link v1.0](https://dev.appsflyer.com/hc/reference/update-onelink-attribution-link)<br>
+          - [Get OneLink link data v1.0](https://dev.appsflyer.com/hc/reference/get-onelink-attribution-link)<br>
+          - [Delete OneLink link v1.0](https://dev.appsflyer.com/hc/reference/delete-onelink-attribution-link)<br>
       tags: 
       - OneLink REST API
       summary: Update OneLink attribution link
@@ -314,9 +309,15 @@ paths:
       deprecated: false
     delete:
       description: |
-        <span style="background-color: #6e00ff; color: #fff; font-size: 12px; font-weight: 400; padding: 4px; border-radius: 8px;">
-          Premium
-        </span>
+        **This version (OneLink API v1.0) is deprecated**<br><br>
+        This version was replaced by [OneLink API v2.0](https://dev.appsflyer.com/hc/reference/onelinkapi_v2_overview).<br>
+        Support for v1.0 version is scheduled to end on June 1st 2026.<br>
+        <br>
+        The following documentation is for OneLink API v1.0.<br>
+          - [Create OneLink link v1.0](https://dev.appsflyer.com/hc/reference/create-onelink-attribution-link)<br>
+          - [Update OneLink link v1.0](https://dev.appsflyer.com/hc/reference/update-onelink-attribution-link)<br>
+          - [Get OneLink link data v1.0](https://dev.appsflyer.com/hc/reference/get-onelink-attribution-link)<br>
+          - [Delete OneLink link v1.0](https://dev.appsflyer.com/hc/reference/delete-onelink-attribution-link)<br>
       tags: 
       - OneLink REST API
       summary: Delete OneLink attribution link
