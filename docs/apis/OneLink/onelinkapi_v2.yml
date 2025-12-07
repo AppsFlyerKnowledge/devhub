@@ -13,9 +13,12 @@ paths:
       - OneLink REST API v2.0 
       summary: Create OneLink link - OneLink API v2.0 
       description: |
-        <span style="background-color: #6e00ff; color: #fff; font-size: 12px; font-weight: 400; padding: 4px; border-radius: 8px;">
+        <p><span style="background-color: #6e00ff; color: #fff; font-size: 12px; font-weight: 400; padding: 4px; border-radius: 8px;">
           Premium
-        </span>
+        </span></p>
+        > 📘 Note
+        > 
+        > This API replaces [Create OneLink link v1.0](https://dev.appsflyer.com/hc/reference/create-onelink-attribution-link)
       operationId: onelink-v2-create-link
       parameters:
         - name: onelink-id
@@ -143,9 +146,12 @@ paths:
       - OneLink REST API v2.0 
       summary: Get OneLink link data - OneLink API v2.0 
       description: |
-        <span style="background-color: #6e00ff; color: #fff; font-size: 12px; font-weight: 400; padding: 4px; border-radius: 8px;">
+        <p><span style="background-color: #6e00ff; color: #fff; font-size: 12px; font-weight: 400; padding: 4px; border-radius: 8px;">
           Premium
-        </span>
+        </span></p>
+        > 📘 Note
+        > 
+        > This API replaces [Get OneLink link data v1.0](https://dev.appsflyer.com/hc/reference/get-onelink-attribution-link)
       operationId: get-onelink-v2-link
       parameters:
         - name: onelink-id
@@ -229,9 +235,12 @@ paths:
       - OneLink REST API v2.0 
       summary: Update OneLink link - OneLink API v2.0 
       description: |
-        <span style="background-color: #6e00ff; color: #fff; font-size: 12px; font-weight: 400; padding: 4px; border-radius: 8px;">
+        <p><span style="background-color: #6e00ff; color: #fff; font-size: 12px; font-weight: 400; padding: 4px; border-radius: 8px;">
           Premium
-        </span>
+        </span></p>
+        > 📘 Note
+        > 
+        > This API replaces [Update OneLink link v1.0](https://dev.appsflyer.com/hc/reference/update-onelink-attribution-link)
       operationId: update-onelink-v2-link
       parameters:
         - name: onelink-id
@@ -347,9 +356,12 @@ paths:
       - OneLink REST API v2.0 
       summary: Delete OneLink link - OneLink API v2.0 
       description: |
-        <span style="background-color: #6e00ff; color: #fff; font-size: 12px; font-weight: 400; padding: 4px; border-radius: 8px;">
+        <p><span style="background-color: #6e00ff; color: #fff; font-size: 12px; font-weight: 400; padding: 4px; border-radius: 8px;">
           Premium
-        </span>
+        </span></p>
+        > 📘 Note
+        > 
+        > This API replaces Delete OneLink link v1.0](https://dev.appsflyer.com/hc/reference/delete-onelink-attribution-link)
       operationId: delete-onelink-v2-link
       parameters:
         - name: onelink-id
