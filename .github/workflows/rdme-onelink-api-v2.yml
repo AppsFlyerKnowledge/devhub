@@ -4,13 +4,12 @@ name: OneLink API v2
 
 # Workflow disabled - uncomment the 'push:' section below to re-enable automatic runs
 on:
-  workflow_dispatch:  # Manual trigger only
-  # push:
-  #   branches:
-  #     # This workflow will run every time you push code to the following branch: `main`
-  #     # Check out GitHub's docs for more info on configuring this:
-  #     # https://docs.github.com/actions/using-workflows/events-that-trigger-workflows
-  #     - main
+  push:
+    branches:
+      # This workflow will run every time you push code to the following branch: `main`
+      # Check out GitHub's docs for more info on configuring this:
+      # https://docs.github.com/actions/using-workflows/events-that-trigger-workflows
+      - main
 
 jobs:
   rdme-openapi:
@@ -28,3 +27,8 @@ jobs:
         uses: readmeio/rdme@v9
         with:
           rdme: docs ./docs/apis/OneLink/onelinkapi_v2_overview.md --key=${{ secrets.README_API_KEY }} 
+
+      - name: Run `docs` command 🚀
+        uses: readmeio/rdme@v9
+        with:
+          rdme: docs ./docs/apis/OneLink/migrate_to_onelink_api_v2.md --key=${{ secrets.README_API_KEY }} 
