@@ -1,5 +1,5 @@
 ---
-title: "OneLink API v2.0 - Overview"
+title: "OneLink API - Overview"
 slug: "onelinkapi_v2_overview"
 category: 6829800b8e61c5005284ad14
 parentDoc: 6861240b50e56f0062c68f47
