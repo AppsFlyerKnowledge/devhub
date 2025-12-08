@@ -137,7 +137,7 @@ class PushNotificationService : FirebaseMessagingService() {
         // Handle the data payload
         if (remoteMessage.data.isNotEmpty()) {
             afOneLinkFromPayload = remoteMessage.data["af_push_link"]
-            afCustomDataPayload = remoteMessage.data["af"]
+         // afCustomDataPayload = remoteMessage.data["af"] // For JSON Campaign data
 
         }
         ....
