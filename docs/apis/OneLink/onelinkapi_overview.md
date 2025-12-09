@@ -11,7 +11,7 @@ order: 0
 > **OneLink API v1 is deprecated**
 > 
 > OneLink API v1 was replaced by [OneLink API v2.0](https://dev.appsflyer.com/hc/reference/onelinkapi_v2_overview).  
-> OneLink API v1 will be sunset and will no longer be supported starting June 1st 2006
+> OneLink API v1 will be sunset and will no longer be supported starting June 1st 2026
 > 
 > The following documentation is for OneLink API v1:
 > 
