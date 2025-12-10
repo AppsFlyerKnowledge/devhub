@@ -383,8 +383,12 @@ To register the AppsFlyer endpoint:
 
 1. Add the `NSAdvertisingAttributionReportEndpoint` key to your app's `info.plist`.
 2. Set the key's value to `https://appsflyer-skadnetwork.com/`.
+3. Type the key name `AdAttributionKit` and select `AdAttributionKit - Postback Copy URL` from the
+pop-up menu.
+4. Set the key’s value to `https://appsflyer-skadnetwork.com/`.
 
-According to Apple, you can set only one endpoint. Copies of received postbacks are available in the [postbacks copy report](https://support.appsflyer.com/hc/en-us/articles/360014261518-SKAN-raw-data-reports#report-types).
+According to Apple, you can set only one endpoint for SKAdNetwork and another one for AdAttributionKit.
+Copies of received postbacks are available in the [postbacks copy report](https://support.appsflyer.com/hc/en-us/articles/360014261518-SKAN-raw-data-reports#report-types).
 
 ## Enabling debug mode
 
