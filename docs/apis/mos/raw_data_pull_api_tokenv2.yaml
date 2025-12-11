@@ -27,8 +27,6 @@ paths:
         - $ref: '#/components/parameters/TimeZone'
         - $ref: '#/components/parameters/Geo'
         - $ref: '#/components/parameters/MaximumRows'
-        - $ref: '#/components/parameters/FromInstallTime'
-        - $ref: '#/components/parameters/ToInstallTime'
         - $ref: '#/components/parameters/Agency'
         - in: query
           name: additional_fields
@@ -183,8 +181,6 @@ paths:
         - $ref: '#/components/parameters/TimeZone'
         - $ref: '#/components/parameters/Geo'
         - $ref: '#/components/parameters/MaximumRows'
-        - $ref: '#/components/parameters/FromInstallTime'
-        - $ref: '#/components/parameters/ToInstallTime'
         - $ref: '#/components/parameters/Agency'
         - in: query
           name: additional_fields
@@ -330,8 +326,6 @@ paths:
         Data freshness: Real-time
       parameters:
         - $ref: '#/components/parameters/AppId'
-        - $ref: '#/components/parameters/FromDate'
-        - $ref: '#/components/parameters/ToDate'
         - $ref: '#/components/parameters/MediaSource'
         - $ref: '#/components/parameters/Category'
         - $ref: '#/components/parameters/Currency'
@@ -523,8 +517,6 @@ paths:
         - $ref: '#/components/parameters/TimeZone'
         - $ref: '#/components/parameters/Geo'
         - $ref: '#/components/parameters/MaximumRows'
-        - $ref: '#/components/parameters/FromInstallTime'
-        - $ref: '#/components/parameters/ToInstallTime'
         - $ref: '#/components/parameters/Agency'
         - in: query
           name: additional_fields
@@ -561,8 +553,6 @@ paths:
         - $ref: '#/components/parameters/TimeZone'
         - $ref: '#/components/parameters/Geo'
         - $ref: '#/components/parameters/MaximumRows'
-        - $ref: '#/components/parameters/FromInstallTime'
-        - $ref: '#/components/parameters/ToInstallTime'
         - $ref: '#/components/parameters/Agency'
         - in: query
           name: additional_fields
