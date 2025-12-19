@@ -26,8 +26,7 @@ Call Validate and Log (`validateAndLogInAppPurchase`) every time a transaction o
 - Requires an explicit call from the app for every transaction
 - Suitable for apps that need to capture events not included in the Purchase Connector’s default coverage. With the Validate and log method, developers can explicitly target and send these additional events.
 
-[View guide → Validate and Log integration](https://www.notion.so/Dev-Hub-Purchase-validation-page-draft-2bdb7b13af5f80a1bd13eeb7011c1369?pvs=21)
-
+To get started see: [`Validate and Log`](https://dev.appsflyer.com/hc/docs/validate-and-log-purchase-android)
 ---
 
 ### 2. Automated Integration method – Purchase Connector
@@ -40,14 +39,9 @@ Purchase Connector automatically detects in-app purchases and subscriptions made
     - Logging subscription revenue from users who subscribed before the integration was added.
     - Logging subscription price changes, ensuring revenue reflects updated pricing.
 
-[View guide → Purchase Connector integration](https://www.notion.so/Dev-Hub-Purchase-validation-page-draft-2bdb7b13af5f80a1bd13eeb7011c1369?pvs=21)
+To get started see: [Android purchase SDK connector](https://dev.appsflyer.com/hc/docs/purchase-connector-android)
 
 ---
 > ⚠️ Important
 > 
 > To avoid duplicate event logging and inconsistent validation results, it’s recommended to use only one integration method per application.
-
-## Get Started by Integration Method
-
-- [Manual integration: Validate and Log →](https://www.notion.so/Dev-Hub-Purchase-validation-page-draft-2bdb7b13af5f80a1bd13eeb7011c1369?pvs=21)
-- [Automated integration: Purchase Connector →](https://www.notion.so/Dev-Hub-Purchase-validation-page-draft-2bdb7b13af5f80a1bd13eeb7011c1369?pvs=21)
