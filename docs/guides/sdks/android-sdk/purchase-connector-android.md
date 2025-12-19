@@ -2,9 +2,9 @@
 title: "Purchase connector"
 slug: "purchase-connector-android"
 category: 5f9705393c689a065c409b23
-parentDoc: 694543a80c7351ac15b41836
+parentDoc: 5fa0443749be540011850e51
 hidden: false
-order: 1
+order: 10
 ---
 
 ## Overview
