@@ -1,9 +1,9 @@
 ---
-title: "Purchase validation"
+title: "Purchase and subscription validation"
 slug: "purchase-validation-android"
 category: 5f9705393c689a065c409b23
 parentDoc: 5fa0443749be540011850e51
-hidden: true
+hidden: false
 order: 10
 ---
 Purchase validation ensures that only real, store-confirmed in-app purchases and subscriptions are measured in AppsFlyer. It improves revenue accuracy, helps prevent reporting errors, and supports better campaign decisions.
@@ -13,7 +13,7 @@ AppsFlyer offers two products to support purchase validation:
 - **Receipt validation** – A free, lightweight solution for basic in-app purchase verification.
 - **ROI360 Store revenue** – A premium, comprehensive solution for full revenue accuracy, including subscription lifecycle coverage and net revenue reporting.
 
-Learn more about them [KB link]
+For more information, see [Purchase and subscription validation](https://support.appsflyer.com/hc/en-us/articles/42120228484241--WIP-Purchase-and-subscription-validation-Overview).
 
 ## SDK Integration Methods
 
