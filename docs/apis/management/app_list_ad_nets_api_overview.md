@@ -8,19 +8,24 @@ order: 0
 
 **At a glance:**
 
-The [App list API for ad networks](https://dev.appsflyer.com/hc/reference/app-list-ad-nets-api-get) gives ad networks a list of the apps (app IDs) for which advertisers have enabled an integration with you. The response is returned as a JSON file.
+The [App list API](https://dev.appsflyer.com/hc/reference/app-list-ad-nets-api-get) returns a list of apps (app IDs) based on the caller's account type:
+
+- **Ad networks**: Get apps for which advertisers have enabled an integration with you.
+- **Advertisers**: Get apps in your account.
+
+The response is returned as a JSON file.
 
 **To integrate the API**:
 
-Get the API token from your marketer to use as the bearer authorization token.
-Follow the [App list API for ad networks instructions](https://dev.appsflyer.com/hc/reference/app-list-ad-nets-api-get).
+Get the API token to use as the bearer authorization token.
+Follow the [App list API instructions](https://dev.appsflyer.com/hc/reference/app-list-ad-nets-api-get).
 
 ## Limitations
 
-|Limitation|Remarks|
-|--|--|
-| Request limit | <ul><li>20 requests per minute</li><li>100 requests per day</li></ul> |
-| Record limit | 1,000 records per request. See [Pagination](https://dev.appsflyer.com/hc/reference/pagination) for when there are more than 1,000 records.|
+| Limitation    | Remarks                                                                                                                                    |
+| ------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| Request limit | <ul><li>20 requests per minute</li><li>100 requests per day</li></ul>                                                                      |
+| Record limit  | 1,000 records per request. See [Pagination](https://dev.appsflyer.com/hc/reference/pagination) for when there are more than 1,000 records. |
 
 ## Pagination
 
@@ -32,7 +37,7 @@ The API returns up to 1,000 records per request (page).
 
 Response JSONs contain the following pagination-related keys:
 
-- `meta.total_items`: The number of records to be returned by all pages combined. This represents the number of apps for which you have been granted the capabilities being queried.  
+- `meta.total_items`: The number of records to be returned by all pages combined. This represents the number of apps for which you have been granted the capabilities being queried.
 - `links.prev`: If there was a previous request, the pagination link for the request used to generate the previous page.
 - `links.self`: The pagination link for the current request, used to generate the current page.
 - `links.next`: The pagination link for the request required to get the next page. If there is no next key, this is the last page.
@@ -46,11 +51,11 @@ Use one of the following pagination control methods:
 
 - The JSON example that follows contains the result of the first request, where the second request contains two records in the data section (not displayed).
 - The total number of records to return is 6.
-- The  `links.next`  key contains the request that returns the next page, meaning records 5 and 6.
+- The `links.next` key contains the request that returns the next page, meaning records 5 and 6.
 
 ```json
-{                                                                                         
-    "data": {[...]},   
+{
+    "data": {[...]},
     "meta": {
         "total_items": 6
     },
