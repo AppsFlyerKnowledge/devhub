@@ -2,7 +2,7 @@
 title: "Purchase connector"
 slug: "purchase-connector-ios"
 category: 5f9705393c689a065c409b23
-parentDoc: 5fa043dd3b65b20045e35597
+parentDoc: 694abcd9cfedb7e4931ce19b
 hidden: false
 order: 10
 ---
