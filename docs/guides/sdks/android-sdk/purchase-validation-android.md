@@ -26,7 +26,7 @@ Call Validate and Log (`validateAndLogInAppPurchase`) every time a transaction o
 - Requires an explicit call from the app for every transaction
 - Suitable for apps that need to capture events not included in the Purchase Connector’s default coverage. With the Validate and log method, developers can explicitly target and send these additional events.
 
-To get started see: [`Validate and Log`](https://dev.appsflyer.com/hc/docs/validate-and-log-purchase-android)
+To get started see: [Validate and Log](https://dev.appsflyer.com/hc/docs/validate-and-log-purchase-android)
 
 ### 2. Automated Integration method – Purchase Connector
 
