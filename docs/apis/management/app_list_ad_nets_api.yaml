@@ -1,6 +1,10 @@
 openapi: 3.0.3
 info:
-  title: App list API for Ad Networks
+  title: App list API
+  description: |
+    Returns a list of apps based on the caller's account type:
+    - **Ad networks**: Get apps for which advertisers have enabled an integration with you.
+    - **Advertisers**: Get apps in your account.
   version: 1.0.0
 servers:
   - url: https://hq1.appsflyer.com/api/mng
