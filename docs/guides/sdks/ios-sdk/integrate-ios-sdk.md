@@ -374,24 +374,20 @@ For detailed instructions, see [Apple's documentation](https://developer.apple.c
 
 Apple App Clips attribution was introduced in iOS SDK `V6.0.8`. See our [App Clips integration guide](doc:app-clip-overview) for detailed instructions.
 
-### Send SKAN postback copies to AppsFlyer
- 
+### Send SKAN and AdAttributionKit postback copies to AppsFlyer 
+If your app uses both `SKAdNetwork` and `AdAttributionKit`, configure both postback copy endpoints in the `Info.plist` file.
+#### Send SKAN postback copies to AppsFlyer
 Use this setup to send SKAdNetwork postback copies to AppsFlyer.
-
 1. Add the `NSAdvertisingAttributionReportEndpoint` key to your app's `info.plist`.
 2. Set the key's value to `https://appsflyer-skadnetwork.com/`.
 Once configured, Apple will send SKAdNetwork postback copies to AppsFlyer.
-
 Copies of received postbacks are available in the [postbacks copy report](https://support.appsflyer.com/hc/en-us/articles/360014261518-SKAN-raw-data-reports#report-types).
-
-### Send AdAttributionKit postback copies to AppsFlyer
-
+#### Send AdAttributionKit postback copies to AppsFlyer
 Use this setup to send AdAttributionKit postback copies to AppsFlyer.
 1. In your app's Info.plist, add a new key.
 2. Type the key name `AdAttributionKit` and select `AdAttributionKit - Postback Copy URL` from the pop-up menu.
 3. Set the key’s value to `https://appsflyer-skadnetwork.com/`.
 Once configured, Apple will send AdAttributionKit postback copies to AppsFlyer.
-
 Copies of received postbacks are available in the [postbacks copy report](https://support.appsflyer.com/hc/en-us/articles/360014261518-SKAN-raw-data-reports#report-types).
 
 
