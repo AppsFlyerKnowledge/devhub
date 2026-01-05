@@ -404,6 +404,8 @@ For advertisers who use vanity OneLinks.
 
 ### phoneNumber
 
+<span class="annotation-deprecated">Soon to be deprecated</span>
+
 **Property declaration**
 
 ```objc
@@ -1163,6 +1165,8 @@ This method takes no input arguments.
 `void`
 
 ### setUserEmails
+
+<span class="annotation-deprecated">Soon to be deprecated</span>
 
 **Method signature**
 
