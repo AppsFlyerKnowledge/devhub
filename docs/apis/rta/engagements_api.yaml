@@ -542,7 +542,7 @@ components:
       maxLength: 256
       description: |
         Attribution lookback window
-        Configurable number of days/hours for the lookback window attribution period. Available parameter values: 1d - 30d (days) OR 1h-23h (hours). 
+        Configurable number of days/hours for the lookback window attribution period. Available parameter values: Clicks: 1d - 7d (days). Impressions: 1d - 7d (days) OR 1h-23h (hours). 
         Validation: 3 char max and using the scheme above
     AfAdPlacement:
       type: string
