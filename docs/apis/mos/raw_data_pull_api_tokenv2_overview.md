@@ -54,7 +54,7 @@ The path parameters are identical for all raw data pull APIs.
 
 | Parameter | Data Type | Description    | Example    |
 | --------- | --------- | -------------- | ---------- |
-| `app_id*` | string    | Application ID. For non-mobile apps, use the unified app ID with the required platform prefix.  as specified in the list below.  | `id121244` |
+| `app_id*` | string    | Application ID. For non-mobile apps, use the unified app ID with the required platform prefix,  as specified in the list below.  | `id121244` |
 
 ### Supported non-mobile platform prefixes and examples:
 
