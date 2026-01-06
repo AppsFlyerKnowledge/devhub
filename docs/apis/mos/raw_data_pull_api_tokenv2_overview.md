@@ -54,7 +54,25 @@ The path parameters are identical for all raw data pull APIs.
 
 | Parameter | Data Type | Description    | Example    |
 | --------- | --------- | -------------- | ---------- |
-| `app_id*` | string    | Application ID | `id121244` |
+| `app_id*` | string    | Application ID. For non-mobile apps, use the unified app ID with the required platform prefix.  as specified in the list below.  | `id121244` |
+
+### Supported non-mobile platform prefixes and examples:
+
+- `nativepc-`: Example: `nativepc-com.kurogame.pc.wutheringwaves`
+- `steam-`: Example: `steam-3564740`
+- `playstation-`: Example: `playstation-10011142`
+- `roku-`: Example: `roku-43465`
+- `epic-`: Example: `epic-fghi45674unnrAspVxkT5bJgoNo2dPfK`
+- `xbox-`: Example: `xbox-9N8PMW7QMD3D`
+- `tizen-`: Example: `tizen-G19068012619`
+- `smartcast-`: Example: `smartcast-vzfubo`
+- `webos-`: Example: `webos-com.fubotv.app`
+- `quest-`: Example: `quest-6442996282466138`
+- `vidaa-`: Example: `vidaa-07121931`
+- `switch-`: Example: `switch-75158121`
+- `battlenet-`: Example: `battlenet-75158120`
+- `chatgpt-`: Example: `chatgpt-75157577`
+
 
 ## Query parameters
 
