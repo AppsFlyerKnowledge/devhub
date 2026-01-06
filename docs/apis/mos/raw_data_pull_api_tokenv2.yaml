@@ -887,7 +887,7 @@ components:
     AppId:
       in: path
       name: app-id
-      description: Application ID. For non-mobile apps, use the unified app ID with the required platform prefix, for example nativepc-, steam-, epic-, roku-, xbox-, and others. For the complete list see [the overview](https://dev.appsflyer.com/hc/reference/raw_data_pull_api_tokenv2-overview##supported-non-mobile-platform-prefixes-and-examples).
+      description: Application ID. For non-mobile apps, use the unified app ID with the required platform prefix, for example nativepc-, steam-, epic-, roku-, xbox-, and others. For the complete list see [the overview](https://dev.appsflyer.com/hc/reference/raw_data_pull_api_tokenv2-overview#supported-non-mobile-platform-prefixes-and-examples).
       example: "id121244"
       required: true
       schema:
