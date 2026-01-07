@@ -1,3 +1,14 @@
+---
+title: "OneLink Smart Script V2"
+slug: "dl_smart_script_v2"
+category: 6384c30e5a754e005f668a74
+parentDoc: 63ccfdc2635a53004ab874f0
+hidden: false
+createdAt: "2022-12-29T10:12:10.569Z"
+updatedAt: "2023-05-07T20:29:27.336Z"
+order: 1
+---
+
 ## Overview
 
 AppsFlyer provides a Smart Banner SDK that advertisers integrate into their websites. The purpose of the SDK is to pull all the required data to dynamically display the Smart Banners. The Smart Banners SDK also automatically builds the proper attribution links, so you don't need to build them manually.
