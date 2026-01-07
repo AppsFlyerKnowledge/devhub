@@ -1,6 +1,6 @@
 ---
-title: "OneLink Smart Script V2"
-slug: "dl_smart_script_v2"
+title: "OneLink Smart Banner V2"
+slug: "dl_smart_banner_v2"
 category: 6384c30e5a754e005f668a74
 parentDoc: 63ccfdc2635a53004ab874f0
 hidden: false
