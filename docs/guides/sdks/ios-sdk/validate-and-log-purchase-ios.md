@@ -21,7 +21,7 @@ The method is currently implemented in two versions.
 
 ## Implement validateAndLogInAppPurchase
 
-The [validateAndLogInAppPurchase](https://dev.appsflyer.com/hc/docs/ios-sdk-reference-appsflyerlib#validateandloginapppurchase) method (currently in BETA) sends the purchase details to AppsFlyer for validation. After AppsFlyer validates the purchase with the App Store, the method returns the response to a completion handler block.
+The [validateAndLogInAppPurchase](https://dev.appsflyer.com/hc/docs/ios-sdk-reference-appsflyerlib#validateandloginapppurchase) method sends the purchase details to AppsFlyer for validation. After AppsFlyer validates the purchase with the App Store, the method returns the response to a completion handler block.
 
 **To implement the method, perform the following steps:**
 
@@ -42,32 +42,37 @@ If the validation is successful, an [`af_purchase`](https://dev.appsflyer.com/hc
 ### Code example
 
 ```swift
-func sampleCodeValidateAndLog(){
-    let productId = "my-product-id"
-    let transactionId = "12345-transaction-id"
-    // Create a new instance of AFSDKPurchaseDetails with the required information
-    let purchaseDetails = AFSDKPurchaseDetails(
-        productId: productId, 
-        transactionId: transactionId, 
-       purchaseType: .subscription
-    )
+let purchaseDetails = AFSDKPurchaseDetails(
+    productId: "premium_monthly_subscription",
+    transactionId: "2000000569065806",
+    purchaseType: .subscription)
 
-    let additionalDetails: [AnyHashable: Any] = [
-        "custom_param_1": "value1"
-    ]
-
-    AppsFlyerLib.shared().validateAndLog(inAppPurchase: purchaseDetails,
-                                     purchaseAdditionalDetails: additionalDetails) { (response, error) in
-      // This block is executed when the logging and validation operation is complete.                              
-        if let error = error {
-                // Process failure error data
-                print("Validation failed: \(error.localizedDescription)")
-            } else if let response = response {
-                // Process successful result data
-                print("Validation succeeded: \(response)")
-            } else {
-                print("No response received.")
-        }
+AppsFlyerLib.shared().validateAndLogInAppPurchase(
+    purchaseDetails: purchaseDetails,
+    purchaseAdditionalDetails: nil
+) { result, error in
+    // Case 1: Technical Error. Network/SDK error
+    if let error = error, result == nil {
+        print("Technical error: \(error.localizedDescription)")
+        // Retry purchase validation
+    }
+    
+    // Case 2: Backend Response. Check the validation result
+    if let result = result, error == nil {
+        let validationResult = result["result"] as? Bool
+        
+        if validationResult == true {
+            // Validation Success. Backend validation succeeded
+            print("Purchase validated successfully")
+            // Handle successful validation
+            
+        } else if validationResult == false {
+            // Validation Failure. Backend rejected the request (HTTP 200 with result set to false)
+            print("Purchase validation failed by backend")
+            // Handle validation failure
+            
+        } 
+        return
     }
 }
 ```
