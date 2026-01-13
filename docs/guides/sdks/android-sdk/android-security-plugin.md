@@ -29,17 +29,33 @@ Conversely, if you are using SDK versions below 6.17.4, please continue using Se
 ## Release Notes
 All notable changes to the AF Security SDK will be documented in this file.
 
+### [2.1.0] - 2025-12-29
+
+#### Added
+- Enhanced code obfuscation to strengthen protection against reverse engineering and unauthorized analysis
+- Support for additional device architectures to ensure broader compatibility
+
+#### Changed
+- Upgraded native development toolkit for improved performance and stability
+- Enhanced protection against emulator detection bypasses
+- Improved security configuration options for advanced threat prevention
+
+#### Improved
+- Strengthened binary protection with advanced obfuscation techniques
+- Optimized build system for better cross-platform support
+- Enhanced application identity verification mechanisms
+
 ### [2.0.0] - 2025-10-15
 
-### Added
+#### Added
 - Enhanced data integrity verification with cryptographic hash-based message signing to ensure secure payload transmission
 - Advanced application identity validation to detect and prevent package tampering
 
-### Changed
+#### Changed
 - Improved security monitoring with enhanced performance tracking capabilities
 - Optimized internal security checks for better efficiency
 
-### Improved
+#### Improved
 - Strengthened application integrity validation to detect configuration mismatches
 - Enhanced error detection and reporting for security-related issues
 
@@ -84,21 +100,6 @@ All notable changes to the AF Security SDK will be documented in this file.
 - Resolved a stability issue related to internal integrity checks to improve reliability in sensitive environments.
 
 
-### [1.2.1] - 2025-04-07
-
-#### Fixed
-
-- Resolved a stability issue related to internal integrity checks to improve reliability in sensitive environments.
-
-### [1.2.0] - 2025-03-21
-
-#### Added
-
-- Introduced a flexible code injection mechanism to support advanced deployment scenarios.
-- Implemented new runtime defenses to enhance protection against dynamic instrumentation tools.
-- Added early-stage integrity validation to detect and respond to compromised environments.
-- Optimized system-level interactions by transitioning select API calls to lower-level mechanisms for improved stealth and performance.
-
 ## Before You Begin
 
  1. Please send us all the certificate hashes (SHA-256) of all the certificates with which you sign your app. <br>This includes the debug and release certificate hashes. The certificate hashes are needed to pre-build the version of the security module that your app will use.</br>
@@ -123,18 +124,17 @@ dependencyResolutionManagement {
     repositories {
         mavenCentral()
         maven {
-            // replace YOUR_APPSFLYER_MAVEN_REPO_ID with your AppsFlyer Maven Repo ID (starting with af-rn-)
-            url "https://art.af-sdk.io/maven/${YOUR_APPSFLYER_MAVEN_REPO_ID}"
+            url 'https://art.af-sdk.io/security-sdk/maven'
             credentials(HttpHeaderCredentials) {
-                name = 'af-security-sdk-token'
+                name = 'Authorization'
                 // get the token from the environment variable
-                value = System.getenv("APPSFLYER_MAVEN_TOKEN")
+                value = 'Bearer ' + System.getenv("APPSFLYER_AUTH_V2_TOKEN")
             }
             authentication {
                 header(HttpHeaderAuthentication)
             }
-            content { 
-                includeGroup "com.appsflyer.security" 
+            content {
+                includeGroup "com.appsflyer.security"
             }
         }
         // other repositories...
@@ -145,26 +145,27 @@ dependencyResolutionManagement {
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)    
     repositories {
-      mavenCentral()
+        mavenCentral()
         maven {
-            // replace YOUR_APPSFLYER_MAVEN_REPO_ID with your AppsFlyer Maven Repo ID (starting with af-rn-)
-            url = uri("https://art.af-sdk.io/maven/${YOUR_APPSFLYER_MAVEN_REPO_ID}")
-            credentials(HttpHeaderCredentials::class) {
-                name = "af-security-sdk-token"
-                // get the token from the environment variable
-                value = System.getenv("APPSFLYER_MAVEN_TOKEN")
-            }
-            authentication {
-                create<HttpHeaderAuthentication>("header")
-            }
-            content {
-                includeGroup("com.appsflyer.security")
-            }
+        url = uri("https://art.af-sdk.io/security-sdk/maven")
+        credentials(HttpHeaderCredentials::class) {
+            name = "Authorization"
+            // get the token from the environment variable
+            value = "Bearer ${System.getenv("APPSFLYER_AUTH_V2_TOKEN")}"
         }
+        authentication {
+            create("header", HttpHeaderAuthentication::class.java)
+        }
+        content {
+            includeGroup("com.appsflyer.security")
+        }
+     }
         // other repositories...
     }
 }
 ```
+
+`APPSFLYER_AUTH_V2_TOKEN` This is an API V2 token required for repository authentication and authorization. You can retrieve the token in your AppsFlyer [dashboard](https://support.appsflyer.com/hc/en-us/articles/360004562377-Managing-AppsFlyer-tokens).
 
 ### Step 2
 
