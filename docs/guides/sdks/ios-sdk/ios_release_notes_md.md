@@ -7,7 +7,7 @@ hidden: false
 order: 1
 ---
 
-## Version 6.17.8 . 03/12/2025
+## Version 6.17.8
 
 #### New features
 
