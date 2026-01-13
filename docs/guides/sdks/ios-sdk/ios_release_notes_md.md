@@ -7,6 +7,15 @@ hidden: false
 order: 1
 ---
 
+## Version 6.17.8 . 03/12/2025
+
+#### New features
+
+- Purchase validation using `validateAndLogInAppPurchase` with `AFSDKPurchaseDetails` is now generally available, following the beta phase.
+This API replaces the legacy `validateAndLogInAppPurchase` API, which is now deprecated.
+For more information, see [Validate and log in-app purchases (iOS)](https://dev.appsflyer.com/hc/docs/validate-and-log-purchase-ios).
+
+
 ## Version 6.17.7
 
 #### Bug Fixes
