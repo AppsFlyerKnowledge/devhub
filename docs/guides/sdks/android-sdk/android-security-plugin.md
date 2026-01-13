@@ -124,18 +124,18 @@ dependencyResolutionManagement {
     repositories {
         mavenCentral()
         maven {
-            url 'https://art.af-sdk.io/security-sdk/maven'
-            credentials(HttpHeaderCredentials) {
-                name = 'Authorization'
-                // get the token from the environment variable
-                value = 'Bearer ' + System.getenv("APPSFLYER_AUTH_V2_TOKEN")
-            }
-            authentication {
-                header(HttpHeaderAuthentication)
-            }
-            content {
-                includeGroup "com.appsflyer.security"
-            }
+           url 'https://art.af-sdk.io/security-sdk/maven'
+           credentials(HttpHeaderCredentials) {
+               name = 'Authorization'
+               // get the token from the environment variable
+               value = 'Bearer ' + System.getenv("APPSFLYER_AUTH_V2_TOKEN")
+           }
+           authentication {
+               header(HttpHeaderAuthentication)
+           }
+           content {
+               includeGroup "com.appsflyer.security"
+           }
         }
         // other repositories...
     }
@@ -147,19 +147,19 @@ dependencyResolutionManagement {
     repositories {
         mavenCentral()
         maven {
-        url = uri("https://art.af-sdk.io/security-sdk/maven")
-        credentials(HttpHeaderCredentials::class) {
-            name = "Authorization"
-            // get the token from the environment variable
-            value = "Bearer ${System.getenv("APPSFLYER_AUTH_V2_TOKEN")}"
+          url = uri("https://art.af-sdk.io/security-sdk/maven")
+          credentials(HttpHeaderCredentials::class) {
+              name = "Authorization"
+              // get the token from the environment variable
+              value = "Bearer ${System.getenv("APPSFLYER_AUTH_V2_TOKEN")}"
+          }
+          authentication {
+              create("header", HttpHeaderAuthentication::class.java)
+          }
+          content {
+              includeGroup("com.appsflyer.security")
+          }
         }
-        authentication {
-            create("header", HttpHeaderAuthentication::class.java)
-        }
-        content {
-            includeGroup("com.appsflyer.security")
-        }
-     }
         // other repositories...
     }
 }
