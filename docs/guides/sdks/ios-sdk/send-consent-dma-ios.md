@@ -14,7 +14,7 @@ For a general introduction to DMA consent data, see [here](https://dev.appsflyer
 
 The SDK offers two alternative methods for gathering consent data:
 
-- **Through a Consent Management Platform (CMP)**: If the app uses a CMP that complies with the [Transparency and Consent Framework (TCF) v2.2 protocol](https://iabeurope.eu/tcf-supporting-resources/), the SDK can automatically retrieve the consent details.  
+- **Through a Consent Management Platform (CMP)**: If the app uses a CMP that complies with the [Transparency and Consent Framework (TCF) v2.2/2.3 protocol](https://iabeurope.eu/tcf-supporting-resources/), the SDK can automatically retrieve the consent details.  
 
 **OR**
 
@@ -26,7 +26,7 @@ The SDK offers two alternative methods for gathering consent data:
 
 ## Use CMP to collect consent data
 
-A CMP compatible with TCF v2.2 collects DMA consent data and stores it in `NSUserDefaults`. To enable the SDK to access this data and include it with every event, follow these steps:
+A CMP compatible with TCF v2.2/2.3 collects DMA consent data and stores it in `NSUserDefaults`. To enable the SDK to access this data and include it with every event, follow these steps:
 
 1. Initialize the SDK in `didFinishLaunchingWithOptions` as described [here](https://dev.appsflyer.com/hc/docs/integrate-ios-sdk#initializing-the-ios-sdk).
 2. Call `enableTCFDataCollection(true)`  to instruct the SDK to collect the TCF data from the device.
@@ -89,7 +89,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate , AppsFlyerLibDelegate {
 
 ## Manually collect consent data
 
-If your app does not use a CMP compatible with TCF v2.2, use the SDK API detailed below to provide the consent data directly to the SDK.
+If your app does not use a CMP compatible with TCF v2.2/2.3, use the SDK API detailed below to provide the consent data directly to the SDK.
 
 To manually collect consent data, perform the following:
 

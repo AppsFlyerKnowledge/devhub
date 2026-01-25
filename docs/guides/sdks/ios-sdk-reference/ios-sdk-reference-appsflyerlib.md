@@ -654,7 +654,7 @@ func enableTCFDataCollection(_ flag: Bool)
 ```
 
 **Description** 
-Enables the collection of Transparency and Consent Framework (TCF) data from `NSUserDefaults`. The data was placed in `UserDefaults` by the device's TCF v2.2 compatible Consent Management Platform (CMP).
+Enables the collection of Transparency and Consent Framework (TCF) data from `NSUserDefaults`. The data was placed in `UserDefaults` by the device's TCF v2.2/2.3 compatible Consent Management Platform (CMP).
 
 **Input arguments**
 

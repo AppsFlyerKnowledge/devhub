@@ -249,7 +249,7 @@ AppsFlyerLib enableTCFDataCollection (boolean flag)
 
 **Description**
 
-Enable the collection of Transparency and Consent Framework (TCF) data from `SharedPreferences`. The data was placed in `SharedPreferences` by the device TCF v2.2 compatible Consent Management Platform (CMP).
+Enable the collection of Transparency and Consent Framework (TCF) data from `SharedPreferences`. The data was placed in `SharedPreferences` by the device TCF v2.2/2.3 compatible Consent Management Platform (CMP).
 
 **Input arguments**
 
