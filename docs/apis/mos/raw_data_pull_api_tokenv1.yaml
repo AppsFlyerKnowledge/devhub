@@ -278,7 +278,7 @@ paths:
         - Raw data reports (organic)
       summary: Organic reinstalls
       description: | 
-        Records users uninstalling the app and then installing it.
+        Records users uninstalling the app and then installing it again.
         Data freshness: Daily
       parameters:
         - $ref: '#/components/parameters/AppId' 
