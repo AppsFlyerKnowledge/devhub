@@ -278,7 +278,7 @@ paths:
         - Raw data reports (organic)
       summary: Organic reinstalls
       description: | 
-        Records ad revenue for users attributed to a retargeting media source during the re-engagement window.
+        Records users uninstalling the app and then installing it.
         Data freshness: Daily
       parameters:
         - $ref: '#/components/parameters/AppId' 
