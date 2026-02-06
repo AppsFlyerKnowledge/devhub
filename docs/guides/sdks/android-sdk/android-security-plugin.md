@@ -103,9 +103,9 @@ All notable changes to the AF Security SDK will be documented in this file.
 ## Before You Begin
 
  1. Please send us all the certificate hashes (SHA-256) of all the certificates with which you sign your app. <br>This includes the debug and release certificate hashes. The certificate hashes are needed to pre-build the version of the security module that your app will use.</br>
-Instructions of getting the certificates can be found [here](#sha256-fingerprint). </br>
+Instructions of getting the certificates can be found [here](#generating-a-sha256-fingerprint). </br>
 
-2. Make sure to ask the following information from your contact person at AppsFlyer:
+1. Make sure to ask the following information from your contact person at AppsFlyer:
     1. Maven repository name
     2. Maven Auth token
     3. Latest Advanced Security module version that was built for your app.
@@ -117,7 +117,7 @@ Please follow the next two steps. Once completed and the dependency is downloade
 
 ### Step 1
 The artifacts are hosted on AppsFlyer infrastructure.
-Add the your dedicated repository on AppsFlyer Maven as a repository source in your `settings.gradle` or `settings.gradle.kts` file:
+Add your dedicated repository on AppsFlyer Maven as a repository source in your `settings.gradle` or `settings.gradle.kts` file:
 ```groovy
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
