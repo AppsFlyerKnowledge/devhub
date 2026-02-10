@@ -557,6 +557,7 @@ components:
           - switch
           - xbox
           - nativepc
+          - vega
       required: true
       description: |
         The CTV platform of the measured app
@@ -600,6 +601,7 @@ components:
               - steamid
               - epicid
               - psid
+              - vegaid
               description: |
                 `custom` format is GUID
             value:
