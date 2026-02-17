@@ -326,6 +326,8 @@ paths:
         Data freshness: Real-time
       parameters:
         - $ref: '#/components/parameters/AppId'
+        - $ref: '#/components/parameters/FromDate'
+        - $ref: '#/components/parameters/ToDate'
         - $ref: '#/components/parameters/MediaSource'
         - $ref: '#/components/parameters/Category'
         - $ref: '#/components/parameters/Currency'
