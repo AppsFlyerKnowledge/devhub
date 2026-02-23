@@ -4,7 +4,7 @@ slug: "android-release-notes"
 category: 5f9705393c689a065c409b23
 parentDoc: 5fa0443749be540011850e51
 hidden: false
-order: 1
+order: 14
 ---
 
 ## Version 6.17.5 - 26/11/2025
