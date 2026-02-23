@@ -232,7 +232,30 @@ AppsFlyerLib.shared().useUninstallSandbox = true
 ```objc
 [AppsFlyerLib shared].setUseUninstallSandbox = true;
 ```
+### Example
 
+```objc
+import UserNotifications
+
+func application(
+  _ application: UIApplication,
+  didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?
+) -> Bool {
+
+    AppsFlyerLib.shared().useUninstallSandbox = true
+    application.registerForRemoteNotifications()
+
+    return true
+}
+
+// Called when the application successfully registers for push notifications
+func application(
+  _ application: UIApplication,
+  didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data
+) {
+    AppsFlyerLib.shared().registerUninstall(deviceToken)
+}
+```
 
 
 > 📘 Note
