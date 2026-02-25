@@ -126,6 +126,7 @@ Validating an in-app purchase automatically generates and sends an in-app purcha
 ```
 
 ## validateAndLogInAppPurchase (LEGACY)
+<span class="annotation-deprecated">Deprecated since V6.17.8</span>  
 
 ### Purchase validation using validateAndLogInAppPurchase
 

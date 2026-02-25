@@ -1300,7 +1300,7 @@ An object that encapsulates all data related to the purchase provided to the `va
 | AFSDKPurchaseTypeSubscriptionurce | String |  |
 
 ### validateAndLogInAppPurchase (LEGACY)
-(Supported until SDK v.6.14.0)
+<span class="annotation-deprecated">Deprecated since V6.14.0</span>  
 
 **Method signature**
 

@@ -145,7 +145,8 @@ The callback function [AppsFlyerInAppPurchaseValidationCallback](https://dev.app
   }
 }
 ```
-## validateAndLogInAppPurchase (Legacy)
+## validateAndLogInAppPurchase (Legacy) 
+<span class="annotation-deprecated">Deprecated since V6.17.5</span>  
 
 [`validateAndLogInAppPurchase`](doc:android-sdk-reference-appsflyerlib#validateandloginapppurchase-legacy) is exposed via [`AppsFlyerLib`](doc:android-sdk-reference-appsflyerlib).
 
