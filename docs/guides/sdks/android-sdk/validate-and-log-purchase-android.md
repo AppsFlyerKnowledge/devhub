@@ -19,13 +19,9 @@ The method is currently implemented in two versions.
 - [validateAndLogInAppPurchase](#implement-validateandloginapppurchase-beta) supported from SDK v.6.17.5
 - [validateAndLogInAppPurchase (LEGACY)](#validateandloginapppurchase-legacy) 
 
-### Implement validateAndLogInAppPurchase (BETA)
+### Implement validateAndLogInAppPurchase
 
 The [validateAndLogInAppPurchase](https://dev.appsflyer.com/hc/docs/android-sdk-reference-appsflyerlib#validateandloginapppurchase) (currently in BETA) sends the purchase details to AppsFlyer for validation. After AppsFlyer validates the purchase with Google Play the method returns the response to a callback function.
-
-> 📘Note
-> 
-> Contact your CSM to join the beta.
 
 **To implement the method perform the following steps:**
 
