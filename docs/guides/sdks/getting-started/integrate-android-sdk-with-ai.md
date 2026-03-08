@@ -11,7 +11,7 @@ Offload much of the AppsFlyer Android SDK integration work to AppsFlyer’s SDK 
 
 ## Step 1: Get ready
 
-- [Your **AppsFlyer Dev key**](https://support.appsflyer.com/hc/en-us/articles/207032066-Basic-SDK-integration-guide#retrieve-the-dev-key)
+- Your [**AppsFlyer Dev key**](https://support.appsflyer.com/hc/en-us/articles/207032066-Basic-SDK-integration-guide#retrieve-the-dev-key)
 - Your Android app project.
 - Your AI-powered coding tool is installed and set up for your project
 - Android Studio is installed to sync and run the app
