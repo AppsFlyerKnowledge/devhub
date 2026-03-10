@@ -13,7 +13,12 @@ paths:
       tags:
       - Predict iOS aggregated report
       summary: Get report
-      description: "The Predict aggregated report returns predicted performance metrics, for both SKAdNetwork attribution and AF attribution models. The report is available through Data Locker or the API."
+      description: |
+        > ⚠️ Important
+        >
+        > All API V2 tokens generated before March 10, 2026, 19:00 UTC have been revoked. If your token was generated before this date, please regenerate it. [Learn how](https://support.appsflyer.com/hc/en-us/articles/360004562377-Managing-AppsFlyer-tokens).
+
+        The Predict aggregated report returns predicted performance metrics, for both SKAdNetwork attribution and AF attribution models. The report is available through Data Locker or the API.
       operationId: predict-ios-pull-api-get
       parameters:
       - name: app-id
@@ -164,5 +169,8 @@ components:
       type: http
       scheme: bearer
       description: |
+        **Important: API V2 Token Revocation**
+        All API V2 tokens generated before March 10, 2026, 19:00 UTC have been revoked. If your token was generated before this date, please regenerate it. [Learn how](https://support.appsflyer.com/hc/en-us/articles/360004562377-Managing-AppsFlyer-tokens).
+
         Authorization HTTP header containing API V2.0 token (Bearer token) is required.
         The admin [gets the V2 token in the dashboard](https://support.appsflyer.com/hc/en-us/articles/360004562377), go to your email address

@@ -14,7 +14,11 @@ paths:
       tags:
         - Raw data reports (non-organic)
       summary: Installs
-      description: | 
+      description: |
+        > ⚠️ Important
+        >
+        > All API V2 tokens generated before March 10, 2026, 19:00 UTC have been revoked. If your token was generated before this date, please regenerate it. [Learn how](https://support.appsflyer.com/hc/en-us/articles/360004562377-Managing-AppsFlyer-tokens).
+
         Records non-organic installs. The record is generated when a user opens the app for the first time.
         Data freshness: Real-time
       parameters:
@@ -50,8 +54,12 @@ paths:
       tags:
         - Raw data reports (non-organic)
       summary: In-app events
-      description: | 
-        Records the events performed by users. 
+      description: |
+        > ⚠️ Important
+        >
+        > All API V2 tokens generated before March 10, 2026, 19:00 UTC have been revoked. If your token was generated before this date, please regenerate it. [Learn how](https://support.appsflyer.com/hc/en-us/articles/360004562377-Managing-AppsFlyer-tokens).
+
+        Records the events performed by users.
         Data freshness: Real-time
       parameters:
         - $ref: '#/components/parameters/AppId' 
@@ -90,8 +98,12 @@ paths:
       tags:
         - Raw data reports (non-organic)
       summary: Uninstalls
-      description: | 
-        Records when a user uninstalls the app. 
+      description: |
+        > ⚠️ Important
+        >
+        > All API V2 tokens generated before March 10, 2026, 19:00 UTC have been revoked. If your token was generated before this date, please regenerate it. [Learn how](https://support.appsflyer.com/hc/en-us/articles/360004562377-Managing-AppsFlyer-tokens).
+
+        Records when a user uninstalls the app.
         Data freshness: Daily
       parameters:
         - $ref: '#/components/parameters/AppId' 
@@ -129,8 +141,12 @@ paths:
       tags:
         - Raw data reports (non-organic)
       summary: Reinstalls
-      description: | 
-        Records users who after uninstalling the app, engage with a UA media source and reinstall the app during the re-attribution window. 
+      description: |
+        > ⚠️ Important
+        >
+        > All API V2 tokens generated before March 10, 2026, 19:00 UTC have been revoked. If your token was generated before this date, please regenerate it. [Learn how](https://support.appsflyer.com/hc/en-us/articles/360004562377-Managing-AppsFlyer-tokens).
+
+        Records users who after uninstalling the app, engage with a UA media source and reinstall the app during the re-attribution window.
         Data freshness: Real-time
       parameters:
         - $ref: '#/components/parameters/AppId' 
@@ -168,7 +184,11 @@ paths:
       tags:
         - Raw data reports (organic)
       summary: Organic Installs
-      description: | 
+      description: |
+        > ⚠️ Important
+        >
+        > All API V2 tokens generated before March 10, 2026, 19:00 UTC have been revoked. If your token was generated before this date, please regenerate it. [Learn how](https://support.appsflyer.com/hc/en-us/articles/360004562377-Managing-AppsFlyer-tokens).
+
         Records when the app is opened by a user for the first time.
         Data freshness: Continuous
       parameters:
@@ -204,7 +224,11 @@ paths:
       tags:
         - Raw data reports (organic)
       summary: Organic in-app events
-      description: | 
+      description: |
+        > ⚠️ Important
+        >
+        > All API V2 tokens generated before March 10, 2026, 19:00 UTC have been revoked. If your token was generated before this date, please regenerate it. [Learn how](https://support.appsflyer.com/hc/en-us/articles/360004562377-Managing-AppsFlyer-tokens).
+
         Records details about events performed by users.
         Data freshness: Continuous
       parameters:
@@ -243,7 +267,11 @@ paths:
       tags:
         - Raw data reports (organic)
       summary: Organic uninstalls
-      description: | 
+      description: |
+        > ⚠️ Important
+        >
+        > All API V2 tokens generated before March 10, 2026, 19:00 UTC have been revoked. If your token was generated before this date, please regenerate it. [Learn how](https://support.appsflyer.com/hc/en-us/articles/360004562377-Managing-AppsFlyer-tokens).
+
         Records users uninstalling the app.
         Data freshness: Daily
       parameters:
@@ -281,7 +309,11 @@ paths:
       tags:
         - Raw data reports (organic)
       summary: Organic reinstalls
-      description: | 
+      description: |
+        > ⚠️ Important
+        >
+        > All API V2 tokens generated before March 10, 2026, 19:00 UTC have been revoked. If your token was generated before this date, please regenerate it. [Learn how](https://support.appsflyer.com/hc/en-us/articles/360004562377-Managing-AppsFlyer-tokens).
+
         Records users uninstalling the app and then installing it again.
         Data freshness: Daily
       parameters:
@@ -321,6 +353,10 @@ paths:
         - Retargeting
       summary: Conversions (re-engagements & re-attributions)
       description: |
+        > ⚠️ Important
+        >
+        > All API V2 tokens generated before March 10, 2026, 19:00 UTC have been revoked. If your token was generated before this date, please regenerate it. [Learn how](https://support.appsflyer.com/hc/en-us/articles/360004562377-Managing-AppsFlyer-tokens).
+
         Re-engagement: Record of a user opening the app after engaging with a retargeting campaign.
         Re-attribution (retargeting-reinstall): Event generated when a user, having uninstalled the app, engages with a retargeting media source and reinstalls the app during the re-attribution window.
         Data freshness: Real-time
@@ -357,6 +393,10 @@ paths:
         - Retargeting
       summary: In-app events
       description: |
+        > ⚠️ Important
+        >
+        > All API V2 tokens generated before March 10, 2026, 19:00 UTC have been revoked. If your token was generated before this date, please regenerate it. [Learn how](https://support.appsflyer.com/hc/en-us/articles/360004562377-Managing-AppsFlyer-tokens).
+
         In-app events performed by the user during the re-engagement window.
         Data freshness: Real-time
       parameters:
@@ -394,8 +434,12 @@ paths:
       tags:
         - Ad Revenue raw data
       summary: Attributed ad revenue
-      description: | 
-        Records ad revenue for users attributed to a media source. 
+      description: |
+        > ⚠️ Important
+        >
+        > All API V2 tokens generated before March 10, 2026, 19:00 UTC have been revoked. If your token was generated before this date, please regenerate it. [Learn how](https://support.appsflyer.com/hc/en-us/articles/360004562377-Managing-AppsFlyer-tokens).
+
+        Records ad revenue for users attributed to a media source.
         Data freshness: Daily
       parameters:
         - $ref: '#/components/parameters/AppId' 
@@ -432,7 +476,11 @@ paths:
       tags:
         - Ad Revenue raw data
       summary: Organic ad revenue
-      description: | 
+      description: |
+        > ⚠️ Important
+        >
+        > All API V2 tokens generated before March 10, 2026, 19:00 UTC have been revoked. If your token was generated before this date, please regenerate it. [Learn how](https://support.appsflyer.com/hc/en-us/articles/360004562377-Managing-AppsFlyer-tokens).
+
         Records ad revenue for users not attributed to a media source.
         Data freshness: Daily
       parameters:
@@ -471,7 +519,11 @@ paths:
         - Ad Revenue raw data
       summary: Retargeting ad revenue
       description: |
-        Ad revenue of users attributed to a retargeting media source during the re-engagement window. 
+        > ⚠️ Important
+        >
+        > All API V2 tokens generated before March 10, 2026, 19:00 UTC have been revoked. If your token was generated before this date, please regenerate it. [Learn how](https://support.appsflyer.com/hc/en-us/articles/360004562377-Managing-AppsFlyer-tokens).
+
+        Ad revenue of users attributed to a retargeting media source during the re-engagement window.
         Data freshness: Daily
       parameters:
         - $ref: '#/components/parameters/AppId'
@@ -506,7 +558,11 @@ paths:
       tags:
         - Protect360 fraud
       summary: Installs
-      description: | 
+      description: |
+        > ⚠️ Important
+        >
+        > All API V2 tokens generated before March 10, 2026, 19:00 UTC have been revoked. If your token was generated before this date, please regenerate it. [Learn how](https://support.appsflyer.com/hc/en-us/articles/360004562377-Managing-AppsFlyer-tokens).
+
         Records installs identified as fraudulent and therefore not attributed to any media source.
         Data freshness: Real-time
       parameters:
@@ -542,7 +598,11 @@ paths:
       tags:
         - Protect360 fraud
       summary: Post-attribution installs
-      description: | 
+      description: |
+        > ⚠️ Important
+        >
+        > All API V2 tokens generated before March 10, 2026, 19:00 UTC have been revoked. If your token was generated before this date, please regenerate it. [Learn how](https://support.appsflyer.com/hc/en-us/articles/360004562377-Managing-AppsFlyer-tokens).
+
         Reports include installs attributed to a media source but later found to be fraudulent.
         Data freshness: Daily
       parameters:
@@ -578,8 +638,12 @@ paths:
       tags:
         - Protect360 fraud
       summary: In-app events
-      description: | 
-        Records in-app events identified as fraudulent by Protect360.  
+      description: |
+        > ⚠️ Important
+        >
+        > All API V2 tokens generated before March 10, 2026, 19:00 UTC have been revoked. If your token was generated before this date, please regenerate it. [Learn how](https://support.appsflyer.com/hc/en-us/articles/360004562377-Managing-AppsFlyer-tokens).
+
+        Records in-app events identified as fraudulent by Protect360.
         Data freshness: Daily 
       parameters:
         - $ref: '#/components/parameters/AppId' 
@@ -617,8 +681,12 @@ paths:
       tags:
         - Protect360 fraud
       summary: Post-attribution in-app events
-      description: | 
-        Records in-app events for installs identified as fraudulent after being attributed to a media source or judged fraudulent without regard to the install itself. 
+      description: |
+        > ⚠️ Important
+        >
+        > All API V2 tokens generated before March 10, 2026, 19:00 UTC have been revoked. If your token was generated before this date, please regenerate it. [Learn how](https://support.appsflyer.com/hc/en-us/articles/360004562377-Managing-AppsFlyer-tokens).
+
+        Records in-app events for installs identified as fraudulent after being attributed to a media source or judged fraudulent without regard to the install itself.
         Data freshness: Daily
       parameters:
         - $ref: '#/components/parameters/AppId' 
@@ -656,8 +724,12 @@ paths:
       tags:
         - Protect360 fraud
       summary: Clicks
-      description: | 
-        Records clicks performed by users blocked by Protect360. 
+      description: |
+        > ⚠️ Important
+        >
+        > All API V2 tokens generated before March 10, 2026, 19:00 UTC have been revoked. If your token was generated before this date, please regenerate it. [Learn how](https://support.appsflyer.com/hc/en-us/articles/360004562377-Managing-AppsFlyer-tokens).
+
+        Records clicks performed by users blocked by Protect360.
         Data freshness: Daily
       parameters:
         - $ref: '#/components/parameters/AppId' 
@@ -694,8 +766,12 @@ paths:
       tags:
         - Protect360 fraud
       summary: Blocked install postbacks
-      description: | 
-        Records copies of postbacks sent to a media source resulting in a blocked install. 
+      description: |
+        > ⚠️ Important
+        >
+        > All API V2 tokens generated before March 10, 2026, 19:00 UTC have been revoked. If your token was generated before this date, please regenerate it. [Learn how](https://support.appsflyer.com/hc/en-us/articles/360004562377-Managing-AppsFlyer-tokens).
+
+        Records copies of postbacks sent to a media source resulting in a blocked install.
         Data freshness: Real-time
       parameters:
         - $ref: '#/components/parameters/AppId' 
@@ -733,7 +809,11 @@ paths:
       tags:
         - Postbacks
       summary: Install postbacks
-      description: | 
+      description: |
+        > ⚠️ Important
+        >
+        > All API V2 tokens generated before March 10, 2026, 19:00 UTC have been revoked. If your token was generated before this date, please regenerate it. [Learn how](https://support.appsflyer.com/hc/en-us/articles/360004562377-Managing-AppsFlyer-tokens).
+
         Records install events generated when a user opens the app for the first time.
         Data freshness: Daily
       parameters:
@@ -771,7 +851,11 @@ paths:
       tags:
         - Postbacks
       summary: In-app event postbacks
-      description: | 
+      description: |
+        > ⚠️ Important
+        >
+        > All API V2 tokens generated before March 10, 2026, 19:00 UTC have been revoked. If your token was generated before this date, please regenerate it. [Learn how](https://support.appsflyer.com/hc/en-us/articles/360004562377-Managing-AppsFlyer-tokens).
+
         Records in-app event postbacks sent to the media source.
         Data freshness: Daily
       parameters:
@@ -810,7 +894,11 @@ paths:
       tags:
         - Postbacks
       summary: Retargeting in-app event postbacks
-      description: | 
+      description: |
+        > ⚠️ Important
+        >
+        > All API V2 tokens generated before March 10, 2026, 19:00 UTC have been revoked. If your token was generated before this date, please regenerate it. [Learn how](https://support.appsflyer.com/hc/en-us/articles/360004562377-Managing-AppsFlyer-tokens).
+
         Records in-app events users performed during the re-engagement window.
         Data freshness: Real-time
       parameters:
@@ -849,7 +937,11 @@ paths:
       tags:
         - Postbacks
       summary: Retargeting conversions postbacks
-      description: | 
+      description: |
+        > ⚠️ Important
+        >
+        > All API V2 tokens generated before March 10, 2026, 19:00 UTC have been revoked. If your token was generated before this date, please regenerate it. [Learn how](https://support.appsflyer.com/hc/en-us/articles/360004562377-Managing-AppsFlyer-tokens).
+
         Records in-app events users performed during the re-engagement window.
         Data freshness: Real-time
       parameters:
@@ -1134,7 +1226,7 @@ components:
     Bearer-Authentication:
       type: http
       scheme: bearer
-      description: "Authorization HTTP header containing API V2 token (bearer token) is required.\n\n
+      description: "**Important: API V2 Token Revocation**\n\nAll API V2 tokens generated before March 10, 2026, 19:00 UTC have been revoked. If your token was generated before this date, please regenerate it. [Learn how](https://support.appsflyer.com/hc/en-us/articles/360004562377-Managing-AppsFlyer-tokens).\n\nAuthorization HTTP header containing API V2 token (bearer token) is required.\n\n
         The admin [gets the V2 token in the dashboard](https://support.appsflyer.com/hc/en-us/articles/360004562377) "
 
 

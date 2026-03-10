@@ -12,7 +12,12 @@ paths:
       tags:
         - Message Fields
       summary: Retrieve per platform
-      description: Returns a list of the available message fields for each platform
+      description: |
+        > ⚠️ Important
+        >
+        > All API V2 tokens generated before March 10, 2026, 19:00 UTC have been revoked. If your token was generated before this date, please regenerate it. [Learn how](https://support.appsflyer.com/hc/en-us/articles/360004562377-Managing-AppsFlyer-tokens).
+
+        Returns a list of the available message fields for each platform
       parameters:
       - name: platform
         in: path
@@ -75,7 +80,12 @@ paths:
       tags:
         - Event Types 
       summary: Retrieve per attributing-entity
-      description: Returns a list of the available event types for the specified endpoint type
+      description: |
+        > ⚠️ Important
+        >
+        > All API V2 tokens generated before March 10, 2026, 19:00 UTC have been revoked. If your token was generated before this date, please regenerate it. [Learn how](https://support.appsflyer.com/hc/en-us/articles/360004562377-Managing-AppsFlyer-tokens).
+
+        Returns a list of the available event types for the specified endpoint type
       parameters:
       - name: attributing-entity
         in: path
@@ -121,7 +131,12 @@ paths:
       tags:
         - URL Validation
       summary: Validate URL
-      description: Validates and tests URL to be used as a Push API endpoint
+      description: |
+        > ⚠️ Important
+        >
+        > All API V2 tokens generated before March 10, 2026, 19:00 UTC have been revoked. If your token was generated before this date, please regenerate it. [Learn how](https://support.appsflyer.com/hc/en-us/articles/360004562377-Managing-AppsFlyer-tokens).
+
+        Validates and tests URL to be used as a Push API endpoint
       requestBody:
         description: Body for validate url
         content:
@@ -258,7 +273,11 @@ paths:
     put:
       tags:
         - Manage Push API configuration
-      summary: Update Push API configuration 
+      summary: Update Push API configuration
+      description: |
+        > ⚠️ Important
+        >
+        > All API V2 tokens generated before March 10, 2026, 19:00 UTC have been revoked. If your token was generated before this date, please regenerate it. [Learn how](https://support.appsflyer.com/hc/en-us/articles/360004562377-Managing-AppsFlyer-tokens).
       parameters:
       - name: app-id
         in: path
@@ -484,7 +503,11 @@ paths:
     get:
       tags:
         - Manage Push API configuration
-      summary: Get Push API configuration 
+      summary: Get Push API configuration
+      description: |
+        > ⚠️ Important
+        >
+        > All API V2 tokens generated before March 10, 2026, 19:00 UTC have been revoked. If your token was generated before this date, please regenerate it. [Learn how](https://support.appsflyer.com/hc/en-us/articles/360004562377-Managing-AppsFlyer-tokens).
       parameters:
       - name: app-id
         in: path
@@ -607,6 +630,10 @@ paths:
       tags:
         - Authentication Token
       summary: Set Push API Authentication Token
+      description: |
+        > ⚠️ Important
+        >
+        > All API V2 tokens generated before March 10, 2026, 19:00 UTC have been revoked. If your token was generated before this date, please regenerate it. [Learn how](https://support.appsflyer.com/hc/en-us/articles/360004562377-Managing-AppsFlyer-tokens).
       parameters:
         - name: app_id
           in: path
@@ -808,6 +835,10 @@ paths:
       tags:
         - Authentication Token
       summary: Delete Push API Authentication Token
+      description: |
+        > ⚠️ Important
+        >
+        > All API V2 tokens generated before March 10, 2026, 19:00 UTC have been revoked. If your token was generated before this date, please regenerate it. [Learn how](https://support.appsflyer.com/hc/en-us/articles/360004562377-Managing-AppsFlyer-tokens).
       parameters:
         - name: app_id
           in: path
@@ -1272,7 +1303,7 @@ components:
     Bearer-Authentication:
       type: http
       scheme: bearer
-      description: "Authorization HTTP header containing API V2 token (bearer token) is required.\n\n
+      description: "**Important: API V2 Token Revocation**\n\nAll API V2 tokens generated before March 10, 2026, 19:00 UTC have been revoked. If your token was generated before this date, please regenerate it. [Learn how](https://support.appsflyer.com/hc/en-us/articles/360004562377-Managing-AppsFlyer-tokens).\n\nAuthorization HTTP header containing API V2 token (bearer token) is required.\n\n
         The admin [gets the V2 token in the dashboard](https://support.appsflyer.com/hc/en-us/articles/360004562377) "
   schemas:
     GetConfigurationReponseBody:

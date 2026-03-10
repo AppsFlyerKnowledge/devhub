@@ -12,6 +12,10 @@ paths:
       tags:
       - Get config
       summary: Get click signing config
+      description: |
+        > ⚠️ Important
+        >
+        > All API V2 tokens generated before March 10, 2026, 19:00 UTC have been revoked. If your token was generated before this date, please regenerate it. [Learn how](https://support.appsflyer.com/hc/en-us/articles/360004562377-Managing-AppsFlyer-tokens).
       operationId: click-signing-config-get
 
       responses:
@@ -96,6 +100,10 @@ paths:
       tags:
       - Update config
       summary: Update click signing config
+      description: |
+        > ⚠️ Important
+        >
+        > All API V2 tokens generated before March 10, 2026, 19:00 UTC have been revoked. If your token was generated before this date, please regenerate it. [Learn how](https://support.appsflyer.com/hc/en-us/articles/360004562377-Managing-AppsFlyer-tokens).
       operationId: click-signing-config-update-put
 
       parameters:
@@ -172,6 +180,10 @@ paths:
       tags:
       - Circuit breaker
       summary: Circuit breaker
+      description: |
+        > ⚠️ Important
+        >
+        > All API V2 tokens generated before March 10, 2026, 19:00 UTC have been revoked. If your token was generated before this date, please regenerate it. [Learn how](https://support.appsflyer.com/hc/en-us/articles/360004562377-Managing-AppsFlyer-tokens).
       operationId: click-signing-config-circuit-breaker-put
 
       requestBody:
@@ -228,6 +240,10 @@ paths:
       tags:
       - Add excluded app
       summary: Add excluded app
+      description: |
+        > ⚠️ Important
+        >
+        > All API V2 tokens generated before March 10, 2026, 19:00 UTC have been revoked. If your token was generated before this date, please regenerate it. [Learn how](https://support.appsflyer.com/hc/en-us/articles/360004562377-Managing-AppsFlyer-tokens).
       operationId: click-signing-config-excluded-apps-add
 
       parameters:
@@ -268,6 +284,10 @@ paths:
       tags:
       - Remove excluded app
       summary: Remove excluded app
+      description: |
+        > ⚠️ Important
+        >
+        > All API V2 tokens generated before March 10, 2026, 19:00 UTC have been revoked. If your token was generated before this date, please regenerate it. [Learn how](https://support.appsflyer.com/hc/en-us/articles/360004562377-Managing-AppsFlyer-tokens).
       operationId: click-signing-config-excluded-apps-delete
 
       parameters:
@@ -310,6 +330,10 @@ paths:
       tags:
       - Report
       summary: Report
+      description: |
+        > ⚠️ Important
+        >
+        > All API V2 tokens generated before March 10, 2026, 19:00 UTC have been revoked. If your token was generated before this date, please regenerate it. [Learn how](https://support.appsflyer.com/hc/en-us/articles/360004562377-Managing-AppsFlyer-tokens).
       operationId: click-signing-report-get
 
       parameters:
@@ -391,6 +415,10 @@ paths:
       tags:
       - Test
       summary: Test
+      description: |
+        > ⚠️ Important
+        >
+        > All API V2 tokens generated before March 10, 2026, 19:00 UTC have been revoked. If your token was generated before this date, please regenerate it. [Learn how](https://support.appsflyer.com/hc/en-us/articles/360004562377-Managing-AppsFlyer-tokens).
       operationId: click-signing-test-post
 
       requestBody:
@@ -466,6 +494,10 @@ paths:
       tags:
       - Generate secret key
       summary: Generate secret key
+      description: |
+        > ⚠️ Important
+        >
+        > All API V2 tokens generated before March 10, 2026, 19:00 UTC have been revoked. If your token was generated before this date, please regenerate it. [Learn how](https://support.appsflyer.com/hc/en-us/articles/360004562377-Managing-AppsFlyer-tokens).
       operationId: click-signing-secret-post
 
       parameters:
@@ -531,6 +563,10 @@ paths:
       tags:
       - Revoke secret key
       summary: Revoke secret key
+      description: |
+        > ⚠️ Important
+        >
+        > All API V2 tokens generated before March 10, 2026, 19:00 UTC have been revoked. If your token was generated before this date, please regenerate it. [Learn how](https://support.appsflyer.com/hc/en-us/articles/360004562377-Managing-AppsFlyer-tokens).
       operationId: click-signing-secret-delete
 
       parameters:
@@ -573,7 +609,12 @@ components:
       type: http
       scheme: bearer
       bearerFormat: JWT
-      description: Token required for authorization. Please refer to [this link](https://support.appsflyer.com/hc/en-us/articles/360004562377) for instructions on how to obtain the token.
+      description: |
+        > ⚠️ Important
+        >
+        > All API V2 tokens generated before March 10, 2026, 19:00 UTC have been revoked. If your token was generated before this date, please regenerate it. [Learn how](https://support.appsflyer.com/hc/en-us/articles/360004562377-Managing-AppsFlyer-tokens).
+
+        Token required for authorization. Please refer to [this link](https://support.appsflyer.com/hc/en-us/articles/360004562377) for instructions on how to obtain the token.
 
   schemas:
     error_response:

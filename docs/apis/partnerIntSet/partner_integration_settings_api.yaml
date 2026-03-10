@@ -30,6 +30,10 @@ paths:
         - Unique partner integration parameters
       summary: Get a list of unique parameters
       description: |
+        > ⚠️ Important
+        >
+        > All API V2 tokens generated before March 10, 2026, 19:00 UTC have been revoked. If your token was generated before this date, please regenerate it. [Learn how](https://support.appsflyer.com/hc/en-us/articles/360004562377-Managing-AppsFlyer-tokens).
+
         Get a list of the unique partner parameters needed for the integration. If the partner has no unique parameters, a successful message is recieved with no data.
       responses:
         '200':
@@ -58,7 +62,11 @@ paths:
         - Active integrations
       summary: Get active integrations
       description: |
-        Get a list of the active integrations with your partners arranged by app. An integration is considered active if one of the following is enabled: 
+        > ⚠️ Important
+        >
+        > All API V2 tokens generated before March 10, 2026, 19:00 UTC have been revoked. If your token was generated before this date, please regenerate it. [Learn how](https://support.appsflyer.com/hc/en-us/articles/360004562377-Managing-AppsFlyer-tokens).
+
+        Get a list of the active integrations with your partners arranged by app. An integration is considered active if one of the following is enabled:
         - Activate partner
         - Cost
         - Ad revenue
@@ -96,6 +104,10 @@ paths:
         - Active integrations
       summary: Get active integration parameters
       description: |
+        > ⚠️ Important
+        >
+        > All API V2 tokens generated before March 10, 2026, 19:00 UTC have been revoked. If your token was generated before this date, please regenerate it. [Learn how](https://support.appsflyer.com/hc/en-us/articles/360004562377-Managing-AppsFlyer-tokens).
+
         Get a list of all the parameters for all the active integrations for a specific app. This API returns only the parameters under the integration tab.
       responses:
         '200':
@@ -124,7 +136,11 @@ paths:
         - Integration settings
       summary: Copy partner integration settings
       description: |
-        Copy the integration settings from one app to another. Copying the parameters can be done only for apps on the same platform. To retrieve the partner's unique parameters needed for the integration, use the [GET request](https://dev.appsflyer.com/hc/reference/get_v1-partner-params-pid-platform). 
+        > ⚠️ Important
+        >
+        > All API V2 tokens generated before March 10, 2026, 19:00 UTC have been revoked. If your token was generated before this date, please regenerate it. [Learn how](https://support.appsflyer.com/hc/en-us/articles/360004562377-Managing-AppsFlyer-tokens).
+
+        Copy the integration settings from one app to another. Copying the parameters can be done only for apps on the same platform. To retrieve the partner's unique parameters needed for the integration, use the [GET request](https://dev.appsflyer.com/hc/reference/get_v1-partner-params-pid-platform).
         > 📘 Note
         > Only parameters of event names with the `af_` prefix can be copied.  
       requestBody:
@@ -245,6 +261,10 @@ paths:
         - Google Play install referrer
       summary: Set install referrer decryption key
       description: |
+        > ⚠️ Important
+        >
+        > All API V2 tokens generated before March 10, 2026, 19:00 UTC have been revoked. If your token was generated before this date, please regenerate it. [Learn how](https://support.appsflyer.com/hc/en-us/articles/360004562377-Managing-AppsFlyer-tokens).
+
         Set the Google Play install referrer decryption key for each app as recieved by Facebook.
       requestBody:
         description: 'Use these examples as a template for your request body:'
@@ -319,6 +339,10 @@ paths:
       tags:
         - Integration settings
       summary: Deprecated - Copy partner integration settings
+      description: |
+        > ⚠️ Important
+        >
+        > All API V2 tokens generated before March 10, 2026, 19:00 UTC have been revoked. If your token was generated before this date, please regenerate it. [Learn how](https://support.appsflyer.com/hc/en-us/articles/360004562377-Managing-AppsFlyer-tokens).
       requestBody:
         description: 'Use these examples as a template for your request body:'
         content:
@@ -435,6 +459,10 @@ components:
       scheme: bearer
       bearerFormat: JWT
       description: |
+        > ⚠️ Important
+        >
+        > All API V2 tokens generated before March 10, 2026, 19:00 UTC have been revoked. If your token was generated before this date, please regenerate it. [Learn how](https://support.appsflyer.com/hc/en-us/articles/360004562377-Managing-AppsFlyer-tokens).
+
         HTTP header containing the API token (bearer token) is required. Ask your account admin to [obtain the V2.0 token](https://support.appsflyer.com/hc/en-us/articles/360004562377) from the AppsFlyer dashboard.
   schemas:
     setFacebook:

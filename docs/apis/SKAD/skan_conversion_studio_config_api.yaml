@@ -13,6 +13,10 @@ paths:
       - "SKAN conversion studio API"
      summary: Copy SKAN schema
      description: |
+      > ⚠️ Important
+      >
+      > All API V2 tokens generated before March 10, 2026, 19:00 UTC have been revoked. If your token was generated before this date, please regenerate it. [Learn how](https://support.appsflyer.com/hc/en-us/articles/360004562377-Managing-AppsFlyer-tokens).
+
       Copy the SKAN conversion value (CV) schema from 1 app to another.
      operationId: skan-studio-duplicate-config
      parameters:
@@ -73,7 +77,12 @@ paths:
       tags:
       - "SKAN conversion studio API"
       summary: Get SKAN schema
-      description: Get the SKAN conversion schema you have configured for a specific app.
+      description: |
+        > ⚠️ Important
+        >
+        > All API V2 tokens generated before March 10, 2026, 19:00 UTC have been revoked. If your token was generated before this date, please regenerate it. [Learn how](https://support.appsflyer.com/hc/en-us/articles/360004562377-Managing-AppsFlyer-tokens).
+
+        Get the SKAN conversion schema you have configured for a specific app.
       operationId: skan-studio-read-config
       parameters:
       - name: app_id
@@ -126,6 +135,9 @@ components:
       type: http
       scheme: bearer
       description: |
+        **Important: API V2 Token Revocation**
+        All API V2 tokens generated before March 10, 2026, 19:00 UTC have been revoked. If your token was generated before this date, please regenerate it. [Learn how](https://support.appsflyer.com/hc/en-us/articles/360004562377-Managing-AppsFlyer-tokens).
+
         Reach out to your CSM to enable Cohort API and then [get the token in the dashboard](https://support.appsflyer.com/hc/en-us/articles/360004562377)
 
   requestBodies: 

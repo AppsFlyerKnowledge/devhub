@@ -8,8 +8,12 @@ security:
   - Bearer-Authentication: []
 paths:
   /app/{app-id}:
-    put: 
+    put:
       summary: Add, Modify or Remove
+      description: |
+        > ⚠️ Important
+        >
+        > All API V2 tokens generated before March 10, 2026, 19:00 UTC have been revoked. If your token was generated before this date, please regenerate it. [Learn how](https://support.appsflyer.com/hc/en-us/articles/360004562377-Managing-AppsFlyer-tokens).
       tags:
         - "Additional Identifiers Handling"
       operationId: audience-put-additional-identifier
@@ -41,7 +45,7 @@ components:
     Bearer-Authentication:
       type: http
       scheme: bearer
-      description: "Authorization HTTP header containing API V2 token (bearer token) is required.\n\n
+      description: "**Important: API V2 Token Revocation**\n\nAll API V2 tokens generated before March 10, 2026, 19:00 UTC have been revoked. If your token was generated before this date, please regenerate it. [Learn how](https://support.appsflyer.com/hc/en-us/articles/360004562377-Managing-AppsFlyer-tokens).\n\nAuthorization HTTP header containing API V2 token (bearer token) is required.\n\n
         The admin [gets the V2 token in the dashboard](https://support.appsflyer.com/hc/en-us/articles/360004562377) "
      
   responses:
