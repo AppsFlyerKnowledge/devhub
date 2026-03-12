@@ -7,6 +7,13 @@ hidden: false
 order: 1
 ---
 
+## Version 6.17.9
+
+#### Bug Fixes
+
+- Fixed an issue where the SDK could get stuck while attempting to fetch ODM data, preventing requests from being sent to the server.
+- Fixed an issue where Customer User ID set by the app would not be sent in the install event.
+
 ## Version 6.17.8
 
 #### New features

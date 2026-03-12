@@ -7,7 +7,13 @@ hidden: false
 order: 14
 ---
 
-## Version 6.17.5 - 26/11/2025
+## Version 6.17.6 - 11/03/2026
+
+#### Technical Update
+
+- Fixed an issue where the value of AF_STORE set by the app was not being sent by the SDK.
+
+## Version 6.## 17.5 - 26/11/2025
 
 #### Technical Update
 
