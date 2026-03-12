@@ -88,6 +88,10 @@ paths:
                   value:
                     error_code: 1004
                     message: "Creation is no longer allowed for this account"
+                Internal error:
+                  value:
+                    error_code: 1020
+                    message: "Internal error occurred"
   /audience/{audience_id}/connections:
     get:
       tags:
@@ -196,6 +200,10 @@ paths:
                   value:
                     error_code: 1009
                     message: "Total connections (120) exceeds the maximum limit of 115"
+                Internal error:
+                  value:
+                    error_code: 1020
+                    message: "Internal error occurred"                
   /audience/{audience_id}/split_syncs:
     get:
       tags:
@@ -238,6 +246,10 @@ paths:
                   value:
                     error_code: 1005
                     messege: "This audience is not a split audience"
+                Internal error:
+                  value:
+                    error_code: 1020
+                    message: "Internal error occurred"  
     put:
       tags:
       - Audience split
@@ -302,6 +314,10 @@ paths:
                   value:
                     error_code: 1005
                     messege: "This audience is not a split audience"
+                Internal error:
+                  value:
+                    error_code: 1020
+                    message: "Internal error occurred"
   /audience/{audience_id}/upload_now:
     post:
       tags:
@@ -338,6 +354,10 @@ paths:
                   value:
                     error_code: 1006
                     message: "There are no partners connected, upload is not possible"
+                Internal error:
+                  value:
+                    error_code: 1020
+                    message: "Internal error occurred"                   
   /connections:
     get:
       tags:
