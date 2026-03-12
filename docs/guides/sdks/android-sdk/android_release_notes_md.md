@@ -13,7 +13,7 @@ order: 14
 
 - Fixed an issue where the value of AF_STORE set by the app was not being sent by the SDK.
 
-## Version 6.## 17.5 - 26/11/2025
+## Version 6.17.5
 
 #### Technical Update
 
