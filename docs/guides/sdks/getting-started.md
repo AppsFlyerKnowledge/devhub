@@ -17,6 +17,10 @@ Native SDKs and plugins
 
 The AppsFlyer Software Development Kits (SDKs) and plugins are your primary way to tap into our ever-growing ecosystem of digital marketing services. By [integrating our SDKs](https://dev.appsflyer.com/hc/docs/getting-started#integration-guides), you get [attribution](https://support.appsflyer.com/hc/en-us/articles/207447053) out-of-the-box. You also gain access to many more [SDK features](https://dev.appsflyer.com/hc/docs/getting-started#sdk-features).
 
+> 📘 Note
+> 
+> AppsFlyer supports only the HTTPS protocol for all incoming SDK traffic
+
 ### Native SDKs
 
 The native SDKs utilize OS-specific APIs and optimizations to enable a better user experience. They contain the core functionality that also powers our [plugins](https://dev.appsflyer.com/hc/docs/getting-started#plugins), which are thin wrappers around the native SDKs.
