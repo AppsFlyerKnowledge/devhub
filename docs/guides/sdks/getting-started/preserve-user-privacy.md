@@ -6,7 +6,7 @@ parentDoc: 609a858fb96cee00165e8fca
 hidden: false
 createdAt: "2024-01-07T19:00:15.000Z"
 updatedAt: "2024-01-07T19:00:15.000Z"
-order: 12
+order: 11
 ---
 The SDK offers various privacy-preserving methods to manage the data sent to AppsFlyer from your app. These methods help to ensure that private information is not exposed without user consent and that user privacy is maintained in accordance with relevant data protection laws and regulations.
 

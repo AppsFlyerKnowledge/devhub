@@ -6,7 +6,7 @@ parentDoc: 609a858fb96cee00165e8fca
 hidden: false
 createdAt: "2024-02-08T19:00:15.000Z"
 updatedAt: "2024-02-08T19:00:15.000Z"
-order: 13
+order: 12
 ---
 As part of the EU [Digital Marketing Act](https://commission.europa.eu/strategy-and-policy/priorities-2019-2024/europe-fit-digital-age/digital-markets-act-ensuring-fair-and-open-digital-markets_en) (DMA) legislation, big tech companies must get consent from European end users before using personal data from third-party services for advertising.
 
