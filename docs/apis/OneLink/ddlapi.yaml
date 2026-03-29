@@ -447,7 +447,7 @@ components:
               - referrer
               - id_matching
               - srn
-              - fingerprinting
+              - probabilistic
             media_source:
               type: string
               nullable: true
