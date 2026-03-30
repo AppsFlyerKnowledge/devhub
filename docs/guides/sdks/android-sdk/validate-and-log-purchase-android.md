@@ -21,7 +21,7 @@ The method is currently implemented in two versions.
 
 ### Implement validateAndLogInAppPurchase
 
-The [validateAndLogInAppPurchase](https://dev.appsflyer.com/hc/docs/android-sdk-reference-appsflyerlib#validateandloginapppurchase sends the purchase details to AppsFlyer for validation. After AppsFlyer validates the purchase with Google Play the method returns the response to a callback function.
+The [validateAndLogInAppPurchase](https://dev.appsflyer.com/hc/docs/android-sdk-reference-appsflyerlib#validateandloginapppurchase) sends the purchase details to AppsFlyer for validation. After AppsFlyer validates the purchase with Google Play the method returns the response to a callback function.
 
 **To implement the method perform the following steps:**
 
