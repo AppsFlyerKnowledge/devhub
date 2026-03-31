@@ -18,11 +18,11 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Run `openapi` command 🚀
-        uses: readmeio/rdme@v8
+        uses: readmeio/rdme@v10
         with:
-          rdme: openapi ./docs/apis/OneLink/onelinkapi.yml --key=${{ secrets.README_API_KEY }} --id=624693c6fa631302dde62cf4
+          rdme: openapi upload ./docs/apis/OneLink/onelinkapi.yml --key=${{ secrets.README_API_KEY }} --legacy-id=624693c6fa631302dde62cf4 --confirm-overwrite
       
       - name: Run `docs` command 🚀
-        uses: readmeio/rdme@v8
+        uses: readmeio/rdme@v10
         with:
-          rdme: docs ./docs/apis/OneLink/onelinkapi_overview.md --key=${{ secrets.README_API_KEY }}
+          rdme: docs upload ./docs/apis/OneLink/onelinkapi_overview.md --key=${{ secrets.README_API_KEY }} --confirm-overwrite

@@ -18,11 +18,11 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Run `openapi` command 🚀
-        uses: readmeio/rdme@v8
+        uses: readmeio/rdme@v10
         with:
-          rdme: openapi ./docs/apis/ROI360/incost_uploader.yaml --key=${{ secrets.README_API_KEY }} --id=659fad5eb597bf0045b7c4ce
+          rdme: openapi upload ./docs/apis/ROI360/incost_uploader.yaml --key=${{ secrets.README_API_KEY }} --legacy-id=659fad5eb597bf0045b7c4ce --confirm-overwrite
       
       - name: Run `docs` command 🚀
-        uses: readmeio/rdme@v8
+        uses: readmeio/rdme@v10
         with:
-          rdme: docs ./docs/apis/ROI360/incost_overview.md --key=${{ secrets.README_API_KEY }} --version=0.1
+          rdme: docs upload ./docs/apis/ROI360/incost_overview.md --key=${{ secrets.README_API_KEY }} --branch=0.1 --confirm-overwrite

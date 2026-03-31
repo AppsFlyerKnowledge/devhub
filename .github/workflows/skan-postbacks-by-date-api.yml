@@ -18,6 +18,6 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Run `openapi` command 🚀
-        uses: readmeio/rdme@v8
+        uses: readmeio/rdme@v10
         with:
-          rdme: openapi ./docs/apis/SKAD/skan_postbacks_by_date_api.yaml --key=${{ secrets.README_API_KEY }} --id=64a528803f0a300a33e8602d
+          rdme: openapi upload ./docs/apis/SKAD/skan_postbacks_by_date_api.yaml --key=${{ secrets.README_API_KEY }} --legacy-id=64a528803f0a300a33e8602d --confirm-overwrite
