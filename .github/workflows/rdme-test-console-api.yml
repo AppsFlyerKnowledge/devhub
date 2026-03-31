@@ -20,4 +20,4 @@ jobs:
       - name: Run `openapi` command 🚀
         uses: readmeio/rdme@v10
         with:
-          rdme: openapi upload ./docs/apis/mobile/test_console_api.yaml --key=${{ secrets.README_API_KEY }} --legacy-id=66617dfe6a17eb0010569ad5 --confirm-overwrite
+          rdme: openapi upload ./docs/apis/mobile/test_console_api.yaml --key=${{ secrets.README_API_KEY }} --branch=0.1 --legacy-id=66617dfe6a17eb0010569ad5 --confirm-overwrite

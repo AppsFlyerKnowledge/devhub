@@ -20,7 +20,7 @@ jobs:
       - name: Run `openapi` command 🚀
         uses: readmeio/rdme@v10
         with:
-          rdme: openapi upload ./docs/apis/ROI360/incost_uploader.yaml --key=${{ secrets.README_API_KEY }} --legacy-id=659fad5eb597bf0045b7c4ce --confirm-overwrite
+          rdme: openapi upload ./docs/apis/ROI360/incost_uploader.yaml --key=${{ secrets.README_API_KEY }} --branch=0.1 --legacy-id=659fad5eb597bf0045b7c4ce --confirm-overwrite
       
       - name: Run `docs` command 🚀
         uses: readmeio/rdme@v10

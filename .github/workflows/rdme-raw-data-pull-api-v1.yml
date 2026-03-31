@@ -20,4 +20,4 @@ jobs:
       - name: Run `openapi` command 🚀
         uses: readmeio/rdme@v10
         with:
-          rdme: openapi upload ./docs/apis/mos/raw_data_pull_api_tokenv1.yaml --key=${{ secrets.README_API_KEY }} --legacy-id=62d4514efabb0500da0b2d90 --confirm-overwrite
+          rdme: openapi upload ./docs/apis/mos/raw_data_pull_api_tokenv1.yaml --key=${{ secrets.README_API_KEY }} --branch=0.1 --legacy-id=62d4514efabb0500da0b2d90 --confirm-overwrite
