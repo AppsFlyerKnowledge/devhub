@@ -20,4 +20,4 @@ jobs:
       - name: Run `docs` command 🚀
         uses: readmeio/rdme@v10
         with:
-          rdme: docs upload ./docs/apis/management/bulk_users_management_overview.md --key=${{ secrets.README_API_KEY }} --confirm-overwrite
+          rdme: docs upload ./docs/apis/management/bulk_users_management_overview.md --key=${{ secrets.README_API_KEY }}

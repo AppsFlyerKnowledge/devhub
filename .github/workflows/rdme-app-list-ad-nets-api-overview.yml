@@ -20,4 +20,4 @@ jobs:
       - name: Run `docs` command 🚀
         uses: readmeio/rdme@v10
         with:
-          rdme: docs upload ./docs/apis/management/app_list_ad_nets_api_overview.md --key=${{ secrets.README_API_KEY }} --branch=0.1 --confirm-overwrite
+          rdme: docs upload ./docs/apis/management/app_list_ad_nets_api_overview.md --key=${{ secrets.README_API_KEY }} --branch=0.1
