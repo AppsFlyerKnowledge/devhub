@@ -1,11 +1,12 @@
 ---
-title: "DeepLinkListener"
-slug: "android-sdk-reference-deeplinklistener"
-category: 5f9705393c689a065c409b23
-parentDoc: 60ca3f03ceb11a00db127bd8
-hidden: false
-createdAt: "2021-06-16T18:13:36.649Z"
-updatedAt: "2021-08-16T12:31:06.093Z"
+title: DeepLinkListener
+slug: android-sdk-reference-deeplinklistener
+category:
+  uri: AppsFlyer SDKs
+parent:
+  uri: android-sdk-reference
+privacy:
+  view: public
 ---
 [block:api-header]
 {

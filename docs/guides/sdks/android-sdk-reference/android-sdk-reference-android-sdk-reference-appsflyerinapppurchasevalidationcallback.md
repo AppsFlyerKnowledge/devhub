@@ -1,11 +1,12 @@
 ---
-title: "AppsFlyerInAppPurchaseValidationCallback"
-slug: "android-sdk-reference-appsflyerinapppurchasevalidationcallback"
-category: 5f9705393c689a065c409b23
-parentDoc: 60ca3f03ceb11a00db127bd8
-hidden: false
-createdAt: "2021-06-26T15:15:23.678Z"
-updatedAt: "2021-07-04T10:30:16.598Z"
+title: AppsFlyerInAppPurchaseValidationCallback
+slug: android-sdk-reference-appsflyerinapppurchasevalidationcallback
+category:
+  uri: AppsFlyer SDKs
+parent:
+  uri: android-sdk-reference
+privacy:
+  view: public
 ---
 ## Overview
 Implement the `AppsFlyerInAppPurchaseValidationCallback` interface to handle purchase validation success and failure.

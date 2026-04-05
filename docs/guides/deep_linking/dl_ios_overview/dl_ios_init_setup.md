@@ -1,11 +1,12 @@
 ---
-title: "iOS initial setup"
-slug: "dl_ios_init_setup"
-category: 6384c30e5a754e005f668a74
-parentDoc: 63a8517990401800247b99ce
-hidden: false
-createdAt: "2022-12-25T13:36:23.084Z"
-updatedAt: "2023-01-05T09:25:21.577Z"
+title: iOS initial setup
+slug: dl_ios_init_setup
+category:
+  uri: Deep Linking and OneLink
+parent:
+  uri: dl_ios_overview
+privacy:
+  view: public
 ---
 **At a glance**: The initial app setup enables the marketer to create links that send existing app users directly into the app. The initial setup is also a prerequisite for deep linking and deferred deep linking.
 

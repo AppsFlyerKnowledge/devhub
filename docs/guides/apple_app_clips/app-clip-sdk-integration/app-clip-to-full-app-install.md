@@ -1,11 +1,12 @@
 ---
-title: "App Clip-to-full app install configuration"
-slug: "app-clip-to-full-app-install"
-category: 5f849793f6d5d2006de9d826
-parentDoc: 5f8497f614361a0019bd00f2 
-hidden: false
-createdAt: "2020-10-12T18:03:56.249Z"
-updatedAt: "2022-12-21T11:17:05.497Z"
+title: App Clip-to-full app install configuration
+slug: app-clip-to-full-app-install
+category:
+  uri: Apple App Clips integration
+parent:
+  uri: app-clip-sdk-integration
+privacy:
+  view: public
 ---
 App owners/advertisers can attribute user downloads of the full app from the App Clip. To do so, the developer needs to configure both the App Clip and the full app. 
 [block:api-header]

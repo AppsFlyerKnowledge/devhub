@@ -1,12 +1,13 @@
 ---
-title: "Ad revenue"
-slug: "ad-revenue"
-category: 5f9705393c689a065c409b23
-parentDoc: 609a858fb96cee00165e8fca
-hidden: false
-createdAt: "2022-01-12T08:35:51.103Z"
-updatedAt: "2022-02-21T10:40:02.285Z"
-order: 9
+title: Ad revenue
+slug: ad-revenue
+category:
+  uri: AppsFlyer SDKs
+parent:
+  uri: getting-started
+privacy:
+  view: public
+position: 9
 ---
 Ad revenue from partners can be reported to AppsFlyer with impression-level granularity via SDK. Impression-level data via SDK:
 - Has better data freshness and earlier availability in AppsFlyer.

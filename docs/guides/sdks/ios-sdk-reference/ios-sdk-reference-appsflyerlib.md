@@ -1,11 +1,12 @@
 ---
-title: "AppsFlyerLib"
-slug: "ios-sdk-reference-appsflyerlib"
-category: 5f9705393c689a065c409b23
-parentDoc: 60ca3e14e22f76007884b6fc
-hidden: false
-createdAt: "2021-06-16T18:09:37.826Z"
-updatedAt: "2023-05-07T09:12:24.329Z"
+title: AppsFlyerLib
+slug: ios-sdk-reference-appsflyerlib
+category:
+  uri: AppsFlyer SDKs
+parent:
+  uri: ios-sdk-reference
+privacy:
+  view: public
 ---
 ## Overview
 

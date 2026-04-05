@@ -1,9 +1,12 @@
 ---
-title: "iOS SDK reference"
-slug: "ios-sdk-reference"
-category: 5f9705393c689a065c409b23
-excerpt: "The AppsFlyer iOS SDK reference documentation."
-hidden: false
+title: iOS SDK reference
+slug: ios-sdk-reference
+category:
+  uri: AppsFlyer SDKs
+content:
+  excerpt: The AppsFlyer iOS SDK reference documentation.
+privacy:
+  view: public
 ---
 This is the iOS SDK reference document. In this section you will find technical descriptions of classes, protocols and methods that comprise the SDK.
 ## Classes

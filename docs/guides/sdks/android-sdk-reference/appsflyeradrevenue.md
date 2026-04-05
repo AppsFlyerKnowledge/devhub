@@ -1,11 +1,12 @@
 ---
-title: "AppsFlyerAdRevenue [LEGACY]"
-slug: "appsflyeradrevenue"
-category: 5f9705393c689a065c409b23
-parentDoc: 60ca3f03ceb11a00db127bd8
-hidden: false
-createdAt: "2022-01-12T08:42:56.136Z"
-updatedAt: "2023-02-09T14:37:08.648Z"
+title: 'AppsFlyerAdRevenue [LEGACY]'
+slug: appsflyeradrevenue
+category:
+  uri: AppsFlyer SDKs
+parent:
+  uri: android-sdk-reference
+privacy:
+  view: public
 ---
 <span class="annotation-deprecated">Deprecated in v6.15.0</span>  
 

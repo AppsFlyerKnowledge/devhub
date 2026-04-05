@@ -1,13 +1,15 @@
 ---
-title: "Preserve user privacy"
-slug: "preserve-user-privacy-ios"
-category: 5f9705393c689a065c409b23
-parentDoc: 5fa043dd3b65b20045e35597
-excerpt: "Learn how to preserve user privacy in the iOS SDK."
-hidden: false
-createdAt: "2024-01-07T19:00:15.000Z"
-updatedAt: "2024-01-07T19:00:15.000Z"
-order: 11
+title: Preserve user privacy
+slug: preserve-user-privacy-ios
+category:
+  uri: AppsFlyer SDKs
+parent:
+  uri: ios-sdk
+content:
+  excerpt: Learn how to preserve user privacy in the iOS SDK.
+privacy:
+  view: public
+position: 11
 ---
 ## Getting Started on Privacy Preservation
 

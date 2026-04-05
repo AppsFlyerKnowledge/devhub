@@ -1,12 +1,13 @@
 ---
-title: "Preserve user privacy"
-slug: "preserve-user-privacy-1"
-category: 5f9705393c689a065c409b23
-parentDoc: 609a858fb96cee00165e8fca
-hidden: false
-createdAt: "2024-01-07T19:00:15.000Z"
-updatedAt: "2024-01-07T19:00:15.000Z"
-order: 11
+title: Preserve user privacy
+slug: preserve-user-privacy-1
+category:
+  uri: AppsFlyer SDKs
+parent:
+  uri: getting-started
+privacy:
+  view: public
+position: 11
 ---
 The SDK offers various privacy-preserving methods to manage the data sent to AppsFlyer from your app. These methods help to ensure that private information is not exposed without user consent and that user privacy is maintained in accordance with relevant data protection laws and regulations.
 

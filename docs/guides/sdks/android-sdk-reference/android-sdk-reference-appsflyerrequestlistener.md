@@ -1,11 +1,12 @@
 ---
-title: "AppsFlyerRequestListener"
-slug: "android-sdk-reference-appsflyerrequestlistener"
-category: 5f9705393c689a065c409b23
-parentDoc: 60ca3f03ceb11a00db127bd8
-hidden: false
-createdAt: "2021-06-26T18:21:31.120Z"
-updatedAt: "2021-06-26T21:06:04.880Z"
+title: AppsFlyerRequestListener
+slug: android-sdk-reference-appsflyerrequestlistener
+category:
+  uri: AppsFlyer SDKs
+parent:
+  uri: android-sdk-reference
+privacy:
+  view: public
 ---
 ## Overview
 Intercept requests to the AppsFlyer servers by implementing the `AppsFlyerRequestListener` interface and [registering it with `start`](doc:android-sdk-reference-appsflyerlib#start).

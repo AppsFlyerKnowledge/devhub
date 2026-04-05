@@ -1,11 +1,12 @@
 ---
-title: "iOS Deep Linking post user event"
-slug: "dl_ios_dl_post_event"
-category: 6384c30e5a754e005f668a74
-parentDoc: 63a8517990401800247b99ce
-hidden: false
-createdAt: "2023-05-04T14:40:50.816Z"
-updatedAt: "2023-05-04T14:56:36.984Z"
+title: iOS Deep Linking post user event
+slug: dl_ios_dl_post_event
+category:
+  uri: Deep Linking and OneLink
+parent:
+  uri: dl_ios_overview
+privacy:
+  view: public
 ---
 ## Overview
 In some cases the user is required to go through some kind of an event before continuing to application page pointed by deep linking destination.

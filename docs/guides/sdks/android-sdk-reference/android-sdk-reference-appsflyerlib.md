@@ -1,11 +1,12 @@
 ---
-title: "AppsFlyerLib"
-slug: "android-sdk-reference-appsflyerlib"
-category: 5f9705393c689a065c409b23
-parentDoc: 60ca3f03ceb11a00db127bd8
-hidden: false
-createdAt: "2021-06-16T18:12:50.747Z"
-updatedAt: "2023-05-03T08:48:19.400Z"
+title: AppsFlyerLib
+slug: android-sdk-reference-appsflyerlib
+category:
+  uri: AppsFlyer SDKs
+parent:
+  uri: android-sdk-reference
+privacy:
+  view: public
 ---
 ## Overview
 

@@ -1,11 +1,12 @@
 ---
-title: "iOS Extended Deferred Deep Linking"
-slug: "dl_ios_ocds_ddl"
-category: 6384c30e5a754e005f668a74
-parentDoc: 63a8517990401800247b99ce
-hidden: false
-createdAt: "2022-12-28T10:54:45.551Z"
-updatedAt: "2023-04-19T09:54:41.906Z"
+title: iOS Extended Deferred Deep Linking
+slug: dl_ios_ocds_ddl
+category:
+  uri: Deep Linking and OneLink
+parent:
+  uri: dl_ios_overview
+privacy:
+  view: public
 ---
 ## Overview
 

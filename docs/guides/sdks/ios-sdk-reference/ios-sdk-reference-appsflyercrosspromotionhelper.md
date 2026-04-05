@@ -1,11 +1,12 @@
 ---
-title: "AppsFlyerCrossPromotionHelper"
-slug: "ios-sdk-reference-appsflyercrosspromotionhelper"
-category: 5f9705393c689a065c409b23
-parentDoc: 60ca3e14e22f76007884b6fc
-hidden: false
-createdAt: "2021-06-26T15:29:07.228Z"
-updatedAt: "2021-09-09T14:39:36.475Z"
+title: AppsFlyerCrossPromotionHelper
+slug: ios-sdk-reference-appsflyercrosspromotionhelper
+category:
+  uri: AppsFlyer SDKs
+parent:
+  uri: ios-sdk-reference
+privacy:
+  view: public
 ---
 ## Overview
 AppsFlyer allows you to log and attribute installs originating from cross-promotion campaigns of your own apps. This enables marketers to optimize cross-promotion campaigns for better results.

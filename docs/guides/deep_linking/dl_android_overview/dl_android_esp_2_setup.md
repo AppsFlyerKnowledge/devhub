@@ -1,9 +1,12 @@
 ---
-title: "Android Deep Linking ESP 2.0"
-slug: "dl_android_esp_2_setup"
-category: 6384c30e5a754e005f668a74
-parentDoc: 6387276d97e08d00104d4435
-hidden: false
+title: Android Deep Linking ESP 2.0
+slug: dl_android_esp_2_setup
+category:
+  uri: Deep Linking and OneLink
+parent:
+  uri: dl_android_overview
+privacy:
+  view: public
 ---
 
 ## Overview

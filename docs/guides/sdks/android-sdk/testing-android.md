@@ -1,12 +1,13 @@
 ---
-title: "Test integration"
-slug: "testing-android"
-category: 5f9705393c689a065c409b23
-parentDoc: 5fa0443749be540011850e51
-hidden: false
-createdAt: "2021-07-27T21:45:38.893Z"
-updatedAt: "2022-11-29T15:55:40.188Z"
-order: 4
+title: Test integration
+slug: testing-android
+category:
+  uri: AppsFlyer SDKs
+parent:
+  uri: android-sdk
+privacy:
+  view: public
+position: 4
 ---
 
 ## Recommended 👍

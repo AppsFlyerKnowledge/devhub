@@ -1,10 +1,11 @@
 ---
-title: "Migrate to OneLink API v.2.0"
-slug: "migrate_to_onelink_api_v2"
-category: 6829800b8e61c5005284ad14
-parentDoc: 6861240b50e56f0062c68f47
-hidden: false
-order: 0
+title: Migrate to OneLink API v.2.0
+slug: migrate_to_onelink_api_v2
+category:
+  uri: OneLink API v2.0
+privacy:
+  view: public
+position: 0
 ---
 
 Use this document to understand what has changed in V2.0 and how to transition to the new version effectively:

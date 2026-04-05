@@ -1,11 +1,12 @@
 ---
-title: "DeepLink"
-slug: "android-sdk-reference-deeplink"
-category: 5f9705393c689a065c409b23
-parentDoc: 60ca3f03ceb11a00db127bd8
-hidden: false
-createdAt: "2021-06-16T18:13:50.647Z"
-updatedAt: "2021-07-04T10:29:29.773Z"
+title: DeepLink
+slug: android-sdk-reference-deeplink
+category:
+  uri: AppsFlyer SDKs
+parent:
+  uri: android-sdk-reference
+privacy:
+  view: public
 ---
 [block:api-header]
 {

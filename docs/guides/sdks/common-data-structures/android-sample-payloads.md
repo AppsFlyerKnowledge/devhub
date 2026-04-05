@@ -1,10 +1,10 @@
 ---
-title: "Android sample payloads"
-slug: "android-sample-payloads"
-category: 5f9705393c689a065c409b23
-hidden: true
-createdAt: "2020-08-13T10:17:26.522Z"
-updatedAt: "2023-03-13T09:50:33.756Z"
+title: Android sample payloads
+slug: android-sample-payloads
+category:
+  uri: AppsFlyer SDKs
+privacy:
+  view: anyone_with_link
 ---
 See the following sample payloads for App Links, URI schemes, and deferred deep linking. The samples contain a full payload, relevant for when all parameters in the Onelink custom link setup page contain data.
 

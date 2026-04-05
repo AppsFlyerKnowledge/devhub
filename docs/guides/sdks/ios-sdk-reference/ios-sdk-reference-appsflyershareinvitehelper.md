@@ -1,11 +1,12 @@
 ---
-title: "AppsFlyerShareInviteHelper"
-slug: "ios-sdk-reference-appsflyershareinvitehelper"
-category: 5f9705393c689a065c409b23
-parentDoc: 60ca3e14e22f76007884b6fc
-hidden: false
-createdAt: "2021-06-28T09:21:01.322Z"
-updatedAt: "2022-04-14T12:06:46.371Z"
+title: AppsFlyerShareInviteHelper
+slug: ios-sdk-reference-appsflyershareinvitehelper
+category:
+  uri: AppsFlyer SDKs
+parent:
+  uri: ios-sdk-reference
+privacy:
+  view: public
 ---
 ## Overview
 The `AppsFlyerShareInviteHelper` class provides a structured way to construct user-invite URLs for various scenarios.

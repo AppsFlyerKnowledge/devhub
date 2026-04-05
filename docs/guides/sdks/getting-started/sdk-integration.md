@@ -1,13 +1,15 @@
 ---
-title: "SDK integration"
-slug: "sdk-integration"
-category: 5f9705393c689a065c409b23
-parentDoc: 609a858fb96cee00165e8fca
-excerpt: "Links to SDK integration instructions for various supported platforms."
-hidden: false
-createdAt: "2021-05-11T13:18:59.767Z"
-updatedAt: "2021-09-05T08:19:48.040Z"
-order: 3
+title: SDK integration
+slug: sdk-integration
+category:
+  uri: AppsFlyer SDKs
+parent:
+  uri: getting-started
+content:
+  excerpt: Links to SDK integration instructions for various supported platforms.
+privacy:
+  view: public
+position: 3
 ---
 AppsFlyer SDK integration instructions for various platforms. By integrating the SDK, you get [app attribution](https://support.appsflyer.com/hc/en-us/articles/207447053#what-is-attribution%C2%A0) out-of-the-box.
 

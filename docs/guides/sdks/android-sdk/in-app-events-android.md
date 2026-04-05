@@ -1,12 +1,13 @@
 ---
-title: "In-app events"
-slug: "in-app-events-android"
-category: 5f9705393c689a065c409b23
-parentDoc: 5fa0443749be540011850e51
-hidden: false
-createdAt: "2020-11-02T18:39:02.209Z"
-updatedAt: "2023-05-07T09:04:30.642Z"
-order: 5
+title: In-app events
+slug: in-app-events-android
+category:
+  uri: AppsFlyer SDKs
+parent:
+  uri: android-sdk
+privacy:
+  view: public
+position: 5
 ---
 ## Overview
 

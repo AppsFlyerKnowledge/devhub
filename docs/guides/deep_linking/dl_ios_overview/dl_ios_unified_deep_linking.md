@@ -1,11 +1,12 @@
 ---
-title: "iOS Unified Deep Linking"
-slug: "dl_ios_unified_deep_linking"
-category: 6384c30e5a754e005f668a74
-parentDoc: 63a8517990401800247b99ce
-hidden: false
-createdAt: "2022-12-27T13:58:01.063Z"
-updatedAt: "2023-02-02T09:10:57.367Z"
+title: iOS Unified Deep Linking
+slug: dl_ios_unified_deep_linking
+category:
+  uri: Deep Linking and OneLink
+parent:
+  uri: dl_ios_overview
+privacy:
+  view: public
 ---
 **At a glance:** Unified deep linking (UDL) enables you to send new and existing users to a specific in-app activity (for example, a specific page in the app) as soon as the app is opened.
 

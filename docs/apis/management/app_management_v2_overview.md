@@ -1,9 +1,11 @@
 ---
-title: "Overview"
-slug: "app-management-v2-overview"
-category: 65d1df96a2f25300104f9fe1
-hidden: false
-order: 0
+title: Overview
+slug: app-management-v2-overview
+category:
+  uri: App management API V2.0
+privacy:
+  view: public
+position: 0
 ---
 
 **At a glance**

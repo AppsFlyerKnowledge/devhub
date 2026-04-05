@@ -1,10 +1,13 @@
 ---
-title: "Purchase connector"
-slug: "purchase-connector-android"
-category: 5f9705393c689a065c409b23
-parentDoc: 694543a80c7351ac15b41836
-hidden: false
-order: 2
+title: Purchase connector
+slug: purchase-connector-android
+category:
+  uri: AppsFlyer SDKs
+parent:
+  uri: purchase-validation-android
+privacy:
+  view: public
+position: 2
 ---
 
 ## Overview

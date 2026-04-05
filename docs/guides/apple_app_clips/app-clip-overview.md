@@ -1,10 +1,10 @@
 ---
-title: "Overview"
-slug: "app-clip-overview"
-category: 5f849793f6d5d2006de9d826 
-hidden: false
-createdAt: "2020-10-26T08:06:50.776Z"
-updatedAt: "2021-08-25T08:12:21.763Z"
+title: Overview
+slug: app-clip-overview
+category:
+  uri: Apple App Clips integration
+privacy:
+  view: public
 ---
 **At a glance**: App Clips enable users with iOS 14 or later to quickly access and experience your app. AppsFlyer SDK integration gives you valuable App Clip attribution data. And OneLink configuration lets you automatically redirect users who can't use App Clips to the places defined in your OneLink settings. [Learn more](https://www.appsflyer.com/resources/guides/ios-14-app-clips/) 
 [block:image]

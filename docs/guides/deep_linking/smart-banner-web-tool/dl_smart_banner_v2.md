@@ -1,12 +1,13 @@
 ---
-title: "OneLink Smart Banner V2"
-slug: "dl_smart_banner_v2"
-category: 6384c30e5a754e005f668a74
-parentDoc: 63ccfdc2635a53004ab874f0
-hidden: false
-createdAt: "2022-12-29T10:12:10.569Z"
-updatedAt: "2023-05-07T20:29:27.336Z"
-order: 1
+title: OneLink Smart Banner V2
+slug: dl_smart_banner_v2
+category:
+  uri: Deep Linking and OneLink
+parent:
+  uri: smart-banner-web-tool
+privacy:
+  view: public
+position: 1
 ---
 
 ## Overview

@@ -1,9 +1,12 @@
 ---
-title: "Android SDK reference"
-slug: "android-sdk-reference"
-category: 5f9705393c689a065c409b23
-excerpt: "The AppsFlyer Android SDK reference documentation."
-hidden: false
+title: Android SDK reference
+slug: android-sdk-reference
+category:
+  uri: AppsFlyer SDKs
+content:
+  excerpt: The AppsFlyer Android SDK reference documentation.
+privacy:
+  view: public
 ---
 ## Overview
 This is the Android SDK reference document. In this section you will find technical descriptions of classes and methods that comprise the SDK.

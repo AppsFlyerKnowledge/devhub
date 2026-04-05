@@ -1,9 +1,12 @@
 ---
-title: "Android: Set parameters based on the clicked URL domain"
-slug: "dl_android_attr_params_based_click"
-category: 6384c30e5a754e005f668a74
-parentDoc: 6387276d97e08d00104d4435
-hidden: false
+title: 'Android: Set parameters based on the clicked URL domain'
+slug: dl_android_attr_params_based_click
+category:
+  uri: Deep Linking and OneLink
+parent:
+  uri: dl_android_overview
+privacy:
+  view: public
 ---
 ## Overview
 Organic search attribution can be set from AppsFlyer without updating the SDK. [Learn more](https://support.appsflyer.com/hc/en-us/articles/15123194526353#setup).

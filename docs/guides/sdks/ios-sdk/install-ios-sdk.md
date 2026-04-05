@@ -1,13 +1,15 @@
 ---
-title: "Install SDK"
-slug: "install-ios-sdk"
-excerpt: "Learn how to download and install the iOS SDK."
-category: 5f9705393c689a065c409b23
-parentDoc: 5fa043dd3b65b20045e35597
-hidden: false
-createdAt: "2020-11-02T17:38:36.458Z"
-updatedAt: "2023-04-19T09:56:35.686Z"
-order: 2
+title: Install SDK
+slug: install-ios-sdk
+category:
+  uri: AppsFlyer SDKs
+content:
+  excerpt: Learn how to download and install the iOS SDK.
+parent:
+  uri: ios-sdk
+privacy:
+  view: public
+position: 2
 ---
 
 ## Recommended

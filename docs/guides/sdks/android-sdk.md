@@ -1,9 +1,12 @@
 ---
-title: "Android SDK"
-slug: "android-sdk"
-category: 5f9705393c689a065c409b23
-excerpt: "AppsFlyer Android SDK guides for developers."
-hidden: false
+title: Android SDK
+slug: android-sdk
+category:
+  uri: AppsFlyer SDKs
+content:
+  excerpt: AppsFlyer Android SDK guides for developers.
+privacy:
+  view: public
 ---
 [block:embed]
 {

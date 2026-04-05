@@ -1,10 +1,13 @@
 ---
-title: "Overview"
-slug: "onelinkapi_overview"
-category: 624693c6fa631302dde62cf5
-parentDoc: 624693c7fa631302dde62cf7
-hidden: true
-order: 0
+title: Overview
+slug: onelinkapi_overview
+category:
+  uri: OneLink API
+parent:
+  uri: onelink_rest_api
+privacy:
+  view: anyone_with_link
+position: 0
 ---
 > ❗️ Important
 > 

@@ -1,11 +1,12 @@
 ---
-title: "Android Extended Deferred Deep Linking"
-slug: "dl_android_ocds_ddl"
-category: 6384c30e5a754e005f668a74
-parentDoc: 6387276d97e08d00104d4435
-hidden: false
-createdAt: "2022-11-30T12:10:13.619Z"
-updatedAt: "2023-04-19T09:55:10.205Z"
+title: Android Extended Deferred Deep Linking
+slug: dl_android_ocds_ddl
+category:
+  uri: Deep Linking and OneLink
+parent:
+  uri: dl_android_overview
+privacy:
+  view: public
 ---
 ## Overview
 

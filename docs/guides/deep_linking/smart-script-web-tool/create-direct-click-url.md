@@ -1,11 +1,12 @@
 ---
-title: "Smart script for cross-platform"
-slug: "create-direct-click-url"
-category: 6384c30e5a754e005f668a74
-parentDoc: 63ad67e32f0483001e26406b
-hidden: false
-createdAt: "2023-02-21T13:14:37.778Z"
-updatedAt: "2023-03-01T12:21:52.568Z"
+title: Smart script for cross-platform
+slug: create-direct-click-url
+category:
+  uri: Deep Linking and OneLink
+parent:
+  uri: smart-script-web-tool
+privacy:
+  view: public
 ---
 Smart Script can generate OneLinks that redirect users to non-mobile stores where they can download, install, or purchase PC, CTV or console apps. 
 

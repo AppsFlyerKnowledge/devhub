@@ -1,11 +1,12 @@
 ---
-title: "ShareInviteHelper"
-slug: "android-sdk-reference-shareinvitehelper"
-category: 5f9705393c689a065c409b23
-parentDoc: 60ca3f03ceb11a00db127bd8
-hidden: false
-createdAt: "2021-06-26T15:47:39.568Z"
-updatedAt: "2021-07-28T11:21:23.971Z"
+title: ShareInviteHelper
+slug: android-sdk-reference-shareinvitehelper
+category:
+  uri: AppsFlyer SDKs
+parent:
+  uri: android-sdk-reference
+privacy:
+  view: public
 ---
 ## Overview
 **Class declaration**

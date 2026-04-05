@@ -1,13 +1,15 @@
 ---
-title: "Integrate SDK"
-slug: "integrate-ios-sdk"
-excerpt: "Learn how to initialize and start the iOS SDK."
-category: 5f9705393c689a065c409b23
-parentDoc: 5fa043dd3b65b20045e35597
-hidden: false
-createdAt: "2020-11-02T17:48:20.793Z"
-updatedAt: "2023-05-02T12:31:52.710Z"
-order: 3
+title: Integrate SDK
+slug: integrate-ios-sdk
+category:
+  uri: AppsFlyer SDKs
+content:
+  excerpt: Learn how to initialize and start the iOS SDK.
+parent:
+  uri: ios-sdk
+privacy:
+  view: public
+position: 3
 ---
 ## Recommended
 

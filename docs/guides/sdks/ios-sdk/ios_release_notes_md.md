@@ -1,10 +1,13 @@
 ---
-title: "iOS Release Notes"
-slug: "ios-release-notes"
-category: 5f9705393c689a065c409b23
-parentDoc: 5fa043dd3b65b20045e35597
-hidden: false
-order: 1
+title: iOS Release Notes
+slug: ios-release-notes
+category:
+  uri: AppsFlyer SDKs
+parent:
+  uri: ios-sdk
+privacy:
+  view: public
+position: 1
 ---
 
 ## Version 6.17.9

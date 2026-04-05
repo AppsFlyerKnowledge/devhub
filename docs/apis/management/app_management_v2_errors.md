@@ -1,9 +1,11 @@
 ---
-title: "Error messages"
-slug: "app-management-v2-errors"
-category: 65d1df96a2f25300104f9fe1
-hidden: false
-order: 1
+title: Error messages
+slug: app-management-v2-errors
+category:
+  uri: App management API V2.0
+privacy:
+  view: public
+position: 1
 ---
 
 ## Errors for adding an app

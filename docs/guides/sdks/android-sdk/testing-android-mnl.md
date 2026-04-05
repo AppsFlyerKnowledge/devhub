@@ -1,10 +1,13 @@
 ---
-title: "Manual testing"
-slug: "manual-testing-android"
-category: 5f9705393c689a065c409b23
-parentDoc: 645bca51a6baa4286ef83a43
-hidden: true 
-order: 0
+title: Manual testing
+slug: manual-testing-android
+category:
+  uri: AppsFlyer SDKs
+parent:
+  uri: testing-android
+privacy:
+  view: anyone_with_link
+position: 0
 ---
 
 > 📘 **Note**

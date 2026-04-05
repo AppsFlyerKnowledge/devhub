@@ -1,10 +1,10 @@
 ---
-title: "Input parameters"
-slug: "direct-deep-linking-1"
-category: 5f9705393c689a065c409b23
-hidden: true
-createdAt: "2020-06-29T12:43:59.959Z"
-updatedAt: "2020-11-22T14:06:54.805Z"
+title: Input parameters
+slug: direct-deep-linking-1
+category:
+  uri: AppsFlyer SDKs
+privacy:
+  view: anyone_with_link
 ---
 The following table lists the possible parameters OneLink can pass as an input.
 

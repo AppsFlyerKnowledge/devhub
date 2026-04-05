@@ -1,12 +1,13 @@
 ---
-title: "OAID"
-slug: "oaid"
-category: 5f9705393c689a065c409b23
-parentDoc: 5fa0443749be540011850e51
-hidden: false
-createdAt: "2022-11-29T14:54:36.852Z"
-updatedAt: "2022-12-13T12:14:03.404Z"
-order: 11
+title: OAID
+slug: oaid
+category:
+  uri: AppsFlyer SDKs
+parent:
+  uri: android-sdk
+privacy:
+  view: public
+position: 11
 ---
 ## Overview
 

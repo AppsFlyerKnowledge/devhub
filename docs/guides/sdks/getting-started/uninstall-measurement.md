@@ -1,12 +1,13 @@
 ---
-title: "Uninstall measurement"
-slug: "uninstall-measurement"
-category: 5f9705393c689a065c409b23
-parentDoc: 609a858fb96cee00165e8fca
-hidden: false
-createdAt: "2022-04-18T11:38:21.705Z"
-updatedAt: "2022-04-18T11:45:01.694Z"
-order: 8
+title: Uninstall measurement
+slug: uninstall-measurement
+category:
+  uri: AppsFlyer SDKs
+parent:
+  uri: getting-started
+privacy:
+  view: public
+position: 8
 ---
 ## Overview
 Integrate uninstall measurement into your apps.

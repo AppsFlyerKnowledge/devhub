@@ -1,11 +1,12 @@
 ---
-title: "AppsFlyerConsent"
-slug: "ios-sdk-reference-appsflyerconsent"
-category: 5f9705393c689a065c409b23
-parentDoc: 60ca3e14e22f76007884b6fc
-hidden: false
-createdAt: "2024-02-08T19:00:15.000Z"
-updatedAt: "2024-02-08T19:00:15.000Z"
+title: AppsFlyerConsent
+slug: ios-sdk-reference-appsflyerconsent
+category:
+  uri: AppsFlyer SDKs
+parent:
+  uri: ios-sdk-reference
+privacy:
+  view: public
 ---
 ### Overview
 

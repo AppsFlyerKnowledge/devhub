@@ -1,12 +1,13 @@
 ---
-title: "Push notifications"
-slug: "push-notifications"
-category: 5f9705393c689a065c409b23
-parentDoc: 609a858fb96cee00165e8fca
-hidden: false
-createdAt: "2022-04-24T11:55:56.519Z"
-updatedAt: "2022-08-17T12:59:46.273Z"
-order: 7
+title: Push notifications
+slug: push-notifications
+category:
+  uri: AppsFlyer SDKs
+parent:
+  uri: getting-started
+privacy:
+  view: public
+position: 7
 ---
 ## Overview
 Learn how to enable your app to measure push notification campaigns and send related attribution data to AppsFlyer.

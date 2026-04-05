@@ -1,9 +1,12 @@
 ---
-title: "Getting started"
-slug: "getting-started"
-category: 5f9705393c689a065c409b23
-excerpt: "Getting started with the AppsFlyer SDKs."
-hidden: false
+title: Getting started
+slug: getting-started
+category:
+  uri: AppsFlyer SDKs
+content:
+  excerpt: Getting started with the AppsFlyer SDKs.
+privacy:
+  view: public
 ---
 Getting started with AppsFlyer SDKs
 -----------------------------------

@@ -1,13 +1,15 @@
 ---
-title: "In-app events"
-slug: "in-app-events-ios"
-excerpt: "Learn how to work with in-app events in the iOS SDK."
-category: 5f9705393c689a065c409b23
-parentDoc: 5fa043dd3b65b20045e35597
-hidden: false
-createdAt: "2021-05-10T10:41:46.430Z"
-updatedAt: "2023-05-07T09:13:55.637Z"
-order: 5
+title: In-app events
+slug: in-app-events-ios
+category:
+  uri: AppsFlyer SDKs
+content:
+  excerpt: Learn how to work with in-app events in the iOS SDK.
+parent:
+  uri: ios-sdk
+privacy:
+  view: public
+position: 5
 ---
 ## Overview
 

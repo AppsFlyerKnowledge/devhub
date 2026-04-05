@@ -1,9 +1,11 @@
 ---
-title: "Overview"
-slug: "s2s-events-api3-overview"
-category: 6575d5361ad9bf00553500b2
-hidden: false
-order: 0
+title: Overview
+slug: s2s-events-api3-overview
+category:
+  uri: Server-to-server events API (for mobile)
+privacy:
+  view: public
+position: 0
 ---
 
 

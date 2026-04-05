@@ -1,10 +1,13 @@
 ---
-title: "Android security plugin"
-slug: "android-security-plugin"
-category: 5f9705393c689a065c409b23
-parentDoc: 5fa0443749be540011850e51
-hidden: true
-order: 99
+title: Android security plugin
+slug: android-security-plugin
+category:
+  uri: AppsFlyer SDKs
+parent:
+  uri: android-sdk
+privacy:
+  view: anyone_with_link
+position: 99
 ---
 
 ## Overview

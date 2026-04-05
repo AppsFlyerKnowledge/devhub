@@ -1,11 +1,17 @@
 ---
-title: "Branch Migration Navigator on Android"
-slug: "branch-migration-android"
-category: 5f9705393c689a065c409b23
-parentDoc: 5fa0443749be540011850e51
-excerpt: "Activate the Branch Migration Navigator to streamline your traffic migration journey from Branch to AppsFlyer"
-hidden: true
-order: 90
+title: Branch Migration Navigator on Android
+slug: branch-migration-android
+category:
+  uri: AppsFlyer SDKs
+parent:
+  uri: android-sdk
+content:
+  excerpt: >-
+    Activate the Branch Migration Navigator to streamline your traffic migration
+    journey from Branch to AppsFlyer
+privacy:
+  view: anyone_with_link
+position: 90
 ---
 
 # What is Branch Migration Navigator?

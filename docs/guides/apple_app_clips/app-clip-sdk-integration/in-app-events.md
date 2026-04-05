@@ -1,11 +1,12 @@
 ---
-title: "In-app events for App Clips"
-slug: "in-app-events"
-category: 5f849793f6d5d2006de9d826
-parentDoc: 5f8497f614361a0019bd00f2
-hidden: false
-createdAt: "2020-10-12T17:58:30.265Z"
-updatedAt: "2022-01-12T08:23:24.940Z"
+title: In-app events for App Clips
+slug: in-app-events
+category:
+  uri: Apple App Clips integration
+parent:
+  uri: app-clip-sdk-integration
+privacy:
+  view: public
 ---
 In-app events provide advertisers with the ability to record post-install events (like registrations or purchases) with customized details and attribute them to the originating media source.
 

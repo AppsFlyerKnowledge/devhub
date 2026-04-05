@@ -1,12 +1,13 @@
 ---
-title: "Conversion data"
-slug: "conversion-data-android"
-category: 5f9705393c689a065c409b23
-parentDoc: 5fa0443749be540011850e51
-hidden: false
-createdAt: "2021-01-28T10:04:50.003Z"
-updatedAt: "2022-07-18T17:29:49.495Z"
-order: 6
+title: Conversion data
+slug: conversion-data-android
+category:
+  uri: AppsFlyer SDKs
+parent:
+  uri: android-sdk
+privacy:
+  view: public
+position: 6
 ---
 In this guide you will learn how to get conversion data using [`AppsFlyerConversionListener`](doc:android-sdk-reference-appsflyerconversionlistener), as well as [examples](doc:conversion-data-android#accessing-attribution-data) for using the conversion data.
 

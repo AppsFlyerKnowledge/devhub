@@ -1,9 +1,12 @@
 ---
-title: "iOS SDK"
-slug: "ios-sdk"
-category: 5f9705393c689a065c409b23
-excerpt: "AppsFlyer iOS SDK guides for developers."
-hidden: false
+title: iOS SDK
+slug: ios-sdk
+category:
+  uri: AppsFlyer SDKs
+content:
+  excerpt: AppsFlyer iOS SDK guides for developers.
+privacy:
+  view: public
 ---
 [block:embed]
 {

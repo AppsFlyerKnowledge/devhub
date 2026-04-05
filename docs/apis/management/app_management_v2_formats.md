@@ -1,9 +1,11 @@
 ---
-title: "Supported formats"
-slug: "app-management-v2-formats"
-category: 65d1df96a2f25300104f9fe1
-hidden: false
-order: 2
+title: Supported formats
+slug: app-management-v2-formats
+category:
+  uri: App management API V2.0
+privacy:
+  view: public
+position: 2
 ---
 
 ## List of supported platforms that can be deleted

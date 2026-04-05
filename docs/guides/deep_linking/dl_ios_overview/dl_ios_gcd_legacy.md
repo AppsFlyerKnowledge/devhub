@@ -1,11 +1,12 @@
 ---
-title: "iOS Legacy APIs"
-slug: "dl_ios_gcd_legacy"
-category: 6384c30e5a754e005f668a74
-parentDoc: 63a8517990401800247b99ce
-hidden: false
-createdAt: "2022-12-28T11:07:32.794Z"
-updatedAt: "2023-05-03T15:55:14.736Z"
+title: iOS Legacy APIs
+slug: dl_ios_gcd_legacy
+category:
+  uri: Deep Linking and OneLink
+parent:
+  uri: dl_ios_overview
+privacy:
+  view: public
 ---
 ## Direct Deep Linking
 

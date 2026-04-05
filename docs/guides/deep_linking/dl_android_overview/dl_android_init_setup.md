@@ -1,11 +1,12 @@
 ---
-title: "Android initial setup"
-slug: "dl_android_init_setup"
-category: 6384c30e5a754e005f668a74
-parentDoc: 6387276d97e08d00104d4435
-hidden: false
-createdAt: "2022-11-30T10:30:22.647Z"
-updatedAt: "2023-04-27T06:38:09.782Z"
+title: Android initial setup
+slug: dl_android_init_setup
+category:
+  uri: Deep Linking and OneLink
+parent:
+  uri: dl_android_overview
+privacy:
+  view: public
 ---
 **At a glance**: The initial app setup enables the marketer to create links that send existing app users directly into the app. The initial setup is also a prerequisite for deep linking and deferred deep linking.
 

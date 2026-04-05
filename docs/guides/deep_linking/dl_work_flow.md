@@ -1,10 +1,10 @@
 ---
-title: "Deep Linking work flow"
-slug: "dl_work_flow"
-category: 6384c30e5a754e005f668a74
-hidden: false
-createdAt: "2022-11-30T10:00:54.337Z"
-updatedAt: "2023-04-19T09:57:22.029Z"
+title: Deep Linking work flow
+slug: dl_work_flow
+category:
+  uri: Deep Linking and OneLink
+privacy:
+  view: public
 ---
 ## Setup
 

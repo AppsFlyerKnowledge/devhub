@@ -1,9 +1,11 @@
 ---
-title: "Overview"
-slug: "bulk-users-management-overview"
-category: 65b6092bf5a65400575b99ec
-hidden: false
-order: 0
+title: Overview
+slug: bulk-users-management-overview
+category:
+  uri: User management
+privacy:
+  view: public
+position: 0
 ---
 
 **At a glance:**

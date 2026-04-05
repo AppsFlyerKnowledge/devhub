@@ -1,11 +1,12 @@
 ---
-title: "AppsFlyerConsent"
-slug: "android-sdk-reference-appsflyerconsent"
-category: 5f9705393c689a065c409b23
-parentDoc: 60ca3f03ceb11a00db127bd8
-hidden: false
-createdAt: "2024-02-08T19:00:15.000Z"
-updatedAt: "2024-02-08T19:00:15.000Z"
+title: AppsFlyerConsent
+slug: android-sdk-reference-appsflyerconsent
+category:
+  uri: AppsFlyer SDKs
+parent:
+  uri: android-sdk-reference
+privacy:
+  view: public
 ---
 ## Overview
 

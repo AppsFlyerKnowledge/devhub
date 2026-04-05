@@ -1,13 +1,15 @@
 ---
-title: "Install SDK"
-slug: "install-android-sdk"
-category: 5f9705393c689a065c409b23
-parentDoc: 5fa0443749be540011850e51
-excerpt: "Learn how to download and install the Android SDK."
-hidden: false
-createdAt: "2020-11-02T17:40:03.171Z"
-updatedAt: "2022-11-03T13:09:22.572Z"
-order: 2
+title: Install SDK
+slug: install-android-sdk
+category:
+  uri: AppsFlyer SDKs
+parent:
+  uri: android-sdk
+content:
+  excerpt: Learn how to download and install the Android SDK.
+privacy:
+  view: public
+position: 2
 ---
 
 ## Recommended

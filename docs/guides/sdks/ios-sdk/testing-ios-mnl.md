@@ -1,10 +1,13 @@
 ---
-title: "Manual testing"
-slug: "manual-testing-ios"
-category: 5f9705393c689a065c409b23
-parentDoc: 645bca9009c0a70a08399a55
-hidden: true
-order: 0
+title: Manual testing
+slug: manual-testing-ios
+category:
+  uri: AppsFlyer SDKs
+parent:
+  uri: testing-ios
+privacy:
+  view: anyone_with_link
+position: 0
 ---
 
 > 📘 **Note**

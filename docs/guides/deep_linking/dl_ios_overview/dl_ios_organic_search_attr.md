@@ -1,9 +1,12 @@
 ---
-title: "iOS: Set parameters based on the clicked URL domain"
-slug: "dl_ios_attr_params_based_click"
-category: 6384c30e5a754e005f668a74
-parentDoc: 63a8517990401800247b99ce
-hidden: false
+title: 'iOS: Set parameters based on the clicked URL domain'
+slug: dl_ios_attr_params_based_click
+category:
+  uri: Deep Linking and OneLink
+parent:
+  uri: dl_ios_overview
+privacy:
+  view: public
 ---
 ## Overview
 Organic search attribution can be set from AppsFlyer without updating the SDK. [Learn more](https://support.appsflyer.com/hc/en-us/articles/15123194526353#setup).

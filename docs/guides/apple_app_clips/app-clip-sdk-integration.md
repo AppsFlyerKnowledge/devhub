@@ -1,10 +1,10 @@
 ---
-title: "App Clip SDK integration"
-slug: "app-clip-sdk-integration"
-category: 5f849793f6d5d2006de9d826
-hidden: false
-createdAt: "2020-10-12T17:52:54.319Z"
-updatedAt: "2021-11-16T11:52:14.714Z"
+title: App Clip SDK integration
+slug: app-clip-sdk-integration
+category:
+  uri: Apple App Clips integration
+privacy:
+  view: public
 ---
 The developer routes the user to the correct activity using the invocation URL (the QR code, NFC tag, etc. that invokes the App Clip). 
 

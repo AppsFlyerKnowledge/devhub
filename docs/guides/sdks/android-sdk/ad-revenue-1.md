@@ -1,11 +1,15 @@
 ---
-title: "Ad revenue"
-slug: "ad-revenue-1"
-category: 5f9705393c689a065c409b23
-parentDoc: 5fa0443749be540011850e51
-excerpt: "Impression-level ad revenue reporting by SDK"
-hidden: false
-order: 8
+title: Ad revenue
+slug: ad-revenue-1
+category:
+  uri: AppsFlyer SDKs
+parent:
+  uri: android-sdk
+content:
+  excerpt: Impression-level ad revenue reporting by SDK
+privacy:
+  view: public
+position: 8
 ---
 
 ## Recommended

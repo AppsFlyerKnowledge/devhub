@@ -1,11 +1,12 @@
 ---
-title: "iOS user invite"
-slug: "dl_ios_user_invite"
-category: 6384c30e5a754e005f668a74
-parentDoc: 63a8517990401800247b99ce
-hidden: false
-createdAt: "2022-12-29T10:09:41.374Z"
-updatedAt: "2023-05-03T16:00:09.572Z"
+title: iOS user invite
+slug: dl_ios_user_invite
+category:
+  uri: Deep Linking and OneLink
+parent:
+  uri: dl_ios_overview
+privacy:
+  view: public
 ---
 ## Overview
 

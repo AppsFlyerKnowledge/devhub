@@ -1,11 +1,12 @@
 ---
-title: "[Legacy] OneLink Smart Script V1"
-slug: "dl_legacy_smart_script_v1"
-category: 6384c30e5a754e005f668a74
-parentDoc: 63ad67e32f0483001e26406b
-hidden: false
-createdAt: "2022-12-29T10:12:33.092Z"
-updatedAt: "2022-12-29T10:34:49.126Z"
+title: '[Legacy] OneLink Smart Script V1'
+slug: dl_legacy_smart_script_v1
+category:
+  uri: Deep Linking and OneLink
+parent:
+  uri: smart-script-web-tool
+privacy:
+  view: public
 ---
 **At a glance**: Customize OneLinks that are automatically generated and embedded behind a button or banner on your brand's website. **Note**: Although not mandatory, consider migrating to [OneLink Smart Script V2](https://dev.appsflyer.com/hc/docs/onelink-smart-script-v2web-to-app-url-generator). 
 [block:image]

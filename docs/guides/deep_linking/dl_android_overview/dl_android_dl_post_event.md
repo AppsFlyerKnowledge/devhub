@@ -1,11 +1,12 @@
 ---
-title: "Android Deep Linking post user event"
-slug: "dl_android_dl_post_event"
-category: 6384c30e5a754e005f668a74
-parentDoc: 6387276d97e08d00104d4435
-hidden: false
-createdAt: "2023-05-04T14:40:50.447Z"
-updatedAt: "2023-05-04T14:56:37.040Z"
+title: Android Deep Linking post user event
+slug: dl_android_dl_post_event
+category:
+  uri: Deep Linking and OneLink
+parent:
+  uri: dl_android_overview
+privacy:
+  view: public
 ---
 ## Overview
 In some cases the user is required to go through some kind of an event before continuing to application page pointed by deep linking destination.

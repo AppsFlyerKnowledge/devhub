@@ -1,9 +1,11 @@
 ---
-title: "Overview"
-slug: "click-sign-api-overview"
-category: 65a5059cbcfe3400421aa9cc
-hidden: false
-order: 0
+title: Overview
+slug: click-sign-api-overview
+category:
+  uri: Click Signing API
+privacy:
+  view: public
+position: 0
 ---
 
 **At a glance:**

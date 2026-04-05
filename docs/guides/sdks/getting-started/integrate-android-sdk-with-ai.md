@@ -1,10 +1,13 @@
 ---
-title: "Integrate Android SDK with AI"
-slug: "integrate-android-sdk-with-ai"
-category: 5f9705393c689a065c409b23
-parentDoc: 609a858fb96cee00165e8fca
-hidden: false
-order: 1
+title: Integrate Android SDK with AI
+slug: integrate-android-sdk-with-ai
+category:
+  uri: AppsFlyer SDKs
+parent:
+  uri: getting-started
+privacy:
+  view: public
+position: 1
 ---
 
 Offload much of the AppsFlyer Android SDK integration work to AppsFlyer’s SDK MCP server by using an AI-powered coding tool, such as OpenAI Codex, Git Hub Co-Pilot, or Cursor.

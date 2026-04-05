@@ -1,11 +1,12 @@
 ---
-title: "CrossPromotionHelper"
-slug: "android-sdk-reference-sharecrosspromotionhelper"
-category: 5f9705393c689a065c409b23
-parentDoc: 60ca3f03ceb11a00db127bd8
-hidden: false
-createdAt: "2021-06-26T15:46:41.320Z"
-updatedAt: "2021-07-04T10:30:31.934Z"
+title: CrossPromotionHelper
+slug: android-sdk-reference-sharecrosspromotionhelper
+category:
+  uri: AppsFlyer SDKs
+parent:
+  uri: android-sdk-reference
+privacy:
+  view: public
 ---
 ## Overview
 Android SDK cross-promotion helper class.

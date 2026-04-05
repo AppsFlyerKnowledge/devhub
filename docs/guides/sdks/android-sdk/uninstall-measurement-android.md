@@ -1,12 +1,13 @@
 ---
-title: "Uninstall measurement"
-slug: "uninstall-measurement-android"
-category: 5f9705393c689a065c409b23
-parentDoc: 5fa0443749be540011850e51
-hidden: false
-createdAt: "2022-03-16T10:04:32.183Z"
-updatedAt: "2022-05-05T12:59:21.488Z"
-order: 9
+title: Uninstall measurement
+slug: uninstall-measurement-android
+category:
+  uri: AppsFlyer SDKs
+parent:
+  uri: android-sdk
+privacy:
+  view: public
+position: 9
 ---
 ## Overview
 Set up uninstall measurement in Android apps using AppsFlyer SDK and Firebase Cloud Messaging.

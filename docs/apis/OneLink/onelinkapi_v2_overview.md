@@ -1,10 +1,11 @@
 ---
-title: "OneLink API - Overview"
-slug: "onelinkapi_v2_overview"
-category: 6829800b8e61c5005284ad14
-parentDoc: 6861240b50e56f0062c68f47
-hidden: false
-order: 0
+title: OneLink API - Overview
+slug: onelinkapi_v2_overview
+category:
+  uri: OneLink API v2.0
+privacy:
+  view: public
+position: 0
 ---
 OneLink Rest API enables programmatic creation, management, and retrieval of short links used for redirection, deep linking, and measurement across different platforms and channels. 
 

@@ -1,10 +1,13 @@
 ---
-title: "Android Release Notes"
-slug: "android-release-notes"
-category: 5f9705393c689a065c409b23
-parentDoc: 5fa0443749be540011850e51
-hidden: false
-order: 14
+title: Android Release Notes
+slug: android-release-notes
+category:
+  uri: AppsFlyer SDKs
+parent:
+  uri: android-sdk
+privacy:
+  view: public
+position: 14
 ---
 
 ## Version 6.17.6 - 11/03/2026

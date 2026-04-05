@@ -1,10 +1,13 @@
 ---
-title: "Android legacy security plugin"
-slug: "android-legacy-security-plugin"
-category: 5f9705393c689a065c409b23
-parentDoc: 5fa0443749be540011850e51
-hidden: true
-order: 99
+title: Android legacy security plugin
+slug: android-legacy-security-plugin
+category:
+  uri: AppsFlyer SDKs
+parent:
+  uri: android-sdk
+privacy:
+  view: anyone_with_link
+position: 99
 ---
 
 [![Maven Central](https://img.shields.io/nexus/r/com.appsflyer/af-security-plugin?server=https%3A%2F%2Foss.sonatype.org)](https://repo1.maven.org/maven2/com/appsflyer/af-security-plugin/)

@@ -1,13 +1,15 @@
 ---
-title: "SDK installation"
-slug: "sdk-installation"
-category: 5f9705393c689a065c409b23
-parentDoc: 609a858fb96cee00165e8fca
-excerpt: "Links to SDK installation instructions for various supported platforms."
-hidden: false
-createdAt: "2021-05-11T13:17:50.404Z"
-updatedAt: "2021-06-28T18:24:24.334Z"
-order: 2
+title: SDK installation
+slug: sdk-installation
+category:
+  uri: AppsFlyer SDKs
+parent:
+  uri: getting-started
+content:
+  excerpt: Links to SDK installation instructions for various supported platforms.
+privacy:
+  view: public
+position: 2
 ---
 AppsFlyer SDK installation instructions for various platforms:
 [block:html]

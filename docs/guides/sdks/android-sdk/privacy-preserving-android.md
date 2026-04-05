@@ -1,13 +1,15 @@
 ---
-title: "Preserve user privacy"
-slug: "preserve-user-privacy-android"
-category: 5f9705393c689a065c409b23
-parentDoc: 5fa0443749be540011850e51
-excerpt: "Learn how to preserve user privacy in the Android SDK."
-hidden: false
-createdAt: "2024-01-07T19:00:15.000Z"
-updatedAt: "2024-01-07T19:00:15.000Z"
-order: 12
+title: Preserve user privacy
+slug: preserve-user-privacy-android
+category:
+  uri: AppsFlyer SDKs
+parent:
+  uri: android-sdk
+content:
+  excerpt: Learn how to preserve user privacy in the Android SDK.
+privacy:
+  view: public
+position: 12
 ---
 
 # Preserve user privacy

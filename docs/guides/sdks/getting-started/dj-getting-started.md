@@ -1,11 +1,15 @@
 ---
-title: "Developer Journey"
-slug: "dj-getting-started"
-category: 5f9705393c689a065c409b23
-parentDoc: 609a858fb96cee00165e8fca
-excerpt: "SDK integration wizard"
-hidden: false
-order: 0
+title: Developer Journey
+slug: dj-getting-started
+category:
+  uri: AppsFlyer SDKs
+parent:
+  uri: getting-started
+content:
+  excerpt: SDK integration wizard
+privacy:
+  view: public
+position: 0
 ---
 
 Let [Developer Journey](https://dj.dev.appsflyer.com/?utm_source=devhub&utm_medium=dj-getting-started) (our SDK integration wizard) guide you through the SDK integration process.

@@ -1,10 +1,13 @@
 ---
-title: "Purchase and subscription validation"
-slug: "purchase-and-subscription-validation"
-category: 5f9705393c689a065c409b23
-parentDoc: 609a858fb96cee00165e8fca
-hidden: false
-order: 10
+title: Purchase and subscription validation
+slug: purchase-and-subscription-validation
+category:
+  uri: AppsFlyer SDKs
+parent:
+  uri: getting-started
+privacy:
+  view: public
+position: 10
 ---
 <style>
   .button-container {

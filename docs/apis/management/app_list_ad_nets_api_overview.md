@@ -1,9 +1,11 @@
 ---
-title: "Overview"
-slug: "app-list-ad-nets-overview"
-category: 649adc4b66993d000bd3b723
-hidden: false
-order: 0
+title: Overview
+slug: app-list-ad-nets-overview
+category:
+  uri: App list API
+privacy:
+  view: public
+position: 0
 ---
 
 **At a glance:**

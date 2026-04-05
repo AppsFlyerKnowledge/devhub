@@ -1,9 +1,12 @@
 ---
-title: "iOS Deep Linking ESP 2.0"
-slug: "dl_ios_esp_2_setup"
-category: 6384c30e5a754e005f668a74
-parentDoc: 63a8517990401800247b99ce
-hidden: false
+title: iOS Deep Linking ESP 2.0
+slug: dl_ios_esp_2_setup
+category:
+  uri: Deep Linking and OneLink
+parent:
+  uri: dl_ios_overview
+privacy:
+  view: public
 ---
 
 ## Overview

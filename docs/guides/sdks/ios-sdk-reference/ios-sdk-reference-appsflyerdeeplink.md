@@ -1,11 +1,12 @@
 ---
-title: "AppsFlyerDeepLink"
-slug: "ios-sdk-reference-appsflyerdeeplink"
-category: 5f9705393c689a065c409b23
-parentDoc: 60ca3e14e22f76007884b6fc
-hidden: false
-createdAt: "2021-06-16T18:11:19.889Z"
-updatedAt: "2022-03-22T13:13:37.900Z"
+title: AppsFlyerDeepLink
+slug: ios-sdk-reference-appsflyerdeeplink
+category:
+  uri: AppsFlyer SDKs
+parent:
+  uri: ios-sdk-reference
+privacy:
+  view: public
 ---
 [block:api-header]
 {

@@ -1,11 +1,12 @@
 ---
-title: "Android User Invite"
-slug: "dl_android_user_invite"
-category: 6384c30e5a754e005f668a74
-parentDoc: 6387276d97e08d00104d4435
-hidden: false
-createdAt: "2022-11-30T12:20:34.448Z"
-updatedAt: "2023-01-19T15:14:19.232Z"
+title: Android User Invite
+slug: dl_android_user_invite
+category:
+  uri: Deep Linking and OneLink
+parent:
+  uri: dl_android_overview
+privacy:
+  view: public
 ---
 
 Overview

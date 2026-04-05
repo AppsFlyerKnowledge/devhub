@@ -1,10 +1,10 @@
 ---
-title: "User invite attribution"
-slug: "dl_user_invite"
-category: 6384c30e5a754e005f668a74
-hidden: false
-createdAt: "2022-11-30T10:00:53.943Z"
-updatedAt: "2023-01-25T15:49:57.304Z"
+title: User invite attribution
+slug: dl_user_invite
+category:
+  uri: Deep Linking and OneLink
+privacy:
+  view: public
 ---
 ## Overview
 Attributing user invites lets marketers gain insight into how much traffic your app gets from existing users inviting new users to join.

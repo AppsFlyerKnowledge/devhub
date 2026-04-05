@@ -1,11 +1,12 @@
 ---
-title: "Android Legacy APIs"
-slug: "dl_android_gcd_legacy"
-category: 6384c30e5a754e005f668a74
-parentDoc: 6387276d97e08d00104d4435
-hidden: false
-createdAt: "2022-11-30T12:10:13.972Z"
-updatedAt: "2023-01-19T15:14:19.428Z"
+title: Android Legacy APIs
+slug: dl_android_gcd_legacy
+category:
+  uri: Deep Linking and OneLink
+parent:
+  uri: dl_android_overview
+privacy:
+  view: public
 ---
 ## Direct Deep Linking
 

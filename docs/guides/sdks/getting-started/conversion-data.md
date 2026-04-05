@@ -1,12 +1,13 @@
 ---
-title: "Conversion data"
-slug: "conversion-data"
-category: 5f9705393c689a065c409b23
-parentDoc: 609a858fb96cee00165e8fca
-hidden: false
-createdAt: "2021-05-12T10:50:55.001Z"
-updatedAt: "2021-07-04T13:15:40.138Z"
-order: 6
+title: Conversion data
+slug: conversion-data
+category:
+  uri: AppsFlyer SDKs
+parent:
+  uri: getting-started
+privacy:
+  view: public
+position: 6
 ---
 Conversion data describes the channel(s) through which users got to your app.
 

@@ -1,12 +1,13 @@
 ---
-title: "Test integration"
-slug: "testing-ios"
-category: 5f9705393c689a065c409b23
-parentDoc: 5fa043dd3b65b20045e35597
-hidden: false
-createdAt: "2021-07-26T09:22:21.564Z"
-updatedAt: "2022-11-29T15:57:14.716Z"
-order: 4
+title: Test integration
+slug: testing-ios
+category:
+  uri: AppsFlyer SDKs
+parent:
+  uri: ios-sdk
+privacy:
+  view: public
+position: 4
 ---
 
 ## Recommended 👍

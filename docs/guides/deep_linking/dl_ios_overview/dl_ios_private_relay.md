@@ -1,11 +1,12 @@
 ---
-title: "iOS deferred deep linking with iOS Private Relay"
-slug: "dl_ios_private_relay"
-category: 6384c30e5a754e005f668a74
-parentDoc: 63a8517990401800247b99ce
-hidden: false
-createdAt: "2022-12-29T10:31:18.696Z"
-updatedAt: "2023-01-05T09:11:09.808Z"
+title: iOS deferred deep linking with iOS Private Relay
+slug: dl_ios_private_relay
+category:
+  uri: Deep Linking and OneLink
+parent:
+  uri: dl_ios_overview
+privacy:
+  view: public
 ---
 With the launch of 1OS 15, Apple provides iCloud+ users with a feature called Private Relay, which gives them the option to encrypt their web-browsing traffic and hide their exact location, IP address, and the contents of their browsing traffic. If users opt-in to Private Relay, this could interfere with attribution and deferred deep linking. Meaning, once a new user without the app goes to the App Store, and installs and launches the app, Private Relay could prevent them from being sent to a specific page in the app.
 

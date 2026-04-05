@@ -1,11 +1,12 @@
 ---
-title: "AppsFlyerLinkGenerator"
-slug: "ios-sdk-reference-appsflyerlinkgenerator"
-category: 5f9705393c689a065c409b23
-parentDoc: 60ca3e14e22f76007884b6fc
-hidden: false
-createdAt: "2021-06-28T10:05:32.458Z"
-updatedAt: "2021-08-10T15:01:46.715Z"
+title: AppsFlyerLinkGenerator
+slug: ios-sdk-reference-appsflyerlinkgenerator
+category:
+  uri: AppsFlyer SDKs
+parent:
+  uri: ios-sdk-reference
+privacy:
+  view: public
 ---
 ## Overview
 Instances of the `AppsFlyerLinkGenerator` class are provided as input for [`generateInviteUrl`](doc:ios-sdk-reference-appsflyershareinvitehelper#generateinviteurl) from [`AppsFlyerShareInviteHelper`](doc:ios-sdk-reference-appsflyershareinvitehelper).

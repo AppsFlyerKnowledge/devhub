@@ -1,11 +1,12 @@
 ---
-title: "Smart Banner migration guide v1 to v2"
-slug: "dl_smart_banner_migration_guide"
-category: 6384c30e5a754e005f668a74
-parentDoc: 63ccfdc2635a53004ab874f0
-hidden: false
-createdAt: "2023-01-22T09:32:49.242Z"
-updatedAt: "2023-01-23T11:59:44.291Z"
+title: Smart Banner migration guide v1 to v2
+slug: dl_smart_banner_migration_guide
+category:
+  uri: Deep Linking and OneLink
+parent:
+  uri: smart-banner-web-tool
+privacy:
+  view: public
 ---
 
 > ⚠️ **Important notice**

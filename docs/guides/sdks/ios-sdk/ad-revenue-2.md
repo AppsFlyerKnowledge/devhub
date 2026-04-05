@@ -1,12 +1,13 @@
 ---
-title: "Ad revenue"
-slug: "ad-revenue-2"
-category: 5f9705393c689a065c409b23
-parentDoc: 5fa043dd3b65b20045e35597
-hidden: false
-createdAt: "2022-01-12T08:36:36.927Z"
-updatedAt: "2022-02-21T10:40:53.749Z"
-order: 9
+title: Ad revenue
+slug: ad-revenue-2
+category:
+  uri: AppsFlyer SDKs
+parent:
+  uri: ios-sdk
+privacy:
+  view: public
+position: 9
 ---
 
 ## Recommended

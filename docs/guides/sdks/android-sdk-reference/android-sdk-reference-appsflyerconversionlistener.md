@@ -1,11 +1,12 @@
 ---
-title: "AppsFlyerConversionListener"
-slug: "android-sdk-reference-appsflyerconversionlistener"
-category: 5f9705393c689a065c409b23
-parentDoc: 60ca3f03ceb11a00db127bd8
-hidden: false
-createdAt: "2021-06-16T18:14:33.730Z"
-updatedAt: "2021-08-15T07:50:42.191Z"
+title: AppsFlyerConversionListener
+slug: android-sdk-reference-appsflyerconversionlistener
+category:
+  uri: AppsFlyer SDKs
+parent:
+  uri: android-sdk-reference
+privacy:
+  view: public
 ---
 [block:api-header]
 {

@@ -1,11 +1,12 @@
 ---
-title: "AppsFlyerLibDelegate"
-slug: "ios-sdk-reference-appsflyerlibdelegate"
-category: 5f9705393c689a065c409b23
-parentDoc: 60ca3e14e22f76007884b6fc
-hidden: false
-createdAt: "2021-06-16T18:10:30.920Z"
-updatedAt: "2021-06-28T19:47:31.592Z"
+title: AppsFlyerLibDelegate
+slug: ios-sdk-reference-appsflyerlibdelegate
+category:
+  uri: AppsFlyer SDKs
+parent:
+  uri: ios-sdk-reference
+privacy:
+  view: public
 ---
 [block:api-header]
 {
