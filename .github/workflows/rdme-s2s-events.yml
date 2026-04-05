@@ -20,4 +20,4 @@ jobs:
       - name: Run `openapi` command 🚀
         uses: readmeio/rdme@v10
         with:
-          rdme: openapi upload ./docs/apis/rta/s2s_events_api.yaml --key=${{ secrets.README_API_KEY }} --branch=0.1 --legacy-id=6395db9fa17cb50068ac9e3e --confirm-overwrite
+          rdme: openapi upload ./docs/apis/rta/s2s_events_api.yaml --key=${{ secrets.README_API_KEY }} --legacy-id=6395db9fa17cb50068ac9e3e --confirm-overwrite

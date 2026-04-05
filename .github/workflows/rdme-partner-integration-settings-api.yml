@@ -20,4 +20,4 @@ jobs:
       - name: Run `openapi` command 🚀
         uses: readmeio/rdme@v10
         with:
-          rdme: openapi upload ./docs/apis/partnerIntSet/partner_integration_settings_api.yaml --key=${{ secrets.README_API_KEY }} --branch=0.1 --legacy-id=615eb7b60319170356179796 --confirm-overwrite
+          rdme: openapi upload ./docs/apis/partnerIntSet/partner_integration_settings_api.yaml --key=${{ secrets.README_API_KEY }} --legacy-id=615eb7b60319170356179796 --confirm-overwrite

@@ -20,4 +20,4 @@ jobs:
       - name: Run `openapi` command 🚀
         uses: readmeio/rdme@v10
         with:
-          rdme: openapi upload ./docs/apis/protect360/click_signing_api.yaml --key=${{ secrets.README_API_KEY }} --branch=0.1 --legacy-id=65a5059cbcfe3400421aa9ca --confirm-overwrite
+          rdme: openapi upload ./docs/apis/protect360/click_signing_api.yaml --key=${{ secrets.README_API_KEY }} --legacy-id=65a5059cbcfe3400421aa9ca --confirm-overwrite

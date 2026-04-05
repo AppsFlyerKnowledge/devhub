@@ -20,4 +20,4 @@ jobs:
       - name: Run `docs` command 🚀
         uses: readmeio/rdme@v10
         with:
-          rdme: docs upload ./docs/guides/sdks/ --key=${{ secrets.README_API_KEY }} --branch=0.1
+          rdme: docs upload ./docs/guides/sdks/ --key=${{ secrets.README_API_KEY }}
