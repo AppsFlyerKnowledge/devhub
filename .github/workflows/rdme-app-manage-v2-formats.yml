@@ -20,4 +20,4 @@ jobs:
       - name: Run `docs` command 🚀
         uses: readmeio/rdme@v10
         with:
-          rdme: docs upload ./docs/apis/management/app_management_v2_errors.md --key=${{ secrets.README_API_KEY }}
+          rdme: reference upload ./docs/apis/management/app_management_v2_errors.md --key=${{ secrets.README_API_KEY }}
