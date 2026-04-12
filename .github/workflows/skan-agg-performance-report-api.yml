@@ -20,4 +20,4 @@ jobs:
       - name: Run `openapi` command 🚀
         uses: readmeio/rdme@v10
         with:
-          rdme: openapi upload ./docs/apis/SKAD/skan_agg_performance_report_api.yaml --key=${{ secrets.README_API_KEY }} --legacy-id=64a6a24fe91be80029801f6c --confirm-overwrite
+          rdme: openapi upload ./docs/apis/SKAD/skan_agg_performance_report_api.yaml --key=${{ secrets.README_API_KEY }} --slug=skan-aggregated-performance-report-api.json --confirm-overwrite

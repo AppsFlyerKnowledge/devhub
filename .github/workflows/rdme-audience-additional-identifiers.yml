@@ -20,4 +20,4 @@ jobs:
       - name: Run `openapi` command 🚀
         uses: readmeio/rdme@v10
         with:
-          rdme: openapi upload ./docs/apis/audience/additional_identifiers_api.yaml --key=${{ secrets.README_API_KEY }} --legacy-id=647f2ae1813f141128f5589e --confirm-overwrite
+          rdme: openapi upload ./docs/apis/audience/additional_identifiers_api.yaml --key=${{ secrets.README_API_KEY }} --slug=additional-identifiers-api.json --confirm-overwrite

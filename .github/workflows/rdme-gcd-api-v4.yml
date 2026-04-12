@@ -20,4 +20,4 @@ jobs:
       - name: Run `openapi` command 🚀
         uses: readmeio/rdme@v10
         with:
-          rdme: openapi upload ./docs/apis/gcdapi/gcdapi.yaml --key=${{ secrets.README_API_KEY }} --legacy-id=638628a899eda80f20cabab9 --confirm-overwrite
+          rdme: openapi upload ./docs/apis/gcdapi/gcdapi.yaml --key=${{ secrets.README_API_KEY }} --slug=gcd-api-for-sdk-attribution-testing-1.json --confirm-overwrite

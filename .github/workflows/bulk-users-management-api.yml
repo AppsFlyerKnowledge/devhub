@@ -20,4 +20,4 @@ jobs:
       - name: Run `openapi` command 🚀
         uses: readmeio/rdme@v10
         with:
-          rdme: openapi upload ./docs/apis/management/user_management.yaml --key=${{ secrets.README_API_KEY }} --legacy-id=65b6092bf5a65400575b99ea --confirm-overwrite
+          rdme: openapi upload ./docs/apis/management/user_management.yaml --key=${{ secrets.README_API_KEY }} --slug=user-management.json --confirm-overwrite

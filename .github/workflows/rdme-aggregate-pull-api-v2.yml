@@ -20,4 +20,4 @@ jobs:
       - name: Run `openapi` command 🚀
         uses: readmeio/rdme@v10
         with:
-          rdme: openapi upload ./docs/apis/analytics/aggregate_pull_api_v2.yaml --key=${{ secrets.README_API_KEY }} --legacy-id=636a481d2d5ae60049dee908 --confirm-overwrite
+          rdme: openapi upload ./docs/apis/analytics/aggregate_pull_api_v2.yaml --key=${{ secrets.README_API_KEY }} --slug=aggregate-pull-api-v2-token.json --confirm-overwrite

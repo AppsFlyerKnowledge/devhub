@@ -20,4 +20,4 @@ jobs:
       - name: Run `openapi` command 🚀
         uses: readmeio/rdme@v10
         with:
-          rdme: openapi upload ./docs/apis/mos/pushapi_config_api.yaml --key=${{ secrets.README_API_KEY }} --legacy-id=6238552ac90926011752e49b --confirm-overwrite
+          rdme: openapi upload ./docs/apis/mos/pushapi_config_api.yaml --key=${{ secrets.README_API_KEY }} --slug=push-api-configuration-api.json --confirm-overwrite

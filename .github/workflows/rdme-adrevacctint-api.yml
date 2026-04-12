@@ -20,4 +20,4 @@ jobs:
       - name: Run `openapi` command 🚀
         uses: readmeio/rdme@v10
         with:
-          rdme: openapi upload ./docs/apis/ROI360/adrevacctint.yaml --key=${{ secrets.README_API_KEY }} --legacy-id=637632d64f5e250092a83dee --confirm-overwrite
+          rdme: openapi upload ./docs/apis/ROI360/adrevacctint.yaml --key=${{ secrets.README_API_KEY }} --slug=adrevenue-account-integrations-api.json --confirm-overwrite

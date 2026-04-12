@@ -20,4 +20,4 @@ jobs:
       - name: Run `openapi` command 🚀
         uses: readmeio/rdme@v10
         with:
-          rdme: openapi upload ./docs/apis/rta/engagements_api.yaml --key=${{ secrets.README_API_KEY }} --legacy-id=6203fb9db858c900490628e6 --confirm-overwrite
+          rdme: openapi upload ./docs/apis/rta/engagements_api.yaml --key=${{ secrets.README_API_KEY }} --slug=engagements-api.json --confirm-overwrite

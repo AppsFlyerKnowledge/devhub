@@ -20,4 +20,4 @@ jobs:
       - name: Run `openapi` command 🚀
         uses: readmeio/rdme@v10
         with:
-          rdme: openapi upload ./docs/apis/rta/preload_download_api.yaml --key=${{ secrets.README_API_KEY }} --legacy-id=6297336ccdcdd4008814970f --confirm-overwrite
+          rdme: openapi upload ./docs/apis/rta/preload_download_api.yaml --key=${{ secrets.README_API_KEY }} --slug=preload-measurement-api-1.json --confirm-overwrite

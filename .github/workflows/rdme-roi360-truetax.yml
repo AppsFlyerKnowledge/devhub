@@ -20,4 +20,4 @@ jobs:
       - name: Run `openapi` command 🚀
         uses: readmeio/rdme@v10
         with:
-          rdme: openapi upload ./docs/apis/ROI360/true_revenue_api.yaml --key=${{ secrets.README_API_KEY }} --legacy-id=63eb8607ce3ff30366cc2b8c --confirm-overwrite
+          rdme: openapi upload ./docs/apis/ROI360/true_revenue_api.yaml --key=${{ secrets.README_API_KEY }} --slug=roi360-net-revenue-api-v20.json --confirm-overwrite

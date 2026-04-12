@@ -20,7 +20,7 @@ jobs:
       - name: Run `openapi` command 🚀
         uses: readmeio/rdme@v10
         with:
-          rdme: openapi upload ./docs/apis/OneLink/onelinkapi.yml --key=${{ secrets.README_API_KEY }} --legacy-id=624693c6fa631302dde62cf4 --confirm-overwrite
+          rdme: openapi upload ./docs/apis/OneLink/onelinkapi.yml --key=${{ secrets.README_API_KEY }} --slug=onelink-api-2.json --confirm-overwrite
       
       - name: Run `docs` command 🚀
         uses: readmeio/rdme@v10
