@@ -8,20 +8,18 @@ privacy:
 position: 0
 ---
 
-**At a glance:**
+> 📘 Note
+> 
+> The Roles API is available to advertisers only; partners and agencies cannot access it.
 
-Account admins can efficiently execute various bulk actions through a dedicated API.
+Account admins can efficiently execute various bulk actions through the dedicated API.
 
 - **For roles:** This includes retrieving details about roles and their associated attributes.
 - **For user management:** This includes adding and deleting users, as well as retrieving user permission details. The API supports the main user management features found in the UI and includes the same error verifications.
 
-> Note
-> 
+> 📘 Note
 > 
 > The maximum **daily limit** for **API calls per account is 100**. This includes the “Get roles”, “Add users”, “Get users”, and “Delete users” APIs **combined**.
-> 
-
-
 
 ## Users
 
@@ -33,27 +31,19 @@ Use the Get API to retrieve data on user roles and permissions in bulk.
 
 **Response example:**
 
-“users”: [
-
-{
-
-“username”: “Dan Smith”,
-
-“email”: “dan.smith@mycompany.com”,
-
-“role”: “admin”,
-
-“apps”: “All & future”,
-
-“media_sources”: “All”,
-
-“geos”: “All”,
-
-“last_login”: “Apr 15, 2024”
-
-}
-
+```json
+"users": [
+  {
+    "username": "Dan Smith",
+    "email": "dan.smith@mycompany.com",
+    "role": "admin",
+    "apps": "All & future",
+    "media_sources": "All",
+    "geos": "All",
+    "last_login": "Apr 15, 2024"
+  }
 ]
+```
 
 ### Add users in bulk
 
