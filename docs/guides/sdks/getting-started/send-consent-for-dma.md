@@ -15,7 +15,7 @@ To comply with the legislation, Google requires AppsFlyer customers to include s
 
 > 📘 Note
 > 
-> All EU countries are subject to GDPR and DMA, with the exception of the UK. The UK complies with GDPR but is not subject to the DMA.
+> All EU countries are subject to GDPR and DMA, and countries that are not in the EU such as UK and CH.
 
 See guides for the following platforms:
 <style>
