@@ -67,5 +67,5 @@ See guides for the following platforms:
 </style>
 
 <div class="button-container">
-  <a class="button android" href="https://dev.appsflyer.com/hc/docs/android-send-consent-for-dma-compliance">Android SDK  </a>
+  <a class="button android" href="https://dev.appsflyer.com/hc/docs/android-send-consent-for-dma-compliance">Android SDK&nbsp;&nbsp;</a>
   <a class="button ios" href="https://dev.appsflyer.com/hc/docs/ios-send-consent-for-dma-compliance">iOS SDK</a></div>
