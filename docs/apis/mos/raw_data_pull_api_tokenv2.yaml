@@ -448,7 +448,7 @@ paths:
         - $ref: '#/components/parameters/MediaSource'
         - $ref: '#/components/parameters/Category'
         - $ref: '#/components/parameters/Currency'
-        - $ref: '#/components/parameters/TimeZone'
+      
         - $ref: '#/components/parameters/Geo'
         - $ref: '#/components/parameters/MaximumRows'
         - $ref: '#/components/parameters/FromInstallTime'
@@ -490,7 +490,7 @@ paths:
         - $ref: '#/components/parameters/MediaSource'
         - $ref: '#/components/parameters/Category'
         - $ref: '#/components/parameters/Currency'
-        - $ref: '#/components/parameters/TimeZone'
+
         - $ref: '#/components/parameters/Geo'
         - $ref: '#/components/parameters/MaximumRows'
         - $ref: '#/components/parameters/FromInstallTime'
@@ -532,7 +532,7 @@ paths:
         - $ref: '#/components/parameters/MediaSource'
         - $ref: '#/components/parameters/Category'
         - $ref: '#/components/parameters/Currency'
-        - $ref: '#/components/parameters/TimeZone'
+
         - $ref: '#/components/parameters/Geo'
         - $ref: '#/components/parameters/MaximumRows'
         - in: query

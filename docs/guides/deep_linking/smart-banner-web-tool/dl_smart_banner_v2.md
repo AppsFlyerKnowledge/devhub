@@ -10,25 +10,40 @@ privacy:
 position: 1
 ---
 
-## Overview
+## **Overview**
 
-AppsFlyer provides a Smart Banner SDK that advertisers integrate into their websites. The purpose of the SDK is to pull all the required data to dynamically display the Smart Banners. The Smart Banners SDK also automatically builds the proper attribution links, so you don't need to build them manually.
+AppsFlyer provides a Smart Banner SDK that advertisers integrate into their websites. The purpose of the SDK is to retrieve all required data to dynamically display Smart Banners. The Smart Banners SDK also automatically builds the proper attribution links, so you don't need to build them manually.
 
-Therefore, **the Smart Banner SDK should be accessible from all pages displaying your mobile banners.**  
-The Smart Banner SDK authenticates using the unique **Web key**, which you can get from the [Website workplace](https://support.appsflyer.com/hc/en-us/articles/360000764837#1-website-setup).
+Therefore, **the Smart Banner SDK should be accessible from all pages displaying your mobile banners.**
 
-## Installation
+The Smart Banner SDK authenticates using the unique **Web key**, which you can get from the [Website workplace](https://support.appsflyer.com/hc/en-us/articles/360000764837#1-website-setup).
 
-### Smart banners only
+To install Smart Banners or Smart Banners and PBA on your website, perform the following: 
 
-You can either copy the smart banner script from the AppsFlyer dashboard or from below.
+1. Select a code snippet
+2. Embed the code snippet in your website
 
-1. Copy the script code snippet in **one** of the following ways:
+## Select a code snippet
 
-   - Copy the script from the [Smart Banner’s Website workplace](https://support.appsflyer.com/hc/en-us/articles/360000764837-Smart-Banners-mobile-web-to-app-#1-website-workplace-setup) in the AppsFlyer dashboard. Your web key is already included in the script.
-   - Copy the script from the the code snippet below and replace YOUR_WEB_KEY placeholder in the script with your **Web key**. The web key is created when you create a new [Website workplace](https://support.appsflyer.com/hc/en-us/articles/360000764837-Smart-Banners-mobile-web-to-app-#1-website-workplace-setup).
+Select the snippet that matches your use case and security requirements.
 
-```js
+- **Smart Banners only**: Use this if you want to display Smart Banners on your website without People-Based Attribution.
+- **Smart Banners with People-Based Attribution (PBA)**: Use this to display Smart Banners and measure user journeys across platforms.
+
+### Smart Banners only
+
+You can select between two Smart Banners snippets:
+
+- **Standard**: The standard integration.
+- **Advanced SDK Verification**: An enhanced integration that adds supply-chain protection for the Web SDK. Use this to add an extra layer of security against CDN compromise, DNS hijacking, and man-in-the-middle attacks.
+
+> **Important!**
+If you are transitioning from the Standard Web SDK to Advanced SDK Verification, replace your existing snippet with the new one. Do not add the new snippet on top of the existing one.
+> 
+
+#### **Standard code snippet**
+
+```jsx
 <script>
 !function(t,e,n,s,a,c,i,o,p){t.AppsFlyerSdkObject=a,t.AF=t.AF||function(){
 (t.AF.q=t.AF.q||[]).push([Date.now()].concat(Array.prototype.slice.call(arguments)))},
@@ -40,20 +55,50 @@ AF('banners', 'showBanner');
 </script>
 ```
 
-2. Paste the code snippet in the `head` tag on your website. Make sure to paste it near the top of the `head` tag.
+#### **Advanced SDK Verification**
 
-> 📘 Note
+```jsx
+<script>
+  // Queue — buffers AF() calls until the SDK is ready
+  window.AppsFlyerSdkObject = "AF";
+  window.AF = window.AF || function() {
+    (window.AF.q = window.AF.q || []).push([Date.now()].concat(Array.prototype.slice.call(arguments)));
+  };
+  window.AF.id = window.AF.id || { banners: { key: "YOUR_BANNER_KEY" } };
+  window.AF.plugins = {};
+
+  // Manifest loader config
+  window.AF_LOADER_CONFIG = {
+    baseUrl: "https://websdk.appsflyersdk.com",
+    plugins: ["banners"]
+  };
+
+  // Inject manifest loader
+  var loaderScript = document.createElement("script");
+  loaderScript.src = "https://websdk.appsflyersdk.com/manifestLoader.v1.js";
+  loaderScript.integrity = "sha384-Uncl2YwvjFpFz0PwEfl3bL/0JsOQcDFEpwXHzcN0MBavn9vvFEx5pZxADTq8h+CV";
+  loaderScript.crossOrigin = "anonymous";
+  loaderScript.async = true;
+  document.head.appendChild(loaderScript);
+  // Smart Banners are by default set to the max z-index value, so they won't be hidden by the website elements. This can be changed if you want some website components to be on top of the banner.
+  AF('banners', 'showBanner');
+</script>
+```
+
+#### Smart Banners and People-Based Attribution (PBA)
+
+You can select between two Smart Banners and PBA snippets
+
+- **Standard**: The standard integration.
+- **Advanced SDK Verification**: An enhanced integration that adds supply-chain protection for the Web SDK. Use this to add an extra layer of security against CDN compromise, DNS hijacking, and man-in-the-middle attacks.
+
+> **Important!**
+If you are transitioning from the Standard Web SDK to Advanced SDK Verification, replace your existing snippet with the new one. Do not add the new snippet on top of the existing one.
 > 
-> - The `showBanner` method at the end of installation code can take more parameters. [Learn more](#showbanner).
-> - To overcome iOS 26/Safari storage limitations, declare the storage-mode flag as a global variable before SDK initialization to control how the web SDK stores data for Smart Banners. See [Set storage mode](#set-storage-mode-optional) below.
 
-### Smart banners and People-Based Attribution
+#### Standard code snippet
 
-1. Replace the _YOUR_WEB_KEY_ placeholder in the script with your **Web key**. The web key is created when you create a new Website workplace.
-2. Replace the _YOUR_PBA_KEY_ placeholder in the script with your **web dev key**. The web dev key is created when you create a brand bundle. 
-3. Paste this code snippet in the head tag on your website. Make sure to paste it near the top of the head tag.
-
-```js
+```jsx
 <script>
 !function(t,e,n,s,a,c,i,o,p){t.AppsFlyerSdkObject=a,t.AF=t.AF||function(){
 (t.AF.q=t.AF.q||[]).push([Date.now()].concat(Array.prototype.slice.call(arguments)))},
@@ -62,10 +107,52 @@ o.src="https://websdk.appsflyersdk.com?"+(c.length>0?"st="+c.split(",").sort().j
 p.parentNode.insertBefore(o,p)}(window,document,"script",0,"AF", "pba,banners",{pba: {webAppId: "YOUR_PBA_KEY"}, banners: {key: "YOUR_WEB_KEY"}});
 // Smart Banners are by default set to the max z-index value, so they won't be hidden by the website elements. This can be changed if you want some website components to be on top of the banner.
 AF('banners', 'showBanner', { bannerZIndex: 1000, additionalParams: { p1: "v1", p2: "v2"}});
+```
+
+#### **Advanced SDK Verification**
+
+```jsx
+<script>
+  // Queue — buffers AF() calls until the SDK is ready
+  window.AppsFlyerSdkObject = "AF";
+  window.AF = window.AF || function() {
+    (window.AF.q = window.AF.q || []).push([Date.now()].concat(Array.prototype.slice.call(arguments)));
+  };
+  window.AF.id = window.AF.id || { pba: { webAppId: "WEB_DEV_KEY" }, banners: { key: "YOUR_BANNER_KEY" } };
+  window.AF.plugins = {};
+
+  // Manifest loader config
+  window.AF_LOADER_CONFIG = {
+    baseUrl: "https://websdk.appsflyersdk.com",
+    plugins: ["banners", "pba"]
+  };
+
+  // Inject manifest loader
+  var loaderScript = document.createElement("script");
+  loaderScript.src = "https://websdk.appsflyersdk.com/manifestLoader.v1.js";
+  loaderScript.integrity = "sha384-Uncl2YwvjFpFz0PwEfl3bL/0JsOQcDFEpwXHzcN0MBavn9vvFEx5pZxADTq8h+CV";
+  loaderScript.crossOrigin = "anonymous";
+  loaderScript.async = true;
+  document.head.appendChild(loaderScript);
+  // Smart Banners are by default set to the max z-index value, so they won't be hidden by the website elements. This can be changed if you want some website components to be on top of the banner.
+  AF('banners', 'showBanner', { bannerZIndex: 1000, additionalParams: { p1: "v1", p2: "v2"}});
 </script>
 ```
 
-#### Set Storage Mode (Optional)
+## Embed the code snippet in your website
+
+After selecting a code snippet, perform the following:
+
+1. Replace the *YOUR_WEB_KEY* placeholder in the script with your **Web key**. The web key is created when you create a new Website workplace.
+2. If you selected a Smart Banners and PBA snippet, replace the *YOUR_PBA_KEY* placeholder in the script with your **web dev key**. The web dev key is created when you create a brand bundle.
+3. Paste this code snippet in the `head` tag on your website. Make sure to paste it near the top of the `head` tag.
+
+> 📘 Note
+> 
+> - The `showBanner` method at the end of installation code can take more parameters. [Learn more](https://dev.appsflyer.com/hc/docs/dl_smart_banner_v2#showbanner).
+> - To overcome iOS 26/Safari storage limitations, declare the storage-mode flag as a global variable before SDK initialization to control how the web SDK stores data for Smart Banners. See Set storage mode below.
+
+### Set Storage Mode (Optional)
 
 Smart Banners use browser storage to handle banner state and functionality. With the release of iOS 26, Safari introduced changes that affect how browser storage behaves. To help websites maintain consistent Smart Banner behavior in these environments, you can configure the storage method with the `storage-mode` flag.
 

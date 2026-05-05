@@ -9,8 +9,14 @@ privacy:
   view: public
 position: 14
 ---
+## Version 6.18.0 
 
-## Version 6.17.6 - 11/03/2026
+#### Technical Update
+
+- Fix potential ANRs in SDK startup 
+- Remove Google Privacy Sandbox code from the SDK
+
+## Version 6.17.6 
 
 #### Technical Update
 

@@ -9,7 +9,16 @@ privacy:
   view: public
 position: 1
 ---
+## Version 6.18.0
 
+#### New Features
+
+- Added support for fetching AppTransaction - a representation of an app's download, cryptographically signed by the app store.
+
+#### Bug Fixes
+
+- Fixed compile-time warnings in XCode that appeared when using the Static Framework.
+  
 ## Version 6.17.9
 
 #### Bug Fixes
