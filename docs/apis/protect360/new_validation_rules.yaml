@@ -1,0 +1,562 @@
+openapi: 3.0.3
+info:
+  title: Validation Rules External API
+  version: 1.0.0
+  description: |
+    Server-to-Server API for managing validation rules: create, list, retrieve, update, delete,
+    and patch dimension values.
+
+    Authentication is via bearer token sent to the API gateway, which extracts the account
+    identity and forwards the request to the service.
+
+servers:
+  - url: https://hq1.appsflyer.com/api/vr2api/public/v1
+    description: Validation Rules API v1
+
+security:
+  - bearerAuth: []
+
+tags:
+  - name: Rules
+  - name: Dimension Values
+
+paths:
+  /rules:
+    get:
+      tags: [Rules]
+      summary: List rules
+      operationId: listRules
+      description: |
+        Returns all active rules (enabled or disabled) for the account.
+        Deleted rules are excluded. Returns metadata fields only (no conditions/population data).
+      responses:
+        '200':
+          description: Array of rule metadata
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/RuleMetadata'
+                required: [data]
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '500':
+          $ref: '#/components/responses/InternalError'
+
+    post:
+      tags: [Rules]
+      summary: Create rule
+      operationId: createRule
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RuleCreateRequest'
+      responses:
+        '201':
+          description: Rule created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse_RuleMetadata'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '500':
+          $ref: '#/components/responses/InternalError'
+
+  /rules/{rule_id}:
+    get:
+      tags: [Rules]
+      summary: Get rule
+      operationId: getRule
+      description: |
+        Returns the full rule including conditions, population, and all metadata.
+      parameters:
+        - $ref: '#/components/parameters/RuleIdPath'
+      responses:
+        '200':
+          description: Full rule
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse_RuleFull'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalError'
+
+    put:
+      tags: [Rules]
+      summary: Update full rule
+      operationId: updateRule
+      description: |
+        Full replacement update. Version is incremented automatically.
+        The rule becomes API-managed after update.
+      parameters:
+        - $ref: '#/components/parameters/RuleIdPath'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RuleCreateRequest'
+      responses:
+        '200':
+          description: Updated rule metadata
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse_RuleMetadata'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '500':
+          $ref: '#/components/responses/InternalError'
+
+    delete:
+      tags: [Rules]
+      summary: Delete rule
+      operationId: deleteRule
+      description: |
+        Soft-deletes the rule by creating a new version with status "deleted".
+      parameters:
+        - $ref: '#/components/parameters/RuleIdPath'
+      responses:
+        '204':
+          description: No Content
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalError'
+
+  /rules/{rule_id}/status:
+    put:
+      tags: [Rules]
+      summary: Update rule status
+      operationId: updateRuleStatus
+      description: |
+        Enable or disable a rule. If the status already matches, returns the
+        current rule metadata without creating a new version.
+      parameters:
+        - $ref: '#/components/parameters/RuleIdPath'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: string
+                  enum: [enabled, disabled]
+              required: [status]
+      responses:
+        '200':
+          description: Rule metadata after status update
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse_RuleMetadata'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '500':
+          $ref: '#/components/responses/InternalError'
+
+  /rules/{rule_id}/values:
+    patch:
+      tags: [Dimension Values]
+      summary: Patch dimension values
+      operationId: patchDimensionValues
+      description: |
+        Add, remove, or replace values for a specific dimension in a rule section.
+        The dimension must use a list-type operator (s.in, s.not_in).
+        Creates a new rule version.
+      parameters:
+        - $ref: '#/components/parameters/RuleIdPath'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchValuesRequest'
+      responses:
+        '200':
+          description: Patch result with rule metadata
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/PatchValuesResponse'
+                required: [data]
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '500':
+          $ref: '#/components/responses/InternalError'
+
+components:
+  parameters:
+    RuleIdPath:
+      name: rule_id
+      in: path
+      required: true
+      description: The UUID of the rule
+      schema:
+        type: string
+        format: uuid
+
+  responses:
+    BadRequest:
+      description: Bad request (validation error)
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error:
+              code: INVALID_REQUEST
+              message: Invalid request
+              detail: "API currently supports event types: install. Got: re-engagement"
+
+    Forbidden:
+      description: Not authorized (invalid token, wrong account, or feature flag disabled)
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error:
+              code: NOT_AUTHORIZED
+              message: Not authorized
+
+    NotFound:
+      description: Resource not found (rule deleted or does not exist)
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error:
+              code: NOT_FOUND
+              message: Resource not found
+
+    Conflict:
+      description: Conflict (rule was modified concurrently, retry the request)
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error:
+              code: CONFLICT
+              message: Resource was modified concurrently
+
+    InternalError:
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error:
+              code: INTERNAL_ERROR
+              message: An error occurred
+
+  schemas:
+    Error:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+              enum: [NOT_AUTHORIZED, INVALID_REQUEST, NOT_FOUND, CONFLICT, LIMIT_EXCEEDED, INTERNAL_ERROR]
+            message:
+              type: string
+            detail:
+              type: string
+              description: Optional detail for validation, not-found, limit, and conflict errors
+          required: [code, message]
+      required: [error]
+
+    Condition:
+      type: object
+      properties:
+        attr:
+          type: string
+          description: |
+            Dimension attribute name. Available dimensions depend on the section.
+
+            Population dimensions (usable in both rule_conditions and population):
+              engagement.site_id, engagement.media_source, engagement.agency,
+              engagement.campaign, engagement.campaign_id,
+              engagement.ad_set_id, engagement.ad_id
+
+            Condition-only dimensions (usable in rule_conditions only):
+              geo, platform
+        oper:
+          type: string
+          enum: [s.in, s.not_in]
+          description: Condition operator
+        values:
+          type: array
+          items:
+            type: string
+            minLength: 1
+            maxLength: 150
+          minItems: 1
+      required: [attr, oper, values]
+
+    ConditionGroup:
+      type: object
+      properties:
+        cond_oper:
+          type: string
+          enum: [and]
+          description: Only "and" is supported
+        conds:
+          type: array
+          items:
+            $ref: '#/components/schemas/Condition'
+          minItems: 1
+      required: [cond_oper, conds]
+
+    RuleConditions:
+      type: object
+      properties:
+        cond_group_oper:
+          type: string
+          enum: [and]
+          description: Only "and" is supported
+        cond_groups:
+          type: array
+          items:
+            $ref: '#/components/schemas/ConditionGroup'
+          minItems: 1
+      required: [cond_group_oper, cond_groups]
+
+    Population:
+      description: |
+        Population targeting section. Either an empty object `{}` (only valid when
+        source_type is `all`) or a fully populated condition group.
+      oneOf:
+        - type: object
+          additionalProperties: false
+        - type: object
+          properties:
+            cond_oper:
+              type: string
+              enum: [and]
+              description: Population only supports "and"
+            conds:
+              type: array
+              items:
+                $ref: '#/components/schemas/Condition'
+              minItems: 1
+          required: [cond_oper, conds]
+
+    RuleCreateRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 256
+        status:
+          type: string
+          enum: [enabled, disabled]
+        description:
+          type: string
+          maxLength: 1000
+        event_type:
+          type: string
+          enum: [install]
+        rule_type:
+          type: string
+          enum: [blocking, allow-only]
+          description: |
+            Determines how the rule conditions are evaluated:
+            - `blocking`: block traffic that **matches** the conditions (Match Conditions).
+            - `allow-only`: block traffic that does **not match** the conditions (Don't Match Conditions).
+        action:
+          type: string
+          enum: [block-event, block-candidate]
+        app_ids:
+          type: array
+          items:
+            type: string
+          minItems: 1
+          maxItems: 2000
+          description: Must be owned by the authenticated account
+        source_type:
+          type: string
+          enum: [all, all-non-organic, non-organic]
+        rule_conditions:
+          $ref: '#/components/schemas/RuleConditions'
+        population:
+          $ref: '#/components/schemas/Population'
+      required:
+        - name
+        - status
+        - description
+        - event_type
+        - rule_type
+        - action
+        - app_ids
+        - source_type
+        - rule_conditions
+        - population
+
+    RuleMetadata:
+      type: object
+      description: Lightweight rule representation returned by list, create, update, and delete
+      properties:
+        rule_id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        status:
+          type: string
+          enum: [enabled, disabled, deleted]
+        event_type:
+          type: string
+          enum: [install]
+        rule_type:
+          type: string
+          enum: [blocking, allow-only]
+          description: |
+            Determines how the rule conditions are evaluated:
+            - `blocking`: block traffic that **matches** the conditions (Match Conditions).
+            - `allow-only`: block traffic that does **not match** the conditions (Don't Match Conditions).
+        action:
+          type: string
+          enum: [block-event, block-candidate]
+        app_ids:
+          type: array
+          items:
+            type: string
+        source_type:
+          type: string
+          enum: [all, all-non-organic, non-organic]
+        description:
+          type: string
+        last_update_time_millis:
+          type: integer
+          description: Epoch milliseconds of last update
+        is_api_rule:
+          type: boolean
+          description: True when the rule was created or last updated via the API.
+          readOnly: true
+
+    RuleFull:
+      description: Full rule representation returned by get-rule (includes conditions and population)
+      allOf:
+        - $ref: '#/components/schemas/RuleMetadata'
+        - type: object
+          properties:
+            rule_conditions:
+              $ref: '#/components/schemas/RuleConditions'
+            population:
+              $ref: '#/components/schemas/Population'
+
+    ApiResponse_RuleMetadata:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/RuleMetadata'
+      required: [data]
+
+    ApiResponse_RuleFull:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/RuleFull'
+      required: [data]
+
+    PatchValuesRequest:
+      type: object
+      properties:
+        section:
+          type: string
+          enum: [rule_conditions, population]
+        attr:
+          type: string
+          description: Dimension attribute name to modify
+        action:
+          type: string
+          enum: [add, remove, replace]
+        values:
+          type: array
+          items:
+            type: string
+            minLength: 1
+            maxLength: 150
+          minItems: 1
+      required: [section, attr, action, values]
+
+    PatchValuesResponse:
+      description: Patch result with nested rule metadata and patch statistics
+      type: object
+      properties:
+        patch:
+          type: object
+          properties:
+            values_added:
+              type: integer
+            values_removed:
+              type: integer
+            total_values:
+              type: integer
+            attr:
+              type: string
+            action:
+              type: string
+              enum: [add, remove, replace]
+        rule:
+          $ref: '#/components/schemas/RuleMetadata'
+      required: [patch, rule]
+
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: |
+        Bearer token for authentication. The API gateway validates the token and extracts
+        the account identity. See https://support.appsflyer.com/hc/en-us/articles/360004562377
