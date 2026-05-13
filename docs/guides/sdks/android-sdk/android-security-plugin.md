@@ -22,7 +22,7 @@ Ensure your project meets the following minimum versions for compatibility with 
 
 
 - Security Module v1.x.x (latest `1.3.4`) is compatible with [AppsFlyer Android SDK versions](https://support.appsflyer.com/hc/en-us/articles/115001256006-AppsFlyer-Android-SDK-release-notes) `6.15.2 – 6.17.3`.
-- Security Module v2.x.x (currently `2.0.0`) is compatible only with AppsFlyer Android SDK version `6.17.4` and above.
+- Security Module v2.x.x (currently `2.2.1`) is compatible only with AppsFlyer Android SDK version `6.17.4` and above.
 
 Please ensure that the versions you integrate follow the compatibility ranges above to avoid build or runtime issues.
 If you plan to upgrade the SDK to `6.17.4+`, make sure to update the Security Module to v2.0.0 and above as well.
@@ -31,6 +31,20 @@ Conversely, if you are using SDK versions below 6.17.4, please continue using Se
 
 ## Release Notes
 All notable changes to the AF Security SDK will be documented in this file.
+
+### [2.2.1] - 2026-04-06
+
+#### Added
+- iOS simulator support for easier integration testing during development
+
+#### Improved
+- Security SDK Stability
+
+### [2.2.0] - 2026-02-12
+
+#### Improved
+- Strengthened iOS framework packaging with advanced LLVM code transformation
+- Optimized security signing function for improved cross-platform verification
 
 ### [2.1.0] - 2025-12-29
 
