@@ -9,6 +9,17 @@ info:
     Authentication is via bearer token sent to the API gateway, which extracts the account
     identity and forwards the request to the service.
 
+    **Rules**
+    - [List rules](https://dev.appsflyer.com/hc/reference/listrules)
+    - [Create rule](https://dev.appsflyer.com/hc/reference/createrule)
+    - [Get rule](https://dev.appsflyer.com/hc/reference/getrule)
+    - [Update full rule](https://dev.appsflyer.com/hc/reference/updaterule)
+    - [Delete rule](https://dev.appsflyer.com/hc/reference/deleterule)
+    - [Update rule status](https://dev.appsflyer.com/hc/reference/updaterulestatus)
+
+    **Dimension Values**
+    - [Patch dimension values](https://dev.appsflyer.com/hc/reference/patchdimensionvalues)
+
 servers:
   - url: https://hq1.appsflyer.com/api/vr2api/public/v1
     description: Validation Rules API v1
@@ -29,6 +40,17 @@ paths:
       description: |
         Returns all active rules (enabled or disabled) for the account.
         Deleted rules are excluded. Returns metadata fields only (no conditions/population data).
+
+        **Rules**
+        - [List rules](https://dev.appsflyer.com/hc/reference/listrules)
+        - [Create rule](https://dev.appsflyer.com/hc/reference/createrule)
+        - [Get rule](https://dev.appsflyer.com/hc/reference/getrule)
+        - [Update full rule](https://dev.appsflyer.com/hc/reference/updaterule)
+        - [Delete rule](https://dev.appsflyer.com/hc/reference/deleterule)
+        - [Update rule status](https://dev.appsflyer.com/hc/reference/updaterulestatus)
+
+        **Dimension Values**
+        - [Patch dimension values](https://dev.appsflyer.com/hc/reference/patchdimensionvalues)
       responses:
         '200':
           description: Array of rule metadata
@@ -51,6 +73,17 @@ paths:
       tags: [Rules]
       summary: Create rule
       operationId: createRule
+      description: |
+        **Rules**
+        - [List rules](https://dev.appsflyer.com/hc/reference/listrules)
+        - [Create rule](https://dev.appsflyer.com/hc/reference/createrule)
+        - [Get rule](https://dev.appsflyer.com/hc/reference/getrule)
+        - [Update full rule](https://dev.appsflyer.com/hc/reference/updaterule)
+        - [Delete rule](https://dev.appsflyer.com/hc/reference/deleterule)
+        - [Update rule status](https://dev.appsflyer.com/hc/reference/updaterulestatus)
+
+        **Dimension Values**
+        - [Patch dimension values](https://dev.appsflyer.com/hc/reference/patchdimensionvalues)
       requestBody:
         required: true
         content:
@@ -80,6 +113,17 @@ paths:
       operationId: getRule
       description: |
         Returns the full rule including conditions, population, and all metadata.
+
+        **Rules**
+        - [List rules](https://dev.appsflyer.com/hc/reference/listrules)
+        - [Create rule](https://dev.appsflyer.com/hc/reference/createrule)
+        - [Get rule](https://dev.appsflyer.com/hc/reference/getrule)
+        - [Update full rule](https://dev.appsflyer.com/hc/reference/updaterule)
+        - [Delete rule](https://dev.appsflyer.com/hc/reference/deleterule)
+        - [Update rule status](https://dev.appsflyer.com/hc/reference/updaterulestatus)
+
+        **Dimension Values**
+        - [Patch dimension values](https://dev.appsflyer.com/hc/reference/patchdimensionvalues)
       parameters:
         - $ref: '#/components/parameters/RuleIdPath'
       responses:
@@ -105,6 +149,17 @@ paths:
       description: |
         Full replacement update. Version is incremented automatically.
         The rule becomes API-managed after update.
+
+        **Rules**
+        - [List rules](https://dev.appsflyer.com/hc/reference/listrules)
+        - [Create rule](https://dev.appsflyer.com/hc/reference/createrule)
+        - [Get rule](https://dev.appsflyer.com/hc/reference/getrule)
+        - [Update full rule](https://dev.appsflyer.com/hc/reference/updaterule)
+        - [Delete rule](https://dev.appsflyer.com/hc/reference/deleterule)
+        - [Update rule status](https://dev.appsflyer.com/hc/reference/updaterulestatus)
+
+        **Dimension Values**
+        - [Patch dimension values](https://dev.appsflyer.com/hc/reference/patchdimensionvalues)
       parameters:
         - $ref: '#/components/parameters/RuleIdPath'
       requestBody:
@@ -137,6 +192,17 @@ paths:
       operationId: deleteRule
       description: |
         Soft-deletes the rule by creating a new version with status "deleted".
+
+        **Rules**
+        - [List rules](https://dev.appsflyer.com/hc/reference/listrules)
+        - [Create rule](https://dev.appsflyer.com/hc/reference/createrule)
+        - [Get rule](https://dev.appsflyer.com/hc/reference/getrule)
+        - [Update full rule](https://dev.appsflyer.com/hc/reference/updaterule)
+        - [Delete rule](https://dev.appsflyer.com/hc/reference/deleterule)
+        - [Update rule status](https://dev.appsflyer.com/hc/reference/updaterulestatus)
+
+        **Dimension Values**
+        - [Patch dimension values](https://dev.appsflyer.com/hc/reference/patchdimensionvalues)
       parameters:
         - $ref: '#/components/parameters/RuleIdPath'
       responses:
@@ -159,6 +225,17 @@ paths:
       description: |
         Enable or disable a rule. If the status already matches, returns the
         current rule metadata without creating a new version.
+
+        **Rules**
+        - [List rules](https://dev.appsflyer.com/hc/reference/listrules)
+        - [Create rule](https://dev.appsflyer.com/hc/reference/createrule)
+        - [Get rule](https://dev.appsflyer.com/hc/reference/getrule)
+        - [Update full rule](https://dev.appsflyer.com/hc/reference/updaterule)
+        - [Delete rule](https://dev.appsflyer.com/hc/reference/deleterule)
+        - [Update rule status](https://dev.appsflyer.com/hc/reference/updaterulestatus)
+
+        **Dimension Values**
+        - [Patch dimension values](https://dev.appsflyer.com/hc/reference/patchdimensionvalues)
       parameters:
         - $ref: '#/components/parameters/RuleIdPath'
       requestBody:
@@ -199,6 +276,17 @@ paths:
         Add, remove, or replace values for a specific dimension in a rule section.
         The dimension must use a list-type operator (s.in, s.not_in).
         Creates a new rule version.
+
+        **Rules**
+        - [List rules](https://dev.appsflyer.com/hc/reference/listrules)
+        - [Create rule](https://dev.appsflyer.com/hc/reference/createrule)
+        - [Get rule](https://dev.appsflyer.com/hc/reference/getrule)
+        - [Update full rule](https://dev.appsflyer.com/hc/reference/updaterule)
+        - [Delete rule](https://dev.appsflyer.com/hc/reference/deleterule)
+        - [Update rule status](https://dev.appsflyer.com/hc/reference/updaterulestatus)
+
+        **Dimension Values**
+        - [Patch dimension values](https://dev.appsflyer.com/hc/reference/patchdimensionvalues)
       parameters:
         - $ref: '#/components/parameters/RuleIdPath'
       requestBody:
