@@ -17,7 +17,6 @@ Extended deferred deep linking allows deep linking for new users in certain scen
   - Time between click and install exceeds the UDL lookback window (15 minutes).
 - When UDL returns `FOUND` but the deep linking data is missing parameters, which are not `deep_link_value` and `deep_link_sub1-10`.  
   Main examples for such scenarios:
-  - Clicking a link in a Self Reporting Network (SRN), like Meta ads or Twitter.
   - Clicking a link that doesn't contain `deep_link_value` or `deep_link_sub1-10` used for deep-linking, for example, old links created before `deep_link_value` existed that are still in use.
   - Time between click and install exceeds the UDL lookback window (15 minutes).
 
