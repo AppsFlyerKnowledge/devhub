@@ -41,7 +41,7 @@ paths:
             description: |
               The app identifier used in the AppsFlyer dashboard. 
               Insert it excatly as it appears on the dashboard.
-              **iOS apps**: Ensure to prefix with id, for example id123456789. If you don’t, the request returns a 200 OK status but doesn’t record the event.
+              **iOS apps**: Ensure to prefix with id, for example id123456789. If you don't, the request returns a 200 OK status but doesn't record the event.
               **Android apps**: Use the app package name as it appears in the Google Play Store. For example: com.example.myapp.
               **Windows**: Get the app ID from the *Microsoft App Store*.
             example: 
@@ -50,11 +50,11 @@ paths:
       requestBody:
         description: |
           **What if I can't send a device identifier?**
-          You may be unable to send the device identifier with the S2S event. In such cases, AppsFlyer will attempt to enrich the event postback with the device ID from the user's install (**Note**: Identifier enrichment doesn’t apply for IDFV). 
+          You may be unable to send the device identifier with the S2S event. In such cases, AppsFlyer will attempt to enrich the event postback with the device ID from the user's install (**Note**: Identifier enrichment doesn't apply for IDFV). 
           However, when the SDK sends install events without device identifiers, for example, when ATT (App Tracking Transparency) has not been implemented, the postback will not include the device ID.
           Not sending an advertising ID/device identifier can result in: 
           - **Postback issues**: The media source will receive the postback but without a device identifier. As a result the media source can't associate the postback with a specific user. 
-          - **Audiences segmentation** and rule failure. Audiences rulesets require [identifiers](https://support.appsflyer.com/hc/en-us/articles/115002689186#useridentifier-advanced-setting). It’s always best practice to send a device ID or customer user ID according to the ID type your ruleset uses, for every S2S event.
+          - **Audiences segmentation** and rule failure. Audiences rulesets require [identifiers](https://support.appsflyer.com/hc/en-us/articles/115002689186#useridentifier-advanced-setting). It's always best practice to send a device ID or customer user ID according to the ID type your ruleset uses, for every S2S event.
           - **Incrementaliy**: In order to be measured in Incrementality, S2S events must include the advertising ID in their payload (IDFA for iOS, GAID for Android). 
           
         required: true
@@ -114,7 +114,7 @@ paths:
           description: |
             |Message|How to handle|
             |--- |--- |--- |
-            |Forbidden|“Zero Package” does not accept attribution events|
+            |Forbidden|"Zero Package" does not accept attribution events|
           content:
             application/json:
               schema:
@@ -177,6 +177,39 @@ components:
           example: customer_user_id 
           description: |
             [Customer user ID](https://support.appsflyer.com/hc/en-us/articles/207032016), a unique user identifier set by the app owner.
+        email_hashed:
+          type: string
+          description: |
+            The user's email address, hashed using SHA-256.
+            Before hashing: trim leading and trailing spaces, and convert all characters to lowercase.
+          example: "62a14e44f765419d10fea99367361a727c12365e2520f32218d505ed9aa0f62f"
+        phone_number_hashed:
+          type: string
+          description: |
+            The user's phone number, hashed using SHA-256.
+            Before hashing: remove all symbols, letters, and leading zeros. The phone number must include the country code (for example, the US number (650)555-1212 becomes 16505551212).
+          example: "e323ec626319ca94ee8bff2e4c87cf613be6ea19919ed1364124e16807ab3176"
+        phone_number_e164_hashed:
+          type: string
+          description: |
+            The user's phone number in [E.164 format](https://en.wikipedia.org/wiki/E.164), hashed using SHA-256.
+            Before hashing: normalize to E.164 format (for example, +12133734253). Include the country code prefixed with +, with no parentheses, leading zeros, spaces, letters, or symbols other than the leading +.
+            We recommend using [libphonenumber-js](https://github.com/catamphetamine/libphonenumber-js) for E.164 parsing.
+          example: "9f7ec22d72092cd3c0b58726ed9c2d91b92e51a3f29837508fb2948bb22dd2fd"
+        first_name_hashed:
+          type: string
+          description: |
+            The user's first name, hashed using SHA-256.
+            Before hashing: convert to lowercase.
+        last_name_hashed:
+          type: string
+          description: |
+            The user's last name, hashed using SHA-256.
+            Before hashing: convert to lowercase.
+        fb_login_id:
+          type: string
+          description: The user's Facebook Login ID. Send as a numeric string.
+          example: "10293847561029384"
         ip:
           type: string
           description: |
@@ -419,12 +452,12 @@ components:
 
             **Note:** 
               To find out the required partner IDs:
-              1. Run the [Get active integrations API](https://dev.appsflyer.com/hc/reference/get_v1-integrations) for a list of all active integrations
-              2. Use the `media_source_name` values from the [API response](https://dev.appsflyer.com/hc/reference/get_v1-integrations) as input values to the method `partners` array. 
+              1. Run the [Get active integrations API](https://dev.appsflyer.com/hc/reference/get_v1-integrations) for a list of all active integrations
+              2. Use the `media_source_name` values from the [API response](https://dev.appsflyer.com/hc/reference/get_v1-integrations) as input values to the method `partners` array. 
 
               **Exceptions**:
-              - For Apple Search Ads use "`Apple Search Ads`" (and not "`iossearchads_int`").
-              - For Twitter, use "`twitter`" (and not "`twitter_int`")
+              - For Apple Search Ads use "`Apple Search Ads`" (and not "`iossearchads_int`").
+              - For Twitter, use "`twitter`" (and not "`twitter_int`")
           type: array
           items:
             type: string
@@ -536,6 +569,39 @@ components:
           example: customer_user_id 
           description: |
             [Customer user ID](https://support.appsflyer.com/hc/en-us/articles/207032016), a unique user identifier set by the app owner.
+        email_hashed:
+          type: string
+          description: |
+            The user's email address, hashed using SHA-256.
+            Before hashing: trim leading and trailing spaces, and convert all characters to lowercase.
+          example: "62a14e44f765419d10fea99367361a727c12365e2520f32218d505ed9aa0f62f"
+        phone_number_hashed:
+          type: string
+          description: |
+            The user's phone number, hashed using SHA-256.
+            Before hashing: remove all symbols, letters, and leading zeros. The phone number must include the country code (for example, the US number (650)555-1212 becomes 16505551212).
+          example: "e323ec626319ca94ee8bff2e4c87cf613be6ea19919ed1364124e16807ab3176"
+        phone_number_e164_hashed:
+          type: string
+          description: |
+            The user's phone number in [E.164 format](https://en.wikipedia.org/wiki/E.164), hashed using SHA-256.
+            Before hashing: normalize to E.164 format (for example, +12133734253). Include the country code prefixed with +, with no parentheses, leading zeros, spaces, letters, or symbols other than the leading +.
+            We recommend using [libphonenumber-js](https://github.com/catamphetamine/libphonenumber-js) for E.164 parsing.
+          example: "9f7ec22d72092cd3c0b58726ed9c2d91b92e51a3f29837508fb2948bb22dd2fd"
+        first_name_hashed:
+          type: string
+          description: |
+            The user's first name, hashed using SHA-256.
+            Before hashing: convert to lowercase.
+        last_name_hashed:
+          type: string
+          description: |
+            The user's last name, hashed using SHA-256.
+            Before hashing: convert to lowercase.
+        fb_login_id:
+          type: string
+          description: The user's Facebook Login ID. Send as a numeric string.
+          example: "10293847561029384"
         att:
           type: integer
           enum:
@@ -799,12 +865,12 @@ components:
             
             **Note:** 
               To find out the required partner IDs:
-              1. Run the [Get active integrations API](https://dev.appsflyer.com/hc/reference/get_v1-integrations) for a list of all active integrations
-              2. Use the `media_source_name` values from the [API response](https://dev.appsflyer.com/hc/reference/get_v1-integrations) as input values to the method `partners` array. 
+              1. Run the [Get active integrations API](https://dev.appsflyer.com/hc/reference/get_v1-integrations) for a list of all active integrations
+              2. Use the `media_source_name` values from the [API response](https://dev.appsflyer.com/hc/reference/get_v1-integrations) as input values to the method `partners` array. 
 
               **Exceptions**:
-              - For Apple Search Ads use "`Apple Search Ads`" (and not "`iossearchads_int`").
-              - For Twitter, use "`twitter`" (and not "`twitter_int`")
+              - For Apple Search Ads use "`Apple Search Ads`" (and not "`iossearchads_int`").
+              - For Twitter, use "`twitter`" (and not "`twitter_int`")
           type: array
           items:
             type: string
@@ -1152,12 +1218,12 @@ components:
 
             **Note:** 
               To find out the required partner IDs:
-              1. Run the [Get active integrations API](https://dev.appsflyer.com/hc/reference/get_v1-integrations) for a list of all active integrations
-              2. Use the `media_source_name` values from the [API response](https://dev.appsflyer.com/hc/reference/get_v1-integrations) as input values to the method `partners` array. 
+              1. Run the [Get active integrations API](https://dev.appsflyer.com/hc/reference/get_v1-integrations) for a list of all active integrations
+              2. Use the `media_source_name` values from the [API response](https://dev.appsflyer.com/hc/reference/get_v1-integrations) as input values to the method `partners` array. 
 
               **Exceptions**:
-              - For Apple Search Ads use "`Apple Search Ads`" (and not "`iossearchads_int`").
-              - For Twitter, use "`twitter`" (and not "`twitter_int`")
+              - For Apple Search Ads use "`Apple Search Ads`" (and not "`iossearchads_int`").
+              - For Twitter, use "`twitter`" (and not "`twitter_int`")
           type: array
           items:
             type: string
