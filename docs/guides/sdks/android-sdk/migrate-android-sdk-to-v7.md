@@ -5,8 +5,6 @@ category:
   uri: AppsFlyer SDKs
 parent:
   uri: android-sdk-7
-content:
-  excerpt: Step-by-step guide for migrating your Android app from AppsFlyer SDK 6 to SDK 7, covering breaking changes, the new session model, and behavioral updates.
 privacy:
   view: public
 position: 1

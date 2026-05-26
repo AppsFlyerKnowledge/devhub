@@ -5,8 +5,6 @@ category:
   uri: AppsFlyer SDKs
 parent:
   uri: android-sdk-7
-content:
-  excerpt: Install the AppsFlyer Android SDK V7 into your app using Gradle or manually, and configure permissions, ProGuard rules, and store referrer libraries.
 privacy:
   view: public
 position: 2

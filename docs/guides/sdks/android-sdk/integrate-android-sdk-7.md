@@ -5,8 +5,6 @@ category:
   uri: AppsFlyer SDKs
 parent:
   uri: android-sdk-7
-content:
-  excerpt: Learn how to initialize and start the Android SDK V7.
 privacy:
   view: public
 position: 3
