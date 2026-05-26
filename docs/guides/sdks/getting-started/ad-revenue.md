@@ -1,6 +1,6 @@
 ---
 title: Ad revenue
-slug: ad-revenue
+slug: gs-ad-revenue
 category:
   uri: AppsFlyer SDKs
 parent:
