@@ -4,7 +4,7 @@ slug: ios-sdk-7
 category:
   uri: AppsFlyer SDKs
 parent:
-  uri: android-sdk
+  uri: ios-sdk
 privacy:
   view: public
 position: 1

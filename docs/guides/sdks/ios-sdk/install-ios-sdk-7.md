@@ -4,7 +4,7 @@ slug: install-ios-sdk-7
 category:
   uri: AppsFlyer SDKs
 parent:
-  uri: ios-sdk
+  uri: ios-sdk-7
 privacy:
   view: public
 position: 2
