@@ -6,7 +6,7 @@ category:
 parent:
   uri: android-sdk
 privacy:
-  view: public
+  view: hidden
 position: 1
 ---
 

@@ -6,7 +6,7 @@ category:
 parent:
   uri: ios-sdk
 privacy:
-  view: public
+  view: hidden
 position: 1
 ---
 
