@@ -1,5 +1,5 @@
 ---
-title: Integrate iOS SDK
+title: Integrate iOS SDK 7
 slug: integrate-ios-sdk-7
 category:
   uri: AppsFlyer SDKs

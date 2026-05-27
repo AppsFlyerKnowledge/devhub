@@ -1,5 +1,5 @@
 ---
-title: Install iOS SDK
+title: Install iOS SDK 7
 slug: install-ios-sdk-7
 category:
   uri: AppsFlyer SDKs
