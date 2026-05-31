@@ -58,9 +58,7 @@ Currently doesn't support tvOS apps.
 >
 > To learn more, see [Carthage docs](https://github.com/Carthage/Carthage#build-static-frameworks-to-speed-up-your-apps-launch-times).
 
-### Install using Swift Package Manager (V6.1.0+)
-
-Starting `V6.1.0` the iOS SDK can be installed via Swift Package Manager (SPM):
+### Install using Swift Package Manager
 
 **Step 1: Navigate to Add Package Dependency**  
 In Xcode, go to **File > Add Packages**.
@@ -98,77 +96,12 @@ Drag the `AppsFlyerLib.framework` folder and drop it into your Xcode project. Ma
 > 2. Find `AppsFlyerLib.framework` in [this folder of the cloned repo](https://github.com/AppsFlyerSDK/AppsFlyerFramework/tree/master/tvOS).
 > 3. Repeat step 3.
 
----
-
 ## Native iOS framework dependencies
 
 The SDK automatically adds and uses the following native frameworks:
 
 - **`AdSupport` framework**: Required to collect the IDFA from devices. Without IDFA you cannot attribute installs to Meta ads, Twitter, Google Ads, and other networks.
-- **`AdServices` framework** (`V6.1.3+`): Measure the performance of Apple Search Ads in your app.
-- **`iAd` framework**: (Deprecated) Measure the performance of Apple Search Ads in your app. **Note:** The `iAd` framework has not been in use since `V6.10.1` and was completely removed from the code base from `V6.13.0`.
-
----
-
-## Optional: Configure using AppsFlyerLibConfig.plist
-
-SDK V7 introduces an optional property list file for configuring SDK behavior without code. Add `AppsFlyerLibConfig.plist` to your app's main bundle — the SDK loads it automatically at initialization, before `initialize(devKey:appId:)` is called.
-
-If the file is missing, the SDK uses defaults. If a key is absent from the plist, its default applies. Programmatic API calls always override plist values.
-
-### Supported keys
-
-| Plist key | Type | Default | Programmatic equivalent |
-|---|---|---|---|
-| `debug_mode` | Boolean | `false` | `AppsFlyerLib.shared().isDebug = true` |
-| `currency_code` | String | `"USD"` | `AppsFlyerLib.shared().currencyCode = "ILS"` |
-| `disable_idfa_collection` | Boolean | `false` | `AppsFlyerLib.shared().disableAdvertisingIdentifier = true` |
-| `disable_idfv_collection` | Boolean | `false` | `AppsFlyerLib.shared().disableIDFVCollection = true` |
-| `disable_skadnetwork` | Boolean | `false` | `AppsFlyerLib.shared().disableSKAdNetwork = true` |
-| `min_time_between_sessions` | Integer (seconds) | `30` | `AppsFlyerLib.shared().minTimeBetweenSessions = 1` |
-| `host` | String | `""` | `AppsFlyerLib.shared().setHost("prefix", hostName: "host.com")` |
-| `prefix` | String | `""` | *(set together with `host`)* |
-
-### Example plist
-
-```xml
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
-  "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0">
-<dict>
-    <key>debug_mode</key>
-    <true/>
-    <key>currency_code</key>
-    <string>USD</string>
-    <key>disable_idfa_collection</key>
-    <false/>
-    <key>disable_idfv_collection</key>
-    <false/>
-    <key>disable_skadnetwork</key>
-    <false/>
-    <key>min_time_between_sessions</key>
-    <integer>30</integer>
-    <key>host</key>
-    <string></string>
-    <key>prefix</key>
-    <string></string>
-</dict>
-</plist>
-```
-
-### Adding the file in Xcode
-
-1. Choose **File → New → File** and select **Property List**.
-2. Name it exactly `AppsFlyerLibConfig` (Xcode adds `.plist`).
-3. Add it to your **app target**, not the test target.
-4. Verify it appears under **Build Phases → Copy Bundle Resources**.
-
-### Precedence
-
-Programmatic API calls always override plist values. On every cold start, the plist is re-read first, and any subsequent API calls override those values for the remainder of the process.
-
----
+- **`AdServices` framework**: Measure the performance of Apple Search Ads in your app.
 
 ## Strict mode SDK
 
