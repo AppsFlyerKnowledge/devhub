@@ -80,18 +80,7 @@ Add the following permissions to `AndroidManifest.xml` in the `manifest` section
 
 ### The AD_ID permission
 
-In early 2022, Google announced a change to the behavior of Google Play Services and fetching of the Android Advertising ID. According to the [announcement](https://support.google.com/googleplay/android-developer/answer/6048248?hl=en), apps targeting Android 13 (API 33) and above must declare a Google Play services normal permission in their `AndroidManifest.xml` file in order to get access to the device's Advertising ID.
-
-Starting `V6.8.0`, the SDK adds the AD_ID permission automatically.
-
-> 📘 Note
->
-> - If your app participates in the [Designed for Families](https://support.google.com/googleplay/android-developer/topic/9877766?hl=en&ref_topic=9858052) program:
->   - If using SDK `V6.8.0` and above, you should revoke the AD_ID permission (see below).
->   - If using SDK older than `V6.8.0`, don't add this permission to your app.
-> - For apps that target API level 32 (Android 12L) or older, this permission is not needed.
-
-Apps that use SDK versions **older** than `V6.8.0` and target Android 13 (API 33) and above must manually include the permission in their `AndroidManifest.xml` to have access to the Advertising ID:
+The SDK adds the AD_ID permission automatically. If your app participates in the Designed for Families program, you should review the AD_ID permission.
 
 ```xml
 <uses-permission android:name="com.google.android.gms.permission.AD_ID" />
@@ -321,7 +310,7 @@ Once added, the SDK will collect the AppSet ID if it is available on the device.
 
 ## Google Play Integrity API
 
-Starting with **v6.17.1**, the SDK has built-in integration with Google Play Integrity API. This provides device-integrity verification through Google Play. You can read more about it [here](https://support.google.com/googleplay/android-developer/answer/15299193).
+The SDK has built-in integration with Google Play Integrity API. This provides device integrity verification via Google Play. You can read more about it [here](https://support.google.com/googleplay/android-developer/answer/15299193).
 
 If your app is distributed outside the Google Play Store, you can safely exclude this dependency by adding the following lines to your app's `build.gradle`:
 
@@ -338,18 +327,6 @@ implementation ("com.appsflyer:af-android-sdk:HERE_SDK_VERSION") {
 
 
 ## Known issues
-
-### Missing resource files
-
-*SDK V5 only*
-
-If you are using Android SDK V5 and above, make sure that in the APK file, in addition to the `classes.dex` and resources files, you also have a **com > appsflyer > internal** folder with files `a-` and `b-` inside.
-
-> 📘 Note
->
-> Before SDK 5.3.0, file names are `a.` and `b.`
-
-If those files are missing, the SDK can't make network requests to our server, and you need to contact your CSM or support.
 
 ### Boot Complete
 
