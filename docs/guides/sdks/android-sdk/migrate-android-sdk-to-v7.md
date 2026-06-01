@@ -59,32 +59,30 @@ SDK 7 also addresses long-standing inconsistencies between iOS and Android. The 
 ---
 
 ## Upgrade checklist
-
+ 
 Work through these in order — higher-risk changes first. The Risk column tells you whether skipping a step causes a **compile error** (caught at build time) or a **silent regression** (compiles but misbehaves at runtime).
-
+ 
 | # | Action | Risk | § |
 |---|--------|------|---|
 | **Prerequisites** | | | |
-| 1 | Update to Kotlin 2.0 or higher if your app uses Kotlin 1.9. | Prerequisite | Before you begin |
-| 2 | Set `minSdkVersion` to at least 21 in your `build.gradle`. | Prerequisite | Before you begin |
+| 1 | Update to Kotlin 2.0 or higher if your app uses Kotlin 1.9. | Prerequisite | [Before you begin](#before-you-begin) |
+| 2 | Set `minSdkVersion` to at least 21 in your `build.gradle`. | Prerequisite | [Before you begin](#before-you-begin) |
 | **High-risk changes** | | | |
-| 3 | Update all imports from their previous packages to `com.appsflyer.share`. Use Android Studio's auto-import to resolve them. | Compile error | §1 |
-| 4 | Remove `Context` and dev key from `start()`. Use `start()` or `start(AppsFlyerRequestListener)` only. | Compile error | §2 |
-| 5 | Update `registerConversionListener`: remove the `Context` parameter, remove `onAppOpenAttribution` and `onAttributionFailure`, and update the import to `com.appsflyer.share.AppsFlyerConversionListener`. | Compile error | §4 |
-| 6 | Add `registerSessionReadyListener` after `init()`. Call `start()` inside the callback, or use the coordinator pattern if your app has pre-start conditions. | Silent regression | §3 |
-| 7 | Re-apply all `AppsFlyerLib` setter values after every cold start, or move constant values to `af_init_config.json`. | Silent regression | Part 2 §1 |
+| 3 | Update all imports from their previous packages to `com.appsflyer.share`. Use Android Studio's auto-import to resolve them. | Compile error | [§1](#1-update-class-imports) |
+| 4 | Remove `Context` and dev key from `start()`. Use `start()` or `start(AppsFlyerRequestListener)` only. | Compile error | [§2](#2-update-the-start-method) |
+| 5 | Update `registerConversionListener`: remove the `Context` parameter, remove `onAppOpenAttribution` and `onAttributionFailure`, and update the import to `com.appsflyer.share.AppsFlyerConversionListener`. | Compile error | [§4](#4-update-the-conversion-listener) |
+| 6 | Add `registerSessionReadyListener` after `init()`. Call `start()` inside the callback, or use the coordinator pattern if your app has pre-start conditions. | Silent regression | [§3](#3-add-a-session-ready-listener) |
+| 7 | Re-apply all `AppsFlyerLib` setter values after every cold start, or move constant values to `af_init_config.json`. | Silent regression | [Part 2 §1](#1-setter-values-are-no-longer-persisted-between-sessions) |
 | **Deep linking** | | | |
-| 8 | Replace `performOnDeepLinking` and `performOnAppAttribution` with `performDeepLinking(String, boolean)`. Replace `subscribeForDeepLink(listener, timeout)` with `setDeepLinkTimeout(long)` followed by `subscribeForDeepLink(listener)`. | Compile error | §5 |
+| 8 | Replace `performOnDeepLinking` and `performOnAppAttribution` with `performDeepLinking(String, boolean)`. Replace `subscribeForDeepLink(listener, timeout)` with `setDeepLinkTimeout(long)` followed by `subscribeForDeepLink(listener)`. | Compile error | [§5](#5-update-deep-linking) |
 | **Deprecated API removals** | | | |
-| 9 | Remove `SingleInstallBroadcastReceiver` and `MultipleInstallBroadcastReceiver` from your manifest. Add `implementation 'com.android.installreferrer:installreferrer:2.2'` to your app's `build.gradle`. | Compile error | §8 |
-| 10 | Update `setUserEmails`: replace MD5 or SHA1 with `SHA256` or `NONE`, and update the import to `com.appsflyer.share.EmailsCryptType`. | Compile error | §7 |
-| 11 | Remove or replace: `waitForCustomerUserId`, `setCustomerIdAndLogSession`, `setCollectIMEI`, `setCollectOaid`, `setExtension`, `registerValidatorListener`, `validateAndLogInAppPurchase` V1, `setSharingFilter`, and `setSharingFilterForAllPartners`. | Compile error | §9 |
+| 9 | Remove `SingleInstallBroadcastReceiver` and `MultipleInstallBroadcastReceiver` from your manifest. Add `implementation 'com.android.installreferrer:installreferrer:2.2'` to your app's `build.gradle`. | Compile error | [§8](#8-remove-legacy-broadcast-receivers) |
+| 10 | Update `setUserEmails`: replace MD5 or SHA1 with `SHA256` or `NONE`, and update the import to `com.appsflyer.share.EmailsCryptType`. | Compile error | [§7](#7-update-the-user-emails-method) |
+| 11 | Remove or replace: `waitForCustomerUserId`, `setCustomerIdAndLogSession`, `setCollectIMEI`, `setCollectOaid`, `setExtension`, `registerValidatorListener`, `validateAndLogInAppPurchase` V1, `setSharingFilter`, and `setSharingFilterForAllPartners`. | Compile error | [§9](#9-remove-or-replace-other-removed-apis) |
 | **Optional** | | | |
-| 12 | Call `collectDataFromLauncherActivity(this)` from your launcher activity's `onCreate` to opt in to app-open and web referrer collection. | — | Part 2 §3 |
-| 13 | If you distribute on Samsung, Xiaomi, or Huawei stores, add the relevant store referrer library to your app's Gradle dependencies. | — | §11 |
-
----
-
+| 12 | Call `collectDataFromLauncherActivity(this)` from your launcher activity's `onCreate` to opt in to app-open and web referrer collection. | — | [Part 2 §3](#3-opt-in-to-app-open-referrer-and-web-referrer-collection) |
+| 13 | If you distribute on Samsung, Xiaomi, or Huawei stores, add the relevant store referrer library to your app's Gradle dependencies. | — | [§11](#11-add-optional-store-referrer-libraries) |
+ 
 ## Part 1: Breaking changes
 
 The following changes will cause compile errors if not addressed. Work through them in the order below, as some steps depend on others.
