@@ -10,18 +10,6 @@ privacy:
 position: 1
 ---
 
----
-title: iOS SDK v7
-slug: ios-sdk-7
-category:
-  uri: AppsFlyer SDKs
-content:
-  excerpt: Get started with AppsFlyer iOS SDK v7, a major release that introduces manual session control, unified cross-platform APIs, and file-based configuration.
-privacy:
-  view: public
-position: 1
----
-
 iOS SDK v7 gives you explicit control over when the SDK fires a session, aligns the iOS and Android APIs, and lets you declare build-time settings in a plist file, so you can build more predictable, consent-aware integrations.
 
 ## What's new in v7
