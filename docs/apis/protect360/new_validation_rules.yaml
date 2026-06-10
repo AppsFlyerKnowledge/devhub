@@ -13,7 +13,7 @@ info:
     - [List rules](https://dev.appsflyer.com/hc/reference/listrules)
     - [Create rule](https://dev.appsflyer.com/hc/reference/createrule)
     - [Get rule](https://dev.appsflyer.com/hc/reference/getrule)
-    - [Update full rule](https://dev.appsflyer.com/hc/reference/updaterule)
+    - [Update rule](https://dev.appsflyer.com/hc/reference/updaterule)
     - [Delete rule](https://dev.appsflyer.com/hc/reference/deleterule)
     - [Update rule status](https://dev.appsflyer.com/hc/reference/updaterulestatus)
 
@@ -21,7 +21,7 @@ info:
     - [Patch dimension values](https://dev.appsflyer.com/hc/reference/patchdimensionvalues)
 
 servers:
-  - url: https://hq1.appsflyer.com/api/vr2api/public/v1
+  - url: https://hq1.appsflyer.com/api/vr2api/v1
     description: Validation Rules API v1
 
 security:
@@ -45,7 +45,7 @@ paths:
         - [List rules](https://dev.appsflyer.com/hc/reference/listrules)
         - [Create rule](https://dev.appsflyer.com/hc/reference/createrule)
         - [Get rule](https://dev.appsflyer.com/hc/reference/getrule)
-        - [Update full rule](https://dev.appsflyer.com/hc/reference/updaterule)
+        - [Update rule](https://dev.appsflyer.com/hc/reference/updaterule)
         - [Delete rule](https://dev.appsflyer.com/hc/reference/deleterule)
         - [Update rule status](https://dev.appsflyer.com/hc/reference/updaterulestatus)
 
@@ -78,7 +78,7 @@ paths:
         - [List rules](https://dev.appsflyer.com/hc/reference/listrules)
         - [Create rule](https://dev.appsflyer.com/hc/reference/createrule)
         - [Get rule](https://dev.appsflyer.com/hc/reference/getrule)
-        - [Update full rule](https://dev.appsflyer.com/hc/reference/updaterule)
+        - [Update rule](https://dev.appsflyer.com/hc/reference/updaterule)
         - [Delete rule](https://dev.appsflyer.com/hc/reference/deleterule)
         - [Update rule status](https://dev.appsflyer.com/hc/reference/updaterulestatus)
 
@@ -107,6 +107,15 @@ paths:
           $ref: '#/components/responses/InternalError'
 
   /rules/{rule_id}:
+    parameters:
+      - name: rule_id
+        in: path
+        required: true
+        description: The UUID of the rule. Use the `rule_id` returned by List rules or Create rule.
+        schema:
+          type: string
+          format: uuid
+          example: 550e8400-e29b-41d4-a716-446655440000
     get:
       tags: [Rules]
       summary: Get rule
@@ -118,14 +127,12 @@ paths:
         - [List rules](https://dev.appsflyer.com/hc/reference/listrules)
         - [Create rule](https://dev.appsflyer.com/hc/reference/createrule)
         - [Get rule](https://dev.appsflyer.com/hc/reference/getrule)
-        - [Update full rule](https://dev.appsflyer.com/hc/reference/updaterule)
+        - [Update rule](https://dev.appsflyer.com/hc/reference/updaterule)
         - [Delete rule](https://dev.appsflyer.com/hc/reference/deleterule)
         - [Update rule status](https://dev.appsflyer.com/hc/reference/updaterulestatus)
 
         **Dimension Values**
         - [Patch dimension values](https://dev.appsflyer.com/hc/reference/patchdimensionvalues)
-      parameters:
-        - $ref: '#/components/parameters/RuleIdPath'
       responses:
         '200':
           description: Full rule
@@ -144,7 +151,7 @@ paths:
 
     put:
       tags: [Rules]
-      summary: Update full rule
+      summary: Update rule
       operationId: updateRule
       description: |
         Full replacement update. Version is incremented automatically.
@@ -154,14 +161,12 @@ paths:
         - [List rules](https://dev.appsflyer.com/hc/reference/listrules)
         - [Create rule](https://dev.appsflyer.com/hc/reference/createrule)
         - [Get rule](https://dev.appsflyer.com/hc/reference/getrule)
-        - [Update full rule](https://dev.appsflyer.com/hc/reference/updaterule)
+        - [Update rule](https://dev.appsflyer.com/hc/reference/updaterule)
         - [Delete rule](https://dev.appsflyer.com/hc/reference/deleterule)
         - [Update rule status](https://dev.appsflyer.com/hc/reference/updaterulestatus)
 
         **Dimension Values**
         - [Patch dimension values](https://dev.appsflyer.com/hc/reference/patchdimensionvalues)
-      parameters:
-        - $ref: '#/components/parameters/RuleIdPath'
       requestBody:
         required: true
         content:
@@ -197,14 +202,12 @@ paths:
         - [List rules](https://dev.appsflyer.com/hc/reference/listrules)
         - [Create rule](https://dev.appsflyer.com/hc/reference/createrule)
         - [Get rule](https://dev.appsflyer.com/hc/reference/getrule)
-        - [Update full rule](https://dev.appsflyer.com/hc/reference/updaterule)
+        - [Update rule](https://dev.appsflyer.com/hc/reference/updaterule)
         - [Delete rule](https://dev.appsflyer.com/hc/reference/deleterule)
         - [Update rule status](https://dev.appsflyer.com/hc/reference/updaterulestatus)
 
         **Dimension Values**
         - [Patch dimension values](https://dev.appsflyer.com/hc/reference/patchdimensionvalues)
-      parameters:
-        - $ref: '#/components/parameters/RuleIdPath'
       responses:
         '204':
           description: No Content
@@ -218,6 +221,15 @@ paths:
           $ref: '#/components/responses/InternalError'
 
   /rules/{rule_id}/status:
+    parameters:
+      - name: rule_id
+        in: path
+        required: true
+        description: The UUID of the rule. Use the `rule_id` returned by List rules or Create rule.
+        schema:
+          type: string
+          format: uuid
+          example: 550e8400-e29b-41d4-a716-446655440000
     put:
       tags: [Rules]
       summary: Update rule status
@@ -230,14 +242,12 @@ paths:
         - [List rules](https://dev.appsflyer.com/hc/reference/listrules)
         - [Create rule](https://dev.appsflyer.com/hc/reference/createrule)
         - [Get rule](https://dev.appsflyer.com/hc/reference/getrule)
-        - [Update full rule](https://dev.appsflyer.com/hc/reference/updaterule)
+        - [Update rule](https://dev.appsflyer.com/hc/reference/updaterule)
         - [Delete rule](https://dev.appsflyer.com/hc/reference/deleterule)
         - [Update rule status](https://dev.appsflyer.com/hc/reference/updaterulestatus)
 
         **Dimension Values**
         - [Patch dimension values](https://dev.appsflyer.com/hc/reference/patchdimensionvalues)
-      parameters:
-        - $ref: '#/components/parameters/RuleIdPath'
       requestBody:
         required: true
         content:
@@ -268,6 +278,15 @@ paths:
           $ref: '#/components/responses/InternalError'
 
   /rules/{rule_id}/values:
+    parameters:
+      - name: rule_id
+        in: path
+        required: true
+        description: The UUID of the rule. Use the `rule_id` returned by List rules or Create rule.
+        schema:
+          type: string
+          format: uuid
+          example: 550e8400-e29b-41d4-a716-446655440000
     patch:
       tags: [Dimension Values]
       summary: Patch dimension values
@@ -281,14 +300,12 @@ paths:
         - [List rules](https://dev.appsflyer.com/hc/reference/listrules)
         - [Create rule](https://dev.appsflyer.com/hc/reference/createrule)
         - [Get rule](https://dev.appsflyer.com/hc/reference/getrule)
-        - [Update full rule](https://dev.appsflyer.com/hc/reference/updaterule)
+        - [Update rule](https://dev.appsflyer.com/hc/reference/updaterule)
         - [Delete rule](https://dev.appsflyer.com/hc/reference/deleterule)
         - [Update rule status](https://dev.appsflyer.com/hc/reference/updaterulestatus)
 
         **Dimension Values**
         - [Patch dimension values](https://dev.appsflyer.com/hc/reference/patchdimensionvalues)
-      parameters:
-        - $ref: '#/components/parameters/RuleIdPath'
       requestBody:
         required: true
         content:
@@ -318,16 +335,6 @@ paths:
           $ref: '#/components/responses/InternalError'
 
 components:
-  parameters:
-    RuleIdPath:
-      name: rule_id
-      in: path
-      required: true
-      description: The UUID of the rule
-      schema:
-        type: string
-        format: uuid
-
   responses:
     BadRequest:
       description: Bad request (validation error)
