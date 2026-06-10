@@ -9,6 +9,14 @@ privacy:
   view: public
 position: 14
 ---
+
+## Version 6.18.1
+
+#### Bug Fixes
+
+- Fixed an issue in the Purchase Connector where purchase validations that failed to be sent due to network connectivity failures were incorrectly cached.
+
+
 ## Version 6.18.0 
 
 #### Technical Update

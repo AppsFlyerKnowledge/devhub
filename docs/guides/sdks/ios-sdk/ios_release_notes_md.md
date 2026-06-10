@@ -9,6 +9,13 @@ privacy:
   view: public
 position: 1
 ---
+
+## Version 6.18.1
+
+#### Bug Fixes
+
+- Fixed an issue in the Purchase Connector where purchase validation requests that failed due to a network error were lost after an app restart. The SDK now retrieves pending StoreKit transactions on initialization and re-submits them for validation.
+
 ## Version 6.18.0
 
 #### New Features
