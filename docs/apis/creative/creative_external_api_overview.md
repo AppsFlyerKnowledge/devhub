@@ -20,8 +20,6 @@ Authorization: Bearer <token>
 
 To obtain a token, sign in to the [AppsFlyer platform](https://hq1.appsflyer.com), open your account's **Security center** → **API tokens**, and generate a token with access to the Creative product.
 
-Your account is resolved from the token. Any `account_id` or `af_user` field in the request body is ignored — you cannot act on behalf of another account by setting these fields.
-
 ## Asynchronous model
 
 The API is asynchronous. Submitting a batch and learning its outcome are two separate calls:
