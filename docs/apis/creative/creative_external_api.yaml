@@ -44,7 +44,7 @@ paths:
         The customer's account is resolved from the Bearer token by the API
         Gateway. Any `account_id` or `af_user` field in the request body is
         ignored.
-      operationId: submitUploadBatch
+      operationId: creative-external-api-upload-batch-post
       requestBody:
         required: true
         content:
@@ -113,7 +113,7 @@ paths:
         Recommended polling cadence: start at 5 s, exponential backoff with a
         cap of 60 s. Items reach a terminal state (`success` or `failed`) within
         a few minutes; large batches may take longer.
-      operationId: getUploadStatus
+      operationId: creative-external-api-upload-status-get
       parameters:
         - in: path
           name: batch_id
