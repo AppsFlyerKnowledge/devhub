@@ -1,0 +1,398 @@
+openapi: 3.0.3
+info:
+  title: AppsFlyer Creative External API
+  description: |
+    Programmatic HTTP API for uploading creatives and publishing ads to ad networks
+    without using the AppsFlyer dashboard. v1 targets Facebook (Meta).
+
+    The API is intentionally asynchronous — `POST /creative/v1.0/upload/batch`
+    accepts a batch and returns a `batch_id` immediately; per-item processing
+    (download, validation, publish) happens server-side. Customers poll
+    `GET /creative/v1.0/upload/status/{batch_id}` until each item reaches a
+    terminal state (`success` or `failed`).
+  version: "1.0.0"
+  contact:
+    name: AppsFlyer Creative team
+
+servers:
+  - url: https://hq1.appsflyer.com/creative-dashboard/api
+    description: Production
+
+security:
+  - bearerAuth: []
+
+tags:
+  - name: Creative External API
+    description: Submit and track creative upload batches.
+
+paths:
+  /creative/v1.0/upload/batch:
+    post:
+      tags: [Creative External API]
+      summary: Submit a creative upload + publish batch
+      description: |
+        Accepts a batch of creative URLs together with target-network publish
+        instructions and queues them for processing. The endpoint is asynchronous
+        — it returns a `batch_id` immediately; poll `/creative/v1.0/upload/status/{batch_id}`
+        for per-item outcomes.
+
+        Per-creative validation (file format, dimensions, aspect ratio, duration)
+        happens after download. A creative that violates network constraints is
+        marked as `failed` with a human-readable `error_message` and a full list
+        of `issues` — the rest of the batch is unaffected.
+      operationId: creative-external-api-upload-batch-post
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UploadBatchRequest"
+            examples:
+              facebookSimple:
+                summary: Single Facebook video into one adset
+                value:
+                  target_network: facebook
+                  ad_account: act_1234567890
+                  network_user_id: "1234567890123456"
+                  publish:
+                    adset_ids: ["1234567890123"]
+                    ads:
+                      - ad_name: example_video.mp4
+                        page_id: "123456789012345"
+                        instagram_account_id: "123456789012345678"
+                        cta_type: LEARN_MORE
+                        launch_status: PAUSED
+                        auto_crop: true
+                        headlines_and_texts:
+                          - headline: An MMP you can count on
+                            primary_text: No more stressing over unexpected changes.
+                        creatives:
+                          - creative_link: https://customer-cdn.example.com/example_video.mp4
+                            asset_name: example_video.mp4
+      responses:
+        "200":
+          description: Batch accepted
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UploadBatchResponse"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "429":
+          $ref: "#/components/responses/TooManyRequests"
+        "502":
+          description: Network destinations API returned a 5xx (Meta unavailable)
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ErrorBody" }
+        "503":
+          description: Concurrency cap reached — retry with backoff
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ErrorBody" }
+        "500":
+          $ref: "#/components/responses/InternalError"
+
+  /creative/v1.0/upload/status/{batch_id}:
+    get:
+      tags: [Creative External API]
+      summary: Get the status of an upload batch
+      description: |
+        Returns the current state of every item in the batch. The endpoint is
+        scoped to the calling account — a customer cannot poll a `batch_id` that
+        belongs to another account (`404` is returned in that case).
+
+        Recommended polling cadence: start at 5 s, exponential backoff with a
+        cap of 60 s. Items reach a terminal state (`success` or `failed`) within
+        a few minutes; large batches may take longer.
+      operationId: creative-external-api-upload-status-get
+      parameters:
+        - in: path
+          name: batch_id
+          required: true
+          schema:
+            type: string
+            pattern: '^[a-zA-Z0-9_:.-]{1,200}$'
+          description: ID returned by `POST /creative/v1.0/upload/batch`
+      responses:
+        "200":
+          description: Batch found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UploadStatusResponse"
+              examples:
+                successAndFailure:
+                  summary: One success, one validation failure
+                  value:
+                    batch_id: b_3f1c
+                    items:
+                      - creative_link: https://customer-cdn.example.com/example_video.mp4
+                        creative_id: dd96604064d9dbfe215c63eb7b6500c5
+                        creative_type: video
+                        ad_name: example_video.mp4
+                        adset_id: "1234567890123"
+                        page_id: "123456789012345"
+                        ad_id: meta_ad_222
+                        status: success
+                        error_message: ""
+                        issues: []
+                        created_at: "2026-05-03T10:00:00Z"
+                        updated_at: "2026-05-03T10:01:30Z"
+                      - creative_link: https://customer-cdn.example.com/tiny.png
+                        creative_id: ""
+                        creative_type: image
+                        ad_name: tiny.png
+                        adset_id: "1234567890123"
+                        page_id: "123456789012345"
+                        ad_id: ""
+                        status: failed
+                        error_message: "Unsupported format: bmp. Supported: jpg, jpeg, png"
+                        issues:
+                          - "Unsupported format: bmp. Supported: jpg, jpeg, png"
+                        created_at: "2026-05-03T10:00:00Z"
+                        updated_at: "2026-05-03T10:00:12Z"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          description: Batch not found for this account
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ErrorBody" }
+        "500":
+          $ref: "#/components/responses/InternalError"
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: |
+        AppsFlyer HQ1 API V2 token. To obtain a token, sign in to the AppsFlyer
+        platform (https://hq1.appsflyer.com), open your account's *Security
+        center* → *API tokens*, and generate a token with access to the
+        Creative product. The token is sent as a standard `Authorization:
+        Bearer <token>` header.
+
+  schemas:
+    UploadBatchRequest:
+      type: object
+      required: [target_network, ad_account, network_user_id, publish]
+      additionalProperties: false
+      properties:
+        target_network:
+          type: string
+          enum: [facebook]
+          description: Destination network. v1 supports `facebook` only.
+        ad_account:
+          type: string
+          maxLength: 200
+          pattern: '^[a-zA-Z0-9_-]{1,100}$'
+          description: |
+            Network-specific ad-account identifier. For Facebook this is the
+            `act_<digits>` form.
+          example: act_1234567890
+        network_user_id:
+          type: string
+          maxLength: 50
+          pattern: '^[a-zA-Z0-9@_+%.*-]+$'
+          description: The customer's user identifier on the destination network.
+          example: "1234567890123456"
+        publish:
+          $ref: "#/components/schemas/FacebookPublish"
+
+    FacebookPublish:
+      type: object
+      required: [adset_ids, ads]
+      additionalProperties: false
+      properties:
+        adset_ids:
+          type: array
+          minItems: 1
+          maxItems: 50
+          items:
+            type: string
+            pattern: '^[0-9]{1,40}$'
+          description: Adset IDs the ads will be created under.
+        ads:
+          type: array
+          minItems: 1
+          maxItems: 50
+          items: { $ref: "#/components/schemas/FacebookAd" }
+
+    FacebookAd:
+      type: object
+      required: [ad_name, page_id, creatives]
+      additionalProperties: false
+      properties:
+        ad_name:
+          type: string
+          maxLength: 200
+        page_id:
+          type: string
+          pattern: '^[0-9]{1,40}$'
+        instagram_account_id:
+          type: string
+          pattern: '^[0-9]{1,40}$'
+          description: Optional Instagram placement.
+        cta_type:
+          type: string
+          pattern: '^[A-Z_]{1,50}$'
+          description: |
+            Meta CTA constant (e.g. `LEARN_MORE`, `SIGN_UP`, `INSTALL_APP`).
+            Server-side allowlist is authoritative.
+        launch_status:
+          type: string
+          enum: [ACTIVE, PAUSED]
+          description: Whether the ad should start serving immediately (`ACTIVE`) or stay paused for review (`PAUSED`).
+        auto_crop:
+          type: boolean
+          description: When true, the network adjusts placements automatically to fit Meta surfaces.
+        headlines_and_texts:
+          type: array
+          maxItems: 10
+          items:
+            type: object
+            additionalProperties: false
+            properties:
+              headline:
+                type: string
+                maxLength: 200
+              primary_text:
+                type: string
+                maxLength: 500
+        creatives:
+          type: array
+          minItems: 1
+          maxItems: 500
+          items: { $ref: "#/components/schemas/CreativeRef" }
+
+    CreativeRef:
+      type: object
+      required: [creative_link, asset_name]
+      additionalProperties: false
+      properties:
+        creative_link:
+          type: string
+          format: uri
+          maxLength: 2048
+          pattern: '^https://[^\s]{1,2048}$'
+          description: |
+            HTTPS URL of the creative file. The server downloads from this URL,
+            so it must be reachable from AppsFlyer infrastructure. Signed URLs
+            and short-lived links should remain valid for at least the duration
+            of batch processing (typically a few minutes).
+        asset_name:
+          type: string
+          maxLength: 200
+          description: Display name persisted alongside the creative.
+
+    UploadBatchResponse:
+      type: object
+      required: [batch_id, message]
+      properties:
+        batch_id:
+          type: string
+          description: ID used to poll the status endpoint.
+          example: b_3f1c
+        message:
+          type: string
+          example: External upload request accepted. Items queued for processing.
+
+    UploadStatusResponse:
+      type: object
+      required: [batch_id, items]
+      properties:
+        batch_id:
+          type: string
+        items:
+          type: array
+          items: { $ref: "#/components/schemas/UploadStatusItem" }
+
+    UploadStatusItem:
+      type: object
+      required: [creative_link, creative_type, ad_name, adset_id, status, error_message, issues, created_at, updated_at]
+      properties:
+        creative_link:
+          type: string
+          description: Original URL the customer submitted.
+        creative_id:
+          type: string
+          description: MD5 hash of the downloaded file. Empty until download completes.
+        creative_type:
+          type: string
+          enum: [image, video]
+          description: Derived server-side from the downloaded file's extension.
+        ad_name:
+          type: string
+        adset_id:
+          type: string
+        page_id:
+          type: string
+        ad_id:
+          type: string
+          description: Meta-issued ad ID. Empty until the ad is published.
+        status:
+          type: string
+          enum: [pending, in_progress, success, failed]
+        error_message:
+          type: string
+          description: |
+            Primary failure reason when `status=failed`. Empty otherwise. The
+            same string is also the first element of `issues`.
+        issues:
+          type: array
+          items: { type: string }
+          description: All validation / publish failure reasons for this item.
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+
+    ErrorBody:
+      type: object
+      properties:
+        message:
+          type: string
+
+  responses:
+    BadRequest:
+      description: Malformed request (schema validation failed, unknown target_network, ownership not granted)
+      content:
+        application/json:
+          schema: { $ref: "#/components/schemas/ErrorBody" }
+    Unauthorized:
+      description: Missing, invalid, or expired bearer token (handled by API Gateway)
+      content:
+        application/json:
+          schema: { $ref: "#/components/schemas/ErrorBody" }
+    Forbidden:
+      description: |
+        Authenticated, but the account is not allowed to use this endpoint.
+        Two reasons surface here:
+        - The account is not entitled to the feature (response body: `Feature not enabled for this account`).
+        - The account has been administratively blocked from the API (response body: `Feature is currently unavailable for this account`).
+      content:
+        application/json:
+          schema: { $ref: "#/components/schemas/ErrorBody" }
+    TooManyRequests:
+      description: Rate limit exceeded (enforced by API Gateway)
+      content:
+        application/json:
+          schema: { $ref: "#/components/schemas/ErrorBody" }
+    InternalError:
+      description: Unexpected server error
+      content:
+        application/json:
+          schema: { $ref: "#/components/schemas/ErrorBody" }
