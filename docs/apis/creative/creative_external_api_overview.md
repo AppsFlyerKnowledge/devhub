@@ -42,8 +42,9 @@ The status endpoint is scoped to your account — a `batch_id` that belongs to a
 
 ## Validation and error isolation
 
-Each creative is validated **after** it is downloaded, against the target network's constraints (file format, dimensions, aspect ratio, and — for video — duration). Validation failures are isolated to the offending item: it is marked `failed` with a human-readable `error_message` and a full list of `issues`, while the rest of the batch continues to process normally.
+Each creative is validated against the target network's constraints after it is downloaded. Failures are isolated to the individual creative — a creative that fails validation is marked `failed` while the rest of the batch continues to process.
 
 ## Reference
 
-See the [Creative External API reference](#) for the full request and response schemas, field-level constraints, and examples.
+- [Submit a creative upload + publish batch](https://dev.appsflyer.com/hc/reference/creative-external-api-upload-batch-post) — `POST /creative/v1.0/upload/batch`
+- [Get the status of an upload batch](https://dev.appsflyer.com/hc/reference/creative-external-api-upload-status-get) — `GET /creative/v1.0/upload/status/{batch_id}`
