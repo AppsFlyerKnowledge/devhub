@@ -547,7 +547,9 @@ components:
         - Clicks: 
             Deterministic: 1-30 days 
             Probabilistic: 1-7 days
-        - Impressions: 1-7 days OR 1-23 hours. 
+        - Impressions:
+            Deterministic: 1-24 hours.
+            Probabilistic: 1-7 days OR 1-23 hours. 
         Validation: 3 char max and using the scheme above
     AfAdPlacement:
       type: string
