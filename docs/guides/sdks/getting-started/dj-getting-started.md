@@ -35,6 +35,7 @@ Currently the Developer Journey only supports:
   - Android
   - iOS
   - React Native
+  - Flutter
 - Flows
   - SDK [installation](https://dev.appsflyer.com/hc/docs/sdk-installation) and [integration](https://dev.appsflyer.com/hc/docs/sdk-integration)
   - [In-app events](https://dev.appsflyer.com/hc/docs/in-app-events-sdk)
