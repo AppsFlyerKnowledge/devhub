@@ -26,18 +26,13 @@ The flow works as follows:
 2. The app open triggers the AppsFlyer SDK.
 3. The AppsFlyer SDK runs the UDL API. 
 4. The UDL API retrieves OneLink data from AppsFlyer servers. 
-5. The UDL API calls back the [`onDeepLinking()`] method in the [`DeepLinkingListener`] class.
-6. The [`onDeepLinking()`] method gets a [`DeepLinkResult`] object. 
-7. The [`DeepLinkResult`] object includes:
+5. The UDL API calls back the [`onDeepLinking()`](https://dev.appsflyer.com/hc/docs/deeplinklistener#ondeeplinking) method in the [`DeepLinkListener`](https://dev.appsflyer.com/hc/docs/deeplinklistener) class.
+6. The [`onDeepLinking()`](https://dev.appsflyer.com/hc/docs/deeplinklistener#ondeeplinking) method gets a [`DeepLinkResult`](https://dev.appsflyer.com/hc/docs/deeplinkresult) object.
+7. The [`DeepLinkResult`](https://dev.appsflyer.com/hc/docs/deeplinkresult) object includes:
    * Status (Found/Not found/Error)
    * A DeepLink object that carries: 
       - **For users with app not yet installed**: The `deep_link_value` and `deep_link_sub1-10` parameters.
-      - **For users with the app already installed**:The `deep_link_value` and `deep_link_sub1-10` parameters and all parameters contained in the `link` parameter of the OneLink attribution link.
-
-[`onDeepLinking()`]: https://dev.appsflyer.com/hc/docs/deeplinklistener#ondeeplinking
-[`DeepLinkingListener`]: https://dev.appsflyer.com/hc/docs/deeplinklistener
-[`DeepLinkResult`]: https://dev.appsflyer.com/hc/docs/deeplinkresult
-[`DeepLink`]: https://dev.appsflyer.com/hc/docs/deeplink
+      - **For users with the app already installed**: The `deep_link_value` and `deep_link_sub1-10` parameters and all parameters contained in the `link` parameter of the OneLink attribution link.
 
 ## Planning
 
