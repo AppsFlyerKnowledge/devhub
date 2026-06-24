@@ -321,7 +321,7 @@ You can use an existing OneLink link or ask your marketer to create a new one fo
 3. Install the application.
 > ** Important **
 > - If the application is still in development and not uploaded to the store yet, you see this image:
-> <img src="https://files.readme.io/8d43627-Screenshot_20221205-191054_Chrome.jpg" alt="drawing" width="250" style="text-align: center;"/>
+> <img src="https://files.readme.io/8d43627-Screenshot_20221205-191054_Chrome.jpg" alt="drawing" width="250" style={{textAlign: "center"}} />
 > - Install the application from Xcode.
 4. UDL detects the deferred deep linking, matches the install to the click, and retrieves the OneLink parameters to `didResolveDeepLink` callback. 
 
