@@ -130,7 +130,7 @@ paths:
                     error_type: "wrong_brand_domain"
                     message: "Brand domain mismatch"
         '404':
-          description: 'OneLink template not found'
+          description: 'Shortlink not found'
           content:
             application/json:
               schema:
@@ -141,7 +141,7 @@ paths:
                     error_type: "invalid_parameter"
                     message: "Shortlink not found"
         '409':
-          description: 'The provided shortlink ID already exists for this template'
+          description: 'Shortlink ID already exists'
           content:
             application/json:
               schema:
