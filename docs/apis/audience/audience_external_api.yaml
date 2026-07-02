@@ -613,5 +613,26 @@ components:
             type: string
           updating_user:
             type: string
+          audience_last_upload_status:
+            type: string
+          audience_last_upload_time:
+            type: string
+            format: timestamp
+          audience_last_successful_upload_time_in_last_7_days:
+            type: string
+          audience_size:
+            type: integer
+          audience_upload_size:
+            type: integer
+          app_id:
+            type: string
+          count_failed_connections:
+            type: integer
+          count_total_connections:
+            type: integer
+          count_total_partners:
+            type: integer
+          count_campaigns:
+            type: integer
 x-id:
 - reitit.swagger/default
