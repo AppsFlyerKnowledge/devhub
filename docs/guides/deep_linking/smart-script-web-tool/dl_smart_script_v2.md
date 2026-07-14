@@ -69,7 +69,7 @@ The Smart Script initialization and calling code can be either come from the Sma
 
 #### Manually configure the script
 
-1. [Download the script](https://onelinksmartscript.appsflyer.com/onelink-smart-script-latest.js).
+1. Download [the script](https://onelinksmartscript.appsflyer.com/onelink-smart-script-latest.js) or it's [minified version](https://onelinksmartscript.appsflyer.com/onelink-smart-script-latest-minified.js).
 2. Get the arguments to call the script which map the incoming parameters to the outgoing parameters from the marketer.
 3. Initialize the Smart Script [arguments](https://dev.appsflyer.com/hc/docs/onelink-smart-script-v2web-to-app-url-generator#arguments) and [configuration objects](https://dev.appsflyer.com/hc/docs/onelink-smart-script-v2web-to-app-url-generator#configuration-object).
 4. Generate the URLs by calling the script in the web/landing page HTML using the following method:
