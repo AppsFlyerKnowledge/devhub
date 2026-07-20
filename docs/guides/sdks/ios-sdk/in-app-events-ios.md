@@ -222,6 +222,33 @@ withValues: [
 
 To learn about currency settings, display, and currency conversion, see our guide on revenue currency.
 
+### Logging net revenue
+
+To report net revenue alongside gross revenue, add a custom parameter with the key `af_net_revenue` to the event values. The value represents net revenue according to your own business logic, for example revenue after store fees and/or taxes, gross margin, or revenue after service fees.
+
+There is no predefined SDK constant for this parameter, so pass the string key directly. Follow the same formatting rules as `af_revenue`, and the same currency rules (currency via `af_currency`, default USD).
+
+```objectivec
+[[AppsFlyerLib shared] logEvent: AFEventPurchase
+withValues:@{
+	AFEventParamRevenue: @200,
+	@"af_net_revenue": @140,
+	AFEventParamCurrency: @"USD"
+}];
+```
+```swift
+AppsFlyerLib.shared().logEvent(AFEventPurchase,
+withValues: [
+	AFEventParamRevenue: 200,
+	"af_net_revenue": 140,
+	AFEventParamCurrency: "USD"
+]);
+```
+
+> 📘 Note
+>
+> For apps with ROI360 store revenue enabled, `af_net_revenue` is populated automatically on the in-app purchase and subscription events recorded by ROI360 store revenue, so you do not need to send it for those events.
+
 ### Logging negative revenue
 
 There may be situations where you want to record negative revenue. For example, a user receives a refund or cancels a subscription.

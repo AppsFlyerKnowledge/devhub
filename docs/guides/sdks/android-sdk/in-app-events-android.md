@@ -54,10 +54,10 @@ import com.appsflyer.AFInAppEventParameterName // Predefined parameter names
 `logEvent` takes 4 arguments:
 
 ```java
-void logEvent(Context context,
-              java.lang.String eventName,
-              java.util.Map<java.lang.String,java.lang.Object> eventValues,
-              AppsFlyerRequestListener listener)
+void logEvent(Context context,
+              java.lang.String eventName,
+              java.util.Map<java.lang.String,java.lang.Object> eventValues,
+              AppsFlyerRequestListener listener)
 ```
 
 - The first argument (`context`) is the Application/Activity Context
@@ -235,6 +235,35 @@ AppsFlyerLib.getInstance().logEvent(getApplicationContext() , AFInAppEventType.P
 - The default currency is USD
 
 To learn about currency settings, display, and currency conversion, see our guide on [revenue currency](<>).
+
+### Logging net revenue
+
+To report net revenue alongside gross revenue, add a custom parameter with the key `af_net_revenue` to the event values. The value represents net revenue according to your own business logic, for example revenue after store fees and/or taxes, gross margin, or revenue after service fees.
+
+There is no predefined SDK constant for this parameter, so pass the string key directly. Follow the same formatting rules as `af_revenue`, and the same currency rules (currency via `af_currency`, default USD).
+
+```java
+Map<String, Object> eventValues = new HashMap<String, Object>();
+eventValues.put(AFInAppEventParameterName.REVENUE, 200);   // gross
+eventValues.put("af_net_revenue", 140);                    // net (custom key)
+eventValues.put(AFInAppEventParameterName.CURRENCY, "USD");
+
+AppsFlyerLib.getInstance().logEvent(getApplicationContext(),
+                                    AFInAppEventType.PURCHASE, eventValues);
+```
+```kotlin
+val eventValues = HashMap<String, Any>()
+eventValues.put(AFInAppEventParameterName.REVENUE, 200)          // gross
+eventValues.put("af_net_revenue", 140)                           // net (custom key)
+eventValues.put(AFInAppEventParameterName.CURRENCY, "USD")
+
+AppsFlyerLib.getInstance().logEvent(getApplicationContext(),
+                                    AFInAppEventType.PURCHASE, eventValues)
+```
+
+> 📘 Note
+>
+> For apps with ROI360 store revenue enabled, `af_net_revenue` is populated automatically on the in-app purchase and subscription events recorded by ROI360 store revenue, so you do not need to send it for those events.
 
 ### Logging negative revenue
 
