@@ -1477,7 +1477,7 @@ AppsFlyerLib.getInstance().setPartnerData("test_int", partnerData)
 
 ### setPhoneNumber
  
-<span class="annotation-deprecated">Soon to be deprecated</span>
+<span class="annotation-deprecated">Deprecated in V7.0.1</span>
 
 **Method signature**
 
@@ -1656,7 +1656,7 @@ This function takes no parameters.
 
 ### setUserEmails 
 
-<span class="annotation-deprecated">Soon to be deprecated</span> 
+<span class="annotation-deprecated">Deprecated in V7.0.1</span> 
 
 **Method signature**
 

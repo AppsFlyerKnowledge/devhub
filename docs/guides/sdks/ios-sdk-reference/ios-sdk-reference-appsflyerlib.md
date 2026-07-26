@@ -405,7 +405,7 @@ For advertisers who use vanity OneLinks.
 
 ### phoneNumber
 
-<span class="annotation-deprecated">Soon to be deprecated</span>
+<span class="annotation-deprecated">Deprecated in V7.0.1</span>
 
 **Property declaration**
 
@@ -1167,7 +1167,7 @@ This method takes no input arguments.
 
 ### setUserEmails
 
-<span class="annotation-deprecated">Soon to be deprecated</span>
+<span class="annotation-deprecated">Deprecated in V7.0.1</span>
 
 **Method signature**
 
