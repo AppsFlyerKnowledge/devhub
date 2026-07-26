@@ -9,6 +9,11 @@ privacy:
   view: public
 position: 1
 ---
+## Version 7.0.1
+
+#### New Features
+- Added hashed PII collection for network sharing via `setUserEmail`, `setUserPhone`, `setUserFirstName`, `setUserLastName`, and `setUserFbLoginId`. Values are normalized and SHA-256 hashed on-device before being added to the payload.
+- Added `handleUniversalLink(_ url: URL)` for SwiftUI apps. SwiftUI receives universal links only via `.onOpenURL`, which previously couldn't be tagged as a universal link — this lets SwiftUI apps classify `.onOpenURL` links correctly for SEO attribution.
 
 ## Version 6.18.1
 
