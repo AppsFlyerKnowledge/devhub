@@ -15,6 +15,9 @@ position: 1
 - Added hashed PII collection for network sharing via `setUserEmail`, `setUserPhone`, `setUserFirstName`, `setUserLastName`, and `setUserFbLoginId`. Values are normalized and SHA-256 hashed on-device before being added to the payload.
 - Added `handleUniversalLink(_ url: URL)` for SwiftUI apps. SwiftUI receives universal links only via `.onOpenURL`, which previously couldn't be tagged as a universal link — this lets SwiftUI apps classify `.onOpenURL` links correctly for SEO attribution.
 
+#### Changed Features
+- Removed the `setUserEmails` and `setPhoneNumber` APIs — full removal, not a deprecation. Use `setUserEmail` and `setUserPhone` instead.
+
 ## Version 6.18.1
 
 #### Bug Fixes
