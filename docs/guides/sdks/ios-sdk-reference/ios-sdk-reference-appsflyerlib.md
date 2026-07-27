@@ -403,7 +403,7 @@ For advertisers who use vanity OneLinks.
 | :-------------------- | :--------------------- |
 | `NSArray<NSString *>` | `oneLinkCustomDomains` |
 
-### phoneNumber
+### phoneNumber (Deprecated)
 
 <span class="annotation-deprecated">Deprecated in V7.0.1</span>
 
@@ -417,6 +417,24 @@ For advertisers who use vanity OneLinks.
 
 | Type       | Name          |
 | :--------- | :------------ |
+| `NSString` | `phoneNumber` |
+
+### phoneNumber
+
+Sets the user's phone number for Advanced Matching. Pass the country dialing code and local number separately.
+
+**Property declaration**
+
+```objectivec
+@property(nonatomic, nullable) NSString *phoneNumber
+```
+
+**Description**
+
+**Input arguments**
+
+| Type | Name |
+| --- | --- |
 | `NSString` | `phoneNumber` |
 
 ### resolveDeepLinkURLs
@@ -1164,6 +1182,29 @@ This method takes no input arguments.
 
 **Returns**  
 `void`
+
+### setUserEmail
+
+**Method signature**
+
+```swift
+setUserEmails(userEmails: [String]?, with: EmailCryptType)
+```
+
+**Description**
+
+Use this to set the user email(s). **Note**: `MD-5` and `SHA-1` encryption types are deprecated starting with SDK V6.9.0. Currently, only `SHA-256` and `NONE` are supported.
+
+**Input arguments**
+
+| Type | Name | Description |
+| --- | --- | --- |
+| `String` | `userEmails` | The user email address |
+| `EmailCryptType` | `type` | Encryption type. |
+
+**Returns**
+
+`void`.
 
 ### setUserEmails
 

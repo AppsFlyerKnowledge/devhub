@@ -1499,6 +1499,28 @@ Will be sent as an SHA-256 encrypted string.
 **Returns**  
 `void`.
 
+### setPhoneNumber
+
+**Method signature**
+
+```java
+void setPhoneNumber(java.lang.String phoneNumber)
+```
+
+**Description**
+
+Sets the user's phone number and hashes it using SHA-256. Pass the country dialing code and local number separately.
+
+**Input arguments**
+
+| Type | Name | Description |
+| --- | --- | --- |
+| `String` | `phoneNumber` |  |
+
+**Returns**
+
+`void`.
+
 ### setPreinstallAttribution
 
 **Method signature**
@@ -1653,6 +1675,34 @@ This function takes no parameters.
 
 **Returns**  
 `void`
+
+
+### setUserEmail
+
+**Method signature**
+
+```java
+void setUserEmail(AppsFlyerProperties.EmailsCryptType cryptMethod,
+                                   java.lang.String... email)
+```
+
+**Description**
+
+Set the user emails and hash them with SHA256.
+
+**Input arguments**
+
+| Type | Name | Description |
+| --- | --- | --- |
+| `AppsFlyerProperties.EmailsCryptType` | `cryptMethod` | Encryption methods:
+• AppsFlyerProperties.EmailsCryptType.NONE
+• AppsFlyerProperties.EmailsCryptType.SHA256 |
+| `String...` | `email` | One user email. |
+
+**Returns**
+
+`void`.
+
 
 ### setUserEmails 
 
