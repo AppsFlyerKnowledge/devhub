@@ -403,21 +403,7 @@ For advertisers who use vanity OneLinks.
 | :-------------------- | :--------------------- |
 | `NSArray<NSString *>` | `oneLinkCustomDomains` |
 
-### phoneNumber (Deprecated)
 
-<span class="annotation-deprecated">Deprecated in V7.0.1</span>
-
-**Property declaration**
-
-```objc
-@property(nonatomic, nullable) NSString *phoneNumber
-```
-
-**Description**
-
-| Type       | Name          |
-| :--------- | :------------ |
-| `NSString` | `phoneNumber` |
 
 ### phoneNumber
 
@@ -428,8 +414,6 @@ Sets the user's phone number for Advanced Matching. Pass the country dialing cod
 ```objectivec
 @property(nonatomic, nullable) NSString *phoneNumber
 ```
-
-**Description**
 
 **Input arguments**
 
