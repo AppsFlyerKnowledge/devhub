@@ -1476,50 +1476,10 @@ AppsFlyerLib.getInstance().setPartnerData("test_int", partnerData)
 
 
 ### setPhoneNumber
- 
-<span class="annotation-deprecated">Deprecated in V7.0.1</span>
 
-**Method signature**
+<span class="annotation-removed">Removed in v7.0.1</span>
 
-```java
-void setPhoneNumber(java.lang.String phoneNumber)
-```
-
-
-
-**Description**  
-Will be sent as an SHA-256 encrypted string.
-
-**Input arguments**
-
-| Type     | Name          | Description |
-| :------- | :------------ | :---------- |
-| `String` | `phoneNumber` |             |
-
-**Returns**  
-`void`.
-
-### setPhoneNumber
-
-**Method signature**
-
-```java
-void setPhoneNumber(java.lang.String phoneNumber)
-```
-
-**Description**
-
-Sets the user's phone number and hashes it using SHA-256. Pass the country dialing code and local number separately.
-
-**Input arguments**
-
-| Type | Name | Description |
-| --- | --- | --- |
-| `String` | `phoneNumber` |  |
-
-**Returns**
-
-`void`.
+`setPhoneNumber` is fully removed, not deprecated, starting in v7.0.1. Apps using it must migrate to [`setUserPhone`](#setuserphone).
 
 ### setPreinstallAttribution
 
@@ -1678,57 +1638,145 @@ This function takes no parameters.
 
 
 ### setUserEmail
+<span class="annotation-added">Added in v7.0.1</span>
 
 **Method signature**
 
-```java
-void setUserEmail(AppsFlyerProperties.EmailsCryptType cryptMethod,
-                                   java.lang.String... email)
+```kotlin
+fun setUserEmail(email: String)
 ```
 
 **Description**
 
-Set the user emails and hash them with SHA256.
+Sets the user's email. The SDK normalizes and SHA-256 hashes the value on-device before appending it to the event payload. The plain-text value is never sent to AppsFlyer servers.
 
 **Input arguments**
 
 | Type | Name | Description |
 | --- | --- | --- |
-| `AppsFlyerProperties.EmailsCryptType` | `cryptMethod` | Encryption methods:
-• AppsFlyerProperties.EmailsCryptType.NONE
-• AppsFlyerProperties.EmailsCryptType.SHA256 |
-| `String...` | `email` | One user email. |
+| `String` | `email` | Plain-text email string. |
+
+**Payload field**: `email_hashed`
+
+**Normalization**: Lowercase; strip leading/trailing/internal whitespace; strip hidden/non-printable characters (for example, zero-width spaces, Unicode control characters). Normalize, then SHA-256, then hex encode.
 
 **Returns**
 
 `void`.
 
+This method replaces the removed `setUserEmail(cryptMethod, email)` overload and `setUserEmails`.
 
-### setUserEmails 
+### setUserEmails
 
-<span class="annotation-deprecated">Deprecated in V7.0.1</span> 
+<span class="annotation-removed">Removed in v7.0.1</span>
+
+`setUserEmails` is fully removed, not deprecated, starting in v7.0.1. Apps using it must migrate to [`setUserEmail`](#setuseremail).
+
+### setUserFbLoginId
+<span class="annotation-added">Added in v7.0.1</span>
 
 **Method signature**
 
-```java
-void setUserEmails(AppsFlyerProperties.EmailsCryptType cryptMethod,
-                                   java.lang.String... emails)
+```kotlin
+fun setUserFbLoginId(fbLoginId: Long)
 ```
 
+**Description**
 
-
-**Description**  
-Set the user emails and encrypt them.
+Sets the user's Facebook App-Scoped ID. Unlike the other hashed-PII setters, this value is sent as-is and is not hashed.
 
 **Input arguments**
 
-| Type                                  | Name          | Description                                                                                                                                                                                                                         |
-| :------------------------------------ | :------------ | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `AppsFlyerProperties.EmailsCryptType` | `cryptMethod` | Encryption methods: <ul><li>AppsFlyerProperties.EmailsCryptType.NONE</li><li> AppsFlyerProperties.EmailsCryptType.SHA256</li></ul> |
-| `String...`                           | `emails`      | One or more  user emails.                                                                                                                                                                                                           |
+| Type | Name | Description |
+| --- | --- | --- |
+| `Long` | `fbLoginId` | Facebook App-Scoped ID, 16 to 18 digits. |
+
+**Payload field**: `fb_login_id` (integer, not hashed)
 
 **Returns**  
 `void`.
+
+### setUserFirstName
+<span class="annotation-added">Added in v7.0.1</span>
+
+**Method signature**
+
+```kotlin
+fun setUserFirstName(firstName: String)
+```
+
+**Description**
+
+Sets the user's first name. The SDK normalizes and SHA-256 hashes the value on-device before appending it to the event payload.
+
+**Input arguments**
+
+| Type | Name | Description |
+| --- | --- | --- |
+| `String` | `firstName` | Plain-text first name. |
+
+**Payload field**: `first_name_hashed`
+
+**Normalization**: Lowercase; special characters preserved and UTF-8 encoded. Normalize, then SHA-256 of the UTF-8 bytes, then hex encode.
+
+**Returns**  
+`void`.
+
+### setUserLastName
+<span class="annotation-added">Added in v7.0.1</span>
+
+**Method signature**
+
+```kotlin
+fun setUserLastName(lastName: String)
+```
+
+**Description**
+
+Sets the user's last name. Same normalization and processing as [`setUserFirstName`](#setuserfirstname).
+
+**Payload field**: `last_name_hashed`
+
+**Returns**  
+`void`.
+
+### setUserPhone
+<span class="annotation-added">Added in v7.0.1</span>
+
+**Method signature**
+
+```kotlin
+fun setUserPhone(countryCode: String, phoneNumber: String)
+```
+
+**Description**
+
+Sets the user's phone number. Pass the country dialing code and local number separately. The SDK concatenates `countryCode` and `phoneNumber` into a single string before normalization, then produces two hashed payload fields from that string.
+
+**Input arguments**
+
+| Type | Name | Description |
+| --- | --- | --- |
+| `String` | `countryCode` | Dialing code, for example `"1"`, `"44"`, `"380"`. |
+| `String` | `phoneNumber` | Local number. May include spaces and symbols. |
+
+| Payload field | Normalization |
+| --- | --- |
+| `phone_number_hashed` | Strip symbols and letters, strip leading zeros, digits only. |
+| `phone_number_e164_hashed` | Strip all non-digit characters, then prepend `+`. |
+
+**Usage example**
+
+```kotlin
+AppsFlyerLib.getInstance().setUserPhone("1", "(650) 555-1212")
+```
+
+`phone_number_hashed` hashes `16505551212`. `phone_number_e164_hashed` hashes `+16505551212`.
+
+**Returns**  
+`void`.
+
+This method replaces the removed `setPhoneNumber`.
 
 ### start
 

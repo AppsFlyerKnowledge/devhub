@@ -594,6 +594,26 @@ Matches URLs that contain `contains` as a substring and appends query parameters
 **Returns**  
 `void`.
 
+### clearUserPii
+<span class="annotation-added">Added in v7.0.1</span>
+
+**Method signature**
+
+```objc
+- (void)clearUserPii NS_SWIFT_NAME(clearUserPii());
+```
+
+**Description**
+
+Clears all hashed-PII fields set via the `setUser*` APIs above. No Android equivalent in this release.
+
+**Input arguments**  
+This method takes no input arguments.
+
+**Returns**
+
+`void`.
+
 ### continue
 
 **Method signature**
@@ -1168,27 +1188,34 @@ This method takes no input arguments.
 `void`
 
 ### setUserEmail
+<span class="annotation-added">Added in v7.0.1</span>
 
 **Method signature**
 
+```objc
+- (void)setUserEmail:(NSString *)email NS_SWIFT_NAME(setUserEmail(_:));
+```
 ```swift
-setUserEmails(userEmails: [String]?, with: EmailCryptType)
+func setUserEmail(_ email: String)
 ```
 
 **Description**
 
-Use this to set the user email(s). **Note**: `MD-5` and `SHA-1` encryption types are deprecated starting with SDK V6.9.0. Currently, only `SHA-256` and `NONE` are supported.
+Sets the user's email. The SDK normalizes and SHA-256 hashes the value on-device before appending it to attribution and event payloads. The plain-text value is never sent to AppsFlyer servers.
 
 **Input arguments**
 
 | Type | Name | Description |
 | --- | --- | --- |
-| `String` | `userEmails` | The user email address |
-| `EmailCryptType` | `type` | Encryption type. |
+| `NSString` | `email` | Plain-text email string. |
+
+**Payload field**: `email_hashed`
 
 **Returns**
 
 `void`.
+
+This method replaces the `setUserEmail(userEmails:with:)` overload.
 
 ### setUserEmails
 
@@ -1216,6 +1243,113 @@ Use this to set the user email(s).
 
 **Returns**  
 `void`.
+
+### setUserFbLoginId
+<span class="annotation-added">Added in v7.0.1</span>
+
+**Method signature**
+
+```objc
+- (void)setUserFbLoginId:(int64_t)fbLoginId NS_SWIFT_NAME(setUserFbLoginId(_:));
+```
+
+**Description**
+
+Sets the user's Facebook App-Scoped ID. Unlike the other hashed-PII setters, this value is sent as-is and is not hashed.
+
+**Input arguments**
+
+| Type | Name | Description |
+| --- | --- | --- |
+| `int64_t` | `fbLoginId` | Facebook App-Scoped ID, 16 to 18 digits. |
+
+**Payload field**: `fb_login_id` (integer, not hashed)
+
+`0` is the unset sentinel and suppresses the field. Facebook App-Scoped IDs are never `0`. Pass `0` to clear this field without calling `clearUserPii`.
+
+**Returns**
+
+`void`.
+
+### setUserFirstName
+<span class="annotation-added">Added in v7.0.1</span>
+
+**Method signature**
+
+```objc
+- (void)setUserFirstName:(NSString *)firstName NS_SWIFT_NAME(setUserFirstName(_:));
+```
+
+**Description**
+
+Sets the user's first name. The SDK normalizes and SHA-256 hashes the value on-device before appending it to attribution and event payloads.
+
+**Input arguments**
+
+| Type | Name | Description |
+| --- | --- | --- |
+| `NSString` | `firstName` | Plain-text first name. |
+
+**Payload field**: `first_name_hashed`
+
+**Returns**
+
+`void`.
+
+### setUserLastName
+<span class="annotation-added">Added in v7.0.1</span>
+
+**Method signature**
+
+```objc
+- (void)setUserLastName:(NSString *)lastName NS_SWIFT_NAME(setUserLastName(_:));
+```
+
+**Description**
+
+Sets the user's last name. Same processing as [`setUserFirstName`](#setuserfirstname).
+
+**Payload field**: `last_name_hashed`
+
+**Returns**
+
+`void`.
+
+### setUserPhone
+<span class="annotation-added">Added in v7.0.1</span>
+
+**Method signature**
+
+```objc
+- (void)setUserPhoneWithCountryCode:(NSString *)countryCode
+                        phoneNumber:(NSString *)phoneNumber
+    NS_SWIFT_NAME(setUserPhone(countryCode:phoneNumber:));
+```
+```swift
+func setUserPhone(countryCode: String, phoneNumber: String)
+```
+
+**Description**
+
+Sets the user's phone number. Pass the country dialing code and local number separately. Produces two payload fields from the same input.
+
+**Input arguments**
+
+| Type | Name | Description |
+| --- | --- | --- |
+| `NSString` | `countryCode` | Dialing code. |
+| `NSString` | `phoneNumber` | Local number. |
+
+| Payload field | Format |
+| --- | --- |
+| `phone_number_hashed` | Digits only, leading zeros stripped. |
+| `phone_number_e164_hashed` | `+` prefix followed by digits. |
+
+**Returns**
+
+`void`.
+
+This method replaces the [`phoneNumber`](#phonenumber) property for new integrations.
 
 ### shared
 
