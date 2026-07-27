@@ -85,7 +85,7 @@ Set your OneLink ID from OneLink configuration. Used in User Invites to generate
 ```
 
 **Description**  
-Use this property to set your app’s Apple ID(taken from the app’s page on iTunes Connect)
+Use this property to set your app’s Apple ID (taken from the app’s page on iTunes Connect)
 
 | Type       | Name         |
 | :--------- | :----------- |
@@ -489,7 +489,7 @@ Set this flag to YES, to collect the current device name(e.g. “My iPhone”).
 ```
 
 **Description**  
-In-app purchase receipt validation Apple environment(production or sandbox).
+In-app purchase receipt validation Apple environment (production or sandbox).
 
 | Type   | Name                          |
 | :----- | :---------------------------- |
@@ -504,7 +504,7 @@ In-app purchase receipt validation Apple environment(production or sandbox).
 ```
 
 **Description**  
-Set this flag to test uninstall on Apple environment(production or sandbox).
+Set this flag to test uninstall on Apple environment (production or sandbox).
 
 | Type   | Name                  |
 | :----- | :-------------------- |

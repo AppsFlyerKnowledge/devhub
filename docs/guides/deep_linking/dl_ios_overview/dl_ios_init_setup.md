@@ -65,7 +65,7 @@ Configuring mobile apps to register approved domains takes place inside Xcode. I
 Universal Links only work when clicked on. For example, when clicking a link in a web page or email. Pasting the link in the browser address bar doesn't deep link into the app.
 
 #### OneLink subdomain
-While the OneLink subdomain can be changed at anytime, it causes all existing OneLink URLs using the original subdomain to stop working.
+While the OneLink subdomain can be changed at any time, it causes all existing OneLink URLs using the original subdomain to stop working.
 
 #### OneLink in social network apps
 Not all apps, including social networks apps, fully support Universal links. For further details, please see [this guide](https://support.appsflyer.com/hc/en-us/articles/207032246-OneLink-Basic-Setup-Guide#partners-onelink-social-apps).

@@ -81,7 +81,7 @@ The `DeepLink` object contains the deep linking information arranged in public v
 
 Legacy OneLink links are links that don't contain the parameters recommended for Unified Deep Linking: `deep_link_value` and `deep_link_sub1-10`.
 Usually these are links that already exist in the field when migrating from legacy methods to UDL.
-News users using legacy links are handled by `onConversionDataSuccess` in the context of [extended deferred deep linking](dl_ios_ocds_ddl).
+New users using legacy links are handled by `onConversionDataSuccess` in the context of [extended deferred deep linking](dl_ios_ocds_ddl).
 UDL handles deep linking for existing users. It's recommended that you add support in the UDL callback `didResolveDeepLink` for legacy parameters.
 [Swift code example](https://github.com/AppsFlyerSDK/appsflyer-onelink-ios-sample-apps/blob/7c58363b01a184863d3b3fc07ba707a72d76bcda/swift/basic_app/basic_app/AppDelegate.swift#L152-L162)
 

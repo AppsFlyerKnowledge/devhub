@@ -90,7 +90,7 @@ The `DeepLink `object contains the deep linking information and helper functions
 
 Legacy OneLink are links that don't contain the parameters recommended for UDL: `deep_link_value` and `deep_link_sub1-10`.
 Usually these are links that already exist and are in use when migrating from legacy methods to UDL.
-News users using legacy links are handled by `onConversionDataSuccess` in the context of [Extended Deferred Deep Linking](dl_android_ocds_ddl).
+New users using legacy links are handled by `onConversionDataSuccess` in the context of [Extended Deferred Deep Linking](dl_android_ocds_ddl).
 UDL handles deep linking for existing users. In this case, it's recommended to add support in the UDL callback `onDeepLinking` for legacy parameters.
 [Java code example](https://github.com/AppsFlyerSDK/appsflyer-onelink-android-sample-apps/blob/bcf13e588561af3739bafbab510d6c3a7fb4e08a/java/basic_app/app/src/main/java/com/appsflyer/onelink/appsflyeronelinkbasicapp/AppsflyerBasicApp.java#L81-L89)
 

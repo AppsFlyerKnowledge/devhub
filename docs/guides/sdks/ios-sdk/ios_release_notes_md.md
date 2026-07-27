@@ -135,9 +135,9 @@ The change includes:
 
 Notes: 
 
-1. This version is compatible with Purchase Connector v6.16.0. If you are using the Purhcase Connector and you would like to use this SDK version, please update the Purchase Connector to v6.16.0 as well.
+1. This version is compatible with Purchase Connector v6.16.0. If you are using the Purchase Connector and you would like to use this SDK version, please update the Purchase Connector to v6.16.0 as well.
 
-2. Storekit v1 is still supported with this release.
+2. StoreKit v1 is still supported with this release.
 
 
 ## Version 6.15.3

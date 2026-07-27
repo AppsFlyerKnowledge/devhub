@@ -132,7 +132,7 @@ The SDK's AndroidManifest.xml includes rules to opt out of backing up the Shared
 
 To merge the SDK backup rules with your app backup rules and to prevent conflicts, perform the following instructions for each use case. 
 
-### Fix confilict with fullBackupContent=”true”
+### Fix conflict with fullBackupContent=”true”
 
 If you add `android:fullBackupContent="true"` in the `AndroidManifest.xml`, you might get the following error:
 

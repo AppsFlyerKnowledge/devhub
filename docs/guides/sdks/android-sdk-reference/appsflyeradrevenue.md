@@ -23,7 +23,7 @@ AppsFlyerAdRevenue is the parent class for the ad revenue SDK.
   "title": "Methods"
 }
 [/block]
-### initaliaze
+### initialize
 **Method signature**
 ```java
 public static void initialize(AppsFlyerAdRevenue revenue)
@@ -61,7 +61,7 @@ Logs an ad revenue impression.
 | Type | Name | Description |
 |:--------|:-----------------|:--------------|
 | `String` | `monetizationNetwork` | The name of the monetization network. |
-| [`MediationNetwork`](https://dev.appsflyer.com/hc/docs/appsflyeradrevenue#mediationnetwork) | `mediationNetwork` | Enum of the medation network. |
+| [`MediationNetwork`](https://dev.appsflyer.com/hc/docs/appsflyeradrevenue#mediationnetwork) | `mediationNetwork` | Enum of the mediation network. |
 | [`Currency`](https://docs.oracle.com/javase/8/docs/api/java/util/Currency.html) | `eventRevenueCurrency` | Currency of the ad revenue event. |
 | `Double` | `eventRevenue` | Amount of the ad revenue event. |
 | `Map<String, String>` | `nonMandatory` | Contains native and custom fields for the ad revenue payload, as described in the following usage example. |

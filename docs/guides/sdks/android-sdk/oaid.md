@@ -58,7 +58,7 @@ implementation files('libs/oaid_sdk_2.0.0.aar')
 
 ### Huawei HMS SDK integration
 
-**To integrate the Hauwei HMS SDK**:
+**To integrate the Huawei HMS SDK**:
 
 1. Add the Huawei maven repo as follows:
 

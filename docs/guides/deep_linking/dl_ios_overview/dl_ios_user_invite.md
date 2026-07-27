@@ -113,7 +113,7 @@ To enable users to invite their friends to your app, you need a way to generate 
 ### Set the shortlink ID
 
 <span class="annotation-optional">Optional</span>  
-The shortlink ID can be determined by the developer, by adding the paramter `af_custom_shortlink` to the `LinkGenerator` instance.
+The shortlink ID can be determined by the developer, by adding the parameter `af_custom_shortlink` to the `LinkGenerator` instance.
 
 ```swift
 generator.addParameterValue(<value>, forKey:"af_custom_shortlink")
@@ -171,7 +171,7 @@ User A's referrer ID is available in the UDL `didResolveDeepLink` (in this examp
 
 **To reward User A for User B's action:**
 
-1. Retrieve user A's referrer ID and add it to one of the customizble in-app event parameters (for example, `af_param_1`):
+1. Retrieve user A's referrer ID and add it to one of the customizable in-app event parameters (for example, `af_param_1`):
    ```swift
    AppsFlyerLib.shared().logEvent(AFEventPurchase, 
      withValues: [
@@ -204,7 +204,7 @@ User A's referrer ID is available in the UDL `didResolveDeepLink` (in this examp
 
 **To reward User A for User B's action:**
 
-1. Retrieve user A's referrer ID and add it to one of the customizble in-app event parameters (for example, `af_param_1`):
+1. Retrieve user A's referrer ID and add it to one of the customizable in-app event parameters (for example, `af_param_1`):
    ```swift
    AppsFlyerLib.shared().logEvent(AFEventPurchase, 
      withValues: [

@@ -27,7 +27,7 @@ The AppsFlyer ROI360 purchase connector is used to validate and report in-app pu
 
 > ⚠️ Important
 > 
-> See the following table for purchase connector and AppsFlyer SDK version compatability and use the correct version to avoid unexpected behavior.
+> See the following table for purchase connector and AppsFlyer SDK version compatibility and use the correct version to avoid unexpected behavior.
 
 |  Purchase connector  | AppsFlyer SDK |
 | :------: | :--------: |
@@ -74,7 +74,7 @@ Follow standard SPM dependency manager instructions.
 
 > 📘 Note
 > 
-> - This repository contains statically linked `PurchaseConnector.xcframework`. If you want to use dynamic .xcframework, integrate it for SPM from ththe following repository:
+> - This repository contains statically linked `PurchaseConnector.xcframework`. If you want to use dynamic .xcframework, integrate it for SPM from the following repository:
 https://github.com/AppsFlyerSDK/PurchaseConnector-Dynamic*
 > - PurchaseConnector has a dependency on [AppsFlyerLib framework](https://github.com/AppsFlyerSDK/AppsFlyerFramework), so make sure to integrate it as well for Carthage and SPM.
 
@@ -136,7 +136,7 @@ if #available(iOS 15.0, *) {
 
 ## Basic integration
 
-> **Note**: Before implemening the purchase connector, make sure to set up AppsFlyer `appId` and `devKey`.
+> **Note**: Before implementing the purchase connector, make sure to set up AppsFlyer `appId` and `devKey`.
 
 ### Set up purchase connector
 

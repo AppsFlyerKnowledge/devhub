@@ -15,7 +15,7 @@ The provided code aims to regulate the functionality of wrapped links within an 
 
 ## Flow description
 
-1. Put of your support ESP domains in a constant list. We will refer to this below
+1. Put your support ESP domains in a constant list. We will refer to this below
 
 ```swift
    var espResolvedDeepLinkDomains = ["click.example.com", "email.example.com"]

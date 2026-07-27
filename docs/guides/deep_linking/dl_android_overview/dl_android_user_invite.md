@@ -132,7 +132,7 @@ To enable users to invite their friends to your app, you need a way to generate 
 ### Set the shortlink ID
 
 <span class="annotation-optional">Optional</span>  
-The shortlink ID can be determined by the developer, by adding the paramter `af_custom_shortlink` to the `LinkGenerator` instance.
+The shortlink ID can be determined by the developer, by adding the parameter `af_custom_shortlink` to the `LinkGenerator` instance.
 
 ```java
 linkGenerator.addParameter("af_custom_shortlink", <value>);

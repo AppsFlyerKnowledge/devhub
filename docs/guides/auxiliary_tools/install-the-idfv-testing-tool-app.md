@@ -29,4 +29,4 @@ To enable the app to emulate belonging to the same vendor as the tested app, it 
 
    **For example,** if your tested app's Bundle Identifier is `com.MyCompany.apps.myapp`, you should change the IDFV testing tool Bundle Identifier (`MyIDFVByAppsflyer`)  into `com.MyCompany.apps.MyIDFVByAppsflyer`.
 6. Build and install the IDFV testing tool on the device. The new app receives the same IDFV as your tested app.
-7. Launch the IDFV testing tool app. The IDFV number is displayed in the app. You can use the IDFV when [manually regisering the device as a testing device](https://support.appsflyer.com/hc/en-us/articles/207031996#add-a-device-manually-via-the-user-interface).
+7. Launch the IDFV testing tool app. The IDFV number is displayed in the app. You can use the IDFV when [manually registering the device as a testing device](https://support.appsflyer.com/hc/en-us/articles/207031996#add-a-device-manually-via-the-user-interface).
