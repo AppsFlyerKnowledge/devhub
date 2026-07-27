@@ -407,7 +407,7 @@ For advertisers who use vanity OneLinks.
 
 ### phoneNumber
 
-Sets the user's phone number for Advanced Matching. Pass the country dialing code and local number separately.
+Sets the user's phone number. Pass the country dialing code and local number separately.
 
 **Property declaration**
 
