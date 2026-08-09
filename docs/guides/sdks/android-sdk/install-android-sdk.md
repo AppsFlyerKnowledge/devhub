@@ -352,9 +352,7 @@ Known issues
 
 ### Missing resource files
 
-<span class="annotation-deprecated">SDK V5</span>  
-If you are using Android SDK V5 and above, make sure that in the APK file, in addition to the `classes.dex` and resources files, you also have a **com > appsflyer > internal**  folder with files `a-` and `b-` inside.  
-Note: Before SDK 5.3.0, file names are `a.` and `b.`
+Make sure that in the APK file, in addition to the `classes.dex` and resource files, you also have an **assets > com > appsflyer > internal** folder containing four files ending with `a-`, `b-`, `c-`, and `d-`.
 
 Check that you have the required files by opening your APK in Android Studio:
 
