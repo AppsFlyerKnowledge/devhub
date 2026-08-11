@@ -356,7 +356,16 @@ Make sure that in the APK file, in addition to the `classes.dex` and resource fi
 
 Check that you have the required files by opening your APK in Android Studio:
 
-![](https://files.readme.io/9969b81-image_with_dash.png "image_with_dash.png")
+```
+assets/
+└── com/
+    └── appsflyer/
+        └── internal/
+            ├── <hash>a-
+            ├── <hash>b-
+            ├── <hash>c-
+            └── <hash>d-
+```
 
 If those files are missing, the SDK can't make network requests to our server, and you need to contact your CSM or support.
 
