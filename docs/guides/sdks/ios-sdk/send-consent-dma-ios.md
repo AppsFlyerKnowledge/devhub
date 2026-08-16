@@ -4,12 +4,12 @@ slug: ios-send-consent-for-dma-compliance
 category:
   uri: AppsFlyer SDKs
 parent:
-  uri: ios-sdk
+  uri: features-ios-6
 content:
   excerpt: Learn how to preserve user privacy in the iOS SDK.
 privacy:
   view: public
-position: 12
+position: 3
 ---
 
 For a general introduction to DMA consent data, see [here](https://dev.appsflyer.com/hc/docs/send-consent-for-dma-compliance).

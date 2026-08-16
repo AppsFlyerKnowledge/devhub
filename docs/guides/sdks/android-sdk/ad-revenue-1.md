@@ -4,12 +4,12 @@ slug: ad-revenue-1
 category:
   uri: AppsFlyer SDKs
 parent:
-  uri: android-sdk
+  uri: in-app-events-android-6
 content:
   excerpt: Impression-level ad revenue reporting by SDK
 privacy:
   view: public
-position: 8
+position: 3
 ---
 
 ## Recommended

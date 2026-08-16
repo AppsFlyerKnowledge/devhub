@@ -6,10 +6,10 @@ category:
 content:
   excerpt: Learn how to work with in-app events in the iOS SDK.
 parent:
-  uri: ios-sdk
+  uri: in-app-events-ios-6
 privacy:
   view: public
-position: 5
+position: 1
 ---
 ## Overview
 

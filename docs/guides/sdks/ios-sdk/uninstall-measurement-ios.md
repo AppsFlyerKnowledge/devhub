@@ -4,10 +4,10 @@ slug: uninstall-measurement-ios
 category:
   uri: AppsFlyer SDKs
 parent:
-  uri: ios-sdk
+  uri: features-ios-6
 privacy:
   view: public
-position: 8
+position: 2
 ---
 ## Overview
 

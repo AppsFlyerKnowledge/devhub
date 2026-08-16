@@ -4,10 +4,10 @@ slug: android-send-consent-for-dma-compliance
 category:
   uri: AppsFlyer SDKs
 parent:
-  uri: android-sdk
+  uri: features-android-6
 privacy:
   view: public
-position: 13
+position: 3
 ---
 
 For a general introduction to DMA consent data, see [here](https://dev.appsflyer.com/hc/docs/send-consent-for-dma-compliance).

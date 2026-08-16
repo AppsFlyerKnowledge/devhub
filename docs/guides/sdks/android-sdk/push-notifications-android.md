@@ -4,10 +4,10 @@ slug: push-notifications-android
 category:
   uri: AppsFlyer SDKs
 parent:
-  uri: android-sdk
+  uri: features-android-6
 privacy:
   view: public
-position: 7
+position: 1
 ---
 ## Overview
 

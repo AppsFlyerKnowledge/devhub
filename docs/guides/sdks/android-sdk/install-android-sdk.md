@@ -4,12 +4,12 @@ slug: install-android-sdk
 category:
   uri: AppsFlyer SDKs
 parent:
-  uri: android-sdk
+  uri: integrate-sdk-android-6
 content:
   excerpt: Learn how to download and install the Android SDK.
 privacy:
   view: public
-position: 2
+position: 1
 ---
 
 ## Recommended

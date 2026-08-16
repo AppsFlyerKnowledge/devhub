@@ -8,10 +8,10 @@ metadata:
     Learn how to configure push notification measurement in the AppsFlyer iOS
     SDK.
 parent:
-  uri: ios-sdk
+  uri: features-ios-6
 privacy:
   view: public
-position: 7
+position: 1
 ---
 ## Overview
 

@@ -4,10 +4,10 @@ slug: install-android-sdk-7
 category:
   uri: AppsFlyer SDKs
 parent:
-  uri: android-sdk-7
+  uri: integrate-sdk-android-7
 privacy:
   view: public
-position: 2
+position: 1
 ---
 
 ## Before you begin

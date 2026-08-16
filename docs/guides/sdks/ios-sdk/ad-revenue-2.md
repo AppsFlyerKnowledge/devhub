@@ -4,10 +4,10 @@ slug: ad-revenue-2
 category:
   uri: AppsFlyer SDKs
 parent:
-  uri: ios-sdk
+  uri: in-app-events-ios-6
 privacy:
   view: public
-position: 9
+position: 3
 ---
 
 ## Recommended

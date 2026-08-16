@@ -7,7 +7,7 @@ parent:
   uri: android-sdk
 privacy:
   view: anyone_with_link
-position: 99
+position: 7
 ---
 
 ## Overview

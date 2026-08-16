@@ -4,12 +4,12 @@ slug: preserve-user-privacy-ios
 category:
   uri: AppsFlyer SDKs
 parent:
-  uri: ios-sdk
+  uri: ios-sdk-6
 content:
   excerpt: Learn how to preserve user privacy in the iOS SDK.
 privacy:
   view: public
-position: 11
+position: 3
 ---
 ## Getting Started on Privacy Preservation
 

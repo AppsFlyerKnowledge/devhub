@@ -11,7 +11,7 @@ content:
     journey from Branch to AppsFlyer
 privacy:
   view: anyone_with_link
-position: 90
+position: 9
 ---
 
 # What is Branch Migration Navigator?

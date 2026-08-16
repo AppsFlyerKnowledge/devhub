@@ -4,10 +4,10 @@ slug: integrate-ios-sdk-7
 category:
   uri: AppsFlyer SDKs
 parent:
-  uri: ios-sdk-7
+  uri: integrate-sdk-ios-7
 privacy:
   view: public
-position: 3
+position: 2
 ---
 
 ## Initializing the iOS SDK
@@ -299,53 +299,7 @@ func application(_ application: UIApplication,
 
 ---
 
-## Setting the Customer User ID
-
-<span class="annotation-optional">Optional</span>
-
-The Customer User ID (CUID) is a unique user identifier created by the app owner outside the SDK. If made available to the SDK, it can be associated with installs and other in-app events. These CUID-tagged events can be cross-referenced with user data from other devices and applications.
-
-### Set the CUID
-
-To set the CUID:
-
-```objc Objective-C
-[AppsFlyerLib shared].customerUserID = @"my user id";
-```
-```swift Swift
-AppsFlyerLib.shared().customerUserID = "my user id"
-```
-
-> 📘 Note
->
-> The Customer User ID must be set with every app launch.
-
-### Associate the CUID with the install event
-
-If you need the CUID to be associated with the install event, set it before calling `start`. In SDK V7, since you control when `start` is called, set the CUID inside your `registerSessionReadyListener` callback before calling `start`.
-
-### Send SKAN and AdAttributionKit postback copies to AppsFlyer
-
-If your app uses both `SKAdNetwork` and `AdAttributionKit`, configure both postback copy endpoints in the `Info.plist` file.
-
-#### Send SKAN postback copies to AppsFlyer
-
-Use this setup to send SKAdNetwork postback copies to AppsFlyer.
-
-1. Add the `NSAdvertisingAttributionReportEndpoint` key to your app's `info.plist`.
-2. Set the key's value to `https://appsflyer-skadnetwork.com/`.
-
-Once configured, Apple will send SKAdNetwork postback copies to AppsFlyer. Copies of received postbacks are available in the [postbacks copy report](https://support.appsflyer.com/hc/en-us/articles/360014261518-SKAN-raw-data-reports#report-types).
-
-#### Send AdAttributionKit postback copies to AppsFlyer
-
-Use this setup to send AdAttributionKit postback copies to AppsFlyer.
-
-1. In your app's Info.plist, add a new key.
-2. Type the key name `AdAttributionKit` and select `AdAttributionKit - Postback Copy URL` from the pop-up menu.
-3. Set the key's value to `https://appsflyer-skadnetwork.com/`.
-
-Once configured, Apple will send AdAttributionKit postback copies to AppsFlyer. Copies of received postbacks are available in the [postbacks copy report](https://support.appsflyer.com/hc/en-us/articles/360014261518-SKAN-raw-data-reports#report-types).
+See [Setting the Customer User ID](doc:customer-user-id-ios-7) to associate a CUID with this integration, and how to configure SKAN / AdAttributionKit postback copies.
 
 ---
 
@@ -376,6 +330,62 @@ AppsFlyerLib.shared().isDebug = true
 
 ---
 
-## Testing the integration
+## Test the integration
 
-For detailed integration testing instructions, see the [iOS SDK integration testing guide](doc:testing-ios).
+[block:html]
+{
+  "html": "<style>\n  .containerBox {\n    right: 0;\n    display: flex;\n    justify-content: flex-start;\n    border-radius: 10px;\n    padding: 20px 10px;\n    padding-right: 50px;\n    padding-top: 10px;\n  }\n .djButton {\n    padding: 8px 16px;\n    border-radius: 4px;\n    text-decoration: none;\n    color: white;\n    font-weight: 600;\n   \tcursor: pointer;\n    border: none;\n    background-color: rgb(3, 109, 235) !important;\n  }\n  \n  .djButton:hover {\n  \tbackground-color: #0360ce !important;\n    transition: 0.3s;\n  }\n</style>\n\n<div class=\"containerBox\">\n  <img src=\"https://dj.dev.appsflyer.com/images/DJ_illustratration.svg\" style=\"width: 120px; margin: 0 0; margin-right: 20px\">\n  <div>\n  \n      <h3>\n        Easily test with our SDK wizard\n    </h3>\n      <button onclick=\"window.open('https://dj.dev.appsflyer.com/?sourceos=ios&utm_source=devhub&utm_medium=integrate-ios-sdk-7');gtag('event', 'click', {'event_category': 'DJ_Banner', 'event_label': 'DJ_ios_test', 'value': '1'});\" target=\"_blank\" class=\"djButton\">\n      Let's go\n      </button>\n  </div>\n</div>\n"
+}
+[/block]
+
+> **Note**
+> 
+> If you prefer not to use our recommended wizard, you can find detailed manual testing instructions [here](doc:manual-testing-ios).
+
+For a full troubleshooting checklist, see [Troubleshooting](doc:troubleshooting-ios-7).
+
+### Creating an iOS debug app
+
+<span class="annotation-optional">Optional</span>
+You can utilize Xcode's compilation configuration capabilities to configure an easy-to-use debug app. It will enable you to switch between your debug and production apps by tapping into Xcode's active compilation conditions.
+
+> 📘 Note
+>
+> If you don't mind mixing production data with test traffic, you can skip this section. All tests can be performed for both production and debug apps.
+
+This is achieved by configuring a User-Defined Setting in your project's Build Settings and exposing it via an `info.plist` property.
+
+**Step 1: Add a debug app to AppsFlyer**
+[Add a new pending iOS app to AppsFlyer](https://support.appsflyer.com/hc/en-us/articles/207377436-Adding-a-New-Application-to-the-AppsFlyer-Dashboard) or ask a team member with dashboard access to add it. Choose any available app ID–You will need it in step 3. Make sure the ID is 9 digits and starts with four 1s, for example, 111167538. 
+
+**Step 2: Add a User-Defined Setting**
+ 1. In Xcode, in the file navigator view, select your project root and go to **Build Settings**.
+ 2. Click **+** in the toolbar and select **Add User-Defined Setting**. In this case, we name it `AF_APP_ID`.
+ 3. Expand the newly created User-Defined Setting:
+    * Set the **Debug** Conditional Setting to your test app's app ID (mentioned in step 1)
+    * Set the **Release** Conditional Setting to your production app's app ID. 
+
+**Step 3: Expose app IDs via info.plist**
+Go to the project's `info.plist` and add a new property (called `AFAppID` in this case). Set its value to `$(AF_APP_ID)` (based on the User-Defined Setting name in step 2).
+
+**Step 4: Retrieve and set the app ID**
+To access and use app ID during SDK initialization, add the following code to `didFinishLaunchingWithOptions` in your `AppDelegate`:
+
+```swift
+func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+    // ...
+    guard let appID : String = Bundle.main.object(forInfoDictionaryKey: "AFAppID") as? String else {
+        fatalError("Cannot find app ID")
+    }
+    AppsFlyerLib.shared().appleAppID = appID
+    // ...
+    return true
+}
+```
+
+**Step 5: Run app using Debug build configuration**
+To change the active build configuration:
+ 1. go to **Product** > **Scheme** > **Edit Scheme...**.
+ 2. Select **Run** and change the **Build configuration** to **Debug** or **Release**, as needed.
+
+Now, when you use the Debug configuration to build your app, Xcode will use the debug app ID that you configured in step 2.

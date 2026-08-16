@@ -4,10 +4,10 @@ slug: conversion-data-android
 category:
   uri: AppsFlyer SDKs
 parent:
-  uri: android-sdk
+  uri: integrate-sdk-android-6
 privacy:
   view: public
-position: 6
+position: 3
 ---
 In this guide you will learn how to get conversion data using [`AppsFlyerConversionListener`](doc:android-sdk-reference-appsflyerconversionlistener), as well as [examples](doc:conversion-data-android#accessing-attribution-data) for using the conversion data.
 

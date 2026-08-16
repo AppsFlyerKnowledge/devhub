@@ -7,7 +7,7 @@ parent:
   uri: ios-sdk
 privacy:
   view: public
-position: 1
+position: 2
 ---
 
 iOS SDK v7 gives you explicit control over when the SDK fires a session, aligns the iOS and Android APIs, and lets you declare build-time settings in a plist file, so you can build more predictable, consent-aware integrations.

@@ -7,7 +7,7 @@ parent:
   uri: android-sdk
 privacy:
   view: public
-position: 14
+position: 1
 ---
 ## Version 7.0.1
 

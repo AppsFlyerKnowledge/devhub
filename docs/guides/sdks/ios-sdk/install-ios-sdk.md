@@ -6,10 +6,10 @@ category:
 content:
   excerpt: Learn how to download and install the iOS SDK.
 parent:
-  uri: ios-sdk
+  uri: integrate-sdk-ios-6
 privacy:
   view: public
-position: 2
+position: 1
 ---
 
 ## Recommended

@@ -4,10 +4,10 @@ slug: manual-testing-android
 category:
   uri: AppsFlyer SDKs
 parent:
-  uri: testing-android
+  uri: android-sdk
 privacy:
   view: anyone_with_link
-position: 0
+position: 11
 ---
 
 > 📘 **Note**

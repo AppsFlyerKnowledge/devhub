@@ -4,14 +4,14 @@ slug: branch-migration-ios
 category:
   uri: AppsFlyer SDKs
 parent:
-  uri: android-sdk
+  uri: ios-sdk
 content:
   excerpt: >-
     Activate the Branch Migration Navigator to streamline your traffic migration
     journey from Branch to AppsFlyer
 privacy:
   view: anyone_with_link
-position: 90
+position: 9
 ---
 
 # What is Branch Migration Navigator?

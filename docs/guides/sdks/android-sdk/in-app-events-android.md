@@ -4,10 +4,10 @@ slug: in-app-events-android
 category:
   uri: AppsFlyer SDKs
 parent:
-  uri: android-sdk
+  uri: in-app-events-android-6
 privacy:
   view: public
-position: 5
+position: 1
 ---
 ## Overview
 

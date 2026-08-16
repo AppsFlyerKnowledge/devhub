@@ -4,10 +4,10 @@ slug: integrate-android-sdk-7
 category:
   uri: AppsFlyer SDKs
 parent:
-  uri: android-sdk-7
+  uri: integrate-sdk-android-7
 privacy:
   view: public
-position: 3
+position: 2
 ---
 
 ## Initializing the Android SDK
@@ -254,52 +254,7 @@ class AFApplication : Application() {
 
 ---
 
-## Setting the Customer User ID
-
-<span class="annotation-optional">Optional</span>
-
-The Customer User ID (CUID) is a unique user identifier created by the app owner outside the SDK. The CUID lets app owners follow user journeys across different devices.
-
-### Set the Customer User ID
-
-Once the CUID is available, set it by calling [`setCustomerUserId`](doc:android-sdk-reference-appsflyerlib#setcustomeruserid):
-
-```java Java
-AppsFlyerLib.getInstance().setCustomerUserId(<MY_CUID>);
-```
-
-The CUID can only be associated with in-app events after it has been set. If `start` was called before `setCustomerUserId`, the install event will not be associated with the CUID. To associate the install event with the CUID, see below.
-
-> 📘 Note
->
-> In SDK V7, setter values are not persisted between sessions. Re-apply `setCustomerUserId` on every cold start.
-
-### Associate the CUID with the install event
-
-If you need the CUID to be associated with the install event, set it before calling `start()`.
-
-In SDK V7, this is straightforward: since you control when `start()` is called, set the CUID inside your session ready listener callback, before calling `start()`:
-
-```java Java
-AppsFlyerLib.getInstance().init(<YOUR_DEV_KEY>, null, this);
-
-AppsFlyerLib.getInstance().registerSessionReadyListener(() -> {
-    AppsFlyerLib.getInstance().setCustomerUserId(<MY_CUID>);
-    AppsFlyerLib.getInstance().start();
-});
-```
-```kotlin Kotlin
-AppsFlyerLib.getInstance().init(<YOUR_DEV_KEY>, null, this)
-
-AppsFlyerLib.getInstance().registerSessionReadyListener {
-    AppsFlyerLib.getInstance().setCustomerUserId(<MY_CUID>)
-    AppsFlyerLib.getInstance().start()
-}
-```
-
-> 📘 Note
->
-> The `waitForCustomerUserId` and `setCustomerIdAndLogSession` APIs have been removed in SDK V7. The new session model makes them unnecessary: since you control when `start()` is called, there is no need for a waiting mechanism.
+See [Setting the Customer User ID](doc:customer-user-id-android-7) to associate a CUID with this integration.
 
 ---
 
@@ -352,8 +307,46 @@ AppsFlyerLib.getInstance().setDebugLog(true)
 
 ---
 
-## Testing the integration
+## Test the integration
 
-<span class="annotation-optional">Optional</span>
+[block:html]
+{
+  "html": "<style>\n  .containerBox {\n    right: 0;\n    display: flex;\n    justify-content: flex-start;\n    border-radius: 10px;\n    padding: 20px 10px;\n    padding-right: 50px;\n    padding-top: 10px;\n  }\n .djButton {\n    padding: 8px 16px;\n    border-radius: 4px;\n    text-decoration: none;\n    color: white;\n    font-weight: 600;\n   \tcursor: pointer;\n    border: none;\n    background-color: rgb(3, 109, 235) !important;\n  }\n  \n  .djButton:hover {\n  \tbackground-color: #0360ce !important;\n    transition: 0.3s;\n  }\n</style>\n\n<div class=\"containerBox\">\n  <img src=\"https://dj.dev.appsflyer.com/images/DJ_illustratration.svg\" style=\"width: 120px; margin: 0 0; margin-right: 20px\">\n  <div>\n  \n      <h3>\n        Easily test with our SDK wizard\n    </h3>\n      <button onclick=\"window.open('https://dj.dev.appsflyer.com/?sourceos=android&utm_source=devhub&utm_medium=integrate-android-sdk-7');gtag('event', 'click', {'event_category': 'DJ_Banner', 'event_label': 'DJ_Anrd_test', 'value': '1'});\" target=\"_blank\" class=\"djButton\">\n      Let's go\n      </button>\n  </div>\n</div>\n"
+}
+[/block]
 
-For detailed integration testing instructions, see the [Android SDK integration testing guide](doc:testing-android).
+> **Note**
+> 
+> If you prefer not to use our recommended wizard, you can find detailed manual testing instructions [here](doc:manual-testing-android).
+
+For a full troubleshooting checklist, see [Troubleshooting](doc:troubleshooting-android-7).
+
+### Creating an Android debug app
+
+<span class="annotation-optional">Optional</span>  
+You can utilize Android Studio's build variants to configure an easy-to-use debug app for testing purposes.
+
+All tests can be performed for both production and debug apps.
+
+**Step 1: Configure Gradle's `debug` build type**  
+In your app-level `build.gradle` file, configure the `debug` [build type](https://developer.android.com/studio/build/build-variants#build-types) and set `applicationIdSuffix` to the test app's name (in this case, `.debug`).
+
+```groovy
+android {
+    // ...
+    buildTypes {
+        // Prevents a signing error when building the production app
+        release {
+            signingConfig signingConfigs.debug
+        } 
+        debug {
+            applicationIdSuffix ".debug"
+        }
+    }
+}
+```
+
+**Step 2: Add a new app to AppsFlyer**  
+Use the resulting package name as the app ID when [adding the app to the AppsFlyer dashboard](https://support.appsflyer.com/hc/en-us/articles/207377436), or ask a team member with dashboard access to add it.
+
+For example, if you have an app with the package name `com.your.app` and you use the Gradle configuration above, the test app's name will be `com.your.app.debug`. Pass this name as the app ID when adding the app to AppsFlyer.

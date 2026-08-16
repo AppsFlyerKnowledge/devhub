@@ -4,12 +4,12 @@ slug: integrate-android-sdk
 category:
   uri: AppsFlyer SDKs
 parent:
-  uri: android-sdk
+  uri: integrate-sdk-android-6
 content:
   excerpt: Learn how to initialize and start the Android SDK.
 privacy:
   view: public
-position: 3
+position: 2
 ---
 
 ## Recommended
@@ -150,92 +150,7 @@ class AFApplication : Application() {
 
 [Github link](https://github.com/AppsFlyerSDK/appsflyer-onelink-android-sample-apps/blob/80763ef8c93c49b1f0226455ae35d089f7968ede/java/basic_app/app/src/main/java/com/appsflyer/onelink/appsflyeronelinkbasicapp/AppsflyerBasicApp.java#L144-L145)
 
-## Setting the Customer User ID
-
-<span class="annotation-optional">Optional</span>  
-
-The Customer User ID (CUID) is a unique user identifier created by the app owner outside the SDK. It can be associated with in-app events if provided to the SDK. Once associated with the CUID, these events can be cross-referenced with user data from other devices and applications.
-
-### Set the customer User ID
-
-Once the CUID is available, you can set it by calling  [`setCustomerUserId`](https://dev.appsflyer.com/hc/docs/android-sdk-reference-appsflyerlib#setcustomeruserid).
-
-```java
-
-...
-AppsFlyerLib.getInstance().init(<YOUR_DEV_KEY>, conversionListener, this);  
-AppsFlyerLib.getInstance().start(this , <YOUR_DEV_KEY> );
-...
-// Do your magic to get the customerUserID...
-...
-AppsFlyerLib.getInstance().setCustomerUserId(<MY_CUID>);
-```
-
-The CUID can only be associated with in-app events after it was set. Since `start` was called before `setCustomerUserID`, the install event will not be associated with the CUID. If you need to associate the install event with the CUID, see the below section.
-
-### Associate the CUID with the install event
-
-If it’s important for you to associate the install event with the CUID, you should set it before calling `start`. 
-
-You can set the CUID before `start`  in two ways, depending on whether you start the SDK in the `Application` or the `Activity` class. 
-
-**When starting from the application class**
-
-If you started the SDK from the `Application` class (see: [`Starting the Android SDK`](https://dev.appsflyer.com/hc/docs/integrate-android-sdk#starting-the-android-sdk)) and you want the CUID to be associated with the install event, put the SDK in waiting mode to prevent the install data from being sent to AppsFlyer before the CUID is provided.
-
-To activate the waiting mode, set [`waitForCustomerUserId`](https://dev.appsflyer.com/hc/docs/android-sdk-reference-appsflyerlib#waitforcustomeruserid) to `true` after [`init`](https://dev.appsflyer.com/hc/docs/android-sdk-reference-appsflyerlib#init) and before [`start`](https://dev.appsflyer.com/hc/docs/android-sdk-reference-appsflyerlib#start).
-
-> ⚠️ **Important**
-> It's important to remember that putting the SDK in a waiting mode may block the SDK from sending the install event and consequently prevent attribution. This can occur, for example, when the user launches the application for the first time and then exits before the SDK can set the CUID. 
-
-```java
-AppsFlyerLib.getInstance().init(<YOUR_DEV_KEY>, getConversionListener(), getApplicationContext());
-AppsFlyerLib.getInstance().waitForCustomerUserId(true);
-AppsFlyerLib.getInstance().start(this);
-```
-
-After calling [`start`](https://dev.appsflyer.com/hc/docs/android-sdk-reference-appsflyerlib#start), you can add your custom code that makes the CUID available.
-
-Once the CUID is available, the final step includes setting the CUID, releasing the SDK from the waiting mode, and sending the attribution data with the customer ID to AppsFlyer. This step is performed using the call to [`setCustomerIdAndLogSession`](https://dev.appsflyer.com/hc/docs/android-sdk-reference-appsflyerlib#setcustomeridandlogsession).
-
-```java
-AppsFlyerLib.getInstance().setCustomerIdAndLogSession(<CUSTOMER_ID>, this);
-```
-
-Other than [`setCustomerIdAndLogSession`](https://dev.appsflyer.com/hc/docs/android-sdk-reference-appsflyerlib#setcustomeridandlogsession), do not use [`setCustomerUserId`](https://dev.appsflyer.com/hc/docs/android-sdk-reference-appsflyerlib#setcustomeruserid) or any other AppsFlyer SDK functionality, as the waiting SDK will ignore it.
-
-### Note
-
-If you wish to remove the waiting mode from the SDK initialization flow, it is not enough to delete the call to `waitForCustomerUserId(true)`. It is also required to replace it with `waitForCustomerUserID(false)`. Simply removing the call is insufficient because the 'waitForCustomerUserId' boolean flag is stored in the Android Shared Preferences. 
-
-**Example code**
-
-```java
-public class AFApplication extends Application {
-  @Override
-  public void onCreate() {
-    super.onCreate();
-    AppsFlyerConversionListener conversionDataListener = 
-    new AppsFlyerConversionListener() {
-      ...
-    };
-    AppsFlyerLib.getInstance().init(<YOUR_DEV_KEY>, getConversionListener(), getApplicationContext());
-    AppsFlyerLib.getInstance().waitForCustomerUserId(true);
-    AppsFlyerLib.getInstance().start(this);
-    // Do your magic to get the customerUserID
-    // any AppsFlyer SDK code invoked here will be discarded
-    // ...
-    // Once the customerUserID is available, call setCustomerIdAndLogSession(). 
-    // setCustomerIdAndLogSession() sets the CUID, releases the waiting mode,
-    // and sends the attribution data with the customer ID to AppsFlyer.
-    AppsFlyerLib.getInstance().setCustomerIdAndLogSession(<CUSTOMER_ID>, this);
-  }
-}
-```
-
-**When starting from the Activity class**
-
-If you started the SDK from an `Activity` (see: [`Deferring SDK start`](https://dev.appsflyer.com/hc/docs/integrate-android-sdk#deferring-sdk-start)) class and you want the CUID to be associated with the install event, set the CUID before[`start`](https://dev.appsflyer.com/hc/docs/android-sdk-reference-appsflyerlib#start).
+See [Setting the Customer User ID](doc:customer-user-id-android) to associate a CUID with this integration.
 
 ## Log sessions
 
@@ -271,9 +186,48 @@ AppsFlyerLib.getInstance().setDebugLog(true)
 > 
 > To avoid leaking sensitive information, make sure debug logs are disabled before distributing the app.
 
-## Testing the integration
+## Test the integration
+
+[block:html]
+{
+  "html": "<style>\n  .containerBox {\n    right: 0;\n    display: flex;\n    justify-content: flex-start;\n    border-radius: 10px;\n    padding: 20px 10px;\n    padding-right: 50px;\n    padding-top: 10px;\n  }\n .djButton {\n    padding: 8px 16px;\n    border-radius: 4px;\n    text-decoration: none;\n    color: white;\n    font-weight: 600;\n   \tcursor: pointer;\n    border: none;\n    background-color: rgb(3, 109, 235) !important;\n  }\n  \n  .djButton:hover {\n  \tbackground-color: #0360ce !important;\n    transition: 0.3s;\n  }\n</style>\n\n<div class=\"containerBox\">\n  <img src=\"https://dj.dev.appsflyer.com/images/DJ_illustratration.svg\" style=\"width: 120px; margin: 0 0; margin-right: 20px\">\n  <div>\n  \n      <h3>\n        Easily test with our SDK wizard\n    </h3>\n      <button onclick=\"window.open('https://dj.dev.appsflyer.com/?sourceos=android&utm_source=devhub&utm_medium=integrate-android-sdk');gtag('event', 'click', {'event_category': 'DJ_Banner', 'event_label': 'DJ_Anrd_test', 'value': '1'});\" target=\"_blank\" class=\"djButton\">\n      Let's go\n      </button>\n  </div>\n</div>\n"
+}
+[/block]
+
+> **Note**
+> 
+> If you prefer not to use our recommended wizard, you can find detailed manual testing instructions [here](doc:manual-testing-android).
+
+For a full troubleshooting checklist, see [Troubleshooting](doc:troubleshooting-android).
+
+### Creating an Android debug app
 
 <span class="annotation-optional">Optional</span>  
-For detailed integration testing instructions, see the [Android SDK integration testing guide](doc:testing-android).
+You can utilize Android Studio's build variants to configure an easy-to-use debug app for testing purposes.
+
+All tests can be performed for both production and debug apps.
+
+**Step 1: Configure Gradle's `debug` build type**  
+In your app-level `build.gradle` file, configure the `debug` [build type](https://developer.android.com/studio/build/build-variants#build-types) and set `applicationIdSuffix` to the test app's name (in this case, `.debug`).
+
+```groovy
+android {
+    // ...
+    buildTypes {
+        // Prevents a signing error when building the production app
+        release {
+            signingConfig signingConfigs.debug
+        } 
+        debug {
+            applicationIdSuffix ".debug"
+        }
+    }
+}
+```
+
+**Step 2: Add a new app to AppsFlyer**  
+Use the resulting package name as the app ID when [adding the app to the AppsFlyer dashboard](https://support.appsflyer.com/hc/en-us/articles/207377436), or ask a team member with dashboard access to add it.
+
+For example, if you have an app with the package name `com.your.app` and you use the Gradle configuration above, the test app's name will be `com.your.app.debug`. Pass this name as the app ID when adding the app to AppsFlyer.
 
 [global Application class/subclass]: https://developer.android.com/reference/android/app/Application

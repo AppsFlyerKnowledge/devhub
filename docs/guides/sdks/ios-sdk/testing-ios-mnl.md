@@ -4,10 +4,10 @@ slug: manual-testing-ios
 category:
   uri: AppsFlyer SDKs
 parent:
-  uri: testing-ios
+  uri: ios-sdk
 privacy:
   view: anyone_with_link
-position: 0
+position: 10
 ---
 
 > 📘 **Note**

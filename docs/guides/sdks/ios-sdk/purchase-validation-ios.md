@@ -4,10 +4,10 @@ slug: purchase-validation-ios
 category:
   uri: AppsFlyer SDKs
 parent:
-  uri: ios-sdk
+  uri: in-app-events-ios-6
 privacy:
   view: public
-position: 10
+position: 2
 ---
 Purchase validation ensures that only real, store-confirmed in-app purchases and subscriptions are measured in AppsFlyer. It improves revenue accuracy, helps prevent reporting errors, and supports better campaign decisions.
 

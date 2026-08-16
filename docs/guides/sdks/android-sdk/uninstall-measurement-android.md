@@ -4,10 +4,10 @@ slug: uninstall-measurement-android
 category:
   uri: AppsFlyer SDKs
 parent:
-  uri: android-sdk
+  uri: features-android-6
 privacy:
   view: public
-position: 9
+position: 2
 ---
 ## Overview
 Set up uninstall measurement in Android apps using AppsFlyer SDK and Firebase Cloud Messaging.

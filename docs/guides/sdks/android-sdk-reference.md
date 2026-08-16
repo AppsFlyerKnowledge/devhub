@@ -3,10 +3,13 @@ title: Android SDK reference
 slug: android-sdk-reference
 category:
   uri: AppsFlyer SDKs
+parent:
+  uri: android-sdk
 content:
   excerpt: The AppsFlyer Android SDK reference documentation.
 privacy:
   view: public
+position: 4
 ---
 ## Overview
 This is the Android SDK reference document. In this section you will find technical descriptions of classes and methods that comprise the SDK.

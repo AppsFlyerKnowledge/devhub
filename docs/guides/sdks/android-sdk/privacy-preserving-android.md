@@ -4,12 +4,12 @@ slug: preserve-user-privacy-android
 category:
   uri: AppsFlyer SDKs
 parent:
-  uri: android-sdk
+  uri: android-sdk-6
 content:
   excerpt: Learn how to preserve user privacy in the Android SDK.
 privacy:
   view: public
-position: 12
+position: 3
 ---
 
 # Preserve user privacy

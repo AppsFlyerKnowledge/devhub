@@ -3,10 +3,13 @@ title: iOS SDK reference
 slug: ios-sdk-reference
 category:
   uri: AppsFlyer SDKs
+parent:
+  uri: ios-sdk
 content:
   excerpt: The AppsFlyer iOS SDK reference documentation.
 privacy:
   view: public
+position: 4
 ---
 This is the iOS SDK reference document. In this section you will find technical descriptions of classes, protocols and methods that comprise the SDK.
 ## Classes

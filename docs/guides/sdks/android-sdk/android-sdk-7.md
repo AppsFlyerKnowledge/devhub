@@ -7,7 +7,7 @@ parent:
   uri: android-sdk
 privacy:
   view: public
-position: 1
+position: 2
 ---
 
 Android SDK v7 gives you explicit control over when the SDK fires a session, aligns the Android and iOS APIs, and lets you declare build-time settings in a JSON file, so you can build more predictable, consent-aware integrations.

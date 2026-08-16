@@ -4,10 +4,10 @@ slug: conversion-data-ios
 category:
   uri: AppsFlyer SDKs
 parent:
-  uri: ios-sdk
+  uri: integrate-sdk-ios-6
 privacy:
   view: public
-position: 6
+position: 3
 ---
 In this guide you will learn how to get [conversion data](doc:conversion-data) using the iOS SDK, as well as [usage examples](https://dev.appsflyer.com/hc/docs/conversion-data-android#accessing-attribution-data).
 
