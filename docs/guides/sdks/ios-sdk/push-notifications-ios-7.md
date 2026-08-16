@@ -3,12 +3,12 @@ title: Push notifications
 slug: push-notifications-ios-7
 category:
   uri: AppsFlyer SDKs
+parent:
+  uri: features-ios-7
 metadata:
   description: >-
     Learn how to configure push notification measurement in the AppsFlyer iOS
     SDK.
-parent:
-  uri: features-ios-7
 privacy:
   view: public
 position: 1
