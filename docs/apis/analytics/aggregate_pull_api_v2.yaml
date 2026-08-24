@@ -2,6 +2,10 @@ openapi: 3.0.1
 info:
   title: Aggregate Pull API V2 Token
   version: 1.0.0
+  description: |
+    > ⚠️ Important
+    >
+    > This API returns a redirect to the report URL. If you copy the example cURL command into a terminal, add the `-L` flag manually to follow the redirect. Without `-L`, curl returns no data.
 servers:
 - url: https://hq1.appsflyer.com/api/agg-data/export/app/
 security:
