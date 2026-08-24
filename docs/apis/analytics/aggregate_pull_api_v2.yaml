@@ -2,10 +2,6 @@ openapi: 3.0.1
 info:
   title: Aggregate Pull API V2 Token
   version: 1.0.0
-  description: |
-    > ⚠️ Important
-    >
-    > This API returns a redirect to the report URL. If you copy the example cURL command into a terminal, add the `-L` flag manually to follow the redirect. Without `-L`, curl returns no data.
 servers:
 - url: https://hq1.appsflyer.com/api/agg-data/export/app/
 security:
@@ -20,7 +16,7 @@ paths:
       description: |
         > ⚠️ Important
         >
-        > All API V2 tokens generated before March 10, 2026, 19:00 UTC have been revoked. If your token was generated before this date, please regenerate it. [Learn how](https://support.appsflyer.com/hc/en-us/articles/360004562377-Managing-AppsFlyer-tokens).
+        > This API returns a redirect to the report URL. If you copy the example cURL command into a terminal, add the `-L` flag manually to follow the redirect. Without `-L`, curl returns no data.
 
         Data is grouped by media source and campaign.
         Data type: LTV
@@ -52,7 +48,7 @@ paths:
       description: |
         > ⚠️ Important
         >
-        > All API V2 tokens generated before March 10, 2026, 19:00 UTC have been revoked. If your token was generated before this date, please regenerate it. [Learn how](https://support.appsflyer.com/hc/en-us/articles/360004562377-Managing-AppsFlyer-tokens).
+        > This API returns a redirect to the report URL. If you copy the example cURL command into a terminal, add the `-L` flag manually to follow the redirect. Without `-L`, curl returns no data.
 
         Data is grouped by date, media source, and campaign.
         Data type: LTV
@@ -83,7 +79,7 @@ paths:
       description: |
         > ⚠️ Important
         >
-        > All API V2 tokens generated before March 10, 2026, 19:00 UTC have been revoked. If your token was generated before this date, please regenerate it. [Learn how](https://support.appsflyer.com/hc/en-us/articles/360004562377-Managing-AppsFlyer-tokens).
+        > This API returns a redirect to the report URL. If you copy the example cURL command into a terminal, add the `-L` flag manually to follow the redirect. Without `-L`, curl returns no data.
 
         Data is grouped by date, media source, and campaign, and excludes in-app events.
         Data type: LTV
@@ -114,7 +110,7 @@ paths:
       description: |
         > ⚠️ Important
         >
-        > All API V2 tokens generated before March 10, 2026, 19:00 UTC have been revoked. If your token was generated before this date, please regenerate it. [Learn how](https://support.appsflyer.com/hc/en-us/articles/360004562377-Managing-AppsFlyer-tokens).
+        > This API returns a redirect to the report URL. If you copy the example cURL command into a terminal, add the `-L` flag manually to follow the redirect. Without `-L`, curl returns no data.
 
         Data is grouped by geo, media source, and campaign.
         Data type: LTV
@@ -145,7 +141,7 @@ paths:
       description: |
         > ⚠️ Important
         >
-        > All API V2 tokens generated before March 10, 2026, 19:00 UTC have been revoked. If your token was generated before this date, please regenerate it. [Learn how](https://support.appsflyer.com/hc/en-us/articles/360004562377-Managing-AppsFlyer-tokens).
+        > This API returns a redirect to the report URL. If you copy the example cURL command into a terminal, add the `-L` flag manually to follow the redirect. Without `-L`, curl returns no data.
 
         Data is grouped by date, geo, media source, and campaign.
         Data type: LTV
