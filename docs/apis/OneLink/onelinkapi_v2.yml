@@ -24,7 +24,7 @@ paths:
       parameters:
         - name: onelink-id
           in: path
-          description: Retreive from your account profile on the AppsFlyer platform
+          description: You can get the accound ID from your account profile on the AppsFlyer platform
           schema:
             type: string
             example: A1b3
@@ -184,7 +184,7 @@ paths:
       parameters:
         - name: onelink-id
           in: path
-          description: Retreive from your account profile on the AppsFlyer platform
+          description: You can get the accound ID from your account profile on the AppsFlyer platform
           schema:
             type: string
             example: A1b3
@@ -276,7 +276,7 @@ paths:
       parameters:
         - name: onelink-id
           in: path
-          description: Retreive from your account profile on the AppsFlyer platform
+          description: You can get the accound ID from your account profile on the AppsFlyer platform
           schema:
             type: string
             example: A1b2
@@ -400,7 +400,7 @@ paths:
       parameters:
         - name: onelink-id
           in: path
-          description: Retreive from your account profile on the AppsFlyer platform
+          description: You can get the accound ID from your account profile on the AppsFlyer platform
           schema:
             type: string
             example: A1b2
@@ -493,7 +493,7 @@ paths:
       parameters:
         - name: onelink-id
           in: path
-          description: Retreive from your account profile on the AppsFlyer platform
+          description: You can get the accound ID from your account profile on the AppsFlyer platform
           schema:
             type: string
             example: A1b2
@@ -605,7 +605,7 @@ paths:
       parameters:
         - name: account-id
           in: path
-          description: Retreive from your account profile on the AppsFlyer platform
+          description: You can get the accound ID from your account profile on the AppsFlyer platform
           schema:
             type: string
             example: TBA
