@@ -15,7 +15,7 @@ paths:
       description: |
         [block:html]
         {
-          "html": "<span style=\"background-color: #6e00ff; color: #fff; font-size: 12px; font-weight: 400; padding: 4px; border-radius: 8px;\">Premium</span>"
+          "html": "<span style=\"background-color: #6e00ff; color: #fff; font-size: 12px; font-weight: 600; padding: 4px; border-radius: 8px;\">Premium</span>"
         }
         [/block]
 
@@ -177,7 +177,7 @@ paths:
       description: |
         [block:html]
         {
-          "html": "<span style=\"background-color: #6e00ff; color: #fff; font-size: 12px; font-weight: 400; padding: 4px; border-radius: 8px;\">Premium</span>"
+          "html": "<span style=\"background-color: #6e00ff; color: #fff; font-size: 12px; font-weight: 600; padding: 4px; border-radius: 8px;\">Premium</span>"
         }
         [/block]
 
@@ -271,7 +271,7 @@ paths:
       description: |
         [block:html]
         {
-          "html": "<span style=\"background-color: #6e00ff; color: #fff; font-size: 12px; font-weight: 400; padding: 4px; border-radius: 8px;\">Premium</span>"
+          "html": "<span style=\"background-color: #6e00ff; color: #fff; font-size: 12px; font-weight: 600; padding: 4px; border-radius: 8px;\">Premium</span>"
         }
         [/block]
 
@@ -397,7 +397,7 @@ paths:
       description: |
         [block:html]
         {
-          "html": "<span style=\"background-color: #6e00ff; color: #fff; font-size: 12px; font-weight: 400; padding: 4px; border-radius: 8px;\">Premium</span>"
+          "html": "<span style=\"background-color: #6e00ff; color: #fff; font-size: 12px; font-weight: 600; padding: 4px; border-radius: 8px;\">Premium</span>"
         }
         [/block]
 
@@ -492,7 +492,7 @@ paths:
       description: |
         [block:html]
         {
-          "html": "<span style=\"background-color: #6e00ff; color: #fff; font-size: 12px; font-weight: 400; padding: 4px; border-radius: 8px;\">Premium</span>"
+          "html": "<span style=\"background-color: #6e00ff; color: #fff; font-size: 12px; font-weight: 600; padding: 4px; border-radius: 8px;\">Premium</span>"
         }
         [/block]
 
@@ -610,7 +610,7 @@ paths:
       description: |
         [block:html]
         {
-          "html": "<span style=\"background-color: #6e00ff; color: #fff; font-size: 12px; font-weight: 400; padding: 4px; border-radius: 8px;\">Premium</span>"
+          "html": "<span style=\"background-color: #6e00ff; color: #fff; font-size: 12px; font-weight: 600; padding: 4px; border-radius: 8px;\">Premium</span>"
         }
         [/block]
       operationId: get-onelink-v2-link-quota
