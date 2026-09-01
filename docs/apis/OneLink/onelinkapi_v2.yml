@@ -13,7 +13,7 @@ paths:
       - OneLink REST API v2.0
       summary: Create OneLink link
       description: |
-        <p><span style="background-color: #6e00ff; color: #fff; font-size: 12px; font-weight: 400; padding: 4px; border-radius: 8px;">
+        <p><span style={{backgroundColor: "#6e00ff", color: "#fff", fontSize: "12px", fontWeight: 400, padding: "4px", borderRadius: "8px"}}>
           Premium
         </span></p>
 
@@ -173,7 +173,7 @@ paths:
       - OneLink REST API v2.0
       summary: Get OneLink link data
       description: |
-        <p><span style="background-color: #6e00ff; color: #fff; font-size: 12px; font-weight: 400; padding: 4px; border-radius: 8px;">
+        <p><span style={{backgroundColor: "#6e00ff", color: "#fff", fontSize: "12px", fontWeight: 400, padding: "4px", borderRadius: "8px"}}>
           Premium
         </span></p>
 
@@ -265,7 +265,7 @@ paths:
       - OneLink REST API v2.0
       summary: Update OneLink link
       description: |
-        <p><span style="background-color: #6e00ff; color: #fff; font-size: 12px; font-weight: 400; padding: 4px; border-radius: 8px;">
+        <p><span style={{backgroundColor: "#6e00ff", color: "#fff", fontSize: "12px", fontWeight: 400, padding: "4px", borderRadius: "8px"}}>
           Premium
         </span></p>
 
@@ -389,7 +389,7 @@ paths:
       - OneLink REST API v2.0
       summary: Delete OneLink link
       description: |
-        <p><span style="background-color: #6e00ff; color: #fff; font-size: 12px; font-weight: 400; padding: 4px; border-radius: 8px;">
+        <p><span style={{backgroundColor: "#6e00ff", color: "#fff", fontSize: "12px", fontWeight: 400, padding: "4px", borderRadius: "8px"}}>
           Premium
         </span></p>
 
@@ -482,7 +482,7 @@ paths:
       - OneLink REST API v2.0
       summary: Get OneLink QR code
       description: |
-        <span style="background-color: #6e00ff; color: #fff; font-size: 12px; font-weight: 400; padding: 4px; border-radius: 8px;">
+        <span style={{backgroundColor: "#6e00ff", color: "#fff", fontSize: "12px", fontWeight: 400, padding: "4px", borderRadius: "8px"}}>
           Premium
         </span>
 
@@ -598,7 +598,7 @@ paths:
       - OneLink REST API v2.0
       summary: Get account quota
       description: |
-        <span style="background-color: #6e00ff; color: #fff; font-size: 12px; font-weight: 400; padding: 4px; border-radius: 8px;">
+        <span style={{backgroundColor: "#6e00ff", color: "#fff", fontSize: "12px", fontWeight: 400, padding: "4px", borderRadius: "8px"}}>
           Premium
         </span>
       operationId: get-onelink-v2-link-quota
