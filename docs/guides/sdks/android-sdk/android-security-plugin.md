@@ -26,7 +26,7 @@ Security Module v2.x.x is compatible only with AppsFlyer Android SDK version `6.
 ## Release Notes
 All notable changes to the AF Security SDK will be documented in this file.
 
-## [2.2.2] - 2026-08-11
+### [2.2.2] - 2026-08-11
 
 ### Fixed
 - Resolved a native crash affecting some 32-bit Android devices during internal security checks
