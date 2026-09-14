@@ -57,6 +57,8 @@ my_additionalParameters[kAppsFlyerAdRevenueCountry] = "US"
 my_additionalParameters[kAppsFlyerAdRevenueAdType] = "Banner"
 my_additionalParameters[kAppsFlyerAdRevenueAdUnit] = "89b8c0159a50ebd1"
 my_additionalParameters[kAppsFlyerAdRevenuePlacement] = "place"
+my_additionalParameters["foo"] = "custom1"
+my_additionalParameters["bar"] = "custom2"
 
 AppsFlyerLib.shared().logAdRevenue(my_adRevenueData, additionalParameters: my_additionalParameters)
 ```
@@ -105,8 +107,8 @@ let adRevenueParams:[AnyHashable: Any] = [
                     kAppsFlyerAdRevenueAdUnit : "02134568",
                     kAppsFlyerAdRevenueAdType : "Banner",
                     kAppsFlyerAdRevenuePlacement : "place",
-                    "foo" : "testcustom",
-                    "bar" : "testcustom2"
+                    "foo" : "custom1",
+                    "bar" : "custom2"
                 ]
                 
 AppsFlyerAdRevenue.shared().logAdRevenue(
