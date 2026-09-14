@@ -78,13 +78,11 @@ All notable changes to the AF Security SDK will be documented in this file.
 
 ## Multi-Store and Out-of-Store Apps
 
-The Security module is **built and packaged per app**. Its dependency coordinate —
+The Security module is **built and packaged per app**. Its dependency coordinate -
 `af-security-sdk-<YOUR_APP_ID>` — is tied to one specific AppsFlyer **App ID**, and the
 module embeds app-specific values (package name and signing certificate hashes) at build time.
 
-In AppsFlyer, each store you distribute to is registered as a **separate app with its own
-App ID**. For the dashboard-per-store setup, the App ID is your Android package name with the
-store channel appended: `<packageName>-<storeChannel>`. See
+When using the dashboard-per-store setup for multiple Android app store distributions, each store you distribute to is registered as a separate app. For the dashboard-per-store setup, the App ID is your Android package name with the store channel appended: `<packageName>-<storeChannel>`. See
 [Set up multi-store Android attribution](https://support.appsflyer.com/hc/en-us/articles/207447023-Set-up-multi-store-Android-attribution)
 and [Adding an app to AppsFlyer](https://support.appsflyer.com/hc/en-us/articles/207377436-Adding-an-app-to-AppsFlyer).
 
@@ -100,9 +98,19 @@ for every variant** and reference the matching dependency in that variant's buil
 
 | Distribution | AppsFlyer App ID | Security module dependency |
 |---|---|---|
-| Google Play | `com.abc.def` | `com.appsflyer.security:af-security-sdk-com.abc.def:<VERSION>` |
 | Out-of-store (direct download) | `com.abc.def-Custom` | `com.appsflyer.security:af-security-sdk-com.abc.def-Custom:<VERSION>` |
 | Amazon Appstore | `com.abc.def-Amazon` | `com.appsflyer.security:af-security-sdk-com.abc.def-Amazon:<VERSION>` |
+
+> [!WARNING]
+> **Only use a `CHANNEL` value that is registered in HQ.**
+> The `AF_CHANNEL` meta-data in your manifest must exactly match a channel already
+> configured for the app in the AppsFlyer dashboard. An unregistered value produces an
+> App ID that does not exist on the server, so the Security module for that variant
+> cannot be built and its traffic will not be attributed.
+>
+> Do not invent channel names, and do not add a channel for the Google Play build —
+> Google Play is the default distribution and uses the plain App ID (`com.abc.def`),
+> with no channel suffix. A channel named `Google` is wrong on both counts.
 
 > 🚧 Provide the certificate hashes (SHA-256) for **each** variant when requesting its build.
 > If a store re-signs your app (a different signing key per distribution), the hashes differ
@@ -217,7 +225,8 @@ A: Please ask your contact person at AppsFlyer to rotate your AppsFlyer Maven Au
 keytool -list -v -keystore ~/.android/debug.keystore
 ```
 
-> 🚧 The password for the debug.keystore is usually \"android\".
+> [!WARNING]
+> The password for the debug.keystore is usually \"android\".
 
 The output should look like this:
 
@@ -251,7 +260,8 @@ SubjectKeyIdentifier [
 
 ### Release
 
-> 🚧 If your release build is not signed by [Google Play](https://developer.android.com/studio/publish/app-signing#google-play-app-signing), follow the [debug](#debug-sha256-fingerprint) instruction with your production key.
+> [!WARNING]
+> If your release build is not signed by [Google Play](https://developer.android.com/studio/publish/app-signing#google-play-app-signing), follow the [debug](#debug-sha256-fingerprint) instruction with your production key.
 
 When using app signing by [Google Play](https://developer.android.com/studio/publish/app-signing#google-play-app-signing), Google manages and protects your app's signing key for you and signs your APKs on your behalf. In this case it is required that you provide the certificate hash for the signing key **used by Google** using this option. This is **always** the case when you distribute Android app bundles.</br>
 
