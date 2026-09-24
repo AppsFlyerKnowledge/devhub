@@ -66,6 +66,8 @@ additionalParameters.put(AdRevenueScheme.COUNTRY, "US");
 additionalParameters.put(AdRevenueScheme.AD_UNIT, "89b8c0159a50ebd1");
 additionalParameters.put(AdRevenueScheme.AD_TYPE, "Banner");
 additionalParameters.put(AdRevenueScheme.PLACEMENT, "place");
+additionalParameters.put("foo", "custom1");
+additionalParameters.put("bar", "custom2");
 
 appsflyer.logAdRevenue(adRevenueData, additionalParameters);
 ```
@@ -139,8 +141,8 @@ customParams.put(Scheme.AD_UNIT, "89b8c0159a50ebd1");
 customParams.put(Scheme.AD_TYPE, "Banner");
 customParams.put(Scheme.PLACEMENT, "place");
 customParams.put(Scheme.ECPM_PAYLOAD, "encrypt");
-customParams.put("foo", "test1");
-customParams.put("bar", "test2");
+customParams.put("foo", "custom1");
+customParams.put("bar", "custom2");
 
 // Record a single impression
 AppsFlyerAdRevenue.logAdRevenue(
