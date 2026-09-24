@@ -20,17 +20,16 @@ Ensure your project meets the following minimum versions for compatibility with 
 
 ### Compatibility Updates: AppsFlyer Android SDK and Security Module
 
-
-- Security Module v1.x.x (latest `1.3.4`) is compatible with [AppsFlyer Android SDK versions](https://support.appsflyer.com/hc/en-us/articles/115001256006-AppsFlyer-Android-SDK-release-notes) `6.15.2 – 6.17.3`.
-- Security Module v2.x.x (currently `2.2.1`) is compatible only with AppsFlyer Android SDK version `6.17.4` and above.
-
-Please ensure that the versions you integrate follow the compatibility ranges above to avoid build or runtime issues.
-If you plan to upgrade the SDK to `6.17.4+`, make sure to update the Security Module to v2.0.0 and above as well.
-Conversely, if you are using SDK versions below 6.17.4, please continue using Security Module v1.x.x (latest `1.3.4`).
+Security Module v2.x.x is compatible only with AppsFlyer Android SDK version `6.17.4` and above. You can find all SDK versions [here](https://support.appsflyer.com/hc/en-us/articles/115001256006-AppsFlyer-Android-SDK-release-notes).
 
 
 ## Release Notes
 All notable changes to the AF Security SDK will be documented in this file.
+
+### [2.2.2] - 2026-08-11
+
+### Fixed
+- Resolved a native crash affecting some 32-bit Android devices during internal security checks
 
 ### [2.2.1] - 2026-04-06
 
@@ -77,56 +76,52 @@ All notable changes to the AF Security SDK will be documented in this file.
 - Enhanced error detection and reporting for security-related issues
 
 
+## Multi-Store and Out-of-Store Apps
 
-### [1.3.4] - 2025-08-25
+The Security module is **built and packaged per app**. Its dependency coordinate -
+`af-security-sdk-<YOUR_APP_ID>` — is tied to one specific AppsFlyer **App ID**, and the
+module embeds app-specific values (package name and signing certificate hashes) at build time.
 
-#### Added
-- Support for 16 KB page size systems
+When using the dashboard-per-store setup for multiple Android app store distributions, each store you distribute to is registered as a separate app. For the dashboard-per-store setup, the App ID is your Android package name with the store channel appended: `<packageName>-<storeChannel>`. See
+[Set up multi-store Android attribution](https://support.appsflyer.com/hc/en-us/articles/207447023-Set-up-multi-store-Android-attribution)
+and [Adding an app to AppsFlyer](https://support.appsflyer.com/hc/en-us/articles/207377436-Adding-an-app-to-AppsFlyer).
 
-### [1.3.3] - 2025-06-19
+- **Google Play** — the App ID is the package name itself, e.g. `com.abc.def`.
+- **Out-of-store / alternative stores** — the App ID is the package name plus the store
+  channel, e.g. `com.abc.def-Custom` (out-of-store / direct download) or `com.abc.def-Amazon`
+  (Amazon Appstore).
 
-#### Fixed
-- Improved input validation to strengthen security checks and prevent null pointer exceptions
+Because each variant is a distinct App ID, **you must create a separate Security module build
+for every variant** and reference the matching dependency in that variant's build.
 
-### [1.3.2] - 2025-06-16
+**Example** — an app shipped to three stores needs three Security modules:
 
-#### Added
-- Enhanced security verification with improved certificate hash validation
+| Distribution | AppsFlyer App ID | Security module dependency |
+|---|---|---|
+| Out-of-store (direct download) | `com.abc.def-Custom` | `com.appsflyer.security:af-security-sdk-com.abc.def-Custom:<VERSION>` |
+| Amazon Appstore | `com.abc.def-Amazon` | `com.appsflyer.security:af-security-sdk-com.abc.def-Amazon:<VERSION>` |
 
-#### Changed
-- Improved event handling and security validation process
+> [!WARNING]
+> **Only use a `CHANNEL` value that is registered in HQ.**
+> The `AF_CHANNEL` meta-data in your manifest must exactly match a channel already
+> configured for the app in the AppsFlyer dashboard. An unregistered value produces an
+> App ID that does not exist on the server, so the Security module for that variant
+> cannot be built and its traffic will not be attributed.
+>
+> Do not invent channel names, and do not add a channel for the Google Play build —
+> Google Play is the default distribution and uses the plain App ID (`com.abc.def`),
+> with no channel suffix. A channel named `Google` is wrong on both counts.
 
+> 🚧 Provide the certificate hashes (SHA-256) for **each** variant when requesting its build.
+> If a store re-signs your app (a different signing key per distribution), the hashes differ
+> between variants — so the modules are not interchangeable.
 
-### [1.3.1] - 2025-05-21
-
-#### Fixed
-- Resolved a stability issue in the SDK's internal data handling to improve reliability in high-concurrency scenarios.
-
-### [1.3.0] - 2025-04-30
-
-#### Added
-- Enhanced runtime protection against unauthorized access and tampering attempts.
-- Implemented advanced security checks to strengthen application integrity verification.
-- Introduced new memory protection mechanisms to safeguard sensitive operations.
-
-#### Improved
-- Optimized performance of security checks to minimize impact on application responsiveness.
-- Enhanced detection capabilities for identifying compromised environments.
-- Refined security verification process to handle edge cases more effectively.
-
-- Resolved a stability issue related to internal integrity checks to improve reliability in sensitive environments.
-
+Use Gradle build flavors/variants to apply the correct module dependency to each store build.
 
 ## Before You Begin
 
- 1. Please send us all the certificate hashes (SHA-256) of all the certificates with which you sign your app. <br>This includes the debug and release certificate hashes. The certificate hashes are needed to pre-build the version of the security module that your app will use.</br>
+ 1. Please prepare all the certificate hashes (SHA-256) of all the certificates with which you sign your app. <br>This includes the debug and release certificate hashes. The certificate hashes are needed to pre-build the version of the security module that your app will use.</br>
 Instructions of getting the certificates can be found [here](#generating-a-sha256-fingerprint). </br>
-
-1. Make sure to ask the following information from your contact person at AppsFlyer:
-    1. Maven repository name
-    2. Maven Auth token
-    3. Latest Advanced Security module version that was built for your app.
-
 
 ## Integration
 
@@ -230,7 +225,8 @@ A: Please ask your contact person at AppsFlyer to rotate your AppsFlyer Maven Au
 keytool -list -v -keystore ~/.android/debug.keystore
 ```
 
-> 🚧 The password for the debug.keystore is usually \"android\".
+> [!WARNING]
+> The password for the debug.keystore is usually \"android\".
 
 The output should look like this:
 
@@ -264,7 +260,8 @@ SubjectKeyIdentifier [
 
 ### Release
 
-> 🚧 If your release build is not signed by [Google Play](https://developer.android.com/studio/publish/app-signing#google-play-app-signing), follow the [debug](#debug-sha256-fingerprint) instruction with your production key.
+> [!WARNING]
+> If your release build is not signed by [Google Play](https://developer.android.com/studio/publish/app-signing#google-play-app-signing), follow the [debug](#debug-sha256-fingerprint) instruction with your production key.
 
 When using app signing by [Google Play](https://developer.android.com/studio/publish/app-signing#google-play-app-signing), Google manages and protects your app's signing key for you and signs your APKs on your behalf. In this case it is required that you provide the certificate hash for the signing key **used by Google** using this option. This is **always** the case when you distribute Android app bundles.</br>
 
